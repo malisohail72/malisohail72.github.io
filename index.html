@@ -1,9 +1,136 @@
-<html>
 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        /* Navbar styles */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Section styles */
+
+
+      
+section {
+            padding: 60px 20px;
+            margin: 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        .about-section, .contact-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Portfolio Template */
+        .portfolio-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .portfolio-item {
+            width: 250px;
+            height: 250px;
+            background-color: #ccc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+        }
+        .portfolio-item:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
 <body>
-  <h1>YOUR NAME</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
-</body>
 
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#aboutme">About Me</a>
+        <a href="#contactme">Contact Me</a>
+    </div>
+
+    <!-- About Me Section -->
+    <section id="aboutme">
+        <div class="section-title">About Me</div>
+
+      
+
+      
+<div class="about-section">
+            <p>Hello, I am a passionate web developer with experience in creating dynamic websites and applications. I specialize in front-end development, including HTML, CSS, JavaScript, and more. I am always eager to learn new technologies and work on exciting projects.</p>
+            <p>Feel free to explore my portfolio below to see some of my work.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-title">My Portfolio</div>
+        <div class="portfolio-container">
+            <div class="portfolio-item">Project 1</div>
+            <div class="portfolio-item">Project 2</div>
+            <div class="portfolio-item">Project 3</div>
+            <div class="portfolio-item">Project 4</div>
+            <div class="portfolio-item">Project 5</div>
+            <div class="portfolio-item">Project 6</div>
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="contactme">
+        <div class="section-title">Contact Me</div>
+        <div class="contact-section">
+            <p>If you'd like to get in touch, feel free to contact me using the form below, or email me directly at <a href="mailto:example@example.com">example@example.com</a></p>
+
+
+<form action="mailto:example@example.com" method="post" enctype="text/plain">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" required></textarea><br><br>
+                <input type="submit" value="Send Message">
+            </form>
+        </div>
+    </section>
+
+</body>
 </html>
+```
+
+
