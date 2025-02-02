@@ -1,4 +1,3 @@
-<html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +13,14 @@
             padding: 0;
             background-color: #f0f0f0;
         }
+
         /* Navbar styles */
         .navbar {
             background-color: #333;
             overflow: hidden;
+            padding: 0 20px;
         }
+
         .navbar a {
             float: left;
             display: block;
@@ -26,184 +28,177 @@
             text-align: center;
             padding: 14px 20px;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
+
         .navbar a:hover {
             background-color: #ddd;
             color: black;
         }
+
         /* Section styles */
-
-
-      
-section {
+        section {
             padding: 60px 20px;
-            margin: 0;
+            margin: 0 auto;
+            max-width: 1200px;
         }
+
         .section-title {
             text-align: center;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 40px;
         }
+
         .about-section, .contact-section {
             background-color: white;
             border-radius: 10px;
             padding: 40px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
+
         /* Portfolio Template */
         .portfolio-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
         }
+
         .portfolio-item {
-            width: 220px;
-            height: 220px;
-            background-color:white;
-            border-radius: 1px solid black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2px;
-            color: white;
-        }
-        .portfolio-item:hover {
             background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+            border: 3px solid #333;
+        }
+
+        .center-text {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-
     <!-- Navbar -->
-    <div class="navbar">
-        <a href="#aboutme">About Me 🪪 </a>
-        <a href="#contactme">Certifications & Awards 🧑‍💻 </a>
+    <nav class="navbar">
+        <a href="#aboutme">About Me 🪪</a>
+        <a href="#contactme">Certifications & Awards 🧑‍💻</a>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="center-text">
+        <img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' 
+             alt='Muhammad Ali profile photo' 
+             class="profile-img">
+        <h1>Muhammad Ali</h1>
+        <p><em>A guy who converts data into insights.</em></p>
     </div>
 
+    <hr>
 
-<br> 
-    
-<center> <a style="border:1px solid white;" href='https://postimg.cc/DSD2sSkB' target='_blank'><img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' border='0' alt='D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC'/></a>  </center>
-<center> Muhammad Ali <p></p><small><i> A guy who converts data into insights.</i></small></center>
-<br>    
-<br>
-    
-<hr>
-
-    
     <!-- About Me Section -->
     <section id="aboutme">
-        <div class="section-title"> Professional Summary.</div>
-      
-<div style="border:1px solid black;" class="about-section">
-            <p> A Data Analyst with strong dedication towards leveraging the analytical skills to drive and lead success in various roles, from freelancing to corporate environments. My Analytical skills enable me to provide actionable insights and from unorganized and raw data to actionable stories . </p>
-   <strong><center> Browse My Portfolio 👇 </center></strong>
-</div>
-        
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="about-section">
+            <p>A Data Analyst with strong dedication towards leveraging analytical skills to drive and lead success in various roles, from freelancing to corporate environments. My analytical skills enable me to provide actionable insights from unorganized and raw data to actionable stories.</p>
+            <p class="center-text"><strong>Browse My Portfolio 👇</strong></p>
+        </div>
     </section>
 
-
-
-    
     <!-- Portfolio Section -->
     <section id="portfolio">
-        <div class="section-title">My Portfolio</div>
+        <h2 class="section-title">My Portfolio</h2>
         <hr>
         <div class="portfolio-container">
-            
             <div class="portfolio-item">
-                
-       <a align="center" href='https://postimg.cc/DWbcWKvR' target=''><img src='https://i.postimg.cc/DWbcWKvR/7-E77233-D-EE5-D-4-A5-C-8-F3-E-3-CFB64688398.jpg' border='0' alt='7-E77233-D-EE5-D-4-A5-C-8-F3-E-3-CFB64688398'/> <button>Click to know more.</button> </a>
-                
-                
-            
+                <img src='https://i.postimg.cc/DWbcWKvR/7-E77233-D-EE5-D-4-A5-C-8-F3-E-3-CFB64688398.jpg' 
+                     alt='Bank of America Dashboard Preview'>
+                <h3>Bank Of America - Customer Complaints Dashboard</h3>
+                <p>Highlights customer issues, sub-issues, and response times</p>
+                <a href="#" class="button">View Details</a>
             </div>
 
-         <strong> <center> Bank Of America - Customer Complaints Dasboard </center> </strong>  <p> <center> This dashboard Highlights: <p> 1-Issues faced by customers. </p> <p> 2- Sub-Issues by customers </p> <p> 3- Timely Response by Bank and many more.</p> </center> </p>
-
-            
-            <div class="portfolio-item">Project 2
-            <p> some text ... </p>
-            </div>
-            
-
-
-            
-            <div class="portfolio-item">Project 3</div>
-
-
-            
-            <div class="portfolio-item">Project 4
-            <p> some text ... </p>
-            </div>
-           
-            <div class="portfolio-item">Project 5
-            <p> some text ... </p>
-            </div>
-           
-            <div class="portfolio-item">Project 6
-            <p> some text ... </p>
-                
-            </div>
+            <!-- Add more portfolio items following the same structure -->
         </div>
     </section>
 
     <!-- Contact Me Section -->
     <section id="contactme">
-        <div class="section-title"> Certifications, Awards & Memberships </div>
+        <h2 class="section-title">Certifications, Awards & Memberships</h2>
         <div class="contact-section">
+            <h3 class="center-text">Certifications</h3>
+            <ul>
+                <li>
+                    <strong>Data Analytics with Python</strong> - freeCodeCamp
+                    <p>Covers mean variance, demographic analysis, data visualization, and predictions</p>
+                    <a href="https://freecodecamp.org/certification/malisohail/data-analysis-with-python-v7" 
+                       class="button">Verify Certification</a>
+                </li>
+            </ul>
 
-            <hr>
-<br>
-<h2><center> Certifications  </center></center></h2>
-    <br>
-<p> <strong> <center> • Data Analytics with Python (freecodecamp.org)</center> </strong> <br></p>
+            <h3 class="center-text">Memberships</h3>
+            <ul>
+                <li>
+                    <strong>PAFLA Member (2024-2025)</strong>
+                    <p>All Pakistan Freelancers Association</p>
+                </li>
+            </ul>
 
-<p> With learning the core concepts: </p>
-<p>- Mean Variance: Standard Deviation Calculation.</p>
-<p>- Demographic Data Analysis.</p>
-<p>- Medical Data Visualization.</p>
-<p>- Page View Time Data Visualization.</p> 
-<p>- Sea Level Prediction.</p>           
-            
-
-<br>
-<a href="https://freecodecamp.org/certification/malisohail/data-analysis-with-python-v7"> Verification: Data Analytics with Python</a>     
-    
-
-            <hr>
-
-            
-           <h2><center> Memberships</center></center></h2>
-
-            <p> <strong> <center> - PAFLA MEMBER (2024-2025) </center> </strong> <br> Member of All Pakistan Freelancers Assocation(PAFLA) for year 2024-2025.</p>
-           
- <br> 
-<h2><center>Awards </center></center></h2>
-            <br>
-
-            <p> <strong> <center> - Stack OverFlow: Top 5% of Community. </center> </strong> <br> On Stackoverflow, I am in top 5% of the whole community.
-            With having stats: <br>
-                - <u>1,320 Reputation </u> 
-                - <u> 26.9m audiance reached </u> 
-                - <u> 44 answers </u> provided.
-
-
-            </p>
-
-
-
-            
-          
-            
-            </form>
+            <h3 class="center-text">Awards</h3>
+            <ul>
+                <li>
+                    <strong>Stack Overflow Top 5%</strong>
+                    <p>1,320 reputation · 26.9M reach · 44 answers</p>
+                </li>
+            </ul>
         </div>
     </section>
-  <p>If you'd like to get in touch, feel free to contact me using the details below.
-      <br> - <a href="mailto:example@example.com">muhammadalisohail7996@gmail.com</a></p>
+
+    <footer class="center-text">
+        <p>Contact me: 
+            <a href="mailto:muhammadalisohail7996@gmail.com" class="button">
+                muhammadalisohail7996@gmail.com
+            </a>
+        </p>
+    </footer>
 </body>
 </html>
-
-
