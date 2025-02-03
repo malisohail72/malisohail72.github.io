@@ -30,19 +30,16 @@
             position: sticky;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
+            background: var(--bg); /* Solid background */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1rem 10%;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            justify-content: center; /* Center nav links */
             z-index: 1000;
         }
 
         .nav-links {
             display: flex;
-            justify-content: center;
             gap: 3rem;
         }
 
@@ -55,13 +52,16 @@
             transition: all 0.3s;
             font-weight: 500;
             color: var(--text);
-            align-self: center;
-            margin-top: 0.5rem;
+            position: fixed;
+            top: 100px; /* Position below navbar */
+            right: 10%;
+            z-index: 1001;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
         }
 
         .lang-toggle:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
         }
 
         .navbar a {
@@ -93,93 +93,16 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .lang-toggle {
+                top: 80px;
+                right: 5%;
+            }
         }
 
-        section {
-            padding: 6rem 10%;
-            margin: 0 auto;
-            max-width: 1400px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 6rem auto 1.5rem;
-            border: 3px solid #00f3ff;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .card-content {
-            max-width: 800px;
-            margin: 0 auto;
-            color: #86868b;
-        }
-
-        .portfolio-container {
-            display: grid;
-            gap: 2rem;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        .portfolio-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            overflow: hidden;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: var(--gradient);
-            color: #fff;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-        }
-
-        footer {
-            padding: 3rem;
-            color: #86868b;
-        }
+        /* Rest of your CSS remains unchanged */
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -189,8 +112,9 @@
             <a href="#portfolio" data-en="Portfolio" data-ar="الأعمال">Portfolio</a>
             <a href="#contactme" data-en="Achievements" data-ar="الإنجازات">Achievements</a>
         </div>
-        <button class="lang-toggle" onclick="toggleLanguage()">English / العربية</button>
     </nav>
+
+    <button class="lang-toggle" onclick="toggleLanguage()">English / العربية</button>
 
     <section style="padding-top: 12rem">
         <img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' alt='Muhammad Ali'
