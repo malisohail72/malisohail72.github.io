@@ -3,37 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Ali - Portfolio</title>
+    <title>Data Portfolio | Your Name</title>
     <style>
-        :root {
-            --bg: #0a0a0a;
-            --text: #fff;
-            --primary: #00f3ff;
-            --gradient: linear-gradient(45deg, #00f3ff, #0066ff);
-        }
-
         * {
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            text-align: center;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
+        nav {
+            background-color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #e9ecef;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .project-tools {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .tool-tag {
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+        }
     </style>
 </head>
-
 <body>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <header class="hero">
+        <div class="container">
+            <h1>Data Science & Analytics Portfolio</h1>
+            <p>Showcasing data-driven solutions and visualizations</p>
+        </div>
+    </header>
 
+    <main class="container" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <article class="project-card">
+                <img src="https://placehold.co/600x400" alt="Project 1" class="project-image">
+                <h3>Sales Performance Analysis</h3>
+                <div class="project-tools">
+                    <span class="tool-tag">Python</span>
+                    <span class="tool-tag">Tableau</span>
+                    <span class="tool-tag">SQL</span>
+                </div>
+                <p>Comprehensive analysis of regional sales data with predictive modeling and interactive dashboards.</p>
+                <a href="#">View Project →</a>
+            </article>
 
+            <!-- Project 2 -->
+            <article class="project-card">
+                <img src="https://placehold.co/600x400" alt="Project 2" class="project-image">
+                <h3>Customer Segmentation Model</h3>
+                <div class="project-tools">
+                    <span class="tool-tag">Machine Learning</span>
+                    <span class="tool-tag">Clustering</span>
+                    <span class="tool-tag">Power BI</span>
+                </div>
+                <p>RFM analysis and clustering implementation for targeted marketing strategies.</p>
+                <a href="#">View Project →</a>
+            </article>
 
+            <!-- Add more projects as needed -->
+        </div>
+    </main>
+
+    <section class="container" id="about">
+        <h2>About Me</h2>
+        <p>Data professional with expertise in analytics, machine learning, and data visualization. Passionate about transforming raw data into actionable insights.</p>
+        <!-- Add more about content -->
+    </section>
+
+    <section class="container" id="contact">
+        <h2>Contact</h2>
+        <p>Connect with me: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <!-- Add contact form or social links -->
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Update copyright year automatically
+        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Your Name. All rights reserved.`;
+    </script>
 </body>
 </html>
