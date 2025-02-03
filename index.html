@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +7,15 @@
     <style>
         :root {
             --bg: #0a0a0a;
-            --text: #ffffff;
+            --text: #fff;
             --primary: #00f3ff;
             --gradient: linear-gradient(45deg, #00f3ff, #0066ff);
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
         body {
@@ -29,101 +28,57 @@
         .navbar {
             position: sticky;
             top: 0;
-            width: 100%;
-            background: var(--bg); /* Solid background */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 1rem 10%;
             display: flex;
-            justify-content: center; /* Center nav links */
+            justify-content: center;
             z-index: 1000;
         }
 
         .nav-links {
             display: flex;
-            gap: 3rem;
-        }
-
-        .lang-toggle {
-            background: var(--gradient);
-            border-radius: 30px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            color: var(--text);
-            position: fixed;
-            top: 100px; /* Position below navbar */
-            right: 10%;
-            z-index: 1001;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-        }
-
-        .lang-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            gap: 2rem;
         }
 
         .navbar a {
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
             border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
         }
 
         .navbar a:hover {
             background: var(--gradient);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0,243,255,0.2);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .navbar {
-                padding: 1rem 5%;
-            }
-            
-            .navbar a {
-                width: 100%;
-                text-align: center;
-            }
-
-            .lang-toggle {
-                top: 80px;
-                right: 5%;
-            }
+            .nav-links { gap:1rem; }
+            .navbar { padding:1rem 5%; }
+            .navbar a { width:100%; }
         }
-
-        /* Rest of your CSS remains unchanged */
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar">
         <div class="nav-links">
-            <a href="#aboutme" data-en="About" data-ar="عني">About</a>
-            <a href="#portfolio" data-en="Portfolio" data-ar="الأعمال">Portfolio</a>
-            <a href="#contactme" data-en="Achievements" data-ar="الإنجازات">Achievements</a>
+            <a href="#aboutme">About</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contactme">Achievements</a>
         </div>
     </nav>
 
-    <button class="lang-toggle" onclick="toggleLanguage()">English / العربية</button>
-
-    <section style="padding-top: 12rem">
-        <img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' alt='Muhammad Ali'
-            class="profile-img">
-        <h1 style="font-size: 2.5rem" data-en="Muhammad Ali" data-ar="محمد علي">Muhammad Ali</h1>
-        <p style="color: #86868b" data-en="Transforming data into strategic insights"
-            data-ar="تحويل البيانات إلى رؤى استراتيجية">Transforming data into strategic insights</p>
+    <section style="padding-top:12rem">
+        <img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' alt='Muhammad Ali' style="width:200px;border-radius:50%">
+        <h1 style="font-size:2.5rem;margin:1rem 0">Muhammad Ali</h1>
+        <p style="color:#86868b">Transforming data into strategic insights</p>
     </section>
-
-    <!-- Rest of your sections remain unchanged -->
 </body>
 </html>
