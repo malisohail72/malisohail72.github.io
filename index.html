@@ -16,7 +16,7 @@
             position: fixed; width: 100%; background: rgba(255,255,255,0.8);
             backdrop-filter: blur(10px); border-bottom: 1px solid #ddd;
             padding: 0 10%; display: flex; gap: 2rem;
-            /* Removed border: 1px solid; */
+        
         }
         .navbar a {
             padding: 1rem 0; color: var(--text); text-decoration: none;
@@ -35,7 +35,7 @@
         .portfolio-container {
             display: grid; gap: 2rem;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            /* Removed border: 1px solid; */
+        
         }
         .portfolio-item {
             background: #fff; border-radius: 18px; padding: 1.5rem;
@@ -51,6 +51,51 @@
     </style>
 </head>
 <body>
-    <!-- Rest of the HTML remains unchanged -->
+    <nav class="navbar">
+        <a href="#aboutme">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contactme">Badges & Awards</a>
+    </nav>
+
+    <section style="padding-top: 8rem">
+        <img src='https://i.postimg.cc/DSD2sSkB/D754-CCF1-075-C-4143-9814-541-D43-F8-D1-DC.jpg' 
+             alt='Muhammad Ali' class="profile-img">
+        <h1 style="text-align: center; font-size: 2.5rem">Muhammad Ali</h1>
+        <p style="text-align: center; color: #86868b">Transforming data into strategic insights</p>
+    </section>
+
+    <section id="aboutme">
+        <h2 class="section-title">Professional Summary</h2>
+        <p style="max-width: 800px; margin: 0 auto; text-align: center; color: #86868b">
+            Data Analyst specializing in transforming raw data into actionable business insights. 
+            Proven track record in both corporate and freelance environments.
+        </p>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Portfolio:</h2>
+        <div class="portfolio-container">
+            <div class="portfolio-item">
+                <img src='https://i.postimg.cc/DWbcWKvR/7-E77233-D-EE5-D-4-A5-C-8-F3-E-3-CFB64688398.jpg' 
+                     alt='Bank of America Dashboard' style="width:100%; border-radius:12px">
+                <h3 style="margin:1rem 0">Bank of America Dashboard</h3>
+                <p style="color:#86868b">Customer complaint analysis and response tracking</p>
+                <a href="#" class="button">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contactme">
+        <h2 class="section-title">Achievements</h2>
+        <div style="max-width:800px; margin:0 auto">
+            <h3 style="margin:2rem 0 1rem">Certifications</h3>
+            <p>Data Analytics with Python <span style="color:#86868b">· freeCodeCamp</span></p>
+            <a href="#" class="button">Verify</a>
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding:3rem; color:#86868b">
+        <p>Contact: <a href="mailto:example@email.com" style="color:var(--primary)">muhammadalisohail7996@gmail.com</a></p>
+    </footer>
 </body>
 </html>
