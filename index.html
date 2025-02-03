@@ -24,14 +24,12 @@
             background: var(--bg);
             color: var(--text);
             text-align: center;
-            overflow-x: hidden;
         }
 
         .lang-toggle {
-            position: relative; /* Changed to relative */
-            top: auto; /* Reset top positioning */
-            left: 50%; /* Center horizontally */
-            transform: translateX(-50%); /* Adjust centering */
+            position: fixed;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
             background: var(--gradient);
             border-radius: 30px;
@@ -40,11 +38,10 @@
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
-            margin-top: 1rem; /* Add some top margin */
         }
 
         .lang-toggle:hover {
-            transform: scale(1.05) translateX(-50%); /* Maintain centering on hover */
+            transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
         }
 
@@ -98,7 +95,6 @@
             margin: 6rem auto 1.5rem;
             border: 3px solid #00f3ff;
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-            /* Removed animation */
         }
 
         .card {
@@ -107,9 +103,13 @@
             padding: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 2rem;
+            margin-bottom: 2rem; /* Space between cards */
         }
-
+        .card-content{
+            max-width: 800px;
+            margin: 0 auto;
+            color: #86868b;
+        }
         .portfolio-container {
             display: grid;
             gap: 2rem;
@@ -122,14 +122,14 @@
             padding: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            /* Removed transition and overflow */
+            transition: all 0.3s;
+            overflow: hidden;
         }
 
         .portfolio-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
         }
-        /*Removed animation*/
 
         .button {
             display: inline-flex;
@@ -179,16 +179,19 @@
     <section id="aboutme">
         <div class="card">
             <h2 class="section-title" data-en="Professional Summary" data-ar="ملخص احترافي">Professional Summary</h2>
-            <p style="max-width: 800px; margin: 0 auto; color: #86868b"
-                data-en="Data Analyst specializing in transforming raw data into actionable business insights. Proven track record in both corporate and freelance environments."
-                data-ar="محلل بيانات متخصص في تحويل البيانات الخام إلى رؤى عمل قابلة للتطبيق. سجل حافل في كل من البيئات المؤسسية والحرة.">
-                Data Analyst specializing in transforming raw data into actionable business insights.
-                Proven track record in both corporate and freelance environments.
-            </p>
+            <div class="card-content">
+                <p data-en="Data Analyst specializing in transforming raw data into actionable business insights. Proven track record in both corporate and freelance environments."
+                    data-ar="محلل بيانات متخصص في تحويل البيانات الخام إلى رؤى عمل قابلة للتطبيق. سجل حافل في كل من البيئات المؤسسية والحرة.">
+                    Data Analyst specializing in transforming raw data into actionable business insights.
+                    Proven track record in both corporate and freelance environments.
+                </p>
+            </div>
         </div>
     </section>
 
     <section id="portfolio">
         <div class="card">
             <h2 class="section-title" data-en="Portfolio" data-ar="الأعمال">Portfolio</h2>
-            <div class="
+            <div class="portfolio-container">
+                <div class="portfolio-item">
+                    <img src='https://i.postimg.cc/DWbc
