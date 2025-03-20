@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Portfolio | Your Name</title>
+    <title>TechVision Solutions | Software Development</title>
     <style>
         * {
             margin: 0;
@@ -28,82 +29,146 @@
             background-color: #fff;
             padding: 20px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: flex-end;
-            gap: 30px;
+            justify-content: center;
+            gap: 40px;
         }
 
         nav a {
             text-decoration: none;
-            color: #333;
-            font-weight: 500;
+            color: #2d3436;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0984e3;
         }
 
         .hero {
             text-align: center;
-            padding: 100px 0;
-            background-color: #e9ecef;
+            padding: 150px 0;
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+            color: white;
         }
 
-        .projects-grid {
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            color: #2d3436;
+        }
+
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            padding: 50px 0;
         }
 
-        .project-card {
+        .portfolio-item {
             background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
+        .portfolio-item:hover {
+            transform: translateY(-10px);
         }
 
-        .project-image {
+        .portfolio-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 4px;
         }
 
-        .project-tools {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 15px 0;
+        .portfolio-content {
+            padding: 20px;
         }
 
-        .tool-tag {
-            background-color: #e9ecef;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.9em;
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: #0984e3;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #74b9ff;
         }
 
         footer {
-            background-color: #333;
+            background-color: #2d3436;
             color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
+            padding: 50px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                justify-content: center;
+            .contact-section {
+                grid-template-columns: 1fr;
             }
             
-            .hero {
-                padding: 60px 0;
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
             }
         }
     </style>
@@ -112,89 +177,132 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero" id="home">
         <div class="container">
-
-      <img style="
-    border-radius: 50%; 
-    border: 2px solid #000; 
-    
-    object-fit: cover;
-  "
-          src='Best_Investments_in_🇰 _1738666644.pdf' 
-             alt='Muhammad Ali' class="profile-img">
-                  
-            
-<h4><center> Muhammad Ali </center></h4>
-<center> <i> Changing raw data to insights. </i></center>
+            <h1>TechVision Solutions</h1>
+            <p class="tagline">Transforming Ideas into Digital Reality</p>
+            <p>Leading software development company since 2010</p>
         </div>
     </header>
-<hr>
-    
-    <main class="container" id="projects">
-        <h2><center> My Portfolio </center> </h2>
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <article class="project-card">
-                <img src='https://i.postimg.cc/nC9RFsNS/From-Raw-Data-to-Actionable-Insights-1738666567.png' border='0' alt='From-Raw-Data-to-Actionable-Insights-1738666567'/>
-                <h3>Automobiles Sales Dashboard </h3>
-               <center>  <h4>Skills Used: </h4>
-                <div class="project-tools">
-                    <span class="tool-tag">Python</span>
-                    <span class="tool-tag">Tableau</span>
-                    <span class="tool-tag">SQL</span>
-                </div>
-               </center>
-                <p>Comprehensive analysis of regional sales data with predictive modeling and interactive dashboards.</p>
-                <a href="#">View Project →</a>
-            </article>
 
-            <!-- Project 2 -->
-            <article class="project-card">
-                <img src="https://placehold.co/600x400" alt="Project 2" class="project-image">
-                <h3>Customer Segmentation Model</h3>
-                <div class="project-tools">
-                    <span class="tool-tag">Machine Learning</span>
-                    <span class="tool-tag">Clustering</span>
-                    <span class="tool-tag">Power BI</span>
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Custom Software Development</h3>
+                        <p>Tailored solutions for your business needs</p>
+                    </div>
                 </div>
-                <p>RFM analysis and clustering implementation for targeted marketing strategies.</p>
-                <a href="#">View Project →</a>
-            </article>
-
-            <!-- Add more projects as needed -->
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Mobile App Development</h3>
+                        <p>iOS & Android applications development</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Cloud Solutions</h3>
+                        <p>Scalable cloud infrastructure and services</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
-
-    <section class="container" id="about">
-        <h2>About Me</h2>
-        <p>Data professional with expertise in analytics, machine learning, and data visualization. Passionate about transforming raw data into actionable insights.</p>
-        <!-- Add more about content -->
     </section>
 
-        <hr>
+    <section class="section" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/800x600?software" alt="Project 1" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <h3>Enterprise SaaS Platform</h3>
+                        <p>Cloud-based solution for enterprise management</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/800x600?app" alt="Project 2" class="portfolio-image">
+                    <div class="portfolio-content">
+                        <h3>Mobile Banking App</h3>
+                        <p>Secure financial management application</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section class="container" id="contact">
-        <h2>Contact</h2>
-        <p>Connect with me: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <!-- Add contact form or social links -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"TechVision delivered exceptional results beyond our expectations."</p>
+                    <h4>John Smith, CEO Tech Corp</h4>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Their technical expertise and professionalism are unmatched."</p>
+                    <h4>Sarah Johnson, CTO Innovations Ltd</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-section">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Email: info@techvision.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                    <address>
+                        123 Tech Park Road<br>
+                        Silicon Valley, CA 94025<br>
+                        United States
+                    </address>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea rows="5" placeholder="Message" required></textarea>
+                    <button class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <footer>
         <div class="container">
-           <center> <p>&copy; 2023 Muhammad Ali Sohail.</p> </center> 
+            <div class="footer-content">
+                <div>
+                    <h4>TechVision Solutions</h4>
+                    <p>© 2023 All rights reserved</p>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p>123 Tech Park Road</p>
+                    <p>Silicon Valley, CA 94025</p>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <p>LinkedIn | Twitter | Facebook</p>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -204,8 +312,7 @@
             });
         });
 
-        // Update copyright year automatically
-        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Your Name. All rights reserved.`;
+        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} TechVision Solutions. All rights reserved.`;
     </script>
 </body>
 </html>
