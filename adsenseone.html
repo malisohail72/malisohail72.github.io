@@ -1,1 +1,271 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBR Tax Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content */
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 2px solid #3498db;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .dropdown {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background: white;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .calculator-inputs {
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .input-group {
+            margin: 0.5rem 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+        }
+
+        .calculate-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: 2px solid #2980b9;
+        }
+
+        .calculate-btn:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            width: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>FBR Tax Portal</h1>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="cards-container">
+            <!-- Salaried Class Card -->
+            <div class="card">
+                <h2>Salaried Class</h2>
+                <select class="dropdown" onchange="showCalculator(this, 'salaried')">
+                    <option value="">Select Calculator</option>
+                    <option value="income-tax">Income Tax Calculator</option>
+                    <option value="property-tax">Property Tax Calculator</option>
+                </select>
+                <div id="salaried-calculator" class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Annual Income (PKR)</label>
+                        <input type="number" id="salaried-income">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateTax('salaried')">Calculate</button>
+                    <div class="result" id="salaried-result"></div>
+                </div>
+            </div>
+
+            <!-- Business Class Card -->
+            <div class="card">
+                <h2>Business Class</h2>
+                <select class="dropdown" onchange="showCalculator(this, 'business')">
+                    <option value="">Select Calculator</option>
+                    <option value="sales-tax">Sales Tax Calculator</option>
+                    <option value="corporate-tax">Corporate Tax Calculator</option>
+                </select>
+                <div id="business-calculator" class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Annual Revenue (PKR)</label>
+                        <input type="number" id="business-revenue">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateTax('business')">Calculate</button>
+                    <div class="result" id="business-result"></div>
+                </div>
+            </div>
+
+            <!-- Investor Class Card -->
+            <div class="card">
+                <h2>Investor Class</h2>
+                <select class="dropdown" onchange="showCalculator(this, 'investor')">
+                    <option value="">Select Calculator</option>
+                    <option value="capital-gains">Capital Gains Tax</option>
+                    <option value="dividend-tax">Dividend Tax</option>
+                </select>
+                <div id="investor-calculator" class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Investment Amount (PKR)</label>
+                        <input type="number" id="investment-amount">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateTax('investor')">Calculate</button>
+                    <div class="result" id="investor-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/FBR_logo.png" alt="FBR Logo" class="footer-logo">
+            <p>© 2023 FBR Tax Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showCalculator(selectElement, category) {
+            const calculatorDiv = document.getElementById(`${category}-calculator`);
+            const inputs = calculatorDiv.querySelectorAll('.input-group');
+            
+            if(selectElement.value) {
+                calculatorDiv.style.display = 'block';
+                inputs.forEach(input => input.style.display = 'block');
+            } else {
+                calculatorDiv.style.display = 'none';
+            }
+        }
+
+        function calculateTax(category) {
+            const resultDiv = document.getElementById(`${category}-result`);
+            let tax = 0;
+            
+            switch(category) {
+                case 'salaried':
+                    const income = parseFloat(document.getElementById('salaried-income').value);
+                    tax = income * 0.15; // Simplified calculation
+                    break;
+                case 'business':
+                    const revenue = parseFloat(document.getElementById('business-revenue').value);
+                    tax = revenue * 0.20; // Simplified calculation
+                    break;
+                case 'investor':
+                    const investment = parseFloat(document.getElementById('investment-amount').value);
+                    tax = investment * 0.10; // Simplified calculation
+                    break;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Estimated Tax: PKR ${tax.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
