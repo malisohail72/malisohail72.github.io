@@ -1,38 +1,193 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World Website</title>
+    <title>Pakistan Tax Calculators</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
-        .container {
-            text-align: center;
+
+        nav {
+            background-color: #004d7a;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        h1 {
-            color: #333;
-            font-size: 2.5em;
+
+        nav button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 3px;
         }
-        p {
-            color: #666;
-            font-size: 1.2em;
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .calculator h2 {
+            color: #004d7a;
+            margin-top: 0;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+        }
+
+        button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f4fc;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello, World! 🌍</h1>
-        <p>Welcome to my first website!</p>
+    <h1>Pakistan Tax Calculators</h1>
+    
+    <nav>
+        <button onclick="showCalculator('income')">Income Tax</button>
+        <button onclick="showCalculator('sales')">Sales Tax</button>
+        <button onclick="showCalculator('property')">Property Tax</button>
+        <button onclick="showCalculator('capital')">Capital Gains</button>
+    </nav>
+
+    <!-- Income Tax Calculator -->
+    <div id="income" class="calculator">
+        <h2>Income Tax Calculator</h2>
+        <input type="number" id="annualIncome" placeholder="Annual Income (PKR)">
+        <button onclick="calculateIncomeTax()">Calculate</button>
+        <div class="result" id="incomeResult"></div>
     </div>
+
+    <!-- Sales Tax Calculator -->
+    <div id="sales" class="calculator" style="display: none;">
+        <h2>Sales Tax Calculator</h2>
+        <input type="number" id="salesAmount" placeholder="Amount (PKR)">
+        <button onclick="calculateSalesTax()">Calculate</button>
+        <div class="result" id="salesResult"></div>
+    </div>
+
+    <!-- Property Tax Calculator -->
+    <div id="property" class="calculator" style="display: none;">
+        <h2>Property Tax Calculator</h2>
+        <select id="propertyType">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+        </select>
+        <input type="number" id="propertyValue" placeholder="Property Value (PKR)">
+        <button onclick="calculatePropertyTax()">Calculate</button>
+        <div class="result" id="propertyResult"></div>
+    </div>
+
+    <!-- Capital Gains Tax Calculator -->
+    <div id="capital" class="calculator" style="display: none;">
+        <h2>Capital Gains Tax Calculator</h2>
+        <input type="number" id="purchasePrice" placeholder="Purchase Price (PKR)">
+        <input type="number" id="salePrice" placeholder="Sale Price (PKR)">
+        <input type="number" id="holdingPeriod" placeholder="Holding Period (months)">
+        <button onclick="calculateCapitalGains()">Calculate</button>
+        <div class="result" id="capitalResult"></div>
+    </div>
+
+    <script>
+        // Show selected calculator
+        function showCalculator(calculatorId) {
+            const calculators = document.querySelectorAll('.calculator');
+            calculators.forEach(calc => calc.style.display = 'none');
+            document.getElementById(calculatorId).style.display = 'block';
+        }
+
+        // Income Tax Calculator (2023-2024 rates)
+        function calculateIncomeTax() {
+            const income = parseFloat(document.getElementById('annualIncome').value);
+            let tax = 0;
+
+            if (income <= 600000) {
+                tax = 0;
+            } else if (income <= 1200000) {
+                tax = (income - 600000) * 0.05;
+            } else if (income <= 2400000) {
+                tax = 30000 + (income - 1200000) * 0.15;
+            } else if (income <= 3600000) {
+                tax = 30000 + 180000 + (income - 2400000) * 0.20;
+            } else {
+                tax = 30000 + 180000 + 240000 + (income - 3600000) * 0.25;
+            }
+
+            document.getElementById('incomeResult').innerHTML = `
+                Annual Tax: PKR ${tax.toFixed(2)}<br>
+                Monthly Deduction: PKR ${(tax/12).toFixed(2)}
+            `;
+        }
+
+        // Sales Tax Calculator (17% standard rate)
+        function calculateSalesTax() {
+            const amount = parseFloat(document.getElementById('salesAmount').value);
+            const tax = amount * 0.17;
+            document.getElementById('salesResult').innerHTML = `
+                Sales Tax (17%): PKR ${tax.toFixed(2)}<br>
+                Total Amount: PKR ${(amount + tax).toFixed(2)}
+            `;
+        }
+
+        // Property Tax Calculator (sample rates)
+        function calculatePropertyTax() {
+            const value = parseFloat(document.getElementById('propertyValue').value);
+            const type = document.getElementById('propertyType').value;
+            const rate = type === 'residential' ? 0.01 : 0.02;
+            const tax = value * rate;
+            document.getElementById('propertyResult').innerHTML = `
+                Annual Property Tax: PKR ${tax.toFixed(2)}
+            `;
+        }
+
+        // Capital Gains Tax Calculator
+        function calculateCapitalGains() {
+            const purchase = parseFloat(document.getElementById('purchasePrice').value);
+            const sale = parseFloat(document.getElementById('salePrice').value);
+            const months = parseFloat(document.getElementById('holdingPeriod').value);
+            const gain = sale - purchase;
+            
+            let rate = 0.15; // Default for short-term
+            if (months > 12) rate = 0.10;
+            
+            const tax = gain * rate;
+            document.getElementById('capitalResult').innerHTML = `
+                Capital Gains Tax: PKR ${tax.toFixed(2)}<br>
+                Net Profit: PKR ${(gain - tax).toFixed(2)}
+            `;
+        }
+    </script>
+
+    <footer style="margin-top: 40px; text-align: center; color: #666;">
+        <p>Note: This calculator provides estimates based on current tax laws. Please consult a tax professional for official calculations.</p>
+        <p>Tax rates updated for FY 2023-2024</p>
+    </footer>
 </body>
 </html>
 
