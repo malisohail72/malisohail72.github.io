@@ -3,177 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistan Tax Hub - Official Tax Calculators</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>FBR Tax Portal</title>
     <style>
+        /* Color Scheme */
         :root {
-            --primary-color: #004d7a;
-            --secondary-color: #0077b6;
+            --primary-color: #006400;
+            --secondary-color: #008000;
+            --hover-color: #004d00;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #f8f9fa;
+            line-height: 1.6;
         }
 
-        .navbar {
+        /* Header Styles */
+        .header {
             background: var(--primary-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            color: white;
         }
 
-        .calculator-card {
+        .nav {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
         }
 
-        .calculator-card:hover {
-            transform: translateY(-3px);
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
-        .calculator-header {
+        .dropdown-item {
+            padding: 12px 16px;
+            color: var(--primary-color);
+        }
+
+        .dropdown-item:hover {
+            background: #f0f0f0;
+        }
+
+        /* Calculator Styles */
+        .calculator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid #ddd;
+        }
+
+        .calculator {
+            display: none;
+        }
+
+        .calculator.active {
+            display: block;
+        }
+
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+
+        button {
             background: var(--secondary-color);
             color: white;
-            border-radius: 15px 15px 0 0;
-            padding: 1.5rem;
+            border: none;
+            cursor: pointer;
         }
 
-        .explanation-box {
-            background: #e8f4fc;
-            border-left: 4px solid var(--secondary-color);
-            border-radius: 0 0 15px 15px;
-            padding: 1rem;
-            margin-top: -1rem;
+        button:hover {
+            background: var(--hover-color);
         }
 
-        .calculator-selector {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .calculator-card {
-                margin: 1rem 0;
+            .nav {
+                flex-direction: column;
+            }
+            
+            .dropdown-content {
+                position: static;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.png" alt="PTH Logo" height="40" class="d-inline-block align-text-top">
-                Pakistan Tax Hub
-            </a>
+    <!-- Header Component -->
+    <header class="header">
+        <nav class="nav">
+            <div class="dropdown">
+                <span>Tax Calculators ▼</span>
+                <div class="dropdown-content" id="mainDropdown"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Calculator Container -->
+    <div class="calculator-container" id="calculatorContainer"></div>
+
+    <!-- Calculator Templates -->
+    <template id="salariedIncomeTax">
+        <div class="calculator">
+            <h3>Income Tax Calculator (Salaried)</h3>
+            <input type="number" id="salary" placeholder="Monthly Salary">
+            <button onclick="calculateIncomeTax()">Calculate</button>
+            <p id="result"></p>
         </div>
-    </nav>
+    </template>
 
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Official Tax Calculators of Pakistan</h1>
-        
-        <!-- Calculator Selector -->
-        <select class="calculator-selector mb-5" onchange="showCalculator(this.value)">
-            <option value="">Select Calculator Type</option>
-            <option value="fbr-income">FBR Income Tax Calculator</option>
-            <option value="salary-tax">Salary Tax Calculator</option>
-            <option value="property-tax">Property Tax Calculator</option>
-            <option value="sales-tax">Sales Tax Calculator</option>
-            <option value="capital-gains">Capital Gains Tax</option>
-            <option value="withholding-tax">Withholding Tax Calculator</option>
-            <option value="vehicle-tax">Vehicle Tax Calculator</option>
-            <option value="rental-income">Rental Income Tax</option>
-            <option value="agriculture-tax">Agriculture Income Tax</option>
-            <option value="customs-duty">Customs Duty Calculator</option>
-        </select>
-
-        <!-- FBR Income Tax Calculator -->
-        <div id="fbr-income" class="calculator-card d-none">
-            <div class="calculator-header">
-                <h3>FBR Income Tax Calculator</h3>
-            </div>
-            <div class="p-4">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <label>Tax Year</label>
-                        <select class="form-select" id="taxYear">
-                            <option value="2024">2023-2024</option>
-                            <option value="2023">2022-2023</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Annual Income (PKR)</label>
-                        <input type="number" class="form-control" id="annualIncome">
-                    </div>
-                    <div class="col-md-4">
-                        <label>Income Type</label>
-                        <select class="form-select" id="incomeType">
-                            <option value="salaried">Salaried</option>
-                            <option value="business">Business</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="btn btn-primary mt-3" onclick="calculateIncomeTax()">Calculate</button>
-                <div id="incomeResult" class="result-box mt-3"></div>
-            </div>
-            <div class="explanation-box">
-                <strong>Explanation:</strong> Calculate your annual income tax liability based on latest FBR tax slabs. 
-                Includes adjustments for different income types and tax credits.
-            </div>
+    <template id="salesTax">
+        <div class="calculator">
+            <h3>Sales Tax Calculator</h3>
+            <input type="number" id="amount" placeholder="Amount">
+            <select id="taxRate">
+                <option value="0.17">Standard 17%</option>
+                <option value="0.21">Special 21%</option>
+            </select>
+            <button onclick="calculateSalesTax()">Calculate</button>
+            <p id="salesResult"></p>
         </div>
+    </template>
 
-        <!-- Add other 9 calculators following similar structure -->
+    <template id="capitalGains">
+        <div class="calculator">
+            <h3>Capital Gains Tax Calculator</h3>
+            <input type="number" id="purchasePrice" placeholder="Purchase Price">
+            <input type="number" id="salePrice" placeholder="Sale Price">
+            <button onclick="calculateCapitalGains()">Calculate</button>
+            <p id="capitalResult"></p>
+        </div>
+    </template>
 
-        <!-- Footer -->
-        <footer class="mt-5 text-center text-muted">
-            <p>Official Partner with Federal Board of Revenue (FBR) Pakistan</p>
-            <p>© 2024 Pakistan Tax Hub - All calculations verified with FBR Act 2023</p>
-        </footer>
-    </div>
+    <template id="stampDuty">
+        <div class="calculator">
+            <h3>Stamp Duty Calculator</h3>
+            <input type="number" id="propertyValue" placeholder="Property Value">
+            <button onclick="calculateStampDuty()">Calculate</button>
+            <p id="stampResult"></p>
+        </div>
+    </template>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Show selected calculator
-        function showCalculator(calculatorId) {
-            document.querySelectorAll('.calculator-card').forEach(el => el.classList.add('d-none'));
-            if(calculatorId) document.getElementById(calculatorId).classList.remove('d-none');
-        }
-
-        // Enhanced Income Tax Calculator
-        function calculateIncomeTax() {
-            const income = parseFloat(document.getElementById('annualIncome').value);
-            const taxYear = document.getElementById('taxYear').value;
-            const incomeType = document.getElementById('incomeType').value;
-            
-            // 2023-2024 Tax Slabs (Salaried)
-            let tax = 0;
-            if(taxYear === '2024') {
-                if(income <= 600000) tax = 0;
-                else if(income <= 1200000) tax = (income - 600000) * 0.05;
-                else if(income <= 2400000) tax = 30000 + (income - 1200000) * 0.15;
-                else if(income <= 3600000) tax = 30000 + 180000 + (income - 2400000) * 0.20;
-                else tax = 30000 + 180000 + 240000 + (income - 3600000) * 0.25;
+        // Calculator Data Structure
+        const calculators = {
+            'Salaried Class': {
+                'Income Tax': 'salariedIncomeTax',
+                'Allowances': 'allowancesCalculator'
+            },
+            'Business Class': {
+                'Sales Tax': 'salesTax',
+                'Withholding Tax': 'withholdingTax',
+                'Corporate Tax': 'corporateTax'
+            },
+            'Investor Class': {
+                'Capital Gains Tax': 'capitalGains',
+                'Stamp Duty': 'stampDuty',
+                'Dividend Tax': 'dividendTax'
             }
+        };
 
-            // Add business income calculations
-            if(incomeType === 'business') tax *= 1.1; // 10% additional tax
-
-            document.getElementById('incomeResult').innerHTML = `
-                <div class="alert alert-primary">
-                    <h4>Annual Tax Liability: PKR ${tax.toLocaleString()}</h4>
-                    <hr>
-                    <p>Monthly Deduction: PKR ${(tax/12).toLocaleString()}<br>
-                    Tax as Percentage: ${((tax/income)*100).toFixed(1)}%</p>
-                </div>
-            `;
+        // Initialize Dropdowns
+        function initDropdowns() {
+            const dropdown = document.getElementById('mainDropdown');
+            for (const [category, subcats] of Object.entries(calculators)) {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'dropdown-item';
+                categoryItem.textContent = category;
+                
+                const subDropdown = document.createElement('div');
+                subDropdown.className = 'dropdown-content';
+                
+                for (const [subcat, templateId] of Object.entries(subcats)) {
+                    const subItem = document.createElement('div');
+                    subItem.className = 'dropdown-item';
+                    subItem.textContent = subcat;
+                    subItem.onclick = () => showCalculator(templateId);
+                    subDropdown.appendChild(subItem);
+                }
+                
+                categoryItem.appendChild(subDropdown);
+                dropdown.appendChild(categoryItem);
+            }
         }
 
-        // Add other calculator functions here
+        // Show Selected Calculator
+        function showCalculator(templateId) {
+            const container = document.getElementById('calculatorContainer');
+            const template = document.getElementById(templateId);
+            container.innerHTML = '';
+            container.appendChild(template.content.cloneNode(true));
+        }
+
+        // Calculator Functions
+        function calculateIncomeTax() {
+            const salary = document.getElementById('salary').value;
+            const annual = salary * 12;
+            let tax = annual > 600000 ? (annual - 600000) * 0.15 : 0;
+            document.getElementById('result').textContent = `Annual Tax: Rs.${tax.toFixed(2)}`;
+        }
+
+        function calculateSalesTax() {
+            const amount = document.getElementById('amount').value;
+            const rate = document.getElementById('taxRate').value;
+            const tax = amount * rate;
+            document.getElementById('salesResult').textContent = `Sales Tax: Rs.${tax.toFixed(2)}`;
+        }
+
+        function calculateCapitalGains() {
+            const purchase = parseFloat(document.getElementById('purchasePrice').value);
+            const sale = parseFloat(document.getElementById('salePrice').value);
+            const gain = sale - purchase;
+            const tax = gain > 0 ? gain * 0.125 : 0;
+            document.getElementById('capitalResult').textContent = `Capital Gains Tax: Rs.${tax.toFixed(2)}`;
+        }
+
+        function calculateStampDuty() {
+            const value = document.getElementById('propertyValue').value;
+            const duty = value * 0.02;
+            document.getElementById('stampResult').textContent = `Stamp Duty: Rs.${duty.toFixed(2)}`;
+        }
+
+        // Initialize App
+        window.onload = initDropdowns;
     </script>
 </body>
 </html>
