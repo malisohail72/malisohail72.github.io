@@ -5,64 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FBR Tax Portal</title>
     <style>
-        /* Color Scheme */
         :root {
-            --primary-color: #006400;
-            --secondary-color: #008000;
-            --hover-color: #004d00;
+            --primary-green: #006400;
+            --secondary-green: #008000;
+            --dark-green: #004d00;
+            --light-bg: #f5f5f5;
         }
 
-        /* Base Styles */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         body {
-            line-height: 1.6;
+            background-color: var(--light-bg);
         }
 
         /* Header Styles */
         .header {
-            background: var(--primary-color);
-            padding: 1rem;
+            background: var(--primary-green);
+            padding: 1rem 2rem;
             color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .nav {
             display: flex;
-            gap: 2rem;
-            position: relative;
+            gap: 3rem;
+            align-items: center;
         }
 
-        /* Dropdown Styles */
+        /* Dropdown Structure */
         .dropdown {
             position: relative;
             cursor: pointer;
+            padding: 1rem 0;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
+        .dropdown:hover .dropdown-menu {
             display: block;
         }
 
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
         .dropdown-item {
-            padding: 12px 16px;
-            color: var(--primary-color);
+            padding: 12px 20px;
+            color: var(--primary-green);
+            border-bottom: 1px solid #eee;
+            position: relative;
         }
 
         .dropdown-item:hover {
-            background: #f0f0f0;
+            background: #f8f8f8;
+        }
+
+        .nested-dropdown .dropdown-menu {
+            left: 100%;
+            top: 0;
         }
 
         /* Calculator Styles */
@@ -70,7 +80,9 @@
             max-width: 800px;
             margin: 2rem auto;
             padding: 2rem;
-            border: 1px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .calculator {
@@ -81,31 +93,48 @@
             display: block;
         }
 
-        input, select, button {
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
+        .input-group {
+            margin: 1rem 0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0.5rem 0;
         }
 
         button {
-            background: var(--secondary-color);
+            background: var(--secondary-green);
             color: white;
+            padding: 0.8rem 1.5rem;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         button:hover {
-            background: var(--hover-color);
+            background: var(--dark-green);
         }
 
-        /* Responsive Design */
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
             .nav {
                 flex-direction: column;
+                align-items: flex-start;
             }
             
-            .dropdown-content {
+            .dropdown-menu {
                 position: static;
+                box-shadow: none;
             }
         }
     </style>
@@ -116,138 +145,202 @@
         <nav class="nav">
             <div class="dropdown">
                 <span>Tax Calculators ▼</span>
-                <div class="dropdown-content" id="mainDropdown"></div>
+                <div class="dropdown-menu" id="mainMenu"></div>
             </div>
         </nav>
     </header>
 
     <!-- Calculator Container -->
-    <div class="calculator-container" id="calculatorContainer"></div>
+    <main class="calculator-container" id="mainContent"></main>
 
     <!-- Calculator Templates -->
-    <template id="salariedIncomeTax">
+    <template id="incomeTaxTemplate">
         <div class="calculator">
-            <h3>Income Tax Calculator (Salaried)</h3>
-            <input type="number" id="salary" placeholder="Monthly Salary">
+            <h2>Income Tax Calculator</h2>
+            <div class="input-group">
+                <input type="number" id="grossSalary" placeholder="Gross Annual Salary (PKR)">
+            </div>
             <button onclick="calculateIncomeTax()">Calculate</button>
-            <p id="result"></p>
+            <div class="result" id="incomeTaxResult"></div>
         </div>
     </template>
 
-    <template id="salesTax">
+    <template id="salesTaxTemplate">
         <div class="calculator">
-            <h3>Sales Tax Calculator</h3>
-            <input type="number" id="amount" placeholder="Amount">
-            <select id="taxRate">
-                <option value="0.17">Standard 17%</option>
-                <option value="0.21">Special 21%</option>
-            </select>
+            <h2>Sales Tax Calculator</h2>
+            <div class="input-group">
+                <input type="number" id="saleAmount" placeholder="Total Sale Amount (PKR)">
+            </div>
             <button onclick="calculateSalesTax()">Calculate</button>
-            <p id="salesResult"></p>
+            <div class="result" id="salesTaxResult"></div>
         </div>
     </template>
 
-    <template id="capitalGains">
+    <template id="capitalGainsTemplate">
         <div class="calculator">
-            <h3>Capital Gains Tax Calculator</h3>
-            <input type="number" id="purchasePrice" placeholder="Purchase Price">
-            <input type="number" id="salePrice" placeholder="Sale Price">
+            <h2>Capital Gains Tax Calculator</h2>
+            <div class="input-group">
+                <input type="number" id="purchasePrice" placeholder="Purchase Price (PKR)">
+                <input type="number" id="salePrice" placeholder="Sale Price (PKR)">
+            </div>
             <button onclick="calculateCapitalGains()">Calculate</button>
-            <p id="capitalResult"></p>
+            <div class="result" id="capitalGainsResult"></div>
         </div>
     </template>
 
-    <template id="stampDuty">
+    <template id="stampDutyTemplate">
         <div class="calculator">
-            <h3>Stamp Duty Calculator</h3>
-            <input type="number" id="propertyValue" placeholder="Property Value">
+            <h2>Stamp Duty Calculator</h2>
+            <div class="input-group">
+                <input type="number" id="propertyValue" placeholder="Property Value (PKR)">
+            </div>
             <button onclick="calculateStampDuty()">Calculate</button>
-            <p id="stampResult"></p>
+            <div class="result" id="stampDutyResult"></div>
         </div>
     </template>
 
     <script>
-        // Calculator Data Structure
-        const calculators = {
-            'Salaried Class': {
-                'Income Tax': 'salariedIncomeTax',
-                'Allowances': 'allowancesCalculator'
-            },
-            'Business Class': {
-                'Sales Tax': 'salesTax',
-                'Withholding Tax': 'withholdingTax',
-                'Corporate Tax': 'corporateTax'
-            },
-            'Investor Class': {
-                'Capital Gains Tax': 'capitalGains',
-                'Stamp Duty': 'stampDuty',
-                'Dividend Tax': 'dividendTax'
+        // Calculator Configuration
+        const taxConfig = {
+            categories: {
+                salaried: {
+                    name: "Salaried Class",
+                    calculators: {
+                        incomeTax: {
+                            name: "Income Tax Calculator",
+                            template: "incomeTaxTemplate"
+                        },
+                        allowances: {
+                            name: "Allowances Calculator",
+                            template: "allowancesTemplate"
+                        }
+                    }
+                },
+                business: {
+                    name: "Business Class",
+                    calculators: {
+                        salesTax: {
+                            name: "Sales Tax Calculator",
+                            template: "salesTaxTemplate"
+                        },
+                        withholdingTax: {
+                            name: "Withholding Tax Calculator",
+                            template: "withholdingTaxTemplate"
+                        },
+                        corporateTax: {
+                            name: "Corporate Tax Calculator",
+                            template: "corporateTaxTemplate"
+                        }
+                    }
+                },
+                investor: {
+                    name: "Investor Class",
+                    calculators: {
+                        capitalGains: {
+                            name: "Capital Gains Tax",
+                            template: "capitalGainsTemplate"
+                        },
+                        stampDuty: {
+                            name: "Stamp Duty",
+                            template: "stampDutyTemplate"
+                        },
+                        dividendTax: {
+                            name: "Dividend Tax",
+                            template: "dividendTaxTemplate"
+                        }
+                    }
+                }
             }
         };
 
-        // Initialize Dropdowns
-        function initDropdowns() {
-            const dropdown = document.getElementById('mainDropdown');
-            for (const [category, subcats] of Object.entries(calculators)) {
-                const categoryItem = document.createElement('div');
-                categoryItem.className = 'dropdown-item';
-                categoryItem.textContent = category;
+        // Initialize Navigation
+        function initNavigation() {
+            const mainMenu = document.getElementById('mainMenu');
+            
+            for(const category of Object.values(taxConfig.categories)) {
+                const categoryItem = createDropdownItem(category.name);
+                const subMenu = document.createElement('div');
+                subMenu.className = 'dropdown-menu';
                 
-                const subDropdown = document.createElement('div');
-                subDropdown.className = 'dropdown-content';
-                
-                for (const [subcat, templateId] of Object.entries(subcats)) {
-                    const subItem = document.createElement('div');
-                    subItem.className = 'dropdown-item';
-                    subItem.textContent = subcat;
-                    subItem.onclick = () => showCalculator(templateId);
-                    subDropdown.appendChild(subItem);
+                for(const calculator of Object.values(category.calculators)) {
+                    const calculatorItem = createDropdownItem(calculator.name, () => {
+                        loadCalculator(calculator.template);
+                    });
+                    subMenu.appendChild(calculatorItem);
                 }
                 
-                categoryItem.appendChild(subDropdown);
-                dropdown.appendChild(categoryItem);
+                categoryItem.appendChild(subMenu);
+                mainMenu.appendChild(categoryItem);
             }
         }
 
-        // Show Selected Calculator
-        function showCalculator(templateId) {
-            const container = document.getElementById('calculatorContainer');
+        function createDropdownItem(text, onClick) {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item';
+            item.textContent = text;
+            if(onClick) item.onclick = onClick;
+            return item;
+        }
+
+        // Calculator Loader
+        function loadCalculator(templateId) {
+            const container = document.getElementById('mainContent');
             const template = document.getElementById(templateId);
+            if(!template) {
+                container.innerHTML = "<p>Calculator under development</p>";
+                return;
+            }
             container.innerHTML = '';
             container.appendChild(template.content.cloneNode(true));
         }
 
-        // Calculator Functions
+        // Calculation Functions
         function calculateIncomeTax() {
-            const salary = document.getElementById('salary').value;
-            const annual = salary * 12;
-            let tax = annual > 600000 ? (annual - 600000) * 0.15 : 0;
-            document.getElementById('result').textContent = `Annual Tax: Rs.${tax.toFixed(2)}`;
+            const salary = parseFloat(document.getElementById('grossSalary').value);
+            if(!salary) return;
+            
+            let tax = 0;
+            if(salary > 1200000) {
+                tax = (salary - 1200000) * 0.25 + 90000;
+            } else if(salary > 600000) {
+                tax = (salary - 600000) * 0.15;
+            }
+            
+            document.getElementById('incomeTaxResult').innerHTML = `
+                <h4>Tax Calculation:</h4>
+                <p>Annual Tax Payable: PKR ${tax.toLocaleString()}</p>
+                <p>Monthly Deduction: PKR ${(tax/12).toLocaleString()}</p>
+            `;
         }
 
         function calculateSalesTax() {
-            const amount = document.getElementById('amount').value;
-            const rate = document.getElementById('taxRate').value;
-            const tax = amount * rate;
-            document.getElementById('salesResult').textContent = `Sales Tax: Rs.${tax.toFixed(2)}`;
+            const amount = parseFloat(document.getElementById('saleAmount').value);
+            const tax = amount * 0.17;
+            document.getElementById('salesTaxResult').innerHTML = `
+                Sales Tax Payable (17%): PKR ${tax.toLocaleString()}
+            `;
         }
 
         function calculateCapitalGains() {
             const purchase = parseFloat(document.getElementById('purchasePrice').value);
             const sale = parseFloat(document.getElementById('salePrice').value);
             const gain = sale - purchase;
-            const tax = gain > 0 ? gain * 0.125 : 0;
-            document.getElementById('capitalResult').textContent = `Capital Gains Tax: Rs.${tax.toFixed(2)}`;
+            const tax = Math.max(gain * 0.125, 0);
+            document.getElementById('capitalGainsResult').innerHTML = `
+                Capital Gains Tax (12.5%): PKR ${tax.toLocaleString()}
+            `;
         }
 
         function calculateStampDuty() {
-            const value = document.getElementById('propertyValue').value;
+            const value = parseFloat(document.getElementById('propertyValue').value);
             const duty = value * 0.02;
-            document.getElementById('stampResult').textContent = `Stamp Duty: Rs.${duty.toFixed(2)}`;
+            document.getElementById('stampDutyResult').innerHTML = `
+                Stamp Duty Payable (2%): PKR ${duty.toLocaleString()}
+            `;
         }
 
-        // Initialize App
-        window.onload = initDropdowns;
+        // Initialize Application
+        window.onload = initNavigation;
     </script>
 </body>
 </html>
