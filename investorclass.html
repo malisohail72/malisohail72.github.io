@@ -1,0 +1,629 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Calculators - My Tax Helper.pk</title>
+    <style>
+        /* Basic CSS for styling (same as the main page) */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styles (same as the main page) */
+        .navbar {
+            background-color: #f8f8f8;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links ul li {
+            padding: 10px 0;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .nav-links ul li a:hover {
+            background-color: #555;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                position: static;
+                background-color: transparent;
+                width: auto;
+                text-align: left;
+                padding: 0;
+            }
+
+            .nav-links ul {
+                display: flex;
+            }
+
+            .nav-links ul li {
+                padding: 0;
+                margin-left: 20px;
+            }
+
+            .nav-links ul li a {
+                color: #333;
+                padding: 10px 15px;
+            }
+
+            .nav-links ul li a:hover {
+                background-color: #eee;
+            }
+        }
+
+        /* Content Sections Styles (same as the main page) */
+        .content-section {
+            padding: 50px 20px;
+            text-align: center;
+            border: 1px solid #eee; /* Light border */
+            margin: 10px;
+        }
+
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section-1 { background-color: #f9fbe7; } /* Light yellow */
+        .section-2 { background-color: #e1bee7; } /* Light purple */
+        .section-3 { background-color: #ffccbc; } /* Light orange */
+        .section-4 { background-color: #c5e1a5; } /* Light green */
+        .section-5 { background-color: #b3e5fc; } /* Light sky blue */
+        .section-6 { background-color: #d7ccc8; } /* Light brown */
+        .section-7 { background-color: #ffe0b2; } /* Light orange accent */
+        .section-8 { background-color: #aed581; } /* Light green accent */
+
+        /* Calculator Specific Styles */
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calculator-container h3 {
+            margin-top: 0;
+            color: #00897b;
+        }
+
+        .calculator-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .calculator-container input[type="number"],
+        .calculator-container button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .calculator-container button {
+            background-color: #00897b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator-container button:hover {
+            background-color: #00695c;
+        }
+
+        .calculator-container .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Testimonials Section Styles (same as the main page) */
+        .testimonials-container {
+            background-color: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .testimonials-container h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* About Us Section Styles (same as the main page) */
+        .about-us {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-us p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Us Section Styles (same as the main page) */
+        .contact-us {
+            background-color: #e0f2f7; /* Light cyan */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-us h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            text-align: left;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #00897b; /* Teal */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #00695c;
+        }
+
+        /* Footer Styles (same as the main page) */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #eee;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links a {
+            color: #eee;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            <strong>My Tax Helper.pk</strong>
+        </div>
+        <div class="hamburger">&#9776;</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tax Calculator</a></li>
+                <li><a href="#">Tax Tips</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content-section section-1">
+        <h2>Stock Market Capital Gains Tax Calculator</h2>
+        <p>Calculate capital gains tax on stock market investments.</p>
+        <div class="calculator-container">
+            <h3>Stock Capital Gains Tax</h3>
+            <label for="stockPurchasePrice">Purchase Price (PKR):</label>
+            <input type="number" id="stockPurchasePrice" placeholder="Enter purchase price">
+            <label for="stockSalePrice">Sale Price (PKR):</label>
+            <input type="number" id="stockSalePrice" placeholder="Enter sale price">
+            <button onclick="calculateStockCapitalGainsTax()">Calculate</button>
+            <div class="result" id="stockCapitalGainsTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-2">
+        <h2>Property Capital Gains Tax Calculator</h2>
+        <p>Calculate capital gains tax on property investments.</p>
+        <div class="calculator-container">
+            <h3>Property Capital Gains Tax</h3>
+            <label for="propertyPurchasePrice">Purchase Price (PKR):</label>
+            <input type="number" id="propertyPurchasePrice" placeholder="Enter purchase price">
+            <label for="propertySalePrice">Sale Price (PKR):</label>
+            <input type="number" id="propertySalePrice" placeholder="Enter sale price">
+            <button onclick="calculatePropertyCapitalGainsTax()">Calculate</button>
+            <div class="result" id="propertyCapitalGainsTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-3">
+        <h2>Gold Investment Capital Gains Tax Calculator</h2>
+        <p>Calculate capital gains tax on gold investments.</p>
+        <div class="calculator-container">
+            <h3>Gold Capital Gains Tax</h3>
+            <label for="goldPurchasePrice">Purchase Price (PKR):</label>
+            <input type="number" id="goldPurchasePrice" placeholder="Enter purchase price">
+            <label for="goldSalePrice">Sale Price (PKR):</label>
+            <input type="number" id="goldSalePrice" placeholder="Enter sale price">
+            <button onclick="calculateGoldCapitalGainsTax()">Calculate</button>
+            <div class="result" id="goldCapitalGainsTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-4">
+        <h2>Savings Account Profit Tax Calculator</h2>
+        <p>Calculate tax on profits from savings accounts (Islamic & Conventional).</p>
+        <div class="calculator-container">
+            <h3>Savings Account Profit Tax</h3>
+            <label for="savingsProfit">Profit (PKR):</label>
+            <input type="number" id="savingsProfit" placeholder="Enter profit">
+            <label for="savingsType">Account Type:</label>
+            <select id="savingsType">
+                <option value="conventional">Conventional</option>
+                <option value="islamic">Islamic</option>
+            </select>
+            <button onclick="calculateSavingsProfitTax()">Calculate</button>
+            <div class="result" id="savingsProfitTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-5">
+        <h2>Bond Investment Profit Tax Calculator</h2>
+        <p>Calculate tax on profits from bond investments.</p>
+        <div class="calculator-container">
+            <h3>Bond Profit Tax</h3>
+            <label for="bondProfit">Profit (PKR):</label>
+            <input type="number" id="bondProfit" placeholder="Enter profit">
+            <button onclick="calculateBondProfitTax()">Calculate</button>
+            <div class="result" id="bondProfitTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-6">
+        <h2>Mutual Fund Profit Tax Calculator</h2>
+        <p>Calculate tax on profits from mutual fund investments.</p>
+        <div class="calculator-container">
+            <h3>Mutual Fund Profit Tax</h3>
+            <label for="mutualFundProfit">Profit (PKR):</label>
+            <input type="number" id="mutualFundProfit" placeholder="Enter profit">
+            <button onclick="calculateMutualFundProfitTax()">Calculate</button>
+            <div class="result" id="mutualFundProfitTaxResult"></div>
+        </div>
+    </section>
+    
+    <section class="content-section section-7">
+        <h2>FAQ (Frequently Asked Questions)</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <h3>Q: Stock Market Capital Gains Tax kia hai?</h3>
+            <p>A: Stock Market Capital Gains Tax woh tax hai jo stocks ki kharid o farokht se hone wale munafa par lagaya jata hai.</p>
+            <h3>Q: Property Capital Gains Tax ki sharah Pakistan mein kia hai?</h3>
+            <p>A: Pakistan mein property capital gains tax ki sharah property ki muddat aur amadni par munhasir hai. FBR ki latest guidelines se maloomat hasil karna zaruri hai.</p>
+            <h3>Q: Savings Account Profit Tax kyu kat'ta hai?</h3>
+            <p>A: Savings account profits par tax kata jata hai taake income tax ki collection ko yaqeeni banaya ja sake. Yeh tax Islamic aur conventional dono savings par lag sakta hai.</p>
+            <h3>Q: Bond Investment Profit Tax kyu zaruri hai?</h3>
+            <p>A: Bond investment profit par tax lagana zaruri hai, yeh tax bond se hone wale munafa par lagaya jata hai.</p>
+            <h3>Q: Mutual Fund Profit tax kaise calculate hota hai?</h3>
+            <p>A: Mutual Fund profit tax mutual fund ki kharid o farokht se hone wale munafa par lagaya jata hai, iski sharah mutual fund ki qisam par munhasir hai.</p>
+        </div>
+    </section>
+
+    <section class="content-section section-8">
+        <h2>ℹ️ General Information</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <p><strong>Tax Year:</strong> Pakistan mein tax year aam tor par 1 July se 30 June tak hota hai.</p>
+            <p><strong>Filing Deadline:</strong> Investment tax returns file karne ki aakhri tareekh aam tor par September 30 hoti hai, lekin FBR is mein tabdeeli kar sakta hai.</p>
+            <p><strong>Tax Identification Number:</strong> Pakistan mein har tax dene wale ke paas National Tax Number (NTN) hona zaruri hai.</p>
+            <p><strong>Important Note:</strong> Yahan diye gaye calculators sirf andaze ke liye hain. Sahih tax calculations aur filing ke liye, Federal Board of Revenue (FBR) Pakistan ki official guidelines ya kisi qualified tax professional se rabta karen.</p>
+        </div>
+    </section>
+
+    <section class="testimonials-container">
+        <h2>Testimonials & Reviews</h2>
+        <div class="testimonial" id="testimonial1">
+            <p>"My Tax Helper.pk ne mere investment ke tax mamlaat ko bohat asaan bana diya. Calculator bohat madadgar tha."</p>
+            <p class="testimonial-author">- Ahmed Raza</p>
+        </div>
+        <div class="testimonial" id="testimonial2" style="display: none;">
+            <p>"Main is website ko Pakistan mein tax se mutaliq madad ke liye bohat recommend karta hoon. Resources bohat umda hain."</p>
+            <p class="testimonial-author">- Sana Khan</p>
+        </div>
+        <div class="testimonial" id="testimonial3" style="display: none;">
+            <p>"Yahan diye gaye tax tips ne mera bohat waqt bachaya aur ghaltiyon se bachaya. Bohat acha kaam!"</p>
+            <p class="testimonial-author">- Ali Hassan</p>
+        </div>
+        <div class="testimonial" id="testimonial4" style="display: none;">
+            <p>"Yeh website mere liye ek nemat hai! Mujhe apne taxes ke bare mein kuch samajh nahi aa raha tha, lekin My Tax Helper.pk ne sab kuch guide kiya."</p>
+            <p class="testimonial-author">- Maria Butt</p>
+        </div>
+        <div class="testimonial" id="testimonial5" style="display: none;">
+            <p>"Pakistani tax qawaneen ko samajhne ke liye bohat behtareen resource. Layout user-friendly hai aur content bohat informative hai."</p>
+            <p class="testimonial-author">- Bilal Ahmed</p>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>My Tax Helper.pk Pakistan mein taxation ke bare mein sahi aur asaan samajh mein aane wali maloomat faraham karne ke liye waqf hai. Hamara maqsad afraad aur chhote karobar ke liye tax ke amal ko asaan banana hai, taake woh tax qawaneen aur regulations ki pechidgiyon se aaram se guzar saken. Hum aap ke tamam tax se mutaliq sawalat aur zaruriyat ke liye ek mustanad resource banne ki koshish karte hain.</p>
+    </section>
+
+    <section class="contact-us">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 My Tax Helper.pk. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Testimonial Slider (same as the main page)
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        }
+
+        showTestimonial(currentIndex);
+        setInterval(nextTestimonial, 5000);
+
+        document.addEventListener('click', (event) => {
+            const isClickInside = hamburger.contains(event.target) || navLinks.contains(event.target);
+            if (navLinks.classList.contains('active') && !isClickInside && window.innerWidth < 768) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Investment Calculators Logic
+        function calculateStockCapitalGainsTax() {
+            const purchasePrice = parseFloat(document.getElementById('stockPurchasePrice').value);
+            const salePrice = parseFloat(document.getElementById('stockSalePrice').value);
+            const capitalGains = salePrice - purchasePrice;
+            let tax = 0;
+
+            if (capitalGains > 0) {
+                tax = capitalGains * 0.15; // Example tax rate, adjust as needed
+            }
+
+            document.getElementById('stockCapitalGainsTaxResult').textContent = `Capital Gains Tax: PKR ${tax.toFixed(2)}`;
+        }
+
+        function calculatePropertyCapitalGainsTax() {
+            const purchasePrice = parseFloat(document.getElementById('propertyPurchasePrice').value);
+            const salePrice = parseFloat(document.getElementById('propertySalePrice').value);
+            const capitalGains = salePrice - purchasePrice;
+            let tax = 0;
+
+            if (capitalGains > 0) {
+                tax = capitalGains * 0.10; // Example tax rate, adjust as needed
+            }
+
+            document.getElementById('propertyCapitalGainsTaxResult').textContent = `Capital Gains Tax: PKR ${tax.toFixed(2)}`;
+        }
+
+        function calculateGoldCapitalGainsTax() {
+            const purchasePrice = parseFloat(document.getElementById('goldPurchasePrice').value);
+            const salePrice = parseFloat(document.getElementById('goldSalePrice').value);
+            const capitalGains = salePrice - purchasePrice;
+            let tax = 0;
+
+            if (capitalGains > 0) {
+                tax = capitalGains * 0.125; // Example tax rate, adjust as needed
+            }
+
+            document.getElementById('goldCapitalGainsTaxResult').textContent = `Capital Gains Tax: PKR ${tax.toFixed(2)}`;
+        }
+
+        function calculateSavingsProfitTax() {
+            const profit = parseFloat(document.getElementById('savingsProfit').value);
+            const type = document.getElementById('savingsType').value;
+            let tax = 0;
+
+            if (type === 'conventional') {
+                tax = profit * 0.15; // Example tax rate for conventional
+            } else if (type === 'islamic') {
+                tax = profit * 0.10; // Example tax rate for islamic
+            }
+
+            document.getElementById('savingsProfitTaxResult').textContent = `Profit Tax: PKR ${tax.toFixed(2)}`;
+        }
+
+        function calculateBondProfitTax() {
+            const profit = parseFloat(document.getElementById('bondProfit').value);
+            let tax = 0;
+
+            tax = profit * 0.125; // Example tax rate, adjust as needed
+
+            document.getElementById('bondProfitTaxResult').textContent = `Profit Tax: PKR ${tax.toFixed(2)}`;
+        }
+
+        function calculateMutualFundProfitTax() {
+            const profit = parseFloat(document.getElementById('mutualFundProfit').value);
+            let tax = 0;
+
+            tax = profit * 0.10; // Example tax rate, adjust as needed
+
+            document.getElementById('mutualFundProfitTaxResult').textContent = `Profit Tax: PKR ${tax.toFixed(2)}`;
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>
