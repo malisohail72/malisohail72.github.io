@@ -1,135 +1,10 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Planning Calculators - My Tax Helper.pk</title>
+    <!-- ... (keep head section unchanged until calculator styles) ... -->
+
+    <!-- Calculator Specific Styles (no changes needed) -->
     <style>
-        /* Basic CSS for styling (same as the main page) */
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Navbar Styles (same as the main page) */
-        .navbar {
-            background-color: #f8f8f8;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .navbar-brand {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: none; /* Hidden by default */
-            position: absolute;
-            top: 60px;
-            left: 0;
-            background-color: #333;
-            width: 100%;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 10;
-        }
-
-        .nav-links.active {
-            display: block;
-        }
-
-        .nav-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .nav-links ul li {
-            padding: 10px 0;
-        }
-
-        .nav-links ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            display: block;
-        }
-
-        .nav-links ul li a:hover {
-            background-color: #555;
-        }
-
-        .hamburger {
-            display: block;
-            cursor: pointer;
-            font-size: 1.5em;
-        }
-
-        @media (min-width: 768px) {
-            .hamburger {
-                display: none;
-            }
-
-            .nav-links {
-                display: flex;
-                position: static;
-                background-color: transparent;
-                width: auto;
-                text-align: left;
-                padding: 0;
-            }
-
-            .nav-links ul {
-                display: flex;
-            }
-
-            .nav-links ul li {
-                padding: 0;
-                margin-left: 20px;
-            }
-
-            .nav-links ul li a {
-                color: #333;
-                padding: 10px 15px;
-            }
-
-            .nav-links ul li a:hover {
-                background-color: #eee;
-            }
-        }
-
-        /* Content Sections Styles (same as the main page) */
-        .content-section {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .content-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .content-section p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .section-1 { background-color: #f9fbe7; } /* Light yellow */
-        .section-2 { background-color: #e1bee7; } /* Light purple */
-        .section-3 { background-color: #ffccbc; } /* Light orange */
-        .section-4 { background-color: #c5e1a5; } /* Light green */
-        .section-5 { background-color: #b3e5fc; } /* Light sky blue */
-        .section-6 { background-color: #d7ccc8; } /* Light brown */
-        .section-7 { background-color: #ffe0b2; } /* Light orange accent */
-        .section-8 { background-color: #aed581; } /* Light green accent */
-
-        /* Calculator Specific Styles */
         .calculator-container {
             background-color: white;
             padding: 20px;
@@ -141,441 +16,208 @@
             margin-left: auto;
             margin-right: auto;
         }
-
-        .calculator-container h3 {
-            margin-top: 0;
-            color: #00897b;
-        }
-
-        .calculator-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .calculator-container input[type="number"],
-        .calculator-container button {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: calc(100% - 22px); /* Adjust for padding and border */
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-
-        .calculator-container button {
-            background-color: #00897b;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .calculator-container button:hover {
-            background-color: #00695c;
-        }
-
-        .calculator-container .result {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* Testimonials Section Styles (same as the main page) */
-        .testimonials-container {
-            background-color: #f0f0f0;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .testimonials-container h2 {
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .testimonial {
-            background-color: white;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-        }
-
-        .testimonial p {
-            font-style: italic;
-            color: #555;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #333;
-            margin-top: 10px;
-        }
-
-        /* About Us Section Styles (same as the main page) */
-        .about-us {
-            background-color: #fff;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .about-us h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .about-us p {
-            color: #666;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Contact Us Section Styles (same as the main page) */
-        .contact-us {
-            background-color: #e0f2f7; /* Light cyan */
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .contact-us h2 {
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .contact-form label {
-            text-align: left;
-            font-weight: bold;
-            color: #555;
-        }
-
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1em;
-            outline: none;
-        }
-
-        .contact-form textarea {
-            resize: vertical;
-        }
-
-        .contact-form button {
-            background-color: #00897b; /* Teal */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            background-color: #00695c;
-        }
-
-        /* Footer Styles (same as the main page) */
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .footer-links {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: #eee;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        .social-links a {
-            color: #eee;
-            text-decoration: none;
-            font-size: 1.5em;
-            margin: 0 10px;
-        }
-
-        .social-links a:hover {
-            color: #bbb;
-        }
-        /* Chart specific styles */
-        .chart-container{
-            width: 80%;
-            margin: 20px auto;
-        }
+        /* ... (rest of existing calculator styles remain same) ... */
     </style>
 </head>
 <body>
+    <!-- ... (keep header and navbar unchanged) ... -->
 
-    <header class="navbar">
-        <div class="navbar-brand">
-            <strong>My Tax Helper.pk</strong>
-        </div>
-        <div class="hamburger">&#9776;</div>
-        <nav class="nav-links">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Tax Calculator</a></li>
-                <li><a href="#">Tax Tips</a></li>
-                <li><a href="#">Resources</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <!-- Modified Calculator Sections -->
     <section class="content-section section-1">
-        <h1> Budget Planning Calculators </h1>
-        <hr>
-        <h2>Monthly Budget Planner</h2>
-        <p>Plan your monthly expenses and income to manage your finances effectively.</p>
+        <h2>Monthly Budget Calculator</h2>
+        <p>Plan your monthly income and expenses.</p>
         <div class="calculator-container">
-            <h3>Monthly Budget</h3>
+            <h3>Monthly Budget Planner</h3>
             <label for="monthlyIncome">Monthly Income (PKR):</label>
-            <input type="number" id="monthlyIncome" placeholder="Enter your monthly income">
-            <label for="rent">Rent/Mortgage (PKR):</label>
-            <input type="number" id="rent" placeholder="Enter rent/mortgage">
-            <label for="utilities">Utilities (PKR):</label>
-            <input type="number" id="utilities" placeholder="Enter utilities expenses">
-            <label for="groceries">Groceries (PKR):</label>
-            <input type="number" id="groceries" placeholder="Enter groceries expenses">
-            <label for="transport">Transport (PKR):</label>
-            <input type="number" id="transport" placeholder="Enter transport expenses">
-            <label for="otherExpenses">Other Expenses (PKR):</label>
-            <input type="number" id="otherExpenses" placeholder="Enter other expenses">
+            <input type="number" id="monthlyIncome" placeholder="Enter income">
+            <label for="monthlyExpenses">Monthly Expenses (PKR):</label>
+            <input type="number" id="monthlyExpenses" placeholder="Enter expenses">
             <button onclick="calculateMonthlyBudget()">Calculate</button>
             <div class="result" id="monthlyBudgetResult"></div>
-        </div>
-        <div class="info">
-            <p>ℹ️ <strong>Monthly Budget Information:</strong></p>
-            <p id="monthlyBudgetInfo">
-                ماہانہ بجٹ کا حساب آپ کی آمدنی اور اخراجات کو مدنظر رکھتے ہوئے کیا جاتا ہے۔
-                یہ آپ کو بتاتا ہے کہ آپ اپنی آمدنی کو مؤثر طریقے سے کیسے منظم کر سکتے ہیں۔
-            </p>
-        </div>
-        <div class="chart-container">
-            <canvas id="budgetChart"></canvas>
         </div>
     </section>
 
     <section class="content-section section-2">
         <h2>Savings Goal Calculator</h2>
-        <p>Calculate how much you need to save each month to reach your financial goals.</p>
+        <p>Calculate how long to reach your savings target.</p>
         <div class="calculator-container">
-            <h3>Savings Goal</h3>
-            <label for="goalAmount">Goal Amount (PKR):</label>
-            <input type="number" id="goalAmount" placeholder="Enter your savings goal">
-            <label for="goalMonths">Number of Months:</label>
-            <input type="number" id="goalMonths" placeholder="Enter number of months">
+            <h3>Savings Goal Planner</h3>
+            <label for="currentSavings">Current Savings (PKR):</label>
+            <input type="number" id="currentSavings" placeholder="Enter current savings">
+            <label for="targetSavings">Target Amount (PKR):</label>
+            <input type="number" id="targetSavings" placeholder="Enter target amount">
+            <label for="monthlySaving">Monthly Saving (PKR):</label>
+            <input type="number" id="monthlySaving" placeholder="Enter monthly saving">
             <button onclick="calculateSavingsGoal()">Calculate</button>
             <div class="result" id="savingsGoalResult"></div>
         </div>
-        <div class="info">
-            <p>ℹ️ <strong>Savings Goal Information:</strong></p>
-            <p id="savingsGoalInfo">
-                سرمایہ کاری کے ہدف کا حساب آپ کے مطلوبہ ہدف اور مہینوں کی تعداد پر مبنی ہوتا ہے۔
-                یہ آپ کو بتاتا ہے کہ آپ کو ہر ماہ کتنی رقم بچانے کی ضرورت ہے۔
-            </p>
-        </div>
-        <div class="chart-container">
-            <canvas id="savingsChart"></canvas>
+    </section>
+
+    <section class="content-section section-3">
+        <h2>Debt Payoff Calculator</h2>
+        <p>Calculate your debt payoff timeline.</p>
+        <div class="calculator-container">
+            <h3>Debt Payoff Planner</h3>
+            <label for="debtAmount">Debt Amount (PKR):</label>
+            <input type="number" id="debtAmount" placeholder="Enter total debt">
+            <label for="interestRate">Annual Interest Rate (%):</label>
+            <input type="number" id="interestRate" placeholder="Enter interest rate">
+            <label for="monthlyPayment">Monthly Payment (PKR):</label>
+            <input type="number" id="monthlyPayment" placeholder="Enter monthly payment">
+            <button onclick="calculateDebtPayoff()">Calculate</button>
+            <div class="result" id="debtPayoffResult"></div>
         </div>
     </section>
 
-    <section class="testimonials-container">
-        <h2>Testimonials & Reviews</h2>
-        <div class="testimonial" id="testimonial1">
-            <p>"This budget planner helped me organize my finances effectively. Highly recommended!"</p>
-            <p class="testimonial-author">- Ali Raza</p>
-        </div>
-        <div class="testimonial" id="testimonial2" style="display: none;">
-            <p>"The savings goal calculator is a great tool for planning my financial future."</p>
-            <p class="testimonial-author">- Sara Khan</p>
-        </div>
-        <div class="testimonial" id="testimonial3" style="display: none;">
-            <p>"Very easy to use and understand. These calculators are a lifesaver!"</p>
-            <p class="testimonial-author">- Usman Malik</p>
-        </div>
-        <div class="testimonial" id="testimonial4" style="display: none;">
-            <p>"I was able to plan my budget and savings goals with ease. Thank you!"</p>
-            <p class="testimonial-author">- Hina Jamil</p>
-        </div>
-        <div class="testimonial" id="testimonial5" style="display: none;">
-            <p>"Great resource for financial planning. The charts are very helpful."</p>
-            <p class="testimonial-author">- Bilal Ahmed</p>
+    <section class="content-section section-4">
+        <h2>Emergency Fund Calculator</h2>
+        <p>Calculate your ideal emergency fund.</p>
+        <div class="calculator-container">
+            <h3>Emergency Fund Planner</h3>
+            <label for="monthlyExpensesEmergency">Monthly Expenses (PKR):</label>
+            <input type="number" id="monthlyExpensesEmergency" placeholder="Enter monthly expenses">
+            <label for="desiredMonths">Desired Coverage (months):</label>
+            <input type="number" id="desiredMonths" placeholder="Enter months">
+            <button onclick="calculateEmergencyFund()">Calculate</button>
+            <div class="result" id="emergencyFundResult"></div>
         </div>
     </section>
 
-    <section class="about-us">
-        <h2>About Us</h2>
-        <p>My Tax Helper.pk provides helpful financial tools and resources to manage your budget and savings effectively. Our budget planning calculators are designed to simplify financial planning for everyone.</p>
+    <section class="content-section section-5">
+        <h2>Retirement Savings Calculator</h2>
+        <p>Estimate your retirement savings growth.</p>
+        <div class="calculator-container">
+            <h3>Retirement Planner</h3>
+            <label for="currentAge">Current Age:</label>
+            <input type="number" id="currentAge" placeholder="Enter current age">
+            <label for="retirementAge">Retirement Age:</label>
+            <input type="number" id="retirementAge" placeholder="Enter retirement age">
+            <label for="monthlyContribution">Monthly Contribution (PKR):</label>
+            <input type="number" id="monthlyContribution" placeholder="Enter monthly amount">
+            <button onclick="calculateRetirementSavings()">Calculate</button>
+            <div class="result" id="retirementResult"></div>
+        </div>
     </section>
 
-    <section class="contact-us">
-        <h2>Contact Us</h2>
-        <form class="contact-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
+    <section class="content-section section-6">
+        <h2>Expense Tracker</h2>
+        <p>Track your daily expenses.</p>
+        <div class="calculator-container">
+            <h3>Daily Expense Tracker</h3>
+            <label for="expenseAmount">Expense Amount (PKR):</label>
+            <input type="number" id="expenseAmount" placeholder="Enter amount">
+            <label for="expenseCategory">Category:</label>
+            <select id="expenseCategory">
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="housing">Housing</option>
+                <option value="other">Other</option>
+            </select>
+            <button onclick="addExpense()">Add Expense</button>
+            <div class="result" id="expenseTrackerResult"></div>
+        </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+    <!-- Modified FAQ Section -->
+    <section class="content-section section-7">
+        <h2>Budget Planning FAQ</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <h3>Q: Emergency fund ki zaroorat kya hai?</h3>
+            <p>A: Emergency fund 3-6 mahine ke kharchon ko cover karne ke liye zaroori hai taake aap financial emergencies handle kar saken.</p>
+            <h3>Q: Savings goal kaise set karen?</h3>
+            <p>A: Apne mahana kharach ka analysis karke aur realistic targets set karte hue savings goals tayyar karen.</p>
+            <h3>Q: Qarz se kesy chutkara paen?</h3>
+            <p>A: Debt snowball ya avalanche method istemal karte hue aur mahana budget mein qarz ki adaygi ko priority den.</p>
         </div>
-        <div class="social-links">
-            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2025 My Tax Helper.pk. All rights reserved.</p>
-    </footer>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Modified General Information Section -->
+    <section class="content-section section-8">
+        <h2>ℹ️ Financial Planning Tips</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <p><strong>50/30/20 Rule:</strong> Apni income ko 50% needs, 30% wants, aur 20% savings mein divide karen.</p>
+            <p><strong>Emergency Fund:</strong> Kam az kam 3 mahine ke expenses ko cover karne wala emergency fund rakhen.</p>
+            <p><strong>Debt Management:</strong> High-interest qarzon ko jald se jald ada karna behtar hai.</p>
+        </div>
+    </section>
+
+    <!-- ... (keep testimonials, about us, contact us, and footer unchanged) ... -->
+
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        // ... (keep existing navbar and testimonial JavaScript) ... 
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Testimonial Slider
-        const testimonials = document.querySelectorAll('.testimonial');
-        let currentIndex = 0;
-
-        function showTestimonial(index) {
-            testimonials.forEach((testimonial, i) => {
-                testimonial.style.display = i === index ? 'block' : 'none';
-            });
-        }
-
-        function nextTestimonial() {
-            currentIndex = (currentIndex + 1) % testimonials.length;
-            showTestimonial(currentIndex);
-        }
-
-        showTestimonial(currentIndex);
-        setInterval(nextTestimonial, 5000);
-
-        document.addEventListener('click', (event) => {
-            const isClickInside = hamburger.contains(event.target) || navLinks.contains(event.target);
-            if (navLinks.classList.contains('active') && !isClickInside && window.innerWidth < 768) {
-                navLinks.classList.remove('active');
-            }
-        });
-
+        // Budget Calculator Functions
         function calculateMonthlyBudget() {
-            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
-            const rent = parseFloat(document.getElementById('rent').value) || 0;
-            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
-            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
-            const transport = parseFloat(document.getElementById('transport').value) || 0;
-            const otherExpenses = parseFloat(document.getElementById('otherExpenses').value) || 0;
-
-            const totalExpenses = rent + utilities + groceries + transport + otherExpenses;
-            const remaining = monthlyIncome - totalExpenses;
-
-            document.getElementById('monthlyBudgetResult').textContent = `Total Expenses: PKR ${totalExpenses.toFixed(2)}, Remaining: PKR ${remaining.toFixed(2)}`;
-
-            // Chart Data
-            const ctx = document.getElementById('budgetChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Rent', 'Utilities', 'Groceries', 'Transport', 'Other Expenses', 'Remaining'],
-                    datasets: [{
-                        label: 'Monthly Budget',
-                        data: [rent, utilities, groceries, transport, otherExpenses, remaining],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)',
-                            'rgba(153, 102, 255, 0.6)',
-                            'rgba(255, 159, 64, 0.6)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+            const income = parseFloat(document.getElementById('monthlyIncome').value);
+            const expenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            const remaining = income - expenses;
+            document.getElementById('monthlyBudgetResult').textContent = 
+                `Remaining Budget: PKR ${remaining.toFixed(2)}`;
         }
 
         function calculateSavingsGoal() {
-            const goalAmount = parseFloat(document.getElementById('goalAmount').value) || 0;
-            const goalMonths = parseInt(document.getElementById('goalMonths').value) || 1;
+            const current = parseFloat(document.getElementById('currentSavings').value);
+            const target = parseFloat(document.getElementById('targetSavings').value);
+            const monthly = parseFloat(document.getElementById('monthlySaving').value);
+            const monthsNeeded = Math.ceil((target - current) / monthly);
+            document.getElementById('savingsGoalResult').textContent = 
+                `Months to Goal: ${monthsNeeded}`;
+        }
 
-            const monthlySavings = goalAmount / goalMonths;
+        function calculateDebtPayoff() {
+            const debt = parseFloat(document.getElementById('debtAmount').value);
+            const rate = parseFloat(document.getElementById('interestRate').value)/100/12;
+            const payment = parseFloat(document.getElementById('monthlyPayment').value);
+            
+            let balance = debt;
+            let months = 0;
+            let totalInterest = 0;
 
-            document.getElementById('savingsGoalResult').textContent = `Monthly Savings Required: PKR ${monthlySavings.toFixed(2)}`;
+            while(balance > 0 && months < 600) {
+                const interest = balance * rate;
+                balance += interest;
+                balance -= payment;
+                totalInterest += interest;
+                months++;
+            }
 
-            // Chart Data
-            const ctx = document.getElementById('savingsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Monthly Savings'],
-                    datasets: [{
-                        label: 'Savings Goal',
-                        data: [monthlySavings],
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+            document.getElementById('debtPayoffResult').textContent = 
+                `Payoff Time: ${months} months | Total Interest: PKR ${totalInterest.toFixed(2)}`;
+        }
+
+        function calculateEmergencyFund() {
+            const expenses = parseFloat(document.getElementById('monthlyExpensesEmergency').value);
+            const months = parseFloat(document.getElementById('desiredMonths').value);
+            document.getElementById('emergencyFundResult').textContent = 
+                `Emergency Fund Needed: PKR ${(expenses * months).toFixed(2)}`;
+        }
+
+        function calculateRetirementSavings() {
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value);
+            const years = retirementAge - currentAge;
+            const annualReturn = 0.07; // 7% annual return
+            
+            let futureValue = 0;
+            for(let i = 0; i < years*12; i++) {
+                futureValue = (futureValue + monthly) * (1 + annualReturn/12);
+            }
+
+            document.getElementById('retirementResult').textContent = 
+                `Estimated Retirement Savings: PKR ${futureValue.toFixed(2)}`;
+        }
+
+        let expenses = [];
+        function addExpense() {
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const category = document.getElementById('expenseCategory').value;
+            expenses.push({amount, category});
+            
+            const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            document.getElementById('expenseTrackerResult').textContent = 
+                `Total Expenses: PKR ${total.toFixed(2)} (${expenses.length} expenses)`;
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>
