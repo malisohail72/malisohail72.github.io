@@ -1,1 +1,230 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tax Helper.pk - Your Taxation Guide</title>
+    <style>
+        /* Preserved styling with homepage enhancements */
+        :root {
+            --primary-color: #00897b;
+            --secondary-color: #00695c;
+            --accent-color: #e1f5fe;
+        }
 
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #004d40);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .services-section {
+            background: #f9f9f9;
+            padding: 4rem 2rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            📊 My Tax Helper.pk
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Your Complete Guide to Pakistani Taxation</h1>
+        <p>Empowering citizens with accurate tax information and financial guidance</p>
+    </section>
+
+    <section class="features-grid">
+        <div class="feature-card">
+            <h3>📈 Investment Guidance</h3>
+            <p>Learn about tax implications for various investment options in Pakistan</p>
+        </div>
+        <div class="feature-card">
+            <h3>📑 Tax Filing Help</h3>
+            <p>Step-by-step assistance for individual and business tax filing</p>
+        </div>
+        <div class="feature-card">
+            <h3>💼 Business Taxation</h3>
+            <p>Complete guide to corporate tax regulations and compliance</p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="content-section">
+            <h2>Our Services</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Personal Tax Assistance</h3>
+                    <p>Guidance on income tax, property tax, and investment declarations</p>
+                </div>
+                <div class="info-card">
+                    <h3>Business Solutions</h3>
+                    <p>Corporate tax planning and compliance management</p>
+                </div>
+                <div class="info-card">
+                    <h3>Legal Updates</h3>
+                    <p>Latest FBR regulations and tax law changes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Essential Resources</h2>
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>📥 Download Forms</h3>
+                <p>Latest FBR tax forms and declarations</p>
+                <a href="#" class="resource-link">View Downloads →</a>
+            </div>
+            <div class="info-card">
+                <h3>🗓 Tax Calendar</h3>
+                <p>Important deadlines and filing dates</p>
+                <a href="#" class="resource-link">View Calendar →</a>
+            </div>
+            <div class="info-card">
+                <h3>❓ FAQ Portal</h3>
+                <p>Answers to common tax questions</p>
+                <a href="#" class="resource-link">Visit FAQ →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-container">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial">
+            <p>"This platform simplified complex tax concepts for me. Essential resource for every Pakistani taxpayer!"</p>
+            <p class="testimonial-author">- Ahmed Raza, Karachi</p>
+        </div>
+        <div class="testimonial">
+            <p>"The most reliable tax information source I've found. Regular updates keep me compliant."</p>
+            <p class="testimonial-author">- Sana Khan, Lahore</p>
+        </div>
+    </section>
+
+    <section class="contact-us">
+        <h2>Get In Touch</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Accessibility</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>© 2023 My Tax Helper.pk - Empowering Financial Literacy</p>
+    </footer>
+
+    <script>
+        // Preserved interactive elements
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>
