@@ -1,5 +1,3 @@
-
-
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Planner - My Tax Helper.pk</title>
     <style>
-        /* ... (Your existing CSS styles remain the same) ... */
+        /* Basic CSS for styling (same as the main page) */
         body {
             font-family: sans-serif;
             margin: 0;
@@ -159,7 +157,8 @@
         }
 
         .calculator-container input[type="number"],
-        .calculator-container button {
+        .calculator-container button,
+        .calculator-container select {
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -188,15 +187,161 @@
             font-weight: bold;
             color: #333;
         }
-        #chartContainer{
-            width:100%;
-            height: 400px;
+
+        /* Testimonials Section Styles (same as the main page) */
+        .testimonials-container {
+            background-color: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
         }
 
+        .testimonials-container h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* About Us Section Styles (same as the main page) */
+        .about-us {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-us p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Us Section Styles (same as the main page) */
+        .contact-us {
+            background-color: #e0f2f7; /* Light cyan */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-us h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            text-align: left;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #00897b; /* Teal */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #00695c;
+        }
+
+        /* Footer Styles (same as the main page) */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #eee;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links a {
+            color: #eee;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: #bbb;
+        }
+
+        /* Budget Planner Styles */
+        #budgetChartContainer {
+            width: 80%;
+            margin: 20px auto;
+            height: 400px;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
     <header class="navbar">
         <div class="navbar-brand">
             <strong>My Tax Helper.pk</strong>
@@ -215,159 +360,57 @@
 
     <section class="content-section section-1">
         <h2>Budget Planner</h2>
-        <p>Plan your monthly budget and visualize your spending.</p>
+        <p>Create a budget plan with your income and expenses.</p>
         <div class="calculator-container">
-            <h3>Monthly Budget</h3>
-            <label for="income">Monthly Income (PKR):</label>
-            <input type="number" id="income" placeholder="Enter income">
-            <label for="bills">Bills (PKR):</label>
-            <input type="number" id="bills" placeholder="Enter bills">
-            <label for="food">Food Expenses (PKR):</label>
-            <input type="number" id="food" placeholder="Enter food expenses">
-            <label for="transport">Transportation (PKR):</label>
-            <input type="number" id="transport" placeholder="Enter transportation expenses">
-            <label for="other">Other Expenses (PKR):</label>
-            <input type="number" id="other" placeholder="Enter other expenses">
-            <button onclick="calculateBudget()">Calculate</button>
+            <h3>Budget Planner</h3>
+            <label for="monthlyIncome">Monthly Income (PKR):</label>
+            <input type="number" id="monthlyIncome" placeholder="Enter monthly income">
+
+            <label for="rentExpense">Rent/Mortgage (PKR):</label>
+            <input type="number" id="rentExpense" placeholder="Enter rent/mortgage">
+
+            <label for="foodExpense">Food Expenses (PKR):</label>
+            <input type="number" id="foodExpense" placeholder="Enter food expenses">
+
+            <label for="utilitiesExpense">Utilities (PKR):</label>
+            <input type="number" id="utilitiesExpense" placeholder="Enter utilities">
+
+            <label for="transportExpense">Transport (PKR):</label>
+            <input type="number" id="transportExpense" placeholder="Enter transport">
+
+            <label for="educationExpense">Education (PKR):</label>
+            <input type="number" id="educationExpense" placeholder="Enter education">
+
+            <label for="healthcareExpense">Healthcare (PKR):</label>
+            <input type="number" id="healthcareExpense" placeholder="Enter healthcare">
+
+            <label for="otherExpense">Other Expenses (PKR):</label>
+            <input type="number" id="otherExpense" placeholder="Enter other expenses">
+
+            <button onclick="calculateBudget()">Calculate Budget</button>
             <div class="result" id="budgetResult"></div>
         </div>
-        <div id="chartContainer">
+        <div id="budgetChartContainer">
             <canvas id="budgetChart"></canvas>
         </div>
     </section>
 
-    <section class="testimonials-container">
-        <h2>Testimonials & Reviews</h2>
-        <div class="testimonial" id="testimonial1">
-            <p>"My Tax Helper.pk ne mere investment ke tax mamlaat ko bohat asaan bana diya. Calculator bohat madadgar tha."</p>
-            <p class="testimonial-author">- Ahmed Raza</p>
-        </div>
-        <div class="testimonial" id="testimonial2" style="display: none;">
-            <p>"Main is website ko Pakistan mein tax se mutaliq madad ke liye bohat recommend karta hoon. Resources bohat umda hain."</p>
-            <p class="testimonial-author">- Sana Khan</p>
-        </div>
-        <div class="testimonial" id="testimonial3" style="display: none;">
-            <p>"Yahan diye gaye tax tips ne mera bohat waqt bachaya aur ghaltiyon se bachaya. Bohat acha kaam!"</p>
-            <p class="testimonial-author">- Ali Hassan</p>
-        </div>
-        <div class="testimonial" id="testimonial4" style="display: none;">
-            <p>"Yeh website mere liye ek nemat hai! Mujhe apne taxes ke bare mein kuch samajh nahi aa raha tha, lekin My Tax Helper.pk ne sab kuch guide kiya."</p>
-            <p class="testimonial-author">- Maria Butt</p>
-        </div>
-        <div class="testimonial" id="testimonial5" style="display: none;">
-            <p>"Pakistani tax qawaneen ko samajhne ke liye bohat behtareen resource. Layout user-friendly hai aur content bohat informative hai."</p>
-            <p class="testimonial-author">- Bilal Ahmed</p>
+    <section class="content-section section-7">
+        <h2>FAQ (Frequently Asked Questions)</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <h3>Q: Budget Planner kaise istemaal hota hai?</h3>
+            <p>A: Budget Planner mein apni maheena aamdani aur kharchon ki tafseelat darj karen, aur phir 'Calculate Budget' par click karen. Yeh aapko aapke kharchon ka tafseeli tajzia aur ek chart dikhayega.</p>
+            <h3>Q: Kya main apne budget ko save kar sakta hoon?</h3>
+            <p>A: Filhaal, yeh feature dastiyab nahi hai. Lekin aap apne browser mein data save kar sakte hain.</p>
+            <h3>Q: Kya yeh calculator sirf Pakistani rupay mein kaam karta hai?</h3>
+            <p>A: Jee haan, yeh calculator sirf Pakistani rupay (PKR) mein kaam karta hai.</p>
+            <h3>Q: Kya main apne budget ka print out le sakta hoon?</h3>
+            <p>A: Jee haan, aap apne browser ke print option se budget ka print out le sakte hain.</p>
         </div>
     </section>
 
-    <section class="about-us">
-        <h2>About Us</h2>
-        <p>My Tax Helper.pk Pakistan mein taxation ke bare mein sahi aur asaan samajh mein aane wali maloomat faraham karne ke liye waqf hai. Hamara maqsad afraad aur chhote karobar ke liye tax ke amal ko asaan banana hai, taake woh tax qawaneen aur regulations ki pechidgiyon se aaram se guzar saken. Hum aap ke tamam tax se mutaliq sawalat aur zaruriyat ke liye ek mustanad resource banne ki koshish karte hain.</p>
-    </section>
-
-    <section class="contact-us">
-        <h2>Contact Us</h2>
-        <form class="contact-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-        <div class="social-links">
-            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2025 My Tax Helper.pk. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // ... (Your existing JavaScript: hamburger menu, testimonial slider) ...
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        const testimonials = document.querySelectorAll('.testimonial');
-        let currentIndex = 0;
-
-        function showTestimonial(index) {
-            testimonials.forEach((testimonial, i) => {
-                testimonial.style.display = i === index ? 'block' : 'none';
-            });
-        }
-
-        function nextTestimonial() {
-            currentIndex = (currentIndex + 1) % testimonials.length;
-            showTestimonial(currentIndex);
-        }
-
-        showTestimonial(currentIndex);
-        setInterval(nextTestimonial, 5000);
-
-        document.addEventListener('click', (event) => {
-            const isClickInside = hamburger.contains(event.target) || navLinks.contains(event.target);
-            if (navLinks.classList.contains('active') && !isClickInside && window.innerWidth < 768) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Budget Calculator Logic
-        function calculateBudget() {
-            const income = parseFloat(document.getElementById('income').value);
-            const bills = parseFloat(document.getElementById('bills').value);
-            const food = parseFloat(document.getElementById('food').value);
-            const transport = parseFloat(document.getElementById('transport').value);
-            const other = parseFloat(document.getElementById('other').value);
-
-            const totalExpenses = bills + food + transport + other;
-            const savings = income - totalExpenses;
-
-            document.getElementById('budgetResult').textContent = `Total Expenses: PKR ${totalExpenses.toFixed(2)}, Savings: PKR ${savings.toFixed(2)}`;
-
-            // Chart
-            const ctx = document.getElementById('budgetChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Bills', 'Food', 'Transport', 'Other', 'Savings'],
-                    datasets: [{
-                        data: [bills, food, transport, other, savings > 0 ? savings : 0],
-                        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Monthly Budget Breakdown'
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</body>
-</html>
+    <section class="content-section section-8">
+        <h2>ℹ️ General Information</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <p><strong>Currency:</strong> Pakistan mein aam tor par Pakistani rupay (PKR) istemaal hota hai.</p>
+            <p><strong>Cost of Living:</strong> Pakistan mein rehn seh
