@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goal Calculator - My Tax Helper.pk</title>
+    <style>
+        /* Basic CSS for styling (same as the previous pages) */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #f8f8f8;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links ul li {
+            padding: 10px 0;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .nav-links ul li a:hover {
+            background-color: #555;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                position: static;
+                background-color: transparent;
+                width: auto;
+                text-align: left;
+                padding: 0;
+            }
+
+            .nav-links ul {
+                display: flex;
+            }
+
+            .nav-links ul li {
+                padding: 0;
+                margin-left: 20px;
+            }
+
+            .nav-links ul li a {
+                color: #333;
+                padding: 10px 15px;
+            }
+
+            .nav-links ul li a:hover {
+                background-color: #eee;
+            }
+        }
+
+        .content-section {
+            padding: 50px 20px;
+            text-align: center;
+            border: 1px solid #eee;
+            margin: 10px;
+        }
+
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calculator-container h3 {
+            margin-top: 0;
+            color: #00897b;
+        }
+
+        .calculator-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .calculator-container input[type="number"],
+        .calculator-container button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .calculator-container button {
+            background-color: #00897b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator-container button:hover {
+            background-color: #00695c;
+        }
+
+        .calculator-container .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #savingsChart {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            <strong>My Tax Helper.pk</strong>
+        </div>
+        <div class="hamburger">&#9776;</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tax Calculator</a></li>
+                <li><a href="#">Tax Tips</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h2>Savings Goal Calculator</h2>
+        <p>Calculate how much you need to save to reach your goal.</p>
+        <div class="calculator-container">
+            <h3>Savings Goal</h3>
+            <label for="goalAmount">Goal Amount (PKR):</label>
+            <input type="number" id="goalAmount" placeholder="Enter goal amount">
+
+            <label for="currentSavings">Current Savings (PKR):</label>
+            <input type="number" id="currentSavings" placeholder="Enter current savings">
+
+            <label for="monthlyContribution">Monthly Contribution (PKR):</label>
+            <input type="number" id="monthlyContribution" placeholder="Enter monthly contribution">
+
+            <label for="timePeriod">Time Period (Months):</label>
+            <input type="number" id="timePeriod" placeholder="Enter time period">
+
+            <button onclick="calculateSavings()">Calculate & Chart</button>
+            <div class="result" id="savingsResult"></div>
+        </div>
+        <canvas id="savingsChart"></canvas>
+    </section>
+
+    <script>
+        function calculateSavings() {
+            const goal = parseFloat(document.getElementById('goalAmount').value);
+            const current = parseFloat(document.getElementById('currentSavings').value);
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value);
+            const months = parseFloat(document.getElementById('timePeriod').value);
+
+            let totalSavings = current;
+            let savingsArray = [current];
+
+            for (let i = 0; i < months; i++) {
+                totalSavings += monthly;
+                savingsArray.push(totalSavings);
+            }
+
+            const remaining = goal - totalSavings;
+            document.getElementById('savingsResult').textContent = `Remaining: PKR ${remaining.toFixed(2)}`;
+
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: months + 1 }, (_, i) => `Month ${i}`),
+                    datasets: [{
+                        label: 'Savings Over Time',
+                        data: savingsArray,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
