@@ -18,7 +18,6 @@
             padding: 0;
             box-sizing: border-box;
             line-height: 1.7;
-            padding-top: 80px; /* Added for fixed navbar */
         }
 
         .navbar {
@@ -75,6 +74,7 @@
             color: white;
             padding: 12rem 2rem 4rem;
             text-align: center;
+            margin-top: 5rem;
         }
 
         .features-grid {
@@ -202,7 +202,6 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
-                z-index: 1001;
             }
 
             .nav-links {
@@ -211,11 +210,9 @@
                 left: -100%;
                 background: white;
                 width: 100%;
-                height: calc(100vh - 70px);
-                padding: 2rem 0;
+                padding: 2rem;
                 transition: 0.3s;
                 box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-                overflow-y: auto;
             }
 
             .nav-links.active {
@@ -224,34 +221,8 @@
 
             .nav-links ul {
                 flex-direction: column;
+                align-items: center;
                 gap: 1.5rem;
-            }
-
-            .hero {
-                padding: 8rem 1rem 2rem;
-            }
-
-            .features-grid, .info-cards {
-                grid-template-columns: 1fr;
-                padding: 2rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 0.8rem 1rem;
-            }
-
-            .navbar-brand {
-                font-size: 1.4rem;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .feature-card, .info-card {
-                padding: 1.5rem;
             }
         }
     </style>
@@ -272,38 +243,105 @@
         </nav>
     </header>
 
-    <!-- Rest of the HTML content remains exactly the same as original -->
     <section class="hero">
         <h1>Your Complete Guide to Pakistani Taxation</h1>
         <p>Empowering citizens with accurate tax information and financial guidance</p>
     </section>
 
     <section class="features-grid">
-        <!-- Feature cards same as before -->
+        <div class="feature-card">
+            <h3>📈 Investment Guidance</h3>
+            <p>Learn about tax implications for various investment options in Pakistan</p>
+        </div>
+        <div class="feature-card">
+            <h3>📑 Tax Filing Help</h3>
+            <p>Step-by-step assistance for individual and business tax filing</p>
+        </div>
+        <div class="feature-card">
+            <h3>💼 Business Taxation</h3>
+            <p>Complete guide to corporate tax regulations and compliance</p>
+        </div>
     </section>
 
     <section class="services-section" id="services">
-        <!-- Services content same -->
+        <div class="content-section">
+            <h2>Our Services</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Personal Tax Assistance</h3>
+                    <p>Guidance on income tax, property tax, and investment declarations</p>
+                </div>
+                <div class="info-card">
+                    <h3>Business Solutions</h3>
+                    <p>Corporate tax planning and compliance management</p>
+                </div>
+                <div class="info-card">
+                    <h3>Legal Updates</h3>
+                    <p>Latest FBR regulations and tax law changes</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="content-section" id="resources">
-        <!-- Resources content same -->
+        <h2>Essential Resources</h2>
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>📥 Download Forms</h3>
+                <p>Latest FBR tax forms and declarations</p>
+                <a href="#" class="resource-link">View Downloads →</a>
+            </div>
+            <div class="info-card">
+                <h3>🗓 Tax Calendar</h3>
+                <p>Important deadlines and filing dates</p>
+                <a href="#" class="resource-link">View Calendar →</a>
+            </div>
+            <div class="info-card">
+                <h3>❓ FAQ Portal</h3>
+                <p>Answers to common tax questions</p>
+                <a href="#" class="resource-link">Visit FAQ →</a>
+            </div>
+        </div>
     </section>
 
     <section class="testimonials-container">
-        <!-- Testimonials same -->
+        <h2>What Our Users Say</h2>
+        <div class="testimonial">
+            <p>"This platform simplified complex tax concepts for me. Essential resource for every Pakistani taxpayer!"</p>
+            <p class="testimonial-author">- Ahmed Raza, Karachi</p>
+        </div>
+        <div class="testimonial">
+            <p>"The most reliable tax information source I've found. Regular updates keep me compliant."</p>
+            <p class="testimonial-author">- Sana Khan, Lahore</p>
+        </div>
     </section>
 
     <section class="contact-us" id="contact">
-        <!-- Contact form same -->
+        <h2>Get In Touch</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
     </section>
 
     <footer class="footer">
-        <!-- Footer content same -->
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Accessibility</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>© 2023 My Tax Helper.pk - Empowering Financial Literacy</p>
     </footer>
 
     <script>
-        // Mobile menu script remains same
+        // Mobile menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
