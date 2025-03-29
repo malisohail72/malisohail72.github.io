@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner - My Tax Helper.pk</title>
+    <style>
+        /* Basic CSS for styling (same as the previous pages) */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #f8f8f8;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links ul li {
+            padding: 10px 0;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .nav-links ul li a:hover {
+            background-color: #555;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                position: static;
+                background-color: transparent;
+                width: auto;
+                text-align: left;
+                padding: 0;
+            }
+
+            .nav-links ul {
+                display: flex;
+            }
+
+            .nav-links ul li {
+                padding: 0;
+                margin-left: 20px;
+            }
+
+            .nav-links ul li a {
+                color: #333;
+                padding: 10px 15px;
+            }
+
+            .nav-links ul li a:hover {
+                background-color: #eee;
+            }
+        }
+
+        .content-section {
+            padding: 50px 20px;
+            text-align: center;
+            border: 1px solid #eee;
+            margin: 10px;
+        }
+
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calculator-container h3 {
+            margin-top: 0;
+            color: #00897b;
+        }
+
+        .calculator-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .calculator-container input[type="number"],
+        .calculator-container button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .calculator-container button {
+            background-color: #00897b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator-container button:hover {
+            background-color: #00695c;
+        }
+
+        .calculator-container .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #budgetChart {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            <strong>My Tax Helper.pk</strong>
+        </div>
+        <div class="hamburger">&#9776;</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tax Calculator</a></li>
+                <li><a href="#">Tax Tips</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h2>Budget Planner</h2>
+        <p>Plan your monthly budget with Pakistani expenses.</p>
+        <div class="calculator-container">
+            <h3>Income</h3>
+            <label for="monthlyIncome">Monthly Income (PKR):</label>
+            <input type="number" id="monthlyIncome" placeholder="Enter income">
+
+            <h3>Expenses</h3>
+            <label for="bills">Utilities (Bills - Electricity, Gas, Water) (PKR):</label>
+            <input type="number" id="bills" placeholder="Enter bills amount">
+
+            <label for="kitchen">Kitchen/Food Expenses (PKR):</label>
+            <input type="number" id="kitchen" placeholder="Enter food expenses">
+
+            <label for="transport">Transportation (Bike/Fuel/Public Transport) (PKR):</label>
+            <input type="number" id="transport" placeholder="Enter transport expenses">
+
+            <label for="rent">Rent (if applicable) (PKR):</label>
+            <input type="number" id="rent" placeholder="Enter rent amount">
+
+            <label for="education">Education Expenses (PKR):</label>
+            <input type="number" id="education" placeholder="Enter education expenses">
+
+            <label for="other">Other Expenses (PKR):</label>
+            <input type="number" id="other" placeholder="Enter other expenses">
+
+            <button onclick="calculateBudget()">Calculate & Chart</button>
+            <div class="result" id="budgetResult"></div>
+        </div>
+        <canvas id="budgetChart"></canvas>
+    </section>
+
+    <script>
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('monthlyIncome').value);
+            const bills = parseFloat(document.getElementById('bills').value);
+            const kitchen = parseFloat(document.getElementById('kitchen').value);
+            const transport = parseFloat(document.getElementById('transport').value);
+            const rent = parseFloat(document.getElementById('rent').value);
+            const education = parseFloat(document.getElementById('education').value);
+            const other = parseFloat(document.getElementById('other').value);
+
+            const totalExpenses = bills + kitchen + transport + rent + education + other;
+            const remaining = income - totalExpenses;
+
+            document.getElementById('budgetResult').textContent = `Remaining: PKR ${remaining.toFixed(2)}`;
+
+            const ctx = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Bills', 'Kitchen', 'Transport', 'Rent', 'Education', 'Other', 'Remaining'],
+                    datasets: [{
+                        label: 'Budget Breakdown',
+                        data: [bills, kitchen, transport, rent, education, other, remaining],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(0, 255, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 255, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+    </script>
+</body>
+</html>
