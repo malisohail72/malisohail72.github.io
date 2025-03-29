@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tax Helper.pk - Your Taxation Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Preserved styling with homepage enhancements */
         :root {
             --primary-color: #00897b;
             --secondary-color: #00695c;
@@ -42,11 +42,39 @@
             gap: 0.5rem;
         }
 
+        .nav-links ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         .hero {
             background: linear-gradient(135deg, var(--primary-color), #004d40);
             color: white;
-            padding: 8rem 2rem 4rem;
+            padding: 12rem 2rem 4rem;
             text-align: center;
+            margin-top: 5rem;
         }
 
         .features-grid {
@@ -90,20 +118,126 @@
             border-radius: 10px;
             box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
         }
+
+        .testimonials-container {
+            padding: 4rem 2rem;
+            background: var(--accent-color);
+            text-align: center;
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .testimonial-author {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+        }
+
+        .contact-us {
+            padding: 4rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--secondary-color);
+        }
+
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                background: white;
+                width: 100%;
+                padding: 2rem;
+                transition: 0.3s;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-
     <header class="navbar">
         <div class="navbar-brand">
             📊 My Tax Helper.pk
         </div>
+        <button class="hamburger">☰</button>
         <nav class="nav-links">
             <ul>
                 <li><a href="#" class="active">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#resources">Resources</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -129,7 +263,7 @@
         </div>
     </section>
 
-    <section class="services-section">
+    <section class="services-section" id="services">
         <div class="content-section">
             <h2>Our Services</h2>
             <div class="info-cards">
@@ -149,7 +283,7 @@
         </div>
     </section>
 
-    <section class="content-section">
+    <section class="content-section" id="resources">
         <h2>Essential Resources</h2>
         <div class="info-cards">
             <div class="info-card">
@@ -182,7 +316,7 @@
         </div>
     </section>
 
-    <section class="contact-us">
+    <section class="contact-us" id="contact">
         <h2>Get In Touch</h2>
         <form class="contact-form">
             <input type="text" placeholder="Your Name" required>
@@ -207,7 +341,7 @@
     </footer>
 
     <script>
-        // Preserved interactive elements
+        // Mobile menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -219,12 +353,22 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu on click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
             });
         });
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>
