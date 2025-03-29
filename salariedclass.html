@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculators - My Tax Helper.pk</title>
+    <style>
+        /* Basic CSS for styling (same as the main page) */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styles (same as the main page) */
+        .navbar {
+            background-color: #f8f8f8;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links ul li {
+            padding: 10px 0;
+        }
+
+        .nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .nav-links ul li a:hover {
+            background-color: #555;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                position: static;
+                background-color: transparent;
+                width: auto;
+                text-align: left;
+                padding: 0;
+            }
+
+            .nav-links ul {
+                display: flex;
+            }
+
+            .nav-links ul li {
+                padding: 0;
+                margin-left: 20px;
+            }
+
+            .nav-links ul li a {
+                color: #333;
+                padding: 10px 15px;
+            }
+
+            .nav-links ul li a:hover {
+                background-color: #eee;
+            }
+        }
+
+        /* Content Sections Styles (same as the main page) */
+        .content-section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section-1 { background-color: #f9fbe7; } /* Light yellow */
+        .section-2 { background-color: #e1bee7; } /* Light purple */
+        .section-3 { background-color: #ffccbc; } /* Light orange */
+        .section-4 { background-color: #c5e1a5; } /* Light green */
+        .section-5 { background-color: #b3e5fc; } /* Light sky blue */
+        .section-6 { background-color: #d7ccc8; } /* Light brown */
+        .section-7 { background-color: #ffe0b2; } /* Light orange accent */
+        .section-8 { background-color: #aed581; } /* Light green accent */
+
+        /* Calculator Specific Styles */
+        .calculator-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calculator-container h3 {
+            margin-top: 0;
+            color: #00897b;
+        }
+
+        .calculator-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .calculator-container input[type="number"],
+        .calculator-container button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        .calculator-container button {
+            background-color: #00897b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator-container button:hover {
+            background-color: #00695c;
+        }
+
+        .calculator-container .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Testimonials Section Styles (same as the main page) */
+        .testimonials-container {
+            background-color: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .testimonials-container h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* About Us Section Styles (same as the main page) */
+        .about-us {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-us p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Us Section Styles (same as the main page) */
+        .contact-us {
+            background-color: #e0f2f7; /* Light cyan */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contact-us h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form label {
+            text-align: left;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #00897b; /* Teal */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #00695c;
+        }
+
+        /* Footer Styles (same as the main page) */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #eee;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links a {
+            color: #eee;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            <strong>My Tax Helper.pk</strong>
+        </div>
+        <div class="hamburger">&#9776;</div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tax Calculator</a></li>
+                <li><a href="#">Tax Tips</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content-section section-1">
+        <h2>Income Tax Calculator</h2>
+        <p>Calculate your estimated income tax based on your annual salary.</p>
+        <div class="calculator-container">
+            <h3>Income Tax</h3>
+            <label for="annualSalary">Annual Salary (PKR):</label>
+            <input type="number" id="annualSalary" placeholder="Enter your annual salary">
+            <button onclick="alert('Income Tax Calculation Logic Here')">Calculate</button>
+            <div class="result" id="incomeTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-2">
+        <h2>Net Salary Calculator</h2>
+        <p>Find out your take-home pay after deductions like income tax and other contributions.</p>
+        <div class="calculator-container">
+            <h3>Net Salary</h3>
+            <label for="grossSalary">Gross Monthly Salary (PKR):</label>
+            <input type="number" id="grossSalary" placeholder="Enter your gross monthly salary">
+            <label for="taxAmount">Estimated Monthly Tax (PKR):</label>
+            <input type="number" id="taxAmount" placeholder="Enter estimated monthly tax">
+            <label for="otherDeductions">Other Monthly Deductions (PKR):</label>
+            <input type="number" id="otherDeductions" placeholder="Enter other deductions">
+            <button onclick="alert('Net Salary Calculation Logic Here')">Calculate</button>
+            <div class="result" id="netSalaryResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-3">
+        <h2>Provident Fund Calculator</h2>
+        <p>Estimate the growth of your provident fund based on your contributions.</p>
+        <div class="calculator-container">
+            <h3>Provident Fund</h3>
+            <label for="monthlyContribution">Monthly Contribution (PKR):</label>
+            <input type="number" id="monthlyContribution" placeholder="Enter your monthly contribution">
+            <label for="interestRate">Annual Interest Rate (%):</label>
+            <input type="number" id="interestRate" placeholder="Enter annual interest rate">
+            <label for="years">Number of Years:</label>
+            <input type="number" id="years" placeholder="Enter the number of years">
+            <button onclick="alert('Provident Fund Calculation Logic Here')">Calculate</button>
+            <div class="result" id="pfResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-4">
+        <h2>Advance Tax Calculator</h2>
+        <p>Calculate your estimated advance tax liability.</p>
+        <div class="calculator-container">
+            <h3>Advance Tax</h3>
+            <label for="estimatedAnnualIncome">Estimated Annual Income (PKR):</label>
+            <input type="number" id="estimatedAnnualIncome" placeholder="Enter estimated annual income">
+            <button onclick="alert('Advance Tax Calculation Logic Here')">Calculate</button>
+            <div class="result" id="advanceTaxResult"></div>
+        </div>
+    </section>
+
+    <section class="content-section section-7">
+        <h2>FAQ (Frequently Asked Questions)</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <h3>Q: What is income tax?</h3>
+            <p>A: Income tax is a tax levied by a government on the income of individuals or entities (taxpayers) with respect to their income or capital gains (realized or deemed realized) as mandated by the provisions of the relevant tax law.</p>
+            <h3>Q: What are the different tax brackets for salaried individuals in Pakistan?</h3>
+            <p>A: Tax brackets in Pakistan vary based on income levels and are subject to change by the Federal Board of Revenue (FBR). It's recommended to refer to the latest FBR guidelines for the most up-to-date information.</p>
+            <h3>Q: How can I reduce my income tax liability?</h3>
+            <p>A: You can potentially reduce your income tax liability through various deductions and tax credits available under the Pakistani tax laws. These might include investments, allowances, and other eligible expenses. Consult the FBR website or a tax professional for detailed guidance.</p>
+            </div>
+    </section>
+
+    <section class="content-section section-8">
+        <h2>ℹ️ General Information</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+            <p><strong>Tax Year:</strong> The tax year in Pakistan typically runs from July 1st to June 30th of the following year.</p>
+            <p><strong>Filing Deadline:</strong> The deadline for filing income tax returns for salaried individuals is usually September 30th each year, but this can be extended by the FBR.</p>
+            <p><strong>Tax Identification Number:</strong> Every taxpayer in Pakistan is required to have a National Tax Number (NTN).</p>
+            <p><strong>Important Note:</strong> The calculators provided on this page are for estimation purposes only. For accurate tax calculations and filing, please consult the official guidelines of the Federal Board of Revenue (FBR) of Pakistan or a qualified tax professional.</p>
+        </div>
+    </section>
+
+    <section class="testimonials-container">
+        <h2>Testimonials & Reviews</h2>
+        <div class="testimonial" id="testimonial1">
+            <p>"My Tax Helper.pk made filing my taxes so much easier! The information was clear and the calculator was very helpful."</p>
+            <p class="testimonial-author">- Aisha Khan</p>
+        </div>
+        <div class="testimonial" id="testimonial2" style="display: none;">
+            <p>"I highly recommend this website for anyone needing help with their taxes in Pakistan. The resources are excellent."</p>
+            <p class="testimonial-author">- Imran Ali</p>
+        </div>
+        <div class="testimonial" id="testimonial3" style="display: none;">
+            <p>"The tax tips provided on this site saved me a lot of time and potential errors. Great job!"</p>
+            <p class="testimonial-author">- Fatima Rizvi</p>
+        </div>
+        <div class="testimonial" id="testimonial4" style="display: none;">
+            <p>"This website is a lifesaver! I was so confused about my taxes, but My Tax Helper.pk guided me through everything."</p>
+            <p class="testimonial-author">- Shahid Malik</p>
+        </div>
+        <div class="testimonial" id="testimonial5" style="display: none;">
+            <p>"Excellent resource for understanding Pakistani tax laws. The layout is user-friendly and the content is very informative."</p>
+            <p class="testimonial-author">- Sana Jamil</p>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>My Tax Helper.pk is dedicated to providing accurate and easy-to-understand information about taxation in Pakistan. Our goal is to simplify the tax process for individuals and small businesses, helping them navigate the complexities of tax laws and regulations. We strive to be a reliable resource for all your tax-related queries and needs.</p>
+    </section>
+
+    <section class="contact-us">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 My Tax Helper.pk. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Testimonial Slider (same as the main page)
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        }
+
+        showTestimonial(currentIndex);
+        setInterval(nextTestimonial, 5000);
+
+        document.addEventListener('click', (event) => {
+            const isClickInside = hamburger.contains(event.target) || navLinks.contains(event.target);
+            if (navLinks.classList.contains('active') && !isClickInside && window.innerWidth < 768) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>
