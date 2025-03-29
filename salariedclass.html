@@ -354,8 +354,15 @@
             <h3>Income Tax</h3>
             <label for="annualSalary">Annual Salary (PKR):</label>
             <input type="number" id="annualSalary" placeholder="Enter your annual salary">
-            <button onclick="alert('Income Tax Calculation Logic Here')">Calculate</button>
+            <button onclick="calculateIncomeTax()">Calculate</button>
             <div class="result" id="incomeTaxResult"></div>
+        </div>
+        <div class="info">
+            <p>ℹ️ <strong>Income Tax Calculation Information:</strong></p>
+            <p id="incomeTaxInfo">
+                آمدنی ٹیکس کا حساب آپ کی سالانہ تنخواہ پر مبنی ہوتا ہے۔ پاکستان میں ٹیکس کی شرحیں مختلف آمدنی کے بریکٹس پر منحصر ہوتی ہیں۔
+                براہ کرم فیڈرل بورڈ آف ریونیو (FBR) کی تازہ ترین ہدایات سے مشورہ کریں تاکہ درست حساب کیا جا سکے۔
+            </p>
         </div>
     </section>
 
@@ -370,8 +377,15 @@
             <input type="number" id="taxAmount" placeholder="Enter estimated monthly tax">
             <label for="otherDeductions">Other Monthly Deductions (PKR):</label>
             <input type="number" id="otherDeductions" placeholder="Enter other deductions">
-            <button onclick="alert('Net Salary Calculation Logic Here')">Calculate</button>
+            <button onclick="calculateNetSalary()">Calculate</button>
             <div class="result" id="netSalaryResult"></div>
+        </div>
+        <div class="info">
+            <p>ℹ️ <strong>Net Salary Calculation Information:</strong></p>
+            <p id="netSalaryInfo">
+                نیٹ سیلری کا حساب آپ کی مجموعی ماہانہ تنخواہ میں سے ٹیکس اور دیگر کٹوتیوں کو کم کرنے کے بعد کیا جاتا ہے۔
+                یہ آپ کو بتاتا ہے کہ آپ کو ماہانہ کتنی رقم ملے گی۔
+            </p>
         </div>
     </section>
 
@@ -386,8 +400,15 @@
             <input type="number" id="interestRate" placeholder="Enter annual interest rate">
             <label for="years">Number of Years:</label>
             <input type="number" id="years" placeholder="Enter the number of years">
-            <button onclick="alert('Provident Fund Calculation Logic Here')">Calculate</button>
+            <button onclick="calculateProvidentFund()">Calculate</button>
             <div class="result" id="pfResult"></div>
+        </div>
+        <div class="info">
+            <p>ℹ️ <strong>Provident Fund Calculation Information:</strong></p>
+            <p id="providentFundInfo">
+                پراویڈنٹ فنڈ کا حساب آپ کی ماہانہ شراکت، سالانہ سود کی شرح اور سالوں کی تعداد پر منحصر ہوتا ہے۔
+                یہ آپ کو بتاتا ہے کہ آپ کا فنڈ کتنی رقم تک بڑھے گا۔
+            </p>
         </div>
     </section>
 
@@ -398,8 +419,15 @@
             <h3>Advance Tax</h3>
             <label for="estimatedAnnualIncome">Estimated Annual Income (PKR):</label>
             <input type="number" id="estimatedAnnualIncome" placeholder="Enter estimated annual income">
-            <button onclick="alert('Advance Tax Calculation Logic Here')">Calculate</button>
+            <button onclick="calculateAdvanceTax()">Calculate</button>
             <div class="result" id="advanceTaxResult"></div>
+        </div>
+        <div class="info">
+            <p>ℹ️ <strong>Advance Tax Calculation Information:</strong></p>
+            <p id="advanceTaxInfo">
+                ایڈوانس ٹیکس کا حساب آپ کی تخمینہ شدہ سالانہ آمدنی پر مبنی ہوتا ہے۔
+                یہ آپ کو بتاتا ہے کہ آپ کو کتنی ایڈوانس ٹیکس کی ادائیگی کرنی ہوگی۔
+            </p>
         </div>
     </section>
 
@@ -412,7 +440,7 @@
             <p>A: Tax brackets in Pakistan vary based on income levels and are subject to change by the Federal Board of Revenue (FBR). It's recommended to refer to the latest FBR guidelines for the most up-to-date information.</p>
             <h3>Q: How can I reduce my income tax liability?</h3>
             <p>A: You can potentially reduce your income tax liability through various deductions and tax credits available under the Pakistani tax laws. These might include investments, allowances, and other eligible expenses. Consult the FBR website or a tax professional for detailed guidance.</p>
-            </div>
+        </div>
     </section>
 
     <section class="content-section section-8">
@@ -516,6 +544,52 @@
                 navLinks.classList.remove('active');
             }
         });
+
+        function calculateIncomeTax() {
+            let annualSalary = parseFloat(document.getElementById('annualSalary').value);
+            // Replace with actual Pakistani tax calculation logic
+            let incomeTax = 0;
+            if (annualSalary <= 600000) {
+                incomeTax = 0;
+            } else if (annualSalary <= 1200000) {
+                incomeTax = (annualSalary - 600000) * 0.025;
+            } else if(annualSalary <= 2400000) {
+                incomeTax = 15000 + (annualSalary - 1200000)* 0.125;
+            } else {//more complex tax brackets, add more logic here.
+                incomeTax = 100000; //place holder
+            }
+            document.getElementById('incomeTaxResult').textContent = `Estimated Income Tax: PKR ${incomeTax.toFixed(2)}`;
+        }
+
+        function calculateNetSalary() {
+            let grossSalary = parseFloat(document.getElementById('grossSalary').value);
+            let taxAmount = parseFloat(document.getElementById('taxAmount').value);
+            let otherDeductions = parseFloat(document.getElementById('otherDeductions').value);
+            let netSalary = grossSalary - taxAmount - otherDeductions;
+            document.getElementById('netSalaryResult').textContent = `Net Salary: PKR ${netSalary.toFixed(2)}`;
+        }
+
+        function calculateProvidentFund() {
+            let monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            let interestRate = parseFloat(document.getElementById('interestRate').value) / 100;
+            let years = parseInt(document.getElementById('years').value);
+            let total = 0;
+            for (let i = 0; i < years * 12; i++) {
+                total += monthlyContribution;
+                total += total * (interestRate / 12);
+            }
+            document.getElementById('pfResult').textContent = `Estimated Provident Fund: PKR ${total.toFixed(2)}`;
+        }
+
+        function calculateAdvanceTax() {
+            let estimatedAnnualIncome = parseFloat(document.getElementById('estimatedAnnualIncome').value);
+            // Replace with actual Pakistani advance tax calculation logic
+            let advanceTax = 0;
+            if (estimatedAnnualIncome > 600000){
+                advanceTax = estimatedAnnualIncome * 0.01; //place holder
+            }
+            document.getElementById('advanceTaxResult').textContent = `Estimated Advance Tax: PKR ${advanceTax.toFixed(2)}`;
+        }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
