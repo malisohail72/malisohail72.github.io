@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Budget Planner - My Tax Helper.pk</title>
+    <title>Budget Planning Calculators - My Tax Helper.pk</title>
     <style>
         /* Basic CSS for styling (same as the main page) */
         body {
@@ -108,8 +108,6 @@
         .content-section {
             padding: 50px 20px;
             text-align: center;
-            border: 1px solid #eee; /* Light border */
-            margin: 10px;
         }
 
         .content-section h2 {
@@ -157,8 +155,7 @@
         }
 
         .calculator-container input[type="number"],
-        .calculator-container button,
-        .calculator-container select {
+        .calculator-container button {
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -330,15 +327,12 @@
         .social-links a:hover {
             color: #bbb;
         }
-
-        /* Budget Planner Styles */
-        #budgetChartContainer {
+        /* Chart specific styles */
+        .chart-container{
             width: 80%;
             margin: 20px auto;
-            height: 400px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -359,58 +353,229 @@
     </header>
 
     <section class="content-section section-1">
-        <h2>Budget Planner</h2>
-        <p>Create a budget plan with your income and expenses.</p>
+        <h1> Budget Planning Calculators </h1>
+        <hr>
+        <h2>Monthly Budget Planner</h2>
+        <p>Plan your monthly expenses and income to manage your finances effectively.</p>
         <div class="calculator-container">
-            <h3>Budget Planner</h3>
+            <h3>Monthly Budget</h3>
             <label for="monthlyIncome">Monthly Income (PKR):</label>
-            <input type="number" id="monthlyIncome" placeholder="Enter monthly income">
-
-            <label for="rentExpense">Rent/Mortgage (PKR):</label>
-            <input type="number" id="rentExpense" placeholder="Enter rent/mortgage">
-
-            <label for="foodExpense">Food Expenses (PKR):</label>
-            <input type="number" id="foodExpense" placeholder="Enter food expenses">
-
-            <label for="utilitiesExpense">Utilities (PKR):</label>
-            <input type="number" id="utilitiesExpense" placeholder="Enter utilities">
-
-            <label for="transportExpense">Transport (PKR):</label>
-            <input type="number" id="transportExpense" placeholder="Enter transport">
-
-            <label for="educationExpense">Education (PKR):</label>
-            <input type="number" id="educationExpense" placeholder="Enter education">
-
-            <label for="healthcareExpense">Healthcare (PKR):</label>
-            <input type="number" id="healthcareExpense" placeholder="Enter healthcare">
-
-            <label for="otherExpense">Other Expenses (PKR):</label>
-            <input type="number" id="otherExpense" placeholder="Enter other expenses">
-
-            <button onclick="calculateBudget()">Calculate Budget</button>
-            <div class="result" id="budgetResult"></div>
+            <input type="number" id="monthlyIncome" placeholder="Enter your monthly income">
+            <label for="rent">Rent/Mortgage (PKR):</label>
+            <input type="number" id="rent" placeholder="Enter rent/mortgage">
+            <label for="utilities">Utilities (PKR):</label>
+            <input type="number" id="utilities" placeholder="Enter utilities expenses">
+            <label for="groceries">Groceries (PKR):</label>
+            <input type="number" id="groceries" placeholder="Enter groceries expenses">
+            <label for="transport">Transport (PKR):</label>
+            <input type="number" id="transport" placeholder="Enter transport expenses">
+            <label for="otherExpenses">Other Expenses (PKR):</label>
+            <input type="number" id="otherExpenses" placeholder="Enter other expenses">
+            <button onclick="calculateMonthlyBudget()">Calculate</button>
+            <div class="result" id="monthlyBudgetResult"></div>
         </div>
-        <div id="budgetChartContainer">
+        <div class="info">
+            <p>ℹ️ <strong>Monthly Budget Information:</strong></p>
+            <p id="monthlyBudgetInfo">
+                ماہانہ بجٹ کا حساب آپ کی آمدنی اور اخراجات کو مدنظر رکھتے ہوئے کیا جاتا ہے۔
+                یہ آپ کو بتاتا ہے کہ آپ اپنی آمدنی کو مؤثر طریقے سے کیسے منظم کر سکتے ہیں۔
+            </p>
+        </div>
+        <div class="chart-container">
             <canvas id="budgetChart"></canvas>
         </div>
     </section>
 
-    <section class="content-section section-7">
-        <h2>FAQ (Frequently Asked Questions)</h2>
-        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
-            <h3>Q: Budget Planner kaise istemaal hota hai?</h3>
-            <p>A: Budget Planner mein apni maheena aamdani aur kharchon ki tafseelat darj karen, aur phir 'Calculate Budget' par click karen. Yeh aapko aapke kharchon ka tafseeli tajzia aur ek chart dikhayega.</p>
-            <h3>Q: Kya main apne budget ko save kar sakta hoon?</h3>
-            <p>A: Filhaal, yeh feature dastiyab nahi hai. Lekin aap apne browser mein data save kar sakte hain.</p>
-            <h3>Q: Kya yeh calculator sirf Pakistani rupay mein kaam karta hai?</h3>
-            <p>A: Jee haan, yeh calculator sirf Pakistani rupay (PKR) mein kaam karta hai.</p>
-            <h3>Q: Kya main apne budget ka print out le sakta hoon?</h3>
-            <p>A: Jee haan, aap apne browser ke print option se budget ka print out le sakte hain.</p>
+    <section class="content-section section-2">
+        <h2>Savings Goal Calculator</h2>
+        <p>Calculate how much you need to save each month to reach your financial goals.</p>
+        <div class="calculator-container">
+            <h3>Savings Goal</h3>
+            <label for="goalAmount">Goal Amount (PKR):</label>
+            <input type="number" id="goalAmount" placeholder="Enter your savings goal">
+            <label for="goalMonths">Number of Months:</label>
+            <input type="number" id="goalMonths" placeholder="Enter number of months">
+            <button onclick="calculateSavingsGoal()">Calculate</button>
+            <div class="result" id="savingsGoalResult"></div>
+        </div>
+        <div class="info">
+            <p>ℹ️ <strong>Savings Goal Information:</strong></p>
+            <p id="savingsGoalInfo">
+                سرمایہ کاری کے ہدف کا حساب آپ کے مطلوبہ ہدف اور مہینوں کی تعداد پر مبنی ہوتا ہے۔
+                یہ آپ کو بتاتا ہے کہ آپ کو ہر ماہ کتنی رقم بچانے کی ضرورت ہے۔
+            </p>
+        </div>
+        <div class="chart-container">
+            <canvas id="savingsChart"></canvas>
         </div>
     </section>
 
-    <section class="content-section section-8">
-        <h2>ℹ️ General Information</h2>
-        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
-            <p><strong>Currency:</strong> Pakistan mein aam tor par Pakistani rupay (PKR) istemaal hota hai.</p>
-            <p><strong>Cost of Living:</strong> Pakistan mein rehn seh
+    <section class="testimonials-container">
+        <h2>Testimonials & Reviews</h2>
+        <div class="testimonial" id="testimonial1">
+            <p>"This budget planner helped me organize my finances effectively. Highly recommended!"</p>
+            <p class="testimonial-author">- Ali Raza</p>
+        </div>
+        <div class="testimonial" id="testimonial2" style="display: none;">
+            <p>"The savings goal calculator is a great tool for planning my financial future."</p>
+            <p class="testimonial-author">- Sara Khan</p>
+        </div>
+        <div class="testimonial" id="testimonial3" style="display: none;">
+            <p>"Very easy to use and understand. These calculators are a lifesaver!"</p>
+            <p class="testimonial-author">- Usman Malik</p>
+        </div>
+        <div class="testimonial" id="testimonial4" style="display: none;">
+            <p>"I was able to plan my budget and savings goals with ease. Thank you!"</p>
+            <p class="testimonial-author">- Hina Jamil</p>
+        </div>
+        <div class="testimonial" id="testimonial5" style="display: none;">
+            <p>"Great resource for financial planning. The charts are very helpful."</p>
+            <p class="testimonial-author">- Bilal Ahmed</p>
+        </div>
+    </section>
+
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>My Tax Helper.pk provides helpful financial tools and resources to manage your budget and savings effectively. Our budget planning calculators are designed to simplify financial planning for everyone.</p>
+    </section>
+
+    <section class="contact-us">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 My Tax Helper.pk. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        }
+
+        showTestimonial(currentIndex);
+        setInterval(nextTestimonial, 5000);
+
+        document.addEventListener('click', (event) => {
+            const isClickInside = hamburger.contains(event.target) || navLinks.contains(event.target);
+            if (navLinks.classList.contains('active') && !isClickInside && window.innerWidth < 768) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function calculateMonthlyBudget() {
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const rent = parseFloat(document.getElementById('rent').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
+            const transport = parseFloat(document.getElementById('transport').value) || 0;
+            const otherExpenses = parseFloat(document.getElementById('otherExpenses').value) || 0;
+
+            const totalExpenses = rent + utilities + groceries + transport + otherExpenses;
+            const remaining = monthlyIncome - totalExpenses;
+
+            document.getElementById('monthlyBudgetResult').textContent = `Total Expenses: PKR ${totalExpenses.toFixed(2)}, Remaining: PKR ${remaining.toFixed(2)}`;
+
+            // Chart Data
+            const ctx = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Rent', 'Utilities', 'Groceries', 'Transport', 'Other Expenses', 'Remaining'],
+                    datasets: [{
+                        label: 'Monthly Budget',
+                        data: [rent, utilities, groceries, transport, otherExpenses, remaining],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        function calculateSavingsGoal() {
+            const goalAmount = parseFloat(document.getElementById('goalAmount').value) || 0;
+            const goalMonths = parseInt(document.getElementById('goalMonths').value) || 1;
+
+            const monthlySavings = goalAmount / goalMonths;
+
+            document.getElementById('savingsGoalResult').textContent = `Monthly Savings Required: PKR ${monthlySavings.toFixed(2)}`;
+
+            // Chart Data
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Monthly Savings'],
+                    datasets: [{
+                        label: 'Savings Goal',
+                        data: [monthlySavings],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</body>
+</html>
