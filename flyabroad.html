@@ -3,88 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional relocation services helping Pakistani citizens move abroad with visa consultation, document preparation, and settlement assistance in Canada, Australia, UK, and Europe.">
-    <meta name="keywords" content="pakistan relocation, move abroad from pakistan, immigration services pakistan, visa consultation, overseas job placement, study abroad pakistan">
-    <meta name="author" content="Global Horizons">
-    <meta name="robots" content="index, follow">
-    <title>Global Horizons | Expert Relocation Services from Pakistan to Worldwide Destinations</title>
-    <!-- Preconnect to CDNs for faster font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Global Horizons - Your Path from Pakistan to the World</title>
     <style>
-        /* Core variables */
         :root {
-            --primary: #006d77;
-            --primary-light: #83c5be;
-            --secondary: #e29578;
-            --secondary-light: #ffddd2;
-            --dark: #16253d;
-            --text: #2b2d42;
-            --text-light: #4a4e69;
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
             --light: #ffffff;
-            --light-bg: #f8f9fa;
-            --light-accent: #edf6f9;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, #1a759f 100%);
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --border-radius: 8px;
-            --heading-font: 'Playfair Display', serif;
-            --body-font: 'Poppins', sans-serif;
         }
         
-        /* CSS Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
             color: var(--text);
-            font-family: var(--body-font);
             line-height: 1.6;
-            overflow-x: hidden;
-            background-color: var(--light);
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--heading-font);
-            font-weight: 700;
-            line-height: 1.3;
         }
         
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-        
-        ul {
-            list-style: none;
-        }
-        
-        button, input, select, textarea {
-            font-family: var(--body-font);
-        }
-        
-        /* Layout Containers */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -92,518 +32,195 @@
             padding: 0 20px;
         }
         
-        section {
-            padding: 90px 0;
-            position: relative;
-        }
-        
-        /* Utilities */
-        .text-center {
-            text-align: center;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            border: none;
-            outline: none;
-        }
-        
-        .btn-primary {
-            background: var(--gradient);
-            color: white;
-            box-shadow: 0 5px 15px rgba(0, 109, 119, 0.25);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 109, 119, 0.35);
-        }
-        
-        .btn-secondary {
-            background-color: white;
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes floatUp {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
         /* Header Styles */
         header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 20px 0;
-            transition: var(--transition);
-        }
-        
-        .header-scrolled {
-            position: fixed;
             background-color: var(--light);
-            box-shadow: var(--shadow-md);
-            padding: 15px 0;
-            animation: slideDown 0.5s ease;
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            z-index: 101;
         }
         
-        .logo img, .logo svg {
-            height: 45px;
-            margin-right: 12px;
-            transition: var(--transition);
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
         }
         
         .logo h1 {
-            font-size: 26px;
-            color: var(--primary);
-            transition: var(--transition);
-            font-weight: 700;
-        }
-        
-        .header-scrolled .logo h1 {
             font-size: 24px;
+            color: var(--primary);
         }
         
         .nav-links {
             display: flex;
-            align-items: center;
+            list-style: none;
         }
         
         .nav-links li {
-            margin-left: 35px;
-            position: relative;
+            margin-left: 30px;
         }
         
         .nav-links a {
-            font-weight: 500;
-            font-size: 16px;
+            text-decoration: none;
             color: var(--text);
-            padding: 5px 0;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
+            font-weight: 500;
+            transition: color 0.3s;
         }
         
         .nav-links a:hover {
             color: var(--primary);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
         .cta-button {
-            background: var(--gradient);
+            background-color: var(--primary);
             color: white;
-            padding: 12px 24px;
-            border-radius: var(--border-radius);
+            padding: 10px 20px;
+            border-radius: 5px;
             font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0, 109, 119, 0.25);
-            transition: var(--transition);
+            transition: background-color 0.3s;
         }
         
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 109, 119, 0.35);
-        }
-        
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 101;
-            color: var(--primary);
-        }
-        
-        /* Hidden Navbar that appears on scroll */
-        .hidden-navbar {
-            position: fixed;
-            top: -80px;
-            left: 0;
-            width: 100%;
-            background-color: var(--light);
-            box-shadow: var(--shadow-md);
-            z-index: 99;
-            padding: 12px 0;
-            transition: var(--transition);
-        }
-        
-        .hidden-navbar.show {
-            top: 0;
-        }
-        
-        .hidden-navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .hidden-navbar .logo h1 {
-            font-size: 22px;
-        }
-        
-        .hidden-nav-links {
-            display: flex;
-            align-items: center;
-        }
-        
-        .hidden-nav-links li {
-            margin-left: 20px;
-        }
-        
-        .hidden-nav-links a {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-light);
-            padding: 8px 12px;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-        
-        .hidden-nav-links a:hover {
-            background-color: var(--light-accent);
-            color: var(--primary);
+            background-color: var(--secondary);
+            color: white;
         }
         
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(rgba(0, 109, 119, 0.9), rgba(0, 109, 119, 0.85)), url('/api/placeholder/1920/1080') no-repeat center center/cover;
-            background-attachment: fixed;
-        }
-        
-        .hero-content {
-            padding: 60px 0;
+            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('/api/placeholder/1200/600') no-repeat center center/cover;
             color: white;
-            max-width: 850px;
-            margin: 0 auto;
+            padding: 100px 0;
             text-align: center;
-            animation: fadeIn 1s ease-out;
         }
         
         .hero h2 {
-            font-size: 48px;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            font-weight: 700;
+            font-size: 42px;
+            margin-bottom: 20px;
         }
         
         .hero p {
             font-size: 18px;
             max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.95;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            margin: 0 auto 30px;
         }
         
         .hero-cta {
-            font-size: 17px;
-            padding: 15px 35px;
-            font-weight: 600;
-        }
-        
-        .hero-shape {
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            z-index: 1;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: var(--light);
-            position: relative;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 30px;
-        }
-        
-        .feature-card {
-            text-align: center;
-            padding: 40px 25px;
-            border-radius: var(--border-radius);
+            display: inline-block;
             background-color: white;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s;
         }
         
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(131, 197, 190, 0.1) 100%);
-            z-index: -1;
-            transition: var(--transition);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .feature-card:hover::before {
-            height: 100%;
-        }
-        
-        .feature-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 85px;
-            height: 85px;
-            margin-bottom: 25px;
-            border-radius: 50%;
-            background: var(--gradient);
-            color: white;
-            font-size: 32px;
-            box-shadow: 0 10px 20px rgba(0, 109, 119, 0.2);
-        }
-        
-        .feature-card h4 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .feature-card p {
-            color: var(--text-light);
-            font-size: 15px;
-            margin-bottom: 20px;
+        .hero-cta:hover {
+            transform: translateY(-3px);
         }
         
         /* Services Section */
         .services {
-            padding: 100px 0;
-            background-color: var(--light-accent);
-            position: relative;
+            padding: 80px 0;
+            background-color: var(--accent);
         }
         
         .section-title {
             text-align: center;
             margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
         .section-title h3 {
-            font-size: 38px;
-            color: var(--dark);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 3px;
-            background: var(--gradient);
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
         
         .section-title p {
-            color: var(--text-light);
-            font-size: 17px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
         }
         
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
+            gap: 30px;
         }
         
         .service-card {
             background-color: white;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            position: relative;
-            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .service-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
         .service-icon {
-            height: 90px;
-            width: 90px;
-            margin: 35px auto 25px;
-            background: var(--gradient);
+            height: 80px;
+            width: 80px;
+            margin: 30px auto;
+            background-color: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 34px;
-            box-shadow: 0 10px 20px rgba(0, 109, 119, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .service-icon::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .service-card:hover .service-icon::before {
-            opacity: 1;
-            animation: spin 10s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            font-size: 30px;
         }
         
         .service-content {
-            padding: 0 30px 35px;
+            padding: 0 30px 30px;
             text-align: center;
         }
         
         .service-content h4 {
             font-size: 22px;
             margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .service-content p {
-            color: var(--text-light);
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .service-link {
-            display: inline-block;
             color: var(--primary);
-            font-weight: 600;
-            position: relative;
-        }
-        
-        .service-link::after {
-            content: '→';
-            margin-left: 5px;
-            transition: var(--transition);
-        }
-        
-        .service-link:hover::after {
-            margin-left: 10px;
         }
         
         /* Destinations Section */
         .destinations {
-            padding: 100px 0;
-            background-color: var(--light);
+            padding: 80px 0;
         }
         
         .destinations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
         }
         
         .destination-card {
             position: relative;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             overflow: hidden;
-            height: 320px;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-        
-        .destination-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
+            height: 300px;
         }
         
         .destination-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s ease;
+            transition: transform 0.5s;
         }
         
         .destination-card:hover img {
@@ -616,312 +233,110 @@
             left: 0;
             right: 0;
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            padding: 25px;
+            padding: 20px;
             color: white;
-            transition: var(--transition);
         }
         
         .destination-overlay h4 {
-            font-size: 24px;
-            margin-bottom: 8px;
-            position: relative;
-            padding-bottom: 8px;
-        }
-        
-        .destination-overlay h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-        
-        .destination-overlay p {
-            margin-bottom: 0;
-            font-size: 15px;
-            opacity: 0.9;
-        }
-        
-        .destination-info {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 109, 119, 0.85), rgba(0, 109, 119, 0.85));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.4s ease;
-        }
-        
-        .destination-card:hover .destination-info {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .destination-info h4 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 24px;
-        }
-        
-        .destination-info ul {
-            text-align: center;
-        }
-        
-        .destination-info li {
-            color: white;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-        
-        .destination-info .btn {
-            margin-top: 20px;
-            background-color: white;
-            color: var(--primary);
-            font-size: 14px;
-            padding: 10px 20px;
+            font-size: 22px;
+            margin-bottom: 5px;
         }
         
         /* Testimonials Section */
         .testimonials {
-            padding: 100px 0;
-            background-color: var(--light-accent);
-            position: relative;
-        }
-        
-        .testimonial-wrapper {
-            position: relative;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 30px 0;
+            padding: 80px 0;
+            background-color: var(--accent);
         }
         
         .testimonial-card {
             background-color: white;
-            border-radius: var(--border-radius);
-            padding: 40px;
-            box-shadow: var(--shadow-md);
-            margin: 50px auto 30px;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 40px auto;
+            max-width: 800px;
             position: relative;
         }
         
         .testimonial-card::before {
             content: """;
-            font-family: var(--heading-font);
-            font-size: 150px;
-            line-height: 0;
+            font-size: 100px;
             position: absolute;
-            top: 60px;
+            top: -20px;
             left: 20px;
-            color: rgba(0, 109, 119, 0.1);
+            color: rgba(0, 94, 84, 0.1);
         }
         
         .testimonial-content {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 25px;
-            font-size: 17px;
-            color: var(--text);
+            margin-bottom: 20px;
             font-style: italic;
         }
         
         .testimonial-author {
             display: flex;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
         
         .testimonial-author img {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            margin-right: 20px;
-            border: 3px solid var(--primary-light);
-            object-fit: cover;
+            margin-right: 15px;
         }
         
         .author-info h5 {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 5px;
-            color: var(--dark);
         }
         
         .author-info p {
-            color: var(--text-light);
-            font-size: 15px;
-            margin-bottom: 0;
-        }
-        
-        .testimonial-nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 15px;
-        }
-        
-        .testimonial-nav button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: white;
-            color: var(--primary);
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-        
-        .testimonial-nav button:hover {
-            background: var(--gradient);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* Stats Section */
-        .stats {
-            padding: 70px 0;
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        
-        .stat-item {
-            padding: 20px;
-        }
-        
-        .stat-number {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-family: var(--heading-font);
-        }
-        
-        .stat-text {
-            font-size: 17px;
-            opacity: 0.9;
+            color: #666;
         }
         
         /* Contact Section */
         .contact {
-            padding: 100px 0;
-            background-color: var(--light);
-            position: relative;
-        }
-        
-        .contact-container {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            max-width: 1100px;
-            margin: 0 auto;
+            padding: 80px 0;
         }
         
         .contact-flex {
             display: flex;
             flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
         }
         
         .contact-info {
-            flex: 0 0 40%;
-            padding: 50px;
-            background: var(--gradient);
-            color: white;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('/api/placeholder/600/900') no-repeat center center/cover;
-            opacity: 0.1;
-            z-index: -1;
+            flex: 1;
+            min-width: 300px;
         }
         
         .contact-info h4 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .contact-info h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
         }
         
         .contact-detail {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
+            align-items: center;
+            margin-bottom: 20px;
         }
         
         .contact-icon {
-            width: 45px;
-            height: 45px;
-            background-color: rgba(255, 255, 255, 0.15);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 94, 84, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            font-size: 20px;
-        }
-        
-        .contact-text p {
-            margin-bottom: 5px;
-            font-size: 15px;
-            opacity: 0.9;
+            color: var(--primary);
         }
         
         .contact-form {
-            flex: 0 0 60%;
-            padding: 50px;
-        }
-        
-        .contact-form h4 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: var(--dark);
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .contact-form h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--gradient);
+            flex: 1;
+            min-width: 300px;
         }
         
         .form-group {
@@ -930,19 +345,10 @@
         
         .form-control {
             width: 100%;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            font-family: var(--body-font);
-            font-size: 15px;
-            color: var(--text);
-            transition: var(--transition);
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.1);
-            outline: none;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
         }
         
         textarea.form-control {
@@ -951,56 +357,32 @@
         }
         
         .submit-btn {
-            background: var(--gradient);
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: var(--border-radius);
+            padding: 12px 25px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
-            box-shadow: 0 5px 15px rgba(0, 109, 119, 0.25);
-            transition: var(--transition);
+            transition: background-color 0.3s;
         }
         
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 109, 119, 0.35);
-        }
-        
-        /* Call to Action Section */
-        .cta-section {
-            padding: 80px 0;
-            background: linear-gradient(rgba(0, 109, 119, 0.9), rgba(0, 109, 119, 0.9)), url('/api/placeholder/1920/1080') no-repeat center center/cover;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-        }
-        
-        .cta-section h3 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
+            background-color: var(--secondary);
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 70px 0 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
         
         .footer-column {
@@ -1009,11 +391,10 @@
         }
         
         .footer-column h4 {
-            color: white;
             font-size: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
         
         .footer-column h4::after {
@@ -1023,24 +404,324 @@
             left: 0;
             width: 40px;
             height: 2px;
-            background-color: var(--secondary);
+            background-color: white;
         }
         
-        .footer-about p {
-            margin-bottom: 25px;
-            line-height: 1.7;
-            font-size: 15px;
+        .footer-links {
+            list-style: none;
         }
         
-        .social-links {
-            display: flex;
-            gap: 15px;
+        .footer-links li {
+            margin-bottom: 10px;
         }
         
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .section-title h3 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <svg height="40" width="40" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="#005e54" />
+                        <path d="M 30 50 L 70 50 M 50 30 L 50 70" stroke="white" stroke-width="8" />
+                    </svg>
+                    <h1>Global Horizons</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="cta-button">Free Consultation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Your Journey to a Global Future Begins Here</h2>
+            <p>We specialize in helping Pakistani professionals and families start their new life abroad with comprehensive immigration and relocation services tailored to your needs.</p>
+            <a href="#contact" class="hero-cta">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h3>Our Services</h3>
+                <p>We provide end-to-end assistance for your international relocation journey, from initial consultation to settling in your new home.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✓</div>
+                    <div class="service-content">
+                        <h4>Visa Consultation</h4>
+                        <p>Expert guidance on immigration pathways including work, study, business, and family sponsorship visas for various countries.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📄</div>
+                    <div class="service-content">
+                        <h4>Document Preparation</h4>
+                        <p>Professional assistance with application forms, document verification, translations, and submission procedures.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏫</div>
+                    <div class="service-content">
+                        <h4>Education Pathways</h4>
+                        <p>Comprehensive support for students seeking admission to international universities with scholarship guidance.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <div class="service-content">
+                        <h4>Job Placement</h4>
+                        <p>Career counseling, resume building, and connections with employers in your destination country.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <div class="service-content">
+                        <h4>Settlement Services</h4>
+                        <p>Assistance with housing, banking, healthcare, and other essential services in your new country.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍👩‍👧‍👦</div>
+                    <div class="service-content">
+                        <h4>Family Immigration</h4>
+                        <p>Specialized services for family sponsorship, spouse visas, and reunification programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h3>Popular Destinations</h3>
+                <p>We specialize in helping Pakistani citizens relocate to these thriving countries with opportunities for career growth and quality living.</p>
+            </div>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="/api/placeholder/300/300" alt="Canada">
+                    <div class="destination-overlay">
+                        <h4>Canada</h4>
+                        <p>Express Entry, Provincial Nominees</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/300/300" alt="Australia">
+                    <div class="destination-overlay">
+                        <h4>Australia</h4>
+                        <p>Skilled Migration, Study Pathways</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/300/300" alt="United Kingdom">
+                    <div class="destination-overlay">
+                        <h4>United Kingdom</h4>
+                        <p>Work Visas, High Potential Visas</p>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="/api/placeholder/300/300" alt="Germany">
+                    <div class="destination-overlay">
+                        <h4>Germany</h4>
+                        <p>EU Blue Card, Skilled Worker Visa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h3>Success Stories</h3>
+                <p>Hear from our clients who successfully relocated from Pakistan and started their new life abroad.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>Global Horizons made my dream of working in Canada a reality. From helping me with the Express Entry application to finding my first apartment in Toronto, they were with me every step of the way. Their expertise saved me months of research and prevented costly mistakes.</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/60/60" alt="Ahmed Khan">
+                    <div class="author-info">
+                        <h5>Ahmed Khan</h5>
+                        <p>Software Engineer, Toronto</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>As a doctor looking to continue my practice in Australia, I was overwhelmed by the complex registration process. The team at Global Horizons guided me through every requirement and helped me secure a position at a hospital in Melbourne. My family and I couldn't be happier with our new life.</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/60/60" alt="Dr. Sadia Malik">
+                    <div class="author-info">
+                        <h5>Dr. Sadia Malik</h5>
+                        <p>Physician, Melbourne</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h3>Contact Us</h3>
+                <p>Ready to start your journey? Get in touch with our expert consultants for personalized guidance.</p>
+            </div>
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <h4>Our Information</h4>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p>Office 501, Al-Hafeez Heights,</p>
+                            <p>Gulberg III, Lahore, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p>+92 42 35880001</p>
+                            <p>+92 300 1234567</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <p>info@globalhorizons.pk</p>
+                            <p>support@globalhorizons.pk</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <p>Monday - Saturday</p>
+                            <p>9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" required>
+                                <option value="" disabled selected>Interested In</option>
+                                <option value="work-visa">Work Visa</option>
+                                <option value="study-visa">Study Visa</option>
+                                <option value="business-visa">Business Migration</option>
+                                <option value="family-visa">Family Sponsorship</option>
+                                <option value="settlement">Settlement Services</option>
+                                <option value="other">Other Services</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Global Horizons</h4>
+                    <p>Your trusted partner for international relocation from Pakistan, providing comprehensive immigration and settlement services since 2010.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Visa Consultation</a></li>
+                        <li><a href="#">Document Preparation</a></li>
+                        <li><a href="#">Education Pathways</a></li>
+                        <li><a href="#">Job Placement</a></li>
+                        <li><a href="#">Settlement Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Destinations</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Canada</a></li>
+                        <li><a href="#">Australia</a></li>
+                        <li><a href="#">United Kingdom</a></li>
+                        <li><a href="#">United States</a></li>
+                        <li><a href="#">European Union</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Global Horizons. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
