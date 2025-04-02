@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Points Calculator (Pakistan)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visa Points Calculator (Pakistan)</h1>
+
+        <label for="visaType">Visa Type:</label>
+        <select id="visaType">
+            <option value="study">Study</option>
+            <option value="tourism">Tourism</option>
+            <option value="business">Business</option>
+            <option value="investment">Investment</option>
+            <option value="religious">Religious</option>
+            <option value="medical">Medical</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="18">
+
+        <label for="education">Education Level:</label>
+        <select id="education">
+            <option value="highschool">High School</option>
+            <option value="bachelors">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="phd">PhD</option>
+        </select>
+
+        <label for="experience">Work Experience (Years):</label>
+        <input type="number" id="experience" min="0">
+
+        <label for="language">Language Proficiency (IELTS/TOEFL/etc.):</label>
+        <input type="text" id="language">
+
+        <label for="funds">Available Funds (PKR):</label>
+        <input type="number" id="funds" min="0">
+
+        <button onclick="calculatePoints()">Calculate Points</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculatePoints() {
+            const visaType = document.getElementById("visaType").value;
+            const age = parseInt(document.getElementById("age").value);
+            const education = document.getElementById("education").value;
+            const experience = parseInt(document.getElementById("experience").value);
+            const language = document.getElementById("language").value;
+            const funds = parseInt(document.getElementById("funds").value);
+
+            let points = 0;
+
+            // Age Points
+            if (age >= 18 && age <= 25) {
+                points += 10;
+            } else if (age >= 26 && age <= 35) {
+                points += 15;
+            } else if (age >= 36 && age <= 45) {
+                points += 5;
+            }
+
+            // Education Points
+            if (education === "highschool") {
+                points += 5;
+            } else if (education === "bachelors") {
+                points += 10;
+            } else if (education === "masters") {
+                points += 15;
+            } else if (education === "phd") {
+                points += 20;
+            }
+
+            // Experience Points
+            if (experience >= 1 && experience <= 3) {
+                points += 5;
+            } else if (experience >= 4 && experience <= 6) {
+                points += 10;
+            } else if (experience >= 7) {
+                points += 15;
+            }
+
+            // Language Points (Simplified, you'd need a more robust system)
+            if (language.toLowerCase().includes("ielts") || language.toLowerCase().includes("toefl")) {
+                points += 10;
+            }
+
+            // Funds Points (Simplified, you'd need specific country requirements)
+            if (funds >= 1000000) { //Example threshold.
+                points += 5;
+            }
+
+            // Visa Type Specific Points (Example)
+            if (visaType === "study") {
+                points += 10;
+            } else if (visaType === "investment") {
+                points += 20;
+            }
+
+            document.getElementById("result").innerHTML = `Total Points: ${points}`;
+        }
+    </script>
+</body>
+</html>
