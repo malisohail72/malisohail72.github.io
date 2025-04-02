@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> FAQ </title>
+<style>
+  .dropdown-container {
+    width: 80%;
+    margin: 20px auto;
+    font-family: sans-serif;
+  }
+
+  .dropdown summary {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    list-style: none; /* Remove default marker */
+  }
+
+  .dropdown summary::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    font-size: 20px;
+    color: #007bff; /* Blue color */
+  }
+
+  .dropdown[open] summary::before {
+    content: '-';
+  }
+
+  .dropdown p {
+    padding: 15px;
+    margin: 0;
+    color: #555;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none; /* Hide default marker in Chrome, Safari */
+  }
+</style>
+</head>
+<body>
+
+<div class="dropdown-container">
+  <h2>Frequently Asked Questions</h2>
+
+  <details class="dropdown">
+    <summary>What is the Difference Between a Passport and a Visa?</summary>
+    <p>A passport is a government-issued document that verifies your identity and nationality, while a visa is a conditional authorization granted by a foreign country allowing you to enter, remain within, or leave that country.</p>
+  </details>
+
+  <details class="dropdown">
+    <summary>What is the Difference Between an Entry Visa and a Tourist Visa?</summary>
+    <p>An entry visa is a general term for a visa that allows you to enter a country for a specific purpose. A tourist visa is a type of entry visa specifically for tourism or recreational purposes.</p>
+  </details>
+
+  <details class="dropdown">
+    <summary>What Is the Difference Between a Visa and a Residence Permit?</summary>
+    <p>A visa allows you to enter a country for a temporary stay, while a residence permit allows you to live in a country for an extended period, usually for work, study, or family reunification.</p>
+  </details>
+
+  <details class="dropdown">
+    <summary>What Are Electronic Travel Authorizations?</summary>
+    <p>Electronic Travel Authorizations (ETAs) are online systems that allow travelers from eligible countries to visit a specific country without needing a traditional visa. They are often quicker and easier to obtain than visas.</p>
+  </details>
+
+  <details class="dropdown">
+    <summary>What Are the Most Common Reasons for Visa Denial?</summary>
+    <p>Common reasons for visa denial include incomplete applications, insufficient funds, lack of strong ties to your home country, security concerns, and previous immigration violations.</p>
+  </details>
+</div>
+
+<script>
+  // JavaScript functionality can be added here if needed
+</script>
+
+</body>
+</html>
