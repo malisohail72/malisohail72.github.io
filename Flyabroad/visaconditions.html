@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +6,12 @@
     <title>Pakistan Visa Requirements</title>
     <style>
         :root {
-            --primary-color: #006600;
-            --secondary-color: #ffffff;
-            --accent-color: #e0e0e0;
-            --text-color: #333333;
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
             --visa-free-color: #e6f2e6;
             --visa-required-color: #f9e6e6;
         }
@@ -23,47 +24,186 @@
         }
         
         body {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            color: var(--text);
             line-height: 1.6;
         }
         
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
-        header {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
+        /* Header Styles */
+        header.main-header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin: 0 10px;
+            color: #777;
+        }
+        
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            color: white;
+            padding: 70px 0;
             text-align: center;
-            padding: 30px 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .flag {
-            width: 60px;
-            margin-bottom: 15px;
+        .page-hero img.flag {
+            width: 80px;
+            margin-bottom: 20px;
+            border: 3px solid white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        .page-hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
-        .stats {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .page-hero .stats {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 10px;
         }
         
-        .updated {
-            font-size: 0.9rem;
+        .page-hero .updated {
+            font-size: 14px;
             opacity: 0.8;
         }
         
+        /* Search Section */
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #searchInput {
+            padding: 12px 20px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0,94,84,0.15);
+        }
+        
+        /* Table Styles */
         .table-container {
             display: flex;
             flex-wrap: wrap;
@@ -74,26 +214,27 @@
         .table-section {
             flex: 1;
             min-width: 300px;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
         }
         
         .table-header {
             padding: 15px;
-            font-size: 1.2rem;
+            font-size: 18px;
             font-weight: bold;
             text-align: center;
         }
         
         .visa-free .table-header {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
+            background-color: var(--primary);
+            color: var(--light);
         }
         
         .visa-required .table-header {
             background-color: #cc0000;
-            color: var(--secondary-color);
+            color: var(--light);
         }
         
         table {
@@ -104,7 +245,12 @@
         th, td {
             padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: rgba(0,0,0,0.03);
+            font-weight: 600;
         }
         
         .visa-free table tr:nth-child(even) {
@@ -116,65 +262,283 @@
         }
         
         table tr:hover {
-            background-color: var(--accent-color);
+            background-color: var(--accent);
         }
         
-        footer {
+        /* Statistics Section */
+        .statistics {
+            padding: 50px 0;
+            background-color: var(--accent);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h3 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
             color: #666;
-            border-top: 1px solid #ddd;
         }
         
-        .search-container {
-            margin-bottom: 20px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Information Section */
+        .info-section {
+            padding: 50px 0;
+            margin-bottom: 40px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .info-card {
+            background-color: var(--accent);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-card h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .info-card p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .info-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .info-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
+            border-top: 5px solid var(--secondary);
+        }
+        
+        .footer-content {
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
         }
         
-        #searchInput {
-            padding: 10px 15px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
         }
         
+        .footer-column h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-hero h2 {
+                font-size: 32px;
+            }
+            
+            .section-title h3 {
+                font-size: 28px;
+            }
+            
+            .breadcrumb {
+                padding: 8px 0;
+            }
+            
+            .breadcrumb-links a, .breadcrumb-links .current {
+                font-size: 12px;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 28px;
+            }
+            
+            .stat-card .stat-label {
+                font-size: 14px;
+            }
+            
             .table-container {
                 flex-direction: column;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .stats {
-                font-size: 1rem;
-            }
-            
-            th, td {
-                padding: 8px 10px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="/api/placeholder/40/30" alt="VisaGuide Logo">
+                    <h1>VisaGuide</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Visa Requirements</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="cta-button">Apply Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Visa Information</a></li>
+                <li><span class="current">Pakistan Visa Requirements</span></li>
+            </ul>
+        </div>
+    </div>
+    
     <div class="container">
-        <header>
-            <img src="/api/placeholder/60/40" alt="Pakistan Flag" class="flag">
-            <h1>Pakistan Visa Requirements</h1>
+        <!-- Hero Section -->
+        <div class="page-hero">
+            <img src="/api/placeholder/80/60" alt="Pakistan Flag" class="flag">
+            <h2>Pakistan Visa Requirements</h2>
             <div class="stats">32 Visa-Free Destinations • 194 Visa-Required Destinations</div>
             <div class="updated">Last Updated: February 4, 2025</div>
-        </header>
+        </div>
         
+        <!-- Search Bar -->
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search for a country...">
         </div>
         
+        <!-- Tables -->
         <div class="table-container">
             <section class="table-section visa-free">
                 <div class="table-header">Visa-Free Destinations (32)</div>
@@ -182,41 +546,43 @@
                     <thead>
                         <tr>
                             <th>Country/Territory</th>
+                            <th>Currency</th>
+                            <th>Continent</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Dominica</td></tr>
-                        <tr><td>Haiti</td></tr>
-                        <tr><td>Macao (SAR China)</td></tr>
-                        <tr><td>Maldives</td></tr>
-                        <tr><td>Micronesia</td></tr>
-                        <tr><td>Montserrat</td></tr>
-                        <tr><td>Nepal</td></tr>
-                        <tr><td>Niue</td></tr>
-                        <tr><td>Palau Islands</td></tr>
-                        <tr><td>Samoa</td></tr>
-                        <tr><td>Seychelles</td></tr>
-                        <tr><td>Somalia</td></tr>
-                        <tr><td>St. Helena</td></tr>
-                        <tr><td>St. Kitts and Nevis</td></tr>
-                        <tr><td>St. Vincent and the Grenadines</td></tr>
-                        <tr><td>The Gambia</td></tr>
-                        <tr><td>Timor-Leste</td></tr>
-                        <tr><td>Trinidad and Tobago</td></tr>
-                        <tr><td>Tunisia</td></tr>
-                        <tr><td>Tuvalu</td></tr>
-                        <tr><td>Uganda</td></tr>
-                        <tr><td>Vanuatu</td></tr>
-                        <tr><td>Cambodia</td></tr>
-                        <tr><td>Cape Verde Islands</td></tr>
-                        <tr><td>Comoro Islands</td></tr>
-                        <tr><td>Cook Islands</td></tr>
-                        <tr><td>Côte d'Ivoire</td></tr>
-                        <tr><td>Fiji</td></tr>
-                        <tr><td>Kenya</td></tr>
-                        <tr><td>Madagascar</td></tr>
-                        <tr><td>Malaysia</td></tr>
-                        <tr><td>Mauritania</td></tr>
+                        <tr><td>Dominica</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>Haiti</td><td>Haitian Gourde (HTG)</td><td>North America</td></tr>
+                        <tr><td>Macao (SAR China)</td><td>Macanese Pataca (MOP)</td><td>Asia</td></tr>
+                        <tr><td>Maldives</td><td>Maldivian Rufiyaa (MVR)</td><td>Asia</td></tr>
+                        <tr><td>Micronesia</td><td>United States Dollar (USD)</td><td>Oceania</td></tr>
+                        <tr><td>Montserrat</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>Nepal</td><td>Nepalese Rupee (NPR)</td><td>Asia</td></tr>
+                        <tr><td>Niue</td><td>New Zealand Dollar (NZD)</td><td>Oceania</td></tr>
+                        <tr><td>Palau Islands</td><td>United States Dollar (USD)</td><td>Oceania</td></tr>
+                        <tr><td>Samoa</td><td>Samoan Tala (WST)</td><td>Oceania</td></tr>
+                        <tr><td>Seychelles</td><td>Seychellois Rupee (SCR)</td><td>Africa</td></tr>
+                        <tr><td>Somalia</td><td>Somali Shilling (SOS)</td><td>Africa</td></tr>
+                        <tr><td>St. Helena</td><td>Saint Helena Pound (SHP)</td><td>Africa</td></tr>
+                        <tr><td>St. Kitts and Nevis</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>St. Vincent and the Grenadines</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>The Gambia</td><td>Gambian Dalasi (GMD)</td><td>Africa</td></tr>
+                        <tr><td>Timor-Leste</td><td>United States Dollar (USD)</td><td>Asia</td></tr>
+                        <tr><td>Trinidad and Tobago</td><td>Trinidad and Tobago Dollar (TTD)</td><td>North America</td></tr>
+                        <tr><td>Tunisia</td><td>Tunisian Dinar (TND)</td><td>Africa</td></tr>
+                        <tr><td>Tuvalu</td><td>Australian Dollar (AUD)</td><td>Oceania</td></tr>
+                        <tr><td>Uganda</td><td>Ugandan Shilling (UGX)</td><td>Africa</td></tr>
+                        <tr><td>Vanuatu</td><td>Vanuatu Vatu (VUV)</td><td>Oceania</td></tr>
+                        <tr><td>Cambodia</td><td>Cambodian Riel (KHR)</td><td>Asia</td></tr>
+                        <tr><td>Cape Verde Islands</td><td>Cape Verdean Escudo (CVE)</td><td>Africa</td></tr>
+                        <tr><td>Comoro Islands</td><td>Comorian Franc (KMF)</td><td>Africa</td></tr>
+                        <tr><td>Cook Islands</td><td>New Zealand Dollar (NZD)</td><td>Oceania</td></tr>
+                        <tr><td>Côte d'Ivoire</td><td>West African CFA franc (XOF)</td><td>Africa</td></tr>
+                        <tr><td>Fiji</td><td>Fijian Dollar (FJD)</td><td>Oceania</td></tr>
+                        <tr><td>Kenya</td><td>Kenyan Shilling (KES)</td><td>Africa</td></tr>
+                        <tr><td>Madagascar</td><td>Malagasy Ariary (MGA)</td><td>Africa</td></tr>
+                        <tr><td>Malaysia</td><td>Malaysian Ringgit (MYR)</td><td>Asia</td></tr>
+                        <tr><td>Mauritania</td><td>Mauritanian Ouguiya (MRU)</td><td>Africa</td></tr>
                     </tbody>
                 </table>
             </section>
@@ -227,111 +593,117 @@
                     <thead>
                         <tr>
                             <th>Country/Territory</th>
+                            <th>Currency</th>
+                            <th>Continent</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Afghanistan</td></tr>
-                        <tr><td>Albania</td></tr>
-                        <tr><td>Algeria</td></tr>
-                        <tr><td>American Samoa</td></tr>
-                        <tr><td>Andorra</td></tr>
-                        <tr><td>Angola</td></tr>
-                        <tr><td>Anguilla</td></tr>
-                        <tr><td>Antigua and Barbuda</td></tr>
-                        <tr><td>Argentina</td></tr>
-                        <tr><td>Armenia</td></tr>
-                        <tr><td>Aruba</td></tr>
-                        <tr><td>Australia</td></tr>
-                        <tr><td>Austria</td></tr>
-                        <tr><td>Azerbaijan</td></tr>
-                        <tr><td>Bahamas</td></tr>
-                        <tr><td>Bahrain</td></tr>
-                        <tr><td>Bangladesh</td></tr>
-                        <tr><td>Barbados</td></tr>
-                        <tr><td>Belarus</td></tr>
-                        <tr><td>Belgium</td></tr>
-                        <tr><td>Belize</td></tr>
-                        <tr><td>Benin</td></tr>
-                        <tr><td>Bermuda</td></tr>
-                        <tr><td>Bhutan</td></tr>
-                        <tr><td>Bolivia</td></tr>
-                        <tr><td>Bonaire, St. Eustatius and Saba</td></tr>
-                        <tr><td>Bosnia and Herzegovina</td></tr>
-                        <tr><td>Botswana</td></tr>
-                        <tr><td>Brazil</td></tr>
-                        <tr><td>British Virgin Islands</td></tr>
-                        <tr><td>Brunei</td></tr>
-                        <tr><td>Bulgaria</td></tr>
-                        <tr><td>Burkina Faso</td></tr>
-                        <tr><td>Burundi</td></tr>
-                        <tr><td>Cameroon</td></tr>
-                        <tr><td>Canada</td></tr>
-                        <tr><td>Cayman Islands</td></tr>
-                        <tr><td>Central African Republic</td></tr>
-                        <tr><td>Chad</td></tr>
-                        <tr><td>Chile</td></tr>
-                        <tr><td>China</td></tr>
-                        <tr><td>Colombia</td></tr>
-                        <tr><td>Congo (Dem. Rep.)</td></tr>
-                        <tr><td>Congo (Rep.)</td></tr>
-                        <tr><td>Costa Rica</td></tr>
-                        <tr><td>Croatia</td></tr>
-                        <tr><td>Cuba</td></tr>
-                        <tr><td>Curacao</td></tr>
-                        <tr><td>Cyprus</td></tr>
-                        <tr><td>Czechia</td></tr>
-                        <tr><td>Denmark</td></tr>
-                        <tr><td>Djibouti</td></tr>
-                        <tr><td>Dominican Republic</td></tr>
+                        <tr><td>Afghanistan</td><td>Afghan Afghani (AFN)</td><td>Asia</td></tr>
+                        <tr><td>Albania</td><td>Albanian Lek (ALL)</td><td>Europe</td></tr>
+                        <tr><td>Algeria</td><td>Algerian Dinar (DZD)</td><td>Africa</td></tr>
+                        <tr><td>American Samoa</td><td>United States Dollar (USD)</td><td>Oceania</td></tr>
+                        <tr><td>Andorra</td><td>Euro (EUR)</td><td>Europe</td></tr>
+                        <tr><td>Angola</td><td>Angolan Kwanza (AOA)</td><td>Africa</td></tr>
+                        <tr><td>Anguilla</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>Antigua and Barbuda</td><td>Eastern Caribbean Dollar (XCD)</td><td>North America</td></tr>
+                        <tr><td>Argentina</td><td>Argentine Peso (ARS)</td><td>South America</td></tr>
+                        <tr><td>Armenia</td><td>Armenian Dram (AMD)</td><td>Asia</td></tr>
+                        <tr><td>Aruba</td><td>Aruban Florin (AWG)</td><td>North America</td></tr>
+                        <tr><td>Australia</td><td>Australian Dollar (AUD)</td><td>Oceania</td></tr>
+                        <tr><td>Austria</td><td>Euro (EUR)</td><td>Europe</td></tr>
+                        <tr><td>Azerbaijan</td><td>Azerbaijani Manat (AZN)</td><td>Asia</td></tr>
+                        <tr><td>Bahamas</td><td>Bahamian Dollar (BSD)</td><td>North America</td></tr>
+                        <tr><td>Bahrain</td><td>Bahraini Dinar (BHD)</td><td>Asia</td></tr>
+                        <tr><td>Bangladesh</td><td>Bangladeshi Taka (BDT)</td><td>Asia</td></tr>
+                        <tr><td>Barbados</td><td>Barbadian Dollar (BBD)</td><td>North America</td></tr>
+                        <tr><td>Belarus</td><td>Belarusian Ruble (BYN)</td><td>Europe</td></tr>
+                        <tr><td>Belgium</td><td>Euro (EUR)</td><td>Europe</td></tr>
+                        <tr><td>Belize</td><td>Belize Dollar (BZD)</td><td>North America</td></tr>
+                        <tr><td>Benin</td><td>West African CFA Franc (XOF)</td><td>Africa</td></tr>
+                        <tr><td>Bermuda</td><td>Bermudian Dollar (BMD)</td><td>North America</td></tr>
+                        <tr><td>Bhutan</td><td>Bhutanese Ngultrum (BTN)</td><td>Asia</td></tr>
+                        <tr><td>Bolivia</td><td>Bolivian Boliviano (BOB)</td><td>South America</td></tr>
+                        <tr><td>Bonaire, St. Eustatius and Saba</td><td>United States Dollar (USD)</td><td>North America</td></tr>
+                        <tr><td>Bosnia and Herzegovina</td><td>Bosnia-Herzegovina Convertible Mark (BAM)</td><td>Europe</td></tr>
+                        <tr><td>Botswana</td><td>Botswana Pula (BWP)</td><td>Africa</td></tr>
+                        <tr><td>Brazil</td><td>Brazilian Real (BRL)</td><td>South America</td></tr>
+                        <tr><td>British Virgin Islands</td><td>United States Dollar (USD)</td><td>North America</td></tr>
+                        <tr><td>Brunei</td><td>Brunei Dollar (BND)</td><td>Asia</td></tr>
+                        <tr><td>Bulgaria</td><td>Bulgarian Lev (BGN)</td><td>Europe</td></tr>
+                        <tr><td>Burkina Faso</td><td>West African CFA Franc (XOF)</td><td>Africa</td></tr>
+                        <tr><td>Burundi</td><td>Burundian Franc (BIF)</td><td>Africa</td></tr>
+                        <tr><td>Cameroon</td><td>Central African CFA Franc (XAF)</td><td>Africa</td></tr>
+                        <tr><td>Canada</td><td>Canadian Dollar (CAD)</td><td>North America</td></tr>
+                        <tr><td>Cayman Islands</td><td>Cayman Islands Dollar (KYD)</td><td>North America</td></tr>
+                        <tr><td>Central African Republic</td><td>Central African CFA Franc (XAF)</td><td>Africa</td></tr>
+                        <tr><td>Chad</td><td>Central African CFA Franc (XAF)</td><td>Africa</td></tr>
+                        <tr><td>Chile</td><td>Chilean Peso (CLP)</td><td>South America</td></tr>
+                        <tr><td>China</td><td>Chinese Yuan (CNY)</td><td>Asia</td></tr>
+                        <tr><td>Colombia</td><td>Colombian Peso (COP)</td><td>South America</td></tr>
+                        <tr><td>Congo (Dem. Rep.)</td><td>Congolese Franc (CDF)</td><td>Africa</td></tr>
+                        <tr><td>Congo (Rep.)</td><td>Central African CFA Franc (XAF)</td><td>Africa</td></tr>
+                        <tr><td>Costa Rica</td><td>Costa Rican Colón (CRC)</td><td>North America</td></tr>
+                        <tr><td>Croatia</td><td>Euro (EUR)</td><td>Europe</td></tr>
+                        <tr><td>Cuba</td><td>Cuban Peso (CUP)</td><td>North America</td></tr>
+                        <tr><td>Curacao</td><td>Netherlands Antillean Guilder (ANG)</td><td>North America</td></tr>
+                        <tr><td>Cyprus</td><td>Euro (EUR)</td><td>Europe</td></tr>
+                        <tr><td>Czechia</td><td>Czech Koruna (CZK)</td><td>Europe</td></tr>
+                        <tr><td>Denmark</td><td>Danish Krone (DKK)</td><td>Europe</td></tr>
+                        <tr><td>Djibouti</td><td>Djiboutian Franc (DJF)</td><td>Africa</td></tr>
+                        <tr><td>Dominican Republic</td><td>Dominican Peso (DOP)</td><td>North America</td></tr>
                         <!-- More countries would be listed here -->
                     </tbody>
                 </table>
             </section>
         </div>
-    </div>
-    
-    <footer>
-        Data source: Henley Passport Index, February 4, 2025.<br>
-        © 2025 by Henley & Partners. All rights reserved.
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const visaFreeTable = document.getElementById('visaFreeTable').getElementsByTagName('tbody')[0];
-            const visaRequiredTable = document.getElementById('visaRequiredTable').getElementsByTagName('tbody')[0];
+        
+        <!-- Statistics Section -->
+        <section class="statistics">
+            <div class="section-title">
+                <h3>Visa Statistics</h3>
+                <p>Key statistics about Pakistan passport visa requirements worldwide</p>
+            </div>
             
-            const visaFreeCells = visaFreeTable.getElementsByTagName('td');
-            const visaRequiredCells = visaRequiredTable.getElementsByTagName('td');
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">32</div>
+                    <div class="stat-label">Visa-Free Countries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">194</div>
+                    <div class="stat-label">Visa-Required Countries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">14%</div>
+                    <div class="stat-label">World Accessibility</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">92</div>
+                    <div class="stat-label">Global Rank</div>
+                </div>
+            </div>
             
-            searchInput.addEventListener('keyup', function() {
-                const searchTerm = searchInput.value.toLowerCase();
-                
-                // Search visa-free countries
-                Array.from(visaFreeCells).forEach(function(cell) {
-                    const row = cell.parentElement;
-                    const text = cell.textContent.toLowerCase();
-                    
-                    if (text.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-                
-                // Search visa-required countries
-                Array.from(visaRequiredCells).forEach(function(cell) {
-                    const row = cell.parentElement;
-                    const text = cell.textContent.toLowerCase();
-                    
-                    if (text.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+            <!-- Chart -->
+            <div class="chart-container">
+                <h4 style="text-align: center; margin-bottom: 20px; color: var(--primary);">Continental Distribution of Visa-Free Access</h4>
+                <canvas id="visaChart" width="100%" height="60"></canvas>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="info-section">
+            <div class="section-title">
+                <h3>Useful Information</h3>
+                <p>Resources and guides for Pakistani passport holders</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Visa Application Process</h4>
+                    <p>Learn about the standard visa application procedures for different countries, required documents, and processing times.</p>
+                    <a href="#" class="info-btn">Read More</a>
+                </div>
+                <div class="info-card">
+                    <h4>Travel Insurance</h4>
+                    <p>Information about essential travel insurance options for Pakistani citizens traveling abroad, including coverage requirements.</p>
+                    <a href="#" class="info-btn
