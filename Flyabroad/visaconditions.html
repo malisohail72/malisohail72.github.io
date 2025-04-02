@@ -8,6 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pakistan Visa Requirements</title>
     <style>
+
+
+    
+    .visa-on-arrival .table-header {
+        background-color: #e67e22;
+        color: var(--light);
+    }
+
+    
+    .visa-on-arrival table tr:nth-child(even) {
+        background-color: var(--visa-on-arrival-color);
+    }
+
+   
+    
+    
+    
+    
         :root {
             --primary: #005e54;
             --secondary: #01796f;
@@ -17,6 +35,8 @@
             --border-color: #e0e0e0;
             --visa-free-color: #e6f2e6;
             --visa-required-color: #f9e6e6;
+            --visa-on-arrival-color: #fff3e6;
+   
         }
         
         * {
@@ -621,7 +641,65 @@
                     </tbody>
                 </table>
             </section>
-            
+   
+            <!-- Inside the container div, after the statistics section -->
+
+
+
+
+        <!-- Tables -->
+        <div class="table-container">
+            <section class="table-section visa-free">
+                <div class="table-header">Visa-Free Destinations (32)</div>
+                <table id="visaFreeTable">
+                    <!-- Existing visa-free table content -->
+                </table>
+            </section>
+
+            <!-- New Visa on Arrival Table -->
+            <section class="table-section visa-on-arrival">
+                <div class="table-header">Visa On Arrival (15)</div>
+                <table id="visaOnArrivalTable">
+                    <thead>
+                        <tr>
+                            <th>Country/Territory</th>
+                            <th>Currency</th>
+                            <th>Continent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Bahrain</td><td>Bahraini Dinar (BHD)</td><td>Asia</td></tr>
+                        <tr><td>Burundi</td><td>Burundian Franc (BIF)</td><td>Africa</td></tr>
+                        <tr><td>Cambodia</td><td>Cambodian Riel (KHR)</td><td>Asia</td></tr>
+                        <tr><td>Comoros</td><td>Comorian Franc (KMF)</td><td>Africa</td></tr>
+                        <tr><td>Ethiopia</td><td>Ethiopian Birr (ETB)</td><td>Africa</td></tr>
+                        <tr><td>Guinea-Bissau</td><td>West African CFA Franc (XOF)</td><td>Africa</td></tr>
+                        <tr><td>Jordan</td><td>Jordanian Dinar (JOD)</td><td>Asia</td></tr>
+                        <tr><td>Laos</td><td>Lao Kip (LAK)</td><td>Asia</td></tr>
+                        <tr><td>Lebanon</td><td>Lebanese Pound (LBP)</td><td>Asia</td></tr>
+                        <tr><td>Maldives</td><td>Maldivian Rufiyaa (MVR)</td><td>Asia</td></tr>
+                        <tr><td>Mauritania</td><td>Mauritanian Ouguiya (MRU)</td><td>Africa</td></tr>
+                        <tr><td>Mozambique</td><td>Mozambican Metical (MZN)</td><td>Africa</td></tr>
+                        <tr><td>Palestine</td><td>Israeli Shekel (ILS)</td><td>Asia</td></tr>
+                        <tr><td>Somalia</td><td>Somali Shilling (SOS)</td><td>Africa</td></tr>
+                        <tr><td>Zambia</td><td>Zambian Kwacha (ZMW)</td><td>Africa</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="table-section visa-required">
+                <!-- Existing visa-required table content -->
+            </section>
+        </div>
+
+
+                    
+                            
+                                    
+                                            
+                                                    
+                                                            
+                                                                             
             <section class="table-section visa-required">
                 <div class="table-header">Visa-Required Destinations (194)</div>
                 <table id="visaRequiredTable">
