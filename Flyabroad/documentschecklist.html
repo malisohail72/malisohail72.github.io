@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistani Citizen Document Checklist</title>
+    <style>
+        .card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        #checklist {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #checklist ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #checklist li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="dropdown">
+            <label for="purpose">Select Purpose:</label>
+            <select id="purpose">
+                <option value="">--Select--</option>
+                <option value="study">Study</option>
+                <option value="tourism">Tourism</option>
+                <option value="business">Business</option>
+                <option value="investment">Investment</option>
+                <option value="religious">Religious</option>
+                <option value="medical">Medical</option>
+                <option value="others">Others</option>
+            </select>
+        </div>
+
+        <div id="checklist">
+            <ul>
+                </ul>
+        </div>
+    </div>
+
+    <script>
+        const purposeSelect = document.getElementById('purpose');
+        const checklistDiv = document.getElementById('checklist').querySelector('ul');
+
+        const checklists = {
+            study: [
+                "Passport (Valid)",
+                "Visa Application Form",
+                "Acceptance Letter from Educational Institution",
+                "Academic Certificates/Degrees",
+                "Financial Proof (Bank Statements)",
+                "NOC from HEC (if applicable)",
+                "CNIC Copy"
+
+            ],
+            tourism: [
+                "Passport (Valid)",
+                "Visa Application Form",
+                "Travel Itinerary",
+                "Hotel Reservations",
+                "Financial Proof (Bank Statements)",
+                "CNIC Copy",
+                "Return Ticket"
+            ],
+            business: [
+                "Passport (Valid)",
+                "Visa Application Form",
+                "Invitation Letter from Business Partner",
+                "Business Registration Documents",
+                "Financial Proof (Company/Personal)",
+                "NOC from Relevant Chamber of Commerce",
+                "CNIC Copy"
+            ],
+            investment: [
+              "Passport (Valid)",
+              "Visa Application Form",
+              "Investment Plan/Proposal",
+              "Financial Proof (Investment Funds)",
+              "Company Registration Documents (If Applicable)",
+              "NOC from Board of Investment (if applicable)",
+              "CNIC Copy"
+            ],
+            religious: [
+              "Passport (Valid)",
+              "Visa Application Form",
+              "Invitation Letter from Religious Organization",
+              "Proof of Religious Affiliation (If Required)",
+              "Financial Proof (Travel and Stay)",
+              "CNIC Copy"
+            ],
+            medical: [
+              "Passport (Valid)",
+              "Visa Application Form",
+              "Medical Report from Doctor",
+              "Invitation Letter from Hospital/Clinic",
+              "Financial Proof (Treatment and Stay)",
+              "CNIC Copy",
+              "NOC from Ministry of Health (if needed)"
+            ],
+            others: [
+                "Passport (Valid)",
+                "Visa Application Form",
+                "Relevant Supporting Documents",
+                "Financial Proof (Bank Statements)",
+                "CNIC Copy",
+                "Any other documents requested by the embassy."
+            ]
+        };
+
+        purposeSelect.addEventListener('change', function() {
+            const selectedPurpose = this.value;
+            checklistDiv.innerHTML = ''; // Clear previous checklist
+
+            if (selectedPurpose && checklists[selectedPurpose]) {
+                checklists[selectedPurpose].forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item;
+                    checklistDiv.appendChild(listItem);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
