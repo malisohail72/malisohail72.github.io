@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,7 @@
             --accent: #f8f9fa;
             --text: #333333;
             --light: #ffffff;
+            --border-color: #e0e0e0;
         }
         
         * {
@@ -62,6 +62,8 @@
         .logo h1 {
             font-size: 24px;
             color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         
         .nav-links {
@@ -98,17 +100,61 @@
             color: white;
         }
         
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin: 0 10px;
+            color: #777;
+        }
+        
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('/api/placeholder/1200/600') no-repeat center center/cover;
             color: white;
             padding: 100px 0;
             text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .hero h2 {
             font-size: 42px;
             margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .hero p {
@@ -125,11 +171,13 @@
             border-radius: 5px;
             font-weight: 600;
             text-decoration: none;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .hero-cta:hover {
             transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
         /* Services Section */
@@ -147,6 +195,19 @@
             font-size: 32px;
             color: var(--primary);
             margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
         }
         
         .section-title p {
@@ -167,6 +228,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
         }
         
         .service-card:hover {
@@ -185,6 +247,7 @@
             justify-content: center;
             color: white;
             font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0, 94, 84, 0.2);
         }
         
         .service-content {
@@ -196,6 +259,23 @@
             font-size: 22px;
             margin-bottom: 15px;
             color: var(--primary);
+        }
+        
+        .service-btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            margin-top: 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .service-btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
         }
         
         /* Destinations Section */
@@ -215,6 +295,8 @@
             border-radius: 10px;
             overflow: hidden;
             height: 300px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
         
         .destination-card img {
@@ -243,6 +325,23 @@
             margin-bottom: 5px;
         }
         
+        .explore-btn {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .explore-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
         /* Testimonials Section */
         .testimonials {
             padding: 80px 0;
@@ -257,6 +356,7 @@
             margin: 40px auto;
             max-width: 800px;
             position: relative;
+            border: 1px solid var(--border-color);
         }
         
         .testimonial-card::before {
@@ -283,6 +383,7 @@
             height: 60px;
             border-radius: 50%;
             margin-right: 15px;
+            border: 3px solid var(--secondary);
         }
         
         .author-info h5 {
@@ -294,81 +395,82 @@
             color: #666;
         }
         
-        /* Contact Section */
-        .contact {
-            padding: 80px 0;
+        .testimonial-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
         }
         
-        .contact-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contact-info h4 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 94, 84, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--primary);
-        }
-        
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        textarea.form-control {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
+        .testimonial-btn a {
+            display: inline-block;
             background-color: var(--primary);
             color: white;
-            border: none;
-            padding: 12px 25px;
+            padding: 10px 25px;
             border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
+            text-decoration: none;
+            font-weight: 500;
             transition: background-color 0.3s;
         }
         
-        .submit-btn:hover {
+        .testimonial-btn a:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Resources Section (Replacement for Contact) */
+        .resources {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            background-color: var(--accent);
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .resource-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .resource-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .resource-desc {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .resource-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .resource-btn:hover {
             background-color: var(--secondary);
         }
         
@@ -377,6 +479,7 @@
             background-color: var(--primary);
             color: white;
             padding: 50px 0 20px;
+            border-top: 5px solid var(--secondary);
         }
         
         .footer-content {
@@ -445,6 +548,14 @@
             .section-title h3 {
                 font-size: 28px;
             }
+            
+            .breadcrumb {
+                padding: 8px 0;
+            }
+            
+            .breadcrumb-links a, .breadcrumb-links .current {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -454,7 +565,7 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    /* logo here. */
+                    <!-- logo here. -->
                     <h1>Fly Abroad</h1>
                 </div>
                 <ul class="nav-links">
@@ -462,12 +573,24 @@
                     <li><a href="#services">Browse Services</a></li>
                     <li><a href="#destinations">Your Ideal Destination</a></li>
                     <li><a href="#testimonials">Our Success Stories</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#resources">Resources</a></li>
                     <li><a href="#" class="cta-button">Free Consultation</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><span class="current">Immigration Guide</span></li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -489,8 +612,9 @@
                 <div class="service-card">
                     <div class="service-icon">✓</div>
                     <div class="service-content">
-                        <h4> Perfect Destination Picker </h4>
+                        <h4>Perfect Destination Picker</h4>
                         <p>Expert guidance on immigration pathways including work, study, business, and family sponsorship visas for various countries.</p>
+                        <a href="#" class="service-btn">Find Your Match</a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -498,6 +622,7 @@
                     <div class="service-content">
                         <h4>Document Checklist</h4>
                         <p>Professional assistance with application forms, document verification, translations, and submission procedures.</p>
+                        <a href="#" class="service-btn">Get Checklist</a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -505,6 +630,7 @@
                     <div class="service-content">
                         <h4>Education Pathways</h4>
                         <p>Comprehensive support for students seeking admission to international universities with scholarship guidance.</p>
+                        <a href="#" class="service-btn">Explore Options</a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -512,6 +638,7 @@
                     <div class="service-content">
                         <h4>Job Placement</h4>
                         <p>Career counseling, resume building, and connections with employers in your destination country.</p>
+                        <a href="#" class="service-btn">Find Jobs</a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -519,6 +646,7 @@
                     <div class="service-content">
                         <h4>Settlement Services</h4>
                         <p>Assistance with housing, banking, healthcare, and other essential services in your new country.</p>
+                        <a href="#" class="service-btn">Learn More</a>
                     </div>
                 </div>
                 <div class="service-card">
@@ -526,6 +654,7 @@
                     <div class="service-content">
                         <h4>Family Immigration</h4>
                         <p>Specialized services for family sponsorship, spouse visas, and reunification programs.</p>
+                        <a href="#" class="service-btn">Family Plans</a>
                     </div>
                 </div>
             </div>
@@ -545,6 +674,7 @@
                     <div class="destination-overlay">
                         <h4>Canada</h4>
                         <p>Express Entry, Provincial Nominees</p>
+                        <a href="#" class="explore-btn">Explore Options</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -552,6 +682,7 @@
                     <div class="destination-overlay">
                         <h4>Australia</h4>
                         <p>Skilled Migration, Study Pathways</p>
+                        <a href="#" class="explore-btn">Explore Options</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -559,6 +690,7 @@
                     <div class="destination-overlay">
                         <h4>United Kingdom</h4>
                         <p>Work Visas, High Potential Visas</p>
+                        <a href="#" class="explore-btn">Explore Options</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -566,6 +698,7 @@
                     <div class="destination-overlay">
                         <h4>Germany</h4>
                         <p>EU Blue Card, Skilled Worker Visa</p>
+                        <a href="#" class="explore-btn">Explore Options</a>
                     </div>
                 </div>
             </div>
@@ -581,18 +714,6 @@
             </div>
             <div class="testimonial-card">
                 <div class="testimonial-content">
-                    <p>Global Horizons made my dream of working in Canada a reality. From helping me with the Express Entry application to finding my first apartment in Toronto, they were with me every step of the way. Their expertise saved me months of research and prevented costly mistakes.</p>
-                </div>
-                <div class="testimonial-author">
-                    <img src="/api/placeholder/60/60" alt="Ahmed Khan">
-                    <div class="author-info">
-                        <h5>Ahmed Khan</h5>
-                        <p>Software Engineer, Toronto</p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">
                     <p>As a doctor looking to continue my practice in Australia, I was overwhelmed by the complex registration process. The team at Global Horizons guided me through every requirement and helped me secure a position at a hospital in Melbourne. My family and I couldn't be happier with our new life.</p>
                 </div>
                 <div class="testimonial-author">
@@ -602,76 +723,38 @@
                         <p>Physician, Melbourne</p>
                     </div>
                 </div>
+                <div class="testimonial-btn">
+                    <a href="#">Read Full Story</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- Resources Section (Replacement for Contact) -->
+    <section class="resources" id="resources">
         <div class="container">
             <div class="section-title">
-                <h3>Contact Us</h3>
-                <p>Ready to start your journey? Get in touch with our expert consultants for personalized guidance.</p>
+                <h3>Helpful Resources</h3>
+                <p>Access our free tools and guides to help plan your immigration journey and make informed decisions.</p>
             </div>
-            <div class="contact-flex">
-                <div class="contact-info">
-                    <h4>Our Information</h4>
-                    <div class="contact-detail">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <p>Office 501, Al-Hafeez Heights,</p>
-                            <p>Gulberg III, Lahore, Pakistan</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <p>+92 42 35880001</p>
-                            <p>+92 300 1234567</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <div class="contact-icon">✉️</div>
-                        <div>
-                            <p>info@globalhorizons.pk</p>
-                            <p>support@globalhorizons.pk</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <div class="contact-icon">⏰</div>
-                        <div>
-                            <p>Monday - Saturday</p>
-                            <p>9:00 AM - 6:00 PM</p>
-                        </div>
-                    </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h4 class="resource-title">Visa Points Calculator</h4>
+                    <p class="resource-desc">Estimate your eligibility score for different immigration programs and find out where you stand.</p>
+                    <a href="#" class="resource-btn">Calculate Points</a>
                 </div>
-                <div class="contact-form">
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-control" placeholder="Your Phone">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" required>
-                                <option value="" disabled selected>Interested In</option>
-                                <option value="work-visa">Work Visa</option>
-                                <option value="study-visa">Study Visa</option>
-                                <option value="business-visa">Business Migration</option>
-                                <option value="family-visa">Family Sponsorship</option>
-                                <option value="settlement">Settlement Services</option>
-                                <option value="other">Other Services</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+                <div class="resource-card">
+                    <div class="resource-icon">📝</div>
+                    <h4 class="resource-title">Immigration Guides</h4>
+                    <p class="resource-desc">Step-by-step guides for popular immigration pathways with detailed requirements and procedures.</p>
+                    <a href="#" class="resource-btn">Download Guides</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎓</div>
+                    <h4 class="resource-title">University Finder</h4>
+                    <p class="resource-desc">Search for international universities that match your academic background and career goals.</p>
+                    <a href="#" class="resource-btn">Find Universities</a>
                 </div>
             </div>
         </div>
@@ -692,7 +775,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#destinations">Destinations</a></li>
                         <li><a href="#testimonials">Success Stories</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#resources">Resources</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
