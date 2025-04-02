@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Visa Requirements</title>
+    <style>
+        :root {
+            --primary-color: #006600;
+            --secondary-color: #ffffff;
+            --accent-color: #e0e0e0;
+            --text-color: #333333;
+            --visa-free-color: #e6f2e6;
+            --visa-required-color: #f9e6e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flag {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .updated {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .table-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .table-section {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-header {
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .visa-free .table-header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+        
+        .visa-required .table-header {
+            background-color: #cc0000;
+            color: var(--secondary-color);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .visa-free table tr:nth-child(even) {
+            background-color: var(--visa-free-color);
+        }
+        
+        .visa-required table tr:nth-child(even) {
+            background-color: var(--visa-required-color);
+        }
+        
+        table tr:hover {
+            background-color: var(--accent-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #searchInput {
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .table-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats {
+                font-size: 1rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/api/placeholder/60/40" alt="Pakistan Flag" class="flag">
+            <h1>Pakistan Visa Requirements</h1>
+            <div class="stats">32 Visa-Free Destinations • 194 Visa-Required Destinations</div>
+            <div class="updated">Last Updated: February 4, 2025</div>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for a country...">
+        </div>
+        
+        <div class="table-container">
+            <section class="table-section visa-free">
+                <div class="table-header">Visa-Free Destinations (32)</div>
+                <table id="visaFreeTable">
+                    <thead>
+                        <tr>
+                            <th>Country/Territory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Dominica</td></tr>
+                        <tr><td>Haiti</td></tr>
+                        <tr><td>Macao (SAR China)</td></tr>
+                        <tr><td>Maldives</td></tr>
+                        <tr><td>Micronesia</td></tr>
+                        <tr><td>Montserrat</td></tr>
+                        <tr><td>Nepal</td></tr>
+                        <tr><td>Niue</td></tr>
+                        <tr><td>Palau Islands</td></tr>
+                        <tr><td>Samoa</td></tr>
+                        <tr><td>Seychelles</td></tr>
+                        <tr><td>Somalia</td></tr>
+                        <tr><td>St. Helena</td></tr>
+                        <tr><td>St. Kitts and Nevis</td></tr>
+                        <tr><td>St. Vincent and the Grenadines</td></tr>
+                        <tr><td>The Gambia</td></tr>
+                        <tr><td>Timor-Leste</td></tr>
+                        <tr><td>Trinidad and Tobago</td></tr>
+                        <tr><td>Tunisia</td></tr>
+                        <tr><td>Tuvalu</td></tr>
+                        <tr><td>Uganda</td></tr>
+                        <tr><td>Vanuatu</td></tr>
+                        <tr><td>Cambodia</td></tr>
+                        <tr><td>Cape Verde Islands</td></tr>
+                        <tr><td>Comoro Islands</td></tr>
+                        <tr><td>Cook Islands</td></tr>
+                        <tr><td>Côte d'Ivoire</td></tr>
+                        <tr><td>Fiji</td></tr>
+                        <tr><td>Kenya</td></tr>
+                        <tr><td>Madagascar</td></tr>
+                        <tr><td>Malaysia</td></tr>
+                        <tr><td>Mauritania</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="table-section visa-required">
+                <div class="table-header">Visa-Required Destinations (194)</div>
+                <table id="visaRequiredTable">
+                    <thead>
+                        <tr>
+                            <th>Country/Territory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Afghanistan</td></tr>
+                        <tr><td>Albania</td></tr>
+                        <tr><td>Algeria</td></tr>
+                        <tr><td>American Samoa</td></tr>
+                        <tr><td>Andorra</td></tr>
+                        <tr><td>Angola</td></tr>
+                        <tr><td>Anguilla</td></tr>
+                        <tr><td>Antigua and Barbuda</td></tr>
+                        <tr><td>Argentina</td></tr>
+                        <tr><td>Armenia</td></tr>
+                        <tr><td>Aruba</td></tr>
+                        <tr><td>Australia</td></tr>
+                        <tr><td>Austria</td></tr>
+                        <tr><td>Azerbaijan</td></tr>
+                        <tr><td>Bahamas</td></tr>
+                        <tr><td>Bahrain</td></tr>
+                        <tr><td>Bangladesh</td></tr>
+                        <tr><td>Barbados</td></tr>
+                        <tr><td>Belarus</td></tr>
+                        <tr><td>Belgium</td></tr>
+                        <tr><td>Belize</td></tr>
+                        <tr><td>Benin</td></tr>
+                        <tr><td>Bermuda</td></tr>
+                        <tr><td>Bhutan</td></tr>
+                        <tr><td>Bolivia</td></tr>
+                        <tr><td>Bonaire, St. Eustatius and Saba</td></tr>
+                        <tr><td>Bosnia and Herzegovina</td></tr>
+                        <tr><td>Botswana</td></tr>
+                        <tr><td>Brazil</td></tr>
+                        <tr><td>British Virgin Islands</td></tr>
+                        <tr><td>Brunei</td></tr>
+                        <tr><td>Bulgaria</td></tr>
+                        <tr><td>Burkina Faso</td></tr>
+                        <tr><td>Burundi</td></tr>
+                        <tr><td>Cameroon</td></tr>
+                        <tr><td>Canada</td></tr>
+                        <tr><td>Cayman Islands</td></tr>
+                        <tr><td>Central African Republic</td></tr>
+                        <tr><td>Chad</td></tr>
+                        <tr><td>Chile</td></tr>
+                        <tr><td>China</td></tr>
+                        <tr><td>Colombia</td></tr>
+                        <tr><td>Congo (Dem. Rep.)</td></tr>
+                        <tr><td>Congo (Rep.)</td></tr>
+                        <tr><td>Costa Rica</td></tr>
+                        <tr><td>Croatia</td></tr>
+                        <tr><td>Cuba</td></tr>
+                        <tr><td>Curacao</td></tr>
+                        <tr><td>Cyprus</td></tr>
+                        <tr><td>Czechia</td></tr>
+                        <tr><td>Denmark</td></tr>
+                        <tr><td>Djibouti</td></tr>
+                        <tr><td>Dominican Republic</td></tr>
+                        <!-- More countries would be listed here -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        Data source: Henley Passport Index, February 4, 2025.<br>
+        © 2025 by Henley & Partners. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const visaFreeTable = document.getElementById('visaFreeTable').getElementsByTagName('tbody')[0];
+            const visaRequiredTable = document.getElementById('visaRequiredTable').getElementsByTagName('tbody')[0];
+            
+            const visaFreeCells = visaFreeTable.getElementsByTagName('td');
+            const visaRequiredCells = visaRequiredTable.getElementsByTagName('td');
+            
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                // Search visa-free countries
+                Array.from(visaFreeCells).forEach(function(cell) {
+                    const row = cell.parentElement;
+                    const text = cell.textContent.toLowerCase();
+                    
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Search visa-required countries
+                Array.from(visaRequiredCells).forEach(function(cell) {
+                    const row = cell.parentElement;
+                    const text = cell.textContent.toLowerCase();
+                    
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
