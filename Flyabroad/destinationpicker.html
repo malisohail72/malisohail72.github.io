@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Destination Picker (Simplified)</title>
+</head>
+<body>
+
+<h1>Perfect Destination Picker (Simplified Guidance)</h1>
+<p><strong>Disclaimer:</strong> This tool provides very general suggestions based on common immigration criteria for Pakistani nationals. It is NOT a substitute for professional immigration advice. Laws and requirements change frequently. Always consult official government websites and registered immigration consultants/lawyers for accurate, up-to-date information specific to your situation.</p>
+
+<form id="immigrationForm">
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" required><br><br>
+
+    <label for="maritalStatus">Marital Status:</label><br>
+    <select id="maritalStatus" name="maritalStatus" required>
+        <option value="">--Select--</option>
+        <option value="single">Single</option>
+        <option value="married">Married</option>
+        <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="education">Highest Education Level:</label><br>
+    <select id="education" name="education" required>
+        <option value="">--Select--</option>
+        <option value="highschool">High School / Intermediate</option>
+        <option value="diploma">Diploma / Associate Degree</option>
+        <option value="bachelors">Bachelor's Degree (16 years)</option>
+        <option value="masters">Master's Degree (18 years)</option>
+        <option value="phd">PhD</option>
+    </select><br><br>
+
+    <label for="workExperience">Years of Skilled Work Experience:</label><br>
+    <input type="number" id="workExperience" name="workExperience" min="0" required><br><br>
+
+     <label for="fieldOfWork">Field of Work/Study:</label><br>
+    <input type="text" id="fieldOfWork" name="fieldOfWork" placeholder="e.g., Software Engineering, Medicine, Accounting" required><br><br>
+
+    <label for="bankStatement">Approximate Bank Statement Balance (PKR):</label><br>
+    <input type="number" id="bankStatement" name="bankStatement" min="0" required><br>
+    <small>Enter amount in Pakistani Rupees (e.g., 5000000 for 5 Million PKR)</small><br><br>
+
+    <label for="pathway">Desired Immigration Pathway:</label><br>
+    <select id="pathway" name="pathway" required>
+        <option value="">--Select--</option>
+        <option value="work">Skilled Work / Permanent Residence</option>
+        <option value="study">Study Permit / Student Visa</option>
+        <option value="business">Business / Investor Visa</option>
+        <option value="family">Family Sponsorship</option>
+    </select><br><br>
+
+    <label for="ielts">English Proficiency (IELTS Overall Score - if taken):</label><br>
+    <input type="number" id="ielts" name="ielts" step="0.5" min="0" max="9"><br>
+    <small>Leave blank if not taken. Crucial for many work/study paths in English-speaking countries.</small><br><br>
+
+    <button type="button" onclick="getSuggestions()">Get Destination Suggestions</button>
+</form>
+
+<hr>
+<h2>Suggestions:</h2>
+<div id="results">
+    Please fill out the form and click the button above.
+</div>
+
+<script>
+    function getSuggestions() {
+        // --- Get Input Values ---
+        const age = parseInt(document.getElementById('age').value) || 0;
+        const maritalStatus = document.getElementById('maritalStatus').value;
+        const education = document.getElementById('education').value;
+        const workExperience = parseInt(document.getElementById('workExperience').value) || 0;
+        const fieldOfWork = document.getElementById('fieldOfWork').value.trim().toLowerCase();
+        const bankStatementPKR = parseInt(document.getElementById('bankStatement').value) || 0;
+        const pathway = document.getElementById('pathway').value;
+        const ielts = parseFloat(document.getElementById('ielts').value) || 0;
+
+        let suggestions = "<h3>Based on your input (General Guidance Only):</h3><ul>";
+        let potentialCountries = []; // To avoid duplicate suggestions
+
+        // --- Basic Logic ---
+
+        // **Pathway: Family Sponsorship**
+        if (pathway === 'family') {
+            suggestions += "<li><strong>Family Sponsorship:</strong> Eligibility primarily depends on having a qualifying relative (spouse, parent, child, sometimes sibling) who is a citizen or permanent resident of the destination country and meets sponsorship requirements (income, status etc.). The process varies significantly by country. <strong>Action:</strong> Identify countries where you have eligible family sponsors and check their specific government immigration websites for family class visa requirements.</li>";
+        }
+
+        // **Pathway: Study**
+        if (pathway === 'study') {
+            suggestions += "<li><strong>Study Pathway:</strong> Requires admission to a designated learning institution (DLI) in the destination country. Key factors include:<ul>";
+            suggestions += "<li><strong>Proof of Funds:</strong> You indicated approx. PKR " + bankStatementPKR.toLocaleString() + ". This is CRUCIAL. Calculate if this meets the tuition + living expenses requirements for your target country/program (often PKR 5-10 Million+ per year for popular destinations like Canada, Australia, UK, USA). Research specific country requirements carefully.</li>";
+            if (ielts >= 6.0) {
+                 suggestions += "<li>Your IELTS score (" + ielts + ") is generally helpful for English-speaking countries. Some may require higher scores (6.5+).</li>";
+            } else {
+                 suggestions += "<li>English Proficiency (IELTS/TOEFL/PTE) is usually mandatory for English-speaking countries. Aim for 6.0-6.5+ overall.</li>";
+            }
+            suggestions += "<li>Your education level ('" + education + "') determines the level of study you can pursue (e.g., Bachelor's -> Master's).</li>";
+            suggestions += "<li><strong>Potential Destinations:</strong> Consider Canada, Australia, UK, USA, Germany (often lower tuition but requires German proficiency/proof of funds), Malaysia, Turkey. Research specific university requirements and visa processes.</li></ul></li>";
+            if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
+            if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
+            if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
+            if (!potentialCountries.includes("Germany")) potentialCountries.push("Germany");
+            if (!potentialCountries.includes("Malaysia")) potentialCountries.push("Malaysia");
+        }
+
+        // **Pathway: Skilled Work / PR**
+        if (pathway === 'work') {
+             suggestions += "<li><strong>Skilled Work / PR Pathway:</strong> Often uses points-based systems. Key factors include:<ul>";
+             suggestions += "<li><strong>Age:</strong> Ages between 25-35 often score highest in points systems, but older applicants can still qualify.</li>";
+             suggestions += "<li><strong>Education:</strong> Higher education ('" + education + "') generally yields more points. Master's/PhD are highly valued. Foreign credential assessment is usually required.</li>";
+             suggestions += "<li><strong>Work Experience:</strong> " + workExperience + " years in a skilled occupation ('" + fieldOfWork + "') is vital. Longer experience in an in-demand field increases chances. Check official occupation lists (e.g., Canada's NOC, Australia's Skilled Occupation List).</li>";
+             if (ielts >= 6.0) {
+                 suggestions += "<li>Your IELTS score (" + ielts + ") is essential. Aim for CLB 7+ (IELTS 6.0+) for Canada's Express Entry, or 7.0-8.0+ for higher points. Australia also requires high scores (e.g., 'Proficient' or 'Superior' English).</li>";
+             } else {
+                  suggestions += "<li>High English Proficiency (IELTS/PTE) is CRITICAL for points. Without a good score (typically 6.0+, often 7.0+ needed), chances are significantly lower for Canada/Australia/UK.</li>";
+             }
+             suggestions += "<li><strong>Settlement Funds:</strong> Required by some countries (e.g., Canada Express Entry). Your bank balance (PKR " + bankStatementPKR.toLocaleString() + ") needs to meet their specific requirements.</li>";
+             suggestions += "<li><strong>Potential Destinations:</strong> Canada (Express Entry, Provincial Nominee Programs), Australia (Skilled Independent/Nominated visas), Germany (Job Seeker Visa, EU Blue Card - check language/degree recognition), UK (Skilled Worker visa - requires job offer).</li></ul></li>";
+             if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
+             if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
+             if (!potentialCountries.includes("Germany")) potentialCountries.push("Germany");
+             if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
+        }
+
+        // **Pathway: Business / Investor**
+         if (pathway === 'business') {
+             suggestions += "<li><strong>Business/Investor Pathway:</strong> Typically requires significant capital investment, a viable business plan, and sometimes business management experience.<ul>";
+             suggestions += "<li><strong>Investment Amount:</strong> Minimum investments vary drastically by country and program (ranging from ~$100,000 USD equivalent to millions). Your stated balance (PKR " + bankStatementPKR.toLocaleString() + ") needs to be evaluated against specific program requirements. Many popular investor visas require substantially higher amounts.</li>";
+             suggestions += "<li><strong>Business Plan & Experience:</strong> A strong, well-researched business plan and relevant experience are crucial.</li>";
+             suggestions += "<li><strong>Potential Destinations (High Investment Usually Required):</strong> USA (EB-5), Canada (Start-up Visa, Provincial Entrepreneur Programs), UK (Innovator Founder Visa), Australia (Business Innovation and Investment Program), Portugal (Golden Visa - check current status/options), UAE (Golden Visa - specific criteria). Research VERY carefully.</li></ul></li>";
+             if (!potentialCountries.includes("USA")) potentialCountries.push("USA");
+             if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
+             if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
+             if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
+             if (!potentialCountries.includes("Portugal")) potentialCountries.push("Portugal");
+             if (!potentialCountries.includes("UAE")) potentialCountries.push("UAE");
+         }
+
+
+        // --- General Notes & Disclaimer ---
+        suggestions += "</ul>"; // Close the main list
+
+        suggestions += "<hr><h3>General Recommendations & Next Steps:</h3><ul>";
+        if (potentialCountries.length > 0) {
+            suggestions += "<li>Based on your profile, countries like <strong>" + potentialCountries.join(", ") + "</strong> might have relevant programs. <strong>Thoroughly research the OFFICIAL immigration websites for each.</strong></li>";
+        } else if (pathway !== 'family') {
+             suggestions += "<li>Based on the selected pathway, further research into specific country requirements is needed. Start with countries known for that pathway (e.g., Canada/Australia for skilled work, UK/USA/Canada/Australia for study).</li>";
+        }
+
+        if (pathway !== 'family' && ielts < 6.0) {
+             suggestions += "<li><strong>Improve English Proficiency:</strong> If targeting English-speaking countries for work or study, achieving a high score on IELTS (General or Academic), PTE Academic, or TOEFL is often essential. Aim for scores required by your target programs/visas.</li>";
+        }
+         suggestions += "<li><strong>Financial Planning:</strong> Immigration involves significant costs (application fees, medical exams, travel, settlement funds, tuition). Ensure your finances (PKR " + bankStatementPKR.toLocaleString() + ") align with the requirements of your chosen path and country. Convert PKR to the destination currency to check sufficiency.</li>";
+         suggestions += "<li><strong>Credential Assessment:</strong> For work or sometimes study pathways, you'll likely need your Pakistani educational qualifications assessed by a designated body in the destination country (e.g., WES for Canada/USA).</li>";
+         suggestions += "<li><strong>Field of Work:</strong> Research if your field ('" + fieldOfWork + "') is in demand in potential destination countries. Check official occupation lists.</li>";
+         suggestions += "<li><strong>Consult Professionals:</strong> Consider consulting with a registered/licensed immigration consultant or lawyer specializing in your target country for personalized advice. Be wary of unlicensed agents promising guarantees.</li>";
+         suggestions += "<li><strong>OFFICIAL SOURCES ARE KEY:</strong> Always rely on information from the official government immigration websites of the countries you are interested in.</li>";
+         suggestions += "</ul>";
+
+        suggestions += "<p><strong>Remember the Disclaimer: This is simplified guidance, not expert legal advice. Verify all information independently.</strong></p>";
+
+        document.getElementById('results').innerHTML = suggestions;
+    }
+</script>
+
+</body>
+</html>
