@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Nomad Visa Calculator</title>
+    <style>
+        /* Similar Styling - Not the exact CSS */
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--accent); /* Similar to the services section */
+            padding: 40px 0;
+        }
+
+        .calculator-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background-color: var(--light); /* Similar to card backgrounds */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Similar to card shadows */
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary); /* Similar to section titles */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .calculate-button {
+            background-color: var(--primary); /* Similar to primary buttons */
+            color: var(--light);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .calculate-button:hover {
+            background-color: var(--secondary); /* Similar to hover effect */
+        }
+
+        .results-container {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--accent); /* Light background for results */
+        }
+
+        .results-container h3 {
+            color: var(--secondary); /* Similar to secondary headings */
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary); /* Subtle divider */
+            padding-bottom: 5px;
+        }
+
+        .country-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .country-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee; /* Light divider for list items */
+        }
+
+        .country-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Guidance text */
+        .guidance {
+            color: #666;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h2>Digital Nomad Visa Eligibility</h2>
+        <div class="input-group">
+            <label for="monthly-earnings">Monthly Earnings (USD):</label>
+            <input type="number" id="monthly-earnings" placeholder="e.g., 3000">
+        </div>
+        <div class="input-group">
+            <label for="savings">Savings (USD):</label>
+            <input type="number" id="savings" placeholder="e.g., 10000">
+        </div>
+        <button class="calculate-button" onclick="calculateEligibility()">Check Eligibility</button>
+
+        <div class="results-container" id="results">
+            </div>
+    </div>
+
+    <script>
+        function calculateEligibility() {
+            const monthlyEarnings = parseFloat(document.getElementById('monthly-earnings').value);
+            const savings = parseFloat(document.getElementById('savings').value);
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            // Digital Nomad Visa Requirements (Example Data - Please verify actual requirements)
+            const visaRequirements = {
+                "No Income Requirement": [
+                    { country: "Georgia", notes: "Generally requires proof of sufficient funds" },
+                    { country: "Mexico", notes: "Temporary Resident Visa might be an option with proof of funds" }
+                ],
+                "Low Requirement (e.g., < $2,000/month)": [
+                    { country: "Costa Rica", requirement: 2500, duration: "Per month" },
+                    { country: "Colombia", requirement: 3000, duration: "Per month" }
+                ],
+                "Moderate Requirement (e.g., $2,000 - $4,000/month)": [
+                    { country: "Portugal", requirement: 3250, duration: "Per month" },
+                    { country: "Spain", requirement: 2160, duration: "Per month" }
+                ],
+                "High Requirement (e.g., > $4,000/month)": [
+                    { country: "Germany", requirement: 3500, duration: "Per month (estimated)" },
+                    { country: "Estonia", requirement: 3500, duration: "Per month" }
+                ]
+            };
+
+            let guidance = "<p class='guidance'>Based on your input, here are some potential digital nomad visa options:</p>";
+            let eligibleCountries = "";
+
+            // Check for "No Income Requirement" countries
+            if (visaRequirements["No Income Requirement"].length > 0) {
+                eligibleCountries += "<h3>Countries with No Strict Income Requirement:</h3><ul class='country-list'>";
+                visaRequirements["No Income Requirement"].forEach(country => {
+                    eligibleCountries += `<li>${country.country} ${country.notes ? '(' + country.notes + ')' : ''}</li>`;
+                });
+                eligibleCountries += "</ul>";
+            }
+
+            // Check for other requirement levels
+            for (const category in visaRequirements) {
+                if (category !== "No Income Requirement") {
+                    const countriesInCategory = visaRequirements[category].filter(country => monthlyEarnings >= country.requirement);
+                    if (countriesInCategory.length > 0) {
+                        eligibleCountries += `<h3>${category}:</h3><ul class='country-list'>`;
+                        countriesInCategory.forEach(country => {
+                            eligibleCountries += `<li>${country.country} (Requires at least $${country.requirement} ${country.duration})</li>`;
+                        });
+                        eligibleCountries += "</ul>";
+                    }
+                }
+            }
+
+            if (eligibleCountries) {
+                resultsDiv.innerHTML = guidance + eligibleCountries;
+            } else {
+                resultsDiv.innerHTML = "<p>Based on your income, you might need to focus on countries with lower or no strict income requirements. Consider increasing your income or savings to explore more options.</p>";
+            }
+
+            // You can add more sophisticated logic here to consider savings as well.
+            // For example, some countries might have savings requirements in addition to monthly income.
+            if (savings > 0) {
+                let savingsGuidance = "<p class='guidance'>Your savings of $" + savings + " might also help meet the requirements for some visas. Please check the specific visa details for each country.</p>";
+                resultsDiv.innerHTML += savingsGuidance;
+            }
+        }
+    </script>
+</body>
+</html>
