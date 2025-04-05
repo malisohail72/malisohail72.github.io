@@ -3,247 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistan Immigration Pathway Calculators</title>
-    <script>
-        // --- Configuration Data (Highly Simplified Examples) ---
-        // In a real app, this data would be much more extensive and likely fetched from a database.
-        const countryData = {
-            "USA": {
-                visitVisa: { timeline: "4-12 weeks (variable)", process: "DS-160 form, Fee payment, Interview scheduling, Consular interview, Biometrics.", minBalance: 1500000 }, // PKR
-                workVisa: { timeline: "6-18 months (depends on type, e.g., H-1B lottery)", process: "Employer petition (e.g., I-129), LCA (if applicable), DS-160, Interview.", minBalance: 500000 }, // Lower personal proof needed if sponsored
-                studyVisa: { timeline: "3-8 weeks post I-20", process: "SEVP-approved school admission (I-20), SEVIS fee, DS-160, Interview.", minBalance: 2500000 }, // Varies greatly by course/duration
-                citizenship: { timeline: "Approx 5 years post Green Card + processing (6-12 months)", process: "Meet residency requirements, Form N-400, Biometrics, Interview, Civics Test, Oath Ceremony.", requiresPermanentResidency: true }
-            },
-            "Canada": {
-                visitVisa: { timeline: "4-8 weeks (variable)", process: "Online application via IRCC portal, Biometrics, Document submission.", minBalance: 1200000 },
-                workVisa: { timeline: "2-6 months (depends on LMIA/program)", process: "Job offer, LMIA (if required), Work permit application, Biometrics.", minBalance: 400000 },
-                studyVisa: { timeline: "4-10 weeks post Letter of Acceptance", process: "Acceptance letter from DLI, Study permit application, Biometrics, Proof of funds (GIC recommended).", minBalance: 2000000 }, // Approx CAD $10k + tuition
-                 citizenship: { timeline: "Approx 3 years residency in last 5 + processing (12 months)", process: "Meet physical presence requirements, File taxes, Language proficiency (English/French), Citizenship test, Interview, Oath Ceremony.", requiresPermanentResidency: true }
-            },
-            "UK": {
-                visitVisa: { timeline: "3-6 weeks", process: "Online application, Biometrics appointment (VFS Global), Document submission.", minBalance: 1000000 },
-                workVisa: { timeline: "3-8 weeks (Skilled Worker)", process: "Certificate of Sponsorship from licensed employer, Online application, Biometrics, Proof of English.", minBalance: 350000 }, // If employer doesn't cover initial costs
-                studyVisa: { timeline: "3-4 weeks post CAS", process: "Confirmation of Acceptance for Studies (CAS) from sponsor uni, Online application, Biometrics, Proof of funds.", minBalance: 2800000 }, // Varies by location/duration
-                citizenship: { timeline: "Approx 5 years residency + 1 year ILR + processing (6 months)", process: "Meet residency requirements (Indefinite Leave to Remain required), Life in the UK test, English proficiency, Application, Ceremony.", requiresPermanentResidency: true } // ILR is a form of PR
-            },
-            "Australia": {
-                visitVisa: { timeline: "4-8 weeks (variable)", process: "Online application via ImmiAccount, Biometrics (if requested), Document submission.", minBalance: 1300000 },
-                workVisa: { timeline: "3-12 months (depends on subclass)", process: "Skills assessment (often required), EOI (SkillSelect), State nomination (if applicable), Visa application.", minBalance: 500000 }, // Varies greatly
-                studyVisa: { timeline: "4-8 weeks", process: "Confirmation of Enrolment (CoE), Student visa application (subclass 500), GTE requirement, Health check, Biometrics.", minBalance: 3000000 }, // Approx AUD $21k + travel + tuition
-                citizenship: { timeline: "Approx 4 years residency (incl 1 yr PR) + processing (6-18 months)", process: "Meet residency requirements (Permanent Residency required), Character requirements, Citizenship test, Interview, Ceremony.", requiresPermanentResidency: true }
-            },
-             "Germany": {
-                visitVisa: { timeline: "2-4 weeks (Schengen)", process: "Appointment via VFS/Embassy, Application form, Supporting documents (flight, hotel, insurance).", minBalance: 1000000 },
-                workVisa: { timeline: "2-4 months", process: "Job offer recognized in Germany, Visa application (National Visa), Approval from Federal Employment Agency (if needed).", minBalance: 400000 },
-                studyVisa: { timeline: "2-3 months", process: "University admission, Blocked account (approx €11,208/year), National Visa application.", minBalance: 3000000 }, // Must be in blocked account
-                citizenship: { timeline: "Usually 8 years residency (can be reduced) + processing", process: "Meet residency requirements, Secure livelihood, Language proficiency (B1 German), Citizenship test, Renounce previous citizenship (usually).", requiresPermanentResidency: true } // Requires settlement permit generally
-            }
-            // Add more countries as needed with simplified data
-        };
-
-        const pakPassportData = {
-             normal_36: { timeline: "Approx 10-15 working days", process: "Online form/Appointment (optional), Visit Passport Office/Executive Center, Biometrics, Photo, Fee payment (Bank).", fee: 3000 }, // Example fee PKR
-             urgent_36: { timeline: "Approx 4-5 working days", process: "Online form/Appointment (optional), Visit Passport Office/Executive Center, Biometrics, Photo, Fee payment (Bank).", fee: 5000 }, // Example fee PKR
-             normal_72: { timeline: "Approx 10-15 working days", process: "Online form/Appointment (optional), Visit Passport Office/Executive Center, Biometrics, Photo, Fee payment (Bank).", fee: 5500 }, // Example fee PKR
-             urgent_72: { timeline: "Approx 4-5 working days", process: "Online form/Appointment (optional), Visit Passport Office/Executive Center, Biometrics, Photo, Fee payment (Bank).", fee: 9000 }, // Example fee PKR
-             fast_track_36: { timeline: "Approx 2 working days", process: "Visit Executive Passport Office, Biometrics, Photo, Fee payment (Bank). Higher Fee.", fee: 10000}, // Example fee PKR - Check official site!
-             fast_track_72: { timeline: "Approx 2 working days", process: "Visit Executive Passport Office, Biometrics, Photo, Fee payment (Bank). Higher Fee.", fee: 15000} // Example fee PKR - Check official site!
-        };
-
-
-        // --- Calculation Functions ---
-
-        function calculateVisa() {
-            const country = document.getElementById('visaCountry').value;
-            const purpose = document.getElementById('visaPurpose').value;
-            const bankBalance = parseFloat(document.getElementById('visaBankBalance').value) || 0;
-            const resultDiv = document.getElementById('visaResult');
-
-            let output = `<h3>Visa Guidance Estimate for ${country} (${purpose})</h3>`;
-            output += `<p><strong>Disclaimer:</strong> This is simplified, illustrative information only. Requirements change frequently. <strong>ALWAYS consult official government immigration websites and qualified professionals.</strong></p>`;
-
-            if (countryData[country] && countryData[country][purpose + 'Visa']) {
-                const visaInfo = countryData[country][purpose + 'Visa'];
-                output += `<p><strong>Estimated Timeline:</strong> ${visaInfo.timeline}</p>`;
-                output += `<p><strong>General Process Overview:</strong> ${visaInfo.process}</p>`;
-
-                if (visaInfo.minBalance) {
-                     output += `<p><strong>Financial Indication:</strong> You stated a bank balance of ${bankBalance.toLocaleString()} PKR. `;
-                     if (bankBalance >= visaInfo.minBalance) {
-                         output += `This *might* meet the typical minimum proof of funds, but the exact amount depends heavily on duration of stay, number of applicants, sponsor letters, and specific requirements. Verification of funds source is usually needed. Check official guidelines.`;
-                     } else {
-                         output += `This is likely *below* the typical minimum proof of funds required (estimated around ${visaInfo.minBalance.toLocaleString()} PKR or equivalent). Requirements vary greatly, check official guidelines. Strong financial proof is crucial.`;
-                     }
-                     output += `</p>`;
-                } else {
-                    output += `<p><strong>Financial Indication:</strong> Proof of sufficient funds is always required. Check the specific requirements for ${purpose} visas to ${country}.</p>`;
-                }
-
-                 output += `<p><strong>Other Potential Factors:</strong> Travel history, ties to Pakistan (job, family, property), clear purpose of visit, invitation letters (if applicable), accommodation proof, travel insurance (especially Schengen). </p>`;
-
-            } else {
-                output += `<p>Information for ${country} (${purpose} visa) is not available in this simplified calculator or the selected combination is invalid.</p>`;
-            }
-
-            resultDiv.innerHTML = output;
+    <title>Investor Immigration Pathway Calculator (Simplified)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
-
-        function calculateCitizenship() {
-            const country = document.getElementById('citizenshipCountry').value;
-            const yearsResident = parseInt(document.getElementById('citizenshipYears').value) || 0;
-            const hasPR = document.getElementById('citizenshipPR').checked;
-            const resultDiv = document.getElementById('citizenshipResult');
-
-            let output = `<h3>Citizenship Guidance Estimate for ${country}</h3>`;
-            output += `<p><strong>Disclaimer:</strong> This is highly simplified, illustrative information only. Citizenship laws are complex and strict. <strong>ALWAYS consult official government immigration websites and qualified professionals.</strong></p>`;
-
-
-            if (countryData[country] && countryData[country].citizenship) {
-                 const citizenInfo = countryData[country].citizenship;
-
-                 output += `<p><strong>General Residency Requirement (Estimate):</strong> ${citizenInfo.timeline}</p>`;
-                 output += `<p><strong>Permanent Residency Usually Required?:</strong> ${citizenInfo.requiresPermanentResidency ? 'Yes' : 'No (check specific pathways)'}</p>`;
-                 output += `<p><strong>General Process Overview:</strong> ${citizenInfo.process}</p>`;
-
-                 // Basic check (very simplified)
-                 output += `<p><strong>Based on your input:</strong></p>`;
-                 output += `<ul>`;
-                 output += `<li>Years Resident: ${yearsResident}</li>`;
-                 output += `<li>Have Permanent Residency (or equivalent like ILR): ${hasPR ? 'Yes' : 'No'}</li>`;
-                 output += `</ul>`;
-
-                 if (!citizenInfo.requiresPermanentResidency || hasPR) {
-                     // Rough check on years - doesn't account for nuances like 'within last X years'
-                     // Extracting minimum years number (simplistic)
-                     const reqYearsMatch = citizenInfo.timeline.match(/(\d+)\s+years/);
-                     const requiredYears = reqYearsMatch ? parseInt(reqYearsMatch[1]) : 99; // Default high if not found
-
-                     if (yearsResident >= requiredYears) {
-                         output += `<p>You *might* meet the basic residency duration requirement (${requiredYears}+ years typically needed). However, you must meet *all* other criteria (physical presence rules, language, tests, character, etc.).</p>`;
-                     } else {
-                         output += `<p>You likely have not yet met the minimum residency duration requirement (often ${requiredYears}+ years). Continue residing legally and check specific rules.</p>`;
-                     }
-                 } else {
-                     output += `<p>Obtaining Permanent Residency (or the country's equivalent status) is typically the first major step before being eligible to apply for citizenship in ${country}. Focus on meeting PR requirements first.</p>`;
-                 }
-
-                 output += `<p><strong>Other Key Factors:</strong> Language proficiency, knowledge of the country (civics test), integration, good character (no criminal record), potential requirement to renounce Pakistani citizenship (depends on country), tax compliance.</p>`;
-
-            } else {
-                 output += `<p>Citizenship information for ${country} is not available in this simplified calculator.</p>`;
-            }
-
-             resultDiv.innerHTML = output;
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: auto;
         }
-
-        function calculatePassport() {
-            const passportType = document.getElementById('passportType').value;
-            const resultDiv = document.getElementById('passportResult');
-
-            let output = `<h3>Pakistani Passport Guidance Estimate</h3>`;
-             output += `<p><strong>Disclaimer:</strong> This information is for Pakistani passports based on general knowledge. Fees and timelines are subject to change. <strong>ALWAYS check the official Directorate General of Immigration & Passports, Pakistan website (dgip.gov.pk) for the latest information.</strong></p>`;
-
-            if(pakPassportData[passportType]) {
-                const passInfo = pakPassportData[passportType];
-                 output += `<p><strong>Selected Type:</strong> ${passportType.replace('_', ' pages, ')}</p>`;
-                 output += `<p><strong>Estimated Timeline:</strong> ${passInfo.timeline}</p>`;
-                 output += `<p><strong>Estimated Fee (PKR):</strong> ${passInfo.fee.toLocaleString()} (This is an EXAMPLE, check official site for current fees!)</p>`;
-                 output += `<p><strong>General Process Overview:</strong> ${passInfo.process}</p>`;
-                 output += `<p><strong>Required Documents (General - may vary):</strong> Original CNIC/NICOP/Smart Card, Previous Passport (if renewal), Bank challan receipt (fee payment), For minors: Father/Guardian's CNIC, Birth Certificate/CRC.</p>`;
-                 output += `<p><strong>Note:</strong> Online application/appointment systems may be available. Executive Passport Offices (EPOs) offer faster processing at higher fees. Verify locations and services on the official DGIP website.</p>`;
-            } else {
-                 output += `<p>Please select a valid passport type.</p>`;
-            }
-
-            resultDiv.innerHTML = output;
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-    </script>
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Prevents padding from adding to width */
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            background-color: #e9f5ff;
+            border-radius: 4px;
+            display: none; /* Hidden initially */
+        }
+        #results h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+        .disclaimer {
+            margin-top: 25px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .disclaimer strong {
+            color: #721c24;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Immigration Pathway Calculators (for Pakistanis) - ILLUSTRATIVE</h1>
-    <p><strong>VERY IMPORTANT:</strong> This tool provides highly simplified examples and estimates. Immigration rules are complex and change often. <strong>Always consult official government websites and seek professional advice.</strong> Do not rely solely on this calculator for making decisions.</p>
+<div class="container">
+    <h1>Investor Immigration Pathway Calculator</h1>
+    <p style="text-align: center; color: #666;">Simplified guide for Pakistani Investors (Illustrative Only)</p>
 
-    <hr>
-
-    <h2>1. Visa Calculator</h2>
-    <form onsubmit="event.preventDefault(); calculateVisa();">
-        <label for="visaCountry">Destination Country:</label>
-        <select id="visaCountry">
-            <option value="USA">USA</option>
-            <option value="Canada">Canada</option>
-            <option value="UK">UK</option>
-            <option value="Australia">Australia</option>
-            <option value="Germany">Germany</option>
+    <form id="immigrationForm">
+        <div>
+            <label for="country">Select Target Country:</label>
+            <select id="country" required>
+                <option value="">-- Select Country --</option>
+                <option value="portugal">Portugal</option>
+                <option value="turkey">Turkey</option>
+                <option value="uae">UAE (Dubai/Abu Dhabi)</option>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="malta">Malta</option>
+                <option value="stkitts">St Kitts & Nevis</option>
+                 <option value="uk">United Kingdom</option>
             </select>
-        <br><br>
+        </div>
 
-        <label for="visaPurpose">Purpose of Visa:</label>
-        <select id="visaPurpose">
-            <option value="visit">Visit/Tourist</option>
-            <option value="study">Study</option>
-            <option value="work">Work</option>
+        <div>
+            <label for="pathwayType">Select Immigration Pathway Type:</label>
+            <select id="pathwayType" required>
+                <option value="">-- Select Pathway --</option>
+                <option value="residency">Residency by Investment (e.g., Golden Visa)</option>
+                <option value="citizenship">Citizenship by Investment</option>
+                <option value="visa">Investor/Entrepreneur Visa</option>
             </select>
-        <br><br>
+        </div>
 
-        <label for="visaBankBalance">Approximate Bank Balance (PKR):</label>
-        <input type="number" id="visaBankBalance" placeholder="e.g., 1500000">
-        <br><br>
+        <div>
+            <label for="investmentAmount">Your Available Investment Amount (USD):</label>
+            <input type="number" id="investmentAmount" placeholder="e.g., 500000" min="0" required>
+            <small style="color: #777;">Enter approximate liquid investment capital in US Dollars.</small>
+        </div>
 
-        <button type="submit">Calculate Visa Estimate</button>
+        <button type="submit">Calculate Potential Options</button>
     </form>
-    <div id="visaResult" style="margin-top: 15px; border: 1px solid #ccc; padding: 10px;">
-        </div>
 
-    <hr>
+    <div id="results">
+        <h3>Potential Pathway Information:</h3>
+        <p id="resultText"></p>
+    </div>
 
-    <h2>2. Citizenship Calculator</h2>
-     <form onsubmit="event.preventDefault(); calculateCitizenship();">
-        <label for="citizenshipCountry">Destination Country:</label>
-        <select id="citizenshipCountry">
-            <option value="USA">USA</option>
-            <option value="Canada">Canada</option>
-            <option value="UK">UK</option>
-            <option value="Australia">Australia</option>
-             <option value="Germany">Germany</option>
-             </select>
-        <br><br>
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> This calculator provides simplified, illustrative information based on general knowledge of common investment immigration programs (as of early 2025, using sample data). It is **NOT** exhaustive and does **NOT** constitute legal or immigration advice.
+        <ul>
+            <li>Investment thresholds, requirements, timelines, and available pathways change frequently.</li>
+            <li>Eligibility depends on many factors beyond investment amount (source of funds, background checks, business viability, specific program rules, etc.).</li>
+            <li>"Bank Statement" requirements are complex and vary; this tool only uses a simplified investment amount input.</li>
+            <li>Passport acquisition typically follows successful citizenship application.</li>
+            <li>Specific conditions for Pakistani nationals may apply.</li>
+        </ul>
+        <strong>ALWAYS consult official government immigration websites and qualified immigration professionals before making any decisions.</strong>
+    </div>
+</div>
 
-        <label for="citizenshipYears">Years Legally Resident in Country:</label>
-        <input type="number" id="citizenshipYears" placeholder="e.g., 5">
-        <br><br>
+<script>
+    // Simplified Data Store - ILLUSTRATIVE & potentially OUTDATED values. Use USD for consistency.
+    const immigrationData = {
+        "portugal": {
+            "residency": { // Golden Visa (Note: Program rules changed significantly, focus shifted from real estate)
+                minInvestment: 250000, // Example: Investment Fund option minimum (EUR converted roughly)
+                currency: "EUR/USD (check official sources!)",
+                timeline: "12-18+ months for initial residency card",
+                process: "Investment (e.g., funds, donation, job creation), application submission, biometrics, approval, card issuance. Requires periodic stays.",
+                notes: "Significant changes occurred in 2023/2024, real estate largely excluded. Focus on funds, cultural heritage, job creation. Leads to potential citizenship after 5 years of legal residency. Consult official AIMA sources."
+            },
+             "citizenship": { // Not direct Citizenship by Investment
+                minInvestment: null, // Requires prior residency first
+                timeline: "Requires 5 years of legal residency first",
+                process: "Obtain residency (e.g., via Golden Visa or other means), maintain residency for 5 years, meet language/integration requirements, apply for citizenship.",
+                notes: "No direct Citizenship by Investment program. Pathway via residency."
+             }
+        },
+        "turkey": {
+            "citizenship": { // Turkish Citizenship by Investment
+                minInvestment: 400000, // Real Estate Option (USD)
+                currency: "USD",
+                timeline: "6-9 months typically",
+                process: "Investment (Real Estate purchase, Capital Investment, etc.), obtain Certificate of Conformity, Residency Permit application (short), Citizenship application submission, approval.",
+                notes: "Popular option. Minimums may change. Other options like bank deposit ($500k+) exist. Requires holding the investment for 3 years."
+            }
+        },
+        "uae": {
+            "residency": { // Golden Visa
+                minInvestment: 545000, // Approx $545k USD (AED 2 million) for Real Estate investor
+                currency: "AED (USD equivalent shown)",
+                timeline: "Relatively fast, weeks to a few months",
+                process: "Investment (Real Estate, Business Capital), application via official channels (ICP/GDRFA), medical test, Emirates ID/Visa issuance.",
+                notes: "10-year renewable visa. Different categories exist (property, talent, entrepreneurs). No direct path to citizenship for investors."
+            }
+        },
+         "usa": {
+            "visa": { // EB-5 Immigrant Investor Program (Simplified)
+                minInvestment: 800000, // In a Targeted Employment Area (TEA)
+                currency: "USD",
+                timeline: "Highly variable, can take several years (processing backlogs)",
+                process: "Investment in a New Commercial Enterprise creating 10+ jobs, file I-526E (via Regional Center) or I-526, conditional green card upon approval, file I-829 to remove conditions after 2 years.",
+                notes: "$1,050,000 standard minimum investment. Complex process involving source of funds verification. Long waits possible, especially for certain nationalities. Consult experts."
+            }
+        },
+         "canada": {
+             "visa": { // Start-Up Visa (Focus on Innovation, not just capital)
+                minInvestment: 0, // No *direct* minimum investment, but need sufficient settlement funds & potential funding for business
+                currency: "CAD (Settlement Funds)",
+                timeline: "12-36+ months",
+                process: "Develop innovative business idea, get Letter of Support from designated organization (venture capital fund, angel investor group, business incubator), meet language requirements, prove sufficient settlement funds, apply for permanent residence.",
+                notes: "Focus is on the business viability and innovation, not passive investment. Provincial Nominee Programs (PNPs) may have specific Entrepreneur streams with investment requirements."
+             }
+             // Note: Canada does not have a direct federal Citizenship/Residency by *passive* investment program like some others. Focus is on active business/start-up.
+         },
+         "malta": {
+             "residency": { // Malta Permanent Residence Programme (MPRP)
+                minInvestment: 150000, // Approx. mix of property lease/purchase, govt contribution, donation (EUR converted roughly)
+                currency: "EUR",
+                timeline: "4-6 months",
+                process: "Combination of property investment (lease or buy), government contribution, and philanthropic donation. Strict due diligence.",
+                notes: "Provides permanent residency rights in Malta. Investment structure is specific. Requires proof of assets."
+             },
+             "citizenship": { // Granting of Citizenship for Exceptional Services (MEIN)
+                 minInvestment: 700000, // Approx. minimum including contribution, property, donation (EUR converted roughly) - higher if residency period is shorter.
+                 currency: "EUR",
+                 timeline: "12-36 months (depending on residency period chosen before applying)",
+                 process: "Significant non-refundable contribution, property investment (lease/buy), donation, residency requirement (12 or 36 months before citizenship), stringent due diligence.",
+                 notes: "Direct citizenship route via substantial investment and contribution. High standards for applicants."
+             }
+         },
+         "stkitts": {
+             "citizenship": { // St Kitts & Nevis Citizenship by Investment
+                minInvestment: 250000, // Sustainable Island State Contribution (SISC) option (USD) - as of recent changes
+                currency: "USD",
+                timeline: "4-6 months (standard), potentially faster with Accelerated Application Process (AAP)",
+                process: "Choose investment option (SISC contribution or Real Estate), submit application through authorized agent, due diligence checks, approval, investment completion, citizenship granted.",
+                notes: "One of the oldest CBI programs. Real estate options typically start higher ($400k+) plus fees. Contribution amounts may vary based on dependents. Rules updated periodically."
+             }
+         },
+          "uk": {
+            "visa": { // Innovator Founder Visa (Replaced previous investor routes)
+                minInvestment: 0, // No specific *minimum* investment mandated, but need sufficient funds to establish business.
+                currency: "GBP",
+                timeline: "Visa decision typically within 3-8 weeks after application/biometrics",
+                process: "Develop innovative, viable, scalable business idea (must be different from existing market offerings). Get endorsed by an approved Endorsing Body. Meet English language requirement. Show sufficient personal funds. Apply for visa.",
+                notes: "Focus is heavily on the *business idea* and endorsement, not just capital. Replaced the Tier 1 Investor visa. Leads to settlement (ILR) after 3 years if criteria met. Consult official UK Gov sources."
+            }
+        }
+        // Add more countries and pathways here...
+    };
 
-        <label for="citizenshipPR">Do you currently hold Permanent Residency / ILR in that country?</label>
-        <input type="checkbox" id="citizenshipPR"> Yes
-        <br><br>
+    const form = document.getElementById('immigrationForm');
+    const resultsDiv = document.getElementById('results');
+    const resultTextP = document.getElementById('resultText');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        const country = document.getElementById('country').value;
+        const pathwayType = document.getElementById('pathwayType').value;
+        const investmentAmount = parseInt(document.getElementById('investmentAmount').value, 10);
+        resultsDiv.style.display = 'none'; // Hide previous results
+
+        if (!country || !pathwayType || isNaN(investmentAmount)) {
+            resultTextP.innerHTML = "Please fill in all fields correctly.";
+            resultsDiv.style.display = 'block';
+            resultsDiv.style.backgroundColor = '#f8d7da'; // Error indication
+            return;
+        }
+
+        // Look up data
+        const countryInfo = immigrationData[country];
+        if (!countryInfo || !countryInfo[pathwayType]) {
+             resultTextP.innerHTML = `Detailed information for '${pathwayType}' in '${country}' is not available in this simplified tool or may not be a common pathway. Check official sources.`;
+             resultsDiv.style.backgroundColor = '#fff3cd'; // Warning indication
+             resultsDiv.style.display = 'block';
+             return;
+        }
+
+        const pathwayData = countryInfo[pathwayType];
+        let outputHTML = `<strong>Country:</strong> ${country.charAt(0).toUpperCase() + country.slice(1)}<br>`;
+        outputHTML += `<strong>Pathway:</strong> ${pathwayType.charAt(0).toUpperCase() + pathwayType.slice(1)} by Investment<br>`;
+        outputHTML += `<strong>Your Investment:</strong> $${investmentAmount.toLocaleString()} USD<br><hr>`;
+
+        if (pathwayData.minInvestment === null) {
+             outputHTML += `<strong>Eligibility Note:</strong> This pathway in ${country} (e.g., Citizenship) typically requires obtaining residency first through another route (like investment residency if available) and fulfilling residency duration/conditions. There isn't usually a direct investment amount *solely* for this step itself.<br>`;
+        } else if (pathwayData.minInvestment === 0) { // For pathways like Start-up visa
+             outputHTML += `<strong>Minimum Investment:</strong> No strict minimum capital investment mandated by the government for the visa itself, but substantial funds needed for business setup & settlement. Focus is on business innovation and endorsement.<br>`;
+              outputHTML += `<strong>Potential:</strong> Eligibility depends heavily on the business plan's quality, innovation, scalability, and obtaining endorsement/support, plus meeting language and settlement fund requirements.<br>`;
+        }
+         else {
+            outputHTML += `<strong>Minimum Investment Required (Approx.):</strong> ${pathwayData.minInvestment.toLocaleString()} ${pathwayData.currency}<br>`;
+            if (investmentAmount >= pathwayData.minInvestment) {
+                outputHTML += `<strong>Potential Eligibility based on Investment Amount:</strong> Your indicated investment meets or exceeds the typical minimum threshold. <strong>However, meeting the financial threshold is only ONE part of eligibility.</strong><br>`;
+                 resultsDiv.style.backgroundColor = '#d4edda'; // Success indication
+            } else {
+                outputHTML += `<strong>Potential Eligibility based on Investment Amount:</strong> Your indicated investment is below the typical minimum threshold of ${pathwayData.minInvestment.toLocaleString()} ${pathwayData.currency}.<br>`;
+                 resultsDiv.style.backgroundColor = '#f8d7da'; // Error indication
+            }
+        }
+
+        outputHTML += `<hr><strong>Estimated Timeline:</strong> ${pathwayData.timeline || 'Varies Significantly'}<br>`;
+        outputHTML += `<strong>General Process Overview:</strong> ${pathwayData.process || 'Specific process details vary. Consult official sources.'}<br>`;
+        if (pathwayData.notes) {
+             outputHTML += `<strong>Important Notes:</strong> ${pathwayData.notes}<br>`;
+        }
+         outputHTML += `<br><strong>Reminder:</strong> Always verify details with official government sources and immigration professionals. Requirements (including source of funds, background checks, etc.) are complex.`;
 
 
-        <button type="submit">Calculate Citizenship Estimate</button>
-    </form>
-    <div id="citizenshipResult" style="margin-top: 15px; border: 1px solid #ccc; padding: 10px;">
-        </div>
+        resultTextP.innerHTML = outputHTML;
+        resultsDiv.style.display = 'block';
+    });
 
-    <hr>
-
-    <h2>3. Pakistani Passport Calculator</h2>
-     <form onsubmit="event.preventDefault(); calculatePassport();">
-         <label for="passportType">Passport Type:</label>
-         <select id="passportType">
-             <option value="">-- Select Type --</option>
-             <option value="normal_36">Normal (36 Pages)</option>
-             <option value="urgent_36">Urgent (36 Pages)</option>
-             <option value="normal_72">Normal (72 Pages)</option>
-             <option value="urgent_72">Urgent (72 Pages)</option>
-             <option value="fast_track_36">Fast Track (36 Pages)</option>
-             <option value="fast_track_72">Fast Track (72 Pages)</option>
-             </select>
-         <br><br>
-
-         <button type="submit">Calculate Passport Estimate</button>
-     </form>
-    <div id="passportResult" style="margin-top: 15px; border: 1px solid #ccc; padding: 10px;">
-        </div>
+</script>
 
 </body>
 </html>
