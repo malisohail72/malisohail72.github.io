@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embassy Details</title>
+    <style>
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: var(--secondary);
+        }
+
+        #search-results {
+            list-style: none;
+            padding: 0;
+            margin: 10px auto;
+            max-width: 600px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #search-results li {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #search-results li:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Embassy Card Styles */
+        .embassy-card {
+            background-color: var(--light);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .embassy-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .embassy-card p {
+            margin-bottom: 8px;
+        }
+
+        /* You can include the rest of your CSS here */
+        /* ... (rest of the CSS from your provided code) ... */
+        .nav-links {
+            display: none; /* Hide for simplicity in this example */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/40" alt="Logo">
+                <h1>Embassy Info</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero" style="background-image: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('https://via.placeholder.com/1200x600?text=Embassy+Information')">
+            <h2>Find Embassy Details</h2>
+            <p>Search for a country to get contact information for its embassy.</p>
+        </section>
+
+        <section class="search-section" style="padding: 40px 0;">
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Enter country name">
+                <button class="search-button" onclick="searchCountry()">Search</button>
+            </div>
+            <ul id="search-results"></ul>
+        </section>
+
+        <section class="embassy-details">
+            <div id="embassy-card" class="embassy-card">
+                <h3></h3>
+                <p><strong>Email:</strong> <span id="embassy-email"></span></p>
+                <p><strong>Timings:</strong> <span id="embassy-timings"></span></p>
+                <p><strong>Address:</strong> <span id="embassy-address"></span></p>
+                </div>
+        </section>
+    </div>
+
+    <footer style="margin-top: 50px;">
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h4>About Us</h4>
+                <p>Your go-to source for embassy contact information.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <p>Email: info@embassyinfo.com</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Embassy Info. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const embassyData = [
+            { name: "United States", email: "usa@embassy.com", timings: "Mon-Fri, 9 AM - 5 PM", address: "123 US Street, Washington DC" },
+            { name: "Canada", email: "canada@embassy.com", timings: "Mon-Fri, 8:30 AM - 4:30 PM", address: "456 Canadian Avenue, Ottawa" },
+            { name: "United Kingdom", email: "uk@embassy.com", timings: "Mon-Fri, 9:30 AM - 5:30 PM", address: "789 UK Road, London" },
+            { name: "Australia", email: "australia@embassy.com", timings: "Mon-Fri, 10 AM - 6 PM", address: "101 Down Under Lane, Canberra" },
+            { name: "Pakistan", email: "pakistan@embassy.com", timings: "Mon-Fri, 9 AM - 5 PM", address: "Embassy Road, Islamabad" }
+            // Add more embassy data here
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const embassyCard = document.getElementById('embassy-card');
+        const embassyCardTitle = embassyCard.querySelector('h3');
+        const embassyEmail = document.getElementById('embassy-email');
+        const embassyTimings = document.getElementById('embassy-timings');
+        const embassyAddress = document.getElementById('embassy-address');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredCountries = embassyData.filter(country =>
+                country.name.toLowerCase().includes(searchTerm)
+            );
+            displaySearchResults(filteredCountries);
+        });
+
+        function displaySearchResults(results) {
+            searchResults.innerHTML = '';
+            if (results.length > 0) {
+                results.forEach(country => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = country.name;
+                    listItem.addEventListener('click', () => showEmbassyDetails(country));
+                    searchResults.appendChild(listItem);
+                });
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.style.display = 'none';
+            }
+        }
+
+        function showEmbassyDetails(country) {
+            embassyCardTitle.textContent = `Embassy of ${country.name}`;
+            embassyEmail.textContent = country.email;
+            embassyTimings.textContent = country.timings;
+            embassyAddress.textContent = country.address;
+            embassyCard.style.display = 'block';
+            searchResults.style.display = 'none'; // Hide search results after selection
+            searchInput.value = ''; // Clear the search input
+        }
+
+        function searchCountry() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const foundCountry = embassyData.find(country => country.name.toLowerCase() === searchTerm);
+            if (foundCountry) {
+                showEmbassyDetails(foundCountry);
+            } else {
+                alert('Country not found. Please select from the suggestions.');
+            }
+        }
+    </script>
+</body>
+</html>
