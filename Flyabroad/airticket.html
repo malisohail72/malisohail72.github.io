@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Tickets from Pakistan to the World</title>
+    <style>
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin: 0 10px;
+            color: #777;
+        }
+
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('https://via.placeholder.com/1200x600') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Flight Search Section */
+        .flight-search {
+            padding: 40px 0;
+            background-color: var(--accent);
+        }
+
+        .flight-search-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Flight Results Section */
+        .flight-results {
+            padding: 60px 0;
+        }
+
+        .flight-category {
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .category-title {
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .flight-list {
+            padding: 20px;
+        }
+
+        .flight-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .flight-item:last-child {
+            border-bottom: none;
+        }
+
+        .flight-details {
+            flex-grow: 1;
+        }
+
+        .airline-name {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .flight-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .flight-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
+            border-top: 5px solid var(--secondary);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .section-title h3 {
+                font-size: 28px;
+            }
+
+            .breadcrumb {
+                padding: 8px 0;
+            }
+
+            .breadcrumb-links a, .breadcrumb-links .current {
+                font-size: 12px;
+            }
+
+            .flight-search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="https://via.placeholder.com/50/005e54/FFFFFF?Text=Logo" alt="Logo">
+                    <h1>FlightFinder</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <a href="#" class="cta-button">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-links">
+                <li><a href="#">Home</a></li>
+                <li class="current">Flight Search</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Find Your Perfect Flight from Pakistan</h2>
+            <p>Explore the world with the best flight deals from top airlines operating in Pakistan.</p>
+            <a href="#flight-search" class="hero-cta">Search Flights</a>
+        </div>
+    </section>
+
+    <section id="flight-search" class="flight-search">
+        <div class="container">
+            <h3 class="section-title">Search for Flights</h3>
+            <form class="flight-search-form">
+                <div class="form-group">
+                    <label for="departure">Departure City:</label>
+                    <select id="departure">
+                        <option value="Islamabad">Islamabad</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Karachi">Karachi</option>
+                        <option value="Peshawar">Peshawar</option>
+                        <option value="Quetta">Quetta</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="destination">Destination City:</label>
+                    <input type="text" id="destination" placeholder="Enter destination">
+                </div>
+                <div class="form-group">
+                    <label for="departure-date">Departure Date:</label>
+                    <input type="date" id="departure-date">
+                </div>
+                <div class="form-group">
+                    <label for="return-date">Return Date:</label>
+                    <input type="date" id="return-date">
+                </div>
+                <div class="form-group">
+                    <label for="adults">Adults:</label>
+                    <input type="number" id="adults" value="1" min="1">
+                </div>
+                <button type="button" class="search-button" onclick="searchFlights()">Search Flights</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="flight-results">
+        <div class="container">
+            <h3 class="section-title">Available Flights</h3>
+            <div id="flight-results-container">
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <p>Your go-to platform for finding the best flight deals from Pakistan to anywhere in the world.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Phone</a></li>
+                        <li><a href="#">Address</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Deals</a></li>
+                        <li><a href="#">Airlines</a></li>
+                        <li><a href="#">Destinations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FlightFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function searchFlights() {
+            const departureCity = document.getElementById('departure').value;
+            const destinationCity = document.getElementById('destination').value;
+            const departureDate = document.getElementById('departure-date').value;
+            const returnDate = document.getElementById('return-date').value;
+            const adults = document.getElementById('adults').value;
+
+            // In a real scenario, you would make an API call here to fetch flight data.
+            // For this example, we will simulate the data.
+            const simulatedFlights = getSimulatedFlights(departureCity, destinationCity, departureDate, returnDate, adults);
+            displayFlightResults(simulatedFlights);
+        }
+
+        function getSimulatedFlights(departure, destination, departureDate, returnDate, adults) {
+            // Sample flight data (replace with your logic to fetch/generate data)
+            return [
+                {
+                    airline: "Turkish Airlines",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "10:00",
+                    arrivalTime: "18:00",
+                    price: 75000,
+                    category: "Standard",
+                    features: ["Meals", "Entertainment"]
+                },
+                {
+                    airline: "Emirates",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "14:00",
+                    arrivalTime: "22:00",
+                    price: 120000,
+                    category: "Luxury",
+                    features: ["Lie-flat seats", "Premium meals", "Lounge access"]
+                },
+                {
+                    airline: "Qatar Airways",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "08:00",
+                    arrivalTime: "16:00",
+                    price: 60000,
+                    category: "Cheapest",
+                    features: ["Basic amenities"]
+                },
+                {
+                    airline: "PIA",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "16:00",
+                    arrivalTime: "00:00",
+                    price: 55000,
+                    category: "Cheapest",
+                    features: ["Basic amenities"]
+                },
+                {
+                    airline: "Turkish Airlines",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "20:00",
+                    arrivalTime: "04:00",
+                    price: 90000,
+                    category: "Standard",
+                    features: ["Meals", "Entertainment", "Extra legroom"]
+                },
+                {
+                    airline: "Emirates",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "02:00",
+                    arrivalTime: "10:00",
+                    price: 150000,
+                    category: "Luxury",
+                    features: ["Private suite", "Gourmet dining", "Personal concierge"]
+                },
+                {
+                    airline: "Qatar Airways",
+                    departure: departure,
+                    destination: destination,
+                    departureTime: "12:00",
+                    arrivalTime: "20:00",
+                    price: 70000,
+                    category: "Standard",
+                    features: ["Meals", "Entertainment"]
+                }
+            ];
+        }
+
+        function displayFlightResults(flights) {
+            const resultsContainer = document.getElementById('flight-results-container');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            const categorizedFlights = {
+                Cheapest: [],
+                Standard: [],
+                Luxury: []
+            };
+
+            flights.forEach(flight => {
+                categorizedFlights[flight.category].push(flight);
+            });
+
+            for (const category in categorizedFlights) {
+                if (categorizedFlights[category].length > 0) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.classList.add('flight-category');
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.classList.add('category-title');
+                    titleDiv.textContent = category + " Travel";
+                    categoryDiv.appendChild(titleDiv);
+
+                    const listDiv = document.createElement('div');
+                    listDiv.classList.add('flight-list');
+
+                    categorizedFlights[category].sort((a, b) => a.price - b.price); // Sort by price
+
+                    categorizedFlights[category].forEach(flight => {
+                        const flightItem = document.createElement('div');
+                        flightItem.classList.add('flight-item');
+
+                        const detailsDiv = document.createElement('div');
+                        detailsDiv.classList.add('flight-details');
+
+                        const airlineName = document.createElement('div');
+                        airlineName.classList.add('airline-name');
+                        airlineName.textContent = flight.airline;
+                        detailsDiv.appendChild(airlineName);
+
+                        const flightInfo = document.createElement('div');
+                        flightInfo.classList.add('flight-info');
+                        flightInfo.textContent = `${flight.departure} to ${flight.destination} | ${flight.departureTime} - ${flight.arrivalTime}`;
+                        detailsDiv.appendChild(flightInfo);
+
+                        if (flight.features && flight.features.length > 0 && category !== 'Cheapest') {
+                            const featuresList = document.createElement('ul');
+                            featuresList.style.listStyleType = 'disc';
+                            featuresList.style.paddingLeft = '20px';
+                            flight.features.forEach(feature => {
+                                const featureItem = document.createElement('li');
+                                featureItem.textContent = feature;
+                                featuresList.appendChild(featureItem);
+                            });
+                            detailsDiv.appendChild(featuresList);
+                        }
+
+                        flightItem.appendChild(detailsDiv);
+
+                        const priceDiv = document.createElement('div');
+                        priceDiv.classList.add('flight-price');
+                        priceDiv.textContent = `PKR ${flight.price.toLocaleString()}`;
+                        flightItem.appendChild(priceDiv);
+
+                        listDiv.appendChild(flightItem);
+                    });
+
+                    categoryDiv.appendChild(listDiv);
+                    resultsContainer.appendChild(categoryDiv);
+                }
+            }
+
+            if (resultsContainer.innerHTML === '') {
+                resultsContainer.innerHTML = '<p>No flights found for your criteria.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
