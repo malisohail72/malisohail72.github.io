@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa & Intake Updates/Alerts</title>
+    <style>
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin: 0 10px;
+            color: #777;
+        }
+
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* News Section Styles */
+        .news-section {
+            padding: 40px 0;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .news-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+        }
+
+        .news-item {
+            background-color: var(--light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: inline-block;
+            margin-right: 20px;
+            padding: 20px;
+            min-width: 300px;
+            vertical-align: top;
+        }
+
+        .news-item h3 {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .news-item p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .read-more-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .read-more-btn:hover {
+            background-color: var(--primary);
+        }
+
+        .more-info {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .more-info h4 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .copy-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #5a6268;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
+            border-top: 5px solid var(--secondary);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="https://via.placeholder.com/40/005e54/FFFFFF?Text=Logo" alt="Logo">
+                    <h1>VisaIntake News</h1>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Student Visas</a></li>
+                    <li><a href="#">Work Visas</a></li>
+                    <li><a href="#">Student Intakes</a></li>
+                    <li><a href="#">Other</a></li>
+                </ul>
+                <div>
+                    <a href="#" class="cta-button">Subscribe</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-links">
+                <li><a href="#">Home</a></li>
+                <li class="current">Updates & Alerts</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Student Visa Updates</h2>
+            <div class="news-container" id="studentVisaUpdates">
+                </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Work Visa Updates</h2>
+            <div class="news-container" id="workVisaUpdates">
+                </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Student Intake Updates</h2>
+            <div class="news-container" id="studentIntakeUpdates">
+                </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Investor Visa Updates</h2>
+            <div class="news-container" id="investorVisaUpdates">
+                </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Business Visa Updates</h2>
+            <div class="news-container" id="businessVisaUpdates">
+                </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="container">
+            <h2>Tourist Visa Updates</h2>
+            <div class="news-container" id="touristVisaUpdates">
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <p>Your go-to source for the latest updates and alerts on student visas, work visas, and student intakes across different countries. We aim to provide timely and accurate information to help you with your international aspirations.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Student Visas</a></li>
+                        <li><a href="#">Work Visas</a></li>
+                        <li><a href="#">Student Intakes</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <p>123 Visa Info Street, Global City, Earth</p>
+                    <p>Email: info@visaintakenews.com</p>
+                    <p>Phone: +01 123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VisaIntake News. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const newsData = {
+            studentVisaUpdates: [
+                {
+                    title: "Canada Announces New Student Visa Policy",
+                    shortInfo: "Canada has announced changes to its international student visa program...",
+                    fullInfo: "The Canadian government has introduced a new policy effective [Date] that requires all international students to [Detailed Information]. This change aims to [Reason for Change]. Students applying for a visa after this date must ensure they meet these new requirements. For more details, visit the official IRCC website.",
+                },
+                {
+                    title: "UK Student Visa Application Updates",
+                    shortInfo: "Updates regarding the processing times for UK student visa applications...",
+                    fullInfo: "The UK Visas and Immigration (UKVI) has updated its processing times for student visa applications. Due to a high volume of applications, students are advised to apply well in advance of their intended start date. The current estimated processing time is [Timeframe]. Please refer to the official UKVI website for the latest updates and guidance.",
+                },
+                {
+                    title: "Australia Revises Post-Study Work Rights",
+                    shortInfo: "Changes to Australia's post-study work visa for international students...",
+                    fullInfo: "The Australian government has announced revisions to the post-study work visa options for international students graduating from Australian universities. As of [Date], the eligibility criteria and duration of the visa have been modified. Eligible graduates in specific fields may be able to extend their stay. More information can be found on the Department of Home Affairs website.",
+                },
+                // Add more student visa updates
+            ],
+            workVisaUpdates: [
+                {
+                    title: "Germany Introduces New Skilled Worker Immigration Law",
+                    shortInfo: "Germany's new law to attract skilled workers from abroad...",
+                    fullInfo: "Germany has implemented a new immigration law on [Date] to make it easier for skilled workers from non-EU countries to come and work in Germany. The law aims to address labor shortages in key sectors by simplifying the application process and expanding eligibility criteria. Applicants with recognized qualifications and a job offer can now apply under the new regulations. Visit the Federal Ministry of the Interior and Community website for more details.",
+                },
+                {
+                    title: "USA H-1B Visa Lottery Results Announced",
+                    shortInfo: "The results of the annual H-1B visa lottery for the US have been released...",
+                    fullInfo: "The US Citizenship and Immigration Services (USCIS) has announced the results of the H-1B visa lottery for the fiscal year [Year]. Notifications have been sent to petitioners whose registrations were selected. The H-1B visa allows US employers to temporarily employ foreign workers in specialty occupations. Further information and next steps for selected petitioners are available on the USCIS website.",
+                },
+                {
+                    title: "New Zealand Work Visa Changes Focus on Essential Skills",
+                    shortInfo: "Updates to New Zealand's work visa categories with a focus on essential skills...",
+                    fullInfo: "Immigration New Zealand has announced changes to its work visa categories, prioritizing applications for roles requiring essential skills that are in high demand in the country. The updated regulations, effective from [Date], may affect the eligibility criteria for certain types of work visas. Employers and prospective employees are advised to review the new guidelines on the Immigration New Zealand website.",
+                },
+                // Add more work visa updates
+            ],
+            studentIntakeUpdates: [
+                {
+                    title: "University of Toronto Fall 2025 Intake Opens",
+                    shortInfo: "The application portal for the University of Toronto's Fall 2025 intake is now open...",
+                    fullInfo: "The University of Toronto has announced the opening of its application portal for the Fall 2025 academic session. Prospective students can now apply for a wide range of undergraduate and graduate programs. The deadline for applications varies by program, so applicants are encouraged to check the university's admissions website for specific deadlines and requirements.",
+                },
+                {
+                    title: "Monash University Announces Key Dates for 2026 Intakes",
+                    shortInfo: "Important dates for student intakes at Monash University for the year 2026...",
+                    fullInfo: "Monash University in Australia has released the key dates for its 2026 academic year intakes. The first semester intake will commence in [Month], with application deadlines in [Month]. Information on specific program intakes and application procedures can be found on the Monash University admissions website.",
+                },
+                {
+                    title: "ETH Zurich Spring 2026 Intake Information Session",
+                    shortInfo: "ETH Zurich to host an information session for its Spring 2026 intake...",
+                    fullInfo: "ETH Zurich will be hosting a virtual information session on [Date] to provide details about its Spring 2026 intake for various master's and doctoral programs. Prospective students will have the opportunity to learn about the application process, program offerings, and research opportunities. Registration for the information session is available on the ETH Zurich website.",
+                },
+                // Add more student intake updates
+            ],
+            investorVisaUpdates: [
+                {
+                    title: "Portugal Golden Visa Program Updates",
+                    shortInfo: "Recent updates to Portugal's Golden Visa program...",
+                    fullInfo: "The Portuguese government has announced some updates to its Golden Visa program, effective from [Date]. These changes may affect the types of investments that qualify for the program and the regions where investments can be made. Potential investors are advised to consult the official government guidelines or seek advice from legal professionals specializing in immigration law.",
+                },
+                {
+                    title: "Canada's Start-Up Visa Program Sees Increased Quota",
+                    shortInfo: "Canada increases the quota for its Start-Up Visa program...",
+                    fullInfo: "Immigration, Refugees and Citizenship Canada (IRCC) has announced an increase in the annual quota for its Start-Up Visa program. This program allows eligible immigrant entrepreneurs to obtain permanent residence in Canada by launching an innovative business with the support of designated Canadian organizations. The increased quota aims to attract more innovative talent to Canada.",
+                },
+                {
+                    title: "UK Tier 1 Investor Visa Route Remains Suspended",
+                    shortInfo: "The UK's Tier 1 Investor visa route continues to be suspended...",
+                    fullInfo: "The UK government has confirmed that the Tier 1 Investor visa route remains suspended as part of ongoing efforts to ensure the integrity of the UK's immigration system. The route, which offered a path to residency for high-net-worth individuals making significant investments in the UK, was initially suspended in [Month, Year]. There is no current indication of when or if the route will be reopened.",
+                },
+                // Add more investor visa updates
+            ],
+            businessVisaUpdates: [
+                {
+                    title: "Singapore Enhances Global Investor Programme",
+                    shortInfo: "Singapore introduces enhancements to its Global Investor Programme...",
+                    fullInfo: "The Singapore Economic Development Board (EDB) has announced enhancements to its Global Investor Programme (GIP). These enhancements aim to attract more high-caliber business owners and investors who can contribute significantly to Singapore's economy. The changes may include adjustments to the investment criteria and the application process. Interested individuals are encouraged to visit the EDB website for the latest information.",
+                },
+                {
+                    title: "Australia Announces Changes to Business Innovation and Investment Program",
+                    shortInfo: "Updates to Australia's Business Innovation and Investment Program...",
+                    fullInfo: "The Australian Department of Home Affairs has announced several changes to its Business Innovation and Investment Program (BIIP). These changes, effective from [Date], may affect the eligibility requirements for various streams within the program, including the Business Innovation stream and the Investor stream. Prospective applicants should review the updated criteria on the department's website.",
+                },
+                {
+                    title: "France Introduces 'French Tech Visa' for Founders and Employees",
+                    shortInfo: "France's initiative to attract tech talent with the 'French Tech Visa'...",
+                    fullInfo: "The French government continues to promote its 'French Tech Visa', a simplified procedure for attracting international founders, employees, and investors to France's thriving tech ecosystem. The visa offers a streamlined application process and fast-track entry for eligible candidates. More details on eligibility and how to apply can be found on the French Tech website.",
+                },
+                // Add more business visa updates
+            ],
+            touristVisaUpdates: [
+                {
+                    title: "Thailand Announces Visa-Free Entry for More Nationalities",
+                    shortInfo: "Thailand expands its list of countries eligible for visa-free tourist entry...",
+                    fullInfo: "The Tourism Authority of Thailand has announced an expansion of its visa-free entry program for tourists. Effective from [Date], citizens of several additional countries will be allowed to enter Thailand for tourism purposes for a specified period without needing a visa. The exact duration of stay and the list of eligible countries can be found on the official website of the Ministry of Foreign Affairs of Thailand.",
+                },
+                {
+                    title: "European Union Considering Changes to Schengen Visa Rules",
+                    shortInfo: "Potential updates to the Schengen visa regulations for tourists...",
+                    fullInfo: "The European Union is reportedly considering some changes to the regulations governing the Schengen visa, which allows entry into the 27 countries in the Schengen Area. These potential changes could include updates to the application process, visa fees, and the duration of stay permitted. Travelers planning to visit the EU are advised to monitor the official websites of the European Commission and the respective member states for any announcements.",
+                },
+                {
+                    title: "Japan to Offer Digital Nomad Visa",
+                    shortInfo: "Japan plans to introduce a new visa category for digital nomads...",
+                    fullInfo: "The Japanese government has announced plans to introduce a new visa category specifically for digital nomads. This visa will allow eligible foreign professionals who work remotely and earn a certain minimum income to reside in Japan for a specified period. The details regarding the eligibility criteria, duration of stay, and the launch date of this new visa are expected to be released soon by the Ministry of Foreign Affairs of Japan.",
+                },
+                // Add more tourist visa updates
+            ],
+            // Add more sections for other categories as needed
+        };
+
+        function createNewsItem(news, containerId) {
+            const container = document.getElementById(containerId);
+            news.forEach(item => {
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
+
+                const title = document.createElement('h3');
+                title.textContent = item.title;
+                newsItem.appendChild(title);
+
+                const shortInfo = document.createElement('p');
+                shortInfo.textContent = item.shortInfo;
+                newsItem.appendChild(shortInfo);
+
+                const readMoreBtn = document.createElement('button');
+                readMoreBtn.classList.add('read-more-btn');
+                readMoreBtn.textContent = 'Read More';
+                newsItem.appendChild(readMoreBtn);
+
+                const moreInfoDiv = document.createElement('div');
+                moreInfoDiv.classList.add('more-info');
+
+                const fullInfoHeading = document.createElement('h4');
+                fullInfoHeading.textContent = 'More Information:';
+                moreInfoDiv.appendChild(fullInfoHeading);
+
+                const fullInfoParagraph = document.createElement('p');
+                fullInfoParagraph.textContent = item.fullInfo;
+                moreInfoDiv.appendChild(fullInfoParagraph);
+
+                const copyBtn = document.createElement('button');
+                copyBtn.classList.add('copy-btn');
+                copyBtn.textContent = 'Copy Info';
+                moreInfoDiv.appendChild(copyBtn);
+
+                newsItem.appendChild(moreInfoDiv);
+                container.appendChild(newsItem);
+
+                readMoreBtn.addEventListener('click', () => {
+                    moreInfoDiv.style.display = 'block';
+                    readMoreBtn.style.display = 'none';
+                });
+
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(item.fullInfo).then(() => {
+                        alert('Information copied to clipboard!');
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                });
+            });
+        }
+
+        // Load news for each section
+        createNewsItem(newsData.studentVisaUpdates, 'studentVisaUpdates');
+        createNewsItem(newsData.workVisaUpdates, 'workVisaUpdates');
+        createNewsItem(newsData.studentIntakeUpdates, 'studentIntakeUpdates');
+        createNewsItem(newsData.investorVisaUpdates, 'investorVisaUpdates');
+        createNewsItem(newsData.businessVisaUpdates, 'businessVisaUpdates');
+        createNewsItem(newsData.touristVisaUpdates, 'touristVisaUpdates');
+
+        // You can add more calls to createNewsItem for other sections
+    </script>
+</body>
+</html>
