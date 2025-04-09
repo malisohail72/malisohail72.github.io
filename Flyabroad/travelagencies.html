@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -407,23 +406,7 @@
             margin-bottom: 15px;
         }
 
-        .know-more-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .know-more-button:hover {
-            background-color: var(--secondary);
-        }
-
-        .more-details {
-            display: none;
+        .contact-details {
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid var(--border-color);
@@ -431,8 +414,8 @@
             color: #555;
         }
 
-        .agency-card.expanded .more-details {
-            display: block;
+        .contact-details p {
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -470,67 +453,7 @@
     <section class="featured-agencies">
         <div class="container">
             <h2>Featured Travel Agencies</h2>
-            <div class="agency-cards-container">
-                <div class="agency-card">
-                    <div class="agency-logo">
-                        <img src="https://via.placeholder.com/100/f8f9fa/005e54?Text=Agency+1" alt="Agency 1 Logo">
-                    </div>
-                    <h3 class="agency-name">Global Treks</h3>
-                    <p class="agency-details">Your trusted partner for international adventures and affordable flight tickets.</p>
-                    <button class="know-more-button">Know More</button>
-                    <div class="more-details">
-                        <p><strong>Address:</strong> 123 Main Street, Lahore, Pakistan</p>
-                        <p><strong>Phone:</strong> +92 300 1234567</p>
-                        <p><strong>Email:</strong> info@globaltreks.com</p>
-                        <p><strong>Services:</strong> Flight bookings, visa assistance, tour packages, hotel reservations.</p>
-                    </div>
-                </div>
-
-                <div class="agency-card">
-                    <div class="agency-logo">
-                        <img src="https://via.placeholder.com/100/f8f9fa/005e54?Text=Agency+2" alt="Agency 2 Logo">
-                    </div>
-                    <h3 class="agency-name">Adventure Planners</h3>
-                    <p class="agency-details">Discover the world with our expertly curated travel itineraries and best flight deals.</p>
-                    <button class="know-more-button">Know More</button>
-                    <div class="more-details">
-                        <p><strong>Address:</strong> 456 Park Avenue, Karachi, Pakistan</p>
-                        <p><strong>Phone:</strong> +92 311 9876543</p>
-                        <p><strong>Email:</strong> explore@adventureplanners.pk</p>
-                        <p><strong>Services:</strong> Group tours, customized trips, flight and accommodation deals.</p>
-                    </div>
-                </div>
-
-                <div class="agency-card">
-                    <div class="agency-logo">
-                        <img src="https://via.placeholder.com/100/f8f9fa/005e54?Text=Agency+3" alt="Agency 3 Logo">
-                    </div>
-                    <h3 class="agency-name">Sky High Travels</h3>
-                    <p class="agency-details">Book your dream vacation with our wide selection of flights and travel services from Pakistan.</p>
-                    <button class="know-more-button">Know More</button>
-                    <div class="more-details">
-                        <p><strong>Address:</strong> 789 Liberty Square, Islamabad, Pakistan</p>
-                        <p><strong>Phone:</strong> +92 322 1122334</p>
-                        <p><strong>Email:</strong> flyhigh@skytravels.com</p>
-                        <p><strong>Services:</strong> Online flight booking, travel insurance, car rentals.</p>
-                    </div>
-                </div>
-
-                <div class="agency-card">
-                    <div class="agency-logo">
-                        <img src="https://via.placeholder.com/100/f8f9fa/005e54?Text=Agency+4" alt="Agency 4 Logo">
-                    </div>
-                    <h3 class="agency-name">Wanderlust Journeys</h3>
-                    <p class="agency-details">Experience seamless travel planning and find the best flight tickets for your next journey.</p>
-                    <button class="know-more-button">Know More</button>
-                    <div class="more-details">
-                        <p><strong>Address:</strong> 101 Galaxy Road, Rawalpindi, Pakistan</p>
-                        <p><strong>Phone:</strong> +92 333 4455667</p>
-                        <p><strong>Email:</strong> wander@wanderlust.pk</p>
-                        <p><strong>Services:</strong> Honeymoon packages, business travel, student discounts on flights.</p>
-                    </div>
-                </div>
-
+            <div class="agency-cards-container" id="agencyCardsContainer">
                 </div>
         </div>
     </section>
@@ -585,7 +508,7 @@
                         </div>
                         <div class="flight-price">PKR 60,000</div>
                     </li>
-                    </ul>
+                </ul>
             </div>
             </div>
     </section>
@@ -621,13 +544,93 @@
     </footer>
 
     <script>
-        const knowMoreButtons = document.querySelectorAll('.know-more-button');
+        const agencyCardsContainer = document.getElementById('agencyCardsContainer');
 
-        knowMoreButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const agencyCard = this.closest('.agency-card');
-                agencyCard.classList.toggle('expanded');
-            });
+        const agenciesData = [
+            {
+                name: 'Global Treks',
+                logo: 'https://via.placeholder.com/100/f8f9fa/005e54?Text=GT',
+                details: 'Your trusted partner for international adventures and affordable flight tickets.',
+                address: '123 Main Street, Lahore, Pakistan',
+                phone: '+92 300 1234567',
+                email: 'info@globaltreks.com',
+                services: 'Flight bookings, visa assistance, tour packages, hotel reservations.'
+            },
+            {
+                name: 'Adventure Planners',
+                logo: 'https://via.placeholder.com/100/f8f9fa/005e54?Text=AP',
+                details: 'Discover the world with our expertly curated travel itineraries and best flight deals.',
+                address: '456 Park Avenue, Karachi, Pakistan',
+                phone: '+92 311 9876543',
+                email: 'explore@adventureplanners.pk',
+                services: 'Group tours, customized trips, flight and accommodation deals.'
+            },
+            {
+                name: 'Sky High Travels',
+                logo: 'https://via.placeholder.com/100/f8f9fa/005e54?Text=SHT',
+                details: 'Book your dream vacation with our wide selection of flights and travel services from Pakistan.',
+                address: '789 Liberty Square, Islamabad, Pakistan',
+                phone: '+92 322 1122334',
+                email: 'flyhigh@skytravels.com',
+                services: 'Online flight booking, travel insurance, car rentals.'
+            },
+            {
+                name: 'Wanderlust Journeys',
+                logo: 'https://via.placeholder.com/100/f8f9fa/005e54?Text=WJ',
+                details: 'Experience seamless travel planning and find the best flight tickets for your next journey.',
+                address: '101 Galaxy Road, Rawalpindi, Pakistan',
+                phone: '+92 333 4455667',
+                email: 'wander@wanderlust.pk',
+                services: 'Honeymoon packages, business travel, student discounts on flights.'
+            }
+            // Add more agency data here
+        ];
+
+        function createAgencyCard(agency) {
+            const card = document.createElement('div');
+            card.classList.add('agency-card');
+
+            const logoDiv = document.createElement('div');
+            logoDiv.classList.add('agency-logo');
+            const logoImg = document.createElement('img');
+            logoImg.src = agency.logo;
+            logoImg.alt = `${agency.name} Logo`;
+            logoDiv.appendChild(logoImg);
+            card.appendChild(logoDiv);
+
+            const nameHeading = document.createElement('h3');
+            nameHeading.classList.add('agency-name');
+            nameHeading.textContent = agency.name;
+            card.appendChild(nameHeading);
+
+            const detailsParagraph = document.createElement('p');
+            detailsParagraph.classList.add('agency-details');
+            detailsParagraph.textContent = agency.details;
+            card.appendChild(detailsParagraph);
+
+            const contactDiv = document.createElement('div');
+            contactDiv.classList.add('contact-details');
+
+            const addressParagraph = document.createElement('p');
+            addressParagraph.innerHTML = `<strong>Address:</strong> ${agency.address}`;
+            contactDiv.appendChild(addressParagraph);
+
+            const phoneParagraph = document.createElement('p');
+            phoneParagraph.innerHTML = `<strong>Phone:</strong> ${agency.phone}`;
+            contactDiv.appendChild(phoneParagraph);
+
+            const emailParagraph = document.createElement('p');
+            emailParagraph.innerHTML = `<strong>Email:</strong> ${agency.email}`;
+            contactDiv.appendChild(emailParagraph);
+
+            card.appendChild(contactDiv);
+
+            return card;
+        }
+
+        agenciesData.forEach(agency => {
+            const card = createAgencyCard(agency);
+            agencyCardsContainer.appendChild(card);
         });
     </script>
 </body>
