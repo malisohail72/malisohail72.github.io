@@ -1,10 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From Pakistan to World</title>
+
+    <title>Fly Abroad: Free Pakistan Immigration Guide & Visa Services</title>
+
+    <meta name="description" content="Your free expert guide for Pakistanis immigrating abroad. Get comprehensive help with visas (study, work, investor, family), destination selection, documents & more for UAE, Canada, Australia, UK, Germany.">
+
+    <meta name="keywords" content="immigration pakistan, visa assistance pakistan, study abroad pakistan, work abroad pakistan, pakistan immigration services, fly abroad, free visa consultation, canada visa pakistan, australia visa pakistan, uk visa pakistan, uae visa pakistan, germany visa pakistan">
+
+    <link rel="canonical" href="https://www.yourwebsite.com/index.html"> <link rel="icon" href="/favicon.ico" sizes="any"> <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <style>
         :root {
             --primary: #005e54;
@@ -47,7 +56,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 20px 0; /* Adjusted padding slightly */
         }
         
         .logo {
@@ -55,21 +64,27 @@
             align-items: center;
         }
         
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
+        /* Style for potential logo image if added */
+        /* .logo img { height: 40px; margin-right: 10px; } */
         
         .logo h1 {
             font-size: 24px;
             color: var(--primary);
             font-weight: 700;
             letter-spacing: 0.5px;
+            margin: 0; /* Ensure no default margin */
         }
-        
+        /* Make logo H1 link styled correctly */
+        .logo a {
+            text-decoration: none;
+            color: inherit; /* Inherit color from h1 */
+        }
+
         .nav-links {
             display: flex;
             list-style: none;
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
         }
         
         .nav-links li {
@@ -94,11 +109,13 @@
             border-radius: 5px;
             font-weight: 600;
             transition: background-color 0.3s;
+            border: none; /* Ensure no default border */
+            cursor: pointer; /* Indicate it's clickable */
         }
         
         .cta-button:hover {
             background-color: var(--secondary);
-            color: white;
+            color: white; /* Ensure text remains white on hover */
         }
         
         /* Breadcrumb Styles */
@@ -112,16 +129,19 @@
             display: flex;
             list-style: none;
             flex-wrap: wrap;
+            margin: 0; /* Reset list margin */
+            padding: 0; /* Reset list padding */
         }
         
         .breadcrumb-links li {
             display: flex;
             align-items: center;
+            margin-right: 10px; /* Add right margin instead of using ::after margin */
         }
         
         .breadcrumb-links li:not(:last-child)::after {
             content: "›";
-            margin: 0 10px;
+            margin-left: 10px; /* Use margin-left for separator */
             color: #777;
         }
         
@@ -140,15 +160,17 @@
         .breadcrumb-links .current {
             color: #777;
             font-size: 14px;
+            font-weight: 500; /* Slightly bolder */
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('/api/placeholder/1200/600') no-repeat center center/cover;
+            /* TODO: Replace placeholder URL with your actual hero background image */
+            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('images/hero-background.jpg') no-repeat center center/cover;
             color: white;
             padding: 100px 0;
             text-align: center;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 10px 10px; /* Applies rounding to bottom corners */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
@@ -163,7 +185,11 @@
             max-width: 700px;
             margin: 0 auto 30px;
         }
-        
+        /* Ensure underline in hero paragraph is visible */
+        .hero p u {
+            text-decoration-color: rgba(255, 255, 255, 0.7);
+        }
+
         .hero-cta {
             display: inline-block;
             background-color: white;
@@ -181,26 +207,34 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
-        /* Services Section */
-        .services {
+        /* Common Section Styles */
+        section {
             padding: 80px 0;
+        }
+        .services, .testimonials { /* Sections with accent background */
             background-color: var(--accent);
         }
-        
+        .destinations, .resources, .cta-section { /* Sections with white/default background */
+             background-color: var(--light);
+        }
+
+
+        /* Section Title Styles */
         .section-title {
             text-align: center;
             margin-bottom: 60px;
         }
         
-        .section-title h3 {
+        .section-title h2 { /* Target H2 specifically for main titles */
             font-size: 32px;
             color: var(--primary);
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
+            margin-top: 0; /* Reset margin */
         }
         
-        .section-title h3::after {
+        .section-title h2::after {
             content: '';
             position: absolute;
             bottom: -10px;
@@ -213,16 +247,42 @@
         
         .section-title p {
             max-width: 700px;
-            margin: 0 auto;
+            margin: 25px auto 0; /* Adjust top margin relative to H2 */
             color: #666;
         }
         
+        /* Services Section */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 30px; /* Add margin if needed after category titles */
         }
         
+        /* Style for category titles (e.g., "For Students") */
+        .service-category-title {
+            grid-column: 1 / -1; /* Make title span full width */
+            text-align: center;
+            margin: 40px 0 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            display: inline-block; /* Allow centering */
+            width: auto; /* Adjust width based on content */
+            position: relative; /* Needed for centering trick if not using flex parent */
+            left: 50%; /* Center trick */
+            transform: translateX(-50%); /* Center trick */
+        }
+        /* Make category title h3 match styling */
+         .service-category-title h3 {
+            font-size: inherit;
+            font-weight: inherit;
+            color: inherit;
+            margin: 0;
+         }
+
         .service-card {
             background-color: white;
             border-radius: 10px;
@@ -230,6 +290,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid var(--border-color);
+            display: flex; /* Use flex for better internal alignment */
+            flex-direction: column; /* Stack content vertically */
         }
         
         .service-card:hover {
@@ -240,7 +302,7 @@
         .service-icon {
             height: 80px;
             width: 80px;
-            margin: 30px auto;
+            margin: 30px auto 20px; /* Adjusted margin */
             background-color: var(--primary);
             border-radius: 50%;
             display: flex;
@@ -249,17 +311,26 @@
             color: white;
             font-size: 30px;
             box-shadow: 0 4px 8px rgba(0, 94, 84, 0.2);
+            flex-shrink: 0; /* Prevent icon from shrinking */
         }
         
         .service-content {
             padding: 0 30px 30px;
             text-align: center;
+            flex-grow: 1; /* Allow content to fill space */
+            display: flex; /* Flex for button alignment */
+            flex-direction: column;
         }
         
-        .service-content h4 {
+        .service-content h4 { /* Adjusted to H4 based on HTML */
             font-size: 22px;
             margin-bottom: 15px;
             color: var(--primary);
+            margin-top: 0; /* Reset margin */
+        }
+        .service-content p {
+            margin-bottom: 15px; /* Ensure space above button */
+            flex-grow: 1; /* Push button to bottom */
         }
         
         .service-btn {
@@ -268,7 +339,7 @@
             color: white;
             padding: 8px 20px;
             border-radius: 4px;
-            margin-top: 15px;
+            margin-top: auto; /* Push button to bottom */
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s, transform 0.2s;
@@ -280,15 +351,11 @@
         }
         
         /* Destinations Section */
-        .destinations {
-            padding: 80px 0;
-        }
-        
         .destinations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            margin-top: 40px;
+            /* Removed margin-top, handled by section padding */
         }
         
         .destination-card {
@@ -321,9 +388,14 @@
             color: white;
         }
         
-        .destination-overlay h4 {
+        .destination-overlay h4 { /* Adjusted to H4 */
             font-size: 22px;
             margin-bottom: 5px;
+            margin-top: 0; /* Reset margin */
+        }
+        .destination-overlay p {
+             margin-bottom: 10px;
+             font-size: 14px;
         }
         
         .explore-btn {
@@ -332,7 +404,7 @@
             color: white;
             padding: 6px 14px;
             border-radius: 4px;
-            margin-top: 10px;
+            margin-top: 5px; /* Adjusted margin */
             text-decoration: none;
             font-size: 14px;
             transition: background-color 0.3s;
@@ -344,23 +416,19 @@
         }
         
         /* Testimonials Section */
-        .testimonials {
-            padding: 80px 0;
-            background-color: var(--accent);
-        }
-        
         .testimonial-card {
             background-color: white;
             border-radius: 10px;
-            padding: 30px;
+            padding: 40px; /* Increased padding slightly */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin: 40px auto; /* Adjusted margin */
+            margin: 0 auto; /* Centered, remove top/bottom margin handled by section */
             max-width: 800px;
             position: relative;
             border: 1px solid var(--border-color);
+            overflow: hidden; /* Hide quote overflow if needed */
         }
 
-        /* Added Styles for Testimonial Cycling */
+        /* Testimonial Cycling Styles */
         .testimonial-item {
             display: none; /* Hide all testimonials by default */
             animation: fadeIn 0.5s ease-in-out; /* Optional fade-in effect */
@@ -371,32 +439,47 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* End of Added Styles */
+        /* End of Cycling Styles */
         
         .testimonial-card::before {
-            content: '"'; /* Changed to single quote for visual */
+            content: '“'; /* Use standard double quote */
+            font-family: Georgia, serif; /* Nicer quote font */
             font-size: 100px;
             position: absolute;
-            top: -20px;
-            left: 20px;
+            top: 10px; /* Adjusted position */
+            left: 15px; /* Adjusted position */
             color: rgba(0, 94, 84, 0.1);
-            z-index: 0; /* Ensure quote is behind content */
+            z-index: 0;
+            line-height: 1;
         }
         
-        .testimonial-content {
-            margin-bottom: 20px;
-            font-style: italic;
-            position: relative; /* Ensure content is above pseudo-element */
+        /* Structure within testimonial card (figure/blockquote) */
+        .testimonial-card figure {
+            margin: 0;
+            position: relative;
             z-index: 1;
         }
-        
-        .testimonial-author {
+        .testimonial-card blockquote {
+            margin: 0 0 25px 0; /* Space below quote */
+            font-style: italic;
+            font-size: 1.1em; /* Slightly larger quote text */
+            color: #555;
+        }
+         .testimonial-card blockquote p {
+            margin: 0; /* Reset paragraph margin */
+         }
+        .testimonial-card figcaption {
+             display: flex;
+             align-items: center;
+        }
+
+        .testimonial-author { /* Use this class on figcaption */
             display: flex;
             align-items: center;
-            position: relative; /* Ensure author info is above pseudo-element */
+            position: relative;
             z-index: 1;
         }
         
@@ -406,28 +489,33 @@
             border-radius: 50%;
             margin-right: 15px;
             border: 3px solid var(--secondary);
+            object-fit: cover; /* Ensure image covers space */
         }
         
-        .author-info h5 {
+        .author-info h5 { /* Adjusted to H5 */
             font-size: 18px;
-            margin-bottom: 5px;
+            margin-bottom: 2px; /* Reduced margin */
+            margin-top: 0; /* Reset margin */
+            color: var(--primary);
         }
         
         .author-info p {
             color: #666;
+            font-size: 0.9em;
+            margin: 0; /* Reset margin */
         }
         
         .testimonial-btn {
             display: block;
-            text-align: center;
-            margin-top: 20px;
-            position: relative; /* Ensure button is above pseudo-element */
+            text-align: right; /* Align button to the right */
+            margin-top: 25px; /* Add space above button */
+            position: relative;
             z-index: 1;
         }
         
         .testimonial-btn a {
             display: inline-block;
-            background-color: var(--primary);
+            background-color: var(--secondary); /* Changed default color slightly */
             color: white;
             padding: 10px 25px;
             border-radius: 5px;
@@ -437,28 +525,25 @@
         }
         
         .testimonial-btn a:hover {
-            background-color: var(--secondary);
+            background-color: var(--primary);
         }
         
-        /* Resources Section (Replacement for Contact) */
-        .resources {
-            padding: 80px 0;
-            background-color: white;
-        }
-        
+        /* Resources Section */
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax slightly */
             gap: 30px;
-            margin-top: 40px;
+            /* margin-top handled by section padding */
         }
         
         .resource-card {
             background-color: var(--accent);
             border-radius: 10px;
-            padding: 25px;
-            transition: transform 0.3s;
+            padding: 30px; /* Slightly increased padding */
+            transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid var(--border-color);
+            display: flex; /* Use flex for better alignment */
+            flex-direction: column;
         }
         
         .resource-card:hover {
@@ -468,19 +553,24 @@
         
         .resource-icon {
             font-size: 40px;
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* Increased space */
             color: var(--primary);
+            line-height: 1; /* Ensure icon size is consistent */
+            height: 40px; /* Match font-size roughly */
         }
         
-        .resource-title {
+        .resource-title { /* Targets h4.resource-title */
             font-size: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 15px; /* Increased space */
             color: var(--primary);
+            margin-top: 0; /* Reset margin */
+            font-weight: 600; /* Slightly bolder title */
         }
         
         .resource-desc {
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* Increased space */
             color: #666;
+            flex-grow: 1; /* Allow description to push button down */
         }
         
         .resource-btn {
@@ -492,37 +582,91 @@
             text-decoration: none;
             font-size: 14px;
             transition: background-color 0.3s;
+            margin-top: auto; /* Align button at bottom */
+            align-self: flex-start; /* Align button left */
         }
         
         .resource-btn:hover {
             background-color: var(--secondary);
         }
+
+        /* CTA Section Styles */
+        .cta-section {
+            background-color: var(--secondary); /* Use secondary color */
+            color: white;
+            text-align: center;
+            padding: 60px 0; /* Adjust padding */
+        }
+        .cta-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        .cta-button-large { /* Style for the main CTA */
+             display: inline-block;
+             background-color: white;
+             color: var(--primary);
+             padding: 15px 35px;
+             border-radius: 5px;
+             font-weight: 700;
+             font-size: 16px;
+             text-decoration: none;
+             transition: transform 0.3s, box-shadow 0.3s;
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button-large:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
         
         /* Footer */
         footer {
             background-color: var(--primary);
-            color: white;
-            padding: 50px 0 20px;
+            color: rgba(255, 255, 255, 0.9); /* Slightly less bright text */
+            padding: 60px 0 30px; /* Adjusted padding */
             border-top: 5px solid var(--secondary);
         }
         
         .footer-content {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 40px 30px; /* Row and column gap */
+            margin-bottom: 40px; /* Increased space */
         }
         
         .footer-column {
             flex: 1;
-            min-width: 200px;
+            min-width: 220px; /* Slightly wider min-width */
+        }
+        .footer-column p { /* Style for intro paragraph */
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+        }
+         /* Footer Contact links */
+        .footer-column a {
+             color: rgba(255, 255, 255, 0.8);
+             text-decoration: none;
+             transition: color 0.3s;
+        }
+        .footer-column a:hover {
+             color: white;
+             text-decoration: underline;
         }
         
         .footer-column h4 {
-            font-size: 20px;
+            font-size: 18px; /* Slightly smaller footer heading */
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            color: white; /* Ensure heading is bright white */
+            font-weight: 600;
+            margin-top: 0; /* Reset margin */
         }
         
         .footer-column h4::after {
@@ -532,45 +676,76 @@
             left: 0;
             width: 40px;
             height: 2px;
-            background-color: white;
+            background-color: var(--secondary); /* Use secondary color for underline */
         }
         
         .footer-links {
             list-style: none;
+            padding: 0; /* Reset padding */
+            margin: 0; /* Reset margin */
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px; /* Increased spacing */
         }
         
-        .footer-links a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: white;
+        .footer-links a { /* Style inherited from .footer-column a */
+           /* Specific styles if needed */
         }
         
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px; /* Increased spacing */
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* More visible border */
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+        .footer-bottom a { /* Style links in bottom */
+             color: rgba(255, 255, 255, 0.7);
+             text-decoration: underline;
+        }
+        .footer-bottom a:hover {
+             color: white;
         }
         
         /* Responsive Adjustments */
+        @media (max-width: 992px) { /* Adjust breakpoint */
+             .services-grid, .destinations-grid, .resources-grid {
+                  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             }
+        }
+
         @media (max-width: 768px) {
+            nav {
+                padding: 15px 0; /* Reduce header padding */
+            }
             .nav-links {
-                display: none;
+                /* NOTE: Links are hidden, but no mobile menu mechanism is styled. */
+                /* You would need JS and more CSS for a hamburger menu. */
+                display: none; 
             }
             
+            .hero {
+                padding: 80px 0; /* Reduce hero padding */
+            }
             .hero h2 {
                 font-size: 32px;
             }
+            .hero p {
+                 font-size: 16px;
+            }
             
-            .section-title h3 {
+            section {
+                 padding: 60px 0; /* Reduce section padding */
+            }
+            .section-title h2 {
                 font-size: 28px;
+            }
+            .section-title {
+                 margin-bottom: 40px; /* Reduce space */
             }
             
             .breadcrumb {
@@ -580,344 +755,458 @@
             .breadcrumb-links a, .breadcrumb-links .current {
                 font-size: 12px;
             }
+            .breadcrumb-links li:not(:last-child)::after {
+                 margin-left: 5px;
+                 margin-right: 5px; /* Reduce separator space */
+            }
+
+            .footer-content {
+                gap: 30px; /* Reduce gap */
+            }
+            .footer-column {
+                 min-width: 100%; /* Stack columns */
+                 text-align: center; /* Center text */
+            }
+            .footer-column h4::after {
+                 left: 50%; /* Center underline */
+                 transform: translateX(-50%);
+            }
+            .footer-links {
+                 text-align: center;
+            }
         }
+
     </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Fly Abroad",
+      "url": "https://www.yourwebsite.com/", /* TODO: Replace with your homepage URL */
+      "logo": "https://www.yourwebsite.com/logo.png", /* TODO: Replace with your logo URL */
+      "description": "Free expert immigration guidance and services for Pakistanis seeking to relocate abroad for study, work, investment, or family reasons.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+92-XXX-XXXXXXX", /* TODO: Add your phone number */
+        "contactType": "Customer Service",
+        "areaServed": "PK",
+        "availableLanguage": ["en", "ur"]
+      },
+      "sameAs": [ /* TODO: Add links to your social media profiles */
+        "https://www.facebook.com/yourprofile",
+        "https://www.linkedin.com/company/yourprofile"
+      ]
+    }
+    </script>
+
 </head>
-
-
 
 <body>
     <header>
         <div class="container">
-            <nav>
+            <nav aria-label="Main Navigation">
                 <div class="logo">
-                    <h1>Fly Abroad</h1>
+                    <a href="/" title="Fly Abroad Home">
+                        <h1>Fly Abroad</h1>
+                    </a>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="embassydetails.html">Contact Embassy</a></li>
                     <li><a href="#destinations">Your Ideal Destination</a></li>
                     <li><a href="#testimonials">Our Success Stories</a></li>
                     <li><a href="#resources">Resources</a></li>
-                    <li><a href="#" class="cta-button">Free Consultation</a></li>
+                    <li><a href="#consultation" class="cta-button">Free Consultation</a></li>
                 </ul>
-            </nav>
+                 </nav>
         </div>
     </header>
-    
-    <div class="breadcrumb">
+
+    <nav aria-label="Breadcrumb" class="breadcrumb">
         <div class="container">
-            <ul class="breadcrumb-links">
-                <li><span class="current"> Home </span> </li>
-                <li><a href="embassydetails.html">Embassy Details</a></li>
-                <li><a href="airticket.html">Air Ticket Comperison</a></li>
-                 <li><a href="travelagencies.html">Featured Agencies</a></li>
-                 <li><a href="updates.html">Important Dates</a></li>
-            </ul>
+            <ol class="breadcrumb-links" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="current" itemprop="name">Home</span>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="embassydetails.html"><span itemprop="name">Embassy Details</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="airticket.html"><span itemprop="name">Air Ticket Comparison</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="travelagencies.html"><span itemprop="name">Featured Agencies</span></a>
+                    <meta itemprop="position" content="4" />
+                </li>
+                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="updates.html"><span itemprop="name">Important Dates</span></a>
+                    <meta itemprop="position" content="5" />
+                </li>
+            </ol>
         </div>
-    </div>
+    </nav>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <h2>From 🇵🇰 to 🌎</h2>
-            <p>We specialize in helping Pakistani people to start their new life abroad with comprehensive immigration guide and allied services <u>for free</u> according to your needs.</p>
-            <a href="#services" class="hero-cta">Start Now. </a> </div>
-    </section>
+    <main>
 
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h3>Our Services</h3>
-                <p>We provide end-to-end complete A-Z for your international relocation journey, from initial guidance to settling abroad.</p>
+        <section class="hero" id="home">
+            <div class="container">
+                 <h2>Free Immigration Guide & Services for Pakistanis</h2>
+                <p>From 🇵🇰 to 🌎: We specialize in helping Pakistani people start their new life abroad with comprehensive immigration guides and allied services, <u>for free</u>, tailored to your needs.</p>
+                 <a href="#services" class="hero-cta">Explore Our Free Services</a>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"> 📍</div>
-                    <div class="service-content">
-                        <h4>Perfect Destination Picker</h4>
-                        <p>Expert guidance on immigration pathways including work, study, business, and family sponsorship visas for various countries.</p>
-                        <a href="destinationpicker.html" class="service-btn">Know Your Perfect Destination</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📑</div>
-                    <div class="service-content">
-                        <h4>Document Checklist</h4>
-                        <p>Know your necessary and supportive documents for your visa.</p>
-                        <a href="documentschecklist.html" class="service-btn">Know Your Documents</a>
-                    </div>
-                </div>
-                
-                <hr>
-                    <center> For Students </center>
-                
-                <div class="service-card">
-                    <div class="service-icon">📖</div>
-                    <div class="service-content">
-                        <h4>Education Pathways</h4>
-                        <p>Comprehensive support for students seeking admission to international universities with scholarship guidance.</p>
-                        <a href="#resources" class="service-btn">Explore Options</a> </div>
-                </div>
-              
-                
-                 <hr>
-                    <center> For Investors </center>
-                
-                
-                  <div class="service-card">
-                    <div class="service-icon">💵</div>
-                    <div class="service-content">
-                        <h4>Investor Pathways</h4>
-                        <p>Career counseling, resume building, and connections with employers in your destination country.</p>
-                        <a href="investementpathways.html" class="service-btn">Find Your Investment Pathways</a>
-                    </div>
-                </div>
-                
-                 <hr>
-                    <center> For Online Earners </center>
-                
-                
-                
-                <div class="service-card">
-                    <div class="service-icon">🏖</div>
-                    <div class="service-content">
-                        <h4>Digital Nomad Pathways</h4>
-                        <p>If you earn online then you can live anywhere in the world.</p>
-                        <a href="digitalnomad.html" class="service-btn">Digital Nomad </a> </div>
-                </div>
-                
-                 <hr>
-                    <center> For Family of Immigrant </center>
-                
-                
-                <div class="service-card">
-                    <div class="service-icon">👨‍👩‍👧‍👦</div>
-                    <div class="service-content">
-                        <h4>Family Immigration</h4>
-                        <p>If your family member going or lives aborad, you can join them with family sponsorship, spouse visas, and reunification programs.</p>
-                        <a href="familyimmigration.html" class="service-btn">Family Plans</a> </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="destinations" id="destinations">
-        <div class="container">
-            <div class="section-title">
-                <h3>Popular Destinations</h3>
-                <p>We specialize in helping Pakistani citizens relocate to these thriving countries with opportunities for career growth and quality living.</p>
-            </div>
-            <div class="destinations-grid">
-                <div class="destination-card">
-                    <img src="uae.html?text=UAE" alt="UAE"> <div class="destination-overlay">
-                        <h4>UAE</h4>
-                        <p>Know all visa types of UAE</p>
-                        <a href="uae.html" class="explore-btn">Explore UAE</a>
-                    </div>
+        <section class="services" id="services">
+            <div class="container">
+                 <div class="section-title">
+                    <h2>Our Immigration & Relocation Services</h2>
+                    <p>We provide end-to-end A-Z support for your international relocation journey from Pakistan, from initial guidance to settling abroad.</p>
                 </div>
-                <div class="destination-card">
-                    <img src="https://via.placeholder.com/300x300/01796f/ffffff?text=Australia" alt="Australia"> <div class="destination-overlay">
-                        <h4>Australia</h4>
-                        <p>Skilled Migration, Study Pathways</p>
-                        <a href="#" class="explore-btn">Explore Options</a>
-                    </div>
-                </div>
-                <div class="destination-card">
-                     <img src="https://via.placeholder.com/300x300/005e54/ffffff?text=UK" alt="United Kingdom"> <div class="destination-overlay">
-                        <h4>United Kingdom</h4>
-                        <p>Work Visas, High Potential Visas</p>
-                        <a href="#" class="explore-btn">Explore Options</a>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://via.placeholder.com/300x300/01796f/ffffff?text=Germany" alt="Germany"> <div class="destination-overlay">
-                        <h4>Germany</h4>
-                        <p>EU Blue Card, Skilled Worker Visa</p>
-                        <a href="#" class="explore-btn">Explore Options</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h3>Success Stories</h3>
-                <p>Hear from our clients who successfully relocated from Pakistan and started their new life abroad.</p>
-            </div>
+                 <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">📍</div>
+                         <div class="service-content">
+                             <h4>Perfect Destination Picker</h4>
+                            <p>Expert guidance on immigration pathways including work visas, study permits, business immigration, and family sponsorship for various countries.</p>
+                            <a href="destinationpicker.html" class="service-btn">Find Your Perfect Destination</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">📑</div>
+                        <div class="service-content">
+                            <h4>Document Checklist Assistance</h4>
+                            <p>Understand the necessary and supporting documents required for your specific visa application from Pakistan.</p>
+                            <a href="documentschecklist.html" class="service-btn">Get Your Document List</a>
+                        </div>
+                    </div>
 
-            <div class="testimonial-card testimonial-item active">
-                <div class="testimonial-content">
-                    <p>As a doctor looking to continue my practice in Australia, I was overwhelmed by the complex registration process. The team at Fly Abroad guided me through every requirement and helped me secure a position at a hospital in Melbourne. My family and I couldn't be happier with our new life.</p>
-                </div>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60/005e54/ffffff?text=SM" alt="Dr. Sadia Malik"> <div class="author-info">
-                        <h5>Dr. Sadia Malik</h5>
-                        <p>Physician, Melbourne</p>
+                    <div class="service-category-title">
+                        <h3>For Students</h3>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">📖</div>
+                        <div class="service-content">
+                            <h4>Education & Study Pathways</h4>
+                            <p>Comprehensive support for Pakistani students seeking admission to international universities, including scholarship guidance.</p>
+                            <a href="#resources" class="service-btn">Explore Study Options</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category-title">
+                        <h3>For Investors</h3>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">💵</div>
+                        <div class="service-content">
+                            <h4>Investor & Business Visas</h4>
+                            <p>Guidance on investment immigration programs and business visa requirements for entrepreneurs from Pakistan.</p>
+                            <a href="investmentpathways.html" class="service-btn">Explore Investment Pathways</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category-title">
+                         <h3>For Online Earners / Freelancers</h3>
+                    </div>
+                     <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">🏖</div>
+                        <div class="service-content">
+                            <h4>Digital Nomad Visa Pathways</h4>
+                            <p>Discover countries offering digital nomad visas and remote work opportunities suitable for online earners from Pakistan.</p>
+                            <a href="digitalnomad.html" class="service-btn">Explore Digital Nomad Visas</a>
+                        </div>
+                    </div>
+
+                    <div class="service-category-title">
+                         <h3>For Families</h3>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+                        <div class="service-content">
+                            <h4>Family Sponsorship & Reunification</h4>
+                            <p>Helping Pakistani families join relatives abroad through family sponsorship, spouse visas, and parent/child reunification programs.</p>
+                            <a href="familyimmigration.html" class="service-btn">Explore Family Immigration</a>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-btn">
-                    <a href="#">Read Full Story</a>
-                </div>
             </div>
+        </section>
 
-            <div class="testimonial-card testimonial-item">
-                <div class="testimonial-content">
-                    <p>Moving to Canada for my Masters was a dream, but the student visa application felt daunting. Fly Abroad made the process seamless! They helped me choose the right university, prepare my documents, and guided me through the visa interview prep. Now I'm studying Computer Science in Toronto!</p>
+        <section class="destinations" id="destinations">
+            <div class="container">
+                 <div class="section-title">
+                    <h2>Popular Immigration Destinations from Pakistan</h2>
+                    <p>We specialize in helping Pakistani citizens relocate to these thriving countries offering opportunities for career growth and quality living.</p>
                 </div>
-                <div class="testimonial-author">
-                     <img src="https://via.placeholder.com/60x60/01796f/ffffff?text=AA" alt="Ahmed Ali"> <div class="author-info">
-                        <h5>Ahmed Ali</h5>
-                        <p>Student, Toronto</p>
+
+                 <div class="destinations-grid">
+                    <div class="destination-card">
+                         <img src="images/uae-skyline.jpg" alt="Dubai skyline representing immigration opportunities in UAE for Pakistanis">
+                         <div class="destination-overlay">
+                             <h4>UAE</h4>
+                            <p>Explore various visa types for the UAE.</p>
+                             <a href="uae.html" class="explore-btn">Explore UAE Visas</a>
+                        </div>
+                    </div>
+                    <div class="destination-card">
+                         <img src="images/australia-sydney.jpg" alt="Sydney Opera House representing study and skilled migration to Australia from Pakistan">
+                        <div class="destination-overlay">
+                            <h4>Australia</h4>
+                            <p>Skilled Migration, Study Pathways</p>
+                            <a href="australia.html" class="explore-btn">Explore Australia Options</a>
+                        </div>
+                    </div>
+                     <div class="destination-card">
+                          <img src="images/uk-london.jpg" alt="London Big Ben representing work and high potential visas for UK from Pakistan">
+                        <div class="destination-overlay">
+                            <h4>United Kingdom</h4>
+                            <p>Work Visas, High Potential Visas</p>
+                            <a href="uk.html" class="explore-btn">Explore UK Options</a>
+                        </div>
+                    </div>
+                    <div class="destination-card">
+                         <img src="images/germany-berlin.jpg" alt="Brandenburg Gate representing EU Blue Card and skilled worker visas to Germany for Pakistanis">
+                        <div class="destination-overlay">
+                            <h4>Germany</h4>
+                            <p>EU Blue Card, Skilled Worker Visa</p>
+                            <a href="germany.html" class="explore-btn">Explore Germany Options</a>
+                        </div>
                     </div>
                 </div>
-                 <div class="testimonial-btn">
-                    <a href="#">Read Full Story</a>
-                </div>
             </div>
+        </section>
 
-             <div class="testimonial-card testimonial-item">
-                <div class="testimonial-content">
-                    <p>I wanted to expand my IT business to the UK market. The team expertly handled my Innovator Visa application, providing clear guidance on the business plan and endorsement process. Thanks to them, my UK branch is now thriving.</p>
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Success Stories from Pakistanis Abroad</h2>
+                    <p>Hear from our clients who successfully relocated from Pakistan and started their new life abroad with our help.</p>
                 </div>
-                <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/60x60/005e54/ffffff?text=FK" alt="Fatima Khan"> <div class="author-info">
-                        <h5>Fatima Khan</h5>
-                        <p>Entrepreneur, London</p>
+
+                <div class="testimonial-card testimonial-item active" itemscope itemtype="https://schema.org/Review">
+                    <figure>
+                        <blockquote itemprop="reviewBody">
+                            <p>"As a doctor looking to continue my practice in Australia, I was overwhelmed... Fly Abroad guided me through every requirement... My family and I couldn't be happier."</p>
+                        </blockquote>
+                         <figcaption class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <img src="images/dr-sadia-malik.jpg" alt="Dr. Sadia Malik - Physician in Melbourne" itemprop="image">
+                             <div class="author-info">
+                                 <h5 itemprop="name">Dr. Sadia Malik</h5>
+                                <p itemprop="jobTitle">Physician</p>, <span itemprop="addressLocality">Melbourne</span>
+                            </div>
+                        </figcaption>
+                    </figure>
+                     <div class="testimonial-btn">
+                        <a href="testimonials/dr-sadia-malik.html">Read Full Story</a>
+                    </div>
+                     <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+                         <meta itemprop="ratingValue" content="5">
+                         <meta itemprop="bestRating" content="5">
+                     </div>
+                     <meta itemprop="itemReviewed" content="Fly Abroad Immigration Services">
+                </div>
+
+                <div class="testimonial-card testimonial-item" itemscope itemtype="https://schema.org/Review">
+                     <figure>
+                        <blockquote itemprop="reviewBody">
+                            <p>"Moving to Canada for my Masters was a dream... Fly Abroad made the process seamless! They helped me choose the right university... Now I'm studying Computer Science in Toronto!"</p>
+                        </blockquote>
+                        <figcaption class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <img src="images/ahmed-ali.jpg" alt="Ahmed Ali - Student in Toronto" itemprop="image">
+                            <div class="author-info">
+                                <h5 itemprop="name">Ahmed Ali</h5>
+                                <p itemprop="jobTitle">Student</p>, <span itemprop="addressLocality">Toronto</span>
+                            </div>
+                        </figcaption>
+                    </figure>
+                    <div class="testimonial-btn">
+                        <a href="testimonials/ahmed-ali.html">Read Full Story</a>
+                    </div>
+                    <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+                         <meta itemprop="ratingValue" content="5">
+                         <meta itemprop="bestRating" content="5">
+                     </div>
+                     <meta itemprop="itemReviewed" content="Fly Abroad Immigration Services">
+                </div>
+
+                 <div class="testimonial-card testimonial-item" itemscope itemtype="https://schema.org/Review">
+                     <figure>
+                         <blockquote itemprop="reviewBody">
+                            <p>"I wanted to expand my IT business to the UK market. The team expertly handled my Innovator Visa application... Thanks to them, my UK branch is now thriving."</p>
+                        </blockquote>
+                        <figcaption class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <img src="images/fatima-khan.jpg" alt="Fatima Khan - Entrepreneur in London" itemprop="image">
+                            <div class="author-info">
+                                <h5 itemprop="name">Fatima Khan</h5>
+                                <p itemprop="jobTitle">Entrepreneur</p>, <span itemprop="addressLocality">London</span>
+                            </div>
+                        </figcaption>
+                    </figure>
+                     <div class="testimonial-btn">
+                        <a href="testimonials/fatima-khan.html">Read Full Story</a>
+                    </div>
+                     <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+                         <meta itemprop="ratingValue" content="5">
+                         <meta itemprop="bestRating" content="5">
+                     </div>
+                      <meta itemprop="itemReviewed" content="Fly Abroad Immigration Services">
+                </div>
+
+                <div class="testimonial-card testimonial-item" itemscope itemtype="https://schema.org/Review">
+                     <figure>
+                        <blockquote itemprop="reviewBody">
+                            <p>"Securing a work visa for Germany seemed impossible... Fly Abroad simplified everything... I'm now working as a software engineer in Berlin and loving it!"</p>
+                        </blockquote>
+                        <figcaption class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <img src="images/usman-hamid.jpg" alt="Usman Hamid - Software Engineer in Berlin" itemprop="image">
+                            <div class="author-info">
+                                <h5 itemprop="name">Usman Hamid</h5>
+                                <p itemprop="jobTitle">Software Engineer</p>, <span itemprop="addressLocality">Berlin</span>
+                            </div>
+                        </figcaption>
+                    </figure>
+                     <div class="testimonial-btn">
+                        <a href="testimonials/usman-hamid.html">Read Full Story</a>
+                    </div>
+                     <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+                         <meta itemprop="ratingValue" content="5">
+                         <meta itemprop="bestRating" content="5">
+                     </div>
+                      <meta itemprop="itemReviewed" content="Fly Abroad Immigration Services">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="resources" id="resources">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Free Immigration Resources & Tools</h2>
+                    <p>Access our free tools and guides to help plan your immigration journey from Pakistan and make informed decisions.</p>
+                </div>
+                 <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">📊</div>
+                         <h4 class="resource-title">Visa Points Calculator</h4>
+                         <p class="resource-desc">Estimate your eligibility score for skilled migration programs (e.g., Canada Express Entry, Australia Points Test) and find out where you stand.</p>
+                         <a href="pointscalculator.html" class="resource-btn">Calculate Your Points</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">🗺</div>
+                        <h4 class="resource-title">Immigration & Visa Guides</h4>
+                        <p class="resource-desc">Step-by-step guides detailing requirements and procedures for popular immigration pathways from Pakistan.</p>
+                        <a href="guides.html" class="resource-btn">Access Guides</a>
+                    </div>
+                     <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">📝</div>
+                        <h4 class="resource-title">Dedicated Blog & Updates</h4>
+                        <p class="resource-desc">Read our latest blog posts on immigration news, tips, and destination spotlights relevant to Pakistanis.</p>
+                        <a href="blog.html" class="resource-btn">Read Our Blog</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon" aria-hidden="true">🤔</div>
+                        <h4 class="resource-title">Do You Need a Visa Checker</h4>
+                        <p class="resource-desc">Check visa requirements for Pakistani passport holders for various countries (Information sourced reliably).</p>
+                        <a href="visaconditions.html" class="resource-btn">Check Visa Needs</a>
                     </div>
                 </div>
-                 <div class="testimonial-btn">
-                    <a href="#">Read Full Story</a>
-                </div>
             </div>
+        </section>
 
-             <div class="testimonial-card testimonial-item">
-                <div class="testimonial-content">
-                    <p>Securing a work visa for Germany seemed impossible with all the bureaucracy. Fly Abroad simplified everything, identified the right visa category (EU Blue Card), and assisted with language course recommendations. I'm now working as a software engineer in Berlin and loving it!</p>
-                </div>
-                <div class="testimonial-author">
-                     <img src="https://via.placeholder.com/60x60/01796f/ffffff?text=UH" alt="Usman Hamid"> <div class="author-info">
-                        <h5>Usman Hamid</h5>
-                        <p>Software Engineer, Berlin</p>
-                    </div>
-                </div>
-                 <div class="testimonial-btn">
-                    <a href="#">Read Full Story</a>
-                </div>
-            </div>
+         <section class="cta-section" id="consultation">
+             <div class="container">
+                 <h2>Ready to Start Your Journey Abroad?</h2>
+                 <p>Get personalized advice tailored to your profile. Book your free, no-obligation consultation with our Pakistan immigration experts today!</p>
+                 <a href="contact.html" class="cta-button-large">Book Free Consultation Now</a>
+             </div>
+         </section>
 
-        </div>
-    </section>
-
-    <section class="resources" id="resources">
-        <div class="container">
-            <div class="section-title">
-                <h3>Helpful Resources</h3>
-                <p>Access our free tools and guides to help plan your immigration journey and make informed decisions.</p>
-            </div>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">📊</div>
-                    <h4 class="resource-title">Visa Points Calculator</h4>
-                    <p class="resource-desc">Estimate your eligibility score for different immigration programs and find out where you stand.</p>
-                    <a href="pointscalculator.html" class="resource-btn">Let's Calculate </a>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">🗺</div>
-                    <h4 class="resource-title">Immigration Guides</h4>
-                    <p class="resource-desc">Step-by-step guides for popular immigration pathways with detailed requirements and procedures.</p>
-                    <a href="faq.html" class="resource-btn">Go to Guides</a>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">📝</div>
-                    <h4 class="resource-title">Our Dedicated Blogs</h4>
-                    <p class="resource-desc">Read blogs that match your background and life goals.</p>
-                    <a href="#" class="resource-btn">Find Universities</a>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon"> 🤔 </div>
-                    <h4 class="resource-title">Do you need Visa?</h4>
-                    <p class="resource-desc">Check with our portal that which requires visa to enter. (verified by <b>Henley and Partners co</b>).</p>
-                    <a href="visaconditions.html" class="resource-btn">Lets go.</a>
-                </div>
-                
-                
-            </div>
-        </div>
-    </section>
+    </main>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>Fly Abroad</h4> <p>Your trusted partner for international relocation from Pakistan, providing comprehensive immigration and settlement services since 2010.</p>
+             <div class="footer-content">
+                 <div class="footer-column">
+                    <h4>Fly Abroad</h4>
+                    <p>Your trusted partner for international relocation from Pakistan since 2010, providing free comprehensive immigration guidance and settlement services.</p>
+                     <p><strong>Contact:</strong> <a href="tel:+92XXXXXXXXXX">+92-XXX-XXXXXXX</a><br> <strong>Email:</strong> <a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a><br>
+                     </p>
                 </div>
                 <div class="footer-column">
                     <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
+                     <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#destinations">Destinations</a></li>
                         <li><a href="#testimonials">Success Stories</a></li>
                         <li><a href="#resources">Resources</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Services</h4>
                     <ul class="footer-links">
-                        <li><a href="#services">Visa Guidance</a></li>
-                        <li><a href="#services">Document Checklist</a></li>
-                        <li><a href="#services"> Pathway by Profile</a></li>
-                        <li><a href="#services">Settlement Options</a></li>
-                         <li><a href="#services">Family Immigration</a></li>
+                        <li><a href="destinationpicker.html">Destination Selection</a></li>
+                        <li><a href="documentschecklist.html">Document Checklist</a></li>
+                        <li><a href="#services">Study Visa Guidance</a></li>
+                        <li><a href="#services">Work Visa Assistance</a></li>
+                        <li><a href="investmentpathways.html">Investor Visas</a></li>
+                         <li><a href="digitalnomad.html">Digital Nomad Visas</a></li>
+                        <li><a href="familyimmigration.html">Family Immigration</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h4>Destinations</h4>
+                 <div class="footer-column">
+                    <h4>Popular Destinations</h4>
                     <ul class="footer-links">
-                        <li><a href="#destinations">Canada</a></li>
-                        <li><a href="#destinations">Australia</a></li>
-                        <li><a href="#destinations">United Kingdom</a></li>
-                        <li><a href="#destinations">Germany</a></li> 
-                        <li><a href="#">Other Destinations</a></li> </ul>
+                        <li><a href="uae.html">UAE</a></li>
+                        <li><a href="australia.html">Australia</a></li>
+                        <li><a href="uk.html">United Kingdom</a></li>
+                        <li><a href="germany.html">Germany</a></li>
+                        <li><a href="canada.html">Canada</a></li>
+                        <li><a href="destinations.html">Other Destinations</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            
-              <div class="footer-bottom">
-                <p>&copy; 2025 Fly Abroad. All Rights Reserved.</p>
+             <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2025</span> Fly Abroad. All Rights Reserved.</p>
+                 <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
             </div>
-            
         </div>
-        
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Testimonial Slider
             const testimonials = document.querySelectorAll('.testimonial-item');
             let currentTestimonialIndex = 0;
-            const intervalTime = 3500; // Time in milliseconds (3.5 seconds)
+            const intervalTime = 5000; // Time in milliseconds (5 seconds)
 
             function showNextTestimonial() {
-                // Hide the current testimonial
-                testimonials[currentTestimonialIndex].classList.remove('active');
-                
-                // Calculate the index of the next testimonial
-                currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-                
-                // Show the next testimonial
-                testimonials[currentTestimonialIndex].classList.add('active');
+                if (testimonials.length > 1) { // Check if there's more than one testimonial
+                    testimonials[currentTestimonialIndex].classList.remove('active');
+                    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+                    testimonials[currentTestimonialIndex].classList.add('active');
+                }
             }
 
-            // Start the cycling
-            if (testimonials.length > 1) { // Only cycle if there's more than one testimonial
-               setInterval(showNextTestimonial, intervalTime);
+            if (testimonials.length > 1) {
+                 setInterval(showNextTestimonial, intervalTime);
             }
+
+            // Dynamic Copyright Year
+             const yearSpan = document.getElementById('current-year');
+             if (yearSpan) {
+                 yearSpan.textContent = new Date().getFullYear();
+             }
         });
     </script>
 
 </body>
+
 </html>
