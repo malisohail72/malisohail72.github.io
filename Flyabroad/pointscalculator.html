@@ -1,142 +1,413 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visa Points Calculator (Pakistan)</title>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 20px;
-        }
+        /* Basic Styling for better presentation */
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: sans-serif;
         }
         label {
             display: block;
+            margin-top: 15px;
             margin-bottom: 5px;
+            font-weight: bold;
         }
-        input, select {
+        input[type="number"],
+        input[type="text"],
+        select {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
-            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Important for consistent sizing */
         }
         button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
         }
         #result {
             margin-top: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        optgroup {
+            font-style: italic;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Visa Points Calculator (Pakistan)</h1>
 
-        <label for="visaType">Visa Type:</label>
-        <select id="visaType">
-            <option value="study">Study</option>
-            <option value="tourism">Tourism</option>
-            <option value="business">Business</option>
-            <option value="investment">Investment</option>
-            <option value="religious">Religious</option>
-            <option value="medical">Medical</option>
-            <option value="other">Other</option>
-        </select>
+<div class="container">
+    <h1>Visa Points Calculator (Pakistan)</h1>
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" min="18">
+    <label for="visaType">Visa Type:</label>
+    <select id="visaType">
+        <option value="study">Study</option>
+        <option value="tourism">Tourism</option>
+        <option value="business">Business</option>
+        <option value="investment">Investment</option>
+        <option value="religious">Religious</option>
+        <option value="medical">Medical</option>
+        <option value="other">Other</option>
+    </select>
 
-        <label for="education">Education Level:</label>
-        <select id="education">
-            <option value="highschool">High School</option>
-            <option value="bachelors">Bachelor's Degree</option>
-            <option value="masters">Master's Degree</option>
-            <option value="phd">PhD</option>
-        </select>
+    <label for="age">Age:</label>
+    <input type="number" id="age" min="18">
 
-        <label for="experience">Work Experience (Years):</label>
-        <input type="number" id="experience" min="0">
+    <label for="education">Education Level:</label>
+    <select id="education">
+        <option value="highschool">High School</option>
+        <option value="bachelors">Bachelor's Degree</option>
+        <option value="masters">Master's Degree</option>
+        <option value="phd">PhD</option>
+    </select>
 
-        <label for="language">Language Proficiency (IELTS/TOEFL/etc.):</label>
-        <input type="text" id="language">
+    <label for="experience">Work Experience (Years):</label>
+    <input type="number" id="experience" min="0">
 
-        <label for="funds">Available Funds (PKR):</label>
-        <input type="number" id="funds" min="0">
+    <label for="language">Language Proficiency (IELTS/TOEFL/etc.):</label>
+    <input type="text" id="language">
 
-        <button onclick="calculatePoints()">Calculate Points</button>
+    <label for="funds">Available Funds (PKR):</label>
+    <input type="number" id="funds" min="0">
 
-        <div id="result"></div>
-    </div>
+    <label for="destinationCountry">Destination Country:</label>
+    <select id="destinationCountry">
+        <optgroup label="Asia">
+            <option value="AF">Afghanistan</option>
+            <option value="AM">Armenia</option>
+            <option value="AZ">Azerbaijan</option>
+            <option value="BH">Bahrain</option>
+            <option value="BD">Bangladesh</option>
+            <option value="BT">Bhutan</option>
+            <option value="BN">Brunei</option>
+            <option value="KH">Cambodia</option>
+            <option value="CN">China</option>
+            <option value="CY">Cyprus</option>
+            <option value="GE">Georgia</option>
+            <option value="IN">India</option>
+            <option value="ID">Indonesia</option>
+            <option value="IR">Iran</option>
+            <option value="IQ">Iraq</option>
+            <option value="IL">Israel</option>
+            <option value="JP">Japan</option>
+            <option value="JO">Jordan</option>
+            <option value="KZ">Kazakhstan</option>
+            <option value="KW">Kuwait</option>
+            <option value="KG">Kyrgyzstan</option>
+            <option value="LA">Laos</option>
+            <option value="LB">Lebanon</option>
+            <option value="MY">Malaysia</option>
+            <option value="MV">Maldives</option>
+            <option value="MN">Mongolia</option>
+            <option value="MM">Myanmar (Burma)</option>
+            <option value="NP">Nepal</option>
+            <option value="KP">North Korea</option>
+            <option value="OM">Oman</option>
+            <option value="PK">Pakistan</option>
+            <option value="PS">Palestine State</option>
+            <option value="PH">Philippines</option>
+            <option value="QA">Qatar</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="SG">Singapore</option>
+            <option value="KR">South Korea</option>
+            <option value="LK">Sri Lanka</option>
+            <option value="SY">Syria</option>
+            <option value="TW">Taiwan</option>
+            <option value="TJ">Tajikistan</option>
+            <option value="TH">Thailand</option>
+            <option value="TL">Timor-Leste</option>
+            <option value="TR">Turkey</option>
+            <option value="TM">Turkmenistan</option>
+            <option value="AE">United Arab Emirates</option>
+            <option value="UZ">Uzbekistan</option>
+            <option value="VN">Vietnam</option>
+            <option value="YE">Yemen</option>
+        </optgroup>
+        <optgroup label="Africa">
+            <option value="DZ">Algeria</option>
+            <option value="AO">Angola</option>
+            <option value="BJ">Benin</option>
+            <option value="BW">Botswana</option>
+            <option value="BF">Burkina Faso</option>
+            <option value="BI">Burundi</option>
+            <option value="CV">Cabo Verde</option>
+            <option value="CM">Cameroon</option>
+            <option value="CF">Central African Republic</option>
+            <option value="TD">Chad</option>
+            <option value="KM">Comoros</option>
+            <option value="CG">Congo, Republic of the</option>
+            <option value="CD">Congo, Democratic Republic of the</option>
+            <option value="CI">Cote d'Ivoire</option>
+            <option value="DJ">Djibouti</option>
+            <option value="EG">Egypt</option>
+            <option value="GQ">Equatorial Guinea</option>
+            <option value="ER">Eritrea</option>
+            <option value="SZ">Eswatini (fmr. "Swaziland")</option>
+            <option value="ET">Ethiopia</option>
+            <option value="GA">Gabon</option>
+            <option value="GM">Gambia</option>
+            <option value="GH">Ghana</option>
+            <option value="GN">Guinea</option>
+            <option value="GW">Guinea-Bissau</option>
+            <option value="KE">Kenya</option>
+            <option value="LS">Lesotho</option>
+            <option value="LR">Liberia</option>
+            <option value="LY">Libya</option>
+            <option value="MG">Madagascar</option>
+            <option value="MW">Malawi</option>
+            <option value="ML">Mali</option>
+            <option value="MR">Mauritania</option>
+            <option value="MU">Mauritius</option>
+            <option value="MA">Morocco</option>
+            <option value="MZ">Mozambique</option>
+            <option value="NA">Namibia</option>
+            <option value="NE">Niger</option>
+            <option value="NG">Nigeria</option>
+            <option value="RW">Rwanda</option>
+            <option value="ST">Sao Tome and Principe</option>
+            <option value="SN">Senegal</option>
+            <option value="SC">Seychelles</option>
+            <option value="SL">Sierra Leone</option>
+            <option value="SO">Somalia</option>
+            <option value="ZA">South Africa</option>
+            <option value="SS">South Sudan</option>
+            <option value="SD">Sudan</option>
+            <option value="TZ">Tanzania</option>
+            <option value="TG">Togo</option>
+            <option value="TN">Tunisia</option>
+            <option value="UG">Uganda</option>
+            <option value="ZM">Zambia</option>
+            <option value="ZW">Zimbabwe</option>
+        </optgroup>
+        <optgroup label="Europe">
+            <option value="AL">Albania</option>
+            <option value="AD">Andorra</option>
+            <option value="AT">Austria</option>
+            <option value="BY">Belarus</option>
+            <option value="BE">Belgium</option>
+            <option value="BA">Bosnia and Herzegovina</option>
+            <option value="BG">Bulgaria</option>
+            <option value="HR">Croatia</option>
+            <option value="CY">Cyprus</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="DK">Denmark</option>
+            <option value="EE">Estonia</option>
+            <option value="FI">Finland</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+            <option value="GR">Greece</option>
+            <option value="HU">Hungary</option>
+            <option value="IS">Iceland</option>
+            <option value="IE">Ireland</option>
+            <option value="IT">Italy</option>
+            <option value="XK">Kosovo</option>
+            <option value="LV">Latvia</option>
+            <option value="LI">Liechtenstein</option>
+            <option value="LT">Lithuania</option>
+            <option value="LU">Luxembourg</option>
+            <option value="MT">Malta</option>
+            <option value="MD">Moldova</option>
+            <option value="MC">Monaco</option>
+            <option value="ME">Montenegro</option>
+            <option value="NL">Netherlands</option>
+            <option value="MK">North Macedonia</option>
+            <option value="NO">Norway</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="RO">Romania</option>
+            <option value="RU">Russia</option>
+            <option value="SM">San Marino</option>
+            <option value="RS">Serbia</option>
+            <option value="SK">Slovakia</option>
+            <option value="SI">Slovenia</option>
+            <option value="ES">Spain</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="UA">Ukraine</option>
+            <option value="GB">United Kingdom</option>
+            <option value="VA">Vatican City</option>
+        </optgroup>
+        <optgroup label="North America">
+            <option value="AG">Antigua and Barbuda</option>
+            <option value="BS">Bahamas</option>
+            <option value="BB">Barbados</option>
+            <option value="BZ">Belize</option>
+            <option value="CA">Canada</option>
+            <option value="CR">Costa Rica</option>
+            <option value="CU">Cuba</option>
+            <option value="DM">Dominica</option>
+            <option value="DO">Dominican Republic</option>
+            <option value="SV">El Salvador</option>
+            <option value="GD">Grenada</option>
+            <option value="GT">Guatemala</option>
+            <option value="HT">Haiti</option>
+            <option value="HN">Honduras</option>
+            <option value="JM">Jamaica</option>
+            <option value="MX">Mexico</option>
+            <option value="NI">Nicaragua</option>
+            <option value="PA">Panama</option>
+            <option value="KN">Saint Kitts and Nevis</option>
+            <option value="LC">Saint Lucia</option>
+            <option value="VC">Saint Vincent and the Grenadines</option>
+            <option value="TT">Trinidad and Tobago</option>
+            <option value="US">United States</option>
+        </optgroup>
+        <optgroup label="South America">
+            <option value="AR">Argentina</option>
+            <option value="BO">Bolivia</option>
+            <option value="BR">Brazil</option>
+            <option value="CL">Chile</option>
+            <option value="CO">Colombia</option>
+            <option value="EC">Ecuador</option>
+            <option value="GY">Guyana</option>
+            <option value="PY">Paraguay</option>
+            <option value="PE">Peru</option>
+            <option value="SR">Suriname</option>
+            <option value="UY">Uruguay</option>
+            <option value="VE">Venezuela</option>
+        </optgroup>
+        <optgroup label="Oceania">
+            <option value="AU">Australia</option>
+            <option value="FJ">Fiji</option>
+            <option value="KI">Kiribati</option>
+            <option value="MH">Marshall Islands</option>
+            <option value="FM">Micronesia</option>
+            <option value="NR">Nauru</option>
+            <option value="NZ">New Zealand</option>
+            <option value="PW">Palau</option>
+            <option value="PG">Papua New Guinea</option>
+            <option value="WS">Samoa</option>
+            <option value="SB">Solomon Islands</option>
+            <option value="TO">Tonga</option>
+            <option value="TV">Tuvalu</option>
+            <option value="VU">Vanuatu</option>
+        </optgroup>
+    </select>
+    <button onclick="calculatePoints()">Calculate Points</button>
 
-    <script>
-        function calculatePoints() {
-            const visaType = document.getElementById("visaType").value;
-            const age = parseInt(document.getElementById("age").value);
-            const education = document.getElementById("education").value;
-            const experience = parseInt(document.getElementById("experience").value);
-            const language = document.getElementById("language").value;
-            const funds = parseInt(document.getElementById("funds").value);
+    <div id="result"></div>
+</div>
 
-            let points = 0;
+<script>
+    function calculatePoints() {
+        const visaType = document.getElementById("visaType").value;
+        const age = parseInt(document.getElementById("age").value) || 0; // Added fallback for NaN
+        const education = document.getElementById("education").value;
+        const experience = parseInt(document.getElementById("experience").value) || 0; // Added fallback for NaN
+        const language = document.getElementById("language").value;
+        const funds = parseInt(document.getElementById("funds").value) || 0; // Added fallback for NaN
+        const destinationCountry = document.getElementById("destinationCountry").value; // Get selected country value
 
-            // Age Points
-            if (age >= 18 && age <= 25) {
-                points += 10;
-            } else if (age >= 26 && age <= 35) {
-                points += 15;
-            } else if (age >= 36 && age <= 45) {
-                points += 5;
-            }
-
-            // Education Points
-            if (education === "highschool") {
-                points += 5;
-            } else if (education === "bachelors") {
-                points += 10;
-            } else if (education === "masters") {
-                points += 15;
-            } else if (education === "phd") {
-                points += 20;
-            }
-
-            // Experience Points
-            if (experience >= 1 && experience <= 3) {
-                points += 5;
-            } else if (experience >= 4 && experience <= 6) {
-                points += 10;
-            } else if (experience >= 7) {
-                points += 15;
-            }
-
-            // Language Points (Simplified, you'd need a more robust system)
-            if (language.toLowerCase().includes("ielts") || language.toLowerCase().includes("toefl")) {
-                points += 10;
-            }
-
-            // Funds Points (Simplified, you'd need specific country requirements)
-            if (funds >= 1000000) { //Example threshold.
-                points += 5;
-            }
-
-            // Visa Type Specific Points (Example)
-            if (visaType === "study") {
-                points += 10;
-            } else if (visaType === "investment") {
-                points += 20;
-            }
-
-            document.getElementById("result").innerHTML = `Total Points: ${points}`;
+        // Basic input validation (optional but recommended)
+        if (!document.getElementById("age").value) {
+             alert("Please enter your age.");
+             return; // Stop calculation if age is missing
         }
-    </script>
+         if (!document.getElementById("experience").value) {
+             alert("Please enter your work experience (0 if none).");
+             return; // Stop calculation if experience is missing
+        }
+         if (!document.getElementById("funds").value) {
+             alert("Please enter your available funds (0 if none).");
+             return; // Stop calculation if funds are missing
+        }
+
+
+        let points = 0;
+
+        // Age Points
+        if (age >= 18 && age <= 25) {
+            points += 10;
+        } else if (age >= 26 && age <= 35) {
+            points += 15;
+        } else if (age >= 36 && age <= 45) {
+            points += 5;
+        } // Note: age > 45 gets 0 points in this logic
+
+        // Education Points
+        if (education === "highschool") {
+            points += 5;
+        } else if (education === "bachelors") {
+            points += 10;
+        } else if (education === "masters") {
+            points += 15;
+        } else if (education === "phd") {
+            points += 20;
+        }
+
+        // Experience Points
+        if (experience >= 1 && experience <= 3) {
+            points += 5;
+        } else if (experience >= 4 && experience <= 6) {
+            points += 10;
+        } else if (experience >= 7) {
+            points += 15;
+        }
+
+        // Language Points (Simplified, you'd need a more robust system)
+        // Check if the input is not empty and contains relevant keywords
+        const langInput = language.trim().toLowerCase();
+        if (langInput && (langInput.includes("ielts") || langInput.includes("toefl") || langInput.includes("pte") || langInput.includes("english"))) {
+             // You might want to add more specific checks here based on score ranges later
+            points += 10;
+        }
+
+        // Funds Points (Simplified, you'd need specific country requirements)
+        if (funds >= 1000000) { //Example threshold. THIS WILL VARY GREATLY BY COUNTRY AND VISA TYPE!
+            points += 5;
+        } else if (funds >= 500000) { // Example tier
+             points += 2;
+        }
+
+        // Visa Type Specific Points (Example)
+        if (visaType === "study") {
+            points += 10;
+        } else if (visaType === "investment") {
+            points += 20; // Investments often get higher points
+        } else if (visaType === "business") {
+             points += 5;
+        }
+         // Tourism, Religious, Medical usually don't use points systems like this,
+         // but you could add logic if needed for specific cases.
+
+        // --- You could add points based on destinationCountry here if needed ---
+        // Example:
+        // if (destinationCountry === 'CA' || destinationCountry === 'AU') { // Canada or Australia
+        //     points += 5; // Bonus for certain countries? (Just an example)
+        // }
+
+
+        document.getElementById("result").innerHTML = `Total Points: ${points}`;
+
+        // Optional: Add a message based on points (Example threshold)
+        if (points >= 60) { // Example threshold for likely success
+             document.getElementById("result").innerHTML += `<br>You have a good point score!`;
+        } else if (points >= 40) {
+             document.getElementById("result").innerHTML += `<br>Your point score is moderate. Check specific visa requirements.`;
+        } else {
+             document.getElementById("result").innerHTML += `<br>Your point score is low. You may need to improve in certain areas.`;
+        }
+    }
+</script>
+
 </body>
 </html>
