@@ -3,334 +3,1034 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Destination Picker (Styled)</title>
-    <style>
-        /* --- General Styling --- */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px auto; /* Center content */
-            max-width: 850px; /* Readable width */
-            padding: 15px;
-            background-color: #f8f9fa; /* Light grey background */
-            color: #333;
-        }
-
-        /* --- Headings --- */
-        h1 {
-            color: #0056b3; /* Dark blue */
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            color: #0056b3;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 5px;
-        }
-
-        h3 {
-            color: #17a2b8; /* Teal color */
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-
-        /* --- Disclaimer --- */
-        .disclaimer {
-            background-color: #fff3cd; /* Light yellow */
-            border: 1px solid #ffeeba;
-            color: #856404; /* Dark yellow/brown */
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-            text-align: center;
-            font-size: 0.95em;
-        }
-        .disclaimer strong {
-            color: #856404; /* Keep strong text consistent */
-        }
-
-        /* --- Form Styling --- */
-        #immigrationForm {
-            background-color: #ffffff; /* White background for form */
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block; /* Labels on their own line */
-            margin-bottom: 6px;
-            font-weight: bold;
-            color: #495057; /* Dark grey */
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%; /* Full width */
-            padding: 12px;
-            margin-bottom: 18px; /* Space below inputs */
-            border: 1px solid #ced4da; /* Standard border */
-            border-radius: 4px;
-            box-sizing: border-box; /* Include padding in width */
-            font-size: 1em;
-        }
-
-        input:focus, select:focus {
-            border-color: #80bdff; /* Highlight on focus */
-            outline: none; /* Remove default outline */
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Add subtle glow */
-        }
-
-        small {
-            display: block;
-            margin-top: -12px; /* Pull hint closer to input */
-            margin-bottom: 18px;
-            font-size: 0.85em;
-            color: #6c757d; /* Medium grey */
-            font-style: italic;
-        }
-
-        /* --- Button Styling --- */
-        button {
-            display: block;
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #007bff; /* Primary blue */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease; /* Smooth transitions */
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-        button:active {
-             transform: translateY(1px); /* Slight press effect */
-        }
-
-        /* --- Horizontal Rule --- */
-        hr {
-            margin-top: 40px;
-            margin-bottom: 30px;
-            border: 0;
-            border-top: 1px solid #dee2e6; /* Lighter line */
-        }
-
-        /* --- Results Area Styling --- */
-        #results {
-            background-color: #e9ecef; /* Light grey for results */
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: 1px solid #ced4da;
-        }
-
-        #results ul {
-            padding-left: 25px; /* Indent list */
-            list-style: disc; /* Standard bullets */
-        }
-
-        #results li {
-            margin-bottom: 12px; /* Space out list items */
-        }
-
-        #results strong {
-            color: #0056b3; /* Use consistent strong color */
-        }
-
-         /* Style for the final disclaimer paragraph within results */
-        #results p {
-            margin-top: 20px;
-            font-weight: bold;
-            text-align: center;
-            color: #dc3545; /* Red color for emphasis */
-            background-color: #f8d7da; /* Light red background */
-            border: 1px solid #f5c6cb;
-            padding: 10px;
-            border-radius: 4px;
-        }
-         #results p strong {
-             color: #721c24; /* Darker red for strong text inside */
-         }
-
-    </style>
+    <title>Global Destination Recommendation System</title>
 </head>
 <body>
+    <div class="container">
+        <h1>Global Destination Recommendation System</h1>
+        <form id="destinationForm">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="18" max="100" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="maritalStatus">Marital Status:</label>
+                <select id="maritalStatus" required>
+                    <option value="">--Select--</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widowed">Widowed</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="educationLevel">Highest Education Level:</label>
+                <select id="educationLevel" required>
+                    <option value="">--Select--</option>
+                    <option value="highSchool">High School</option>
+                    <option value="bachelors">Bachelor's Degree</option>
+                    <option value="masters">Master's Degree</option>
+                    <option value="phd">PhD or Doctorate</option>
+                    <option value="vocational">Vocational/Trade School</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="workExperience">Years of Skilled Work Experience:</label>
+                <input type="number" id="workExperience" min="0" max="50" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fieldOfWork">Field of Work/Study:</label>
+                <input type="text" id="fieldOfWork" placeholder="e.g., Software Engineering, Medicine, Accounting" required>
+                <div id="fieldSuggestions" class="suggestions"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="bankBalance">Approximate Bank Statement Balance (PKR):</label>
+                <input type="number" id="bankBalance" placeholder="Enter amount in Pakistani Rupees" required>
+                <small>Enter amount in Pakistani Rupees (e.g., 5000000 for 5 Million PKR)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="immigrationPathway">Desired Immigration Pathway:</label>
+                <select id="immigrationPathway" required>
+                    <option value="">--Select--</option>
+                    <option value="work">Work Visa/Permit</option>
+                    <option value="study">Student Visa</option>
+                    <option value="investment">Investment/Business Immigration</option>
+                    <option value="skillsMigration">Skills-Based Migration</option>
+                    <option value="familySponsorship">Family Sponsorship</option>
+                    <option value="refugeeAsylum">Refugee/Asylum</option>
+                    <option value="retirement">Retirement Visa</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ieltsScore">English Proficiency (IELTS Overall Score - if taken):</label>
+                <input type="number" id="ieltsScore" min="0" max="9" step="0.5" placeholder="e.g., 7.5">
+                <small>Leave blank if not taken. Crucial for many work/study paths in English-speaking countries.</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="preferredClimate">Preferred Climate:</label>
+                <select id="preferredClimate">
+                    <option value="">--No Preference--</option>
+                    <option value="tropical">Tropical</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="temperate">Temperate</option>
+                    <option value="continental">Continental</option>
+                    <option value="polar">Cold/Polar</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="languageAbilities">Other Language Abilities:</label>
+                <select id="languageAbilities" multiple>
+                    <option value="arabic">Arabic</option>
+                    <option value="chinese">Chinese (Mandarin)</option>
+                    <option value="french">French</option>
+                    <option value="german">German</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="italian">Italian</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="portuguese">Portuguese</option>
+                    <option value="russian">Russian</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="urdu">Urdu</option>
+                </select>
+                <small>Hold Ctrl/Cmd to select multiple languages</small>
+            </div>
+            
+            <div class="form-group">
+                <label>Priorities (Rank from 1-5):</label>
+                
+                <div class="priority-item">
+                    <label for="priorityEconomy">Economic Opportunities:</label>
+                    <input type="number" id="priorityEconomy" min="1" max="5" value="3">
+                </div>
+                
+                <div class="priority-item">
+                    <label for="priorityQuality">Quality of Life:</label>
+                    <input type="number" id="priorityQuality" min="1" max="5" value="3">
+                </div>
+                
+                <div class="priority-item">
+                    <label for="prioritySafety">Safety & Security:</label>
+                    <input type="number" id="prioritySafety" min="1" max="5" value="3">
+                </div>
+                
+                <div class="priority-item">
+                    <label for="priorityPathway">Immigration Ease:</label>
+                    <input type="number" id="priorityPathway" min="1" max="5" value="3">
+                </div>
+                
+                <div class="priority-item">
+                    <label for="priorityCost">Cost of Living:</label>
+                    <input type="number" id="priorityCost" min="1" max="5" value="3">
+                </div>
+            </div>
+            
+            <button type="submit" id="recommendButton">Get Destination Suggestions</button>
+        </form>
+        
+        <div id="resultsContainer" style="display: none;">
+            <h2>Recommended Destinations</h2>
+            <div id="recommendationResults"></div>
+            <div id="mapContainer"></div>
+            <button id="backButton">Back to Form</button>
+        </div>
+    </div>
 
-<h1>Perfect Destination Picker (Styled Guidance)</h1>
-<p class="disclaimer"><strong>Disclaimer:</strong> This tool provides very general suggestions based on common immigration criteria for Pakistani nationals. It is NOT a substitute for professional immigration advice. Laws and requirements change frequently. Always consult official government websites and registered immigration consultants/lawyers for accurate, up-to-date information specific to your situation.</p>
-
-<form id="immigrationForm">
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
-
-    <label for="maritalStatus">Marital Status:</label>
-    <select id="maritalStatus" name="maritalStatus" required>
-        <option value="">--Select--</option>
-        <option value="single">Single</option>
-        <option value="married">Married</option>
-        <option value="other">Other</option>
-    </select>
-
-    <label for="education">Highest Education Level:</label>
-    <select id="education" name="education" required>
-        <option value="">--Select--</option>
-        <option value="highschool">High School / Intermediate</option>
-        <option value="diploma">Diploma / Associate Degree</option>
-        <option value="bachelors">Bachelor's Degree (16 years)</option>
-        <option value="masters">Master's Degree (18 years)</option>
-        <option value="phd">PhD</option>
-    </select>
-
-    <label for="workExperience">Years of Skilled Work Experience:</label>
-    <input type="number" id="workExperience" name="workExperience" min="0" required>
-
-     <label for="fieldOfWork">Field of Work/Study:</label>
-    <input type="text" id="fieldOfWork" name="fieldOfWork" placeholder="e.g., Software Engineering, Medicine, Accounting" required>
-
-    <label for="bankStatement">Approximate Bank Statement Balance (PKR):</label>
-    <input type="number" id="bankStatement" name="bankStatement" min="0" required>
-    <small>Enter amount in Pakistani Rupees (e.g., 5000000 for 5 Million PKR)</small>
-
-    <label for="pathway">Desired Immigration Pathway:</label>
-    <select id="pathway" name="pathway" required>
-        <option value="">--Select--</option>
-        <option value="work">Skilled Work / Permanent Residence</option>
-        <option value="study">Study Permit / Student Visa</option>
-        <option value="business">Business / Investor Visa</option>
-        <option value="family">Family Sponsorship</option>
-    </select>
-
-    <label for="ielts">English Proficiency (IELTS Overall Score - if taken):</label>
-    <input type="number" id="ielts" name="ielts" step="0.5" min="0" max="9">
-    <small>Leave blank if not taken. Crucial for many work/study paths in English-speaking countries.</small>
-
-    <button type="button" onclick="getSuggestions()">Get Destination Suggestions</button>
-</form>
-
-<hr>
-<h2>Suggestions:</h2>
-<div id="results">
-    Please fill out the form and click the button above.
-</div>
-
-<script>
-    function getSuggestions() {
-        // --- Get Input Values ---
-        const age = parseInt(document.getElementById('age').value) || 0;
-        const maritalStatus = document.getElementById('maritalStatus').value;
-        const education = document.getElementById('education').value;
-        const workExperience = parseInt(document.getElementById('workExperience').value) || 0;
-        const fieldOfWork = document.getElementById('fieldOfWork').value.trim().toLowerCase();
-        const bankStatementPKR = parseInt(document.getElementById('bankStatement').value) || 0;
-        const pathway = document.getElementById('pathway').value;
-        const ielts = parseFloat(document.getElementById('ielts').value) || 0;
-
-        // --- Basic Input Validation (Example - add more if needed) ---
-        if (!age || !maritalStatus || !education || workExperience < 0 || !fieldOfWork || bankStatementPKR < 0 || !pathway) {
-             document.getElementById('results').innerHTML = '<p style="color: red; font-weight: bold;">Please fill out all required fields correctly before submitting.</p>';
-             return; // Stop execution if basic validation fails
-        }
-
-        let suggestions = "<h3>Based on your input (General Guidance Only):</h3><ul>";
-        let potentialCountries = []; // To avoid duplicate suggestions
-
-        // --- Logic (Same as before) ---
-
-        // **Pathway: Family Sponsorship**
-        if (pathway === 'family') {
-            suggestions += "<li><strong>Family Sponsorship:</strong> Eligibility primarily depends on having a qualifying relative (spouse, parent, child, sometimes sibling) who is a citizen or permanent resident of the destination country and meets sponsorship requirements (income, status etc.). The process varies significantly by country. <strong>Action:</strong> Identify countries where you have eligible family sponsors and check their specific government immigration websites for family class visa requirements.</li>";
-        }
-
-        // **Pathway: Study**
-        if (pathway === 'study') {
-            suggestions += "<li><strong>Study Pathway:</strong> Requires admission to a designated learning institution (DLI) in the destination country. Key factors include:<ul>";
-            suggestions += "<li><strong>Proof of Funds:</strong> You indicated approx. PKR " + bankStatementPKR.toLocaleString() + ". This is CRUCIAL. Calculate if this meets the tuition + living expenses requirements for your target country/program (often PKR 5-10 Million+ per year for popular destinations like Canada, Australia, UK, USA). Research specific country requirements carefully.</li>";
-            if (ielts >= 6.0) {
-                 suggestions += "<li>Your IELTS score (<strong>" + ielts + "</strong>) is generally helpful for English-speaking countries. Some may require higher scores (6.5+).</li>";
-            } else {
-                 suggestions += "<li>English Proficiency (IELTS/TOEFL/PTE) is usually mandatory for English-speaking countries. Aim for <strong>6.0-6.5+</strong> overall. Consider taking a test if you haven't.</li>";
+    <script>
+        // Comprehensive country database with immigration criteria
+        const countryDatabase = [
+            // North America
+            {
+                name: "Canada",
+                region: "North America",
+                climate: ["continental", "polar"],
+                languages: ["English", "French"],
+                immigrationPathways: ["work", "study", "skillsMigration", "familySponsorship", "investment"],
+                economyStrength: 4.5,
+                qualityOfLife: 4.8,
+                safety: 4.7,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 1,
+                        minLanguageScore: 6.0,
+                        preferredFields: ["IT", "Engineering", "Healthcare", "Finance"],
+                        financialRequirement: 2000000 // ~12,000 CAD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        financialRequirement: 4000000 // ~24,000 CAD in PKR
+                    },
+                    skillsMigration: {
+                        pointsSystem: true,
+                        minEducation: "bachelors",
+                        minExperience: 1,
+                        minLanguageScore: 7.0,
+                        agePreference: "25-45",
+                        financialRequirement: 2500000 // ~15,000 CAD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 33000000 // ~200,000 CAD in PKR
+                    }
+                },
+                costOfLiving: 3.8,
+                notes: "Express Entry, Provincial Nominee Programs, and Student Direct Stream available."
+            },
+            {
+                name: "United States",
+                region: "North America",
+                climate: ["continental", "temperate", "tropical"],
+                languages: ["English", "Spanish"],
+                immigrationPathways: ["work", "study", "investment", "familySponsorship"],
+                economyStrength: 5.0,
+                qualityOfLife: 4.5,
+                safety: 3.8,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 7.0,
+                        preferredFields: ["IT", "Engineering", "Healthcare", "Research"],
+                        financialRequirement: 1000000 // Self-support evidence
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.5,
+                        financialRequirement: 8000000 // ~48,000 USD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 166000000 // ~1,000,000 USD in PKR for EB-5
+                    }
+                },
+                costOfLiving: 4.2,
+                notes: "H-1B visa lottery, F-1 student visa, EB-5 investor program available."
+            },
+            
+            // Europe
+            {
+                name: "Germany",
+                region: "Europe",
+                climate: ["continental", "temperate"],
+                languages: ["German", "English"],
+                immigrationPathways: ["work", "study", "skillsMigration"],
+                economyStrength: 4.8,
+                qualityOfLife: 4.7,
+                safety: 4.6,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 5.5,
+                        germanLanguage: "Beneficial",
+                        preferredFields: ["Engineering", "IT", "Science", "Skilled Trades"],
+                        financialRequirement: 1500000 // ~9,000 EUR in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        germanLanguage: "Often required",
+                        financialRequirement: 2500000 // ~15,000 EUR in PKR
+                    },
+                    skillsMigration: {
+                        minEducation: "vocational",
+                        minExperience: 2,
+                        germanLanguage: "Often required",
+                        financialRequirement: 1500000 // ~9,000 EUR in PKR
+                    }
+                },
+                costOfLiving: 3.5,
+                notes: "EU Blue Card, Job Seeker Visa, many tuition-free universities."
+            },
+            {
+                name: "United Kingdom",
+                region: "Europe",
+                climate: ["temperate"],
+                languages: ["English"],
+                immigrationPathways: ["work", "study", "skillsMigration", "investment"],
+                economyStrength: 4.6,
+                qualityOfLife: 4.5,
+                safety: 4.3,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 6.0,
+                        preferredFields: ["IT", "Healthcare", "Engineering", "Finance"],
+                        financialRequirement: 3300000 // ~20,000 GBP in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        financialRequirement: 4000000 // ~24,000 GBP in PKR
+                    },
+                    skillsMigration: {
+                        pointsSystem: true,
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 7.0,
+                        financialRequirement: 3300000 // ~20,000 GBP in PKR
+                    },
+                    investment: {
+                        financialRequirement: 332000000 // ~2,000,000 GBP in PKR
+                    }
+                },
+                costOfLiving: 4.0,
+                notes: "Skilled Worker visa, Student visa, Global Talent visa available."
+            },
+            
+            // Australia & Oceania
+            {
+                name: "Australia",
+                region: "Oceania",
+                climate: ["tropical", "temperate", "mediterranean"],
+                languages: ["English"],
+                immigrationPathways: ["work", "study", "skillsMigration", "investment"],
+                economyStrength: 4.6,
+                qualityOfLife: 4.9,
+                safety: 4.8,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 7.0,
+                        preferredFields: ["IT", "Engineering", "Healthcare", "Construction"],
+                        financialRequirement: 2500000 // ~15,000 AUD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        financialRequirement: 5000000 // ~30,000 AUD in PKR
+                    },
+                    skillsMigration: {
+                        pointsSystem: true,
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 7.0,
+                        agePreference: "25-45",
+                        financialRequirement: 2500000 // ~15,000 AUD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 41500000 // ~250,000 AUD in PKR
+                    }
+                },
+                costOfLiving: 4.2,
+                notes: "Skilled Independent visa, Temporary Skill Shortage visa, Student visa available."
+            },
+            {
+                name: "New Zealand",
+                region: "Oceania",
+                climate: ["temperate"],
+                languages: ["English", "Maori"],
+                immigrationPathways: ["work", "study", "skillsMigration"],
+                economyStrength: 4.3,
+                qualityOfLife: 4.8,
+                safety: 4.9,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 6.5,
+                        preferredFields: ["IT", "Construction", "Healthcare", "Agriculture"],
+                        financialRequirement: 2000000 // ~12,000 NZD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        financialRequirement: 4000000 // ~24,000 NZD in PKR
+                    },
+                    skillsMigration: {
+                        pointsSystem: true,
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 6.5,
+                        agePreference: "20-55",
+                        financialRequirement: 2000000 // ~12,000 NZD in PKR
+                    }
+                },
+                costOfLiving: 4.0,
+                notes: "Skilled Migrant Category, Essential Skills Work visa, Student visa available."
+            },
+            
+            // Asia
+            {
+                name: "Singapore",
+                region: "Asia",
+                climate: ["tropical"],
+                languages: ["English", "Chinese", "Malay", "Tamil"],
+                immigrationPathways: ["work", "study", "investment"],
+                economyStrength: 4.9,
+                qualityOfLife: 4.7,
+                safety: 4.9,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 6.5,
+                        preferredFields: ["Finance", "IT", "Engineering", "Healthcare"],
+                        financialRequirement: 1000000 // ~6,000 SGD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.5,
+                        financialRequirement: 5000000 // ~30,000 SGD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 50000000 // ~300,000 SGD in PKR
+                    }
+                },
+                costOfLiving: 4.5,
+                notes: "Employment Pass, S Pass, Entre Pass, and Student Pass available."
+            },
+            {
+                name: "Japan",
+                region: "Asia",
+                climate: ["temperate"],
+                languages: ["Japanese"],
+                immigrationPathways: ["work", "study", "skillsMigration"],
+                economyStrength: 4.7,
+                qualityOfLife: 4.6,
+                safety: 4.9,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 5.5,
+                        japaneseLanguage: "Often required",
+                        preferredFields: ["IT", "Engineering", "Education", "Skilled Trades"],
+                        financialRequirement: 1500000 // ~9,000 USD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 5.5,
+                        japaneseLanguage: "Often required",
+                        financialRequirement: 3300000 // ~20,000 USD in PKR
+                    },
+                    skillsMigration: {
+                        pointsSystem: true,
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        japaneseLanguage: "Often required",
+                        financialRequirement: 1500000 // ~9,000 USD in PKR
+                    }
+                },
+                costOfLiving: 4.0,
+                notes: "Highly Skilled Professional visa, Work visa, Student visa available."
+            },
+            
+            // Middle East
+            {
+                name: "United Arab Emirates",
+                region: "Middle East",
+                climate: ["tropical"],
+                languages: ["Arabic", "English"],
+                immigrationPathways: ["work", "study", "investment", "retirement"],
+                economyStrength: 4.5,
+                qualityOfLife: 4.3,
+                safety: 4.7,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 5.5,
+                        preferredFields: ["Engineering", "Finance", "IT", "Hospitality"],
+                        financialRequirement: 800000 // ~5,000 USD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 5.5,
+                        financialRequirement: 2500000 // ~15,000 USD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 33000000 // ~200,000 USD in PKR
+                    },
+                    retirement: {
+                        financialRequirement: 25000000 // ~150,000 USD in PKR
+                    }
+                },
+                costOfLiving: 4.2,
+                notes: "Work visa, Golden visa, Student visa, Retirement visa available. Tax-free income."
+            },
+            
+            // Africa
+            {
+                name: "South Africa",
+                region: "Africa",
+                climate: ["mediterranean", "temperate"],
+                languages: ["English", "Afrikaans", "Zulu", "Xhosa"],
+                immigrationPathways: ["work", "study", "skillsMigration", "investment", "retirement"],
+                economyStrength: 3.5,
+                qualityOfLife: 3.7,
+                safety: 2.8,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 6.0,
+                        preferredFields: ["IT", "Healthcare", "Engineering", "Finance"],
+                        financialRequirement: 800000 // ~5,000 USD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 6.0,
+                        financialRequirement: 1600000 // ~10,000 USD in PKR
+                    },
+                    skillsMigration: {
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 6.0,
+                        financialRequirement: 800000 // ~5,000 USD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 15000000 // ~90,000 USD in PKR
+                    },
+                    retirement: {
+                        financialRequirement: 8000000 // ~48,000 USD in PKR
+                    }
+                },
+                costOfLiving: 2.8,
+                notes: "Critical Skills Work visa, Study visa, Business visa, Retirement visa available."
+            },
+            
+            // South America
+            {
+                name: "Chile",
+                region: "South America",
+                climate: ["mediterranean", "temperate"],
+                languages: ["Spanish"],
+                immigrationPathways: ["work", "study", "investment", "retirement"],
+                economyStrength: 3.8,
+                qualityOfLife: 4.0,
+                safety: 3.9,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 5.0,
+                        spanishLanguage: "Beneficial",
+                        preferredFields: ["IT", "Engineering", "Education", "Mining"],
+                        financialRequirement: 800000 // ~5,000 USD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 5.0,
+                        spanishLanguage: "Often required",
+                        financialRequirement: 1600000 // ~10,000 USD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 8000000 // ~50,000 USD in PKR
+                    },
+                    retirement: {
+                        financialRequirement: 4000000 // ~25,000 USD in PKR
+                    }
+                },
+                costOfLiving: 3.2,
+                notes: "Tech Visa, Work Visa, Student Visa, Retirement Income Visa available."
+            },
+            
+            // Add more countries as needed...
+            {
+                name: "Malaysia",
+                region: "Asia",
+                climate: ["tropical"],
+                languages: ["Malay", "English", "Chinese", "Tamil"],
+                immigrationPathways: ["work", "study", "investment", "retirement"],
+                economyStrength: 4.0,
+                qualityOfLife: 4.0,
+                safety: 4.0,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 3,
+                        minLanguageScore: 5.5,
+                        preferredFields: ["IT", "Engineering", "Education", "Finance"],
+                        financialRequirement: 800000 // ~5,000 USD in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 5.5,
+                        financialRequirement: 1600000 // ~10,000 USD in PKR
+                    },
+                    investment: {
+                        financialRequirement: 16000000 // ~100,000 USD in PKR
+                    },
+                    retirement: {
+                        financialRequirement: 8000000 // ~50,000 USD in PKR (MM2H program)
+                    }
+                },
+                costOfLiving: 2.8,
+                notes: "Employment Pass, Student Pass, MM2H (retirement) visa available."
+            },
+            {
+                name: "Portugal",
+                region: "Europe",
+                climate: ["mediterranean"],
+                languages: ["Portuguese", "English"],
+                immigrationPathways: ["work", "study", "investment", "retirement"],
+                economyStrength: 3.8,
+                qualityOfLife: 4.5,
+                safety: 4.4,
+                immigrationEase: {
+                    work: {
+                        minEducation: "bachelors",
+                        minExperience: 2,
+                        minLanguageScore: 5.5,
+                        portugueseLanguage: "Beneficial",
+                        preferredFields: ["IT", "Tourism", "Engineering", "Healthcare"],
+                        financialRequirement: 1300000 // ~8,000 EUR in PKR
+                    },
+                    study: {
+                        minEducation: "highSchool",
+                        minLanguageScore: 5.5,
+                        financialRequirement: 2400000 // ~15,000 EUR in PKR
+                    },
+                    investment: {
+                        financialRequirement: 50000000 // ~300,000 EUR in PKR (Golden Visa)
+                    },
+                    retirement: {
+                        financialRequirement: 16000000 // ~100,000 EUR in PKR (D7 Visa)
+                    }
+                },
+                costOfLiving: 3.2,
+                notes: "Work visa, D7 passive income visa, Golden Visa, EU access."
             }
-            suggestions += "<li>Your education level ('" + education + "') determines the level of study you can pursue (e.g., Bachelor's -> Master's).</li>";
-            suggestions += "<li><strong>Potential Destinations:</strong> Consider <strong>Canada, Australia, UK, USA, Germany</strong> (often lower tuition but requires German proficiency/proof of funds), <strong>Malaysia, Turkey</strong>. Research specific university requirements and visa processes.</li></ul></li>";
-            if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
-            if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
-            if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
-            if (!potentialCountries.includes("Germany")) potentialCountries.push("Germany");
-            if (!potentialCountries.includes("Malaysia")) potentialCountries.push("Malaysia");
+        ];
+
+        // Fields of work database with categories and examples
+        const fieldsOfWork = [
+            { category: "IT & Technology", examples: ["Software Engineering", "Data Science", "Cybersecurity", "Network Administration", "DevOps", "UX/UI Design"] },
+            { category: "Engineering", examples: ["Civil Engineering", "Mechanical Engineering", "Electrical Engineering", "Chemical Engineering", "Aerospace Engineering"] },
+            { category: "Healthcare", examples: ["Medicine", "Nursing", "Pharmacy", "Physical Therapy", "Medical Research", "Public Health"] },
+            { category: "Business & Finance", examples: ["Accounting", "Financial Analysis", "Marketing", "Human Resources", "Business Administration", "Investment Banking"] },
+            { category: "Education", examples: ["Teaching", "Educational Administration", "Research", "Training", "Curriculum Development"] },
+            { category: "Creative Arts", examples: ["Graphic Design", "Writing", "Film Production", "Music", "Architecture", "Photography"] },
+            { category: "Legal", examples: ["Law", "Legal Research", "Compliance", "Intellectual Property", "Contract Management"] },
+            { category: "Sciences", examples: ["Biology", "Chemistry", "Physics", "Environmental Science", "Mathematics", "Research & Development"] },
+            { category: "Trade Skills", examples: ["Electrician", "Plumbing", "Welding", "Carpentry", "HVAC", "Automotive"] },
+            { category: "Hospitality & Tourism", examples: ["Hotel Management", "Culinary Arts", "Tourism Management", "Event Planning"] },
+            { category: "Agriculture", examples: ["Farming", "Agricultural Science", "Food Production", "Forestry"] },
+        ];
+
+        // Initialize the field of work autocomplete
+        const fieldInput = document.getElementById('fieldOfWork');
+        const fieldSuggestions = document.getElementById('fieldSuggestions');
+        
+        fieldInput.addEventListener('input', function() {
+            const input = this.value.toLowerCase();
+            fieldSuggestions.innerHTML = '';
+            if (input.length < 2) return;
+            
+            const matchingFields = [];
+            
+            fieldsOfWork.forEach(category => {
+                category.examples.forEach(example => {
+                    if (example.toLowerCase().includes(input)) {
+                        matchingFields.push(example);
+                    }
+                });
+            });
+            
+            const uniqueMatches = [...new Set(matchingFields)].slice(0, 5);
+            
+            uniqueMatches.forEach(match => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.textContent = match;
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.addEventListener('click', function() {
+                    fieldInput.value = match;
+                    fieldSuggestions.innerHTML = '';
+                });
+                fieldSuggestions.appendChild(suggestionItem);
+            });
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (e.target !== fieldInput && e.target !== fieldSuggestions) {
+                fieldSuggestions.innerHTML = '';
+            }
+        });
+
+        // Main recommendation algorithm
+        function getRecommendations(userData) {
+            // Match user input with country criteria
+            const scoredCountries = countryDatabase.map(country => {
+                let score = 0;
+                let matchDetails = [];
+                let disqualifiers = [];
+                
+                // Check if the requested immigration pathway is available
+                if (!country.immigrationPathways.includes(userData.immigrationPathway)) {
+                    disqualifiers.push(`${country.name} does not offer your desired immigration pathway.`);
+                    return { country, score: 0, matchDetails, disqualifiers, qualified: false };
+                }
+                
+                // Get pathway-specific requirements
+                const pathwayRequirements = country.immigrationEase[userData.immigrationPathway];
+                
+                // Check education requirements
+                const educationLevels = ["highSchool", "vocational", "bachelors", "masters", "phd"];
+                const userEducationIndex = educationLevels.indexOf(userData.educationLevel);
+                const requiredEducationIndex = educationLevels.indexOf(pathwayRequirements.minEducation || "highSchool");
+                
+                if (userEducationIndex < requiredEducationIndex) {
+                    disqualifiers.push(`Education: Requires minimum ${pathwayRequirements.minEducation}, you have ${userData.educationLevel}.`);
+                    return { country, score: 0, matchDetails, disqualifiers, qualified: false };
+                } else {
+                    const educationBonus = userEducationIndex - requiredEducationIndex;
+                    score += educationBonus * 5;
+                    matchDetails.push(`Education: +${educationBonus * 5} (exceeds minimum requirements)`);
+                }
+                
+                // Check work experience
+                if (pathwayRequirements.minExperience && userData.workExperience < pathwayRequirements.minExperience) {
+                    disqualifiers.push(`Experience: Requires ${pathwayRequirements.minExperience} years, you have ${userData.workExperience}.`);
+                    return
+                    
+                    disqualifiers.push(`Experience: Requires ${pathwayRequirements.minExperience} years, you have ${userData.workExperience}.`);
+                    return { country, score: 0, matchDetails, disqualifiers, qualified: false };
+                } else if (pathwayRequirements.minExperience) {
+                    const experienceBonus = Math.min(10, userData.workExperience - pathwayRequirements.minExperience);
+                    score += experienceBonus * 3;
+                    matchDetails.push(`Experience: +${experienceBonus * 3} (${userData.workExperience} years vs required ${pathwayRequirements.minExperience})`);
+                }
+                
+                // Check language requirements
+                if (pathwayRequirements.minLanguageScore && userData.ieltsScore < pathwayRequirements.minLanguageScore) {
+                    if (userData.ieltsScore) {
+                        disqualifiers.push(`Language: Requires IELTS ${pathwayRequirements.minLanguageScore}, you have ${userData.ieltsScore}.`);
+                        return { country, score: 0, matchDetails, disqualifiers, qualified: false };
+                    } else {
+                        // If IELTS not provided but required
+                        matchDetails.push(`Language: Warning - IELTS score of ${pathwayRequirements.minLanguageScore} required but not provided.`);
+                        score -= 15; // Penalty but not disqualifying
+                    }
+                } else if (userData.ieltsScore) {
+                    const languageBonus = Math.min(10, (userData.ieltsScore - (pathwayRequirements.minLanguageScore || 5)) * 5);
+                    if (languageBonus > 0) {
+                        score += languageBonus;
+                        matchDetails.push(`Language: +${languageBonus} (IELTS ${userData.ieltsScore} exceeds requirements)`);
+                    }
+                }
+                
+                // Check financial requirements
+                if (pathwayRequirements.financialRequirement && userData.bankBalance < pathwayRequirements.financialRequirement) {
+                    disqualifiers.push(`Financial: Requires PKR ${pathwayRequirements.financialRequirement.toLocaleString()}, you have PKR ${userData.bankBalance.toLocaleString()}.`);
+                    return { country, score: 0, matchDetails, disqualifiers, qualified: false };
+                } else if (pathwayRequirements.financialRequirement) {
+                    const financialRatio = userData.bankBalance / pathwayRequirements.financialRequirement;
+                    const financialBonus = Math.min(20, Math.floor((financialRatio - 1) * 10));
+                    if (financialBonus > 0) {
+                        score += financialBonus;
+                        matchDetails.push(`Financial: +${financialBonus} (exceeds requirements by ${Math.round((financialRatio - 1) * 100)}%)`);
+                    }
+                }
+                
+                // Check preferred fields match
+                if (pathwayRequirements.preferredFields) {
+                    let fieldMatch = false;
+                    pathwayRequirements.preferredFields.forEach(field => {
+                        if (userData.fieldOfWork.toLowerCase().includes(field.toLowerCase())) {
+                            fieldMatch = true;
+                            score += 15;
+                            matchDetails.push(`Field of Work: +15 (in-demand field: ${field})`);
+                        }
+                    });
+                    
+                    if (!fieldMatch) {
+                        matchDetails.push(`Field of Work: Your field is not in the priority list for this country.`);
+                    }
+                }
+                
+                // Age considerations
+                if (pathwayRequirements.agePreference) {
+                    const ageRange = pathwayRequirements.agePreference.split('-');
+                    const minAge = parseInt(ageRange[0]);
+                    const maxAge = parseInt(ageRange[1]);
+                    
+                    if (userData.age >= minAge && userData.age <= maxAge) {
+                        score += 10;
+                        matchDetails.push(`Age: +10 (within preferred range of ${pathwayRequirements.agePreference})`);
+                    } else {
+                        matchDetails.push(`Age: Outside preferred range of ${pathwayRequirements.agePreference}`);
+                        score -= 5;
+                    }
+                }
+                
+                // Language match beyond English
+                if (userData.otherLanguages && userData.otherLanguages.length > 0) {
+                    country.languages.forEach(language => {
+                        if (userData.otherLanguages.some(lang => language.toLowerCase().includes(lang.toLowerCase()))) {
+                            score += 10;
+                            matchDetails.push(`Additional Language: +10 (${language} proficiency)`);
+                        }
+                    });
+                }
+                
+                // Climate preference match
+                if (userData.preferredClimate && country.climate.includes(userData.preferredClimate)) {
+                    score += 8;
+                    matchDetails.push(`Climate: +8 (matches your preference for ${userData.preferredClimate})`);
+                }
+                
+                // Apply user priorities
+                score += (country.economyStrength * userData.priorityEconomy);
+                matchDetails.push(`Economy: +${Math.round(country.economyStrength * userData.priorityEconomy)} (strength rating: ${country.economyStrength})`);
+                
+                score += (country.qualityOfLife * userData.priorityQuality);
+                matchDetails.push(`Quality of Life: +${Math.round(country.qualityOfLife * userData.priorityQuality)} (rating: ${country.qualityOfLife})`);
+                
+                score += (country.safety * userData.prioritySafety);
+                matchDetails.push(`Safety: +${Math.round(country.safety * userData.prioritySafety)} (rating: ${country.safety})`);
+                
+                // Cost of living (inverse scoring - lower cost is better)
+                const costScore = (6 - country.costOfLiving) * userData.priorityCost;
+                score += costScore;
+                matchDetails.push(`Cost of Living: +${Math.round(costScore)} (rating: ${country.costOfLiving}, lower is better)`);
+                
+                // Marital status consideration
+                if (userData.maritalStatus === "married" && userData.immigrationPathway === "familySponsorship") {
+                    score += 15;
+                    matchDetails.push(`Marital Status: +15 (married status is advantageous for family sponsorship)`);
+                }
+                
+                return {
+                    country,
+                    score: Math.round(score),
+                    matchDetails,
+                    disqualifiers,
+                    qualified: true
+                };
+            });
+            
+            // Filter out disqualified countries and sort by score
+            const qualifiedCountries = scoredCountries.filter(result => result.qualified);
+            const sortedResults = qualifiedCountries.sort((a, b) => b.score - a.score);
+            
+            // Also include some "honorable mentions" - countries where the user almost qualifies
+            const almostQualified = scoredCountries
+                .filter(result => !result.qualified && result.disqualifiers.length <= 2)
+                .sort((a, b) => a.disqualifiers.length - b.disqualifiers.length)
+                .slice(0, 3);
+            
+            return {
+                recommendations: sortedResults.slice(0, 5),
+                almostQualified
+            };
         }
 
-        // **Pathway: Skilled Work / PR**
-        if (pathway === 'work') {
-             suggestions += "<li><strong>Skilled Work / PR Pathway:</strong> Often uses points-based systems. Key factors include:<ul>";
-             suggestions += "<li><strong>Age:</strong> Ages between 25-35 often score highest in points systems, but older applicants (your age: " + age + ") can still qualify.</li>";
-             suggestions += "<li><strong>Education:</strong> Higher education ('" + education + "') generally yields more points. Master's/PhD are highly valued. Foreign credential assessment is usually required.</li>";
-             suggestions += "<li><strong>Work Experience:</strong> " + workExperience + " years in a skilled occupation ('" + fieldOfWork + "') is vital. Longer experience in an in-demand field increases chances. Check official occupation lists (e.g., Canada's NOC, Australia's Skilled Occupation List).</li>";
-             if (ielts >= 6.0) {
-                 suggestions += "<li>Your IELTS score (<strong>" + ielts + "</strong>) is essential. Aim for CLB 7+ (IELTS 6.0+) for Canada's Express Entry, or 7.0-8.0+ for higher points. Australia also requires high scores (e.g., 'Proficient' or 'Superior' English).</li>";
-             } else {
-                  suggestions += "<li>High English Proficiency (IELTS/PTE) is CRITICAL for points. Without a good score (typically <strong>6.0+</strong>, often <strong>7.0+</strong> needed), chances are significantly lower for Canada/Australia/UK.</li>";
-             }
-             suggestions += "<li><strong>Settlement Funds:</strong> Required by some countries (e.g., Canada Express Entry). Your bank balance (PKR " + bankStatementPKR.toLocaleString() + ") needs to meet their specific requirements. Check official figures.</li>";
-             suggestions += "<li><strong>Potential Destinations:</strong> Consider <strong>Canada</strong> (Express Entry, Provincial Nominee Programs), <strong>Australia</strong> (Skilled Independent/Nominated visas), <strong>Germany</strong> (Job Seeker Visa, EU Blue Card - check language/degree recognition), <strong>UK</strong> (Skilled Worker visa - requires job offer).</li></ul></li>";
-             if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
-             if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
-             if (!potentialCountries.includes("Germany")) potentialCountries.push("Germany");
-             if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
+        // Function to display recommendations
+        function displayRecommendations(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const recommendationResults = document.getElementById('recommendationResults');
+            
+            resultsContainer.style.display = 'block';
+            document.getElementById('destinationForm').style.display = 'none';
+            
+            recommendationResults.innerHTML = '';
+            
+            if (results.recommendations.length === 0) {
+                recommendationResults.innerHTML = `
+                    <div class="no-results">
+                        <h3>No Matching Destinations Found</h3>
+                        <p>Based on your criteria, we couldn't find suitable destinations. Consider adjusting your requirements or exploring the "almost qualified" options below.</p>
+                    </div>
+                `;
+            } else {
+                // Top recommendations
+                const topRecommendationsHTML = results.recommendations.map((result, index) => `
+                    <div class="recommendation-card ${index === 0 ? 'top-recommendation' : ''}">
+                        <h3>${index + 1}. ${result.country.name} <span class="score">Score: ${result.score}</span></h3>
+                        <div class="recommendation-details">
+                            <div class="country-info">
+                                <p><strong>Region:</strong> ${result.country.region}</p>
+                                <p><strong>Climate:</strong> ${result.country.climate.join(', ')}</p>
+                                <p><strong>Languages:</strong> ${result.country.languages.join(', ')}</p>
+                                <p><strong>Economy Strength:</strong> ${result.country.economyStrength}/5</p>
+                                <p><strong>Quality of Life:</strong> ${result.country.qualityOfLife}/5</p>
+                                <p><strong>Safety Rating:</strong> ${result.country.safety}/5</p>
+                                <p><strong>Cost of Living:</strong> ${result.country.costOfLiving}/5 (lower is cheaper)</p>
+                            </div>
+                            
+                            <div class="match-details">
+                                <h4>Why This Matches Your Profile:</h4>
+                                <ul>
+                                    ${result.matchDetails.map(detail => `<li>${detail}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="pathway-details">
+                            <h4>Immigration Pathway Details: ${capitalizeFirstLetter(result.country.immigrationPathways.find(p => p === document.getElementById('immigrationPathway').value))} Visa</h4>
+                            <p>${result.country.notes}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                recommendationResults.innerHTML = topRecommendationsHTML;
+                
+                // Almost qualified section
+                if (results.almostQualified.length > 0) {
+                    const almostQualifiedHTML = `
+                        <div class="almost-qualified-section">
+                            <h3>Almost Qualified Options</h3>
+                            <p>With some adjustments to your situation, these countries could become viable options:</p>
+                            
+                            ${results.almostQualified.map(result => `
+                                <div class="almost-card">
+                                    <h4>${result.country.name}</h4>
+                                    <p><strong>Missing Requirements:</strong></p>
+                                    <ul>
+                                        ${result.disqualifiers.map(issue => `<li>${issue}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    
+                    recommendationResults.innerHTML += almostQualifiedHTML;
+                }
+                
+                // Add visualization
+                createVisualization(results.recommendations);
+            }
+        }
+        
+        // Function to create visualization
+        function createVisualization(recommendations) {
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.innerHTML = `
+                <h3>Comparative Analysis of Top Recommendations</h3>
+                <div class="chart-container">
+                    <canvas id="radarChart" width="400" height="300"></canvas>
+                </div>
+            `;
+            
+            // Prepare data for the chart
+            const chartData = {
+                labels: ['Economy', 'Quality of Life', 'Safety', 'Immigration Ease', 'Cost of Living'],
+                datasets: recommendations.slice(0, 3).map((rec, index) => {
+                    const country = rec.country;
+                    // Generate a color based on index
+                    const colors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'];
+                    const borderColors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)'];
+                    
+                    return {
+                        label: country.name,
+                        data: [
+                            country.economyStrength * 20, 
+                            country.qualityOfLife * 20, 
+                            country.safety * 20,
+                            calculateImmigrationEase(country, document.getElementById('immigrationPathway').value) * 20,
+                            (6 - country.costOfLiving) * 20 // Inverse cost of living so higher is better
+                        ],
+                        fill: true,
+                        backgroundColor: colors[index],
+                        borderColor: borderColors[index],
+                        pointBackgroundColor: borderColors[index],
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: borderColors[index]
+                    };
+                })
+            };
+            
+            // Create a radar chart (this would use Chart.js in a real implementation)
+            // Simplified mock-up - in a real app you'd need to include Chart.js
+            const chartElement = document.getElementById('radarChart');
+            chartElement.style.background = '#f9f9f9';
+            chartElement.style.border = '1px solid #ddd';
+            chartElement.style.borderRadius = '5px';
+            chartElement.style.padding = '10px';
+            chartElement.style.margin = '20px 0';
+            chartElement.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    [Radar Chart Visualization Would Appear Here]
+                    <p>Top Countries Comparison: ${recommendations.slice(0, 3).map(r => r.country.name).join(', ')}</p>
+                </div>
+            `;
+        }
+        
+        // Calculate immigration ease score based on pathway and country
+        function calculateImmigrationEase(country, pathway) {
+            // This would be more complex in a real implementation
+            let ease = 3; // Default middle value
+            
+            if (country.immigrationPathways.includes(pathway)) {
+                ease += 1;
+                
+                // Adjust based on specific criteria
+                const criteria = country.immigrationEase[pathway];
+                if (criteria) {
+                    if (criteria.pointsSystem) {
+                        ease -= 0.5; // Point systems can be more complex
+                    }
+                    
+                    // Adjust based on financial requirements (lower is easier)
+                    const financialFactor = criteria.financialRequirement / 5000000;
+                    ease -= Math.min(1, financialFactor / 10);
+                    
+                    // Language considerations
+                    if (pathway === 'work' || pathway === 'study') {
+                        if (criteria.minLanguageScore && criteria.minLanguageScore >= 7.0) {
+                            ease -= 0.5;
+                        }
+                    }
+                }
+            } else {
+                ease = 1; // Very difficult if pathway not officially supported
+            }
+            
+            return Math.max(1, Math.min(5, ease)); // Keep between 1-5
+        }
+        
+        // Helper function to capitalize first letter
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        // **Pathway: Business / Investor**
-         if (pathway === 'business') {
-             suggestions += "<li><strong>Business/Investor Pathway:</strong> Typically requires significant capital investment, a viable business plan, and sometimes business management experience.<ul>";
-             suggestions += "<li><strong>Investment Amount:</strong> Minimum investments vary drastically by country and program (ranging from ~$100,000 USD equivalent to millions). Your stated balance (PKR " + bankStatementPKR.toLocaleString() + ") needs to be evaluated against specific program requirements. Many popular investor visas require substantially higher amounts.</li>";
-             suggestions += "<li><strong>Business Plan & Experience:</strong> A strong, well-researched business plan and relevant experience are crucial.</li>";
-             suggestions += "<li><strong>Potential Destinations (High Investment Usually Required):</strong> Consider <strong>USA</strong> (EB-5), <strong>Canada</strong> (Start-up Visa, Provincial Entrepreneur Programs), <strong>UK</strong> (Innovator Founder Visa), <strong>Australia</strong> (Business Innovation and Investment Program), <strong>Portugal</strong> (Golden Visa - check current status/options), <strong>UAE</strong> (Golden Visa - specific criteria). Research VERY carefully.</li></ul></li>";
-             if (!potentialCountries.includes("USA")) potentialCountries.push("USA");
-             if (!potentialCountries.includes("Canada")) potentialCountries.push("Canada");
-             if (!potentialCountries.includes("UK")) potentialCountries.push("UK");
-             if (!potentialCountries.includes("Australia")) potentialCountries.push("Australia");
-             if (!potentialCountries.includes("Portugal")) potentialCountries.push("Portugal");
-             if (!potentialCountries.includes("UAE")) potentialCountries.push("UAE");
-         }
-
-
-        // --- General Notes & Disclaimer ---
-        suggestions += "</ul>"; // Close the main list
-
-        suggestions += "<hr style='margin-top: 20px; margin-bottom: 20px;'><h3>General Recommendations & Next Steps:</h3><ul>"; // Added inline style for spacing
-        if (potentialCountries.length > 0) {
-            suggestions += "<li>Based on your profile, countries like <strong>" + potentialCountries.join(", ") + "</strong> might have relevant programs. <strong>Thoroughly research the OFFICIAL immigration websites for each.</strong></li>";
-        } else if (pathway !== 'family') {
-             suggestions += "<li>Based on the selected pathway, further research into specific country requirements is needed. Start with countries known for that pathway (e.g., Canada/Australia for skilled work, UK/USA/Canada/Australia for study).</li>";
-        }
-
-        if (pathway !== 'family' && ielts < 6.0) {
-             suggestions += "<li><strong>Improve English Proficiency:</strong> If targeting English-speaking countries for work or study, achieving a high score on IELTS (General or Academic), PTE Academic, or TOEFL is often essential. Aim for scores required by your target programs/visas.</li>";
-        }
-         suggestions += "<li><strong>Financial Planning:</strong> Immigration involves significant costs (application fees, medical exams, travel, settlement funds, tuition). Ensure your finances (PKR " + bankStatementPKR.toLocaleString() + ") align with the requirements of your chosen path and country. Convert PKR to the destination currency to check sufficiency.</li>";
-         suggestions += "<li><strong>Credential Assessment:</strong> For work or sometimes study pathways, you'll likely need your Pakistani educational qualifications assessed by a designated body in the destination country (e.g., WES for Canada/USA).</li>";
-         suggestions += "<li><strong>Field of Work:</strong> Research if your field ('" + fieldOfWork + "') is in demand in potential destination countries. Check official occupation lists.</li>";
-         suggestions += "<li><strong>Consult Professionals:</strong> Consider consulting with a registered/licensed immigration consultant or lawyer specializing in your target country for personalized advice. Be wary of unlicensed agents promising guarantees.</li>";
-         suggestions += "<li><strong>OFFICIAL SOURCES ARE KEY:</strong> Always rely on information from the official government immigration websites of the countries you are interested in.</li>";
-         suggestions += "</ul>";
-
-        // Final emphasized disclaimer in the results
-        suggestions += "<p><strong>Remember the Disclaimer: This is simplified guidance, not expert legal advice. Verify all information independently through official sources.</strong></p>";
-
-        document.getElementById('results').innerHTML = suggestions;
-    }
-</script>
-
+        // Form submission handler
+        document.getElementById('destinationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect user data
+            const userData = {
+                age: parseInt(document.getElementById('age').value),
+                maritalStatus: document.getElementById('maritalStatus').value,
+                educationLevel: document.getElementById('educationLevel').value,
+                workExperience: parseInt(document.getElementById('workExperience').value),
+                fieldOfWork: document.getElementById('fieldOfWork').value,
+                bankBalance: parseInt(document.getElementById('bankBalance').value),
+                immigrationPathway: document.getElementById('immigrationPathway').value,
+                ieltsScore: document.getElementById('ieltsScore').value ? parseFloat(document.getElementById('ieltsScore').value) : null,
+                preferredClimate: document.getElementById('preferredClimate').value,
+                otherLanguages: Array.from(document.getElementById('languageAbilities').selectedOptions).map(option => option.value),
+                priorityEconomy: parseInt(document.getElementById('priorityEconomy').value),
+                priorityQuality: parseInt(document.getElementById('priorityQuality').value),
+                prioritySafety: parseInt(document.getElementById('prioritySafety').value),
+                priorityPathway: parseInt(document.getElementById('priorityPathway').value),
+                priorityCost: parseInt(document.getElementById('priorityCost').value)
+            };
+            
+            // Get recommendations
+            const results = getRecommendations(userData);
+            
+            // Display results
+            displayRecommendations(results);
+        });
+        
+        // Back button handler
+        document.getElementById('backButton').addEventListener('click', function() {
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('destinationForm').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
