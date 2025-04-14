@@ -3,141 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Germany Visa Information</title>
+    <title>German Visa Information</title>
     <style>
-        /* --- Updated Color Scheme for Germany --- */
+        /* --- Provided CSS Theme Variables and Base Styles (Same as UK example) --- */
         :root {
-            --primary: #1a3a6d; /* Dark Blue */
-            --secondary: #dd0000; /* German Red */
-            --accent: #f5f5f5; 
-            --text: #333333;
-            --light: #ffffff;
-            --border-color: #e0e0e0;
+            --primary: #005e54; /* Dark Teal/Green - Keeping theme */
+            --secondary: #01796f; /* Medium Teal/Green - Keeping theme */
+            --accent: #f8f9fa; /* Very Light Gray/Off-white */
+            --text: #333333; /* Dark Gray */
+            --light: #ffffff; /* White */
+            --border-color: #e0e0e0; /* Light Gray Border */
         }
 
-        /* ... (rest of CSS remains the same as original UK version) ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .container > p:first-of-type {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+         .container > p:first-of-type strong {
+             color: var(--secondary);
+         }
+
+
+        #visa-types {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        #visa-types h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4em;
+        }
+
+        button {
+            margin: 8px;
+            padding: 12px 22px;
+            cursor: pointer;
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+         button:disabled {
+             background-color: #ccc;
+             cursor: not-allowed;
+             transform: none;
+         }
+
+        #visa-subtypes-container {
+            margin-top: 30px;
+        }
+
+        #subtypes-heading {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block; /* Allow centering */
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 5px;
+        }
+
+        #visa-subtypes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .visa-card {
+            background-color: var(--light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 320px;
+            min-width: 280px;
+        }
+
+        .visa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .visa-card h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3em;
+        }
+
+        .visa-card p {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            color: var(--text);
+            flex-grow: 1;
+        }
+
+        .visa-card .cost {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .airfare-btn {
+            background-color: var(--secondary);
+            font-size: 0.9em;
+            padding: 8px 15px;
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        .airfare-btn:hover {
+            background-color: #015c55;
+        }
+
+        .airfare-display {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--secondary);
+            display: none;
+            font-size: 0.95em;
+            background-color: var(--accent);
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .disclaimer {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            background-color: var(--accent);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .disclaimer strong {
+            color: var(--primary);
+        }
+        .disclaimer ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .disclaimer li {
+            margin-bottom: 8px;
+        }
+
+
+        /* Responsive Adjustments (Same as UK example) */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            #subtypes-heading { font-size: 1.5em; }
+            .visa-card {
+                flex-basis: calc(50% - 12.5px);
+                min-width: unset;
+            }
+        }
+        @media (max-width: 550px) {
+             .visa-card {
+                 flex-basis: 100%;
+             }
+             button {
+                 padding: 10px 18px;
+                 font-size: 0.95em;
+             }
+             h1 { font-size: 1.8em; }
+             #subtypes-heading { font-size: 1.3em; }
+         }
+
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Germany Visa Information Overview</h1>
-        <p><strong>Data taken from:</strong> Source: <u>Federal Foreign Office, Germany</u> website.</p>
+        <h1>German Visa Information Overview</h1>
+        <p>
+            <strong>Data based on information from:</strong> <u>German Federal Foreign Office (Auswärtiges Amt)</u> and associated portals like <u>Make it in Germany</u>. Costs and airfare are estimates.
+        </p>
 
         <div id="visa-types">
             <h3>Select Visa Category:</h3>
             <button data-visa-type="Work">Work Visas</button>
-            <button data-visa-type="Study">Study Visas</button>
-            <button data-visa-type="Visit">Visit Visas</button>
-            <button data-visa-type="Family">Family Visas</button>
-            <button data-visa-type="Business">Business & Investment</button>
-            <button data-visa-type="Other">Other Visas</button>
+            <button data-visa-type="Study">Study & Training</button>
+            <button data-visa-type="Visit">Visit & Short Stay</button>
+            <button data-visa-type="Family">Family Reunion</button>
+            <button data-visa-type="JobSeeker">Job Seeker & Opportunity</button>
+            <button data-visa-type="Other">Other</button>
         </div>
 
-        <!-- ... (same container structure as UK version) ... -->
+        <div id="visa-subtypes-container">
+            <h3 id="subtypes-heading" style="display: none;">Subtypes:</h3>
+            <div id="visa-subtypes">
+                </div>
+        </div>
+
+        <div class="disclaimer">
+            <p><strong>Important Disclaimers:</strong></p>
+            <ul>
+                <li>Visa requirements and fees are subject to change. Always consult the official website of the German Federal Foreign Office or the German mission in Pakistan (Islamabad/Karachi) for the most current and accurate information.</li>
+                <li>Costs shown are standard visa application fees (typically for National 'D' Visas unless specified) and do not include potential service fees (e.g., VFS/VisaMetric), health insurance, or other required expenses.</li>
+                <li>Airfare estimates are highly variable based on airline, time of booking, season, and route.</li>
+                <li>This information is for general guidance only.</li>
+                 <li>Source: Information synthesized from German Federal Foreign Office, Make it in Germany portal, and flight aggregators.</li>
+            </ul>
+        </div>
 
     </div>
 
     <script>
+        // --- German Visa Data Object ---
         const visaData = {
             "Work": [
                 {
-                    name: "Skilled Worker Visa",
-                    description: "For qualified professionals with a job offer in Germany matching their qualifications.",
-                    cost: "€75 - €140 (depending on duration)",
-                    airfareEstimate: "€450 - €800+"
+                    name: "Skilled Worker Visa (Academic/Vocational)",
+                    description: "For individuals with a recognized university degree or vocational qualification and a concrete job offer in Germany.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€600 - €1000+"
                 },
                 {
                     name: "EU Blue Card",
-                    description: "For highly skilled non-EU citizens with a university degree and job offer meeting salary threshold.",
-                    cost: "€140 (plus €100 for residence permit)",
-                    airfareEstimate: "€500 - €850+"
+                    description: "For highly qualified non-EU citizens with a university degree and a job offer meeting salary thresholds.",
+                    cost: "National Visa: €75 (or €100-€110 for card issuance)",
+                    airfareEstimate: "€650 - €1100+"
                 },
                 {
-                    name: "Job Seeker Visa",
-                    description: "For qualified professionals seeking employment in Germany (valid 6 months).",
-                    cost: "€75",
-                    airfareEstimate: "€450 - €800+"
-                }
+                    name: "IT Specialists Visa",
+                    description: "For IT professionals with significant practical experience, potentially without a formal degree, who have a job offer.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€650 - €1100+"
+                },
+                 {
+                    name: "Visa for Recognition of Foreign Qualifications",
+                    description: "To enter Germany to complete the process of having foreign professional qualifications recognized.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€600 - €1000+"
+                 },
+                 {
+                    name: "Self-Employment / Freelancer Visa",
+                    description: "For individuals planning to start a business or work as a freelancer in Germany, requiring a business plan and proof of funding.",
+                    cost: "National Visa: €75 (plus potential business setup costs)",
+                    airfareEstimate: "€650 - €1100+"
+                 }
             ],
             "Study": [
                 {
                     name: "Student Visa",
-                    description: "For international students accepted to a German university or preparatory program.",
-                    cost: "€75 (visa) + €120 residence permit",
-                    airfareEstimate: "€400 - €750+"
+                    description: "For individuals accepted into a full-time course of study at a German university or similar institution.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€550 - €950+"
                 },
-                {
+                 {
+                    name: "Student Applicant Visa",
+                    description: "To enter Germany to apply for university admission in person (valid up to 9 months).",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€550 - €950+"
+                },
+                 {
                     name: "Language Course Visa",
-                    description: "For intensive German language courses (3-12 months).",
-                    cost: "€75",
-                    airfareEstimate: "€400 - €750+"
+                    description: "For attending an intensive German language course (typically over 3 months, not leading directly to university study).",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€550 - €950+"
+                },
+                 {
+                    name: "Vocational Training Visa",
+                    description: "For individuals who have secured a place in a qualified vocational training program in Germany.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€550 - €950+"
                 }
             ],
             "Visit": [
-                {
-                    name: "Schengen Tourist Visa",
-                    description: "Short-term visa for tourism/visits (up to 90 days in 180-day period).",
-                    cost: "€80",
-                    airfareEstimate: "€450 - €800+"
+                 {
+                    name: "Schengen Visa (Tourist/Visitor)",
+                    description: "For short stays (up to 90 days in any 180-day period) for tourism, visiting family/friends.",
+                    cost: "Schengen Visa: €90 (Reduced fees for children)",
+                    airfareEstimate: "€600 - €1000+"
                 },
                 {
-                    name: "Business Visa",
-                    description: "For short-term business activities like meetings or conferences.",
-                    cost: "€80",
-                    airfareEstimate: "€450 - €800+"
+                    name: "Schengen Visa (Business)",
+                    description: "For short stays (up to 90 days in any 180-day period) for business meetings, conferences, trade fairs.",
+                    cost: "Schengen Visa: €90",
+                    airfareEstimate: "€600 - €1000+"
+                },
+                 {
+                    name: "Airport Transit Visa (Type A)",
+                    description: "Required by nationals of certain countries for transiting through the international area of a German airport.",
+                    cost: "Airport Transit Visa: €90",
+                    airfareEstimate: "N/A (Not entering country)"
                 }
             ],
             "Family": [
                 {
-                    name: "Family Reunion Visa",
-                    description: "For spouses/children of German residents or citizens.",
-                    cost: "€75",
-                    airfareEstimate: "€450 - €800+"
+                    name: "Spouse/Partner Reunion Visa",
+                    description: "To join a spouse or registered partner who is legally residing in Germany.",
+                    cost: "National Visa: €75 (Free for spouses of EU/German citizens; Reduced for children)",
+                    airfareEstimate: "€600 - €1000+"
+                },
+                 {
+                    name: "Child Reunion Visa",
+                    description: "For a minor child to join a parent legally residing in Germany.",
+                    cost: "National Visa: €37.50 (Reduced fee for minors)",
+                    airfareEstimate: "€550 - €950+"
+                },
+                 {
+                    name: "Parent Reunion Visa (Specific Cases)",
+                    description: "For a parent to join a minor child residing in Germany (usually if the child is a German citizen or refugee with sole custody).",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€600 - €1000+"
                 },
                 {
-                    name: "Elderly Parent Visa",
-                    description: "For parents of German residents requiring care (strict requirements).",
-                    cost: "€75 + residence permit fees",
-                    airfareEstimate: "€500 - €850+"
+                    name: "Visa for Marriage in Germany",
+                    description: "To enter Germany with the intention of getting married to a resident and then applying for residency.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€600 - €1000+"
                 }
             ],
-            "Business": [
-                {
-                    name: "Freelancer Visa",
-                    description: "For self-employed professionals and freelancers (requires business plan).",
-                    cost: "€100 (visa) + residence permit fees",
-                    airfareEstimate: "€500 - €900+"
-                },
-                {
-                    name: "Investor Visa",
-                    description: "For entrepreneurs establishing a business in Germany (minimum €250,000 investment).",
-                    cost: "€140 + business registration fees",
-                    airfareEstimate: "€500 - €900+"
-                }
+            "JobSeeker": [
+                 {
+                    name: "Job Seeker Visa",
+                    description: "For qualified professionals (usually with a degree) to come to Germany for up to 6 months to look for employment.",
+                    cost: "National Visa: €75",
+                    airfareEstimate: "€600 - €1000+"
+                 },
+                 {
+                     name: "Opportunity Card (Chancenkarte)",
+                     description: "A points-based system for skilled workers to enter Germany for up to one year to seek employment.",
+                     cost: "National Visa: €75",
+                     airfareEstimate: "€600 - €1000+"
+                 }
             ],
-            "Other": [
-                {
-                    name: "Au Pair Visa",
-                    description: "For young adults (18-26) to live with a German host family and learn language.",
-                    cost: "€75",
-                    airfareEstimate: "€400 - €750+"
-                },
-                {
-                    name: "Artist Visa",
-                    description: "For artists and cultural professionals to work in Germany.",
-                    cost: "€100 + residence permit fees",
-                    airfareEstimate: "€450 - €800+"
-                }
-            ]
+             "Other": [
+                 {
+                     name: "Au Pair Visa",
+                     description: "For young adults (typically 18-26) to live with a host family in Germany, learn the language, and help with childcare.",
+                     cost: "National Visa: €75",
+                     airfareEstimate: "€550 - €950+"
+                 },
+                 {
+                     name: "Voluntary Service Visa",
+                     description: "For participating in recognized voluntary programs like the Federal Voluntary Service (BFD) or Voluntary Social Year (FSJ).",
+                     cost: "National Visa: €75 (Often waived/covered by organization)",
+                     airfareEstimate: "€550 - €950+"
+                 },
+                 {
+                     name: "Researcher Visa",
+                     description: "For scientists and researchers invited by a German research institution or having a hosting agreement.",
+                     cost: "National Visa: €75 (Often waived)",
+                     airfareEstimate: "€650 - €1100+"
+                 }
+             ]
         };
 
-
-// --- DOM Elements ---
+        // --- DOM Elements (Same as UK example) ---
         const visaTypesContainer = document.getElementById('visa-types');
         const subtypesContainer = document.getElementById('visa-subtypes');
         const subtypesHeading = document.getElementById('subtypes-heading');
 
-        // --- Event Listener for Main Visa Type Buttons ---
+        // --- Event Listener for Main Visa Type Buttons (Same as UK example) ---
         visaTypesContainer.addEventListener('click', function(event) {
             if (event.target.tagName === 'BUTTON') {
                 const visaType = event.target.getAttribute('data-visa-type');
@@ -150,54 +420,52 @@
             }
         });
 
-        // --- Function to Display Subtypes ---
+        // --- Function to Display Subtypes (Adapted for potentially missing airfare) ---
         function displaySubtypes(visaType) {
-            // Clear previous subtypes
             subtypesContainer.innerHTML = '';
-            subtypesHeading.style.display = 'inline-block'; // Show the heading (use inline-block for centering)
-            subtypesHeading.textContent = `${visaType} Visa Subtypes`; // Updated text slightly
+            subtypesHeading.style.display = 'inline-block';
+            subtypesHeading.textContent = `${visaType} Visa Subtypes`; // Keep consistent heading
 
             const subtypes = visaData[visaType];
-
             if (!subtypes || subtypes.length === 0) {
                 subtypesContainer.innerHTML = '<p style="text-align: center; width: 100%;">No specific subtypes listed for this category or check official sources.</p>';
-                 subtypesHeading.style.display = 'none'; // Hide heading if no subtypes
+                subtypesHeading.style.display = 'none';
                 return;
             }
 
-            // Create and append cards for each subtype
             subtypes.forEach((subtype, index) => {
                 const card = document.createElement('div');
-                card.className = 'visa-card'; // Use class for styling
+                card.className = 'visa-card';
 
-                // Unique ID for the airfare display element within this card
-                const airfareDisplayId = `airfare-${visaType.replace(/\s+/g, '-')}-${index}`; // Sanitize ID
-                const airfareButtonId = `airfare-btn-${visaType.replace(/\s+/g, '-')}-${index}`; // Sanitize ID
+                const sanitizedVisaType = visaType.replace(/\s+/g, '-').replace('&', 'and'); // Sanitize type for ID
+                const airfareDisplayId = `airfare-${sanitizedVisaType}-${index}`;
+                const airfareButtonId = `airfare-btn-${sanitizedVisaType}-${index}`;
 
-                // Check if airfare estimate exists and is not N/A
-                 const showAirfareButton = subtype.airfareEstimate && subtype.airfareEstimate !== 'N/A';
+                // Check if airfare estimate exists and is not N/A or empty
+                 const showAirfareButton = subtype.airfareEstimate && subtype.airfareEstimate !== 'N/A' && subtype.airfareEstimate.trim() !== '';
 
                 card.innerHTML = `
                     <h4>${subtype.name}</h4>
                     <p>${subtype.description}</p>
-                    <p class="cost">${subtype.cost}</p>
+                    <p class="cost">Est. Fee: ${subtype.cost}</p>
                     ${showAirfareButton ?
-                        `<button id="${airfareButtonId}" class="airfare-btn" data-airfare="${subtype.airfareEstimate}" data-target="${airfareDisplayId}">Show Est. Airfare (PK to UK)</button>
+                         `<button id="${airfareButtonId}" class="airfare-btn" data-airfare="${subtype.airfareEstimate}" data-target="${airfareDisplayId}">Show Est. Airfare (PK to Germany)</button>
                          <div id="${airfareDisplayId}" class="airfare-display"></div>`
-                        : '<p style="font-size: 0.85em; color: #888; margin-top: auto;">Airfare estimate not applicable.</p>'
+                        : '<p style="font-size: 0.85em; color: #888; margin-top: auto;">Airfare estimate not applicable or varies greatly.</p>'
                     }
                 `;
                 subtypesContainer.appendChild(card);
 
-                // Add event listener specifically to the new airfare button IF it exists
                 if (showAirfareButton) {
                     const airfareButton = document.getElementById(airfareButtonId);
-                     airfareButton.addEventListener('click', showAirfare);
+                     if(airfareButton) { // Add check if button exists
+                       airfareButton.addEventListener('click', showAirfare);
+                     }
                 }
             });
         }
 
-        // --- Function to Show Airfare ---
+        // --- Function to Show Airfare (Same as UK example) ---
         function showAirfare(event) {
             const button = event.target;
             const targetDisplayId = button.getAttribute('data-target');
@@ -206,16 +474,20 @@
 
             if (airfareDisplayElement) {
                 airfareDisplayElement.textContent = `Est. One-Way Airfare: ${airfareEstimate}`;
-                airfareDisplayElement.style.display = 'block'; // Show the display element
-                button.disabled = true; // Disable button after click
+                airfareDisplayElement.style.display = 'block';
+                button.disabled = true;
                 button.textContent = 'Estimate Shown';
-                button.style.backgroundColor = '#ccc'; // Grey out disabled button
+                button.style.backgroundColor = '#ccc';
             }
         }
 
+        // --- Initial display (Optional: Load a default category on page load) ---
+        // displaySubtypes('Work'); // Example: Load "Work" visas by default
+        // const workButton = visaTypesContainer.querySelector('button[data-visa-type="Work"]');
+        // if(workButton) { workButton.style.backgroundColor = 'var(--secondary)'; }
+
+
     </script>
 
-        // ... (rest of JavaScript remains the same as UK version) ...
-    
 </body>
 </html>
