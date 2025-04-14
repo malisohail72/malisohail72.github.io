@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UAE Visa Information</title>
-    <style>
+    <title>UAE Visa Information</title> <style>
+        /* --- Provided CSS Theme Variables and Base Styles --- */
         :root {
-            --primary: #005e54;
-            --secondary: #01796f;
-            --accent: #f8f9fa;
-            --text: #333333;
-            --light: #ffffff;
-            --border-color: #e0e0e0;
+            --primary: #00732f; /* UAE Green */
+            --secondary: #d4af37; /* Gold Accent (like Golden Visa) */
+            --accent: #f8f9fa; /* Very Light Gray/Off-white */
+            --text: #333333; /* Dark Gray */
+            --light: #ffffff; /* White */
+            --border-color: #e0e0e0; /* Light Gray Border */
         }
 
         * {
@@ -24,571 +24,525 @@
         body {
             color: var(--text);
             line-height: 1.6;
+            background-color: var(--light); /* Set a base background */
         }
 
         .container {
             width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto; /* Added top/bottom margin */
             padding: 0 20px;
         }
 
-        /* Header Styles (Not directly used in this simplified page, but included as per request) */
-        header {
-            background-color: var(--light);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 24px;
+        /* --- Page Specific Styles Using Theme Variables --- */
+        h1 {
             color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin: 0;
-        }
-
-        .logo a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-links {
-            display: none; /* Hidden for simplicity in this single-page app */
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .cta-button {
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background-color: var(--secondary);
-            color: white;
-        }
-
-        /* Breadcrumb Styles (Not directly used, but included) */
-        .breadcrumb {
-            padding: 10px 0;
-            background-color: #f5f5f5;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb-links {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-            margin: 0;
-            padding: 0;
-        }
-
-        .breadcrumb-links li {
-            display: flex;
-            align-items: center;
-            margin-right: 10px;
-        }
-
-        .breadcrumb-links li:not(:last-child)::after {
-            content: "›";
-            margin-left: 10px;
-            color: #777;
-        }
-
-        .breadcrumb-links a {
-            text-decoration: none;
-            color: var(--secondary);
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .breadcrumb-links a:hover {
-            color: var(--primary);
-            text-decoration: underline;
-        }
-
-        .breadcrumb-links .current {
-            color: #777;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Hero Section (Not directly used, but included) */
-        .hero {
-            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('images/hero-background.jpg') no-repeat center center/cover;
-            color: white;
-            padding: 80px 0;
             text-align: center;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero p {
-            font-size: 16px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-
-        .hero p u {
-            text-decoration-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .hero-cta {
-            display: inline-block;
-            background-color: white;
-            color: var(--primary);
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Common Section Styles */
-        section {
-            padding: 60px 0;
-        }
-        .services, .testimonials {
-            background-color: var(--accent);
-        }
-        .destinations, .resources, .cta-section {
-            background-color: var(--light);
-        }
-
-        /* Section Title Styles */
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            color: var(--primary);
             margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-            margin-top: 0;
+            font-size: 2.5em; /* Larger heading */
         }
 
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--secondary);
+        /* Intro paragraph */
+        .container > p:first-of-type {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666; /* Slightly lighter text */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+         .container > p:first-of-type strong {
+             color: var(--primary); /* Use primary color for emphasis */
+         }
+
+
+        #visa-types {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center; /* Center buttons */
         }
 
-        .section-title p {
-            max-width: 700px;
-            margin: 25px auto 0;
-            color: #666;
+        #visa-types h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4em;
         }
 
-        /* Visa Type Buttons Section */
-        .visa-type-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center; /* Center the buttons */
-        }
-
-        .visa-type-buttons button {
-            padding: 10px 15px;
+        /* General button style */
+        button {
+            margin: 8px;
+            padding: 12px 22px;
             cursor: pointer;
-            border: 1px solid var(--border-color);
-            background-color: var(--light);
-            color: var(--text);
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .visa-type-buttons button:hover {
             background-color: var(--primary);
             color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        /* Visa Subtypes Section */
-        .visa-subtypes {
-            display: none;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        button:hover {
+            background-color: #005a25; /* Darker shade of primary */
+            transform: translateY(-2px);
+        }
+         button:disabled {
+             background-color: #ccc;
+             cursor: not-allowed;
+             transform: none;
+         }
+
+        #visa-subtypes-container {
+            margin-top: 30px;
+        }
+
+        #subtypes-heading {
+            color: var(--primary);
+            font-size: 1.8em;
             margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block; /* Allow centering */
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 5px;
+        }
+
+        /* Using Flexbox for card layout */
+        #visa-subtypes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px; /* Spacing between cards */
+            justify-content: center; /* Center cards if they don't fill a row */
         }
 
         .visa-card {
             background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border-color);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .visa-card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: var(--primary);
-            font-size: 20px;
-        }
-
-        .detail-button {
-            background-color: var(--secondary);
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 14px;
-        }
-
-        .detail-button:hover {
-            background-color: var(--primary);
-        }
-
-        /* Visa Details Section */
-        .visa-details {
-            display: none;
-            margin-top: 20px;
+            border-radius: 8px; /* Slightly rounder corners */
             padding: 20px;
-            border: 1px solid var(--border-color);
-            background-color: var(--accent);
-            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; /* Use flex inside card */
+            flex-direction: column; /* Stack content vertically */
+            flex: 1 1 320px; /* Grow, shrink, base width ~3 cards per row on large screens */
+            min-width: 280px; /* Minimum width before wrapping */
         }
 
-        .visa-details h3 {
-            color: var(--primary);
+        .visa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .visa-card h4 {
             margin-top: 0;
             margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3em;
         }
 
-        .visa-details p {
-            margin-bottom: 10px;
+        .visa-card p {
+            font-size: 0.95em; /* Slightly larger base text */
+            margin-bottom: 15px;
+            color: var(--text);
+            flex-grow: 1; /* Allow description to push button down */
         }
 
-        .visa-details strong {
+        .visa-card .cost {
             font-weight: bold;
-            color: var(--secondary);
+            color: var(--secondary); /* Use secondary color for cost */
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+        .visa-card .cost-note { /* Style for additional cost notes */
+             font-size: 0.8em;
+             color: #555;
+             margin-top: -10px;
+             margin-bottom: 15px;
         }
 
-        /* Footer Styles (Simplified for this page) */
-        footer {
-            background-color: var(--primary);
-            color: rgba(255, 255, 255, 0.9);
-            padding: 30px 0;
-            text-align: center;
-            font-size: 14px;
+
+        .airfare-btn {
+            /* Inherits base button styles, override as needed */
+            background-color: var(--secondary); /* Use secondary color */
+            color: var(--primary); /* Dark text on gold */
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 8px 15px;
+            margin-top: auto; /* Push button to bottom */
+            align-self: flex-start; /* Align button left */
         }
 
-        footer p {
-            margin-bottom: 10px;
+        .airfare-btn:hover {
+            background-color: #c09b2d; /* Darker shade of secondary */
         }
 
-        footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s;
+        .airfare-display {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary); /* Use primary color for airfare */
+            display: none; /* Hidden initially */
+            font-size: 0.95em;
+            background-color: var(--accent);
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary); /* Gold border */
         }
 
-        footer a:hover {
-            color: white;
-            text-decoration: underline;
+        .disclaimer {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            background-color: var(--accent); /* Light background for disclaimer */
+            padding: 20px;
+            border-radius: 5px;
         }
+        .disclaimer strong {
+            color: var(--primary);
+        }
+        .disclaimer ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .disclaimer li {
+            margin-bottom: 8px;
+        }
+
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .visa-type-buttons {
-                justify-content: space-around;
+            h1 { font-size: 2em; }
+            #subtypes-heading { font-size: 1.5em; }
+            .visa-card {
+                flex-basis: calc(50% - 12.5px); /* Roughly 2 cards per row, adjust gap offset */
+                min-width: unset; /* Remove min-width to allow 2 columns */
             }
-            .visa-type-buttons button {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-            .visa-subtypes {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            .visa-card h3 {
-                font-size: 18px;
-            }
-        }
+         }
+         /* On smaller screens, ensure flex-basis allows single column when needed */
+         @media (max-width: 550px) {
+                 .visa-card {
+                     flex-basis: 100%; /* 1 card per row */
+                 }
+                 button { /* Make buttons slightly smaller on mobile */
+                     padding: 10px 18px;
+                     font-size: 0.95em;
+                 }
+                 h1 { font-size: 1.8em; }
+                 #subtypes-heading { font-size: 1.3em; }
+         }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <section class="visa-info-section">
-            <div class="section-title">
-                <h2>UAE Visa Information</h2>
-                <p>Explore different types of visas offered by the United Arab Emirates.</p>
-            </div>
+        <h1>UAE Visa Information Overview</h1> <p>
+            Explore various visa options available for visiting, working, studying, or residing in the United Arab Emirates. Costs are estimates and subject to change.
+            <strong>Data primarily sourced from:</strong> The Official Portal of the UAE Government (<u>u.ae</u>) and related authorities (GDRFA, ICP, MoHRE). </p>
 
-            <div class="visa-type-buttons" id="visaTypeButtons">
-                </div>
+        <div id="visa-types">
+            <h3>Select Visa Category:</h3>
+            <button data-visa-type="Visit">Visit & Tourist</button>
+            <button data-visa-type="Work">Work & Residence</button>
+            <button data-visa-type="Family">Family Visas</button>
+            <button data-visa-type="LongTerm">Long-Term (Golden/Green)</button>
+            <button data-visa-type="Other">Other Visas</button>
+        </div>
 
-            <div id="visaSubtypes" class="visa-subtypes">
+        <div id="visa-subtypes-container">
+            <h3 id="subtypes-heading" style="display: none;">Subtypes:</h3>
+            <div id="visa-subtypes">
                 </div>
+        </div>
 
-            <div id="visaDetails" class="visa-details">
-                </div>
-        </section>
+        <div class="disclaimer">
+            <p><strong>Important Disclaimers:</strong></p>
+            <ul>
+                <li>Visa requirements, fees, and processes can change frequently. Always verify information with official UAE government sources (like u.ae, ICP, GDRFA, MoHRE) or the relevant UAE embassy/consulate before applying.</li> <li>Costs shown are estimates (often in AED, converted where possible) and may not include all charges (e.g., medical tests, Emirates ID, insurance, typing center fees, VAT).</li>
+                <li>Airfare estimates are approximate one-way costs from Pakistan (PK) to UAE and vary significantly based on airline, time of booking, and season.</li>
+                <li>Eligibility criteria and specific document requirements apply to each visa type.</li>
+                 <li>Sponsorship requirements differ based on the visa category.</li>
+            </ul>
+        </div>
+
     </div>
 
-    <footer>
-        <p>&copy; 2025 UAE Visa Information. All rights reserved.</p>
-        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-    </footer>
-
     <script>
+        // --- UAE Visa Data Object ---
         const visaData = {
-            student: [
+            "Visit": [
                 {
-                    name: "Student Visa for Bachelors",
-                    details: {
-                        cost: "AED 100 (Application)",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of sufficient funds required",
-                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Academic transcripts", "Passport size photos"],
-                        moreDetails: "Allows enrollment in undergraduate programs in UAE."
-                    }
+                    name: "Tourist Visa (30 Days - Single Entry)",
+                    description: "For tourism purposes, valid for 30 days stay. Issued via airlines, hotels, or travel agencies.",
+                    cost: "Estimate: AED 200 - 400 + VAT", // Based on GDRFA and Musafir
+                    costNote: "May require security deposit depending on provider. Additional fees apply if applying from inside UAE.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
                 },
                 {
-                    name: "Student Visa for Masters",
-                    details: {
-                        cost: "AED 100 (Application)",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of sufficient funds required",
-                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Bachelor's degree certificate", "Academic transcripts", "Passport size photos"],
-                        moreDetails: "Allows enrollment in postgraduate (Masters) programs in UAE."
-                    }
+                    name: "Tourist Visa (60 Days - Single Entry)",
+                    description: "For a longer tourism stay, valid for 60 days. Issued via airlines, hotels, or travel agencies.",
+                    cost: "Estimate: AED 300 - 600 + VAT", // Based on GDRFA and Musafir
+                    costNote: "May require security deposit depending on provider. Additional fees apply if applying from inside UAE.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Tourist Visa (30 Days - Multiple Entry)",
+                    description: "Allows multiple entries within a 30-day period from first entry.",
+                    cost: "Estimate: AED 700 - 850 + VAT", // Based on GDRFA and Musafir
+                    costNote: "Not extendable. Check specific provider terms.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Visit Visa (Relative/Friend - 30/60/90 Days)",
+                    description: "For visiting relatives or friends residing in the UAE. Requires sponsorship or application via ICP/GDRFA.",
+                    cost: "Estimate: AED 300-700 + VAT + Security Deposit (AED ~2000) + Insurance", // Based on GDRFA
+                    costNote: "Deposit refundable. Additional fees apply if applying from inside UAE.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
                 },
                 {
-                    name: "Student Visa for PhD",
-                    details: {
-                        cost: "AED 100 (Application)",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of sufficient funds required",
-                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Master's degree certificate", "Academic transcripts", "Research proposal (if applicable)", "Passport size photos"],
-                        moreDetails: "Allows enrollment in doctoral (PhD) programs in UAE."
-                    }
-                }
-            ],
-            investor: [
-                {
-                    name: "Real Estate Investor Visa",
-                    details: {
-                        cost: "Varies based on investment value",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of investment and financial stability",
-                        requiredDocuments: ["Passport copy", "Title deed of property", "Proof of investment funds", "Medical fitness certificate"],
-                        moreDetails: "Granted to individuals who invest in real estate in the UAE."
-                    }
+                    name: "Transit Visa (48 Hours)",
+                    description: "For passengers transiting through UAE airports for 8 to 48 hours.",
+                    cost: "Often Free (check with airline) or nominal fee",
+                    costNote: "Must have onward ticket.",
+                    airfareEstimate: "N/A (Part of transit)"
                 },
                 {
-                    name: "Business Investor Visa",
-                    details: {
-                        cost: "Varies based on investment type",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of investment in a business",
-                        requiredDocuments: ["Passport copy", "Trade license of the company", "Memorandum of Association", "Proof of investment funds"],
-                        moreDetails: "Issued to individuals who invest in businesses within the UAE."
-                    }
+                    name: "Transit Visa (96 Hours / 4 Days)",
+                    description: "For passengers transiting through UAE airports for up to 4 days.",
+                    cost: "Estimate: ~AED 50 (check with airline/authorities)",
+                    costNote: "Must have onward ticket.",
+                    airfareEstimate: "N/A (Part of transit)"
                 }
             ],
-            tourist: [
+            "Work": [
+                 {
+                    name: "Standard Work Visa / Residence Permit",
+                    description: "Requires sponsorship by a UAE-based employer. Allows holder to live and work in the UAE.",
+                    cost: "Estimate: AED 3000 - 7000+",
+                    costNote: "Includes permit, medical, Emirates ID, insurance etc. Cost varies by company category & emirate. Usually paid by employer.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Freelance Permit",
+                    description: "Allows authorized individuals to undertake independent/self-sponsored work. Requires specific eligibility.",
+                    cost: "Varies by issuing authority (emirate/free zone)",
+                    costNote: "Permit fees + residence visa costs apply.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Temporary Work Permit",
+                    description: "For specific projects or short-term assignments (e.g., 90 days).",
+                    cost: "Estimate: Permit Fee ~AED 500+",
+                    costNote: "Check MoHRE for details.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                 },
+                 {
+                     name: "Mission Work Permit",
+                     description: "For employees performing a specific temporary task for a limited period.",
+                     cost: "Estimate: Permit Fee ~AED 100+",
+                     costNote: "Check MoHRE for details.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                 }
+            ],
+            "Family": [
                 {
-                    name: "30-Day Tourist Visa",
-                    details: {
-                        cost: "Varies based on nationality",
-                        airTicket: "Round-trip ticket required",
-                        bankStatement: "May be required for some nationalities",
-                        requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
-                        moreDetails: "Allows a stay of up to 30 days for tourism purposes."
-                    }
+                    name: "Spouse / Children Residence Visa",
+                    description: "Sponsored by a resident (employee or investor) meeting salary criteria (e.g., min AED 4000 or 3000+accom).",
+                    cost: "Estimate: AED 4000 - 7000+ per dependent",
+                    costNote: "Includes visa, medical, Emirates ID, insurance. Varies by sponsor's visa type/duration.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Parent Residence Visa",
+                    description: "Sponsored by a resident meeting higher salary criteria and specific conditions.",
+                    cost: "Estimate: Similar to Spouse/Child + potential deposit",
+                    costNote: "Requires proof of sole sponsorship necessity.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                }
+            ],
+            "LongTerm": [
+                {
+                    name: "Golden Visa (Investor - Real Estate)",
+                    description: "10-year renewable visa for owners of property worth AED 2 million or more.",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Significant investment required. Allows sponsoring family.",
+                    airfareEstimate: "PKR 50,000 - 80,000+"
+                },
+                 {
+                    name: "Golden Visa (Investor - Public Investments)",
+                    description: "10-year visa for investors with AED 2 million deposit or contribution.",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Significant investment required. Allows sponsoring family.",
+                    airfareEstimate: "PKR 50,000 - 80,000+"
                 },
                 {
-                    name: "60-Day Tourist Visa",
-                    details: {
-                        cost: "Varies based on nationality",
-                        airTicket: "Round-trip ticket required",
-                        bankStatement: "May be required for some nationalities",
-                        requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
-                        moreDetails: "Allows a stay of up to 60 days for tourism purposes."
-                    }
-                }
-            ],
-            business: [
-                {
-                    name: "Business Visa",
-                    details: {
-                        cost: "Varies",
-                        airTicket: "Round-trip ticket recommended",
-                        bankStatement: "Proof of sufficient funds for the visit",
-                        requiredDocuments: ["Passport copy", "Passport size photo", "Invitation letter from a UAE company", "Trade license of the inviting company"],
-                        moreDetails: "For individuals visiting the UAE for business meetings, conferences, etc."
-                    }
-                }
-            ],
-            startup: [
-                {
-                    name: "Startup Visa",
-                    details: {
-                        cost: "Varies",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of funding for the startup",
-                        requiredDocuments: ["Passport copy", "Business plan", "Proof of funding", "Letter of support from an accredited incubator"],
-                        moreDetails: "For entrepreneurs looking to establish a startup in the UAE."
-                    }
-                }
-            ],
-            health: [
-                {
-                    name: "Medical Treatment Visa",
-                    details: {
-                        cost: "Varies",
-                        airTicket: "Round-trip ticket required",
-                        bankStatement: "Proof of sufficient funds for treatment",
-                        requiredDocuments: ["Passport copy", "Medical report", "Letter from UAE hospital/clinic", "Proof of financial guarantee"],
-                        moreDetails: "For individuals seeking medical treatment in the UAE."
-                    }
-                }
-            ],
-            other: [
-                {
-                    name: "Employment Visa",
-                    details: {
-                        cost: "Sponsored by the employer",
-                        airTicket: "Usually provided by the employer",
-                        bankStatement: "Not typically required for initial application",
-                        requiredDocuments: ["Passport copy", "Offer letter", "Educational certificates", "Medical fitness certificate"],
-                        moreDetails: "For individuals who have secured employment in the UAE."
-                    }
+                    name: "Golden Visa (Entrepreneurs)",
+                    description: "5 or 10-year visa for owners of approved projects (e.g., worth AED 500k+ or sold for AED 7M+). Requires approvals.",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Requires approval/nomination from authorities/incubators.",
+                    airfareEstimate: "PKR 50,000 - 80,000+"
                 },
                 {
-                    name: "Family Visa (Sponsorship)",
-                    details: {
-                        cost: "Varies",
-                        airTicket: "Varies based on origin",
-                        bankStatement: "Proof of sufficient income of the sponsor",
-                        requiredDocuments: ["Passport copies of family members", "Marriage certificate (if applicable)", "Birth certificates of children (if applicable)", "Sponsor's Emirates ID and visa"],
-                        moreDetails: "Allows UAE residents to sponsor their family members to live in the UAE."
-                    }
-                }
-                // Add more "other" visa types as needed
+                    name: "Golden Visa (Outstanding Talents)",
+                    description: "10-year visa for professionals/researchers/creatives in specific fields (Doctors, Scientists, Inventors, Artists, Executives etc.). Requires accreditation/approval.",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Specific criteria (e.g., salary >AED 50k for executives).",
+                    airfareEstimate: "PKR 50,000 - 80,000+"
+                },
+                 {
+                    name: "Golden Visa (Outstanding Students/Graduates)",
+                    description: "5 or 10-year visa for high-performing students in UAE secondary schools or graduates from accredited universities.",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Based on grades/university ranking.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                 {
+                    name: "Green Visa (Skilled Employee)",
+                    description: "5-year self-sponsored visa for skilled professionals meeting criteria (degree, salary min AED 15k, specific occupation level).",
+                    cost: "Permit + Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "No sponsor required. Can sponsor family.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                 },
+                 {
+                    name: "Green Visa (Freelancer/Self-Employed)",
+                    description: "5-year self-sponsored visa for freelancers with permit, degree, and min annual income (AED 360k).",
+                    cost: "Permit + Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Requires MoHRE permit.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                 },
+                 {
+                     name: "Green Visa (Investor/Partner)",
+                     description: "5-year visa for investors establishing or participating in commercial activities (proof of investment required, min AED 1M).",
+                     cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                     costNote: "Requires ICP approval.",
+                     airfareEstimate: "PKR 50,000 - 80,000+"
+                 }
+            ],
+            "Other": [
+                {
+                    name: "Student Visa",
+                    description: "Sponsored by an accredited university or educational institution in the UAE.",
+                    cost: "Varies by institution (often included in tuition/fees)",
+                    costNote:"Includes visa, medical, Emirates ID. Check with institution.",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                },
+                {
+                    name: "Retirement Visa",
+                    description: "5-year renewable visa for retirees over 55 meeting financial criteria (property worth AED 1M, savings AED 1M, or income AED 15k/month).",
+                    cost: "Visa Fees + Medical + Emirates ID + Insurance",
+                    costNote: "Must meet one of the financial requirements.",
+                    airfareEstimate: "PKR 50,000 - 80,000+"
+                },
+                 {
+                    name: "Remote Work Visa (Virtual Working Program)",
+                    description: "1-year digital nomad visa allowing foreigners to live in UAE while working remotely for employers outside UAE.",
+                    cost: "Application Fee (~USD 611) + Medical + Insurance",
+                    costNote: "Requires proof of employment & min salary (USD 3500/month).",
+                    airfareEstimate: "PKR 45,000 - 70,000+"
+                 }
             ]
         };
 
-        const visaTypeButtonsDiv = document.getElementById('visaTypeButtons');
-        const visaSubtypesDiv = document.getElementById('visaSubtypes');
-        const visaDetailsDiv = document.getElementById('visaDetails');
+        // --- DOM Elements ---
+        const visaTypesContainer = document.getElementById('visa-types');
+        const subtypesContainer = document.getElementById('visa-subtypes');
+        const subtypesHeading = document.getElementById('subtypes-heading');
 
-        const visaTypes = Object.keys(visaData);
+        // --- Event Listener for Main Visa Type Buttons ---
+        visaTypesContainer.addEventListener('click', function(event) {
+            if (event.target.tagName === 'BUTTON') {
+                const visaType = event.target.getAttribute('data-visa-type');
+                // Optional: Add active state styling to button
+                const allButtons = visaTypesContainer.querySelectorAll('button');
+                allButtons.forEach(btn => {
+                    btn.style.backgroundColor = 'var(--primary)'; // Reset others
+                    btn.style.fontWeight = '600';
+                 });
+                event.target.style.backgroundColor = '#005a25'; // Highlight active (darker primary)
+                event.target.style.fontWeight = 'bold';
 
-        // Function to display visa subtypes
-        function showSubtypes(visaType) {
-            visaSubtypesDiv.innerHTML = ''; // Clear previous subtypes
-            visaDetailsDiv.style.display = 'none'; // Hide details section
 
-            if (visaData[visaType] && visaData[visaType].length > 0) {
-                visaData[visaType].forEach(subtype => {
-                    const card = document.createElement('div');
-                    card.classList.add('visa-card');
-                    card.innerHTML = `
-                        <h3>${subtype.name}</h3>
-                        <button class="detail-button" onclick="showDetails('${visaType}', '${subtype.name}')">Show Details</button>
-                    `;
-                    visaSubtypesDiv.appendChild(card);
-                });
-                visaSubtypesDiv.style.display = 'grid';
-            } else {
-                visaSubtypesDiv.innerHTML = '<p>No subtypes available for this visa type.</p>';
-                visaSubtypesDiv.style.display = 'block';
+                displaySubtypes(visaType);
             }
-        }
-
-        // Function to display specific visa details
-        function showDetails(visaType, subtypeName) {
-            const subtype = visaData[visaType].find(item => item.name === subtypeName);
-            if (subtype && subtype.details) {
-                visaDetailsDiv.innerHTML = `
-                    <h3>${subtypeName} - Details</h3>
-                    <p><strong>Cost:</strong> ${subtype.details.cost}</p>
-                    <p><strong>Air Ticket Price:</strong> ${subtype.details.airTicket}</p>
-                    <p><strong>Bank Statement:</strong> ${subtype.details.bankStatement}</p>
-                    <p><strong>Required Documents:</strong> ${subtype.details.requiredDocuments.join(', ')}</p>
-                    <p><strong>More Details:</strong> ${subtype.details.moreDetails}</p>
-                `;
-                visaDetailsDiv.style.display = 'block';
-            } else {
-                visaDetailsDiv.innerHTML = '<p>Details not available.</p>';
-                visaDetailsDiv.style.display = 'block';
-            }
-        }
-
-        // Create visa type buttons
-        visaTypes.forEach(type => {
-            const button = document.createElement('button');
-            button.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize first letter
-            button.onclick = function() {
-                showSubtypes(type);
-            };
-            visaTypeButtonsDiv.appendChild(button);
         });
+
+        // --- Function to Display Subtypes ---
+        function displaySubtypes(visaType) {
+            // Clear previous subtypes
+            subtypesContainer.innerHTML = '';
+            subtypesHeading.style.display = 'inline-block'; // Show the heading
+            subtypesHeading.textContent = `${visaType.replace(/([A-Z])/g, ' $1').trim()} Visa Subtypes`; // Add space before caps
+
+            const subtypes = visaData[visaType];
+            if (!subtypes || subtypes.length === 0) {
+                subtypesContainer.innerHTML = '<p style="text-align: center; width: 100%;">No specific subtypes listed for this category or check official sources.</p>';
+                subtypesHeading.style.display = 'none'; // Hide heading if no subtypes
+                return;
+            }
+
+            // Create and append cards for each subtype
+            subtypes.forEach((subtype, index) => {
+                const card = document.createElement('div');
+                card.className = 'visa-card'; // Use class for styling
+
+                // Unique ID for the airfare display element
+                const airfareDisplayId = `airfare-${visaType.replace(/[^a-zA-Z0-9]/g, '-')}-${index}`; // Sanitize ID
+                const airfareButtonId = `airfare-btn-${visaType.replace(/[^a-zA-Z0-9]/g, '-')}-${index}`; // Sanitize ID
+
+                // Check if airfare estimate exists and is not N/A
+                 const showAirfareButton = subtype.airfareEstimate && subtype.airfareEstimate !== 'N/A';
+                 const costNoteHTML = subtype.costNote ? `<p class="cost-note">${subtype.costNote}</p>` : ''; // Add cost note if exists
+
+
+                card.innerHTML = `
+                    <h4>${subtype.name}</h4>
+                    <p>${subtype.description}</p>
+                    <p class="cost">${subtype.cost}</p>
+                    ${costNoteHTML}
+                    ${showAirfareButton ?
+                         `<button id="${airfareButtonId}" class="airfare-btn" data-airfare="${subtype.airfareEstimate}" data-target="${airfareDisplayId}">Show Est. Airfare (PK to UAE)</button> <div id="${airfareDisplayId}" class="airfare-display"></div>`
+                        : '<p style="font-size: 0.85em; color: #888; margin-top: auto;">Airfare estimate not applicable or included elsewhere.</p>' // Modified text
+                    }
+                `;
+                subtypesContainer.appendChild(card);
+
+                // Add event listener specifically to the new airfare button IF it exists
+                if (showAirfareButton) {
+                    const airfareButton = document.getElementById(airfareButtonId);
+                    airfareButton.addEventListener('click', showAirfare);
+                }
+            });
+        }
+
+        // --- Function to Show Airfare ---
+        function showAirfare(event) {
+            const button = event.target;
+            const targetDisplayId = button.getAttribute('data-target');
+            const airfareEstimate = button.getAttribute('data-airfare');
+            const airfareDisplayElement = document.getElementById(targetDisplayId);
+
+            if (airfareDisplayElement) {
+                airfareDisplayElement.textContent = `Est. One-Way Airfare (PK to UAE): ${airfareEstimate}`; // Changed Text
+                airfareDisplayElement.style.display = 'block'; // Show the display element
+                button.disabled = true; // Disable button after click
+                button.textContent = 'Estimate Shown';
+                button.style.backgroundColor = '#ccc'; // Grey out disabled button
+                button.style.color = '#666'; // Adjust text color for disabled button
+            }
+        }
+
+        // --- Optional: Display the first category by default on load ---
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const firstButton = visaTypesContainer.querySelector('button');
+        //     if(firstButton) {
+        //         firstButton.click(); // Simulate a click on the first button
+        //      }
+        // });
+
+
     </script>
 
 </body>
