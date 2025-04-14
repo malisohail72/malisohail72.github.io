@@ -5,64 +5,264 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UK Visa Information</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; }
-        button { margin: 5px; padding: 10px 15px; cursor: pointer; background-color: #00529b; color: white; border: none; border-radius: 4px; }
-        button:hover { background-color: #003c75; }
-        #visa-types { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #eee; }
-        .visa-card { border: 1px solid #ccc; border-radius: 5px; padding: 15px; margin: 10px; width: calc(33% - 42px); /* Adjust for 3 columns roughly */ display: inline-block; vertical-align: top; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); min-height: 200px; }
-        .visa-card h4 { margin-top: 0; color: #00529b; }
-        .visa-card p { font-size: 0.9em; }
-        .visa-card .cost { font-weight: bold; color: #d9534f; }
-        .airfare-btn { background-color: #5cb85c; font-size: 0.9em; padding: 5px 10px; margin-top: 10px; }
-        .airfare-btn:hover { background-color: #4cae4c; }
-        .airfare-display { margin-top: 10px; font-weight: bold; color: #4cae4c; display: none; /* Hidden initially */ }
-        #visa-subtypes-container { margin-top: 20px; }
-        .disclaimer { font-size: 0.8em; color: #777; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;}
-         /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .visa-card { width: calc(50% - 42px); } /* 2 columns */
+        /* --- Provided CSS Theme Variables and Base Styles --- */
+        :root {
+            --primary: #005e54; /* Dark Teal/Green */
+            --secondary: #01796f; /* Medium Teal/Green */
+            --accent: #f8f9fa; /* Very Light Gray/Off-white */
+            --text: #333333; /* Dark Gray */
+            --light: #ffffff; /* White */
+            --border-color: #e0e0e0; /* Light Gray Border */
         }
-        @media (max-width: 600px) {
-            .visa-card { width: calc(100% - 42px); } /* 1 column */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light); /* Set a base background */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto; /* Added top/bottom margin */
+            padding: 0 20px;
+        }
+
+        /* --- Page Specific Styles Using Theme Variables --- */
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em; /* Larger heading */
+        }
+
+        /* Intro paragraph */
+        .container > p:first-of-type {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666; /* Slightly lighter text */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+         .container > p:first-of-type strong {
+             color: var(--secondary);
+         }
+
+
+        #visa-types {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center; /* Center buttons */
+        }
+
+        #visa-types h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4em;
+        }
+
+        /* General button style */
+        button {
+            margin: 8px;
+            padding: 12px 22px;
+            cursor: pointer;
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+         button:disabled {
+             background-color: #ccc;
+             cursor: not-allowed;
+             transform: none;
+         }
+
+        #visa-subtypes-container {
+            margin-top: 30px;
+        }
+
+        #subtypes-heading {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block; /* Allow centering */
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 5px;
+        }
+
+        /* Using Flexbox for card layout */
+        #visa-subtypes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px; /* Spacing between cards */
+            justify-content: center; /* Center cards if they don't fill a row */
+        }
+
+        .visa-card {
+            background-color: var(--light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Slightly rounder corners */
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; /* Use flex inside card */
+            flex-direction: column; /* Stack content vertically */
+            flex: 1 1 320px; /* Grow, shrink, base width ~3 cards per row on large screens */
+            min-width: 280px; /* Minimum width before wrapping */
+        }
+
+        .visa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .visa-card h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3em;
+        }
+
+        .visa-card p {
+            font-size: 0.95em; /* Slightly larger base text */
+            margin-bottom: 15px;
+            color: var(--text);
+            flex-grow: 1; /* Allow description to push button down */
+        }
+
+        .visa-card .cost {
+            font-weight: bold;
+            color: var(--secondary); /* Use secondary color for cost */
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .airfare-btn {
+            /* Inherits base button styles, override as needed */
+            background-color: var(--secondary); /* Use secondary color */
+            font-size: 0.9em;
+            padding: 8px 15px;
+            margin-top: auto; /* Push button to bottom */
+            align-self: flex-start; /* Align button left */
+        }
+
+        .airfare-btn:hover {
+            background-color: #015c55; /* Darker shade of secondary */
+        }
+
+        .airfare-display {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--secondary);
+            display: none; /* Hidden initially */
+            font-size: 0.95em;
+            background-color: var(--accent);
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .disclaimer {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            background-color: var(--accent); /* Light background for disclaimer */
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .disclaimer strong {
+            color: var(--primary);
+        }
+        .disclaimer ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .disclaimer li {
+            margin-bottom: 8px;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            #subtypes-heading { font-size: 1.5em; }
+            .visa-card {
+                flex-basis: calc(50% - 12.5px); /* Roughly 2 cards per row, adjust gap offset */
+                min-width: unset; /* Remove min-width to allow 2 columns */
+            }
+            /* On smaller screens, ensure flex-basis allows single column when needed */
+            @media (max-width: 550px) {
+                 .visa-card {
+                     flex-basis: 100%; /* 1 card per row */
+                 }
+                 button { /* Make buttons slightly smaller on mobile */
+                     padding: 10px 18px;
+                     font-size: 0.95em;
+                 }
+                 h1 { font-size: 1.8em; }
+                 #subtypes-heading { font-size: 1.3em; }
+             }
+
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>UK Visa Information Overview</h1>
-    <p>Select a visa category to see common subtypes. <strong>Note:</strong> Information is simplified. Costs and airfare are estimates. Always check the official GOV.UK website for current details.</p>
+    <div class="container"> <h1>UK Visa Information Overview</h1>
+        <p>Select a visa category below to explore common subtypes and general information. <strong>Note:</strong> This is a simplified guide. Costs and airfare are estimates only. <u>Always consult the official GOV.UK website</u> for the most accurate, detailed, and up-to-date requirements and fees before applying.</p>
 
-    <div id="visa-types">
-        <h3>Select Visa Category:</h3>
-        <button data-visa-type="Work">Work Visas</button>
-        <button data-visa-type="Study">Study Visas</button>
-        <button data-visa-type="Visit">Visit Visas</button>
-        <button data-visa-type="Family">Family Visas</button>
-        <button data-visa-type="Business">Business & Investment</button>
-        <button data-visa-type="Other">Other Visas</button>
-    </div>
+        <div id="visa-types">
+            <h3>Select Visa Category:</h3>
+            <button data-visa-type="Work">Work Visas</button>
+            <button data-visa-type="Study">Study Visas</button>
+            <button data-visa-type="Visit">Visit Visas</button>
+            <button data-visa-type="Family">Family Visas</button>
+            <button data-visa-type="Business">Business & Investment</button>
+            <button data-visa-type="Other">Other Visas</button>
+        </div>
 
-    <div id="visa-subtypes-container">
-        <h3 id="subtypes-heading" style="display: none;">Subtypes:</h3>
-        <div id="visa-subtypes">
-            </div>
-    </div>
+        <div id="visa-subtypes-container">
+            <h3 id="subtypes-heading" style="display: none;">Subtypes:</h3>
+            <div id="visa-subtypes">
+                </div>
+        </div>
 
-    <div class="disclaimer">
-        <p><strong>Disclaimer:</strong></p>
-        <ul>
-            <li>All visa details, requirements, and costs are subject to change. Always consult the official UK government website (GOV.UK) for the most accurate and up-to-date information.</li>
-            <li>Visa costs shown are application fees only and are estimates. Additional costs (like the Immigration Health Surcharge, Biometrics, etc.) may apply.</li>
-            <li>Airfare estimates are highly variable based on numerous factors (airline, season, booking time, origin/destination cities, etc.) and are provided for illustrative purposes only. Estimate based on one-way travel from Pakistan to London.</li>
-            <li>Some visa routes may have specific eligibility criteria not detailed here.</li>
-            <li>Visa routes like Tier 1 Investor and Start-up are now closed to new applicants, replaced by routes like Innovator Founder.</li>
-        </ul>
-    </div>
+        <div class="disclaimer">
+            <p><strong>Important Disclaimers:</strong></p>
+            <ul>
+                <li>Visa details, eligibility criteria, required documents, and processing times are complex and change frequently. Always refer to the official UK Visas and Immigration section on the GOV.UK website.</li>
+                <li>Costs shown are indicative application fees only and may not include the Immigration Health Surcharge (IHS), Biometric enrolment fees, priority service fees, or other potential costs. Fees vary based on visa type, duration, location of application, and individual circumstances. Check GOV.UK for exact current fees.</li>
+                <li>Airfare estimates are extremely variable (origin: Pakistan assumed, destination: London assumed). Actual prices depend heavily on the airline, booking time, travel dates, season, baggage allowance, and specific airports. These are illustrative placeholders only.</li>
+                <li>Visa routes like Tier 1 Investor and Start-up are closed to new applicants. They have been replaced by routes like the Innovator Founder visa.</li>
+                <li>This page does not constitute immigration advice.</li>
+            </ul>
+        </div>
 
-    <script>
-        // --- Visa Data Object ---
-        // Structure: Category -> Array of Subtype Objects
-        // Cost estimates are indicative application fees. Airfare is a very rough estimate.
+    </div><script>
+        // --- Visa Data Object (Content remains the same as before) ---
         const visaData = {
             "Work": [
                 {
@@ -219,6 +419,11 @@
         visaTypesContainer.addEventListener('click', function(event) {
             if (event.target.tagName === 'BUTTON') {
                 const visaType = event.target.getAttribute('data-visa-type');
+                // Optional: Add active state styling to button
+                const allButtons = visaTypesContainer.querySelectorAll('button');
+                allButtons.forEach(btn => btn.style.backgroundColor = 'var(--primary)'); // Reset others
+                event.target.style.backgroundColor = 'var(--secondary)'; // Highlight active
+
                 displaySubtypes(visaType);
             }
         });
@@ -227,13 +432,14 @@
         function displaySubtypes(visaType) {
             // Clear previous subtypes
             subtypesContainer.innerHTML = '';
-            subtypesHeading.style.display = 'block'; // Show the heading
-            subtypesHeading.textContent = `${visaType} Visa Subtypes:`;
+            subtypesHeading.style.display = 'inline-block'; // Show the heading (use inline-block for centering)
+            subtypesHeading.textContent = `${visaType} Visa Subtypes`; // Updated text slightly
 
             const subtypes = visaData[visaType];
 
             if (!subtypes || subtypes.length === 0) {
-                subtypesContainer.innerHTML = '<p>No specific subtypes listed for this category or check official sources.</p>';
+                subtypesContainer.innerHTML = '<p style="text-align: center; width: 100%;">No specific subtypes listed for this category or check official sources.</p>';
+                 subtypesHeading.style.display = 'none'; // Hide heading if no subtypes
                 return;
             }
 
@@ -243,22 +449,27 @@
                 card.className = 'visa-card'; // Use class for styling
 
                 // Unique ID for the airfare display element within this card
-                const airfareDisplayId = `airfare-${visaType}-${index}`;
-                const airfareButtonId = `airfare-btn-${visaType}-${index}`;
+                const airfareDisplayId = `airfare-${visaType.replace(/\s+/g, '-')}-${index}`; // Sanitize ID
+                const airfareButtonId = `airfare-btn-${visaType.replace(/\s+/g, '-')}-${index}`; // Sanitize ID
+
+                // Check if airfare estimate exists and is not N/A
+                 const showAirfareButton = subtype.airfareEstimate && subtype.airfareEstimate !== 'N/A';
 
                 card.innerHTML = `
                     <h4>${subtype.name}</h4>
                     <p>${subtype.description}</p>
                     <p class="cost">${subtype.cost}</p>
-                    <button id="${airfareButtonId}" class="airfare-btn" data-airfare="${subtype.airfareEstimate}" data-target="${airfareDisplayId}">Show Est. Airfare (PK to UK)</button>
-                    <div id="${airfareDisplayId}" class="airfare-display">
-                        </div>
+                    ${showAirfareButton ?
+                        `<button id="${airfareButtonId}" class="airfare-btn" data-airfare="${subtype.airfareEstimate}" data-target="${airfareDisplayId}">Show Est. Airfare (PK to UK)</button>
+                         <div id="${airfareDisplayId}" class="airfare-display"></div>`
+                        : '<p style="font-size: 0.85em; color: #888; margin-top: auto;">Airfare estimate not applicable.</p>'
+                    }
                 `;
                 subtypesContainer.appendChild(card);
 
-                // Add event listener specifically to the new airfare button
-                const airfareButton = document.getElementById(airfareButtonId);
-                if (airfareButton) { // Ensure button exists before adding listener
+                // Add event listener specifically to the new airfare button IF it exists
+                if (showAirfareButton) {
+                    const airfareButton = document.getElementById(airfareButtonId);
                      airfareButton.addEventListener('click', showAirfare);
                 }
             });
@@ -274,8 +485,9 @@
             if (airfareDisplayElement) {
                 airfareDisplayElement.textContent = `Est. One-Way Airfare: ${airfareEstimate}`;
                 airfareDisplayElement.style.display = 'block'; // Show the display element
-                button.disabled = true; // Optional: Disable button after click
+                button.disabled = true; // Disable button after click
                 button.textContent = 'Estimate Shown';
+                button.style.backgroundColor = '#ccc'; // Grey out disabled button
             }
         }
 
