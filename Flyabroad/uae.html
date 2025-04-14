@@ -1,228 +1,595 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>UAE Visa Information</title>
-<style>
-  body { font-family: sans-serif; margin: 20px; }
-  .visa-type-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-  .visa-type-buttons button { padding: 10px 15px; cursor: pointer; border: 1px solid #ccc; background-color: #f9f9f9; }
-  .visa-subtypes { display: none; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px; }
-  .visa-card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
-  .visa-card h3 { margin-top: 0; margin-bottom: 10px; }
-  .visa-details { display: none; margin-top: 15px; padding: 15px; border: 1px solid #eee; background-color: #f5f5f5; border-radius: 5px; }
-  .detail-button { padding: 8px 12px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 3px; }
-  .detail-button:hover { background-color: #0056b3; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE Visa Information</title>
+    <style>
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles (Not directly used in this simplified page, but included as per request) */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: none; /* Hidden for simplicity in this single-page app */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Breadcrumb Styles (Not directly used, but included) */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin-left: 10px;
+            color: #777;
+        }
+
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Hero Section (Not directly used, but included) */
+        .hero {
+            background: linear-gradient(rgba(0, 94, 84, 0.8), rgba(0, 94, 84, 0.9)), url('images/hero-background.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero p u {
+            text-decoration-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Common Section Styles */
+        section {
+            padding: 60px 0;
+        }
+        .services, .testimonials {
+            background-color: var(--accent);
+        }
+        .destinations, .resources, .cta-section {
+            background-color: var(--light);
+        }
+
+        /* Section Title Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            margin-top: 0;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 25px auto 0;
+            color: #666;
+        }
+
+        /* Visa Type Buttons Section */
+        .visa-type-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center; /* Center the buttons */
+        }
+
+        .visa-type-buttons button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background-color: var(--light);
+            color: var(--text);
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .visa-type-buttons button:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Visa Subtypes Section */
+        .visa-subtypes {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .visa-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .visa-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .detail-button {
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .detail-button:hover {
+            background-color: var(--primary);
+        }
+
+        /* Visa Details Section */
+        .visa-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--accent);
+            border-radius: 10px;
+        }
+
+        .visa-details h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .visa-details p {
+            margin-bottom: 10px;
+        }
+
+        .visa-details strong {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        /* Footer Styles (Simplified for this page) */
+        footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .visa-type-buttons {
+                justify-content: space-around;
+            }
+            .visa-type-buttons button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+            .visa-subtypes {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .visa-card h3 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <h1>UAE Visa Information</h1>
+    <div class="container">
+        <section class="visa-info-section">
+            <div class="section-title">
+                <h2>UAE Visa Information</h2>
+                <p>Explore different types of visas offered by the United Arab Emirates.</p>
+            </div>
 
-  <div class="visa-type-buttons" id="visaTypeButtons">
+            <div class="visa-type-buttons" id="visaTypeButtons">
+                </div>
+
+            <div id="visaSubtypes" class="visa-subtypes">
+                </div>
+
+            <div id="visaDetails" class="visa-details">
+                </div>
+        </section>
     </div>
 
-  <div id="visaSubtypes" class="visa-subtypes">
-    </div>
+    <footer>
+        <p>&copy; 2025 UAE Visa Information. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 
-  <div id="visaDetails" class="visa-details">
-    </div>
+    <script>
+        const visaData = {
+            student: [
+                {
+                    name: "Student Visa for Bachelors",
+                    details: {
+                        cost: "AED 100 (Application)",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of sufficient funds required",
+                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Academic transcripts", "Passport size photos"],
+                        moreDetails: "Allows enrollment in undergraduate programs in UAE."
+                    }
+                },
+                {
+                    name: "Student Visa for Masters",
+                    details: {
+                        cost: "AED 100 (Application)",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of sufficient funds required",
+                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Bachelor's degree certificate", "Academic transcripts", "Passport size photos"],
+                        moreDetails: "Allows enrollment in postgraduate (Masters) programs in UAE."
+                    }
+                },
+                {
+                    name: "Student Visa for PhD",
+                    details: {
+                        cost: "AED 100 (Application)",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of sufficient funds required",
+                        requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Master's degree certificate", "Academic transcripts", "Research proposal (if applicable)", "Passport size photos"],
+                        moreDetails: "Allows enrollment in doctoral (PhD) programs in UAE."
+                    }
+                }
+            ],
+            investor: [
+                {
+                    name: "Real Estate Investor Visa",
+                    details: {
+                        cost: "Varies based on investment value",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of investment and financial stability",
+                        requiredDocuments: ["Passport copy", "Title deed of property", "Proof of investment funds", "Medical fitness certificate"],
+                        moreDetails: "Granted to individuals who invest in real estate in the UAE."
+                    }
+                },
+                {
+                    name: "Business Investor Visa",
+                    details: {
+                        cost: "Varies based on investment type",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of investment in a business",
+                        requiredDocuments: ["Passport copy", "Trade license of the company", "Memorandum of Association", "Proof of investment funds"],
+                        moreDetails: "Issued to individuals who invest in businesses within the UAE."
+                    }
+                }
+            ],
+            tourist: [
+                {
+                    name: "30-Day Tourist Visa",
+                    details: {
+                        cost: "Varies based on nationality",
+                        airTicket: "Round-trip ticket required",
+                        bankStatement: "May be required for some nationalities",
+                        requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
+                        moreDetails: "Allows a stay of up to 30 days for tourism purposes."
+                    }
+                },
+                {
+                    name: "60-Day Tourist Visa",
+                    details: {
+                        cost: "Varies based on nationality",
+                        airTicket: "Round-trip ticket required",
+                        bankStatement: "May be required for some nationalities",
+                        requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
+                        moreDetails: "Allows a stay of up to 60 days for tourism purposes."
+                    }
+                }
+            ],
+            business: [
+                {
+                    name: "Business Visa",
+                    details: {
+                        cost: "Varies",
+                        airTicket: "Round-trip ticket recommended",
+                        bankStatement: "Proof of sufficient funds for the visit",
+                        requiredDocuments: ["Passport copy", "Passport size photo", "Invitation letter from a UAE company", "Trade license of the inviting company"],
+                        moreDetails: "For individuals visiting the UAE for business meetings, conferences, etc."
+                    }
+                }
+            ],
+            startup: [
+                {
+                    name: "Startup Visa",
+                    details: {
+                        cost: "Varies",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of funding for the startup",
+                        requiredDocuments: ["Passport copy", "Business plan", "Proof of funding", "Letter of support from an accredited incubator"],
+                        moreDetails: "For entrepreneurs looking to establish a startup in the UAE."
+                    }
+                }
+            ],
+            health: [
+                {
+                    name: "Medical Treatment Visa",
+                    details: {
+                        cost: "Varies",
+                        airTicket: "Round-trip ticket required",
+                        bankStatement: "Proof of sufficient funds for treatment",
+                        requiredDocuments: ["Passport copy", "Medical report", "Letter from UAE hospital/clinic", "Proof of financial guarantee"],
+                        moreDetails: "For individuals seeking medical treatment in the UAE."
+                    }
+                }
+            ],
+            other: [
+                {
+                    name: "Employment Visa",
+                    details: {
+                        cost: "Sponsored by the employer",
+                        airTicket: "Usually provided by the employer",
+                        bankStatement: "Not typically required for initial application",
+                        requiredDocuments: ["Passport copy", "Offer letter", "Educational certificates", "Medical fitness certificate"],
+                        moreDetails: "For individuals who have secured employment in the UAE."
+                    }
+                },
+                {
+                    name: "Family Visa (Sponsorship)",
+                    details: {
+                        cost: "Varies",
+                        airTicket: "Varies based on origin",
+                        bankStatement: "Proof of sufficient income of the sponsor",
+                        requiredDocuments: ["Passport copies of family members", "Marriage certificate (if applicable)", "Birth certificates of children (if applicable)", "Sponsor's Emirates ID and visa"],
+                        moreDetails: "Allows UAE residents to sponsor their family members to live in the UAE."
+                    }
+                }
+                // Add more "other" visa types as needed
+            ]
+        };
 
-  <script>
-    const visaData = {
-      student: [
-        {
-          name: "Student Visa for Bachelors",
-          details: {
-            cost: "AED 100 (Application)",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of sufficient funds required",
-            requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Academic transcripts", "Passport size photos"],
-            moreDetails: "Allows enrollment in undergraduate programs in UAE."
-          }
-        },
-        {
-          name: "Student Visa for Masters",
-          details: {
-            cost: "AED 100 (Application)",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of sufficient funds required",
-            requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Bachelor's degree certificate", "Academic transcripts", "Passport size photos"],
-            moreDetails: "Allows enrollment in postgraduate (Masters) programs in UAE."
-          }
-        },
-        {
-          name: "Student Visa for PhD",
-          details: {
-            cost: "AED 100 (Application)",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of sufficient funds required",
-            requiredDocuments: ["Passport copy", "Offer letter from UAE university", "Master's degree certificate", "Academic transcripts", "Research proposal (if applicable)", "Passport size photos"],
-            moreDetails: "Allows enrollment in doctoral (PhD) programs in UAE."
-          }
-        }
-      ],
-      investor: [
-        {
-          name: "Real Estate Investor Visa",
-          details: {
-            cost: "Varies based on investment value",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of investment and financial stability",
-            requiredDocuments: ["Passport copy", "Title deed of property", "Proof of investment funds", "Medical fitness certificate"],
-            moreDetails: "Granted to individuals who invest in real estate in the UAE."
-          }
-        },
-        {
-          name: "Business Investor Visa",
-          details: {
-            cost: "Varies based on investment type",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of investment in a business",
-            requiredDocuments: ["Passport copy", "Trade license of the company", "Memorandum of Association", "Proof of investment funds"],
-            moreDetails: "Issued to individuals who invest in businesses within the UAE."
-          }
-        }
-      ],
-      tourist: [
-        {
-          name: "30-Day Tourist Visa",
-          details: {
-            cost: "Varies based on nationality",
-            airTicket: "Round-trip ticket required",
-            bankStatement: "May be required for some nationalities",
-            requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
-            moreDetails: "Allows a stay of up to 30 days for tourism purposes."
-          }
-        },
-        {
-          name: "60-Day Tourist Visa",
-          details: {
-            cost: "Varies based on nationality",
-            airTicket: "Round-trip ticket required",
-            bankStatement: "May be required for some nationalities",
-            requiredDocuments: ["Passport copy", "Passport size photo", "Confirmed return ticket", "Proof of accommodation"],
-            moreDetails: "Allows a stay of up to 60 days for tourism purposes."
-          }
-        }
-      ],
-      business: [
-        {
-          name: "Business Visa",
-          details: {
-            cost: "Varies",
-            airTicket: "Round-trip ticket recommended",
-            bankStatement: "Proof of sufficient funds for the visit",
-            requiredDocuments: ["Passport copy", "Passport size photo", "Invitation letter from a UAE company", "Trade license of the inviting company"],
-            moreDetails: "For individuals visiting the UAE for business meetings, conferences, etc."
-          }
-        }
-      ],
-      startup: [
-        {
-          name: "Startup Visa",
-          details: {
-            cost: "Varies",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of funding for the startup",
-            requiredDocuments: ["Passport copy", "Business plan", "Proof of funding", "Letter of support from an accredited incubator"],
-            moreDetails: "For entrepreneurs looking to establish a startup in the UAE."
-          }
-        }
-      ],
-      health: [
-        {
-          name: "Medical Treatment Visa",
-          details: {
-            cost: "Varies",
-            airTicket: "Round-trip ticket required",
-            bankStatement: "Proof of sufficient funds for treatment",
-            requiredDocuments: ["Passport copy", "Medical report", "Letter from UAE hospital/clinic", "Proof of financial guarantee"],
-            moreDetails: "For individuals seeking medical treatment in the UAE."
-          }
-        }
-      ],
-      other: [
-        {
-          name: "Employment Visa",
-          details: {
-            cost: "Sponsored by the employer",
-            airTicket: "Usually provided by the employer",
-            bankStatement: "Not typically required for initial application",
-            requiredDocuments: ["Passport copy", "Offer letter", "Educational certificates", "Medical fitness certificate"],
-            moreDetails: "For individuals who have secured employment in the UAE."
-          }
-        },
-        {
-          name: "Family Visa (Sponsorship)",
-          details: {
-            cost: "Varies",
-            airTicket: "Varies based on origin",
-            bankStatement: "Proof of sufficient income of the sponsor",
-            requiredDocuments: ["Passport copies of family members", "Marriage certificate (if applicable)", "Birth certificates of children (if applicable)", "Sponsor's Emirates ID and visa"],
-            moreDetails: "Allows UAE residents to sponsor their family members to live in the UAE."
-          }
-        }
-        // Add more "other" visa types as needed
-      ]
-    };
+        const visaTypeButtonsDiv = document.getElementById('visaTypeButtons');
+        const visaSubtypesDiv = document.getElementById('visaSubtypes');
+        const visaDetailsDiv = document.getElementById('visaDetails');
 
-    const visaTypeButtonsDiv = document.getElementById('visaTypeButtons');
-    const visaSubtypesDiv = document.getElementById('visaSubtypes');
-    const visaDetailsDiv = document.getElementById('visaDetails');
+        const visaTypes = Object.keys(visaData);
 
-    const visaTypes = Object.keys(visaData);
+        // Function to display visa subtypes
+        function showSubtypes(visaType) {
+            visaSubtypesDiv.innerHTML = ''; // Clear previous subtypes
+            visaDetailsDiv.style.display = 'none'; // Hide details section
 
-    // Function to display visa subtypes
-    function showSubtypes(visaType) {
-      visaSubtypesDiv.innerHTML = ''; // Clear previous subtypes
-      visaDetailsDiv.style.display = 'none'; // Hide details section
+            if (visaData[visaType] && visaData[visaType].length > 0) {
+                visaData[visaType].forEach(subtype => {
+                    const card = document.createElement('div');
+                    card.classList.add('visa-card');
+                    card.innerHTML = `
+                        <h3>${subtype.name}</h3>
+                        <button class="detail-button" onclick="showDetails('${visaType}', '${subtype.name}')">Show Details</button>
+                    `;
+                    visaSubtypesDiv.appendChild(card);
+                });
+                visaSubtypesDiv.style.display = 'grid';
+            } else {
+                visaSubtypesDiv.innerHTML = '<p>No subtypes available for this visa type.</p>';
+                visaSubtypesDiv.style.display = 'block';
+            }
+        }
 
-      if (visaData[visaType] && visaData[visaType].length > 0) {
-        visaData[visaType].forEach(subtype => {
-          const card = document.createElement('div');
-          card.classList.add('visa-card');
-          card.innerHTML = `
-            <h3>${subtype.name}</h3>
-            <button class="detail-button" onclick="showDetails('${visaType}', '${subtype.name}')">Show Details</button>
-          `;
-          visaSubtypesDiv.appendChild(card);
+        // Function to display specific visa details
+        function showDetails(visaType, subtypeName) {
+            const subtype = visaData[visaType].find(item => item.name === subtypeName);
+            if (subtype && subtype.details) {
+                visaDetailsDiv.innerHTML = `
+                    <h3>${subtypeName} - Details</h3>
+                    <p><strong>Cost:</strong> ${subtype.details.cost}</p>
+                    <p><strong>Air Ticket Price:</strong> ${subtype.details.airTicket}</p>
+                    <p><strong>Bank Statement:</strong> ${subtype.details.bankStatement}</p>
+                    <p><strong>Required Documents:</strong> ${subtype.details.requiredDocuments.join(', ')}</p>
+                    <p><strong>More Details:</strong> ${subtype.details.moreDetails}</p>
+                `;
+                visaDetailsDiv.style.display = 'block';
+            } else {
+                visaDetailsDiv.innerHTML = '<p>Details not available.</p>';
+                visaDetailsDiv.style.display = 'block';
+            }
+        }
+
+        // Create visa type buttons
+        visaTypes.forEach(type => {
+            const button = document.createElement('button');
+            button.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize first letter
+            button.onclick = function() {
+                showSubtypes(type);
+            };
+            visaTypeButtonsDiv.appendChild(button);
         });
-        visaSubtypesDiv.style.display = 'grid';
-      } else {
-        visaSubtypesDiv.innerHTML = '<p>No subtypes available for this visa type.</p>';
-        visaSubtypesDiv.style.display = 'block';
-      }
-    }
-
-    // Function to display specific visa details
-    function showDetails(visaType, subtypeName) {
-      const subtype = visaData[visaType].find(item => item.name === subtypeName);
-      if (subtype && subtype.details) {
-        visaDetailsDiv.innerHTML = `
-          <h3>${subtypeName} - Details</h3>
-          <p><strong>Cost:</strong> ${subtype.details.cost}</p>
-          <p><strong>Air Ticket Price:</strong> ${subtype.details.airTicket}</p>
-          <p><strong>Bank Statement:</strong> ${subtype.details.bankStatement}</p>
-          <p><strong>Required Documents:</strong> ${subtype.details.requiredDocuments.join(', ')}</p>
-          <p><strong>More Details:</strong> ${subtype.details.moreDetails}</p>
-        `;
-        visaDetailsDiv.style.display = 'block';
-      } else {
-        visaDetailsDiv.innerHTML = '<p>Details not available.</p>';
-        visaDetailsDiv.style.display = 'block';
-      }
-    }
-
-    // Create visa type buttons
-    visaTypes.forEach(type => {
-      const button = document.createElement('button');
-      button.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize first letter
-      button.onclick = function() {
-        showSubtypes(type);
-      };
-      visaTypeButtonsDiv.appendChild(button);
-    });
-  </script>
+    </script>
 
 </body>
 </html>
