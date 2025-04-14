@@ -1,125 +1,79 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
     <title>UK Visa Information</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            background-color: #f4f4f4;
         }
         .header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
             text-align: center;
-            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin-bottom: 0.5rem;
         }
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 80%;
+            margin: 2rem auto;
+            overflow: hidden;
+            background: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .visa-category {
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
         }
-        .category-header {
-            background-color: #1d70b8;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            user-select: none;
+        .visa-category h2 {
+            color: #333;
+            border-bottom: 2px solid #005eb8; /* NHS blue */
+            padding-bottom: 0.5rem;
         }
-        .category-content {
-            display: none;
-            padding: 10px;
+        .visa-item, .subcategory-item {
+            background: #f9f9f9;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-left: 5px solid #005eb8;
         }
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+         .subcategory-item {
+             background: #eef;
+             margin-left: 2rem;
+             border-left: 5px solid #4CAF50; /* Green */
+         }
+        .visa-item h3, .subcategory-item h4 {
+            margin-top: 0;
+            color: #005eb8;
         }
-        .visa-card {
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 15px;
-            width: calc(33.333% - 20px);
-            min-width: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .subcategory-item h4 {
+            color: #4CAF50;
         }
-        .visa-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .visa-item p, .subcategory-item p {
+            margin: 0.5rem 0;
         }
-        .visa-details {
-            display: none;
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .visa-subcategory {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #e6f7ff;
-            border-radius: 5px;
-        }
-        .button {
-            background-color: #1d70b8;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .button:hover {
-            background-color: #155592;
-        }
-        .flight-info {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f0f8ff;
-            border-radius: 5px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
+        .visa-item strong, .subcategory-item strong {
+             color: #555;
+         }
     </style>
 </head>
-
-
 <body>
-   
-    
-     <div class="header">
+
+    <div class="header">
         <h1>UK Visa Information</h1>
         <p>Comprehensive guide to all types of UK visas with details on eligibility, costs, and requirements</p>
     </div>
-    
+
     <div class="container" id="visa-container">
-        <!-- Visa categories will be populated here -->
-    </div>
+        </div>
 
     <script>
         // Visa Data Structure
@@ -130,28 +84,28 @@
                     {
                         title: "Student Visa (Previously Tier 4)",
                         description: "For students aged 16 or over who want to study at a UK educational institution.",
-                        cost: "£363 to £490 depending on location",
-                        duration: "The length of your course plus up to 4 months",
-                        requirements: "Confirmation of Acceptance for Studies (CAS), proof of funds, English language proficiency",
+                        cost: "£490 (from outside UK) / £490 (switch/extend inside UK)",
+                        duration: "The length of your course plus a short period after (e.g., 4 months for courses over 12 months).",
+                        requirements: "Confirmation of Acceptance for Studies (CAS), proof of funds, English language proficiency (B2 level typically)",
                         subcategories: [
                             {
                                 title: "Student Visa - Undergraduate",
                                 description: "For Bachelor's degree studies",
-                                cost: "£363 to £490",
+                                cost: "£490",
                                 duration: "The length of your course plus 4 months",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Student Visa - Postgraduate",
                                 description: "For Master's degree studies",
-                                cost: "£363 to £490",
+                                cost: "£490",
                                 duration: "The length of your course plus 4 months",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Student Visa - PhD",
                                 description: "For Doctoral studies",
-                                cost: "£363 to £490",
+                                cost: "£490",
                                 duration: "The length of your course plus 4 months",
                                 flightCost: "£300 - £900 from major global cities"
                             }
@@ -160,22 +114,22 @@
                     {
                         title: "Child Student Visa",
                         description: "For students aged 4 to 17 who want to study at an independent school in the UK.",
-                        cost: "£363 to £490 depending on location",
-                        duration: "The length of your course plus up to 4 months",
-                        requirements: "Confirmation of Acceptance for Studies (CAS), proof of funds, parental consent",
+                        cost: "£490 (from outside UK) / £490 (switch/extend inside UK)",
+                        duration: "Depends on age and course length, up to 6 years for under 16s.",
+                        requirements: "Confirmation of Acceptance for Studies (CAS), proof of funds, parental consent, place at independent school",
                         subcategories: [
                             {
                                 title: "Child Student Visa (Ages 4-11)",
-                                description: "For primary school education",
-                                cost: "£363 to £490",
-                                duration: "The length of your course plus 4 months",
+                                description: "For primary school education at an independent school",
+                                cost: "£490",
+                                duration: "Course length + 4 months, up to 6 years",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Child Student Visa (Ages 12-17)",
-                                description: "For secondary school education",
-                                cost: "£363 to £490",
-                                duration: "The length of your course plus 4 months",
+                                description: "For secondary school education at an independent school",
+                                cost: "£490",
+                                duration: "Course length + 4 months, up to 3 years (if 16/17)",
                                 flightCost: "£300 - £900 from major global cities"
                             }
                         ]
@@ -183,9 +137,9 @@
                     {
                         title: "Short-term Study Visa",
                         description: "For short courses of up to 6 months, or 11 months for English language courses.",
-                        cost: "£200 for 6 months, £400 for 11 months",
+                        cost: "£200 for 6 months, £395 for 11 months (English language only)", // Updated cost
                         duration: "Up to 6 months, or 11 months for English language courses",
-                        requirements: "Acceptance letter from institution, proof of funds",
+                        requirements: "Acceptance letter from accredited institution, proof of funds, intend to leave UK",
                         subcategories: [
                             {
                                 title: "Short-term Study Visa (6 months)",
@@ -197,7 +151,7 @@
                             {
                                 title: "Short-term Study Visa (11 months)",
                                 description: "For English language courses up to 11 months",
-                                cost: "£400",
+                                cost: "£395", // Updated cost
                                 duration: "Up to 11 months",
                                 flightCost: "£300 - £900 from major global cities"
                             }
@@ -210,175 +164,189 @@
                 visas: [
                     {
                         title: "Skilled Worker Visa (Previously Tier 2)",
-                        description: "For qualified workers who have been offered a skilled job in the UK.",
-                        cost: "£719 to £1,639 plus healthcare surcharge",
-                        duration: "Up to 5 years and 14 days",
-                        requirements: "Job offer from approved employer, appropriate skill level, English language proficiency",
+                        description: "For qualified workers who have been offered a skilled job in the UK by a licensed sponsor.",
+                        cost: "Varies (£719 to £1,639) depending on duration, job type (shortage occupation), and application location, plus Immigration Health Surcharge.",
+                        duration: "Up to 5 years, can be extended and lead to settlement.",
+                        requirements: "Job offer from approved employer (sponsor), Certificate of Sponsorship (CoS), job at appropriate skill level (RQF 3+), English language proficiency (B1), salary meets minimum threshold.",
                         subcategories: [
                             {
                                 title: "Skilled Worker Visa - General",
-                                description: "For skilled workers with job offers",
-                                cost: "£719 to £1,639 plus healthcare surcharge",
-                                duration: "Up to 5 years and 14 days",
+                                description: "For skilled workers with job offers in eligible occupations",
+                                cost: "£719 (up to 3 yrs) / £1,420 (over 3 yrs) if outside UK. £827 / £1,639 if inside UK. Lower fees for shortage occupations.",
+                                duration: "Up to 5 years per application",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Skilled Worker Visa - Health and Care",
-                                description: "For healthcare professionals",
-                                cost: "£232 to £464 plus healthcare surcharge",
-                                duration: "Up to 5 years and 14 days",
+                                description: "For healthcare professionals in eligible roles (e.g., doctors, nurses, social workers) with a job offer from NHS, NHS supplier or adult social care.",
+                                cost: "£284 (up to 3 yrs) / £551 (over 3 yrs). Reduced/exempt Immigration Health Surcharge.",
+                                duration: "Up to 5 years per application",
                                 flightCost: "£300 - £900 from major global cities"
                             }
                         ]
                     },
                     {
                         title: "Global Talent Visa",
-                        description: "For leaders or potential leaders in academia, research, arts and culture, or digital technology.",
-                        cost: "£623 plus healthcare surcharge",
-                        duration: "Up to 5 years",
-                        requirements: "Endorsement from a relevant UK body in your field",
+                        description: "For leaders or potential leaders in academia or research, arts and culture, or digital technology.",
+                        cost: "£716 total (£524 for endorsement, £192 for visa application), plus Immigration Health Surcharge.",
+                        duration: "Up to 5 years per application, flexible.",
+                        requirements: "Endorsement from a relevant UK endorsing body in your field (e.g., Royal Society, Arts Council England, Tech Nation).",
                         subcategories: [
                             {
                                 title: "Global Talent - Science and Research",
-                                description: "For scientists and researchers",
-                                cost: "£623 plus healthcare surcharge",
+                                description: "For scientists and researchers endorsed by bodies like The Royal Society, UKRI.",
+                                cost: "£716 total",
                                 duration: "Up to 5 years",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Global Talent - Arts and Culture",
-                                description: "For artists, musicians, and cultural leaders",
-                                cost: "£623 plus healthcare surcharge",
+                                description: "For artists, musicians, and cultural leaders endorsed by Arts Council England.",
+                                cost: "£716 total",
                                 duration: "Up to 5 years",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Global Talent - Digital Technology",
-                                description: "For tech leaders and innovators",
-                                cost: "£623 plus healthcare surcharge",
+                                description: "For tech leaders and innovators endorsed by Tech Nation.",
+                                cost: "£716 total",
                                 duration: "Up to 5 years",
                                 flightCost: "£300 - £900 from major global cities"
                             }
                         ]
                     },
                     {
-                        title: "Temporary Worker Visa (T5)",
-                        description: "For temporary workers in various categories.",
-                        cost: "£259 plus healthcare surcharge",
-                        duration: "Depends on the specific category, typically up to 2 years",
-                        requirements: "Certificate of Sponsorship, adequate funds",
+                        title: "Temporary Worker Visas (Various Routes)", // Combined T5
+                        description: "For temporary workers in various specific categories, requiring sponsorship.",
+                        cost: "£298 per application, plus Immigration Health Surcharge (unless exempt).", // Updated cost
+                        duration: "Depends on the specific route (e.g., 12-24 months).",
+                        requirements: "Certificate of Sponsorship (CoS) from a licensed sponsor, adequate funds.",
                         subcategories: [
                             {
-                                title: "T5 Creative and Sporting",
-                                description: "For artists, entertainers, and sports people",
-                                cost: "£259 plus healthcare surcharge",
-                                duration: "Up to 12 months",
+                                title: "Creative Worker Visa",
+                                description: "For artists, entertainers, models, film crew (up to 12 months).",
+                                cost: "£298",
+                                duration: "Up to 12 months (can extend)",
                                 flightCost: "£300 - £900 from major global cities"
                             },
+                             {
+                                 title: "Religious Worker Visa",
+                                 description: "For religious roles (preaching, pastoral work) (up to 2 years).",
+                                 cost: "£298",
+                                 duration: "Up to 2 years",
+                                 flightCost: "£300 - £900 from major global cities"
+                             },
+                             {
+                                 title: "Charity Worker Visa",
+                                 description: "For unpaid voluntary work (up to 12 months).",
+                                 cost: "£298",
+                                 duration: "Up to 12 months",
+                                 flightCost: "£300 - £900 from major global cities"
+                             },
                             {
-                                title: "T5 Religious Worker",
-                                description: "For religious workers",
-                                cost: "£259 plus healthcare surcharge",
-                                duration: "Up to 2 years",
+                                title: "Government Authorised Exchange Visa",
+                                description: "For work experience, training, research through approved schemes.",
+                                cost: "£298",
+                                duration: "Up to 12 or 24 months depending on scheme",
                                 flightCost: "£300 - £900 from major global cities"
                             },
+                             {
+                                 title: "International Agreement Visa",
+                                 description: "For work covered by international law (e.g., GATS, embassies).",
+                                 cost: "£298",
+                                 duration: "Varies by agreement, often up to 2 years",
+                                 flightCost: "£300 - £900 from major global cities"
+                             },
                             {
-                                title: "T5 Charity Worker",
-                                description: "For volunteer workers",
-                                cost: "£259 plus healthcare surcharge",
-                                duration: "Up to 12 months",
-                                flightCost: "£300 - £900 from major global cities"
-                            },
-                            {
-                                title: "T5 Youth Mobility Scheme",
-                                description: "For young people from certain countries",
-                                cost: "£259 plus healthcare surcharge",
-                                duration: "Up to 2 years",
-                                flightCost: "£300 - £900 from major global cities"
+                                title: "Seasonal Worker Visa", // Added
+                                description: "For temporary work in horticulture or poultry production.",
+                                cost: "£298",
+                                duration: "Up to 6 months (horticulture) or specific period (poultry)",
+                                flightCost: "£200 - £600 from typical source countries"
                             }
                         ]
                     }
                 ]
             },
             "Business & Investment Visas": {
-                description: "Visas for entrepreneurs, investors and business visitors",
+                description: "Visas for entrepreneurs, innovators, investors and business visitors",
                 visas: [
                     {
-                        title: "Innovator Visa",
-                        description: "For experienced business people with an innovative, viable and scalable business idea.",
-                        cost: "£1,036 plus healthcare surcharge",
-                        duration: "3 years initially",
-                        requirements: "Business plan endorsed by approved body, at least £50,000 investment funds",
+                        title: "Innovator Founder Visa", // Updated name
+                        description: "For individuals seeking to establish an innovative business in the UK. Replaced Innovator and Start-up visas.",
+                        cost: "£1,191 (outside UK) / £1,486 (inside UK), plus Immigration Health Surcharge.", // Updated cost
+                        duration: "3 years initially, can lead to settlement.",
+                        requirements: "Innovative, viable, and scalable business idea endorsed by an approved Endorsing Body. No minimum investment fund requirement, but must show sufficient funds to establish business. English language B2.",
                         subcategories: [
-                            {
-                                title: "Innovator Visa",
-                                description: "For experienced entrepreneurs",
-                                cost: "£1,036 plus healthcare surcharge",
-                                duration: "3 years initially",
-                                flightCost: "£400 - £1,200 from major global cities"
-                            }
-                        ]
+                             {
+                                 title: "Innovator Founder Visa",
+                                 description: "For establishing an innovative UK business",
+                                 cost: "£1,191 (outside UK) / £1,486 (inside UK)", // Updated cost
+                                 duration: "3 years initially",
+                                 flightCost: "£400 - £1,200 from major global cities"
+                             }
+                         ]
                     },
-                    {
-                        title: "Start-up Visa",
-                        description: "For those starting a business for the first time in the UK.",
-                        cost: "£378 plus healthcare surcharge",
-                        duration: "2 years",
-                        requirements: "Business plan endorsed by approved body, no minimum investment",
-                        subcategories: [
-                            {
-                                title: "Start-up Visa",
-                                description: "For first-time entrepreneurs",
-                                cost: "£378 plus healthcare surcharge",
-                                duration: "2 years",
-                                flightCost: "£400 - £1,200 from major global cities"
-                            }
-                        ]
-                    },
-                    {
-                        title: "Investor Visa",
-                        description: "For those willing to invest at least £2 million in the UK.",
-                        cost: "£1,623 plus healthcare surcharge",
-                        duration: "3 years and 4 months initially",
-                        requirements: "At least £2 million investment funds",
-                        subcategories: [
-                            {
-                                title: "Investor Visa - £2 million",
-                                description: "Basic investment level",
-                                cost: "£1,623 plus healthcare surcharge",
-                                duration: "3 years and 4 months initially",
-                                flightCost: "£400 - £5,000 (Business/First Class) from major global cities"
-                            },
-                            {
-                                title: "Investor Visa - £5 million",
-                                description: "Higher investment for faster settlement",
-                                cost: "£1,623 plus healthcare surcharge",
-                                duration: "3 years and 4 months initially",
-                                flightCost: "£400 - £5,000 (Business/First Class) from major global cities"
-                            },
-                            {
-                                title: "Investor Visa - £10 million",
-                                description: "Highest investment for fastest settlement",
-                                cost: "£1,623 plus healthcare surcharge",
-                                duration: "3 years and 4 months initially",
-                                flightCost: "£400 - £5,000 (Business/First Class) from major global cities"
-                            }
-                        ]
-                    },
+                    // Note: Start-up Visa closed to new applicants on 13 April 2023, replaced by Innovator Founder.
+                    // Note: Investor Visa (Tier 1) closed to new applicants on 17 February 2022.
                     {
                         title: "Representative of an Overseas Business Visa",
-                        description: "For senior employees of overseas companies establishing a UK branch or subsidiary.",
-                        cost: "£610 plus healthcare surcharge",
-                        duration: "3 years initially",
-                        requirements: "Senior role in company, company has no existing UK presence",
-                        subcategories: [
+                        description: "For senior employees of overseas companies establishing a UK branch or subsidiary. (Closed to most new applicants, replaced by Global Business Mobility routes).",
+                        cost: "£719 (outside UK) / £827 (inside UK), plus Immigration Health Surcharge.", // Updated cost
+                        duration: "3 years initially, can extend for 2 years.",
+                        requirements: "Senior role in overseas parent company, company has no existing UK branch/subsidiary, intend to establish and run UK entity. (Now largely replaced).",
+                         subcategories: [
                             {
                                 title: "Overseas Business Representative",
-                                description: "For establishing UK presence",
-                                cost: "£610 plus healthcare surcharge",
+                                description: "For establishing UK presence (mostly closed)",
+                                cost: "£719 / £827",
                                 duration: "3 years initially",
                                 flightCost: "£400 - £1,500 from major global cities"
                             }
+                        ]
+                    },
+                    { // Added Global Business Mobility routes
+                        title: "Global Business Mobility Visas",
+                        description: "Suite of sponsored routes for overseas businesses to transfer staff or establish a UK presence.",
+                        cost: "Varies by route (£298 to £1,639), plus Immigration Health Surcharge.",
+                        duration: "Varies by route (e.g., 1-5 years).",
+                        requirements: "Sponsored by a licensed UK sponsor (employer), specific criteria for each route.",
+                        subcategories: [
+                            {
+                                title: "Senior or Specialist Worker",
+                                description: "For senior managers/specialists transferring to a UK branch of their employer.",
+                                cost: "£719 (up to 3 yrs) / £1,420 (over 3 yrs)",
+                                duration: "Up to 5 years",
+                                flightCost: "£400 - £1,500 from major global cities"
+                            },
+                            {
+                                title: "Graduate Trainee",
+                                description: "For workers transferring as part of a graduate training programme.",
+                                cost: "£551",
+                                duration: "Up to 1 year",
+                                flightCost: "£400 - £1,200 from major global cities"
+                            },
+                            {
+                                title: "UK Expansion Worker",
+                                description: "For senior/specialist workers establishing a UK presence for their overseas employer (replaces Sole Rep).",
+                                cost: "£298",
+                                duration: "Up to 1 year (can extend to 2)",
+                                flightCost: "£400 - £1,500 from major global cities"
+                            },
+                            {
+                                title: "Service Supplier",
+                                description: "For contractual service suppliers or independent professionals under international agreements.",
+                                cost: "£298",
+                                duration: "6 or 12 months depending on agreement",
+                                flightCost: "£400 - £1,200 from major global cities"
+                            },
+                             {
+                                 title: "Secondment Worker",
+                                 description: "For workers seconded to the UK as part of high-value contracts.",
+                                 cost: "£298",
+                                 duration: "Up to 1 year (can extend to 2)",
+                                 flightCost: "£400 - £1,500 from major global cities"
+                             }
                         ]
                     }
                 ]
@@ -388,237 +356,250 @@
                 visas: [
                     {
                         title: "Family Visa - Spouse/Partner",
-                        description: "For partners of British citizens or settled persons.",
-                        cost: "£1,048 plus healthcare surcharge",
-                        duration: "2.5 years initially",
-                        requirements: "Genuine relationship, English language, minimum income requirement of £18,600",
+                        description: "For partners (spouse, civil partner, unmarried partner) of British citizens or settled persons.",
+                        cost: "£1,846 (outside UK) / £1,048 (inside UK), plus Immigration Health Surcharge.", // Updated cost
+                        duration: "33 months (outside UK) or 30 months (inside UK) initially. Leads to settlement after 5 years.",
+                        requirements: "Genuine and subsisting relationship, English language A1 (initial) / A2 (extension), Minimum income requirement (£29,000 per year - subject to change, phased increases planned). Adequate accommodation.",
                         subcategories: [
                             {
                                 title: "Spouse Visa",
                                 description: "For married partners",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "2.5 years initially",
+                                cost: "£1,846 / £1,048",
+                                duration: "33/30 months initially",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Unmarried Partner Visa",
-                                description: "For cohabiting partners (2+ years)",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "2.5 years initially",
+                                description: "For cohabiting partners (lived together akin to marriage for 2+ years)",
+                                cost: "£1,846 / £1,048",
+                                duration: "33/30 months initially",
                                 flightCost: "£300 - £900 from major global cities"
                             },
-                            {
-                                title: "Fiancé(e) Visa",
-                                description: "For those planning to marry in the UK",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "6 months",
-                                flightCost: "£300 - £900 from major global cities"
-                            }
-                        ]
+                             {
+                                 title: "Civil Partner Visa",
+                                 description: "For registered civil partners",
+                                 cost: "£1,846 / £1,048",
+                                 duration: "33/30 months initially",
+                                 flightCost: "£300 - £900 from major global cities"
+                             }
+                         ]
+                    },
+                     {
+                         title: "Fiancé(e) or Proposed Civil Partner Visa",
+                         description: "To come to the UK to marry or form a civil partnership within 6 months.",
+                         cost: "£1,846 (outside UK only)", // Updated cost
+                         duration: "6 months. Must apply to switch to Spouse/Partner visa after marriage/partnership.",
+                         requirements: "Intend to marry/form partnership within 6 months, meet relationship, financial (£29,000+), accommodation, and English language requirements applicable to partner visas. Cannot work.",
+                         subcategories: [
+                             {
+                                 title: "Fiancé(e) Visa",
+                                 description: "For those planning to marry in the UK",
+                                 cost: "£1,846",
+                                 duration: "6 months",
+                                 flightCost: "£300 - £900 from major global cities"
+                             }
+                         ]
                     },
                     {
                         title: "Family Visa - Child",
-                        description: "For children joining parents in the UK.",
-                        cost: "£1,048 plus healthcare surcharge",
-                        duration: "2.5 years initially",
-                        requirements: "Parent is British citizen or settled, adequate accommodation and funds",
+                        description: "For children (under 18) joining parent(s) in the UK.",
+                        cost: "£1,846 (outside UK) / £1,048 (inside UK), plus Immigration Health Surcharge.", // Updated cost
+                        duration: "Matches parent's visa duration, or leads to settlement.",
+                        requirements: "Parent(s) have UK visa or are British/settled, adequate accommodation and funds, child not leading independent life.",
                         subcategories: [
                             {
-                                title: "Child Visa - Under 18",
-                                description: "For children joining parents",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "2.5 years initially",
-                                flightCost: "£300 - £900 from major global cities"
-                            },
-                            {
-                                title: "Child Visa - Adult Dependent",
-                                description: "For adult dependent children in exceptional circumstances",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "2.5 years initially",
+                                title: "Child Dependant Visa",
+                                description: "For children joining parents with UK visas",
+                                cost: "£1,846 / £1,048",
+                                duration: "Matches parent's visa",
                                 flightCost: "£300 - £900 from major global cities"
                             }
                         ]
                     },
                     {
-                        title: "Family Visa - Parent",
-                        description: "For parents of children in the UK.",
-                        cost: "£1,048 plus healthcare surcharge",
-                        duration: "2.5 years initially",
-                        requirements: "Child is under 18 and British/settled, sole responsibility for child",
+                        title: "Family Visa - Parent of a Child in the UK",
+                        description: "For parents with sole or shared responsibility for a child (under 18) who is British/settled.",
+                        cost: "£1,846 (outside UK) / £1,048 (inside UK), plus Immigration Health Surcharge.", // Updated cost
+                        duration: "33 months (outside UK) or 30 months (inside UK) initially. Leads to settlement after 5 years.",
+                        requirements: "Child is British/settled & under 18, parent has sole or shared responsibility, parent must be actively involved in child's upbringing, meet financial and accommodation reqs.",
+                         subcategories: [
+                             {
+                                 title: "Parent Route Visa",
+                                 description: "For parents of British/settled children",
+                                 cost: "£1,846 / £1,048",
+                                 duration: "33/30 months initially",
+                                 flightCost: "£300 - £900 from major global cities"
+                             }
+                         ]
+                    },
+                    {
+                        title: "Family Visa - Adult Dependant Relative",
+                        description: "For adults needing long-term personal care from a relative in the UK (parent, grandparent, sibling, child).",
+                        cost: "£3,250 (outside UK only), plus Immigration Health Surcharge.",
+                        duration: "Indefinite Leave to Enter (settlement).",
+                        requirements: "Very strict. Must prove need for long-term care due to age, illness, or disability, which can only be provided by the UK relative and cannot be obtained in home country.",
                         subcategories: [
-                            {
-                                title: "Parent Visa",
-                                description: "For parents of British/settled children",
-                                cost: "£1,048 plus healthcare surcharge",
-                                duration: "2.5 years initially",
-                                flightCost: "£300 - £900 from major global cities"
-                            }
-                        ]
+                             {
+                                 title: "Adult Dependent Relative Visa",
+                                 description: "For adults needing care from UK relatives",
+                                 cost: "£3,250",
+                                 duration: "Settlement",
+                                 flightCost: "£300 - £900 from major global cities"
+                             }
+                         ]
                     }
                 ]
             },
             "Visitor Visas": {
-                description: "Visas for short visits to the UK",
+                description: "Visas for short visits to the UK (typically up to 6 months)",
                 visas: [
                     {
                         title: "Standard Visitor Visa",
-                        description: "For tourism, visiting family, business, or private medical treatment.",
-                        cost: "£100 for 6 months, £376 for 2 years, £670 for 5 years, £837 for 10 years",
-                        duration: "Usually 6 months, can apply for 2, 5, or 10 years",
-                        requirements: "Proof of funds, intention to leave UK, accommodation details",
+                        description: "For tourism, visiting family/friends, short business trips, short study (under 6 months), private medical treatment.",
+                        cost: "£115 for 6 months, £400 for 2 years, £771 for 5 years, £963 for 10 years (multiple entry).", // Updated costs
+                        duration: "Up to 6 months per visit. Longer validity visas allow multiple 6-month stays.",
+                        requirements: "Genuine visitor intention (will leave UK), proof of funds for trip, accommodation details, ties to home country.",
                         subcategories: [
                             {
                                 title: "Tourist Visitor",
                                 description: "For holidays and sightseeing",
-                                cost: "£100 for 6 months",
+                                cost: "£115 (6 months)",
                                 duration: "Up to 6 months",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Family Visitor",
                                 description: "For visiting family members",
-                                cost: "£100 for 6 months",
+                                cost: "£115 (6 months)",
                                 duration: "Up to 6 months",
                                 flightCost: "£300 - £900 from major global cities"
                             },
                             {
                                 title: "Business Visitor",
-                                description: "For business-related activities",
-                                cost: "£100 for 6 months, up to £837 for 10 years",
+                                description: "For meetings, conferences, site visits (no paid work)",
+                                cost: "£115 (6 months), up to £963 (10 years)",
                                 duration: "Up to 6 months per visit",
                                 flightCost: "£400 - £1,500 from major global cities"
-                            }
-                        ]
+                            },
+                             {
+                                 title: "Medical Treatment Visitor",
+                                 description: "For private medical treatment",
+                                 cost: "£115 (6 months), £200 (up to 11 months)", // Cost adjusted
+                                 duration: "Up to 6 or 11 months",
+                                 flightCost: "£300 - £1,200 from major global cities"
+                             }
+                         ]
                     },
                     {
                         title: "Marriage Visitor Visa",
-                        description: "For those coming to the UK to get married or register a civil partnership.",
-                        cost: "£100",
-                        duration: "6 months",
-                        requirements: "Proof of relationship, intention to leave UK after marriage",
-                        subcategories: [
-                            {
-                                title: "Marriage Visitor Visa",
-                                description: "For getting married in the UK",
-                                cost: "£100",
-                                duration: "6 months",
-                                flightCost: "£300 - £900 from major global cities"
-                            }
-                        ]
+                        description: "For those coming to the UK specifically to get married or register a civil partnership (and leave afterwards).",
+                        cost: "£115", // Updated cost
+                        duration: "6 months. Cannot switch to another visa from within UK.",
+                        requirements: "Proof of relationship/plans to marry, intention to leave UK after ceremony, proof of funds.",
+                         subcategories: [
+                             {
+                                 title: "Marriage Visitor Visa",
+                                 description: "For getting married/civil partnership in UK",
+                                 cost: "£115",
+                                 duration: "6 months",
+                                 flightCost: "£300 - £900 from major global cities"
+                             }
+                         ]
                     },
                     {
                         title: "Permitted Paid Engagement Visa",
-                        description: "For professionals invited to the UK for specific paid engagements.",
-                        cost: "£100",
-                        duration: "1 month",
-                        requirements: "Formal invitation, qualification in your profession",
-                        subcategories: [
-                            {
-                                title: "Paid Engagement Visa",
-                                description: "For short professional engagements",
-                                cost: "£100",
-                                duration: "1 month",
-                                flightCost: "£400 - £1,200 from major global cities"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "Healthcare Visas": {
-                description: "Visas for healthcare professionals and medical treatment",
-                visas: [
-                    {
-                        title: "Health and Care Worker Visa",
-                        description: "For qualified doctors, nurses and other healthcare professionals.",
-                        cost: "£232 to £464 plus reduced healthcare surcharge",
-                        duration: "Up to 5 years and 14 days",
-                        requirements: "Job offer from NHS, relevant qualifications, English language proficiency",
-                        subcategories: [
-                            {
-                                title: "NHS Professional Visa",
-                                description: "For doctors, nurses and allied health professionals",
-                                cost: "£232 to £464 plus reduced healthcare surcharge",
-                                duration: "Up to 5 years and 14 days",
-                                flightCost: "£300 - £900 from major global cities"
-                            },
-                            {
-                                title: "Care Worker Visa",
-                                description: "For social care workers",
-                                cost: "£232 to £464 plus reduced healthcare surcharge",
-                                duration: "Up to 5 years and 14 days",
-                                flightCost: "£300 - £900 from major global cities"
-                            }
-                        ]
+                        description: "For professionals invited by a UK organisation for specific paid engagements (e.g., expert speaker, examiner, artist).",
+                        cost: "£115", // Updated cost
+                        duration: "Up to 1 month. Must relate to main profession overseas.",
+                        requirements: "Formal invitation from UK organisation, proof engagement relates to expertise/profession.",
+                         subcategories: [
+                             {
+                                 title: "Paid Engagement Visa",
+                                 description: "For short professional paid engagements",
+                                 cost: "£115",
+                                 duration: "Up to 1 month",
+                                 flightCost: "£400 - £1,200 from major global cities"
+                             }
+                         ]
                     },
-                    {
-                        title: "Medical Treatment Visitor Visa",
-                        description: "For those seeking private medical treatment in the UK.",
-                        cost: "£100",
-                        duration: "6 months initially, can be extended up to 11 months",
-                        requirements: "Details of treatment, proof of funds to cover costs",
+                    { // Added Transit Visas
+                        title: "Transit Visas",
+                        description: "For passing through the UK en route to another country.",
+                        cost: "£64 (Direct Airside Transit), £64 (Visitor in Transit)",
+                        duration: "DATV: Remain airside until connecting flight (max 24hrs). Visitor in Transit: Enter UK for max 48hrs.",
+                        requirements: "Proof of onward travel within 24/48 hours, visa for destination country (if required). Check if needed based on nationality.",
                         subcategories: [
                             {
-                                title: "Private Medical Treatment Visa",
-                                description: "For seeking medical care in the UK",
-                                cost: "£100",
-                                duration: "6 months initially",
-                                flightCost: "£300 - £1,200 from major global cities"
-                            }
-                        ]
+                                title: "Direct Airside Transit Visa (DATV)",
+                                description: "Stay in airport transit area",
+                                cost: "£64",
+                                duration: "Max 24 hours airside",
+                                flightCost: "N/A (part of longer journey)"
+                            },
+                             {
+                                 title: "Visitor in Transit Visa",
+                                 description: "Pass through UK border control",
+                                 cost: "£64",
+                                 duration: "Max 48 hours",
+                                 flightCost: "N/A (part of longer journey)"
+                             }
+                         ]
                     }
                 ]
             },
+             // Note: Dedicated Healthcare visa category removed as it's now primarily under Skilled Worker (Health and Care) or Visitor (Medical Treatment)
             "Settlement & Citizenship": {
-                description: "Paths to permanent residence and British citizenship",
+                description: "Paths to permanent residence (Indefinite Leave to Remain) and British citizenship",
                 visas: [
                     {
-                        title: "Indefinite Leave to Remain (ILR)",
-                        description: "Permanent residence status for those who have lived in the UK for a certain period.",
-                        cost: "£2,404",
+                        title: "Indefinite Leave to Remain (ILR) / Settlement",
+                        description: "Permanent residence status allowing stay in the UK without time limits. Typically applied for after 5 years on qualifying routes.",
+                        cost: "£2,885 per person.", // Updated cost
                         duration: "Permanent",
-                        requirements: "Usually 5 years' continuous residence, English language, Life in the UK test",
+                        requirements: "Usually 5 years' continuous lawful residence on qualifying visa(s) (e.g., Skilled Worker, Spouse, Ancestry, Long Residence), English language B1, Life in the UK test, meet specific route requirements.",
                         subcategories: [
                             {
-                                title: "ILR via Work Routes",
-                                description: "After 5 years in work visa categories",
-                                cost: "£2,404",
+                                title: "ILR via Work Routes (e.g., Skilled Worker)",
+                                description: "After 5 years continuous residence",
+                                cost: "£2,885",
                                 duration: "Permanent",
                                 flightCost: "Not applicable"
                             },
                             {
-                                title: "ILR via Family Routes",
-                                description: "After 5 years on family visas",
-                                cost: "£2,404",
+                                title: "ILR via Family Routes (e.g., Spouse)",
+                                description: "After 5 years continuous residence",
+                                cost: "£2,885",
                                 duration: "Permanent",
                                 flightCost: "Not applicable"
                             },
-                            {
-                                title: "ILR via Investor Routes",
-                                description: "After 2-5 years depending on investment level",
-                                cost: "£2,404",
-                                duration: "Permanent",
-                                flightCost: "Not applicable"
-                            }
-                        ]
+                             {
+                                 title: "ILR via Long Residence",
+                                 description: "After 10 years continuous lawful residence",
+                                 cost: "£2,885",
+                                 duration: "Permanent",
+                                 flightCost: "Not applicable"
+                             }
+                             // Note: Investor/Innovator routes also lead to ILR, potentially faster.
+                         ]
                     },
                     {
-                        title: "British Citizenship",
-                        description: "Full citizenship rights for those meeting residency requirements.",
-                        cost: "£1,330",
+                        title: "British Citizenship (Naturalisation)",
+                        description: "Acquiring full British citizenship.",
+                        cost: "£1,580 (adult application fee), plus £80 ceremony fee.", // Updated cost
                         duration: "Permanent",
-                        requirements: "Usually 12 months with ILR plus 5 years' residence, good character",
+                        requirements: "Usually held ILR for 12+ months (or be married to British Citizen), meet residency requirements (absences, presence 5 years prior), English B1, Life in the UK test, good character.",
                         subcategories: [
                             {
-                                title: "Naturalization",
-                                description: "For adults who have held ILR for 12+ months",
-                                cost: "£1,330",
+                                title: "Naturalisation (Adult)",
+                                description: "For adults applying after holding ILR",
+                                cost: "£1,580 + £80 ceremony fee",
                                 duration: "Permanent",
                                 flightCost: "Not applicable"
                             },
                             {
-                                title: "Registration - Child",
-                                description: "For children under 18",
-                                cost: "£1,012",
+                                title: "Registration (Child)",
+                                description: "For children under 18 applying for citizenship (various routes).",
+                                cost: "£1,214 (registration fee), plus £80 ceremony fee (if 18+).", // Updated cost
                                 duration: "Permanent",
                                 flightCost: "Not applicable"
                             }
@@ -630,32 +611,32 @@
                 description: "Other visa categories for specific purposes",
                 visas: [
                     {
-                        title: "Youth Mobility Scheme",
-                        description: "For young people from participating countries to experience life in the UK.",
-                        cost: "£259 plus healthcare surcharge",
-                        duration: "2 years",
-                        requirements: "Age 18-30, from eligible country, sufficient funds",
+                        title: "Youth Mobility Scheme Visa", // Was under Temporary Worker
+                        description: "For young people (18-30 or 18-35 for some) from participating countries/territories to live and work in the UK.",
+                        cost: "£298, plus Immigration Health Surcharge.", // Updated cost
+                        duration: "2 years (3 years for Australia, Canada, New Zealand). Non-extendable.",
+                        requirements: "Age 18-30/35, citizen of eligible country, sufficient funds (£2,530), usually requires applying via ballot system for some countries.",
                         subcategories: [
                             {
                                 title: "Youth Mobility Scheme",
                                 description: "Working holiday for young people",
-                                cost: "£259 plus healthcare surcharge",
-                                duration: "2 years",
+                                cost: "£298",
+                                duration: "2 or 3 years",
                                 flightCost: "£300 - £900 from eligible countries"
                             }
                         ]
                     },
                     {
-                        title: "Ancestry Visa",
-                        description: "For Commonwealth citizens with a UK-born grandparent.",
-                        cost: "£516 plus healthcare surcharge",
-                        duration: "5 years",
-                        requirements: "Commonwealth citizen, UK-born grandparent, intention to work",
+                        title: "UK Ancestry Visa",
+                        description: "For Commonwealth citizens with a UK-born grandparent, allowing work and study.",
+                        cost: "£637, plus Immigration Health Surcharge.", // Updated cost
+                        duration: "5 years. Can lead to settlement (ILR).",
+                        requirements: "Commonwealth citizen, aged 17+, UK-born grandparent, intend and able to work, sufficient funds.",
                         subcategories: [
                             {
                                 title: "UK Ancestry Visa",
                                 description: "For Commonwealth citizens with UK heritage",
-                                cost: "£516 plus healthcare surcharge",
+                                cost: "£637",
                                 duration: "5 years",
                                 flightCost: "£500 - £1,500 from Commonwealth countries"
                             }
@@ -663,109 +644,117 @@
                     },
                     {
                         title: "Frontier Worker Permit",
-                        description: "For EU, EEA or Swiss citizens who worked in the UK before 31 December 2020 but live elsewhere.",
+                        description: "For EEA/Swiss citizens who started working ('frontier working') in the UK by 31 Dec 2020 but live primarily elsewhere.",
                         cost: "Free",
-                        duration: "5 years",
-                        requirements: "Evidence of work in UK before Dec 2020, continued work activity",
-                        subcategories: [
-                            {
-                                title: "Frontier Worker Permit",
-                                description: "For cross-border workers",
-                                cost: "Free",
-                                duration: "5 years",
-                                flightCost: "£100 - £400 from EU countries"
-                            }
-                        ]
+                        duration: "5 years initially, renewable.",
+                        requirements: "EEA/Swiss citizen, primary residence outside UK, started working in UK by 31 Dec 2020, continue to work.",
+                         subcategories: [
+                             {
+                                 title: "Frontier Worker Permit",
+                                 description: "For cross-border workers (pre-Brexit rights)",
+                                 cost: "Free",
+                                 duration: "5 years",
+                                 flightCost: "£100 - £400 from EU countries"
+                             }
+                         ]
                     },
-                    {
-                        title: "British National (Overseas) Visa",
-                        description: "For Hong Kong BN(O) citizens and their family members.",
-                        cost: "£180 to £250 plus healthcare surcharge",
-                        duration: "2.5 or 5 years",
-                        requirements: "BN(O) status, normally live in Hong Kong",
+                    { // Completed BNO entry
+                        title: "British National (Overseas) Visa - BNO",
+                        description: "For Hong Kong British National (Overseas) citizens and their close family members to live, work and study in the UK.",
+                        cost: "£180 for 2.5 years / £250 for 5 years per person, plus Immigration Health Surcharge.",
+                        duration: "Choice of 2.5 years or 5 years. Leads to settlement after 5 years.",
+                        requirements: "BN(O) status (or eligible family member), ordinarily resident in Hong Kong (or UK if applying to extend), sufficient funds to support self/dependents for 6 months.",
                         subcategories: [
                             {
-                                title: "BN(O) Visa - 2.5 years",
-                                description: "Shorter initial period",
-                                cost: "£180 plus healthcare surcharge",
-                                duration: "2.5 years",
-                                flightCost: "£500 - £900 from Hong Kong"
-                            },
-                            {
-                                title: "BN(O) Visa - 5 years",
-                                description: "Longer initial period",
-                                cost: "£250 plus healthcare surcharge",
+                                title: "BNO Visa (5 Year Route)",
+                                description: "Live, work, study - path to settlement",
+                                cost: "£250 + IHS",
                                 duration: "5 years",
-                                flightCost: "£500 - £900 from Hong Kong"
-                            }
-                        ]
-                    }
+                                flightCost: "£600 - £1,200 from Hong Kong"
+                            },
+                             {
+                                 title: "BNO Visa (2.5 Year Route)",
+                                 description: "Live, work, study - extendable",
+                                 cost: "£180 + IHS",
+                                 duration: "2 years 6 months",
+                                 flightCost: "£600 - £1,200 from Hong Kong"
+                             }
+                         ]
+                     }
+                     // Other niche visas exist e.g. for diplomats, armed forces etc.
                 ]
             }
         };
 
-        // Function to populate the visa information
-        function populateVisaData() {
+        // Function to populate visa information into the container
+        function displayVisaData() {
             const container = document.getElementById('visa-container');
-            
-            // Loop through each visa category
-            for (const [categoryName, categoryData] of Object.entries(visaData)) {
+            container.innerHTML = ''; // Clear previous content
+
+            for (const category in visaData) {
+                const categoryData = visaData[category];
+
+                // Create category container
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'visa-category';
-                container.appendChild(categoryDiv);
-                
-                // Create category header
-                const categoryHeader = document.createElement('div');
-                categoryHeader.className = 'category-header';
-                categoryHeader.innerHTML = `<h2>${categoryName}</h2>`;
-                categoryHeader.onclick = function() {
-                    const content = this.nextElementSibling;
-                    if (content.style.display === 'block') {
-                        content.style.display = 'none';
-                    } else {
-                        content.style.display = 'block';
-                    }
-                };
-                categoryDiv.appendChild(categoryHeader);
-                
-                // Create category content container
-                const categoryContent = document.createElement('div');
-                categoryContent.className = 'category-content';
-                categoryDiv.appendChild(categoryContent);
-                
-                // Add category description
-                const categoryDescription = document.createElement('p');
-                categoryDescription.textContent = categoryData.description;
-                categoryContent.appendChild(categoryDescription);
-                
-                // Create card container
-                const cardContainer = document.createElement('div');
-                cardContainer.className = 'card-container';
-                categoryContent.appendChild(cardContainer);
-                
-                // Loop through each visa in the category
+
+                // Category Title and Description
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.textContent = category;
+                categoryDiv.appendChild(categoryTitle);
+
+                const categoryDesc = document.createElement('p');
+                categoryDesc.textContent = categoryData.description;
+                categoryDiv.appendChild(categoryDesc);
+
+                // Loop through visas in the category
                 categoryData.visas.forEach(visa => {
-                    // Create visa card
-                    const visaCard = document.createElement('div');
-                    visaCard.className = 'visa-card';
-                    visaCard.innerHTML = `
+                    const visaItemDiv = document.createElement('div');
+                    visaItemDiv.className = 'visa-item';
+
+                    // Visa details
+                    visaItemDiv.innerHTML = `
                         <h3>${visa.title}</h3>
                         <p>${visa.description}</p>
+                        <p><strong>Cost:</strong> ${visa.cost || 'N/A'}</p>
+                        <p><strong>Duration:</strong> ${visa.duration || 'N/A'}</p>
+                        <p><strong>Key Requirements:</strong> ${visa.requirements || 'N/A'}</p>
                     `;
-                    visaCard.onclick = function() {
-                        const details = this.querySelector('.visa-details');
-                        if (details) {
-                            details.style.display = details.style.display === 'block' ? 'none' : 'block';
-                        } else {
-                            // Create details section if it doesn't exist
-                            const detailsSection = document.createElement('div');
-                            detailsSection.className = 'visa-details';
-                            detailsSection.innerHTML = `
-                                <h4>Details</h4>
-                                <table>
-                                    <tr>
-                                        <th>Cost</th>
-                                        
-                                        
-                                        
-                                        
+
+                     // Check for and display subcategories
+                     if (visa.subcategories && visa.subcategories.length > 0) {
+                         visa.subcategories.forEach(sub => {
+                             const subItemDiv = document.createElement('div');
+                             subItemDiv.className = 'subcategory-item';
+                             subItemDiv.innerHTML = `
+                                 <h4>${sub.title}</h4>
+                                 <p>${sub.description}</p>
+                                 <p><strong>Cost:</strong> ${sub.cost || visa.cost || 'N/A'}</p>
+                                 <p><strong>Duration:</strong> ${sub.duration || visa.duration || 'N/A'}</p>
+                                 ${sub.flightCost ? `<p><strong>Est. Flight Cost (Economy):</strong> ${sub.flightCost}</p>` : ''}
+                             `;
+                             visaItemDiv.appendChild(subItemDiv);
+                         });
+                     }
+
+                    categoryDiv.appendChild(visaItemDiv);
+                });
+
+                container.appendChild(categoryDiv);
+            }
+             // Add disclaimer
+             const disclaimer = document.createElement('p');
+             disclaimer.style.marginTop = '2rem';
+             disclaimer.style.fontSize = '0.9em';
+             disclaimer.style.color = '#555';
+             disclaimer.innerHTML = `<strong>Disclaimer:</strong> Visa information, costs, and requirements are subject to change. Always consult the official UK government website (GOV.UK) for the most up-to-date and accurate information before making any decisions or applications. Flight costs are estimates and vary significantly. Immigration Health Surcharge (IHS) fees apply to most visa routes and are an additional cost.`;
+             container.appendChild(disclaimer);
+        }
+
+        // Call the function to display the data when the page loads
+        window.onload = displayVisaData;
+
+    </script>
+
+</body>
+</html>
