@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Symptom Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #4a90e2; /* A calming blue */
+            --secondary-color: #f4f7fa; /* Light grey background */
+            --text-color: #333;
+            --border-color: #dce6f0;
+            --accent-color: #e67e22; /* For highlighting severity */
+            --white: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius: 8px;
+            --spacing-unit: 1rem; /* 16px default */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: var(--spacing-unit);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Layout Containers --- */
+        .container {
+            max-width: 1200px;
+            margin: calc(var(--spacing-unit) * 1.5) auto;
+            padding: calc(var(--spacing-unit) * 2);
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: var(--spacing-unit);
+            font-weight: 600;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        /* --- Form Styling --- */
+        .input-section {
+            flex: 1 1 300px; /* Flex basis 300px, can grow/shrink */
+            padding: var(--spacing-unit);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: #fdfdfd;
+        }
+
+        .input-section h2 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            font-size: 1.2em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: calc(var(--spacing-unit) / 2);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: calc(var(--spacing-unit) / 3);
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: calc(var(--spacing-unit) / 1.5);
+            border: 1px solid var(--border-color);
+            border-radius: calc(var(--border-radius) / 2);
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-group .severity-display {
+            display: inline-block;
+            margin-left: var(--spacing-unit);
+            font-weight: bold;
+            color: var(--accent-color);
+            min-width: 20px; /* Ensure space */
+        }
+
+        .btn-add {
+            display: block;
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 0.8);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: calc(var(--border-radius) / 2);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            font-weight: 500;
+        }
+
+        .btn-add:hover {
+            background-color: #3a7ac8; /* Darker shade on hover */
+        }
+        .btn-add:active {
+             transform: scale(0.98);
+        }
+
+        /* --- Timeline Display --- */
+        .timeline-section {
+            flex: 3 1 500px; /* Take more space */
+            min-height: 400px; /* Ensure canvas has height */
+            padding: var(--spacing-unit);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--white); /* White background for chart */
+        }
+
+        .timeline-section h2 {
+             color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+             font-size: 1.2em;
+             border-bottom: 1px solid var(--border-color);
+             padding-bottom: calc(var(--spacing-unit) / 2);
+        }
+
+        #symptomTimelineChart {
+            width: 100% !important;
+            height: auto !important; /* Let container control height */
+            max-height: 500px; /* Limit max height if needed */
+        }
+
+        /* --- Symptom List (Optional but helpful) --- */
+        .symptom-list-section {
+            width: 100%; /* Take full width below form/chart on small screens */
+            margin-top: var(--spacing-unit);
+            padding: var(--spacing-unit);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: #fdfdfd;
+        }
+        .symptom-list-section h2 {
+             color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+             font-size: 1.2em;
+             border-bottom: 1px solid var(--border-color);
+             padding-bottom: calc(var(--spacing-unit) / 2);
+        }
+
+        #symptomList {
+            list-style: none;
+            padding: 0;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        #symptomList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(var(--spacing-unit) / 1.5);
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.95em;
+            gap: var(--spacing-unit);
+        }
+         #symptomList li:last-child {
+            border-bottom: none;
+         }
+
+        #symptomList li .details {
+            flex-grow: 1;
+        }
+         #symptomList li .details strong {
+            color: var(--primary-color);
+         }
+         #symptomList li .details em {
+            color: var(--accent-color);
+            font-weight: bold;
+         }
+         #symptomList li .details small {
+            display: block;
+            color: #666;
+            margin-top: 4px;
+            font-style: italic;
+         }
+
+        .btn-delete {
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+        }
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: auto; /* Pushes footer to bottom */
+            padding: var(--spacing-unit) 0;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            body {
+                padding: calc(var(--spacing-unit) / 2);
+            }
+            .container {
+                padding: var(--spacing-unit);
+                margin: var(--spacing-unit) auto;
+            }
+            main {
+                flex-direction: column; /* Stack sections vertically */
+            }
+            .input-section, .timeline-section {
+                flex: 1 1 auto; /* Reset flex properties for stacking */
+                width: 100%;
+            }
+             .timeline-section {
+                min-height: 300px; /* Adjust height for smaller screens */
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+             .form-group input[type="text"],
+            .form-group input[type="date"],
+            .form-group select,
+            .form-group textarea {
+                padding: calc(var(--spacing-unit) / 2);
+                font-size: 0.95em;
+            }
+            .btn-add {
+                 padding: calc(var(--spacing-unit) * 0.7);
+                 font-size: 1em;
+            }
+             header h1 {
+                font-size: 1.5em;
+            }
+             .symptom-list-section h2, .input-section h2, .timeline-section h2 {
+                 font-size: 1.1em;
+             }
+             #symptomList li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: calc(var(--spacing-unit) / 2);
+             }
+             .btn-delete {
+                margin-top: calc(var(--spacing-unit) / 2);
+                align-self: flex-end;
+             }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Interactive Symptom Timeline Builder</h1>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>Add New Symptom Entry</h2>
+                <form id="symptomForm">
+                    <div class="form-group">
+                        <label for="symptomName">Symptom Name:</label>
+                        <input type="text" id="symptomName" name="symptomName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="symptomDate">Date:</label>
+                        <input type="date" id="symptomDate" name="symptomDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="symptomSeverity">Severity (1-10):</label>
+                        <input type="range" id="symptomSeverity" name="symptomSeverity" min="1" max="10" value="5" required>
+                        <span class="severity-display" id="severityValue">5</span>
+                    </div>
+                     <div class="form-group">
+                        <label for="symptomNotes">Notes (Optional):</label>
+                        <textarea id="symptomNotes" name="symptomNotes" placeholder="e.g., Triggered after eating, worse in morning..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-add">Add Symptom to Timeline</button>
+                </form>
+            </section>
+
+            <section class="timeline-section">
+                 <h2>Symptom Timeline</h2>
+                <canvas id="symptomTimelineChart"></canvas>
+            </section>
+        </main>
+
+         <section class="symptom-list-section">
+            <h2>Recorded Symptoms</h2>
+            <ul id="symptomList">
+                <li id="no-symptoms-message">No symptoms recorded yet.</li>
+            </ul>
+        </section>
+
+
+        <footer>
+            <p>&copy; <span id="currentYear"></span> Symptom Tracker. Use for informational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const symptomForm = document.getElementById('symptomForm');
+        const symptomNameInput = document.getElementById('symptomName');
+        const symptomDateInput = document.getElementById('symptomDate');
+        const symptomSeverityInput = document.getElementById('symptomSeverity');
+        const severityValueDisplay = document.getElementById('severityValue');
+        const symptomNotesInput = document.getElementById('symptomNotes');
+        const symptomListUl = document.getElementById('symptomList');
+        const noSymptomsMessage = document.getElementById('no-symptoms-message');
+        const currentYearSpan = document.getElementById('currentYear');
+        const canvas = document.getElementById('symptomTimelineChart');
+        const ctx = canvas.getContext('2d');
+
+        // --- Data Storage ---
+        // Use localStorage to persist data across sessions
+        let symptoms = JSON.parse(localStorage.getItem('symptoms')) || [];
+
+        // --- Chart.js Instance ---
+        let symptomChart;
+
+        // --- Helper Functions ---
+
+        // Format date for display (e.g., "Apr 16, 2025")
+        function formatDate(dateString) {
+             if (!dateString) return '';
+            // Add time to avoid timezone issues with Chart.js date adapter if only date is given
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        // Update the severity display next to the slider
+        function updateSeverityDisplay() {
+             severityValueDisplay.textContent = symptomSeverityInput.value;
+        }
+
+        // Render the list of symptoms below the chart
+        function renderSymptomList() {
+            symptomListUl.innerHTML = ''; // Clear existing list
+
+            if (symptoms.length === 0) {
+                symptomListUl.appendChild(noSymptomsMessage); // Show 'no symptoms' message
+                noSymptomsMessage.style.display = 'block'; // Ensure it's visible
+                return;
+            }
+
+            noSymptomsMessage.style.display = 'none'; // Hide 'no symptoms' message
+
+            // Sort symptoms by date before rendering
+            const sortedSymptoms = [...symptoms].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            sortedSymptoms.forEach((symptom, index) => {
+                const li = document.createElement('li');
+                li.setAttribute('data-index', index); // Store original index if needed, though we use unique ID now
+
+                const detailsDiv = document.createElement('div');
+                detailsDiv.classList.add('details');
+                detailsDiv.innerHTML = `
+                    <strong>${symptom.name}</strong> on ${formatDate(symptom.date)}
+                    - Severity: <em>${symptom.severity}</em>
+                    ${symptom.notes ? `<small>${symptom.notes}</small>` : ''}
+                `;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('btn-delete');
+                deleteButton.onclick = () => deleteSymptom(symptom.id); // Use unique ID for deletion
+
+                li.appendChild(detailsDiv);
+                li.appendChild(deleteButton);
+                symptomListUl.appendChild(li);
+            });
+        }
+
+        // Update the Chart.js timeline
+        function updateTimelineChart() {
+            if (!symptomChart) {
+                initializeChart(); // Initialize if not already done
+            }
+
+             // Group symptoms by name to create separate datasets for better visualization
+            const datasetsMap = symptoms.reduce((acc, symptom) => {
+                if (!acc[symptom.name]) {
+                    acc[symptom.name] = {
+                        label: symptom.name,
+                        data: [],
+                        // Assign a unique color based on symptom name (simple hash function)
+                        borderColor: stringToColor(symptom.name),
+                        backgroundColor: stringToColor(symptom.name, 0.7), // Slightly transparent fill
+                        pointRadius: 6, // Base radius
+                        pointHoverRadius: 9, // Radius on hover
+                        tension: 0.1 // Slight curve between points if using line type
+                    };
+                }
+                acc[symptom.name].data.push({
+                    x: symptom.date + 'T00:00:00', // Ensure consistent date parsing for time scale
+                    y: symptom.severity,
+                    notes: symptom.notes // Add notes to point data for tooltips
+                });
+                 // Sort data points within each dataset by date
+                 acc[symptom.name].data.sort((a, b) => new Date(a.x) - new Date(b.x));
+                return acc;
+            }, {});
+
+            const datasets = Object.values(datasetsMap);
+
+
+            symptomChart.data.datasets = datasets;
+            symptomChart.update(); // Redraw the chart
+        }
+
+        // Simple function to generate a color from a string (for consistent dataset colors)
+        function stringToColor(str, alpha = 1) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            let color = '#';
+            for (let i = 0; i < 3; i++) {
+                const value = (hash >> (i * 8)) & 0xFF;
+                color += ('00' + value.toString(16)).substr(-2);
+            }
+             // Convert hex to rgba for alpha
+             const r = parseInt(color.slice(1, 3), 16);
+             const g = parseInt(color.slice(3, 5), 16);
+             const b = parseInt(color.slice(5, 7), 16);
+             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+
+
+        // Function to add a new symptom
+        function addSymptom(event) {
+            event.preventDefault(); // Prevent page reload
+
+            const name = symptomNameInput.value.trim();
+            const date = symptomDateInput.value;
+            const severity = symptomSeverityInput.value;
+            const notes = symptomNotesInput.value.trim();
+
+            if (!name || !date) {
+                alert('Please provide both symptom name and date.');
+                return;
+            }
+
+            const newSymptom = {
+                id: Date.now().toString(), // Simple unique ID based on timestamp
+                name: name,
+                date: date,
+                severity: parseInt(severity), // Store as number
+                notes: notes
+            };
+
+            symptoms.push(newSymptom);
+            localStorage.setItem('symptoms', JSON.stringify(symptoms)); // Save to localStorage
+
+            renderSymptomList();
+            updateTimelineChart();
+
+            // Reset form
+            symptomForm.reset();
+            updateSeverityDisplay(); // Reset severity display
+        }
+
+        // Function to delete a symptom
+        function deleteSymptom(idToDelete) {
+            // Filter out the symptom with the matching ID
+            symptoms = symptoms.filter(symptom => symptom.id !== idToDelete);
+            localStorage.setItem('symptoms', JSON.stringify(symptoms)); // Update localStorage
+
+            renderSymptomList();
+            updateTimelineChart();
+        }
+
+        // --- Chart Initialization ---
+        function initializeChart() {
+             symptomChart = new Chart(ctx, {
+                type: 'line', // Use line chart to connect dots for same symptom
+                data: {
+                    datasets: [] // Start with empty datasets, filled by updateTimelineChart
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Allow container to control aspect ratio
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'day', // Adjust as needed (week, month)
+                                tooltipFormat: 'MMM dd, yyyy', // Format for tooltips
+                                displayFormats: {
+                                    day: 'MMM dd' // Format for axis labels
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                             grid: {
+                                color: 'rgba(0, 0, 0, 0.05)' // Lighter grid lines
+                             }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 11, // Go slightly above max severity for padding
+                             ticks: {
+                                stepSize: 1
+                             },
+                            title: {
+                                display: true,
+                                text: 'Severity (1-10)'
+                            },
+                             grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                             }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                // Customize tooltip title (show symptom name)
+                                title: function(tooltipItems) {
+                                    // Assuming one item per tooltip hover
+                                     if (tooltipItems.length > 0) {
+                                         const datasetLabel = tooltipItems[0].dataset.label || 'Symptom';
+                                         return datasetLabel;
+                                     }
+                                     return '';
+                                },
+                                // Customize tooltip body (show date, severity, notes)
+                                label: function(context) {
+                                    const dateLabel = `Date: ${formatDate(context.parsed.x)}`;
+                                    const severityLabel = `Severity: ${context.parsed.y}`;
+                                    const notes = context.raw.notes; // Get notes from original data point
+                                    let labels = [dateLabel, severityLabel];
+                                    if (notes) {
+                                        labels.push(`Notes: ${notes}`);
+                                    }
+                                    return labels;
+                                }
+                            },
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleFont: { size: 14, weight: 'bold'},
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            displayColors: false // Hide the color box in tooltip
+                        },
+                        legend: {
+                            position: 'bottom', // Position legend below chart
+                             labels: {
+                                usePointStyle: true, // Use point style (circle) in legend
+                                padding: 20
+                             }
+                        }
+                    },
+                     interaction: {
+                        mode: 'index', // Show tooltips for all points at the same x-index
+                        intersect: false // Show tooltips even when not directly hovering over point
+                     },
+                    hover: { // Ensure hover effects work well with interaction mode
+                         mode: 'nearest',
+                         intersect: true
+                    }
+                }
+            });
+        }
+
+        // --- Event Listeners ---
+        symptomForm.addEventListener('submit', addSymptom);
+        symptomSeverityInput.addEventListener('input', updateSeverityDisplay);
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            currentYearSpan.textContent = new Date().getFullYear();
+
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            symptomDateInput.value = today;
+
+            // Initialize the chart and render initial data
+            initializeChart();
+            renderSymptomList();
+            updateTimelineChart(); // Load data from localStorage into chart
+             updateSeverityDisplay(); // Set initial severity display
+        });
+
+    </script>
+
+</body>
+</html>
