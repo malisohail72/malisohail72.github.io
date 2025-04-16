@@ -3,245 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Visa Cost Calculator</title>
+    <title>Student Visa Cost - Country Suggester</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
         .calculator {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-width: 700px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
             margin: auto;
         }
         h1, h2 {
-            color: #333;
+            color: #0056b3; /* Changed heading color */
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
+         h3 {
+             color: #0056b3;
+             margin-top: 20px;
+             margin-bottom: 10px;
+             border-bottom: 1px solid #eee;
+             padding-bottom: 5px;
+         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600; /* Slightly bolder label */
+            color: #495057;
         }
-        select, button {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
-        }
-        select {
-             appearance: none; /* Remove default arrow */
-            background-color: #fff;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 12px;
+        .budget-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+            gap: 10px;
         }
         .budget-buttons button {
             background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
-            margin-top: 5px;
-            transition: background-color 0.3s ease;
+            padding: 12px 10px; /* Adjusted padding */
+            border-radius: 5px;
+            font-size: 0.95em;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+             text-align: center;
         }
         .budget-buttons button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px); /* Slight lift on hover */
         }
         .budget-buttons button.selected {
-             background-color: #0056b3;
+             background-color: #004085; /* Darker blue for selected */
              font-weight: bold;
+             box-shadow: 0 0 5px rgba(0, 64, 133, 0.5);
         }
+
         #results {
             margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+        #suggested-countries h3 {
+            margin-bottom: 15px;
+        }
+        #country-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px; /* Limit height and make scrollable */
+            overflow-y: auto; /* Add scrollbar if needed */
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        #country-list li {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f1f1;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between name and cost */
+            align-items: center;
+        }
+         #country-list li:last-child {
+             border-bottom: none;
+         }
+        #country-list li:hover {
             background-color: #e9ecef;
+        }
+        #country-list li strong {
+            color: #0056b3; /* Highlight country name */
+        }
+         #country-list li .req-funds {
+             font-size: 0.9em;
+             color: #6c757d; /* Muted color for funds */
+             font-weight: normal;
+             margin-left: 10px; /* Space from country name */
+         }
+
+        #cost-details-container {
+            margin-top: 25px;
+            background-color: #e9f7ff; /* Light blue background */
             padding: 20px;
             border-radius: 5px;
-            border: 1px solid #ced4da;
+            border: 1px solid #b8daff; /* Light blue border */
+            display: none; /* Hidden by default */
         }
-        #results h2 {
-            margin-top: 0;
-            color: #0056b3;
-            text-align: left;
-        }
-        #results p {
-            margin-bottom: 10px;
-            color: #333;
-        }
-         #results strong {
-            color: #17a2b8;
+        #cost-details-container h3 {
+             margin-top: 0;
+             color: #0056b3;
          }
-        .suggestion {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .suggestion.suitable {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-         .suggestion.unsuitable {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-        .disclaimer {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 15px;
-            text-align: center;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+
+        .cost-breakdown {
+            list-style: none;
+            padding-left: 0;
         }
         .cost-breakdown li {
-             list-style: none;
-             padding-left: 0;
              margin-bottom: 8px;
+             font-size: 0.95em;
         }
          .cost-breakdown span {
-             font-weight: bold;
+             font-weight: 600; /* Bolder labels */
              display: inline-block;
-             min-width: 180px; /* Adjust as needed */
+             min-width: 190px; /* Adjust for alignment */
              color: #495057;
          }
+         .cost-breakdown strong.important-value {
+             color: #dc3545; /* Highlight important values like bank statement */
+         }
+         .cost-breakdown .note {
+             font-size: 0.9em;
+             color: #6c757d;
+             margin-top: 5px;
+             display: block;
+         }
+
+        .disclaimer {
+            font-size: 0.85em; /* Slightly larger disclaimer */
+            color: #6c757d;
+            margin-top: 25px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .no-results {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <div class="calculator">
-    <h1>Student Visa Cost & Country Suggestion Calculator</h1>
-    <p style="text-align: center; color: #555;">Estimate costs and see potential country fits based on your budget.</p>
+    <h1>Student Visa Cost - Country Suggester</h1>
+    <p style="text-align: center; color: #555;">Select your budget to see potentially suitable countries based on estimated minimum required funds.</p>
 
     <div class="form-group">
-        <label for="continent">1. Select Continent:</label>
-        <select id="continent">
-            <option value="">-- Select Continent --</option>
-            </select>
-    </div>
-
-    <div class="form-group">
-        <label for="country">2. Select Country:</label>
-        <select id="country" disabled>
-            <option value="">-- Select Continent First --</option>
-            </select>
-    </div>
-
-    <div class="form-group">
-        <label>3. Select Your Budget (PKR Lacs):</label>
+        <label>1. Select Your Budget (PKR Lacs):</label>
         <div class="budget-buttons" id="budget-buttons">
             </div>
     </div>
 
-    <div id="results" style="display: none;">
-        <h2>Estimated Costs & Suggestion</h2>
-        <div id="cost-details"></div>
-        <div id="suggestion" class="suggestion"></div>
-         <p class="disclaimer">
-            <strong>Disclaimer:</strong> All costs are estimates for 2025 and subject to change. Bank statement figure is the minimum *proof of funds* typically required, not necessarily immediate spending. Air ticket costs vary greatly. This tool provides a basic guideline only. Always consult official sources for current requirements.
-        </p>
+    <div id="results">
+        <div id="suggested-countries" style="display: none;">
+            <h3>Suggested Countries (Click name for details):</h3>
+             <p style="font-size: 0.9em; color: #6c757d;">Countries where the estimated minimum required funds (Bank Statement) may fall within your selected budget.</p>
+            <ul id="country-list">
+                </ul>
+             <p id="no-results-message" class="no-results" style="display: none;">No countries found matching this budget based on current estimates. Try a higher budget.</p>
+        </div>
+
+        <div id="cost-details-container">
+            <h3 id="cost-details-title">Cost Breakdown</h3>
+            <div id="cost-details"></div>
+        </div>
     </div>
+
+    <p class="disclaimer">
+        <strong>Disclaimer:</strong> All costs are *estimates* (approx. early 2025) for Pakistani students and subject to frequent change. The 'Minimum Bank Statement Required' is the estimated proof of funds needed (often 1 year tuition + 1 year living costs) – this amount varies significantly by university, city, and exact visa rules. Air ticket costs are highly variable. This tool provides a preliminary guideline only. **Always consult official embassy/consulate and university websites for current, accurate requirements before making any decisions.** Data for all countries worldwide is not included.
+    </p>
 </div>
 
 <script>
     // --- Data (Estimates as of early 2025 for Pakistani Students) ---
-    // All costs converted to PKR for simplicity. Exchange rates used implicitly for estimation.
-    // Bank Statement = Proof of funds (Tuition for 1 year + Living Expenses for 1 year + Travel Approx) - highly variable!
-    // Other Costs = Health Insurance, Application Fees, Biometrics, SEVIS/IHS etc. - approximate.
+    // bankStatementMinPKR = Estimated Minimum Proof of Funds (Highly Variable!)
+    // Other Costs = Health Insurance, App Fees, Biometrics, SEVIS/IHS etc.
     const countryData = {
-        "North America": {
-            "USA": {
-                visaFeePKR: 50000, // Approx $185
-                bankStatementMinPKR: 9000000, // Highly Variable ($35k-60k+ depending on I-20)
-                airTicketPKR: 350000,
-                otherCostsPKR: 110000, // SEVIS fee (~$350) + App Fees
-                currency: "USD",
-                notes: "Bank statement requirement (I-20) varies significantly by university. SEVIS fee mandatory."
-            },
-            "Canada": {
-                visaFeePKR: 55000, // Approx CAD 150 (visa) + CAD 85 (biometrics)
-                bankStatementMinPKR: 5500000, // GIC (CAD ~20,635 for 2024, may rise) + 1yr Tuition + Travel
-                airTicketPKR: 380000,
-                otherCostsPKR: 60000, // Medical Exam, App Fees
-                currency: "CAD",
-                notes: "Guaranteed Investment Certificate (GIC) often required for SDS stream. Tuition varies widely."
-            }
-        },
-        "Europe": {
-            "UK": {
-                visaFeePKR: 155000, // Approx £490 (student visa)
-                bankStatementMinPKR: 7500000, // 1yr Tuition + Living (£1,334/mo London, £1,023/mo elsewhere for 9 months)
-                airTicketPKR: 250000,
-                otherCostsPKR: 250000, // IHS Surcharge (~£776/year) + App Fees
-                currency: "GBP",
-                notes: "Mandatory Immigration Health Surcharge (IHS) adds significant cost, paid upfront."
-            },
-            "Germany": {
-                visaFeePKR: 25000, // Approx €75
-                bankStatementMinPKR: 3800000, // Blocked Account (~€11,208 for 2024/25, likely to increase) + Buffer
-                airTicketPKR: 220000,
-                otherCostsPKR: 40000, // Health Insurance (sometimes covered initially by blocked acc), App Fees
-                currency: "EUR",
-                notes: "No/low tuition fees at many public universities. Blocked account mandatory for living expenses proof."
-            },
-             "Sweden": {
-                visaFeePKR: 45000, // Approx SEK 1500 (residence permit)
-                bankStatementMinPKR: 4000000, // Approx SEK 10,000/month living + Full Tuition Fees
-                airTicketPKR: 280000,
-                otherCostsPKR: 70000, // App fee (~SEK 900), Insurance
-                currency: "SEK",
-                notes: "Tuition fees apply for non-EU students and can be high. Proof of funds covers living + tuition."
-             }
-        },
-        "Oceania": {
-            "Australia": {
-                visaFeePKR: 160000, // Approx AUD 710
-                bankStatementMinPKR: 8000000, // Living (AUD ~24,505/yr) + 1yr Tuition + Travel (AUD ~2000)
-                airTicketPKR: 300000,
-                otherCostsPKR: 150000, // OSHC Health Insurance (variable) + App Fees
-                currency: "AUD",
-                notes: "Strict financial requirements. Overseas Student Health Cover (OSHC) is mandatory."
-            },
-            "New Zealand": {
-                 visaFeePKR: 80000, // Approx NZD 430 (online)
-                 bankStatementMinPKR: 6000000, // Living (NZD 20,000/yr) + 1yr Tuition + Travel
-                 airTicketPKR: 350000,
-                 otherCostsPKR: 80000, // Insurance, App Fees, Medicals if needed
-                 currency: "NZD",
-                 notes: "Proof of funds needed for living costs plus tuition."
-             }
-        },
-        "Asia": {
-             "Malaysia": {
-                visaFeePKR: 20000, // Visa Approval Letter (VAL) + Visa fees - variable by institution/country
-                bankStatementMinPKR: 1500000, // Lower compared to Western countries, but varies.
-                airTicketPKR: 100000,
-                otherCostsPKR: 50000, // EMGS Fee, Insurance, Medical
-                currency: "MYR",
-                notes: "Generally more affordable option. Costs managed via Education Malaysia Global Services (EMGS)."
-            },
-            "Turkey": {
-                visaFeePKR: 25000, // Approx $80-$100, varies
-                bankStatementMinPKR: 2000000, // Relatively lower requirement, depends on duration/city
-                airTicketPKR: 150000,
-                otherCostsPKR: 60000, // Residence Permit, Insurance, App Fees
-                currency: "TRY",
-                notes: "Affordable tuition and living costs compared to many destinations."
-            }
-            // Add more Asian countries if needed
-        }
-        // Add Africa if needed
+         // North America
+         "USA": { continent: "North America", visaFeePKR: 50000, bankStatementMinPKR: 9000000, airTicketPKR: 350000, otherCostsPKR: 110000, currency: "USD", notes: "Bank statement (I-20) varies greatly by uni. SEVIS fee mandatory." },
+         "Canada": { continent: "North America", visaFeePKR: 55000, bankStatementMinPKR: 5500000, airTicketPKR: 380000, otherCostsPKR: 60000, currency: "CAD", notes: "GIC (~CAD 20,635+) + 1yr Tuition often needed for SDS. Tuition varies." },
+         "Mexico": { continent: "North America", visaFeePKR: 15000, bankStatementMinPKR: 1500000, airTicketPKR: 400000, otherCostsPKR: 30000, currency: "MXN", notes: "Requirements vary; proof of sufficient monthly income or savings needed." },
+
+         // Europe
+         "UK": { continent: "Europe", visaFeePKR: 155000, bankStatementMinPKR: 7500000, airTicketPKR: 250000, otherCostsPKR: 250000, currency: "GBP", notes: "Mandatory IHS (~£776/yr) adds significant cost. Funds = Tuition + Living (£1334 London/£1023 elsewhere per month)." },
+         "Germany": { continent: "Europe", visaFeePKR: 25000, bankStatementMinPKR: 3800000, airTicketPKR: 220000, otherCostsPKR: 40000, currency: "EUR", notes: "Blocked Account (~€11,208/yr, may increase) mandatory. Many public unis have low/no tuition." },
+         "France": { continent: "Europe", visaFeePKR: 30000, bankStatementMinPKR: 2500000, airTicketPKR: 240000, otherCostsPKR: 50000, currency: "EUR", notes: "Proof of funds (~€615/month) + Tuition needed. Campus France process applies." },
+         "Netherlands": { continent: "Europe", visaFeePKR: 70000, bankStatementMinPKR: 4500000, airTicketPKR: 260000, otherCostsPKR: 60000, currency: "EUR", notes: "Proof of funds (~€1200/month) + Tuition required. Can be high." },
+         "Sweden": { continent: "Europe", visaFeePKR: 45000, bankStatementMinPKR: 4000000, airTicketPKR: 280000, otherCostsPKR: 70000, currency: "SEK", notes: "Funds for Living (~SEK 10,000/month) + Full Tuition (can be high) needed." },
+         "Norway": { continent: "Europe", visaFeePKR: 20000, bankStatementMinPKR: 4200000, airTicketPKR: 290000, otherCostsPKR: 30000, currency: "NOK", notes: "Proof of funds (~NOK 137,907/yr, increases annually) required. Public uni tuition generally free, but cost of living is high." },
+         "Italy": { continent: "Europe", visaFeePKR: 20000, bankStatementMinPKR: 2500000, airTicketPKR: 230000, otherCostsPKR: 40000, currency: "EUR", notes: "Proof of funds (~€6000/yr) needed. Pre-enrollment via Universitaly required." },
+         "Spain": { continent: "Europe", visaFeePKR: 25000, bankStatementMinPKR: 2800000, airTicketPKR: 250000, otherCostsPKR: 40000, currency: "EUR", notes: "Proof of funds (~€600/month) + insurance needed." },
+         "Ireland": { continent: "Europe", visaFeePKR: 20000, bankStatementMinPKR: 4000000, airTicketPKR: 270000, otherCostsPKR: 100000, currency: "EUR", notes: "Proof of funds (€10k-€14k/yr + Tuition) often needed. Check INIS for exact amounts." },
+         "Poland": { continent: "Europe", visaFeePKR: 25000, bankStatementMinPKR: 2000000, airTicketPKR: 240000, otherCostsPKR: 40000, currency: "PLN", notes: "Lower cost of living/tuition compared to Western Europe. Proof of sufficient funds required." },
+         "Hungary": { continent: "Europe", visaFeePKR: 25000, bankStatementMinPKR: 2200000, airTicketPKR: 230000, otherCostsPKR: 50000, currency: "HUF/EUR", notes: "Popular for medical programs. Stipendium Hungaricum scholarship available. Proof of funds required." },
+
+         // Oceania
+         "Australia": { continent: "Oceania", visaFeePKR: 160000, bankStatementMinPKR: 8000000, airTicketPKR: 300000, otherCostsPKR: 150000, currency: "AUD", notes: "Strict funds req. (Living ~AUD 24,505/yr + Tuition + Travel). Mandatory OSHC." },
+         "New Zealand": { continent: "Oceania", visaFeePKR: 80000, bankStatementMinPKR: 6000000, airTicketPKR: 350000, otherCostsPKR: 80000, currency: "NZD", notes: "Funds req. (Living NZD 20,000/yr + Tuition + Travel). Insurance mandatory." },
+
+         // Asia
+         "Malaysia": { continent: "Asia", visaFeePKR: 20000, bankStatementMinPKR: 1500000, airTicketPKR: 100000, otherCostsPKR: 50000, currency: "MYR", notes: "Affordable option. Costs via EMGS. Varies by institution." },
+         "Turkey": { continent: "Asia", visaFeePKR: 25000, bankStatementMinPKR: 2000000, airTicketPKR: 150000, otherCostsPKR: 60000, currency: "TRY", notes: "Affordable tuition/living. Residence Permit required." },
+         "China": { continent: "Asia", visaFeePKR: 20000, bankStatementMinPKR: 1800000, airTicketPKR: 180000, otherCostsPKR: 40000, currency: "CNY", notes: "Scholarships common (CSC). Proof of funds (~$2500/yr equivalent) + tuition/acc." },
+         "South Korea": { continent: "Asia", visaFeePKR: 20000, bankStatementMinPKR: 4500000, airTicketPKR: 200000, otherCostsPKR: 50000, currency: "KRW", notes: "Proof of funds (~$20,000 USD equiv. for Seoul, less elsewhere) often needed." },
+         "Japan": { continent: "Asia", visaFeePKR: 10000, bankStatementMinPKR: 4000000, airTicketPKR: 220000, otherCostsPKR: 40000, currency: "JPY", notes: "Proof of ability to cover expenses required (varies significantly)." },
+         "Singapore": { continent: "Asia", visaFeePKR: 15000, bankStatementMinPKR: 6000000, airTicketPKR: 150000, otherCostsPKR: 50000, currency: "SGD", notes: "High living costs. Student Pass requires proof of funds via ICA." },
+         "UAE": { continent: "Asia", visaFeePKR: 30000, bankStatementMinPKR: 3000000, airTicketPKR: 80000, otherCostsPKR: 70000, currency: "AED", notes: "Sponsored by university or guardian. Requirements vary by Emirate/institution." }
+         // Add more countries as needed, ensuring 'bankStatementMinPKR' is the key filter value.
     };
 
     const budgetRanges = [
@@ -254,51 +244,18 @@
     ];
 
     // --- DOM Elements ---
-    const continentSelect = document.getElementById('continent');
-    const countrySelect = document.getElementById('country');
     const budgetButtonsContainer = document.getElementById('budget-buttons');
     const resultsDiv = document.getElementById('results');
+    const suggestedCountriesDiv = document.getElementById('suggested-countries');
+    const countryListUl = document.getElementById('country-list');
+    const noResultsMsg = document.getElementById('no-results-message');
+    const costDetailsContainer = document.getElementById('cost-details-container');
+    const costDetailsTitle = document.getElementById('cost-details-title');
     const costDetailsDiv = document.getElementById('cost-details');
-    const suggestionDiv = document.getElementById('suggestion');
 
-    let selectedContinent = null;
-    let selectedCountry = null;
     let selectedBudget = null;
 
     // --- Functions ---
-
-    // Populate continent dropdown
-    function populateContinents() {
-        const continents = Object.keys(countryData);
-        continents.forEach(continent => {
-            const option = document.createElement('option');
-            option.value = continent;
-            option.textContent = continent;
-            continentSelect.appendChild(option);
-        });
-    }
-
-    // Populate country dropdown based on selected continent
-    function populateCountries() {
-        selectedContinent = continentSelect.value;
-        countrySelect.innerHTML = '<option value="">-- Select Country --</option>'; // Clear previous options
-        countrySelect.disabled = true;
-        selectedCountry = null; // Reset country selection
-        resetBudgetAndResults(); // Reset budget and results when continent changes
-
-        if (selectedContinent && countryData[selectedContinent]) {
-            const countries = Object.keys(countryData[selectedContinent]);
-            countries.forEach(country => {
-                const option = document.createElement('option');
-                option.value = country;
-                option.textContent = country;
-                countrySelect.appendChild(option);
-            });
-            countrySelect.disabled = false;
-        } else {
-             countrySelect.innerHTML = '<option value="">-- Select Continent First --</option>';
-        }
-    }
 
     // Populate budget buttons
     function populateBudgetButtons() {
@@ -306,21 +263,27 @@
             const button = document.createElement('button');
             button.textContent = range.label;
             button.dataset.min = range.min;
-            button.dataset.max = range.max;
+            // Use a very large number for infinity representation in max dataset
+            button.dataset.max = (range.max === Infinity) ? '9999999999' : range.max;
             button.addEventListener('click', handleBudgetSelection);
             budgetButtonsContainer.appendChild(button);
         });
     }
 
-     // Reset budget selection and hide results
-    function resetBudgetAndResults() {
-        selectedBudget = null;
-        const buttons = budgetButtonsContainer.querySelectorAll('button');
-        buttons.forEach(btn => btn.classList.remove('selected'));
-        resultsDiv.style.display = 'none';
-        costDetailsDiv.innerHTML = '';
-        suggestionDiv.innerHTML = '';
-        suggestionDiv.className = 'suggestion'; // Reset suggestion styling
+    // Format number as PKR Lacs or Crores
+    function formatPKR(amount) {
+        if (amount === null || amount === undefined) return "N/A";
+        if (amount >= 10000000) { // 1 Crore
+            return (amount / 10000000).toFixed(2) + " Cr";
+        } else if (amount >= 100000) { // 1 Lac
+             return (amount / 100000).toFixed(2) + " Lac";
+        } else {
+            return amount.toLocaleString('en-PK') + " PKR"; // Use PK locale if available, else fallback
+        }
+    }
+    function formatPKR_full(amount) {
+         if (amount === null || amount === undefined) return "N/A";
+         return amount.toLocaleString('en-PK') + " PKR"; // Always show full amount with commas
     }
 
 
@@ -337,96 +300,95 @@
         buttons.forEach(btn => btn.classList.remove('selected'));
         event.target.classList.add('selected');
 
+        // Hide detailed cost breakdown when budget changes
+        costDetailsContainer.style.display = 'none';
 
-        // Check if country is selected before calculating
-        selectedCountry = countrySelect.value; // Ensure country is updated
-        if (selectedContinent && selectedCountry) {
-            calculateAndDisplayResults();
-        } else {
-            alert("Please select a continent and country first.");
-             resetBudgetAndResults(); // Reset if country is not selected
-        }
+        filterAndDisplayCountries();
     }
 
-    // Format number as PKR Lacs or Crores
-    function formatPKR(amount) {
-        if (amount >= 10000000) { // 1 Crore
-            return (amount / 10000000).toFixed(2) + " Crore PKR";
-        } else if (amount >= 100000) { // 1 Lac
-             return (amount / 100000).toFixed(2) + " Lac PKR";
-        } else {
-            return amount.toLocaleString('en-IN') + " PKR"; // Format smaller numbers with commas
+    // Filter countries based on budget and display the list
+    function filterAndDisplayCountries() {
+        if (!selectedBudget) return;
+
+        countryListUl.innerHTML = ''; // Clear previous list
+        let suitableCountries = [];
+
+        for (const countryName in countryData) {
+            const country = countryData[countryName];
+            // Check if the minimum bank statement requirement fits within the budget range
+            // We primarily care if it's *less than or equal to* the budget's max limit.
+            if (country.bankStatementMinPKR !== null && country.bankStatementMinPKR <= selectedBudget.max) {
+                 // Optionally, you could also check country.bankStatementMinPKR >= selectedBudget.min if you want strict range matching
+                suitableCountries.push({ name: countryName, ...country });
+            }
         }
+
+        // Sort suitable countries alphabetically by name for consistency
+        suitableCountries.sort((a, b) => a.name.localeCompare(b.name));
+
+        if (suitableCountries.length > 0) {
+            suitableCountries.forEach(country => {
+                const li = document.createElement('li');
+                li.dataset.country = country.name; // Store country name for click handling
+
+                // Display country name and its required funds for quick comparison
+                li.innerHTML = `
+                    <strong>${country.name}</strong>
+                    <span class="req-funds">Req. Funds: ~${formatPKR(country.bankStatementMinPKR)}</span>
+                `;
+
+                li.addEventListener('click', () => displayCostDetails(country.name));
+                countryListUl.appendChild(li);
+            });
+            noResultsMsg.style.display = 'none';
+            suggestedCountriesDiv.style.display = 'block';
+        } else {
+             noResultsMsg.style.display = 'block';
+             suggestedCountriesDiv.style.display = 'none'; // Hide the heading if no results
+        }
+         resultsDiv.style.display = 'block'; // Show the results area
     }
 
+    // Display detailed cost breakdown for the selected country
+    function displayCostDetails(countryName) {
+        const data = countryData[countryName];
+        if (!data) return; // Should not happen if clicked from the list
 
-    // Calculate costs and display results
-    function calculateAndDisplayResults() {
-        if (!selectedContinent || !selectedCountry || !selectedBudget) {
-            resultsDiv.style.display = 'none';
-            return;
-        }
+        const initialOutlay = (data.visaFeePKR || 0) + (data.airTicketPKR || 0) + (data.otherCostsPKR || 0);
 
-        const data = countryData[selectedContinent]?.[selectedCountry];
-        if (!data) {
-            costDetailsDiv.innerHTML = `<p>Cost data not available for ${selectedCountry}.</p>`;
-            suggestionDiv.innerHTML = '';
-            resultsDiv.style.display = 'block';
-            return;
-        }
-
-        // Calculate total estimated *initial* outlay for comparison
-        // Note: Bank statement is proof of funds, not direct initial cost, but crucial for planning
-        const initialOutlay = data.visaFeePKR + data.airTicketPKR + data.otherCostsPKR;
-        const minimumFundsRequired = data.bankStatementMinPKR; // The key figure for budget check
-
+        costDetailsTitle.textContent = `Cost Breakdown for ${countryName}`;
         costDetailsDiv.innerHTML = `
-            <h3>Costs for ${selectedCountry} (${data.currency})</h3>
-             <ul class="cost-breakdown">
-                <li><span>Est. Visa Fee:</span> ${formatPKR(data.visaFeePKR)}</li>
-                <li><span>Est. Air Ticket (from PK):</span> ${formatPKR(data.airTicketPKR)}</li>
-                <li><span>Est. Other Costs (Insurance, Fees etc.):</span> ${formatPKR(data.otherCostsPKR)}</li>
-                <li><span><strong>Min. Bank Statement Required:</strong></span> <strong>${formatPKR(minimumFundsRequired)}</strong></li>
-                <li><span>Est. Initial Outlay (Visa+Ticket+Other):</span> ${formatPKR(initialOutlay)}</li>
+            <ul class="cost-breakdown">
+                <li><span>Continent:</span> ${data.continent || 'N/A'}</li>
+                <li><span>Currency:</span> ${data.currency || 'N/A'}</li>
+                <li><span>Est. Visa Fee:</span> ${formatPKR_full(data.visaFeePKR)}</li>
+                <li><span>Est. Air Ticket (from PK):</span> ${formatPKR_full(data.airTicketPKR)}</li>
+                <li><span>Est. Other Costs (Insurance, Fees etc.):</span> ${formatPKR_full(data.otherCostsPKR)}</li>
+                <li><span><strong>Min. Bank Statement Required:</strong></span> <strong class="important-value">${formatPKR(data.bankStatementMinPKR)} (${formatPKR_full(data.bankStatementMinPKR)})</strong></li>
+                <li><span><em>Est. Initial Outlay (Visa+Ticket+Other):</em></span> <em>${formatPKR_full(initialOutlay)}</em></li>
              </ul>
-             <p><em>Note: ${data.notes}</em></p>
+             <p class="note"><strong>Note:</strong> ${data.notes || 'No specific notes.'}</p>
         `;
+        costDetailsContainer.style.display = 'block';
 
-        // Suggestion based on bank statement requirement fitting into budget
-        if (minimumFundsRequired <= selectedBudget.max) {
-             // More refined check: Does it comfortably fit? Check against lower bound.
-             if (minimumFundsRequired >= selectedBudget.min) {
-                 suggestionDiv.innerHTML = `<strong>Suggestion:</strong> ${selectedCountry} potentially fits your budget (${selectedBudget.label}). The minimum required funds (${formatPKR(minimumFundsRequired)}) fall within this range. Ensure you also account for actual tuition fees separately.`;
-                 suggestionDiv.className = 'suggestion suitable';
+        // Optional: Scroll to the details section smoothly
+        costDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Highlight the selected country in the list
+        const listItems = countryListUl.querySelectorAll('li');
+        listItems.forEach(item => {
+             if(item.dataset.country === countryName) {
+                 item.style.backgroundColor = '#d1e7ff'; // Highlight blue
+                 item.style.fontWeight = 'bold';
              } else {
-                 // Fits within max, but below min - means budget is higher than needed
-                 suggestionDiv.innerHTML = `<strong>Suggestion:</strong> ${selectedCountry} is likely well within your budget (${selectedBudget.label}). The minimum required funds (${formatPKR(minimumFundsRequired)}) are below this range's lower limit.`;
-                 suggestionDiv.className = 'suggestion suitable';
+                 item.style.backgroundColor = ''; // Remove highlight from others
+                  item.style.fontWeight = '';
              }
-
-        } else {
-            suggestionDiv.innerHTML = `<strong>Suggestion:</strong> Based on estimates, ${selectedCountry} might be challenging with your selected budget (${selectedBudget.label}). The minimum required funds are estimated at ${formatPKR(minimumFundsRequired)}.`;
-            suggestionDiv.className = 'suggestion unsuitable';
-        }
-
-
-        resultsDiv.style.display = 'block';
+        });
     }
-
-    // --- Event Listeners ---
-    continentSelect.addEventListener('change', populateCountries);
-    countrySelect.addEventListener('change', () => {
-         selectedCountry = countrySelect.value;
-         resetBudgetAndResults(); // Reset budget when country changes
-         // If a budget was previously selected, recalculate for the new country
-        // if (selectedBudget) {
-        //      calculateAndDisplayResults();
-        // } // Decided against auto-recalc, better for user to re-click budget.
-    });
 
 
     // --- Initial Setup ---
-    populateContinents();
     populateBudgetButtons();
 
 </script>
