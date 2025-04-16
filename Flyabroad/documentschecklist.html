@@ -5,101 +5,565 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visa Document Checklist Checker</title>
     <style>
-        body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
+        /* --- Integrated CSS --- */
+        :root {
+            --primary: #005e54;
+            --secondary: #01796f;
+            --accent: #f8f9fa;
+            --text: #333333;
+            --light: #ffffff;
+            --border-color: #e0e0e0;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--accent); /* Use accent for overall page background */
+        }
+
         .container {
-            background-color: #fff;
-            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0; /* Adjusted padding */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Style for potential logo image if added */
+        /* .logo img { height: 40px; margin-right: 10px; } */
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0; /* Ensure no default margin */
+        }
+        /* Make logo H1 link styled correctly */
+        .logo a {
+            text-decoration: none;
+            color: inherit; /* Inherit color from h1 */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none; /* Ensure no default border */
+            cursor: pointer; /* Indicate it's clickable */
+            text-decoration: none; /* Ensure links look like buttons */
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white; /* Ensure text remains white on hover */
+        }
+
+        /* Breadcrumb Styles */
+        .breadcrumb {
+            padding: 10px 0;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            margin: 0; /* Reset list margin */
+            padding: 0; /* Reset list padding */
+        }
+
+        .breadcrumb-links li {
+            display: flex;
+            align-items: center;
+            margin-right: 10px; /* Add right margin instead of using ::after margin */
+        }
+
+        .breadcrumb-links li:not(:last-child)::after {
+            content: "›";
+            margin-left: 10px; /* Use margin-left for separator */
+            color: #777;
+        }
+
+        .breadcrumb-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .breadcrumb-links .current {
+            color: #777;
+            font-size: 14px;
+            font-weight: 500; /* Slightly bolder */
+        }
+
+        /* Main Content Area */
+        main {
+            padding: 40px 0; /* Add padding to main area */
+        }
+
+        /* --- Styles specific to the Checklist component --- */
+        .checklist-wrapper {
+            background-color: var(--light);
+            padding: 30px; /* Add more padding */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            /* max-width: 800px;  */ /* Let the outer .container control max-width */
             margin: auto;
         }
-        h1, h2 {
-            color: #333;
+
+        .checklist-wrapper h2 { /* Use H2 for the checklist title now */
+            color: var(--primary);
             text-align: center;
+            margin-bottom: 30px; /* More space below title */
+            font-size: 28px;
         }
-        label {
+
+        .checklist-wrapper label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px; /* Slightly more space */
+            font-weight: 600; /* Bolder labels */
+            color: var(--primary); /* Use primary color */
+            font-size: 1.1em;
         }
-        select {
+
+        .checklist-wrapper select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            padding: 12px; /* Increase padding */
+            margin-bottom: 25px; /* More space below dropdowns */
+            border: 1px solid var(--border-color);
+            border-radius: 5px; /* Match theme */
+            box-sizing: border-box;
+            background-color: var(--light);
+            color: var(--text);
+            font-size: 1em;
+            transition: border-color 0.3s;
         }
+        .checklist-wrapper select:focus {
+             border-color: var(--primary);
+             outline: none;
+             box-shadow: 0 0 0 2px rgba(0, 94, 84, 0.2);
+        }
+         .checklist-wrapper select:disabled {
+             background-color: #eee;
+             cursor: not-allowed;
+         }
+
+
         #visaInfo {
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 2px solid var(--border-color); /* Thicker top border */
+            padding-top: 30px;
         }
+
         .visa-type {
-            background-color: #e9f5ff;
-            border: 1px solid #b3d7ff;
+            background-color: var(--accent); /* Use accent color for background */
+            border: 1px solid var(--border-color); /* Use border color */
+            border-left: 5px solid var(--secondary); /* Add accent border */
             border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 20px; /* Increase padding */
+            margin-bottom: 20px; /* More space */
+            transition: box-shadow 0.3s;
         }
+        .visa-type:hover {
+             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
         .visa-type h3 {
             margin-top: 0;
-            margin-bottom: 10px;
-            color: #0056b3;
+            margin-bottom: 15px; /* More space */
+            color: var(--primary); /* Use primary color */
+            font-size: 1.4em; /* Larger visa type title */
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
+
         .visa-type ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            padding-left: 0;
+            list-style-type: none; /* Remove default bullets */
+            margin-left: 0; /* Reset margin */
+            padding-left: 0; /* Reset padding */
         }
+
          .visa-type li {
-            margin-bottom: 5px;
-        }
+            margin-bottom: 10px; /* More space between items */
+            padding-left: 25px; /* Indent items */
+            position: relative;
+            color: var(--text);
+            font-size: 1em;
+         }
+         .visa-type li::before {
+             content: '✓'; /* Use checkmark */
+             color: var(--secondary); /* Use secondary color */
+             position: absolute;
+             left: 0;
+             top: 1px;
+             font-weight: bold;
+         }
+
         .disclaimer {
             font-size: 0.9em;
             color: #777;
-            margin-top: 15px;
-            border-top: 1px dashed #ccc;
-            padding-top: 10px;
+            margin-top: 25px; /* More space */
+            border-top: 1px dashed var(--border-color); /* Dashed border */
+            padding-top: 15px;
+            background-color: #f9f9f9; /* Slight background */
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
         }
+        .disclaimer strong {
+            color: #555;
+        }
+
         .no-data {
             color: #cc0000;
             font-style: italic;
+            font-weight: bold;
+            background-color: #fff0f0;
+            border: 1px solid #ffcccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
         }
+        /* --- End Checklist Specific Styles --- */
+
+
+        /* Footer Styles (Copied from provided CSS) */
+        footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.9); /* Slightly less bright text */
+            padding: 60px 0 30px; /* Adjusted padding */
+            border-top: 5px solid var(--secondary);
+            margin-top: 50px; /* Add margin above footer */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px 30px; /* Row and column gap */
+            margin-bottom: 40px; /* Increased space */
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px; /* Slightly wider min-width */
+        }
+        .footer-column p { /* Style for intro paragraph */
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+        }
+         /* Footer Contact links */
+        .footer-column a {
+             color: rgba(255, 255, 255, 0.8);
+             text-decoration: none;
+             transition: color 0.3s;
+        }
+        .footer-column a:hover {
+             color: white;
+             text-decoration: underline;
+        }
+
+        .footer-column h4 {
+            font-size: 18px; /* Slightly smaller footer heading */
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: white; /* Ensure heading is bright white */
+            font-weight: 600;
+            margin-top: 0; /* Reset margin */
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary); /* Use secondary color for underline */
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0; /* Reset padding */
+            margin: 0; /* Reset margin */
+        }
+
+        .footer-links li {
+            margin-bottom: 12px; /* Increased spacing */
+        }
+
+        /* .footer-links a { } /* Style inherited from .footer-column a */
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px; /* Increased spacing */
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* More visible border */
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+        .footer-bottom a { /* Style links in bottom */
+             color: rgba(255, 255, 255, 0.7);
+             text-decoration: underline;
+        }
+        .footer-bottom a:hover {
+             color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 0; /* Reduce header padding */
+                flex-direction: column; /* Stack logo and links */
+                align-items: flex-start;
+            }
+             .logo {
+                 margin-bottom: 10px;
+             }
+            .nav-links {
+                /* NOTE: Links are hidden, but no mobile menu mechanism is styled. */
+                /* You would need JS and more CSS for a hamburger menu. */
+                display: none;
+                /* Basic display for demo if needed: */
+                /* display: flex;
+                flex-direction: column;
+                width: 100%; */
+            }
+             .nav-links li {
+                 margin-left: 0;
+                 margin-bottom: 10px;
+                 width: 100%;
+             }
+             .nav-links a {
+                 display: block;
+                 padding: 5px 0;
+             }
+             .cta-button {
+                 margin-top: 10px;
+                 align-self: flex-start;
+             }
+
+
+            .breadcrumb {
+                padding: 8px 0;
+            }
+
+            .breadcrumb-links a, .breadcrumb-links .current {
+                font-size: 12px;
+            }
+            .breadcrumb-links li:not(:last-child)::after {
+                 margin-left: 5px;
+                 margin-right: 5px; /* Reduce separator space */
+            }
+
+             .checklist-wrapper {
+                 padding: 20px;
+             }
+             .checklist-wrapper h2 {
+                 font-size: 24px;
+             }
+             .checklist-wrapper label {
+                 font-size: 1em;
+             }
+             .visa-type {
+                 padding: 15px;
+             }
+             .visa-type h3 {
+                 font-size: 1.2em;
+             }
+             .visa-type li {
+                 font-size: 0.95em;
+                 padding-left: 20px;
+             }
+
+
+            .footer-content {
+                gap: 30px; /* Reduce gap */
+                flex-direction: column; /* Stack columns */
+                align-items: center; /* Center columns */
+            }
+            .footer-column {
+                min-width: 100%; /* Stack columns */
+                text-align: center; /* Center text */
+                max-width: 400px; /* Limit width when stacked */
+            }
+            .footer-column h4::after {
+                 left: 50%; /* Center underline */
+                 transform: translateX(-50%);
+            }
+            .footer-links {
+                 text-align: center;
+            }
+        }
+        /* Note: Styles for .hero, .services, .testimonials, .resources, .cta-section are included
+           in the CSS but not used in this specific HTML structure. You can add those sections
+           later if needed. */
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Visa Document Checklist Checker</h1>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="#"><h1>VisaCheck</h1></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+             <a href="#checklist-section" class="cta-button">Check Visa Docs</a>
+        </nav>
+    </header>
 
-    <div>
-        <label for="continentSelect">Select Continent:</label>
-        <select id="continentSelect">
-            <option value="">-- Select Continent --</option>
-        </select>
+    <div class="breadcrumb">
+        <div class="container">
+             <ul class="breadcrumb-links">
+                 <li><a href="#">Home</a></li>
+                 <li><span class="current">Visa Document Checker</span></li>
+             </ul>
+        </div>
     </div>
 
-    <div>
-        <label for="countrySelect">Select Country:</label>
-        <select id="countrySelect" disabled>
-            <option value="">-- Select Continent First --</option>
-        </select>
-    </div>
+    <main>
+         <section id="checklist-section">
+            <div class="container">
+                <div class="checklist-wrapper">
+                    <h2>Visa Document Checklist Checker</h2>
 
-    <div id="visaInfo">
-        <p class="disclaimer">
-            <strong>Disclaimer:</strong> Visa requirements change frequently and vary based on nationality and specific circumstances. The information provided here is illustrative. Always consult the official embassy or consulate website of the country you plan to visit for the most accurate and up-to-date requirements before applying.
-        </p>
-    </div>
+                    <div>
+                        <label for="continentSelect">1. Select Continent:</label>
+                        <select id="continentSelect">
+                            <option value="">-- Select Continent --</option>
+                        </select>
+                    </div>
 
-</div>
+                    <div>
+                        <label for="countrySelect">2. Select Country:</label>
+                        <select id="countrySelect" disabled>
+                            <option value="">-- Select Continent First --</option>
+                        </select>
+                    </div>
+
+                    <div id="visaInfo">
+                        <p class="disclaimer">
+                            <strong>Disclaimer:</strong> Visa requirements change frequently and vary based on nationality and specific circumstances. The information provided here is illustrative. <strong>Always consult the official embassy or consulate website</strong> of the country you plan to visit for the most accurate and up-to-date requirements before applying.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About VisaCheck</h4>
+                    <p>Simplifying your visa application process by providing essential document checklists. Remember to always verify with official sources.</p>
+                    </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Travel Advisories</a></li>
+                        <li><a href="#">Embassy Finder (Link)</a></li>
+                        <li><a href="#">Visa Application Tips</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                     <p>
+                         Email: <a href="mailto:info@example.com">info@example.com</a><br>
+                         Phone: <a href="tel:+1234567890">+1 234 567 890</a><br>
+                         Address: 123 Visa Lane, Travel City
+                     </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                 <p>&copy; 2025 VisaCheck. All Rights Reserved.</p>
+                 <p>Information provided is for guidance only. Verify with official sources.</p>
+                 <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
 
 <script>
     // --- DATA ---
@@ -268,7 +732,8 @@
     const continentSelect = document.getElementById('continentSelect');
     const countrySelect = document.getElementById('countrySelect');
     const visaInfoDiv = document.getElementById('visaInfo');
-    const disclaimerParagraph = visaInfoDiv.querySelector('.disclaimer'); // Keep the disclaimer
+    // Get reference to the disclaimer paragraph to re-add it later
+    const disclaimerParagraph = visaInfoDiv.querySelector('.disclaimer').cloneNode(true);
 
 
     // --- Functions ---
@@ -288,8 +753,9 @@
     function populateCountries(continent) {
         // Clear previous options and visa info
         countrySelect.innerHTML = '<option value="">-- Select Country --</option>';
-        visaInfoDiv.innerHTML = ''; // Clear previous visa info
-        visaInfoDiv.appendChild(disclaimerParagraph); // Re-add disclaimer
+        // Clear visa info but keep the disclaimer structure for re-adding
+        visaInfoDiv.innerHTML = '';
+        visaInfoDiv.appendChild(disclaimerParagraph);
 
 
         if (continent && countriesByContinent[continent]) {
@@ -303,16 +769,18 @@
             countrySelect.disabled = false;
         } else {
             countrySelect.disabled = true;
-             countrySelect.innerHTML = '<option value="">-- Select Continent First --</option>';
+            countrySelect.innerHTML = '<option value="">-- Select Continent First --</option>';
         }
     }
 
     // Display Visa Information for selected country
     function displayVisaInfo(country) {
-         visaInfoDiv.innerHTML = ''; // Clear previous visa info
-         visaInfoDiv.appendChild(disclaimerParagraph); // Re-add disclaimer
+         // Clear previous visa info but keep the disclaimer structure for re-adding
+        visaInfoDiv.innerHTML = '';
+
 
         if (!country) {
+             visaInfoDiv.appendChild(disclaimerParagraph); // Add disclaimer back if no country selected
             return; // No country selected
         }
 
@@ -336,18 +804,14 @@
                 visaTypeDiv.appendChild(ul);
                 visaInfoDiv.appendChild(visaTypeDiv);
             });
-
-             // Re-append disclaimer at the end if it was cleared
-             if (!visaInfoDiv.contains(disclaimerParagraph)) {
-                  visaInfoDiv.appendChild(disclaimerParagraph);
-             }
-
         } else {
             const noDataP = document.createElement('p');
             noDataP.classList.add('no-data');
             noDataP.textContent = `Specific visa document information for ${country} is not available in this example dataset. Please check the official embassy/consulate website.`;
-            visaInfoDiv.insertBefore(noDataP, disclaimerParagraph); // Add message before disclaimer
+            visaInfoDiv.appendChild(noDataP); // Add message
         }
+         // Re-append disclaimer at the end
+        visaInfoDiv.appendChild(disclaimerParagraph);
     }
 
     // --- Event Listeners ---
@@ -364,6 +828,11 @@
 
     // --- Initialisation ---
     populateContinents();
+     // Ensure disclaimer is present initially
+    if (!visaInfoDiv.querySelector('.disclaimer')) {
+        visaInfoDiv.appendChild(disclaimerParagraph);
+    }
+
 
 </script>
 
