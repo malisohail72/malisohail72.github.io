@@ -776,6 +776,130 @@
                  text-align: center;
             }
         }
+        
+        
+        /* ========= FAQ Section Styles ========= */
+.faq-section {
+    /* Uses existing 'section' padding */
+    background-color: var(--light); /* Or var(--accent) if preferred */
+}
+
+.faq-container {
+    max-width: 900px; /* Constrain width for readability */
+    margin: 0 auto; /* Center the container */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Ensures child borders don't stick out */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+}
+.faq-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 25px;
+    background-color: var(--light);
+    border: none;
+    text-align: left;
+    font-size: 18px; /* Slightly larger question font */
+    font-weight: 600; /* Bolder question */
+    color: var(--primary);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover,
+.faq-question:focus {
+    background-color: var(--accent);
+    outline: none; /* Remove default focus outline if desired */
+}
+
+.faq-question span:first-child {
+    flex-grow: 1; /* Allow text to take available space */
+    margin-right: 15px; /* Space between text and icon */
+}
+
+.faq-toggle-icon {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--secondary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.faq-answer {
+    max-height: 0; /* Initially hidden */
+    overflow: hidden;
+    background-color: var(--accent); /* Subtle background for answer */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition */
+    padding: 0 25px; /* Add padding when open, but 0 height hides it */
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.faq-answer p {
+    margin: 0; /* Reset paragraph margin if needed */
+     padding: 20px 0; /* Add vertical padding inside when open */
+}
+
+/* --- Styles for Active/Open State --- */
+.faq-item.active .faq-question {
+    background-color: var(--accent); /* Keep hover/focus style when open */
+}
+
+.faq-item.active .faq-toggle-icon {
+    transform: rotate(45deg); /* Change '+' to 'x' */
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Make large enough for content */
+    /* Padding is handled by the transition */
+    padding: 0 25px; /* Ensure horizontal padding is consistent */
+    /* The padding on the p inside provides vertical space */
+    border-top: 1px dashed var(--border-color); /* Separator line */
+}
+
+/* --- Accessibility Focus --- */
+.faq-question:focus-visible { /* Modern focus styling */
+   outline: 2px solid var(--secondary);
+   outline-offset: 2px;
+}
+
+/* --- Optional: Responsive Adjustments for FAQ --- */
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    .faq-toggle-icon {
+        font-size: 20px;
+    }
+    .faq-answer {
+        padding: 0 20px;
+        font-size: 15px;
+    }
+     .faq-item.active .faq-answer {
+        padding: 0 20px;
+    }
+     .faq-answer p {
+        padding: 15px 0;
+    }
+}
+        
+        
+        
+        
+        
+        
     </style>
 
 
@@ -1181,6 +1305,126 @@
          </section>
 
     </main>
+
+
+
+
+
+
+
+
+<section class="faq-section container" id="faq">
+    <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about our services and processes. If you don't find your answer here, feel free to contact us.</p>
+    </div>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>What types of visas do you assist with?</span>
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+                <p>We provide comprehensive assistance for various visa categories, including student visas, tourist visas, work permits, family reunification visas, and business visas for popular destinations like the USA, Canada, UK, Australia, Schengen countries, and more. Please contact us with your specific needs.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>How long does the visa application process typically take?</span>
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+                <p>Processing times vary significantly based on the destination country, visa type, time of year, and individual applicant profile. While we can provide estimates based on current trends during your consultation, embassy/consulate processing times are ultimately beyond our control. We focus on submitting complete and accurate applications promptly to minimize delays.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>What are your service fees?</span>
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+                <p>Our service fees depend on the complexity of the case, the destination country, and the specific services required (e.g., application filing only, full consultation, document review). We offer transparent pricing and will provide a detailed quote after an initial assessment of your needs. Government visa fees are separate and paid directly to the respective authorities.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>Do you guarantee visa approval?</span>
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+                <p>No reputable consultant can guarantee visa approval. The final decision rests solely with the immigration authorities of the destination country. Our role is to maximize your chances of success by ensuring your application is complete, accurate, meets all requirements, and is presented professionally. We leverage our expertise to guide you through the process effectively.</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+                <span>What documents do I typically need?</span>
+                <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer" aria-hidden="true">
+                <p>Required documents vary widely. Generally, you'll need a valid passport, application forms, photographs, proof of financial means, travel itinerary (like flight bookings or hotel reservations), and supporting documents specific to the visa type (e.g., university acceptance letter for student visas, employment contract for work visas, invitation letter for visitor visas). We will provide a detailed checklist tailored to your specific application.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const questionButton = item.querySelector('.faq-question');
+        const answerPanel = item.querySelector('.faq-answer');
+
+        if (questionButton && answerPanel) {
+            questionButton.addEventListener('click', () => {
+                const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
+
+                // --- Optional: Close other open FAQs (Accordion effect) ---
+                // Uncomment the block below if you want only one FAQ open at a time
+                /*
+                if (!isExpanded) { // Only close others if we are opening this one
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                            otherItem.querySelector('.faq-answer').setAttribute('aria-hidden', 'true');
+                             // Reset icon explicitly if needed, though CSS handles rotation
+                             // otherItem.querySelector('.faq-toggle-icon').textContent = '+';
+                        }
+                    });
+                }
+                */
+                // --- End Optional Accordion Block ---
+
+
+                // Toggle the current item
+                item.classList.toggle('active');
+                questionButton.setAttribute('aria-expanded', !isExpanded);
+                answerPanel.setAttribute('aria-hidden', isExpanded);
+
+                // Optional: Change icon text content if not using rotate transform
+                // const icon = questionButton.querySelector('.faq-toggle-icon');
+                // if (icon) {
+                //    icon.textContent = item.classList.contains('active') ? '−' : '+';
+                // }
+            });
+        }
+    });
+});
+</script>
+
+
+
+
+
 
     <footer>
         <div class="container">
