@@ -1,147 +1,371 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistani Citizen Document Checklist</title>
+    <title>Visa Document Checklist Checker</title>
     <style>
-        .card {
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
+        body {
             font-family: sans-serif;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
-
-        .dropdown {
-            margin-bottom: 20px;
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
         }
-
-        #checklist {
-            margin-top: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+        h1, h2 {
+            color: #333;
+            text-align: center;
         }
-
-        #checklist ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #checklist li {
+        label {
+            display: block;
             margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+        #visaInfo {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .visa-type {
+            background-color: #e9f5ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .visa-type h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #0056b3;
+        }
+        .visa-type ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+         .visa-type li {
+            margin-bottom: 5px;
+        }
+        .disclaimer {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 15px;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+        .no-data {
+            color: #cc0000;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="dropdown">
-            <label for="purpose">Select Purpose:</label>
-            <select id="purpose">
-                <option value="">--Select--</option>
-                <option value="study">Study</option>
-                <option value="tourism">Tourism</option>
-                <option value="business">Business</option>
-                <option value="investment">Investment</option>
-                <option value="religious">Religious</option>
-                <option value="medical">Medical</option>
-                <option value="others">Others</option>
-            </select>
-        </div>
+<div class="container">
+    <h1>Visa Document Checklist Checker</h1>
 
-        <div id="checklist">
-            <ul>
-                </ul>
-        </div>
+    <div>
+        <label for="continentSelect">Select Continent:</label>
+        <select id="continentSelect">
+            <option value="">-- Select Continent --</option>
+        </select>
     </div>
 
-    <script>
-        const purposeSelect = document.getElementById('purpose');
-        const checklistDiv = document.getElementById('checklist').querySelector('ul');
+    <div>
+        <label for="countrySelect">Select Country:</label>
+        <select id="countrySelect" disabled>
+            <option value="">-- Select Continent First --</option>
+        </select>
+    </div>
 
-        const checklists = {
-            study: [
-                "Passport (Valid)",
-                "Visa Application Form",
-                "Acceptance Letter from Educational Institution",
-                "Academic Certificates/Degrees",
-                "Financial Proof (Bank Statements)",
-                "NOC from HEC (if applicable)",
-                "CNIC Copy"
+    <div id="visaInfo">
+        <p class="disclaimer">
+            <strong>Disclaimer:</strong> Visa requirements change frequently and vary based on nationality and specific circumstances. The information provided here is illustrative. Always consult the official embassy or consulate website of the country you plan to visit for the most accurate and up-to-date requirements before applying.
+        </p>
+    </div>
 
+</div>
+
+<script>
+    // --- DATA ---
+    // Comprehensive list of countries grouped by continent
+    const countriesByContinent = {
+        "Africa": ["Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Comoros", "Congo, Democratic Republic of the", "Congo, Republic of the", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe"],
+        "Asia": ["Afghanistan", "Armenia", "Azerbaijan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cambodia", "China", "Cyprus", "Georgia", "India", "Indonesia", "Iran", "Iraq", "Israel", "Japan", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Malaysia", "Maldives", "Mongolia", "Myanmar (Burma)", "Nepal", "North Korea", "Oman", "Pakistan", "Palestine State", "Philippines", "Qatar", "Saudi Arabia", "Singapore", "South Korea", "Sri Lanka", "Syria", "Taiwan", "Tajikistan", "Thailand", "Timor-Leste", "Turkey", "Turkmenistan", "United Arab Emirates", "Uzbekistan", "Vietnam", "Yemen"],
+        "Europe": ["Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czechia (Czech Republic)", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Ukraine", "United Kingdom", "Vatican City"],
+        "North America": ["Antigua and Barbuda", "Bahamas", "Barbados", "Belize", "Canada", "Costa Rica", "Cuba", "Dominica", "Dominican Republic", "El Salvador", "Grenada", "Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States"],
+        "Oceania": ["Australia", "Fiji", "Kiribati", "Marshall Islands", "Micronesia", "Nauru", "New Zealand", "Palau", "Papua New Guinea", "Samoa", "Solomon Islands", "Tonga", "Tuvalu", "Vanuatu"],
+        "South America": ["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"],
+        "Antarctica": ["Note"] // Special case placeholder
+    };
+
+    // --- EXAMPLE VISA DATA (Needs accurate data from official sources!) ---
+    const visaData = {
+        "Japan": { // Example data for Japan (Asia)
+            "Tourist Visa (Self-Financed)": [
+                "Valid Passport (6+ months validity, 2+ blank pages)",
+                "Visa Application Form (Completed & Signed)",
+                "Photo (4.5cm x 4.5cm, white background, last 6 months, name/DOB on back)",
+                "Flight Itinerary (Reservation, not necessarily purchased ticket)",
+                "Detailed Daily Itinerary",
+                "Proof of Sufficient Funds (e.g., Bank statements - last 3 months)",
+                "Recent Income Tax Returns (or explanation if unavailable)",
+                "Proof of Employment (e.g., Letter from employer, NOC)",
+                "Civil Status Documents (e.g., Birth/Marriage certificate, if applicable)",
+                "Copy of National ID Card (if applicable)",
             ],
-            tourism: [
-                "Passport (Valid)",
-                "Visa Application Form",
-                "Travel Itinerary",
-                "Hotel Reservations",
-                "Financial Proof (Bank Statements)",
-                "CNIC Copy",
-                "Return Ticket"
-            ],
-            business: [
-                "Passport (Valid)",
-                "Visa Application Form",
-                "Invitation Letter from Business Partner",
-                "Business Registration Documents",
-                "Financial Proof (Company/Personal)",
-                "NOC from Relevant Chamber of Commerce",
-                "CNIC Copy"
-            ],
-            investment: [
-              "Passport (Valid)",
-              "Visa Application Form",
-              "Investment Plan/Proposal",
-              "Financial Proof (Investment Funds)",
-              "Company Registration Documents (If Applicable)",
-              "NOC from Board of Investment (if applicable)",
-              "CNIC Copy"
-            ],
-            religious: [
-              "Passport (Valid)",
-              "Visa Application Form",
-              "Invitation Letter from Religious Organization",
-              "Proof of Religious Affiliation (If Required)",
-              "Financial Proof (Travel and Stay)",
-              "CNIC Copy"
-            ],
-            medical: [
-              "Passport (Valid)",
-              "Visa Application Form",
-              "Medical Report from Doctor",
-              "Invitation Letter from Hospital/Clinic",
-              "Financial Proof (Treatment and Stay)",
-              "CNIC Copy",
-              "NOC from Ministry of Health (if needed)"
-            ],
-            others: [
-                "Passport (Valid)",
-                "Visa Application Form",
-                "Relevant Supporting Documents",
-                "Financial Proof (Bank Statements)",
-                "CNIC Copy",
-                "Any other documents requested by the embassy."
+            "Tourist Visa (Visiting Friends/Family - Financed by Host)": [
+                 "Valid Passport (6+ months validity, 2+ blank pages)",
+                "Visa Application Form (Completed & Signed)",
+                "Photo (4.5cm x 4.5cm, white background, last 6 months, name/DOB on back)",
+                "Flight Itinerary (Reservation, not necessarily purchased ticket)",
+                "Detailed Daily Itinerary",
+                "Invitation Letter from Guarantor in Japan",
+                "Letter of Guarantee from Guarantor",
+                "Guarantor's Income Certificate (last 3 months)",
+                "Guarantor's Residence Certificate (if guarantor is foreign resident)",
+                "Proof of Relationship (e.g., Photos, letters, call logs, civil documents)",
+                "Copy of National ID Card (if applicable)",
             ]
-        };
+            // Add other Japan visa types here
+        },
+        "Germany": { // Example data for Germany (Europe)
+            "Schengen Tourist Visa": [
+                "Visa Application Form (Printed & Signed)",
+                "Valid Passport (3+ months validity beyond intended stay, previous passports if any)",
+                "Two Biometric Passport Photos (Recent, meeting specs)",
+                "Travel Health Insurance (€30,000+ coverage for all Schengen states, signed if applicable)",
+                "Signed Health Insurance Declaration",
+                "Proof of Accommodation (e.g., Hotel reservation for entire stay)",
+                "Flight Reservation (Return/Round trip)",
+                "Proof of Financial Means (e.g., Personal bank statements - last 6 months, signed/stamped)",
+                "Proof of Employment/Studies (e.g., NOC from employer/university, salary slips, enrollment proof)",
+                "Copy of National ID Card (e.g., CNIC for Pakistanis)",
+                "Family Registration Certificate (FRC) / Marriage Certificate / Birth Certificate (as applicable, NADRA issued for Pakistanis)",
+                "Copy of Previous Schengen/UK/US Visas (if any)",
+                "Appointment Confirmation Email Printout",
+                 "For Minors: Birth Certificate, Application signed by both parents, Consent forms, Copies of parents' IDs/Passports"
+            ]
+             // Add other Germany visa types here
+        },
+        "United States": { // Example data for USA (North America)
+            "Visitor Visa (B1/B2 - Tourism/Business)": [
+                "DS-160 Confirmation Page (Online Nonimmigrant Visa Application)",
+                "Valid Passport (6+ months validity beyond intended stay)",
+                "One Photo (Meeting U.S. specifications, upload during DS-160 or bring printed if upload fails)",
+                "Application Fee Payment Receipt",
+                "Interview Appointment Letter (Printed)",
+                "Proof of Financial Means (e.g., Bank statements, proof of assets)",
+                "Proof of Ties to Home Country (e.g., Employment verification, property ownership, family ties)",
+                "Travel Itinerary (Details of your planned trip)",
+                "Expired Passports (Showing previous travel, if applicable)",
+                "National ID Card (if applicable)"
+            ]
+             // Add other USA visa types here
+        },
+         "Australia": { // Example data for Australia (Oceania)
+            "Visitor Visa (Subclass 600 - Tourist Stream - Applied Outside Australia)": [
+                "Copy of Valid Passport (Bio-data page, issue/expiry dates)",
+                "Passport-style Photograph (Recent, white background)",
+                "National Identity Card Copy (Both sides, certified if required by specific office)",
+                "Proof of Financial Capacity (e.g., Bank statements - 3 months, pay slips, tax records)",
+                "Evidence of Ties to Home Country (e.g., Employer letter confirming leave & return, proof of studies, property ownership, family ties)",
+                "Detailed Travel Itinerary / Plans in Australia",
+                "Letter of Invitation (If visiting friends/family, include host's details and proof of funds if they are sponsoring)",
+                "Proof of Accommodation (e.g., Hotel bookings)",
+                "Copies of previous visas/travel history (stamps in passport)",
+                "Family Composition Information/Certificates (e.g., Birth/Marriage certs, Family Registration Certificate)",
+                "Biometrics Collection (Required after application submission)",
+                "Health Examination (May be required)",
+                "Police Certificate (May be required)",
+                "For Minors: Birth Certificate, Parental Consent Form (1229) or statutory declaration from non-travelling parent(s), Form 1257 if staying with someone other than parent/legal guardian"
+            ]
+             // Add other Australia visa types here
+        },
+         "Brazil": { // Example data for Brazil (South America)
+             "Tourist Visa (VIVIS)": [
+                 "Visa Application Form (Online receipt - RER)",
+                 "Valid Passport (signed, two blank pages, valid for intended stay)",
+                 "One Recent Photo (ICAO standard, white background)",
+                 "Proof of Financial Means (Bank statements, credit card statements, pay slips)",
+                 "Round Trip Ticket (Confirmed reservation or itinerary)",
+                 "Proof of Accommodation (Hotel reservation or invitation letter if staying with someone)",
+                 "Proof of Employment/Studies (Letter from employer/school)",
+                 "Visa Fee Payment Receipt",
+                 "For Minors: Birth certificate, notarized authorization from non-traveling parent(s)"
+             ]
+             // Add other Brazil visa types here
+         },
+         "Nigeria": { // Example data for Nigeria (Africa)
+             "Tourist Visa (Standard - applied at Embassy/Consulate)": [
+                 "Completed Visa Application Form (Online via NIS portal)",
+                 "Passport (Valid for at least 6 months with 2 blank pages)",
+                 "Two Recent Passport Photographs",
+                 "Visa Payment Slip (From NIS portal)",
+                 "Visa Acknowledgement Slip (From NIS portal)",
+                 "Valid Return Ticket",
+                 "Letter of Invitation (If visiting host, including host's passport data page/residence permit)",
+                 "Hotel Reservation (Confirmed)",
+                 "Evidence of Sufficient Funds (e.g., Bank statement - last 6 months)"
+             ]
+             // Add other Nigeria visa types here
+         },
+         "Note": { // Example data for Antarctica (Antarctica)
+            "General Information": [
+                "Antarctica is governed by the Antarctic Treaty System.",
+                "Access typically requires permits obtained through national Antarctic programs or authorized tour operators.",
+                "Requirements depend on the organizing country/operator and the nature of the visit (tourism, research, etc.).",
+                "Check with your specific tour operator or the relevant government authority of the country you are departing from (e.g., Argentina, Chile, New Zealand, Australia, South Africa)."
+            ]
+         },
+          "Pakistan": { // Example data for Pakistan (Asia)
+            "Visit Visa (Tourist - Self-Sponsored)": [
+                "Valid Passport (at least 6 months validity)",
+                "Visa Application Form (Usually online via NADRA portal)",
+                "Recent Passport-sized Photograph",
+                "Proof of Legal Residence (if not applying from country of nationality)",
+                "Travel Itinerary / Flight Reservation",
+                "Hotel Booking / Proof of Accommodation",
+                "Letter of Invitation (LOI) from registered sponsor/hotel OR Details of registered Tour Operator (if applicable via tour operator)",
+                "Proof of Financial Means (e.g., Bank Statement for last 3-6 months)",
+                "Letter from Employer / Business registration / Proof of Enrollment (as applicable)",
+                "CNIC Copy (for Pakistani citizens or if applicable)"
+            ],
+            "Visit Visa (Family Visit)": [
+                "Valid Passport (at least 6 months validity)",
+                "Visa Application Form (Usually online via NADRA portal)",
+                "Recent Passport-sized Photograph",
+                "Proof of Legal Residence (if not applying from country of nationality)",
+                "Travel Itinerary / Flight Reservation",
+                "Invitation Letter from Family Member in Pakistan",
+                "Host's Pakistani ID (CNIC/NICOP) / Passport / Visa copy",
+                "Proof of Relationship (e.g., FRC/Marriage Certificate issued by NADRA/relevant authority)",
+                "Proof of Financial Means (Applicant's or Sponsor's Bank Statement)",
+                "CNIC Copy (for Pakistani citizens applying or if applicable)"
+            ]
+            // Add other Pakistan visa types here
+         }
+        // --- !!! ADD MORE COUNTRIES AND THEIR VISA DATA HERE !!! ---
+    };
 
-        purposeSelect.addEventListener('change', function() {
-            const selectedPurpose = this.value;
-            checklistDiv.innerHTML = ''; // Clear previous checklist
 
-            if (selectedPurpose && checklists[selectedPurpose]) {
-                checklists[selectedPurpose].forEach(item => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = item;
-                    checklistDiv.appendChild(listItem);
-                });
-            }
+    // --- DOM Elements ---
+    const continentSelect = document.getElementById('continentSelect');
+    const countrySelect = document.getElementById('countrySelect');
+    const visaInfoDiv = document.getElementById('visaInfo');
+    const disclaimerParagraph = visaInfoDiv.querySelector('.disclaimer'); // Keep the disclaimer
+
+
+    // --- Functions ---
+
+    // Populate Continent Dropdown
+    function populateContinents() {
+        const continents = Object.keys(countriesByContinent).sort();
+        continents.forEach(continent => {
+            const option = document.createElement('option');
+            option.value = continent;
+            option.textContent = continent;
+            continentSelect.appendChild(option);
         });
-    </script>
+    }
+
+    // Populate Country Dropdown based on selected continent
+    function populateCountries(continent) {
+        // Clear previous options and visa info
+        countrySelect.innerHTML = '<option value="">-- Select Country --</option>';
+        visaInfoDiv.innerHTML = ''; // Clear previous visa info
+        visaInfoDiv.appendChild(disclaimerParagraph); // Re-add disclaimer
+
+
+        if (continent && countriesByContinent[continent]) {
+            const countries = countriesByContinent[continent].sort(); // Sort countries alphabetically
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            });
+            countrySelect.disabled = false;
+        } else {
+            countrySelect.disabled = true;
+             countrySelect.innerHTML = '<option value="">-- Select Continent First --</option>';
+        }
+    }
+
+    // Display Visa Information for selected country
+    function displayVisaInfo(country) {
+         visaInfoDiv.innerHTML = ''; // Clear previous visa info
+         visaInfoDiv.appendChild(disclaimerParagraph); // Re-add disclaimer
+
+        if (!country) {
+            return; // No country selected
+        }
+
+        const countryData = visaData[country];
+
+        if (countryData) {
+            Object.keys(countryData).forEach(visaType => {
+                const visaTypeDiv = document.createElement('div');
+                visaTypeDiv.classList.add('visa-type');
+
+                const title = document.createElement('h3');
+                title.textContent = visaType;
+                visaTypeDiv.appendChild(title);
+
+                const ul = document.createElement('ul');
+                countryData[visaType].forEach(doc => {
+                    const li = document.createElement('li');
+                    li.textContent = doc;
+                    ul.appendChild(li);
+                });
+                visaTypeDiv.appendChild(ul);
+                visaInfoDiv.appendChild(visaTypeDiv);
+            });
+
+             // Re-append disclaimer at the end if it was cleared
+             if (!visaInfoDiv.contains(disclaimerParagraph)) {
+                  visaInfoDiv.appendChild(disclaimerParagraph);
+             }
+
+        } else {
+            const noDataP = document.createElement('p');
+            noDataP.classList.add('no-data');
+            noDataP.textContent = `Specific visa document information for ${country} is not available in this example dataset. Please check the official embassy/consulate website.`;
+            visaInfoDiv.insertBefore(noDataP, disclaimerParagraph); // Add message before disclaimer
+        }
+    }
+
+    // --- Event Listeners ---
+    continentSelect.addEventListener('change', (event) => {
+        populateCountries(event.target.value);
+        // Also clear visa info when continent changes
+        visaInfoDiv.innerHTML = '';
+        visaInfoDiv.appendChild(disclaimerParagraph);
+    });
+
+    countrySelect.addEventListener('change', (event) => {
+        displayVisaInfo(event.target.value);
+    });
+
+    // --- Initialisation ---
+    populateContinents();
+
+</script>
 
 </body>
 </html>
