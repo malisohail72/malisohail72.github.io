@@ -5,6 +5,290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Destination Recommendation System</title>
+
+<style>
+
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+h2, h3, h4 {
+    color: #2c3e50;
+    margin: 15px 0;
+}
+
+/* Form Styles */
+#destinationForm {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+select[multiple] {
+    height: 120px;
+}
+
+small {
+    display: block;
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.priority-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.priority-item label {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.priority-item input {
+    width: 80px;
+    margin-left: 15px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#backButton {
+    background-color: #7f8c8d;
+    margin-top: 20px;
+}
+
+#backButton:hover {
+    background-color: #6c7a7d;
+}
+
+/* Suggestions Dropdown */
+.suggestions {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: calc(100% - 60px);
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* Results Container */
+#resultsContainer {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.recommendation-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #3498db;
+}
+
+.top-recommendation {
+    background-color: #ebf5fb;
+    border-left: 5px solid #2ecc71;
+}
+
+.score {
+    float: right;
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.top-recommendation .score {
+    background-color: #2ecc71;
+}
+
+.recommendation-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    gap: 20px;
+}
+
+.country-info, .match-details {
+    flex: 1;
+    min-width: 250px;
+}
+
+.country-info p {
+    margin-bottom: 8px;
+}
+
+.match-details ul {
+    padding-left: 20px;
+}
+
+.match-details li {
+    margin-bottom: 8px;
+}
+
+.pathway-details {
+    background-color: #f0f7fd;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+/* Almost Qualified Section */
+.almost-qualified-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.almost-card {
+    background-color: #fff3e0;
+    border-left: 5px solid #f39c12;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.almost-card ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: #7f8c8d;
+}
+
+/* Chart Container */
+.chart-container {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .recommendation-details {
+        flex-direction: column;
+    }
+    
+    .priority-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .priority-item input {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+        
+            
+                
+                    
+                            
+    
+</style>
+
 </head>
 <body>
     <div class="container">
