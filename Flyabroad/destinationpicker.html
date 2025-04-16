@@ -9,7 +9,15 @@
 <style>
 
 
-/* Global Styles */
+  :root {
+    --primary: #3498db;
+    --secondary: #2980b9;
+    --accent: #f5f7fa;
+    --text: #333333;
+    --light: #ffffff;
+    --border-color: #ddd;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -18,12 +26,13 @@
 }
 
 body {
-    background-color: #f5f7fa;
-    color: #333;
+    color: var(--text);
     line-height: 1.6;
+    background-color: var(--accent);
 }
 
 .container {
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     padding: 30px 20px;
@@ -44,11 +53,12 @@ h2, h3, h4 {
 
 /* Form Styles */
 #destinationForm {
-    background-color: #fff;
+    background-color: var(--light);
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 30px;
     margin-bottom: 30px;
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -65,7 +75,7 @@ label {
 input, select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     font-size: 16px;
     transition: border-color 0.3s;
@@ -73,7 +83,7 @@ input, select {
 
 input:focus, select:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: var(--primary);
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
@@ -105,7 +115,7 @@ small {
 }
 
 button {
-    background-color: #3498db;
+    background-color: var(--primary);
     color: white;
     border: none;
     padding: 14px 24px;
@@ -120,7 +130,7 @@ button {
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: var(--secondary);
 }
 
 #backButton {
@@ -135,8 +145,8 @@ button:hover {
 /* Suggestions Dropdown */
 .suggestions {
     position: absolute;
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: var(--light);
+    border: 1px solid var(--border-color);
     border-top: none;
     border-radius: 0 0 6px 6px;
     max-height: 150px;
@@ -158,10 +168,11 @@ button:hover {
 
 /* Results Container */
 #resultsContainer {
-    background-color: #fff;
+    background-color: var(--light);
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    border: 1px solid var(--border-color);
 }
 
 .recommendation-card {
@@ -170,7 +181,7 @@ button:hover {
     padding: 20px;
     margin-bottom: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    border-left: 5px solid #3498db;
+    border-left: 5px solid var(--primary);
 }
 
 .top-recommendation {
@@ -180,7 +191,7 @@ button:hover {
 
 .score {
     float: right;
-    background-color: #3498db;
+    background-color: var(--primary);
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
@@ -226,7 +237,7 @@ button:hover {
 .almost-qualified-section {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--border-color);
 }
 
 .almost-card {
@@ -252,15 +263,30 @@ button:hover {
 .chart-container {
     margin: 30px 0;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--light);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    #destinationForm, #resultsContainer {
+        padding: 25px;
+    }
+    
     .recommendation-details {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
     }
     
     .priority-item {
@@ -274,18 +300,14 @@ button:hover {
         margin-top: 5px;
     }
     
-    h1 {
-        font-size: 1.8rem;
+    #destinationForm, #resultsContainer {
+        padding: 20px;
+    }
+    
+    .recommendation-card {
+        padding: 15px;
     }
 }
-
-
-
-        
-            
-                
-                    
-                            
     
 </style>
 
