@@ -1,1 +1,417 @@
-aaa
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistani Software Houses</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+/* Basic Reset & Defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+.site-header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.site-header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+/* Main Content */
+.site-main {
+    padding-bottom: 3rem;
+}
+
+.site-main h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #495057;
+    font-size: 2rem;
+}
+
+.disclaimer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* Table Styling */
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scroll on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-bottom: 1rem;
+}
+
+#softwareHousesTable {
+    width: 100%;
+    border-collapse: collapse; /* More modern look than separate borders */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* DataTables adds its own classes, but we can override/enhance */
+#softwareHousesTable thead th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+    cursor: pointer; /* Indicate sortable columns */
+    white-space: nowrap; /* Prevent header text wrapping */
+}
+
+/* Style the sorting icons added by DataTables */
+#softwareHousesTable thead th.sorting,
+#softwareHousesTable thead th.sorting_asc,
+#softwareHousesTable thead th.sorting_desc {
+    padding-right: 30px; /* Make space for the icon */
+    position: relative;
+}
+
+#softwareHousesTable thead th.sorting::after,
+#softwareHousesTable thead th.sorting_asc::after,
+#softwareHousesTable thead th.sorting_desc::after {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 0.8em;
+    opacity: 0.5;
+}
+
+#softwareHousesTable thead th.sorting::after { content: "\2195"; } /* Up/Down arrow */
+#softwareHousesTable thead th.sorting_asc::after { content: "\2191"; opacity: 1; } /* Up arrow */
+#softwareHousesTable thead th.sorting_desc::after { content: "\2193"; opacity: 1; } /* Down arrow */
+
+
+#softwareHousesTable tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+#softwareHousesTable tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Specific column alignment if needed */
+#softwareHousesTable td:nth-child(1), /* Sr No */
+#softwareHousesTable td:nth-child(4), /* Headcount */
+#softwareHousesTable td:nth-child(5), /* Listed */
+#softwareHousesTable td:nth-child(6) { /* Founding Year */
+    text-align: center;
+}
+
+#softwareHousesTable td:nth-child(3) { /* Area of Expertise */
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* DataTables features styling */
+.dataTables_wrapper .dataTables_filter { /* Search box */
+    float: right;
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_length { /* Show entries */
+    float: left;
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate { /* Pagination */
+    float: right;
+    margin-top: 1rem;
+}
+
+.dataTables_wrapper .dataTables_info { /* Showing x to y of z entries */
+    float: left;
+    margin-top: 1rem;
+    padding-top: 0.5em; /* Align better with pagination */
+}
+
+/* Footer */
+.site-footer {
+    background-color: #343a40;
+    color: #adb5bd;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9em;
+}
+
+.site-footer p {
+    margin-bottom: 0.3rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .site-header h1 {
+        font-size: 2rem;
+    }
+
+    .site-main h2 {
+        font-size: 1.75rem;
+    }
+
+    /* Make search and length selectors stack */
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length {
+        float: none;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Center pagination and info */
+     .dataTables_wrapper .dataTables_paginate,
+     .dataTables_wrapper .dataTables_info {
+        float: none;
+        text-align: center;
+     }
+     .dataTables_wrapper .dataTables_info {
+         margin-top: 0.5rem;
+         margin-bottom: 1rem;
+     }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 14px; /* Slightly smaller base font */
+    }
+    #softwareHousesTable thead th,
+    #softwareHousesTable tbody td {
+        padding: 8px 10px; /* Reduce padding */
+        font-size: 0.9em;
+    }
+    /* Consider hiding less critical columns on very small screens if needed */
+    /*
+    #softwareHousesTable th:nth-child(3),
+    #softwareHousesTable td:nth-child(3) { // Example: Hide Expertise
+        display: none;
+    }
+    */
+}
+        
+        
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <h1>Pakistani Software Houses Directory</h1>
+            <p>A curated list of leading tech companies</p>
+        </div>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
+            <h2>Software Houses List</h2>
+            <p class="disclaimer">Note: Data, especially headcount, is approximate and illustrative. Click headers to sort.</p>
+
+            <div class="table-responsive">
+                <table id="softwareHousesTable" class="display compact stripe hover order-column">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Name</th>
+                            <th>Area of Expertise</th>
+                            <th>Headcount (Est.)</th>
+                            <th>Listed (PSX)</th>
+                            <th>Founding Year</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Systems Limited</td>
+                            <td>IT Solutions, Software Services, Digital Tech, Cloud, ERP</td>
+                            <td>5300</td>
+                            <td>Yes</td>
+                            <td>1977</td>
+                            <td><a href="https://www.systemsltd.com" target="_blank" rel="noopener noreferrer">systemsltd.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NetSol Technologies</td>
+                            <td>Finance & Leasing Software, IT Consulting, Cloud Services</td>
+                            <td>1500</td>
+                            <td>Yes</td>
+                            <td>1996</td>
+                            <td><a href="https://netsoltech.com" target="_blank" rel="noopener noreferrer">netsoltech.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Contour Software</td>
+                            <td>Enterprise Software (VMS), R&D, IT Services (for CSI)</td>
+                            <td>2100</td>
+                            <td>No</td>
+                            <td>2010</td>
+                            <td><a href="https://contour-software.com" target="_blank" rel="noopener noreferrer">contour-software.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>10Pearls</td>
+                            <td>Digital Transformation, AI, Software Dev, Cloud, Security</td>
+                            <td>1300</td>
+                            <td>No</td>
+                            <td>2004</td>
+                            <td><a href="https://10pearls.com" target="_blank" rel="noopener noreferrer">10pearls.com</a></td>
+                        </tr>
+                         <tr>
+                            <td>5</td>
+                            <td>Afiniti (Pakistan Ops)</td>
+                            <td>AI for Customer Experience Pairing</td>
+                            <td>1000</td>
+                            <td>No</td>
+                            <td>2005</td>
+                            <td><a href="https://www.afiniti.com" target="_blank" rel="noopener noreferrer">afiniti.com</a></td>
+                        </tr>
+                         <tr>
+                            <td>6</td>
+                            <td>TRG Pakistan Ltd</td>
+                            <td>Technology Investment, BPO, Customer Experience Tech</td>
+                            <td>500</td>
+                            <td>Yes</td>
+                            <td>2002</td>
+                            <td><a href="https://trg.com.pk" target="_blank" rel="noopener noreferrer">trg.com.pk</a></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Folio3</td>
+                            <td>Digital Transformation, Web/Mobile Apps, Consulting</td>
+                            <td>700</td>
+                            <td>No</td>
+                            <td>2005</td>
+                            <td><a href="https://www.folio3.com" target="_blank" rel="noopener noreferrer">folio3.com</a></td>
+                        </tr>
+                         <tr>
+                            <td>8</td>
+                            <td>Xavor Corporation</td>
+                            <td>IT Consulting, Microsoft Solutions, Cloud, Data & AI</td>
+                            <td>400</td>
+                            <td>No</td>
+                            <td>1998</td>
+                            <td><a href="https://www.xavor.com" target="_blank" rel="noopener noreferrer">xavor.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Arpatech</td>
+                            <td>IT Services, Software Dev, E-commerce, Call Center</td>
+                            <td>300</td>
+                            <td>No</td>
+                            <td>2003</td>
+                            <td><a href="https://arpatech.com" target="_blank" rel="noopener noreferrer">arpatech.com</a></td>
+                        </tr>
+                         <tr>
+                            <td>10</td>
+                            <td>Cubix</td>
+                            <td>Mobile/Web/Game Dev, Blockchain, BI</td>
+                            <td>150</td>
+                            <td>No</td>
+                            <td>2008</td>
+                            <td><a href="https://www.cubix.co" target="_blank" rel="noopener noreferrer">cubix.co</a></td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Pakistani Software Houses Directory. All Rights Reserved.</p>
+             <p>Data is illustrative. Current date: <span id="currentDate"></span></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+   
+     <script>
+$(document).ready(function() {
+    // Initialize DataTables
+    $('#softwareHousesTable').DataTable({
+        // Enable responsive extension if needed (requires additional JS/CSS)
+        // responsive: true,
+
+        // Default sort order (e.g., by Headcount descending)
+        "order": [[ 3, "desc" ]], // Column index 3 (Headcount), descending
+
+        // Optional: Customize language options (e.g., search placeholder)
+        "language": {
+            "search": "Filter records:",
+            "lengthMenu": "Show _MENU_ entries",
+            "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "paginate": {
+                "first": "First",
+                "last": "Last",
+                "next": "Next",
+                "previous": "Previous"
+            }
+        },
+
+        // Define column types for better sorting (optional but good practice)
+        "columnDefs": [
+            { "type": "num", "targets": [0, 3, 5] }, // Sr No, Headcount, Founding Year
+            { "type": "string", "targets": [1, 2, 4] }, // Name, Expertise, Listed
+            { "orderable": false, "targets": [6] } // Disable sorting for Website column
+        ],
+
+        // Add other DataTables options as needed
+        // e.g., disable pagination: "paging": false,
+        // e.g., disable search: "searching": false,
+    });
+
+    // --- Footer ---
+    // Set current year in footer
+    const currentYear = new Date().getFullYear();
+    $('#currentYear').text(currentYear);
+
+    // Set current date in footer
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+     // Use user's locale for formatting
+    $('#currentDate').text(today.toLocaleDateString(undefined, options) + ' ' + today.toLocaleTimeString());
+
+
+});
+    </script>
+    
+    
+    
+</body>
+</html>
