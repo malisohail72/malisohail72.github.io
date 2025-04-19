@@ -6,7 +6,6 @@
     <title>Pakistani Software Houses Directory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css">
     <style>
-        /* Basic styling */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -27,9 +26,7 @@
             padding: 2rem 0;
             text-align: center;
         }
-        .site-main {
-            padding: 2rem 0;
-        }
+        .site-main { padding: 2rem 0; }
         .site-footer {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -37,18 +34,9 @@
             text-align: center;
             margin-top: 2rem;
         }
-        .table-responsive {
-            overflow-x: auto;
-            margin-bottom: 2rem;
-        }
-        table.dataTable {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table.dataTable th {
-            background-color: #2980b9;
-            color: white;
-        }
+        .table-responsive { overflow-x: auto; margin-bottom: 2rem; }
+        table.dataTable { width: 100%; border-collapse: collapse; }
+        table.dataTable th { background-color: #2980b9; color: white; }
         .disclaimer {
             font-style: italic;
             color: #7f8c8d;
@@ -61,17 +49,12 @@
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .filters-section h3 {
-            margin-top: 0;
-        }
         .filter-controls {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .filter-group {
-            flex: 1 1 200px;
-        }
+        .filter-group { flex: 1 1 200px; }
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -114,9 +97,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .btn:hover {
-            background-color: #2980b9;
-        }
+        .btn:hover { background-color: #2980b9; }
         .btn-outline {
             background-color: transparent;
             border: 1px solid #3498db;
@@ -126,24 +107,15 @@
             background-color: #3498db;
             color: white;
         }
-        /* Export buttons styling */
         .export-buttons {
             margin-bottom: 1rem;
             display: flex;
             gap: 0.5rem;
         }
-        /* Star rating feature */
-        .star {
-            cursor: pointer;
-            color: #ddd;
-        }
-        .star.active {
-            color: #ffc107;
-        }
-        /* Print styles */
         @media print {
-            .site-header, .site-footer, .filters-section, .export-buttons, .dataTables_wrapper .dataTables_filter, 
-            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_paginate {
+            .site-header, .site-footer, .filters-section, .export-buttons, 
+            .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_length, 
+            .dataTables_wrapper .dataTables_paginate {
                 display: none !important;
             }
             body, .container {
@@ -151,9 +123,7 @@
                 margin: 0;
                 padding: 0;
             }
-            .company-details {
-                break-inside: avoid;
-            }
+            .company-details { break-inside: avoid; }
         }
     </style>
 </head>
@@ -167,7 +137,6 @@
 
     <main class="site-main">
         <div class="container">
-            <!-- FEATURE 1: Analytics Dashboard -->
             <div class="dashboard">
                 <div class="stat-card">
                     <h3>Total Companies</h3>
@@ -187,7 +156,6 @@
                 </div>
             </div>
             
-            <!-- FEATURE 2: Advanced Filtering -->
             <div class="filters-section">
                 <h3>Advanced Filters</h3>
                 <div class="filter-controls">
@@ -218,14 +186,12 @@
                 </div>
             </div>
             
-            <!-- FEATURE 3: Export Functionality -->
             <div class="export-buttons">
                 <button id="exportCSV" class="btn">Export to CSV</button>
                 <button id="exportPDF" class="btn">Print/PDF</button>
                 <button id="showChart" class="btn">Show Comparison Chart</button>
             </div>
             
-            <!-- Chart Container -->
             <div id="chartContainer" class="comparison-chart" style="display: none;">
                 <h3>Company Size Comparison</h3>
                 <canvas id="comparisonChart" height="300"></canvas>
@@ -245,8 +211,6 @@
                             <th>Listed (PSX)</th>
                             <th>Founding Year</th>
                             <th>Website</th>
-                            <!-- FEATURE 4: User Rating Feature -->
-                            <th>Rating</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -259,13 +223,6 @@
                             <td>Yes</td>
                             <td>1977</td>
                             <td><a href="https://www.systemsltd.com" target="_blank" rel="noopener noreferrer">systemsltd.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
@@ -276,13 +233,6 @@
                             <td>Yes</td>
                             <td>1996</td>
                             <td><a href="https://netsoltech.com" target="_blank" rel="noopener noreferrer">netsoltech.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
@@ -293,13 +243,6 @@
                             <td>No</td>
                             <td>2010</td>
                             <td><a href="https://contour-software.com" target="_blank" rel="noopener noreferrer">contour-software.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
@@ -310,13 +253,6 @@
                             <td>No</td>
                             <td>2004</td>
                             <td><a href="https://10pearls.com" target="_blank" rel="noopener noreferrer">10pearls.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
@@ -327,13 +263,6 @@
                             <td>No</td>
                             <td>2005</td>
                             <td><a href="https://www.afiniti.com" target="_blank" rel="noopener noreferrer">afiniti.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
@@ -344,13 +273,6 @@
                             <td>Yes</td>
                             <td>2002</td>
                             <td><a href="https://trg.com.pk" target="_blank" rel="noopener noreferrer">trg.com.pk</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
@@ -361,13 +283,6 @@
                             <td>No</td>
                             <td>2005</td>
                             <td><a href="https://www.folio3.com" target="_blank" rel="noopener noreferrer">folio3.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
@@ -378,13 +293,6 @@
                             <td>No</td>
                             <td>1998</td>
                             <td><a href="https://www.xavor.com" target="_blank" rel="noopener noreferrer">xavor.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
@@ -395,13 +303,6 @@
                             <td>No</td>
                             <td>2003</td>
                             <td><a href="https://arpatech.com" target="_blank" rel="noopener noreferrer">arpatech.com</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
@@ -412,28 +313,18 @@
                             <td>No</td>
                             <td>2008</td>
                             <td><a href="https://www.cubix.co" target="_blank" rel="noopener noreferrer">cubix.co</a></td>
-                            <td class="rating-cell">
-                                <span class="star" data-rating="1">★</span>
-                                <span class="star" data-rating="2">★</span>
-                                <span class="star" data-rating="3">★</span>
-                                <span class="star" data-rating="4">★</span>
-                                <span class="star" data-rating="5">★</span>
-                            </td>
                             <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
-            <!-- FEATURE 5: Company Details Modal -->
             <div id="companyDetailsModal" class="company-details">
                 <h3 id="modalCompanyName"></h3>
                 <div id="modalCompanyDetails"></div>
                 <div class="additional-info">
                     <h4>Additional Information</h4>
-                    <div id="companyAdditionalInfo">
-                        <!-- Additional info will be loaded here -->
-                    </div>
+                    <div id="companyAdditionalInfo"></div>
                 </div>
                 <button id="closeDetails" class="btn" style="margin-top: 1rem;">Close</button>
             </div>
@@ -448,450 +339,322 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
    
     <script>
-$(document).ready(function() {
-    // Initialize variables to store filtered data
-    let tableData = [];
-    let dataTable;
-    
-    // Initialize localStorage for ratings if not exists
-    if (!localStorage.getItem('companyRatings')) {
-        localStorage.setItem('companyRatings', JSON.stringify({}));
-    }
-    
-    // Load any saved ratings
-    const savedRatings = JSON.parse(localStorage.getItem('companyRatings'));
-    
-    // Initialize DataTables with custom search functionality
-    dataTable = $('#softwareHousesTable').DataTable({
-        "order": [[ 3, "desc" ]],
-        "language": {
-            "search": "Quick Search:",
-            "lengthMenu": "Show _MENU_ entries",
-            "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-            "paginate": {
-                "first": "First",
-                "last": "Last",
-                "next": "Next",
-                "previous": "Previous"
+    $(document).ready(function() {
+        // Initialize variables
+        let tableData = [];
+        let dataTable;
+        let comparisonChart = null;
+        
+        // Initialize DataTable
+        dataTable = $('#softwareHousesTable').DataTable({
+            "order": [[ 3, "desc" ]],
+            "columnDefs": [
+                { "type": "num", "targets": [0, 3, 5] },
+                { "orderable": false, "targets": 7 }
+            ],
+            "processing": true,
+            "initComplete": function() {
+                tableData = getTableData();
+                updateDashboard(tableData);
             }
-        },
-        "columnDefs": [
-            { "type": "num", "targets": [0, 3, 5] },
-            { "type": "string", "targets": [1, 2, 4] },
-            { "orderable": false, "targets": [6, 7, 8] }
-        ],
-        // Add a processing indicator
-        "processing": true,
-        "initComplete": function() {
-            // Get table data after initialization
-            tableData = getTableData();
-            updateDashboard(tableData);
+        });
+        
+        // Dashboard Statistics
+        function updateDashboard(data) {
+            const currentYear = new Date().getFullYear();
+            const totalCompanies = data.length;
+            const totalHeadcount = data.reduce((sum, company) => sum + parseInt(company.headcount), 0);
+            const avgHeadcount = Math.round(totalHeadcount / totalCompanies);
+            const listedCount = data.filter(company => company.listed === 'Yes').length;
+            const totalAge = data.reduce((sum, company) => sum + (currentYear - parseInt(company.foundingYear)), 0);
+            const avgAge = Math.round(totalAge / totalCompanies);
             
-            // Apply any saved ratings
-            applyStoredRatings();
+            $('#totalCompanies').text(totalCompanies);
+            $('#avgHeadcount').text(avgHeadcount);
+            $('#listedCompanies').text(listedCount);
+            $('#avgAge').text(avgAge);
         }
-    });
-    
-    // FEATURE 1: Update Dashboard Statistics
-    function updateDashboard(data) {
-        const currentYear = new Date().getFullYear();
         
-        // Calculate statistics
-        const totalCompanies = data.length;
+        // Get table data as array of objects
+        function getTableData() {
+            const data = [];
+            $('#softwareHousesTable tbody tr').each(function() {
+                const $row = $(this);
+                const rowData = {
+                    id: $row.find('td:eq(0)').text(),
+                    name: $row.find('td:eq(1)').text(),
+                    expertise: $row.find('td:eq(2)').text(),
+                    headcount: parseInt($row.find('td:eq(3)').text()),
+                    listed: $row.find('td:eq(4)').text(),
+                    foundingYear: parseInt($row.find('td:eq(5)').text()),
+                    website: $row.find('td:eq(6) a').attr('href')
+                };
+                data.push(rowData);
+            });
+            return data;
+        }
         
-        // Calculate average headcount
-        const totalHeadcount = data.reduce((sum, company) => sum + parseInt(company.headcount), 0);
-        const avgHeadcount = Math.round(totalHeadcount / totalCompanies);
-        
-        // Count listed companies
-        const listedCount = data.filter(company => company.listed === 'Yes').length;
-        
-        // Calculate average company age
-        const totalAge = data.reduce((sum, company) => sum + (currentYear - parseInt(company.foundingYear)), 0);
-        const avgAge = Math.round(totalAge / totalCompanies);
-        
-        // Update dashboard
-        $('#totalCompanies').text(totalCompanies);
-        $('#avgHeadcount').text(avgHeadcount);
-        $('#listedCompanies').text(listedCount);
-        $('#avgAge').text(avgAge);
-    }
-    
-    // Helper function to get table data as array of objects
-    function getTableData() {
-        const data = [];
-        $('#softwareHousesTable tbody tr').each(function() {
-            const $row = $(this);
-            const rowData = {
-                id: $row.find('td:eq(0)').text(),
-                name: $row.find('td:eq(1)').text(),
-                expertise: $row.find('td:eq(2)').text(),
-                headcount: parseInt($row.find('td:eq(3)').text()),
-                listed: $row.find('td:eq(4)').text(),
-                foundingYear: parseInt($row.find('td:eq(5)').text()),
-                website: $row.find('td:eq(6) a').attr('href')
-            };
-            data.push(rowData);
-        });
-        return data;
-    }
-    
-    // FEATURE 2: Advanced filtering functionality
-    $('#applyFilters').on('click', function() {
-        const minHeadcount = parseInt($('#minHeadcount').val());
-        const maxHeadcount = parseInt($('#maxHeadcount').val());
-        const listedFilter = $('#listedFilter').val();
-        const yearFilter = parseInt($('#yearFilter').val());
-        
-        dataTable.draw();
-        
-        // Create custom filter function
-        $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-                const headcount = parseInt(data[3]) || 0;
-                const listed = data[4];
-                const foundingYear = parseInt(data[5]) || 0;
-                
-                // Check if row matches all filters
-                let matchesHeadcount = (isNaN(minHeadcount) || headcount >= minHeadcount) && 
-                                      (isNaN(maxHeadcount) || headcount <= maxHeadcount);
-                                      
-                let matchesListed = listedFilter === 'all' || listed === listedFilter;
-                
-                let matchesYear = isNaN(yearFilter) || foundingYear >= yearFilter;
-                
-                return matchesHeadcount && matchesListed && matchesYear;
-            }
-        );
-        
-        // Redraw table with filters applied
-        dataTable.draw();
-        
-        // Update dashboard with filtered data
-        const filteredData = getFilteredData();
-        updateDashboard(filteredData);
-    });
-    
-    // Helper function to get currently filtered data
-    function getFilteredData() {
-        const data = [];
-        const rows = dataTable.rows({ search: 'applied' }).nodes();
-        
-        $(rows).each(function() {
-            const $row = $(this);
-            const rowData = {
-                id: $row.find('td:eq(0)').text(),
-                name: $row.find('td:eq(1)').text(),
-                expertise: $row.find('td:eq(2)').text(),
-                headcount: parseInt($row.find('td:eq(3)').text()),
-                listed: $row.find('td:eq(4)').text(),
-                foundingYear: parseInt($row.find('td:eq(5)').text()),
-                website: $row.find('td:eq(6) a').attr('href')
-            };
-            data.push(rowData);
-        });
-        return data;
-    }
-    
-    // Reset filters
-    $('#resetFilters').on('click', function() {
-        $('#minHeadcount').val(0);
-        $('#maxHeadcount').val(10000);
-        $('#listedFilter').val('all');
-        $('#yearFilter').val(1970);
-        
-        // Clear custom filters
-        $.fn.dataTable.ext.search.pop();
-        dataTable.draw();
-        
-        // Update dashboard with all data
-        updateDashboard(tableData);
-    });
-    
-    // FEATURE 3: Export functionality
-    $('#exportCSV').on('click', function() {
-        exportTableToCSV('pakistani_software_houses.csv');
-    });
-    
-    function exportTableToCSV(filename) {
-        const rows = [];
-        const headers = [];
-        
-        // Get headers (excluding Actions column)
-        $('#softwareHousesTable thead th').each(function(index) {
-            if (index < $('#softwareHousesTable thead th').length - 1) {
-                headers.push($(this).text());
-            }
-        });
-        rows.push(headers.join(','));
-        
-        // Get visible rows data
-        dataTable.rows({ search: 'applied' }).every(function() {
-            const data = this.data();
-            const row = [];
+        // Get currently filtered data
+        function getFilteredData() {
+            const data = [];
+            const rows = dataTable.rows({ search: 'applied' }).nodes();
             
-            // Add each cell data (excluding Actions column)
-            for (let i = 0; i < data.length - 1; i++) {
-                // Clean data of commas for CSV format
-                let cellData = data[i].toString();
-                if (cellData.includes(',')) {
-                    cellData = '"' + cellData + '"';
+            $(rows).each(function() {
+                const $row = $(this);
+                const rowData = {
+                    id: $row.find('td:eq(0)').text(),
+                    name: $row.find('td:eq(1)').text(),
+                    expertise: $row.find('td:eq(2)').text(),
+                    headcount: parseInt($row.find('td:eq(3)').text()),
+                    listed: $row.find('td:eq(4)').text(),
+                    foundingYear: parseInt($row.find('td:eq(5)').text()),
+                    website: $row.find('td:eq(6) a').attr('href')
+                };
+                data.push(rowData);
+            });
+            return data;
+        }
+        
+        // Advanced filtering
+        $('#applyFilters').on('click', function() {
+            const minHeadcount = parseInt($('#minHeadcount').val());
+            const maxHeadcount = parseInt($('#maxHeadcount').val());
+            const listedFilter = $('#listedFilter').val();
+            const yearFilter = parseInt($('#yearFilter').val());
+            
+            // Clear previous custom filters
+            $.fn.dataTable.ext.search.pop();
+            
+            // Add new filter function
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    const headcount = parseInt(data[3]) || 0;
+                    const listed = data[4];
+                    const foundingYear = parseInt(data[5]) || 0;
+                    
+                    let matchesHeadcount = (isNaN(minHeadcount) || headcount >= minHeadcount) && 
+                                         (isNaN(maxHeadcount) || headcount <= maxHeadcount);
+                    let matchesListed = listedFilter === 'all' || listed === listedFilter;
+                    let matchesYear = isNaN(yearFilter) || foundingYear >= yearFilter;
+                    
+                    return matchesHeadcount && matchesListed && matchesYear;
                 }
-                row.push(cellData);
-            }
+            );
             
-            rows.push(row.join(','));
+            dataTable.draw();
+            updateDashboard(getFilteredData());
         });
         
-        // Create and download CSV file
-        const csvContent = rows.join('\n');
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        // Reset filters
+        $('#resetFilters').on('click', function() {
+            $('#minHeadcount').val(0);
+            $('#maxHeadcount').val(10000);
+            $('#listedFilter').val('all');
+            $('#yearFilter').val(1970);
+            
+            $.fn.dataTable.ext.search.pop();
+            dataTable.draw();
+            updateDashboard(tableData);
+        });
         
-        // Create download link
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-    
-    // Print functionality
-    $('#exportPDF').on('click', function() {
-        window.print();
-    });
-    
-    // FEATURE 4: Interactive company size chart
-    let comparisonChart = null;
-    
-    $('#showChart').on('click', function() {
-        const chartContainer = $('#chartContainer');
+        // Export to CSV
+        $('#exportCSV').on('click', function() {
+            const rows = [];
+            const headers = [];
+            
+            $('#softwareHousesTable thead th').each(function(index) {
+                if (index < $('#softwareHousesTable thead th').length - 1) {
+                    headers.push($(this).text());
+                }
+            });
+            rows.push(headers.join(','));
+            
+            dataTable.rows({ search: 'applied' }).every(function() {
+                const data = this.data();
+                const row = [];
+                
+                for (let i = 0; i < data.length - 1; i++) {
+                    let cellData = data[i].toString();
+                    if (cellData.includes(',')) {
+                        cellData = '"' + cellData + '"';
+                    }
+                    row.push(cellData);
+                }
+                
+                rows.push(row.join(','));
+            });
+            
+            const csvContent = rows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'pakistani_software_houses.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
         
-        if (chartContainer.is(':visible')) {
-            chartContainer.hide();
-            $(this).text('Show Comparison Chart');
-        } else {
-            chartContainer.show();
-            $(this).text('Hide Comparison Chart');
-            renderComparisonChart();
-        }
-    });
-    
-    function renderComparisonChart() {
-        const ctx = document.getElementById('comparisonChart').getContext('2d');
+        // Print functionality
+        $('#exportPDF').on('click', function() {
+            window.print();
+        });
         
-        // Get filtered data for chart
-        const filteredData = getFilteredData();
+        // Toggle chart display
+        $('#showChart').on('click', function() {
+            const chartContainer = $('#chartContainer');
+            
+            if (chartContainer.is(':visible')) {
+                chartContainer.hide();
+                $(this).text('Show Comparison Chart');
+            } else {
+                chartContainer.show();
+                $(this).text('Hide Comparison Chart');
+                renderComparisonChart();
+            }
+        });
         
-        // Sort companies by headcount for better visualization
-        filteredData.sort((a, b) => b.headcount - a.headcount);
-        
-        // Prepare chart data
-        const labels = filteredData.map(company => company.name);
-        const headcounts = filteredData.map(company => company.headcount);
-        
-        // Assign different colors based on listing status
-        const backgroundColors = filteredData.map(company => 
-            company.listed === 'Yes' ? 'rgba(41, 128, 185, 0.7)' : 'rgba(192, 57, 43, 0.7)'
-        );
-        
-        // Destroy previous chart if exists
-        if (comparisonChart) {
-            comparisonChart.destroy();
-        }
-        
-        // Create new chart
-        comparisonChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Employee Headcount',
-                    data: headcounts,
-                    backgroundColor: backgroundColors,
-                    borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
+        // Render chart
+        function renderComparisonChart() {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            const filteredData = getFilteredData();
+            
+            filteredData.sort((a, b) => b.headcount - a.headcount);
+            
+            const labels = filteredData.map(company => company.name);
+            const headcounts = filteredData.map(company => company.headcount);
+            const backgroundColors = filteredData.map(company => 
+                company.listed === 'Yes' ? 'rgba(41, 128, 185, 0.7)' : 'rgba(192, 57, 43, 0.7)'
+            );
+            
+            if (comparisonChart) {
+                comparisonChart.destroy();
+            }
+            
+            comparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Employee Headcount',
+                        data: headcounts,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const idx = context.dataIndex;
+                                    const company = filteredData[idx];
+                                    return [
+                                        `Founded: ${company.foundingYear}`,
+                                        `Listed: ${company.listed}`,
+                                        `Expertise: ${company.expertise.substring(0, 30)}...`
+                                    ];
+                                }
+                            }
+                        }
                     },
-                    tooltip: {
-                        callbacks: {
-                            afterLabel: function(
-
-afterLabel: function(context) {
-                                const idx = context.dataIndex;
-                                const company = filteredData[idx];
-                                return [
-                                    `Founded: ${company.foundingYear}`,
-                                    `Listed: ${company.listed}`,
-                                    `Expertise: ${company.expertise.substring(0, 30)}...`
-                                ];
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Employees'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45
                             }
                         }
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Number of Employees'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45
-                        }
-                    }
-                }
-            }
-        });
-    }
-    
-    // FEATURE 5: Company details modal functionality
-    $('.view-details').on('click', function() {
-        const $row = $(this).closest('tr');
-        const companyName = $row.find('td:eq(1)').text();
-        const expertise = $row.find('td:eq(2)').text();
-        const headcount = $row.find('td:eq(3)').text();
-        const listed = $row.find('td:eq(4)').text();
-        const foundingYear = $row.find('td:eq(5)').text();
-        const website = $row.find('td:eq(6) a').attr('href');
-        
-        // Calculate years in operation
-        const currentYear = new Date().getFullYear();
-        const yearsInOperation = currentYear - parseInt(foundingYear);
-        
-        // Set company name in modal header
-        $('#modalCompanyName').text(companyName);
-        
-        // Create company details HTML
-        let detailsHTML = `
-            <div class="company-profile">
-                <p><strong>Expertise:</strong> ${expertise}</p>
-                <p><strong>Headcount:</strong> ${headcount} employees</p>
-                <p><strong>Listed on PSX:</strong> ${listed}</p>
-                <p><strong>Founded:</strong> ${foundingYear} (${yearsInOperation} years in operation)</p>
-                <p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>
-            </div>
-        `;
-        
-        // Additional information based on company type
-        let additionalInfo = '';
-        
-        if (listed === 'Yes') {
-            additionalInfo += `
-                <p><strong>${companyName}</strong> is a publicly traded company listed on the Pakistan Stock Exchange (PSX).</p>
-                <p>As a listed company, they publish regular financial reports and are subject to additional regulatory oversight.</p>
-            `;
-        } else {
-            additionalInfo += `
-                <p><strong>${companyName}</strong> is a privately held company.</p>
-            `;
-        }
-        
-        // Add information based on size
-        if (parseInt(headcount) > 1000) {
-            additionalInfo += `<p>With over ${headcount} employees, they are among the largest software houses in Pakistan.</p>`;
-        } else if (parseInt(headcount) > 500) {
-            additionalInfo += `<p>With ${headcount} employees, they are a medium-to-large sized software house in Pakistan.</p>`;
-        } else {
-            additionalInfo += `<p>With ${headcount} employees, they are a mid-sized software development company in Pakistan.</p>`;
-        }
-        
-        // Add founding information
-        if (parseInt(foundingYear) < 2000) {
-            additionalInfo += `<p>Founded in ${foundingYear}, they are one of the pioneer tech companies in Pakistan.</p>`;
-        } else if (parseInt(foundingYear) < 2010) {
-            additionalInfo += `<p>Founded in ${foundingYear}, they have established themselves during the early growth phase of Pakistan's IT industry.</p>`;
-        } else {
-            additionalInfo += `<p>Founded in ${foundingYear}, they represent the newer generation of Pakistani technology companies.</p>`;
-        }
-        
-        // Set details in modal
-        $('#modalCompanyDetails').html(detailsHTML);
-        $('#companyAdditionalInfo').html(additionalInfo);
-        
-        // Show modal
-        $('#companyDetailsModal').show();
-    });
-    
-    // Close company details modal
-    $('#closeDetails').on('click', function() {
-        $('#companyDetailsModal').hide();
-    });
-    
-    // Star rating system
-    $('.star').on('click', function() {
-        const $star = $(this);
-        const rating = $star.data('rating');
-        const $row = $star.closest('tr');
-        const companyName = $row.find('td:eq(1)').text();
-        
-        // Update UI by highlighting stars
-        const $stars = $star.closest('.rating-cell').find('.star');
-        $stars.removeClass('active');
-        $stars.each(function(index) {
-            if (index < rating) {
-                $(this).addClass('active');
-            }
-        });
-        
-        // Save rating to localStorage
-        const ratings = JSON.parse(localStorage.getItem('companyRatings'));
-        ratings[companyName] = rating;
-        localStorage.setItem('companyRatings', JSON.stringify(ratings));
-        
-        // Show temporary confirmation
-        alert(`You rated ${companyName} ${rating} out of 5 stars!`);
-    });
-    
-    // Apply stored ratings to UI
-    function applyStoredRatings() {
-        const ratings = JSON.parse(localStorage.getItem('companyRatings'));
-        
-        // For each rating in storage
-        Object.keys(ratings).forEach(companyName => {
-            const rating = ratings[companyName];
-            
-            // Find the row with this company
-            $('#softwareHousesTable tbody tr').each(function() {
-                const rowCompanyName = $(this).find('td:eq(1)').text();
-                if (rowCompanyName === companyName) {
-                    // Apply rating to stars
-                    const $stars = $(this).find('.rating-cell .star');
-                    $stars.each(function(index) {
-                        if (index < rating) {
-                            $(this).addClass('active');
-                        }
-                    });
                 }
             });
+        }
+        
+        // Company details modal
+        $('.view-details').on('click', function() {
+            const $row = $(this).closest('tr');
+            const companyName = $row.find('td:eq(1)').text();
+            const expertise = $row.find('td:eq(2)').text();
+            const headcount = $row.find('td:eq(3)').text();
+            const listed = $row.find('td:eq(4)').text();
+            const foundingYear = $row.find('td:eq(5)').text();
+            const website = $row.find('td:eq(6) a').attr('href');
+            
+            const currentYear = new Date().getFullYear();
+            const yearsInOperation = currentYear - parseInt(foundingYear);
+            
+            $('#modalCompanyName').text(companyName);
+            
+            let detailsHTML = `
+                <div class="company-profile">
+                    <p><strong>Expertise:</strong> ${expertise}</p>
+                    <p><strong>Headcount:</strong> ${headcount} employees</p>
+                    <p><strong>Listed on PSX:</strong> ${listed}</p>
+                    <p><strong>Founded:</strong> ${foundingYear} (${yearsInOperation} years in operation)</p>
+                    <p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>
+                </div>
+            `;
+            
+            let additionalInfo = '';
+            
+            if (listed === 'Yes') {
+                additionalInfo += `
+                    <p><strong>${companyName}</strong> is a publicly traded company listed on the Pakistan Stock Exchange (PSX).</p>
+                    <p>As a listed company, they publish regular financial reports and are subject to additional regulatory oversight.</p>
+                `;
+            } else {
+                additionalInfo += `<p><strong>${companyName}</strong> is a privately held company.</p>`;
+            }
+            
+            if (parseInt(headcount) > 1000) {
+                additionalInfo += `<p>With over ${headcount} employees, they are among the largest software houses in Pakistan.</p>`;
+            } else if (parseInt(headcount) > 500) {
+                additionalInfo += `<p>With ${headcount} employees, they are a medium-to-large sized software house in Pakistan.</p>`;
+            } else {
+                additionalInfo += `<p>With ${headcount} employees, they are a mid-sized software development company in Pakistan.</p>`;
+            }
+            
+            if (parseInt(foundingYear) < 2000) {
+                additionalInfo += `<p>Founded in ${foundingYear}, they are one of the pioneer tech companies in Pakistan.</p>`;
+            } else if (parseInt(foundingYear) < 2010) {
+                additionalInfo += `<p>Founded in ${foundingYear}, they have established themselves during the early growth phase of Pakistan's IT industry.</p>`;
+            } else {
+                additionalInfo += `<p>Founded in ${foundingYear}, they represent the newer generation of Pakistani technology companies.</p>`;
+            }
+            
+            $('#modalCompanyDetails').html(detailsHTML);
+            $('#companyAdditionalInfo').html(additionalInfo);
+            $('#companyDetailsModal').show();
         });
-    }
-    
-    // Footer year and date
-    const currentYear = new Date().getFullYear();
-    $('#currentYear').text(currentYear);
-    
-    const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    $('#currentDate').text(today.toLocaleDateString(undefined, options) + ' ' + today.toLocaleTimeString());
-});
-
-</script>
-
+        
+        // Close modal
+        $('#closeDetails').on('click', function() {
+            $('#companyDetailsModal').hide();
+        });
+        
+        // Set footer date and year
+        const currentYear = new Date().getFullYear();
+        $('#currentYear').text(currentYear);
+        
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        $('#currentDate').text(today.toLocaleDateString(undefined, options) + ' ' + today.toLocaleTimeString());
+    });
+    </script>
 </body>
 </html>
