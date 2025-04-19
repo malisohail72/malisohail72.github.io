@@ -3,235 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistani Software Houses</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    
-<style>
-
-/* Basic Reset & Defaults */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Header */
-.site-header {
-    background-color: #343a40;
-    color: #fff;
-    padding: 1.5rem 0;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.site-header h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2.5rem;
-}
-
-/* Main Content */
-.site-main {
-    padding-bottom: 3rem;
-}
-
-.site-main h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #495057;
-    font-size: 2rem;
-}
-
-.disclaimer {
-    text-align: center;
-    font-size: 0.9em;
-    color: #6c757d;
-    margin-bottom: 1.5rem;
-}
-
-/* Table Styling */
-.table-responsive {
-    overflow-x: auto; /* Enable horizontal scroll on small screens */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    margin-bottom: 1rem;
-}
-
-#softwareHousesTable {
-    width: 100%;
-    border-collapse: collapse; /* More modern look than separate borders */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* DataTables adds its own classes, but we can override/enhance */
-#softwareHousesTable thead th {
-    background-color: #e9ecef;
-    color: #495057;
-    font-weight: 600;
-    text-align: left;
-    padding: 12px 15px;
-    border-bottom: 2px solid #dee2e6;
-    cursor: pointer; /* Indicate sortable columns */
-    white-space: nowrap; /* Prevent header text wrapping */
-}
-
-/* Style the sorting icons added by DataTables */
-#softwareHousesTable thead th.sorting,
-#softwareHousesTable thead th.sorting_asc,
-#softwareHousesTable thead th.sorting_desc {
-    padding-right: 30px; /* Make space for the icon */
-    position: relative;
-}
-
-#softwareHousesTable thead th.sorting::after,
-#softwareHousesTable thead th.sorting_asc::after,
-#softwareHousesTable thead th.sorting_desc::after {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    font-size: 0.8em;
-    opacity: 0.5;
-}
-
-#softwareHousesTable thead th.sorting::after { content: "\2195"; } /* Up/Down arrow */
-#softwareHousesTable thead th.sorting_asc::after { content: "\2191"; opacity: 1; } /* Up arrow */
-#softwareHousesTable thead th.sorting_desc::after { content: "\2193"; opacity: 1; } /* Down arrow */
-
-
-#softwareHousesTable tbody td {
-    padding: 10px 15px;
-    border-bottom: 1px solid #e9ecef;
-    vertical-align: middle;
-}
-
-#softwareHousesTable tbody tr:hover {
-    background-color: #f1f3f5;
-}
-
-/* Specific column alignment if needed */
-#softwareHousesTable td:nth-child(1), /* Sr No */
-#softwareHousesTable td:nth-child(4), /* Headcount */
-#softwareHousesTable td:nth-child(5), /* Listed */
-#softwareHousesTable td:nth-child(6) { /* Founding Year */
-    text-align: center;
-}
-
-#softwareHousesTable td:nth-child(3) { /* Area of Expertise */
-    font-size: 0.9em;
-    color: #555;
-}
-
-/* DataTables features styling */
-.dataTables_wrapper .dataTables_filter { /* Search box */
-    float: right;
-    margin-bottom: 1rem;
-}
-
-.dataTables_wrapper .dataTables_length { /* Show entries */
-    float: left;
-    margin-bottom: 1rem;
-}
-
-.dataTables_wrapper .dataTables_paginate { /* Pagination */
-    float: right;
-    margin-top: 1rem;
-}
-
-.dataTables_wrapper .dataTables_info { /* Showing x to y of z entries */
-    float: left;
-    margin-top: 1rem;
-    padding-top: 0.5em; /* Align better with pagination */
-}
-
-/* Footer */
-.site-footer {
-    background-color: #343a40;
-    color: #adb5bd;
-    padding: 1.5rem 0;
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 0.9em;
-}
-
-.site-footer p {
-    margin-bottom: 0.3rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .site-header h1 {
-        font-size: 2rem;
-    }
-
-    .site-main h2 {
-        font-size: 1.75rem;
-    }
-
-    /* Make search and length selectors stack */
-    .dataTables_wrapper .dataTables_filter,
-    .dataTables_wrapper .dataTables_length {
-        float: none;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Center pagination and info */
-     .dataTables_wrapper .dataTables_paginate,
-     .dataTables_wrapper .dataTables_info {
-        float: none;
-        text-align: center;
-     }
-     .dataTables_wrapper .dataTables_info {
-         margin-top: 0.5rem;
-         margin-bottom: 1rem;
-     }
-}
-
-@media (max-width: 576px) {
-    body {
-        font-size: 14px; /* Slightly smaller base font */
-    }
-    #softwareHousesTable thead th,
-    #softwareHousesTable tbody td {
-        padding: 8px 10px; /* Reduce padding */
-        font-size: 0.9em;
-    }
-    /* Consider hiding less critical columns on very small screens if needed */
-    /*
-    #softwareHousesTable th:nth-child(3),
-    #softwareHousesTable td:nth-child(3) { // Example: Hide Expertise
-        display: none;
-    }
-    */
-}
-        
-</style>
-        
+    <title>Pakistani Software Houses Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css">
+    <style>
+        /* Basic styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .site-header {
+            background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .site-main {
+            padding: 2rem 0;
+        }
+        .site-footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+        table.dataTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table.dataTable th {
+            background-color: #2980b9;
+            color: white;
+        }
+        .disclaimer {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+        .filters-section {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filters-section h3 {
+            margin-top: 0;
+        }
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .filter-group {
+            flex: 1 1 200px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .comparison-chart {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .company-details {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+            display: none;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+        .btn-outline:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        /* Export buttons styling */
+        .export-buttons {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        /* Star rating feature */
+        .star {
+            cursor: pointer;
+            color: #ddd;
+        }
+        .star.active {
+            color: #ffc107;
+        }
+        /* Print styles */
+        @media print {
+            .site-header, .site-footer, .filters-section, .export-buttons, .dataTables_wrapper .dataTables_filter, 
+            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_paginate {
+                display: none !important;
+            }
+            body, .container {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .company-details {
+                break-inside: avoid;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
     <header class="site-header">
         <div class="container">
             <h1>Pakistani Software Houses Directory</h1>
@@ -241,6 +167,70 @@ a:hover {
 
     <main class="site-main">
         <div class="container">
+            <!-- FEATURE 1: Analytics Dashboard -->
+            <div class="dashboard">
+                <div class="stat-card">
+                    <h3>Total Companies</h3>
+                    <div class="stat-number" id="totalCompanies">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Headcount</h3>
+                    <div class="stat-number" id="avgHeadcount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Listed Companies</h3>
+                    <div class="stat-number" id="listedCompanies">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Age (Years)</h3>
+                    <div class="stat-number" id="avgAge">0</div>
+                </div>
+            </div>
+            
+            <!-- FEATURE 2: Advanced Filtering -->
+            <div class="filters-section">
+                <h3>Advanced Filters</h3>
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="minHeadcount">Min Headcount:</label>
+                        <input type="number" id="minHeadcount" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="filter-group">
+                        <label for="maxHeadcount">Max Headcount:</label>
+                        <input type="number" id="maxHeadcount" class="form-control" min="0" value="10000">
+                    </div>
+                    <div class="filter-group">
+                        <label for="listedFilter">Listed Status:</label>
+                        <select id="listedFilter" class="form-control">
+                            <option value="all">All</option>
+                            <option value="Yes">Listed</option>
+                            <option value="No">Not Listed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="yearFilter">Founded After:</label>
+                        <input type="number" id="yearFilter" class="form-control" min="1970" max="2025" value="1970">
+                    </div>
+                    <div class="filter-group">
+                        <button id="applyFilters" class="btn">Apply Filters</button>
+                        <button id="resetFilters" class="btn btn-outline">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FEATURE 3: Export Functionality -->
+            <div class="export-buttons">
+                <button id="exportCSV" class="btn">Export to CSV</button>
+                <button id="exportPDF" class="btn">Print/PDF</button>
+                <button id="showChart" class="btn">Show Comparison Chart</button>
+            </div>
+            
+            <!-- Chart Container -->
+            <div id="chartContainer" class="comparison-chart" style="display: none;">
+                <h3>Company Size Comparison</h3>
+                <canvas id="comparisonChart" height="300"></canvas>
+            </div>
+
             <h2>Software Houses List</h2>
             <p class="disclaimer">Note: Data, especially headcount, is approximate and illustrative. Click headers to sort.</p>
 
@@ -255,6 +245,9 @@ a:hover {
                             <th>Listed (PSX)</th>
                             <th>Founding Year</th>
                             <th>Website</th>
+                            <!-- FEATURE 4: User Rating Feature -->
+                            <th>Rating</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -266,6 +259,14 @@ a:hover {
                             <td>Yes</td>
                             <td>1977</td>
                             <td><a href="https://www.systemsltd.com" target="_blank" rel="noopener noreferrer">systemsltd.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -275,6 +276,14 @@ a:hover {
                             <td>Yes</td>
                             <td>1996</td>
                             <td><a href="https://netsoltech.com" target="_blank" rel="noopener noreferrer">netsoltech.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
                             <td>3</td>
@@ -284,6 +293,14 @@ a:hover {
                             <td>No</td>
                             <td>2010</td>
                             <td><a href="https://contour-software.com" target="_blank" rel="noopener noreferrer">contour-software.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
                             <td>4</td>
@@ -293,6 +310,14 @@ a:hover {
                             <td>No</td>
                             <td>2004</td>
                             <td><a href="https://10pearls.com" target="_blank" rel="noopener noreferrer">10pearls.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
                             <td>5</td>
@@ -302,6 +327,14 @@ a:hover {
                             <td>No</td>
                             <td>2005</td>
                             <td><a href="https://www.afiniti.com" target="_blank" rel="noopener noreferrer">afiniti.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
                             <td>6</td>
@@ -311,6 +344,14 @@ a:hover {
                             <td>Yes</td>
                             <td>2002</td>
                             <td><a href="https://trg.com.pk" target="_blank" rel="noopener noreferrer">trg.com.pk</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
                             <td>7</td>
@@ -320,6 +361,14 @@ a:hover {
                             <td>No</td>
                             <td>2005</td>
                             <td><a href="https://www.folio3.com" target="_blank" rel="noopener noreferrer">folio3.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
                             <td>8</td>
@@ -329,6 +378,14 @@ a:hover {
                             <td>No</td>
                             <td>1998</td>
                             <td><a href="https://www.xavor.com" target="_blank" rel="noopener noreferrer">xavor.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                         <tr>
                             <td>9</td>
@@ -338,6 +395,14 @@ a:hover {
                             <td>No</td>
                             <td>2003</td>
                             <td><a href="https://arpatech.com" target="_blank" rel="noopener noreferrer">arpatech.com</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
                          <tr>
                             <td>10</td>
@@ -347,9 +412,30 @@ a:hover {
                             <td>No</td>
                             <td>2008</td>
                             <td><a href="https://www.cubix.co" target="_blank" rel="noopener noreferrer">cubix.co</a></td>
+                            <td class="rating-cell">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </td>
+                            <td><button class="btn btn-outline view-details">Details</button></td>
                         </tr>
-                        </tbody>
+                    </tbody>
                 </table>
+            </div>
+            
+            <!-- FEATURE 5: Company Details Modal -->
+            <div id="companyDetailsModal" class="company-details">
+                <h3 id="modalCompanyName"></h3>
+                <div id="modalCompanyDetails"></div>
+                <div class="additional-info">
+                    <h4>Additional Information</h4>
+                    <div id="companyAdditionalInfo">
+                        <!-- Additional info will be loaded here -->
+                    </div>
+                </div>
+                <button id="closeDetails" class="btn" style="margin-top: 1rem;">Close</button>
             </div>
         </div>
     </main>
@@ -357,26 +443,33 @@ a:hover {
     <footer class="site-footer">
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Pakistani Software Houses Directory. All Rights Reserved.</p>
-             <p>Data is illustrative. Current date: <span id="currentDate"></span></p>
+            <p>Data is illustrative. Current date: <span id="currentDate"></span></p>
         </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
    
-     <script>
+    <script>
 $(document).ready(function() {
-    // Initialize DataTables
-    $('#softwareHousesTable').DataTable({
-        // Enable responsive extension if needed (requires additional JS/CSS)
-        // responsive: true,
-
-        // Default sort order (e.g., by Headcount descending)
-        "order": [[ 3, "desc" ]], // Column index 3 (Headcount), descending
-
-        // Optional: Customize language options (e.g., search placeholder)
+    // Initialize variables to store filtered data
+    let tableData = [];
+    let dataTable;
+    
+    // Initialize localStorage for ratings if not exists
+    if (!localStorage.getItem('companyRatings')) {
+        localStorage.setItem('companyRatings', JSON.stringify({}));
+    }
+    
+    // Load any saved ratings
+    const savedRatings = JSON.parse(localStorage.getItem('companyRatings'));
+    
+    // Initialize DataTables with custom search functionality
+    dataTable = $('#softwareHousesTable').DataTable({
+        "order": [[ 3, "desc" ]],
         "language": {
-            "search": "Filter records:",
+            "search": "Quick Search:",
             "lengthMenu": "Show _MENU_ entries",
             "info": "Showing _START_ to _END_ of _TOTAL_ entries",
             "paginate": {
@@ -386,35 +479,252 @@ $(document).ready(function() {
                 "previous": "Previous"
             }
         },
-
-        // Define column types for better sorting (optional but good practice)
         "columnDefs": [
-            { "type": "num", "targets": [0, 3, 5] }, // Sr No, Headcount, Founding Year
-            { "type": "string", "targets": [1, 2, 4] }, // Name, Expertise, Listed
-            { "orderable": false, "targets": [6] } // Disable sorting for Website column
+            { "type": "num", "targets": [0, 3, 5] },
+            { "type": "string", "targets": [1, 2, 4] },
+            { "orderable": false, "targets": [6, 7, 8] }
         ],
-
-        // Add other DataTables options as needed
-        // e.g., disable pagination: "paging": false,
-        // e.g., disable search: "searching": false,
+        // Add a processing indicator
+        "processing": true,
+        "initComplete": function() {
+            // Get table data after initialization
+            tableData = getTableData();
+            updateDashboard(tableData);
+            
+            // Apply any saved ratings
+            applyStoredRatings();
+        }
     });
-
-    // --- Footer ---
-    // Set current year in footer
-    const currentYear = new Date().getFullYear();
-    $('#currentYear').text(currentYear);
-
-    // Set current date in footer
-    const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-     // Use user's locale for formatting
-    $('#currentDate').text(today.toLocaleDateString(undefined, options) + ' ' + today.toLocaleTimeString());
-
-
-});
-    </script>
     
+    // FEATURE 1: Update Dashboard Statistics
+    function updateDashboard(data) {
+        const currentYear = new Date().getFullYear();
+        
+        // Calculate statistics
+        const totalCompanies = data.length;
+        
+        // Calculate average headcount
+        const totalHeadcount = data.reduce((sum, company) => sum + parseInt(company.headcount), 0);
+        const avgHeadcount = Math.round(totalHeadcount / totalCompanies);
+        
+        // Count listed companies
+        const listedCount = data.filter(company => company.listed === 'Yes').length;
+        
+        // Calculate average company age
+        const totalAge = data.reduce((sum, company) => sum + (currentYear - parseInt(company.foundingYear)), 0);
+        const avgAge = Math.round(totalAge / totalCompanies);
+        
+        // Update dashboard
+        $('#totalCompanies').text(totalCompanies);
+        $('#avgHeadcount').text(avgHeadcount);
+        $('#listedCompanies').text(listedCount);
+        $('#avgAge').text(avgAge);
+    }
     
+    // Helper function to get table data as array of objects
+    function getTableData() {
+        const data = [];
+        $('#softwareHousesTable tbody tr').each(function() {
+            const $row = $(this);
+            const rowData = {
+                id: $row.find('td:eq(0)').text(),
+                name: $row.find('td:eq(1)').text(),
+                expertise: $row.find('td:eq(2)').text(),
+                headcount: parseInt($row.find('td:eq(3)').text()),
+                listed: $row.find('td:eq(4)').text(),
+                foundingYear: parseInt($row.find('td:eq(5)').text()),
+                website: $row.find('td:eq(6) a').attr('href')
+            };
+            data.push(rowData);
+        });
+        return data;
+    }
     
-</body>
-</html>
+    // FEATURE 2: Advanced filtering functionality
+    $('#applyFilters').on('click', function() {
+        const minHeadcount = parseInt($('#minHeadcount').val());
+        const maxHeadcount = parseInt($('#maxHeadcount').val());
+        const listedFilter = $('#listedFilter').val();
+        const yearFilter = parseInt($('#yearFilter').val());
+        
+        dataTable.draw();
+        
+        // Create custom filter function
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                const headcount = parseInt(data[3]) || 0;
+                const listed = data[4];
+                const foundingYear = parseInt(data[5]) || 0;
+                
+                // Check if row matches all filters
+                let matchesHeadcount = (isNaN(minHeadcount) || headcount >= minHeadcount) && 
+                                      (isNaN(maxHeadcount) || headcount <= maxHeadcount);
+                                      
+                let matchesListed = listedFilter === 'all' || listed === listedFilter;
+                
+                let matchesYear = isNaN(yearFilter) || foundingYear >= yearFilter;
+                
+                return matchesHeadcount && matchesListed && matchesYear;
+            }
+        );
+        
+        // Redraw table with filters applied
+        dataTable.draw();
+        
+        // Update dashboard with filtered data
+        const filteredData = getFilteredData();
+        updateDashboard(filteredData);
+    });
+    
+    // Helper function to get currently filtered data
+    function getFilteredData() {
+        const data = [];
+        const rows = dataTable.rows({ search: 'applied' }).nodes();
+        
+        $(rows).each(function() {
+            const $row = $(this);
+            const rowData = {
+                id: $row.find('td:eq(0)').text(),
+                name: $row.find('td:eq(1)').text(),
+                expertise: $row.find('td:eq(2)').text(),
+                headcount: parseInt($row.find('td:eq(3)').text()),
+                listed: $row.find('td:eq(4)').text(),
+                foundingYear: parseInt($row.find('td:eq(5)').text()),
+                website: $row.find('td:eq(6) a').attr('href')
+            };
+            data.push(rowData);
+        });
+        return data;
+    }
+    
+    // Reset filters
+    $('#resetFilters').on('click', function() {
+        $('#minHeadcount').val(0);
+        $('#maxHeadcount').val(10000);
+        $('#listedFilter').val('all');
+        $('#yearFilter').val(1970);
+        
+        // Clear custom filters
+        $.fn.dataTable.ext.search.pop();
+        dataTable.draw();
+        
+        // Update dashboard with all data
+        updateDashboard(tableData);
+    });
+    
+    // FEATURE 3: Export functionality
+    $('#exportCSV').on('click', function() {
+        exportTableToCSV('pakistani_software_houses.csv');
+    });
+    
+    function exportTableToCSV(filename) {
+        const rows = [];
+        const headers = [];
+        
+        // Get headers (excluding Actions column)
+        $('#softwareHousesTable thead th').each(function(index) {
+            if (index < $('#softwareHousesTable thead th').length - 1) {
+                headers.push($(this).text());
+            }
+        });
+        rows.push(headers.join(','));
+        
+        // Get visible rows data
+        dataTable.rows({ search: 'applied' }).every(function() {
+            const data = this.data();
+            const row = [];
+            
+            // Add each cell data (excluding Actions column)
+            for (let i = 0; i < data.length - 1; i++) {
+                // Clean data of commas for CSV format
+                let cellData = data[i].toString();
+                if (cellData.includes(',')) {
+                    cellData = '"' + cellData + '"';
+                }
+                row.push(cellData);
+            }
+            
+            rows.push(row.join(','));
+        });
+        
+        // Create and download CSV file
+        const csvContent = rows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        
+        // Create download link
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    
+    // Print functionality
+    $('#exportPDF').on('click', function() {
+        window.print();
+    });
+    
+    // FEATURE 4: Interactive company size chart
+    let comparisonChart = null;
+    
+    $('#showChart').on('click', function() {
+        const chartContainer = $('#chartContainer');
+        
+        if (chartContainer.is(':visible')) {
+            chartContainer.hide();
+            $(this).text('Show Comparison Chart');
+        } else {
+            chartContainer.show();
+            $(this).text('Hide Comparison Chart');
+            renderComparisonChart();
+        }
+    });
+    
+    function renderComparisonChart() {
+        const ctx = document.getElementById('comparisonChart').getContext('2d');
+        
+        // Get filtered data for chart
+        const filteredData = getFilteredData();
+        
+        // Sort companies by headcount for better visualization
+        filteredData.sort((a, b) => b.headcount - a.headcount);
+        
+        // Prepare chart data
+        const labels = filteredData.map(company => company.name);
+        const headcounts = filteredData.map(company => company.headcount);
+        
+        // Assign different colors based on listing status
+        const backgroundColors = filteredData.map(company => 
+            company.listed === 'Yes' ? 'rgba(41, 128, 185, 0.7)' : 'rgba(192, 57, 43, 0.7)'
+        );
+        
+        // Destroy previous chart if exists
+        if (comparisonChart) {
+            comparisonChart.destroy();
+        }
+        
+        // Create new chart
+        comparisonChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Employee Headcount',
+                    data: headcounts,
+                    backgroundColor: backgroundColors,
+                    borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            afterLabel: function(
