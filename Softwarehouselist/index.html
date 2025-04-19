@@ -728,3 +728,170 @@ $(document).ready(function() {
                     tooltip: {
                         callbacks: {
                             afterLabel: function(
+
+afterLabel: function(context) {
+                                const idx = context.dataIndex;
+                                const company = filteredData[idx];
+                                return [
+                                    `Founded: ${company.foundingYear}`,
+                                    `Listed: ${company.listed}`,
+                                    `Expertise: ${company.expertise.substring(0, 30)}...`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Employees'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // FEATURE 5: Company details modal functionality
+    $('.view-details').on('click', function() {
+        const $row = $(this).closest('tr');
+        const companyName = $row.find('td:eq(1)').text();
+        const expertise = $row.find('td:eq(2)').text();
+        const headcount = $row.find('td:eq(3)').text();
+        const listed = $row.find('td:eq(4)').text();
+        const foundingYear = $row.find('td:eq(5)').text();
+        const website = $row.find('td:eq(6) a').attr('href');
+        
+        // Calculate years in operation
+        const currentYear = new Date().getFullYear();
+        const yearsInOperation = currentYear - parseInt(foundingYear);
+        
+        // Set company name in modal header
+        $('#modalCompanyName').text(companyName);
+        
+        // Create company details HTML
+        let detailsHTML = `
+            <div class="company-profile">
+                <p><strong>Expertise:</strong> ${expertise}</p>
+                <p><strong>Headcount:</strong> ${headcount} employees</p>
+                <p><strong>Listed on PSX:</strong> ${listed}</p>
+                <p><strong>Founded:</strong> ${foundingYear} (${yearsInOperation} years in operation)</p>
+                <p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>
+            </div>
+        `;
+        
+        // Additional information based on company type
+        let additionalInfo = '';
+        
+        if (listed === 'Yes') {
+            additionalInfo += `
+                <p><strong>${companyName}</strong> is a publicly traded company listed on the Pakistan Stock Exchange (PSX).</p>
+                <p>As a listed company, they publish regular financial reports and are subject to additional regulatory oversight.</p>
+            `;
+        } else {
+            additionalInfo += `
+                <p><strong>${companyName}</strong> is a privately held company.</p>
+            `;
+        }
+        
+        // Add information based on size
+        if (parseInt(headcount) > 1000) {
+            additionalInfo += `<p>With over ${headcount} employees, they are among the largest software houses in Pakistan.</p>`;
+        } else if (parseInt(headcount) > 500) {
+            additionalInfo += `<p>With ${headcount} employees, they are a medium-to-large sized software house in Pakistan.</p>`;
+        } else {
+            additionalInfo += `<p>With ${headcount} employees, they are a mid-sized software development company in Pakistan.</p>`;
+        }
+        
+        // Add founding information
+        if (parseInt(foundingYear) < 2000) {
+            additionalInfo += `<p>Founded in ${foundingYear}, they are one of the pioneer tech companies in Pakistan.</p>`;
+        } else if (parseInt(foundingYear) < 2010) {
+            additionalInfo += `<p>Founded in ${foundingYear}, they have established themselves during the early growth phase of Pakistan's IT industry.</p>`;
+        } else {
+            additionalInfo += `<p>Founded in ${foundingYear}, they represent the newer generation of Pakistani technology companies.</p>`;
+        }
+        
+        // Set details in modal
+        $('#modalCompanyDetails').html(detailsHTML);
+        $('#companyAdditionalInfo').html(additionalInfo);
+        
+        // Show modal
+        $('#companyDetailsModal').show();
+    });
+    
+    // Close company details modal
+    $('#closeDetails').on('click', function() {
+        $('#companyDetailsModal').hide();
+    });
+    
+    // Star rating system
+    $('.star').on('click', function() {
+        const $star = $(this);
+        const rating = $star.data('rating');
+        const $row = $star.closest('tr');
+        const companyName = $row.find('td:eq(1)').text();
+        
+        // Update UI by highlighting stars
+        const $stars = $star.closest('.rating-cell').find('.star');
+        $stars.removeClass('active');
+        $stars.each(function(index) {
+            if (index < rating) {
+                $(this).addClass('active');
+            }
+        });
+        
+        // Save rating to localStorage
+        const ratings = JSON.parse(localStorage.getItem('companyRatings'));
+        ratings[companyName] = rating;
+        localStorage.setItem('companyRatings', JSON.stringify(ratings));
+        
+        // Show temporary confirmation
+        alert(`You rated ${companyName} ${rating} out of 5 stars!`);
+    });
+    
+    // Apply stored ratings to UI
+    function applyStoredRatings() {
+        const ratings = JSON.parse(localStorage.getItem('companyRatings'));
+        
+        // For each rating in storage
+        Object.keys(ratings).forEach(companyName => {
+            const rating = ratings[companyName];
+            
+            // Find the row with this company
+            $('#softwareHousesTable tbody tr').each(function() {
+                const rowCompanyName = $(this).find('td:eq(1)').text();
+                if (rowCompanyName === companyName) {
+                    // Apply rating to stars
+                    const $stars = $(this).find('.rating-cell .star');
+                    $stars.each(function(index) {
+                        if (index < rating) {
+                            $(this).addClass('active');
+                        }
+                    });
+                }
+            });
+        });
+    }
+    
+    // Footer year and date
+    const currentYear = new Date().getFullYear();
+    $('#currentYear').text(currentYear);
+    
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    $('#currentDate').text(today.toLocaleDateString(undefined, options) + ' ' + today.toLocaleTimeString());
+});
+
+</script>
+
+</body>
+</html>
