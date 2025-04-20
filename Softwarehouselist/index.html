@@ -112,6 +112,11 @@
             display: flex;
             gap: 0.5rem;
         }
+        .loader {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
         @media print {
             .site-header, .site-footer, .filters-section, .export-buttons, 
             .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_length, 
@@ -200,6 +205,8 @@
             <h2>Software Houses List</h2>
             <p class="disclaimer">Note: Data, especially headcount, is approximate and illustrative. Click headers to sort.</p>
 
+            <div id="loader" class="loader">Loading data...</div>
+            
             <div class="table-responsive">
                 <table id="softwareHousesTable" class="display compact stripe hover order-column">
                     <thead>
@@ -215,106 +222,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Systems Limited</td>
-                            <td>IT Solutions, Software Services, Digital Tech, Cloud, ERP</td>
-                            <td>5300</td>
-                            <td>Yes</td>
-                            <td>1977</td>
-                            <td><a href="https://www.systemsltd.com" target="_blank" rel="noopener noreferrer">systemsltd.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>NetSol Technologies</td>
-                            <td>Finance & Leasing Software, IT Consulting, Cloud Services</td>
-                            <td>1500</td>
-                            <td>Yes</td>
-                            <td>1996</td>
-                            <td><a href="https://netsoltech.com" target="_blank" rel="noopener noreferrer">netsoltech.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Contour Software</td>
-                            <td>Enterprise Software (VMS), R&D, IT Services (for CSI)</td>
-                            <td>2100</td>
-                            <td>No</td>
-                            <td>2010</td>
-                            <td><a href="https://contour-software.com" target="_blank" rel="noopener noreferrer">contour-software.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>10Pearls</td>
-                            <td>Digital Transformation, AI, Software Dev, Cloud, Security</td>
-                            <td>1300</td>
-                            <td>No</td>
-                            <td>2004</td>
-                            <td><a href="https://10pearls.com" target="_blank" rel="noopener noreferrer">10pearls.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>5</td>
-                            <td>Afiniti (Pakistan Ops)</td>
-                            <td>AI for Customer Experience Pairing</td>
-                            <td>1000</td>
-                            <td>No</td>
-                            <td>2005</td>
-                            <td><a href="https://www.afiniti.com" target="_blank" rel="noopener noreferrer">afiniti.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>6</td>
-                            <td>TRG Pakistan Ltd</td>
-                            <td>Technology Investment, BPO, Customer Experience Tech</td>
-                            <td>500</td>
-                            <td>Yes</td>
-                            <td>2002</td>
-                            <td><a href="https://trg.com.pk" target="_blank" rel="noopener noreferrer">trg.com.pk</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Folio3</td>
-                            <td>Digital Transformation, Web/Mobile Apps, Consulting</td>
-                            <td>700</td>
-                            <td>No</td>
-                            <td>2005</td>
-                            <td><a href="https://www.folio3.com" target="_blank" rel="noopener noreferrer">folio3.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>8</td>
-                            <td>Xavor Corporation</td>
-                            <td>IT Consulting, Microsoft Solutions, Cloud, Data & AI</td>
-                            <td>400</td>
-                            <td>No</td>
-                            <td>1998</td>
-                            <td><a href="https://www.xavor.com" target="_blank" rel="noopener noreferrer">xavor.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Arpatech</td>
-                            <td>IT Services, Software Dev, E-commerce, Call Center</td>
-                            <td>300</td>
-                            <td>No</td>
-                            <td>2003</td>
-                            <td><a href="https://arpatech.com" target="_blank" rel="noopener noreferrer">arpatech.com</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
-                         <tr>
-                            <td>10</td>
-                            <td>Cubix</td>
-                            <td>Mobile/Web/Game Dev, Blockchain, BI</td>
-                            <td>150</td>
-                            <td>No</td>
-                            <td>2008</td>
-                            <td><a href="https://www.cubix.co" target="_blank" rel="noopener noreferrer">cubix.co</a></td>
-                            <td><button class="btn btn-outline view-details">Details</button></td>
-                        </tr>
+                        <!-- Data will be loaded dynamically -->
                     </tbody>
                 </table>
             </div>
@@ -343,34 +251,221 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
    
     <script>
+    // Inline JSON data (in a real application, this would be loaded from an external file)
+    
+    
+    
+    const companiesData = [
+        {
+            "id": 1,
+            "name": "Systems Limited",
+            "expertise": "IT Solutions, Software Services, Digital Tech, Cloud, ERP",
+            "headcount": 5300,
+            "listed": "Yes",
+            "foundingYear": 1977,
+            "website": "https://www.systemsltd.com"
+        },
+        {
+            "id": 2,
+            "name": "NetSol Technologies",
+            "expertise": "Finance & Leasing Software, IT Consulting, Cloud Services",
+            "headcount": 1500,
+            "listed": "Yes",
+            "foundingYear": 1996,
+            "website": "https://netsoltech.com"
+        },
+        {
+            "id": 3,
+            "name": "Contour Software",
+            "expertise": "Enterprise Software (VMS), R&D, IT Services (for CSI)",
+            "headcount": 2100,
+            "listed": "No",
+            "foundingYear": 2010,
+            "website": "https://contour-software.com"
+        },
+        {
+            "id": 4,
+            "name": "10Pearls",
+            "expertise": "Digital Transformation, AI, Software Dev, Cloud, Security",
+            "headcount": 1300,
+            "listed": "No",
+            "foundingYear": 2004,
+            "website": "https://10pearls.com"
+        },
+        {
+            "id": 5,
+            "name": "Afiniti (Pakistan Ops)",
+            "expertise": "AI for Customer Experience Pairing",
+            "headcount": 1000,
+            "listed": "No",
+            "foundingYear": 2005,
+            "website": "https://www.afiniti.com"
+        },
+        {
+            "id": 6,
+            "name": "TRG Pakistan Ltd",
+            "expertise": "Technology Investment, BPO, Customer Experience Tech",
+            "headcount": 500,
+            "listed": "Yes",
+            "foundingYear": 2002,
+            "website": "https://trg.com.pk"
+        },
+        {
+            "id": 7,
+            "name": "Folio3",
+            "expertise": "Digital Transformation, Web/Mobile Apps, Consulting",
+            "headcount": 700,
+            "listed": "No",
+            "foundingYear": 2005,
+            "website": "https://www.folio3.com"
+        },
+        {
+            "id": 8,
+            "name": "Xavor Corporation",
+            "expertise": "IT Consulting, Microsoft Solutions, Cloud, Data & AI",
+            "headcount": 400,
+            "listed": "No",
+            "foundingYear": 1998,
+            "website": "https://www.xavor.com"
+        },
+        {
+            "id": 9,
+            "name": "Arpatech",
+            "expertise": "IT Services, Software Dev, E-commerce, Call Center",
+            "headcount": 300,
+            "listed": "No",
+            "foundingYear": 2003,
+            "website": "https://arpatech.com"
+        },
+        {
+            "id": 10,
+            "name": "Cubix",
+            "expertise": "Mobile/Web/Game Dev, Blockchain, BI",
+            "headcount": 150,
+            "listed": "No",
+            "foundingYear": 2008,
+            "website": "https://www.cubix.co"
+        }
+    ];
+
     $(document).ready(function() {
-        // Initialize variables
+        // Variables
         let tableData = [];
         let dataTable;
         let comparisonChart = null;
         
-        // Initialize DataTable
-        dataTable = $('#softwareHousesTable').DataTable({
-            "order": [[ 3, "desc" ]],
-            "columnDefs": [
-                { "type": "num", "targets": [0, 3, 5] },
-                { "orderable": false, "targets": 7 }
-            ],
-            "processing": true,
-            "initComplete": function() {
-                tableData = getTableData();
-                updateDashboard(tableData);
-            }
-        });
+        // Initialize table with data
+        initializeTable();
         
-        // Dashboard Statistics
+        function initializeTable() {
+            $('#loader').show();
+          
+            
+            
+            
+              
+            // In a real application, use this approach to fetch external data
+            /*
+            fetch('companies-data.json')
+                .then(response => response.json())
+                .then(data => {
+                    populateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error loading data:', error);
+                    $('#loader').text('Error loading data. Please refresh the page.');
+                })
+                .finally(() => {
+                    $('#loader').hide();
+                });
+            */
+            
+            
+            
+            
+            // Using the inline data for demonstration
+            setTimeout(() => {
+                populateTable(companiesData);
+                $('#loader').hide();
+            }, 300);
+        }
+        
+        function populateTable(data) {
+            const tbody = $('#softwareHousesTable tbody');
+            tbody.empty();
+            
+            data.forEach(company => {
+                const row = `
+                    <tr>
+                        <td>${company.id}</td>
+                        <td>${company.name}</td>
+                        <td>${company.expertise}</td>
+                        <td>${company.headcount}</td>
+                        <td>${company.listed}</td>
+                        <td>${company.foundingYear}</td>
+                        <td><a href="${company.website}" target="_blank" rel="noopener noreferrer">${company.website}</a></td>
+                        <td><button class="btn btn-outline view-details">Details</button></td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+            
+            initializeDataTable();
+        }
+        
+        function initializeDataTable() {
+            dataTable = $('#softwareHousesTable').DataTable({
+                "order": [[ 3, "desc" ]],
+                "columnDefs": [
+                    { "type": "num", "targets": [0, 3, 5] },
+                    { "orderable": false, "targets": 7 }
+                ],
+                "processing": true,
+                "initComplete": function() {
+                    tableData = getTableData();
+                    updateDashboard(tableData);
+                    bindEventHandlers();
+                }
+            });
+        }
+        
+        function bindEventHandlers() {
+            // Event delegation for view details buttons
+            $('#softwareHousesTable').on('click', '.view-details', function() {
+                const $row = $(this).closest('tr');
+                showCompanyDetails($row);
+            });
+            
+            // Close modal
+            $('#closeDetails').on('click', function() {
+                $('#companyDetailsModal').hide();
+            });
+            
+            // Advanced filtering
+            $('#applyFilters').on('click', applyFilters);
+            
+            // Reset filters
+            $('#resetFilters').on('click', resetFilters);
+            
+            // Export to CSV
+            $('#exportCSV').on('click', exportToCSV);
+            
+            // Print functionality
+            $('#exportPDF').on('click', function() {
+                window.print();
+            });
+            
+            // Toggle chart display
+            $('#showChart').on('click', toggleChart);
+        }
+        
         function updateDashboard(data) {
             const currentYear = new Date().getFullYear();
             const totalCompanies = data.length;
-            const totalHeadcount = data.reduce((sum, company) => sum + parseInt(company.headcount), 0);
+            const totalHeadcount = data.reduce((sum, company) => sum + company.headcount, 0);
             const avgHeadcount = Math.round(totalHeadcount / totalCompanies);
             const listedCount = data.filter(company => company.listed === 'Yes').length;
-            const totalAge = data.reduce((sum, company) => sum + (currentYear - parseInt(company.foundingYear)), 0);
+            const totalAge = data.reduce((sum, company) => sum + (currentYear - company.foundingYear), 0);
             const avgAge = Math.round(totalAge / totalCompanies);
             
             $('#totalCompanies').text(totalCompanies);
@@ -379,48 +474,31 @@
             $('#avgAge').text(avgAge);
         }
         
-        // Get table data as array of objects
         function getTableData() {
-            const data = [];
-            $('#softwareHousesTable tbody tr').each(function() {
-                const $row = $(this);
-                const rowData = {
-                    id: $row.find('td:eq(0)').text(),
-                    name: $row.find('td:eq(1)').text(),
-                    expertise: $row.find('td:eq(2)').text(),
-                    headcount: parseInt($row.find('td:eq(3)').text()),
-                    listed: $row.find('td:eq(4)').text(),
-                    foundingYear: parseInt($row.find('td:eq(5)').text()),
-                    website: $row.find('td:eq(6) a').attr('href')
-                };
-                data.push(rowData);
-            });
-            return data;
+            return dataTable.rows().data().toArray().map((row, index) => ({
+                id: row[0],
+                name: row[1],
+                expertise: row[2],
+                headcount: parseInt(row[3]),
+                listed: row[4],
+                foundingYear: parseInt(row[5]),
+                website: $(row[6]).find('a').attr('href')
+            }));
         }
         
-        // Get currently filtered data
         function getFilteredData() {
-            const data = [];
-            const rows = dataTable.rows({ search: 'applied' }).nodes();
-            
-            $(rows).each(function() {
-                const $row = $(this);
-                const rowData = {
-                    id: $row.find('td:eq(0)').text(),
-                    name: $row.find('td:eq(1)').text(),
-                    expertise: $row.find('td:eq(2)').text(),
-                    headcount: parseInt($row.find('td:eq(3)').text()),
-                    listed: $row.find('td:eq(4)').text(),
-                    foundingYear: parseInt($row.find('td:eq(5)').text()),
-                    website: $row.find('td:eq(6) a').attr('href')
-                };
-                data.push(rowData);
-            });
-            return data;
+            return dataTable.rows({ search: 'applied' }).data().toArray().map((row, index) => ({
+                id: row[0],
+                name: row[1],
+                expertise: row[2],
+                headcount: parseInt(row[3]),
+                listed: row[4],
+                foundingYear: parseInt(row[5]),
+                website: $(row[6]).find('a').attr('href')
+            }));
         }
         
-        // Advanced filtering
-        $('#applyFilters').on('click', function() {
+        function applyFilters() {
             const minHeadcount = parseInt($('#minHeadcount').val());
             const maxHeadcount = parseInt($('#maxHeadcount').val());
             const listedFilter = $('#listedFilter').val();
@@ -436,10 +514,10 @@
                     const listed = data[4];
                     const foundingYear = parseInt(data[5]) || 0;
                     
-                    let matchesHeadcount = (isNaN(minHeadcount) || headcount >= minHeadcount) && 
-                                         (isNaN(maxHeadcount) || headcount <= maxHeadcount);
-                    let matchesListed = listedFilter === 'all' || listed === listedFilter;
-                    let matchesYear = isNaN(yearFilter) || foundingYear >= yearFilter;
+                    const matchesHeadcount = (isNaN(minHeadcount) || headcount >= minHeadcount) && 
+                                           (isNaN(maxHeadcount) || headcount <= maxHeadcount);
+                    const matchesListed = listedFilter === 'all' || listed === listedFilter;
+                    const matchesYear = isNaN(yearFilter) || foundingYear >= yearFilter;
                     
                     return matchesHeadcount && matchesListed && matchesYear;
                 }
@@ -447,10 +525,9 @@
             
             dataTable.draw();
             updateDashboard(getFilteredData());
-        });
+        }
         
-        // Reset filters
-        $('#resetFilters').on('click', function() {
+        function resetFilters() {
             $('#minHeadcount').val(0);
             $('#maxHeadcount').val(10000);
             $('#listedFilter').val('all');
@@ -459,71 +536,56 @@
             $.fn.dataTable.ext.search.pop();
             dataTable.draw();
             updateDashboard(tableData);
-        });
+        }
         
-        // Export to CSV
-        $('#exportCSV').on('click', function() {
-            const rows = [];
-            const headers = [];
+        function exportToCSV() {
+            const headers = ['Sr No', 'Name', 'Area of Expertise', 'Headcount (Est.)', 'Listed (PSX)', 'Founding Year', 'Website'];
+            const rows = [headers];
             
-            $('#softwareHousesTable thead th').each(function(index) {
-                if (index < $('#softwareHousesTable thead th').length - 1) {
-                    headers.push($(this).text());
-                }
-            });
-            rows.push(headers.join(','));
-            
-            dataTable.rows({ search: 'applied' }).every(function() {
-                const data = this.data();
-                const row = [];
-                
+            dataTable.rows({ search: 'applied' }).data().each(function(data) {
+                const rowData = [];
                 for (let i = 0; i < data.length - 1; i++) {
                     let cellData = data[i].toString();
+                    // Handle cells with commas for CSV format
                     if (cellData.includes(',')) {
                         cellData = '"' + cellData + '"';
                     }
-                    row.push(cellData);
+                    rowData.push(cellData);
                 }
-                
-                rows.push(row.join(','));
+                rows.push(rowData);
             });
             
-            const csvContent = rows.join('\n');
+            const csvContent = rows.map(row => row.join(',')).join('\n');
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             const url = URL.createObjectURL(blob);
+            
             link.setAttribute('href', url);
             link.setAttribute('download', 'pakistani_software_houses.csv');
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        });
+        }
         
-        // Print functionality
-        $('#exportPDF').on('click', function() {
-            window.print();
-        });
-        
-        // Toggle chart display
-        $('#showChart').on('click', function() {
+        function toggleChart() {
             const chartContainer = $('#chartContainer');
             
             if (chartContainer.is(':visible')) {
                 chartContainer.hide();
-                $(this).text('Show Comparison Chart');
+                $('#showChart').text('Show Comparison Chart');
             } else {
                 chartContainer.show();
-                $(this).text('Hide Comparison Chart');
+                $('#showChart').text('Hide Comparison Chart');
                 renderComparisonChart();
             }
-        });
+        }
         
-        // Render chart
         function renderComparisonChart() {
             const ctx = document.getElementById('comparisonChart').getContext('2d');
             const filteredData = getFilteredData();
             
+            // Sort by headcount descending
             filteredData.sort((a, b) => b.headcount - a.headcount);
             
             const labels = filteredData.map(company => company.name);
@@ -585,22 +647,21 @@
             });
         }
         
-        // Company details modal
-        $('.view-details').on('click', function() {
-            const $row = $(this).closest('tr');
-            const companyName = $row.find('td:eq(1)').text();
-            const expertise = $row.find('td:eq(2)').text();
-            const headcount = $row.find('td:eq(3)').text();
-            const listed = $row.find('td:eq(4)').text();
-            const foundingYear = $row.find('td:eq(5)').text();
-            const website = $row.find('td:eq(6) a').attr('href');
+        function showCompanyDetails($row) {
+            const data = dataTable.row($row).data();
+            const companyName = data[1];
+            const expertise = data[2];
+            const headcount = data[3];
+            const listed = data[4];
+            const foundingYear = data[5];
+            const website = $($row.find('td:eq(6)')).find('a').attr('href');
             
             const currentYear = new Date().getFullYear();
             const yearsInOperation = currentYear - parseInt(foundingYear);
             
             $('#modalCompanyName').text(companyName);
             
-            let detailsHTML = `
+            const detailsHTML = `
                 <div class="company-profile">
                     <p><strong>Expertise:</strong> ${expertise}</p>
                     <p><strong>Headcount:</strong> ${headcount} employees</p>
@@ -640,12 +701,7 @@
             $('#modalCompanyDetails').html(detailsHTML);
             $('#companyAdditionalInfo').html(additionalInfo);
             $('#companyDetailsModal').show();
-        });
-        
-        // Close modal
-        $('#closeDetails').on('click', function() {
-            $('#companyDetailsModal').hide();
-        });
+        }
         
         // Set footer date and year
         const currentYear = new Date().getFullYear();
