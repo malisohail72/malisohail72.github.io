@@ -1,1 +1,280 @@
-placeholder
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Personal Finance Portal</title>
+    <script>
+        // Navigation functionality
+        function navigateTo(section) {
+            // This will be replaced with actual navigation in the future
+            alert("Navigating to " + section + " section. This page is under development.");
+        }
+
+        // Currency formatter for Pakistani Rupees
+        function formatPKR(amount) {
+            return "Rs. " + amount.toLocaleString('en-PK');
+        }
+
+        // Simple calculator for savings
+        function calculateSavings() {
+            const income = parseFloat(document.getElementById('monthlyIncome').value);
+            const expenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            
+            if (isNaN(income) || isNaN(expenses)) {
+                alert("Please enter valid numbers");
+                return;
+            }
+            
+            const savings = income - expenses;
+            const savingsRate = (savings / income) * 100;
+            
+            document.getElementById('savingsResult').innerHTML = 
+                `Monthly Savings: ${formatPKR(savings)}<br>
+                Savings Rate: ${savingsRate.toFixed(1)}%<br>
+                Annual Savings: ${formatPKR(savings * 12)}`;
+        }
+
+        // Toggle for FAQ items
+        function toggleFaq(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+        // Display date and prayer times
+        function displayDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            document.getElementById('currentDateTime').textContent = now.toLocaleDateString('en-PK', options);
+        }
+
+        // Execute when page loads
+        window.onload = function() {
+            displayDateTime();
+            
+            // Sample exchange rates
+            document.getElementById('usdRate').textContent = "USD: Rs. 278.50";
+            document.getElementById('gbpRate').textContent = "GBP: Rs. 358.20";
+            document.getElementById('eurRate').textContent = "EUR: Rs. 302.75";
+            document.getElementById('sarRate').textContent = "SAR: Rs. 74.25";
+            document.getElementById('aedRate').textContent = "AED: Rs. 75.84";
+        }
+    </script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5;">
+    <header style="background-color: #01411c; color: white; padding: 20px; text-align: center;">
+        <h1>Pakistan Personal Finance Portal</h1>
+        <p>Your guide to financial success in Pakistan</p>
+        <div id="currentDateTime" style="font-size: 14px;"></div>
+    </header>
+
+    <nav style="background-color: #006600; padding: 10px; text-align: center;">
+        <button onclick="navigateTo('home')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Home</button>
+        <button onclick="navigateTo('taxes')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Taxes</button>
+        <button onclick="navigateTo('investments')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Investments</button>
+        <button onclick="navigateTo('savings')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Savings</button>
+        <button onclick="navigateTo('income')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Increase Income</button>
+        <button onclick="navigateTo('Islamic')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Islamic Finance</button>
+        <button onclick="navigateTo('tools')" style="margin: 5px; padding: 8px 15px; cursor: pointer;">Financial Tools</button>
+    </nav>
+
+    <main style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <section style="margin-bottom: 30px;">
+            <h2>Welcome to Your Financial Journey</h2>
+            <p>Assalam-o-Alaikum! This portal is designed specifically for Pakistani citizens looking to improve their financial situation. Whether you're trying to understand your tax obligations, find the best investment options, save more effectively, or increase your income, we have resources to help you succeed.</p>
+            
+            <div style="background-color: #ffffcc; border-left: 4px solid #ffcc00; padding: 15px; margin: 20px 0;">
+                <h3 style="margin-top: 0;">Current Economic Indicators</h3>
+                <div style="display: flex; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; margin: 5px;">
+                        <h4>Exchange Rates</h4>
+                        <p id="usdRate"></p>
+                        <p id="gbpRate"></p>
+                        <p id="eurRate"></p>
+                        <p id="sarRate"></p>
+                        <p id="aedRate"></p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; margin: 5px;">
+                        <h4>Key Interest Rates</h4>
+                        <p>SBP Policy Rate: 22.00%</p>
+                        <p>Average Savings Rate: 14.00%</p>
+                        <p>Inflation Rate: 19.50%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+            <!-- Tax Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Tax Planning</h3>
+                <p>Understanding FBR tax regulations is crucial for financial planning. Learn about income tax slabs, filing deadlines, and tax-saving strategies.</p>
+                <ul>
+                    <li>Income Tax Brackets</li>
+                    <li>Sales Tax Regulations</li>
+                    <li>Property Tax Guidelines</li>
+                    <li>Tax Filing Deadlines</li>
+                    <li>Deductions & Exemptions</li>
+                </ul>
+                <button onclick="navigateTo('taxes')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Explore Tax Resources</button>
+            </div>
+            
+            <!-- Investment Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Investment Options</h3>
+                <p>Discover various investment avenues available to Pakistani citizens, from government savings schemes to stocks and real estate.</p>
+                <ul>
+                    <li>National Savings Schemes</li>
+                    <li>Pakistan Stock Exchange</li>
+                    <li>Mutual Funds</li>
+                    <li>Real Estate Investment</li>
+                    <li>Government Bonds</li>
+                </ul>
+                <button onclick="navigateTo('investments')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Explore Investment Options</button>
+            </div>
+            
+            <!-- Saving Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Smart Saving Strategies</h3>
+                <p>Learn effective methods to save money in Pakistan's economic conditions and build financial security.</p>
+                <ul>
+                    <li>Emergency Fund Building</li>
+                    <li>Budgeting Techniques</li>
+                    <li>Expense Tracking Tools</li>
+                    <li>Savings Automation</li>
+                    <li>Saving for Major Life Events</li>
+                </ul>
+                <button onclick="navigateTo('savings')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Explore Savings Strategies</button>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+            <!-- Income Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Increase Your Income</h3>
+                <p>Discover opportunities and strategies to enhance your earning potential in Pakistan's economy.</p>
+                <ul>
+                    <li>Remote Work Opportunities</li>
+                    <li>Freelancing Platforms</li>
+                    <li>Side Business Ideas</li>
+                    <li>Skill Development Resources</li>
+                    <li>Career Advancement Strategies</li>
+                </ul>
+                <button onclick="navigateTo('income')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Explore Income Growth</button>
+            </div>
+            
+            <!-- Islamic Finance Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Islamic Finance</h3>
+                <p>Shariah-compliant financial solutions for Muslims seeking halal investment and banking options.</p>
+                <ul>
+                    <li>Islamic Banking Accounts</li>
+                    <li>Shariah-Compliant Investments</li>
+                    <li>Sukuk (Islamic Bonds)</li>
+                    <li>Islamic Mutual Funds</li>
+                    <li>Zakat Calculator and Guide</li>
+                </ul>
+                <button onclick="navigateTo('Islamic')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Explore Islamic Finance</button>
+            </div>
+            
+            <!-- Financial Tools Card -->
+            <div style="flex: 1; min-width: 300px; background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px;">
+                <h3>Financial Tools</h3>
+                <p>Use our calculators and tools to plan your financial journey effectively.</p>
+                <ul>
+                    <li>Loan EMI Calculator</li>
+                    <li>Retirement Planning Tool</li>
+                    <li>Investment Return Calculator</li>
+                    <li>Budget Planner</li>
+                    <li>Zakat Calculator</li>
+                </ul>
+                <button onclick="navigateTo('tools')" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Access Financial Tools</button>
+            </div>
+        </div>
+
+        <!-- Quick Savings Calculator -->
+        <section style="background-color: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 30px;">
+            <h3>Quick Savings Calculator</h3>
+            <p>Find out how much you can save each month based on your income and expenses.</p>
+            
+            <div style="margin: 15px 0;">
+                <label for="monthlyIncome">Monthly Income (PKR): </label>
+                <input type="number" id="monthlyIncome" placeholder="Enter your monthly income" style="padding: 8px; width: 200px;">
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <label for="monthlyExpenses">Monthly Expenses (PKR): </label>
+                <input type="number" id="monthlyExpenses" placeholder="Enter your monthly expenses" style="padding: 8px; width: 200px;">
+            </div>
+            
+            <button onclick="calculateSavings()" style="background-color: #01411c; color: white; border: none; padding: 8px 15px; cursor: pointer;">Calculate Savings</button>
+            
+            <div id="savingsResult" style="margin-top: 15px; padding: 10px; background-color: #f9f9f9; border-left: 4px solid #01411c;"></div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section style="margin-bottom: 30px;">
+            <h3>Frequently Asked Questions</h3>
+            
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h4 onclick="toggleFaq('faq1')" style="cursor: pointer;">How do I know if I need to file income tax in Pakistan?</h4>
+                <div id="faq1" style="display: none; padding: 10px; background-color: #f9f9f9;">
+                    <p>In Pakistan, you need to file income tax if your annual income exceeds Rs. 600,000. However, different tax slabs apply based on your income level and profession. Salaried individuals, business owners, and freelancers have different filing requirements.</p>
+                </div>
+            </div>
+            
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h4 onclick="toggleFaq('faq2')" style="cursor: pointer;">What are the best savings options for short-term goals in Pakistan?</h4>
+                <div id="faq2" style="display: none; padding: 10px; background-color: #f9f9f9;">
+                    <p>For short-term goals (1-3 years), consider high-interest savings accounts, term deposit certificates from banks, short-term government securities, or National Savings schemes like Bahbood Savings Certificates or Defense Savings Certificates.</p>
+                </div>
+            </div>
+            
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h4 onclick="toggleFaq('faq3')" style="cursor: pointer;">How can I start investing in Pakistan Stock Exchange with limited funds?</h4>
+                <div id="faq3" style="display: none; padding: 10px; background-color: #f9f9f9;">
+                    <p>You can start investing in PSX with as little as Rs. 5,000-10,000. First, open an account with a broker, get a CDC sub-account, and complete KYC requirements. Consider starting with mutual funds which allow investment with smaller amounts before directly buying individual stocks.</p>
+                </div>
+            </div>
+            
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h4 onclick="toggleFaq('faq4')" style="cursor: pointer;">What are the best online earning opportunities for Pakistanis?</h4>
+                <div id="faq4" style="display: none; padding: 10px; background-color: #f9f9f9;">
+                    <p>Pakistanis can earn online through freelancing platforms like Fiverr, Upwork, and Freelancer. Popular skills include graphic design, content writing, web development, digital marketing, and virtual assistance. Additionally, content creation on YouTube, teaching English online, and e-commerce are viable options.</p>
+                </div>
+            </div>
+            
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                <h4 onclick="toggleFaq('faq5')" style="cursor: pointer;">How does Islamic banking differ from conventional banking in Pakistan?</h4>
+                <div id="faq5" style="display: none; padding: 10px; background-color: #f9f9f9;">
+                    <p>Islamic banking operates according to Shariah principles, which prohibit interest (riba), gambling (maysir), and excessive uncertainty (gharar). Instead of charging interest, Islamic banks earn through profit-sharing arrangements (Mudarabah), partnerships (Musharakah), cost-plus financing (Murabaha), and leasing (Ijara). All products are approved by Shariah advisors.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: #01411c; color: white; text-align: center; padding: 20px; margin-top: 30px;">
+        <p>Pakistan Personal Finance Portal © 2025</p>
+        <p>Disclaimer: Information provided is for educational purposes only and does not constitute financial advice. Always consult with qualified financial professionals before making financial decisions.</p>
+        
+        <div style="margin-top: 15px;">
+            <button onclick="navigateTo('about')" style="margin: 5px; padding: 5px 10px; cursor: pointer;">About Us</button>
+            <button onclick="navigateTo('contact')" style="margin: 5px; padding: 5px 10px; cursor: pointer;">Contact</button>
+            <button onclick="navigateTo('privacy')" style="margin: 5px; padding: 5px 10px; cursor: pointer;">Privacy Policy</button>
+            <button onclick="navigateTo('terms')" style="margin: 5px; padding: 5px 10px; cursor: pointer;">Terms of Use</button>
+        </div>
+    </footer>
+</body>
+</html>
