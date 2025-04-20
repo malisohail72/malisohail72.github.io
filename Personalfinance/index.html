@@ -9,49 +9,93 @@
     
     
     <style>
-    
-    /* Global Styles */
+  
+
+
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Using a slightly more refined font stack */
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 :root {
-    --primary-color: #01411c;
-    --primary-light: #025e28;
-    --primary-dark: #012b13;
-    --secondary-color: #f5f5f5;
-    --accent-color: #ffcc00;
-    --accent-light: #ffffcc;
-    --text-color: #333333;
-    --text-light: #666666;
-    --text-white: #ffffff;
-    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
-    --border-radius: 8px;
-    --transition: all 0.3s ease;
+    --primary-color: #01411c; /* Deep Forest Green */
+    --primary-light: #025e28; /* Lighter Forest Green */
+    --primary-dark: #012b13;  /* Darker Forest Green */
+    --secondary-color: #f5f5f5; /* Very Light Gray */
+    --accent-color: #ffc107; /* Changed to a slightly richer gold/yellow */
+    --accent-light: #fff8e1; /* Very Pale Yellow */
+    --text-color: #333333;   /* Dark Gray */
+    --text-light: #555555;   /* Medium Gray - increased contrast slightly */
+    --text-white: #ffffff;   /* White */
+    --border-color: #e0e0e0; /* Subtle border color */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04); /* Softer shadows */
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-std: all 0.3s ease-in-out;
+}
+
+/* Add smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #f9fafb; /* Slightly different light background */
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.7; /* Slightly increased line-height for readability */
+    font-size: 16px; /* Base font size */
 }
+
+/* General Link Styles (assuming <a> tags might be used) */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+a:hover, a:focus {
+    color: var(--primary-light);
+    text-decoration: underline;
+    outline: none; /* Remove default outline if using custom focus */
+}
+
+/* Focus visible for keyboard navigation - important for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); /* Subtle glow */
+}
+/* Remove outline for mouse interactions if :focus-visible is supported */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
 
 /* Header Styles */
 header {
+    /* Slightly softer gradient */
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     color: var(--text-white);
-    padding: 1.5rem 0;
+    padding: 2rem 1rem; /* Increased padding */
     text-align: center;
     box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
+    border-bottom: 3px solid var(--primary-dark); /* Add a subtle bottom border */
 }
 
+/* Subtle pattern */
 header::before {
     content: '';
     position: absolute;
@@ -59,382 +103,489 @@ header::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     opacity: 0.1;
+    pointer-events: none; /* Ensure pattern doesn't interfere with interactions */
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.8rem; /* Slightly larger */
+    margin-bottom: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px; /* More spacing */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
 }
 
 header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto 0.5rem;
+    font-size: 1.15rem;
+    opacity: 0.95;
+    max-width: 650px;
+    margin: 0 auto 1rem; /* Increased bottom margin */
 }
 
 #currentDateTime {
     font-size: 0.9rem;
-    opacity: 0.8;
-    margin-top: 0.5rem;
+    opacity: 0.85;
+    margin-top: 1rem;
+    font-style: italic;
 }
 
-/* Navigation Styles */
+/* Navigation Styles - More engaging buttons */
 nav {
     background-color: var(--text-white);
-    padding: 0.8rem;
+    padding: 0.8rem 1rem; /* Adjusted padding */
     text-align: center;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000; /* Ensure it's above other content */
     box-shadow: var(--shadow-sm);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color); /* Softer border */
 }
 
 nav button {
-    background-color: transparent;
+    /* Give buttons a subtle background and border initially */
+    background-color: rgba(1, 65, 28, 0.05); /* Very light primary tint */
     color: var(--primary-color);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 0.6rem 1.2rem;
-    margin: 0.3rem;
-    font-weight: 500;
+    border: 1px solid rgba(1, 65, 28, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 0.7rem 1.4rem; /* Slightly larger padding */
+    margin: 0.4rem; /* Consistent margin */
+    font-weight: 600; /* Bolder text */
     font-size: 0.95rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-std); /* Use standard transition */
+    letter-spacing: 0.5px;
 }
 
 nav button:hover {
     background-color: var(--primary-color);
     color: var(--text-white);
-    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    transform: translateY(-3px) scale(1.03); /* More noticeable hover effect */
+    box-shadow: var(--shadow-md);
+}
+
+nav button:active {
+     transform: translateY(-1px) scale(1); /* Subtle press effect */
+     box-shadow: var(--shadow-sm);
 }
 
 /* Main Content Styles */
 main {
-    padding: 2rem;
+    padding: 2.5rem 1.5rem; /* Increased padding */
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 1rem auto 0; /* Add margin top */
 }
 
 section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* Increased spacing between sections */
 }
 
 section h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
+    font-size: 2.2rem; /* Larger section titles */
+    margin-bottom: 1.5rem; /* More space below title */
+    color: var(--primary-dark); /* Use darker primary for titles */
     position: relative;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
+    font-weight: 700;
 }
 
+/* Refined underline effect */
 section h2::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-    border-radius: 3px;
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, #ffda63 100%); /* Gradient underline */
+    border-radius: 2px;
 }
 
 section p {
     color: var(--text-light);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     max-width: 800px;
+    font-size: 1.05rem; /* Slightly larger paragraph text */
 }
 
-/* Economic Indicators Section */
+/* Economic Indicators Section - More visual separation */
 .economic-indicators {
     background-color: var(--accent-light);
-    border-left: 4px solid var(--accent-color);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border-left: 5px solid var(--accent-color);
+    padding: 2rem; /* Increased padding */
+    margin: 2rem 0; /* Increased margin */
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0; /* Larger radius */
     box-shadow: var(--shadow-sm);
 }
 
 .economic-indicators h3 {
     margin-top: 0;
+    margin-bottom: 1.5rem; /* More space below heading */
     color: var(--primary-dark);
+    font-size: 1.4rem; /* Larger heading */
 }
 
 .indicators-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    display: grid; /* Use grid for better alignment */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive grid */
+    gap: 1.8rem; /* Increased gap */
 }
 
 .indicator-box {
-    flex: 1;
-    min-width: 200px;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 1rem;
-    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly more opaque */
+    padding: 1.5rem; /* Increased padding */
+    border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color); /* Subtle border */
+    transition: var(--transition-std);
+}
+
+.indicator-box:hover {
+    transform: translateY(-4px); /* Hover effect */
+    box-shadow: var(--shadow-md);
 }
 
 .indicator-box h4 {
     color: var(--primary-color);
-    margin-bottom: 0.8rem;
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+    font-weight: 600;
 }
 
 .indicator-box p {
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
+    margin: 0.6rem 0;
+    font-size: 1rem;
+    color: var(--text-light); /* Ensure consistent text color */
 }
 
-/* Card Styles */
+/* Card Styles - Enhanced visual appeal */
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem; /* Increased gap */
+    margin-bottom: 3rem;
 }
 
 .card {
-    flex: 1;
-    min-width: 300px;
     background-color: var(--text-white);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg); /* Larger radius */
     box-shadow: var(--shadow-md);
-    padding: 1.5rem;
-    transition: var(--transition);
-    border-top: 4px solid var(--primary-color);
+    padding: 2rem; /* Increased padding */
+    transition: var(--transition-std);
+    border-top: 5px solid var(--primary-color); /* Thicker top border */
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border-color); /* Add subtle border */
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* More pronounced lift */
     box-shadow: var(--shadow-lg);
+    border-top-color: var(--primary-light); /* Change border color on hover */
 }
 
+/* Refined corner element */
 .card::before {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
     background-color: var(--primary-color);
-    opacity: 0.05;
-    border-radius: 0 0 0 100%;
+    opacity: 0.04; /* Make it more subtle */
+    border-radius: 50%;
+    transform: rotate(45deg);
+    transition: var(--transition-std);
+    z-index: 0;
+}
+.card:hover::before {
+    opacity: 0.08;
+    transform: rotate(60deg) scale(1.1);
 }
 
 .card h3 {
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    color: var(--primary-dark);
+    font-size: 1.5rem; /* Larger heading */
+    margin-bottom: 1.2rem;
     position: relative;
+    z-index: 1; /* Ensure text is above pseudo-element */
+    font-weight: 600;
 }
 
 .card p {
     color: var(--text-light);
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .card ul {
     list-style-type: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem; /* More space below list */
+    position: relative;
+    z-index: 1;
 }
 
 .card ul li {
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 0; /* Adjusted padding */
+    border-bottom: 1px dashed var(--border-color); /* Lighter dashed line */
     color: var(--text-light);
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 2rem; /* More space for icon */
+    font-size: 0.95rem;
 }
 
 .card ul li::before {
-    content: '✓';
+    content: '✔'; /* Unicode check mark */
     position: absolute;
     left: 0;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--primary-light);
     font-weight: bold;
+    font-size: 1.2rem; /* Slightly larger icon */
 }
 
 .card ul li:last-child {
     border-bottom: none;
 }
 
+/* Enhanced Card Button */
 .card button {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); /* Gradient background */
     color: var(--text-white);
     border: none;
-    border-radius: var(--border-radius);
-    padding: 0.7rem 1.2rem;
-    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    padding: 0.8rem 1.6rem; /* Generous padding */
+    font-weight: 600; /* Bolder text */
+    font-size: 1rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-std);
     display: inline-block;
-    margin-top: 0.5rem;
+    margin-top: 1rem; /* More space above button */
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
 }
 
 .card button:hover {
-    background-color: var(--primary-light);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)); /* Darker gradient on hover */
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+
+.card button:active {
+    transform: translateY(-1px) scale(1);
     box-shadow: var(--shadow-sm);
 }
 
-/* Calculator Section */
+
+/* Calculator Section - Cleaner look */
 .calculator-section {
     background-color: var(--text-white);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
-    padding: 2rem;
-    margin-bottom: 2.5rem;
-    border-left: 4px solid var(--primary-color);
+    padding: 2.5rem; /* More padding */
+    margin-bottom: 3rem;
+    border-left: 5px solid var(--primary-color);
+    border: 1px solid var(--border-color); /* Add subtle overall border */
 }
 
 .calculator-section h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .calculator-section p {
     color: var(--text-light);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem; /* More space below intro */
+    font-size: 1rem;
 }
 
 .input-group {
-    margin: 1.2rem 0;
+    margin: 1.5rem 0; /* Increased margin */
     display: flex;
     flex-direction: column;
+    gap: 0.5rem; /* Add gap between label and input */
 }
 
 .input-group label {
-    margin-bottom: 0.5rem;
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600; /* Bolder labels */
+    font-size: 0.95rem;
 }
 
 .input-group input {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
+    padding: 0.9rem 1rem; /* Comfortable padding */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
     font-size: 1rem;
     width: 100%;
-    max-width: 300px;
-    transition: var(--transition);
+    max-width: 350px; /* Slightly wider max-width */
+    transition: var(--transition-fast);
+    background-color: #fdfdfd; /* Very light input background */
 }
 
+/* Enhanced input focus state */
 .input-group input:focus {
     outline: none;
     border-color: var(--primary-light);
-    box-shadow: 0 0 0 2px rgba(1, 65, 28, 0.1);
+    box-shadow: 0 0 0 3px rgba(1, 94, 40, 0.15); /* Subtle glow using primary color */
+    background-color: var(--text-white);
 }
 
+/* Enhanced Calculator Button */
 .calculator-section button {
-    background-color: var(--primary-color);
-    color: var(--text-white);
+    background: linear-gradient(135deg, var(--accent-color), #ffda63); /* Use accent gradient */
+    color: var(--primary-dark); /* Dark text on yellow */
     border: none;
-    border-radius: var(--border-radius);
-    padding: 0.8rem 1.5rem;
-    font-weight: 500;
-    font-size: 1rem;
+    border-radius: var(--border-radius-md);
+    padding: 0.9rem 1.8rem; /* Generous padding */
+    font-weight: 700; /* Very bold */
+    font-size: 1.05rem; /* Slightly larger */
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-std);
+    margin-top: 1rem; /* Add space above button */
+    box-shadow: var(--shadow-sm);
+    letter-spacing: 0.5px;
 }
 
 .calculator-section button:hover {
-    background-color: var(--primary-light);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #ffc107, #ffecb3); /* Lighter accent on hover */
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+.calculator-section button:active {
+    transform: translateY(-1px) scale(1);
     box-shadow: var(--shadow-sm);
 }
 
+
 #savingsResult {
-    margin-top: 1.5rem;
-    padding: 1.2rem;
-    background-color: #f9f9f9;
-    border-left: 4px solid var(--primary-color);
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
+    margin-top: 2rem; /* More space above result */
+    padding: 1.5rem; /* More padding */
+    background-color: var(--accent-light); /* Use light accent for result */
+    border-left: 5px solid var(--accent-color);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    display: none; /* Keep hidden initially */
+    animation: fadeIn 0.5s ease-in-out forwards; /* Ensure it stays visible */
+    border: 1px solid #ffe082; /* Add subtle border */
+    color: var(--primary-dark);
+    font-weight: 500;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* FAQ Section */
+/* FAQ Section - Smoother interaction */
 .faq-section {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .faq-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    font-size: 1.8rem; /* Slightly larger */
+    margin-bottom: 2rem;
+    color: var(--primary-dark);
 }
 
 .faq-item {
     margin: 1rem 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color); /* Lighter border */
     padding-bottom: 1rem;
+}
+.faq-item:last-child {
+    border-bottom: none;
 }
 
 .faq-question {
     cursor: pointer;
-    padding: 1rem;
+    padding: 1.2rem 1.5rem; /* More padding */
     background-color: var(--text-white);
-    border-radius: var(--border-radius);
-    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    font-weight: 600; /* Bolder question */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: var(--transition);
+    transition: var(--transition-fast);
     box-shadow: var(--shadow-sm);
+    border: 1px solid transparent; /* Prepare for border change */
+    position: relative; /* For pseudo-element */
 }
 
 .faq-question:hover {
-    background-color: rgba(1, 65, 28, 0.05);
+    background-color: rgba(1, 65, 28, 0.03); /* Very subtle hover */
+    border-color: var(--border-color);
 }
 
+/* Animated Plus/Minus Icon */
 .faq-question::after {
     content: '+';
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Larger icon */
     color: var(--primary-color);
+    transition: transform 0.3s ease-in-out; /* Animate transform */
+    font-weight: 300; /* Lighter weight for icon */
+}
+
+.faq-question.active {
+    background-color: rgba(1, 65, 28, 0.05); /* Slightly darker when active */
+    border-color: var(--primary-light);
 }
 
 .faq-question.active::after {
-    content: '-';
+    content: '−'; /* Minus sign */
+    transform: rotate(180deg); /* Rotate the plus */
 }
 
 .faq-answer {
     display: none;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-    margin-top: 0.2rem;
-    animation: fadeIn 0.5s ease-in-out;
+    padding: 1.5rem; /* More padding */
+    background-color: #fdfdfd; /* Slightly off-white background */
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    margin-top: -1px; /* Overlap slightly with question border */
+    border: 1px solid var(--border-color);
+    border-top: none; /* Remove top border */
+    animation: slideDown 0.4s ease-in-out forwards; /* Use slideDown animation */
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.8; /* More space for answer text */
 }
+
+/* Keyframes for FAQ answer */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px; /* Allow content to expand */
+  }
+}
+
 
 /* Footer Styles */
 footer {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-    color: var(--text-white);
+    color: rgba(255, 255, 255, 0.9); /* Slightly transparent white text */
     text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 3rem;
+    padding: 3rem 1rem; /* Increased padding */
+    margin-top: 4rem; /* More space above footer */
     position: relative;
     overflow: hidden;
 }
 
+/* Use the same subtle pattern as header */
 footer::before {
     content: '';
     position: absolute;
@@ -442,112 +593,168 @@ footer::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     opacity: 0.1;
+    pointer-events: none;
 }
 
 footer p {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
     opacity: 0.9;
     max-width: 800px;
-    margin: 0.5rem auto;
+    font-size: 0.95rem; /* Slightly larger footer text */
 }
 
 .footer-links {
     margin-top: 1.5rem;
+    margin-bottom: 1rem; /* Add space below links */
 }
 
-footer button {
+/* Style footer buttons/links more distinctly */
+footer button, footer a.button-link /* Add class if using links */ {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-white);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-    margin: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Add subtle border */
+    border-radius: var(--border-radius-md);
+    padding: 0.6rem 1.2rem; /* Consistent padding */
+    margin: 0.4rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-fast);
     font-size: 0.9rem;
+    font-weight: 500; /* Make text slightly bolder */
+    display: inline-block; /* Ensure proper spacing/layout */
+    text-decoration: none; /* Remove underline if it's an <a> */
 }
 
-footer button:hover {
+footer button:hover, footer a.button-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
 }
 
+footer button:focus-visible, footer a.button-link:focus-visible {
+     outline: 2px solid var(--accent-light); /* Lighter outline for dark background */
+     outline-offset: 2px;
+     box-shadow: 0 0 0 3px rgba(255, 248, 225, 0.3); /* Subtle glow using accent light */
+}
+footer button:focus:not(:focus-visible),
+footer a.button-link:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
 /* Responsive Styles */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8rem;
+@media (max-width: 992px) {
+    /* Adjust grid for tablets */
+    .indicators-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-    
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 15px; /* Slightly smaller base font on mobile */
+    }
+    header h1 {
+        font-size: 2rem; /* Adjust header size */
+    }
+    header p {
+        font-size: 1rem;
+    }
     nav {
-        padding: 0.5rem;
+        padding: 0.6rem 0.5rem;
+        /* Enable horizontal scrolling for many buttons */
         overflow-x: auto;
         white-space: nowrap;
+        /* Hide scrollbar visually but allow scrolling */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
-    
+    nav::-webkit-scrollbar { /* Chrome, Safari, Opera */
+        display: none;
+    }
     nav button {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.6rem 1rem; /* Adjust nav button padding */
+        font-size: 0.9rem;
     }
-    
     main {
-        padding: 1.5rem;
+        padding: 2rem 1rem; /* Adjust main padding */
     }
-    
+    section h2 {
+        font-size: 1.8rem; /* Adjust section title size */
+    }
+    .card-container {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+        gap: 1.5rem;
+    }
     .card {
-        min-width: 100%;
+        min-width: auto; /* Override previous min-width */
+        padding: 1.5rem; /* Adjust card padding */
     }
-    
     .input-group input {
-        max-width: 100%;
+        max-width: 100%; /* Allow input to take full width */
+    }
+    .calculator-section {
+        padding: 2rem 1.5rem; /* Adjust calculator padding */
+    }
+    .faq-question {
+        padding: 1rem 1.2rem; /* Adjust FAQ padding */
+    }
+    footer {
+        padding: 2rem 1rem; /* Adjust footer padding */
     }
 }
 
 /* Animations */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(1, 65, 28, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(1, 65, 28, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(1, 65, 28, 0); }
 }
 
 .highlight-pulse {
+    /* Apply pulse to elements needing extra attention */
     animation: pulse 2s infinite;
+    border-radius: var(--border-radius-md); /* Ensure pulse respects border radius */
 }
 
-/* Additional JavaScript required adjustments */
+/* JavaScript required adjustments (placeholders) */
+/* Ensure result area appears correctly when populated */
 #savingsResult:not(:empty) {
     display: block;
 }
 
+/* Ensure FAQ answer shows when question is active */
 .faq-question.active + .faq-answer {
     display: block;
+    /* Animation is handled by keyframes now */
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px; /* Slightly wider */
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--primary-light);
     border-radius: 10px;
+    border: 2px solid #f1f1f1; /* Add track color border for contrast */
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
 }
+    
+    
     
     </style>
     
