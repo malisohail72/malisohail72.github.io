@@ -502,18 +502,23 @@
         </section>
     </main>
 
+
+
+
+
+
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>Fly Abroad India</h4>
-                    <p>Your trusted partner for international relocation from India since 2020, providing free comprehensive immigration guidance and settlement services.</p>
-                    <p><strong>Contact:</strong> <a href="tel:+91XXXXXXXXXX">+91-98765-43210</a><br> <strong>Email:</strong> <a href="mailto:info@flyabroadindia.com">info@flyabroadindia.com</a><br>
-                    </p>
+             <div class="footer-content">
+                 <div class="footer-column">
+                    <h4>Fly Abroad</h4>
+                    <p>Your trusted partner for international relocation from Pakistan since 2020, providing free comprehensive immigration guidance and settlement services.</p>
+                     <p><strong>Contact:</strong> <a href="tel:+92XXXXXXXXXX">+92-303-0906606</a><br> <strong>Email:</strong> <a href="mailto:info@yourwebsite.com">muhammadalisohail7996@gmail.com</a><br>
+                     </p>
                 </div>
                 <div class="footer-column">
                     <h4>Quick Links</h4>
-                    <ul class="footer-links">
+                     <ul class="footer-links">
                         <li><a href="/">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#destinations">Destinations</a></li>
@@ -521,7 +526,67 @@
                         <li><a href="#resources">Resources</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                         <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="destinationpicker.html">Destination Selection</a></li>
+                        <li><a href="documentschecklist.html">Document Checklist</a></li>
+                        <li><a href="#services">Study Visa Guidance</a></li>
+                        <li><a href="#services">Work Visa Assistance</a></li>
+                        <li><a href="investmentpathways.html">Investor Visas</a></li>
+                         <li><a href="digitalnomad.html">Digital Nomad Visas</a></li>
+                        <li><a href="familyimmigration.html">Family Immigration</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-column">
+                    <h4>Popular Destinations</h4>
+                    <ul class="footer-links">
+                        <li><a href="uae.html">UAE</a></li>
+                        <li><a href="australia.html">Australia</a></li>
+                        <li><a href="uk.html">United Kingdom</a></li>
+                        <li><a href="germany.html">Germany</a></li>
+                        <li><a href="canada.html">Canada</a></li>
+                        <li><a href="destinations.html">Other Destinations</a></li>
+                    </ul>
+                </div>
+            </div>
+             <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2025</span> Fly Abroad. All Rights Reserved.</p>
+                 <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Testimonial Slider
+            const testimonials = document.querySelectorAll('.testimonial-item');
+            let currentTestimonialIndex = 0;
+            const intervalTime = 6000; // Time in milliseconds (5 seconds)
+
+            function showNextTestimonial() {
+                if (testimonials.length > 1) { // Check if there's more than one testimonial
+                    testimonials[currentTestimonialIndex].classList.remove('active');
+                    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+                    testimonials[currentTestimonialIndex].classList.add('active');
+                }
+            }
+
+            if (testimonials.length > 1) {
+                 setInterval(showNextTestimonial, intervalTime);
+            }
+
+            // Dynamic Copyright Year
+             const yearSpan = document.getElementById('current-year');
+             if (yearSpan) {
+                 yearSpan.textContent = new Date().getFullYear();
+             }
+        });
+    </script>
+
+</body>
+
+</html>
