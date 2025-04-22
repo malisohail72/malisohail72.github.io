@@ -1181,6 +1181,195 @@ img, svg {
 
 /* Media Queries for Responsiveness */
 
+    /* Responsive Adjustments */
+        @media (max-width: 992px) { /* Adjust breakpoint */
+             .services-grid, .destinations-grid, .resources-grid {
+                  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 0; /* Reduce header padding */
+            }
+            .nav-links {
+                /* NOTE: Links are hidden, but no mobile menu mechanism is styled. */
+                /* You would need JS and more CSS for a hamburger menu. */
+                display: none; 
+            }
+            
+            .hero {
+                padding: 80px 0; /* Reduce hero padding */
+            }
+            .hero h2 {
+                font-size: 32px;
+            }
+            .hero p {
+                 font-size: 16px;
+            }
+            
+            section {
+                 padding: 60px 0; /* Reduce section padding */
+            }
+            .section-title h2 {
+                font-size: 28px;
+            }
+            .section-title {
+                 margin-bottom: 40px; /* Reduce space */
+            }
+            
+            .breadcrumb {
+                padding: 8px 0;
+            }
+            
+            .breadcrumb-links a, .breadcrumb-links .current {
+                font-size: 12px;
+            }
+            .breadcrumb-links li:not(:last-child)::after {
+                 margin-left: 5px;
+                 margin-right: 5px; /* Reduce separator space */
+            }
+
+            .footer-content {
+                gap: 30px; /* Reduce gap */
+            }
+            .footer-column {
+                 min-width: 100%; /* Stack columns */
+                 text-align: center; /* Center text */
+            }
+            .footer-column h4::after {
+                 left: 50%; /* Center underline */
+                 transform: translateX(-50%);
+            }
+            .footer-links {
+                 text-align: center;
+            }
+        }
+        
+        
+        
+        
+        
+        /* ========= FAQ Section Styles ========= */
+.faq-section {
+    /* Uses existing 'section' padding */
+    background-color: var(--light); /* Or var(--accent) if preferred */
+}
+
+.faq-container {
+    max-width: 900px; /* Constrain width for readability */
+    margin: 0 auto; /* Center the container */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Ensures child borders don't stick out */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+}
+.faq-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 25px;
+    background-color: var(--light);
+    border: none;
+    text-align: left;
+    font-size: 18px; /* Slightly larger question font */
+    font-weight: 600; /* Bolder question */
+    color: var(--primary);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover,
+.faq-question:focus {
+    background-color: var(--accent);
+    outline: none; /* Remove default focus outline if desired */
+}
+
+.faq-question span:first-child {
+    flex-grow: 1; /* Allow text to take available space */
+    margin-right: 15px; /* Space between text and icon */
+}
+
+.faq-toggle-icon {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--secondary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.faq-answer {
+    max-height: 0; /* Initially hidden */
+    overflow: hidden;
+    background-color: var(--accent); /* Subtle background for answer */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition */
+    padding: 0 25px; /* Add padding when open, but 0 height hides it */
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.faq-answer p {
+    margin: 0; /* Reset paragraph margin if needed */
+     padding: 20px 0; /* Add vertical padding inside when open */
+}
+
+/* --- Styles for Active/Open State --- */
+.faq-item.active .faq-question {
+    background-color: var(--accent); /* Keep hover/focus style when open */
+}
+
+.faq-item.active .faq-toggle-icon {
+    transform: rotate(45deg); /* Change '+' to 'x' */
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Make large enough for content */
+    /* Padding is handled by the transition */
+    padding: 0 25px; /* Ensure horizontal padding is consistent */
+    /* The padding on the p inside provides vertical space */
+    border-top: 1px dashed var(--border-color); /* Separator line */
+}
+
+/* --- Accessibility Focus --- */
+.faq-question:focus-visible { /* Modern focus styling */
+   outline: 2px solid var(--secondary);
+   outline-offset: 2px;
+}
+
+/* --- Optional: Responsive Adjustments for FAQ --- */
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    .faq-toggle-icon {
+        font-size: 20px;
+    }
+    .faq-answer {
+        padding: 0 20px;
+        font-size: 15px;
+    }
+     .faq-item.active .faq-answer {
+        padding: 0 20px;
+    }
+     .faq-answer p {
+        padding: 15px 0;
+    }
+}
+        
+        
+    
+    
     
     
     
