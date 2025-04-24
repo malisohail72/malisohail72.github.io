@@ -65,9 +65,15 @@
       header nav {
         max-width: var(--container-width); margin: auto; padding: 0 20px;
         display: flex; justify-content: space-between; align-items: center;
+        position: relative; /* Needed for absolute positioning in mobile if used */
       }
-      header .logo { font-size: 1.5rem; font-weight: 700; }
-      header nav ul { display: flex; }
+      header .logo { font-size: 1.5rem; font-weight: 700; z-index: 101; /* Ensure logo stays above mobile menu if absolute */ }
+
+      /* Desktop Navigation List */
+      header nav ul#nav-menu {
+        display: flex;
+        align-items: center; /* Align items vertically in the flex container */
+      }
       header nav ul li { margin-left: 25px; }
       header nav ul li a {
         color: var(--light-text);
@@ -83,6 +89,37 @@
         transform: translateY(-2px); /* Subtle lift */
         text-decoration: none;
       }
+
+      /* Hamburger Toggle Button */
+      #nav-toggle {
+        display: none; /* Hidden by default on larger screens */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101; /* Ensure toggle is clickable above menu */
+      }
+      #nav-toggle:focus { outline: 1px dashed var(--light-text); outline-offset: 2px; } /* Basic focus style */
+      #nav-toggle span {
+        display: block; /* Ensure spans behave correctly */
+        width: 30px;
+        height: 3px;
+        background: var(--light-text);
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out; /* Smoother transition for animation */
+        position: relative; /* Needed for transform-origin */
+        transform-origin: center; /* Rotate around center */
+      }
+
+      /* Hamburger Icon Animation (to 'X') */
+      #nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      #nav-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(-20px);} /* Fade and slide out */
+      #nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
 
       /* --- Hero Section --- */
       #hero {
@@ -201,10 +238,56 @@
         h2 { font-size: 1.75rem; }
         h3 { font-size: 1.3rem; }
         .container, header nav { padding: 0 15px; }
-        header nav { flex-direction: column; align-items: flex-start; }
-        header nav ul { margin-top: 15px; flex-direction: column; width: 100%; align-items: stretch; }
-        header nav ul li { margin: 5px 0; }
-        header nav ul li a { display: block; text-align: center; padding: 10px; }
+
+        /* Show Hamburger Toggle */
+        #nav-toggle { display: flex; }
+
+        /* Mobile Navigation Menu Styling */
+        header nav ul#nav-menu {
+            /* Hide by default using max-height for transition */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding var(--transition-speed) ease-out; /* Smooth transition */
+
+            /* Style as a dropdown block */
+            position: absolute; /* Take out of flow */
+            top: 100%; /* Position below header */
+            left: 0;
+            right: 0;
+            background-color: var(--primary-darker); /* Darker background for dropdown */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 0; /* No padding when closed */
+            margin: 0;
+            flex-direction: column; /* Stack links vertically */
+            align-items: stretch; /* Make items take full width */
+            border-radius: 0 0 var(--border-radius) var(--border-radius); /* Rounded bottom corners */
+        }
+        /* Style for when menu is OPEN */
+        header nav ul#nav-menu.active {
+            max-height: 500px; /* Large enough height to show all items */
+            padding: 10px 0; /* Add padding when open */
+        }
+        header nav ul li {
+            margin: 0; /* Reset desktop margin */
+            width: 100%;
+        }
+        header nav ul li a {
+            display: block; /* Make links full width */
+            text-align: left; /* Align text left */
+            padding: 12px 20px; /* Adjust padding for mobile */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+            border-radius: 0; /* Remove individual radius */
+            transition: background-color var(--transition-speed) ease; /* Only transition color */
+            transform: none; /* Remove desktop hover transform */
+        }
+        header nav ul li:last-child a { border-bottom: none; }
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle hover/active */
+            transform: none; /* Ensure no transform */
+        }
+
+        /* Rest of mobile styles */
         #hero { padding: 60px 15px; }
         .avenue-container { grid-template-columns: 1fr; gap: 20px; } /* Stack cards */
         section { padding: 40px 15px; }
@@ -218,7 +301,12 @@
     <header>
         <nav>
             <div class="logo">HalalInvest Guide</div>
-            <ul>
+            <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#avenues">Avenues</a></li>
                 <li><a href="#calculators">Calculators</a></li>
@@ -301,22 +389,21 @@
                     <p>Estimate Zakat (2.5%) on wealth held >1 year above the Nisab threshold.</p>
                     <p><strong>Note:</strong> Simplified example. Consult a scholar for accuracy, especially regarding current Nisab and complex assets.</p>
 
-                    <form id="zakat-form">
-                        <label for="cash">Cash (Savings, Bank Balance):</label>
-                        <input type="number" id="cash" value="0" min="0" step="any" required placeholder="e.g., 5000">
+                    <form id="zakat-form" name="zakatForm"> <label for="cash">Cash (Savings, Bank Balance):</label>
+                        <input type="number" id="cash" name="cash" value="0" min="0" step="any" required placeholder="e.g., 5000">
 
                         <label for="short-term-stocks">Market Value of Stocks (Short-term/Trading):</label>
-                        <input type="number" id="short-term-stocks" value="0" min="0" step="any" required placeholder="e.g., 10000">
+                        <input type="number" id="short-term-stocks" name="short-term-stocks" value="0" min="0" step="any" required placeholder="e.g., 10000">
 
                         <label for="long-term-stocks">Market Value of Stocks (Long-term):</label>
-                        <input type="number" id="long-term-stocks" value="0" min="0" step="any" required placeholder="e.g., 20000">
+                        <input type="number" id="long-term-stocks" name="long-term-stocks" value="0" min="0" step="any" required placeholder="e.g., 20000">
                         <small>(Simplified: Zakat often estimated on ~25% of value. Consult scholar.)</small>
 
                         <label for="other-assets">Other Zakatable Assets (Gold/Silver Value, Net Rental Income):</label>
-                        <input type="number" id="other-assets" value="0" min="0" step="any" required placeholder="e.g., 8000">
+                        <input type="number" id="other-assets" name="other-assets" value="0" min="0" step="any" required placeholder="e.g., 8000">
 
                         <label for="nisab">Current Nisab Value (approx. 85g Gold):</label>
-                        <input type="number" id="nisab" value="7550" min="0" step="any" required placeholder="Enter current value">
+                        <input type="number" id="nisab" name="nisab" value="7550" min="0" step="any" required placeholder="Enter current value">
                         <small>Check current local Gold/Silver price for accuracy.</small>
 
                         <button type="submit">Calculate Zakat</button>
@@ -396,26 +483,66 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- Navigation Toggle (Hamburger Menu) ---
+      const navToggle = document.getElementById('nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('active'); // Toggle visibility class on menu
+          navToggle.classList.toggle('open'); // Toggle class on button for 'X' animation
+
+          // Toggle aria-expanded attribute for accessibility
+          const isExpanded = navMenu.classList.contains('active');
+          navToggle.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // Optional: Close menu when a link is clicked (useful for single-page apps)
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+         // Optional: Close menu if clicking outside the nav area on mobile
+         document.addEventListener('click', (event) => {
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnToggle = navToggle.contains(event.target);
+            const isMobileView = window.innerWidth <= 768; // Check if in mobile view
+
+            if (isMobileView && !isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+         });
+      }
+
+
       // --- Footer Year ---
       const currentYearSpan = document.getElementById('current-year');
       if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
 
       // --- Zakat Calculator ---
-      const zakatForm = document.getElementById('zakat-form');
+      const zakatForm = document.getElementById('zakat-form'); // Or use document.forms.zakatForm
       const zakatResultDiv = document.getElementById('zakat-result');
 
       if (zakatForm && zakatResultDiv) {
         zakatForm.addEventListener('submit', (e) => {
           e.preventDefault();
-          const data = new FormData(zakatForm);
-          const cash = parseFloat(data.get('cash')) || 0;
-          const shortTermStocks = parseFloat(data.get('short-term-stocks')) || 0;
-          const longTermStocks = parseFloat(data.get('long-term-stocks')) || 0;
-          const otherAssets = parseFloat(data.get('other-assets')) || 0;
-          const nisab = parseFloat(data.get('nisab')) || 0;
+          // Using FormData is often cleaner
+          const formData = new FormData(zakatForm);
+          const cash = parseFloat(formData.get('cash')) || 0;
+          const shortTermStocks = parseFloat(formData.get('short-term-stocks')) || 0;
+          const longTermStocks = parseFloat(formData.get('long-term-stocks')) || 0;
+          const otherAssets = parseFloat(formData.get('other-assets')) || 0;
+          const nisab = parseFloat(formData.get('nisab')) || 0;
 
-          // Simplified: Zakat on ~25% of long-term stocks (consult scholar for specifics)
-          const zakatableAmountLongTermStocks = longTermStocks * 0.25;
+          const zakatableAmountLongTermStocks = longTermStocks * 0.25; // Consult scholar
           const totalZakatableAssets = cash + shortTermStocks + zakatableAmountLongTermStocks + otherAssets;
 
           let resultMessage = '';
@@ -429,7 +556,7 @@
           } else {
             resultMessage = `Total Zakatable Assets: $${totalZakatableAssets.toFixed(2)}<br>
                              Nisab Threshold: $${nisab.toFixed(2)}<br>
-                             Your wealth is below the Nisab threshold. No Zakat is due based on these inputs.`;
+                             Your wealth is below the Nisab threshold. No Zakat is due.`;
           }
           zakatResultDiv.innerHTML = resultMessage;
         });
@@ -445,47 +572,22 @@
       // 1. Halal Index Performance Chart
       const ctxIndex = document.getElementById('halalIndexChart')?.getContext('2d');
       createChart(
-        ctxIndex,
-        'line',
-        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], // Labels
-        [{ // Datasets
-          label: 'Hypothetical Halal Index',
-          data: [1000, 1020, 1015, 1050, 1080, 1070, 1100],
-          borderColor: 'rgb(0, 100, 0)',
-          backgroundColor: 'rgba(0, 100, 0, 0.1)',
-          tension: 0.1,
-          fill: true,
-        }],
-        { // Options
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: { y: { ticks: { callback: value => '$' + value } } }
-        }
+        ctxIndex, 'line',
+        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        [{ label: 'Hypothetical Halal Index', data: [1000, 1020, 1015, 1050, 1080, 1070, 1100], borderColor: 'rgb(0, 100, 0)', backgroundColor: 'rgba(0, 100, 0, 0.1)', tension: 0.1, fill: true }],
+        { responsive: true, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: value => '$' + value } } } }
       );
 
       // 2. Portfolio Allocation Chart
       const ctxPortfolio = document.getElementById('portfolioAllocationChart')?.getContext('2d');
       createChart(
-        ctxPortfolio,
-        'doughnut',
-        ['Halal Stocks', 'Sukuk', 'Halal REIT', 'Gold', 'Cash/Islamic Savings'], // Labels
-        [{ // Datasets
-          label: 'Allocation %',
-          data: [40, 25, 15, 10, 10],
-          backgroundColor: [
-            'rgba(0, 100, 0, 0.8)', 'rgba(60, 179, 113, 0.8)', 'rgba(144, 238, 144, 0.8)',
-            'rgba(255, 215, 0, 0.8)', 'rgba(169, 169, 169, 0.8)'
-          ],
-          hoverOffset: 8 // Slightly larger hover effect
-        }],
-        { // Options
-          responsive: true,
-          plugins: { legend: { position: 'bottom', labels: { padding: 15 } } } // Better legend spacing
-        }
+        ctxPortfolio, 'doughnut',
+        ['Halal Stocks', 'Sukuk', 'Halal REIT', 'Gold', 'Cash/Islamic Savings'],
+        [{ label: 'Allocation %', data: [40, 25, 15, 10, 10], backgroundColor: ['rgba(0, 100, 0, 0.8)', 'rgba(60, 179, 113, 0.8)', 'rgba(144, 238, 144, 0.8)', 'rgba(255, 215, 0, 0.8)', 'rgba(169, 169, 169, 0.8)'], hoverOffset: 8 }],
+        { responsive: true, plugins: { legend: { position: 'bottom', labels: { padding: 15 } } } }
       );
 
         // --- Smooth Scrolling handled by CSS `scroll-behavior: smooth;` ---
-        // The JS version can be removed unless you need more complex scroll logic
 
     }); // End DOMContentLoaded
     </script>
