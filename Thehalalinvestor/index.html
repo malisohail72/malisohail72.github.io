@@ -550,12 +550,12 @@
             resultMessage = 'Please enter a valid Nisab value.';
           } else if (totalZakatableAssets >= nisab) {
             const zakatDue = totalZakatableAssets * 0.025;
-            resultMessage = `Total Zakatable Assets: $${totalZakatableAssets.toFixed(2)}<br>
-                             Nisab Threshold: $${nisab.toFixed(2)}<br>
+            resultMessage = `Total Zakatable Assets: ${totalZakatableAssets.toFixed(2)}<br>
+                             Nisab Threshold: ${nisab.toFixed(2)}<br>
                              Calculated Zakat Due: <strong>$${zakatDue.toFixed(2)}</strong>`;
           } else {
-            resultMessage = `Total Zakatable Assets: $${totalZakatableAssets.toFixed(2)}<br>
-                             Nisab Threshold: $${nisab.toFixed(2)}<br>
+            resultMessage = `Total Zakatable Assets: ${totalZakatableAssets.toFixed(2)}<br>
+                             Nisab Threshold: ${nisab.toFixed(2)}<br>
                              Your wealth is below the Nisab threshold. No Zakat is due.`;
           }
           zakatResultDiv.innerHTML = resultMessage;
