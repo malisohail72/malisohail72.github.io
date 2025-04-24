@@ -1,136 +1,413 @@
-# About Fly Abroad India
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fly Abroad India</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<style>
+/* Common CSS for Policy Pages */
+.policy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
 
-## Our Mission
+.policy-header {
+  margin-bottom: 40px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 20px;
+}
 
-At Fly Abroad India, our mission is to empower Indian citizens with comprehensive immigration guidance and support services, making international relocation accessible, transparent, and stress-free. We believe everyone deserves the opportunity to explore global possibilities, and we're committed to transforming dreams of living abroad into reality.
+.policy-header h1 {
+  color: #0e4d92;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
 
-## Who We Are
+.policy-header .last-updated {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+}
 
-Founded in 2020, Fly Abroad India has rapidly established itself as a trusted immigration consultancy specializing in helping Indian citizens navigate the complex journey of relocating abroad. Our team comprises experienced immigration consultants, former visa officers, education counselors, and settlement specialists who understand the unique challenges Indians face when pursuing international opportunities.
+.policy-section {
+  margin-bottom: 40px;
+}
 
-With headquarters in Mumbai and regional offices in Delhi, Bangalore, Chennai, and Hyderabad, we provide personalized guidance to clients throughout India. Our extensive network of international partners in key destination countries ensures we offer accurate, up-to-date information and localized support at every stage of your journey.
+.policy-section h2, .policy-content h2 {
+  color: #0e4d92;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+  font-weight: 600;
+}
 
-## Our Approach
+.policy-section h3, .policy-content h3 {
+  color: #1a75bb;
+  font-size: 1.4rem;
+  margin: 25px 0 15px;
+  font-weight: 600;
+}
 
-### Client-Centered Excellence
-We place our clients at the heart of everything we do. Our consultants take the time to understand your unique circumstances, goals, and preferences before recommending immigration pathways tailored to your specific profile.
+.policy-section p, .policy-content p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
 
-### Comprehensive Support
-From initial assessment to post-landing assistance, we provide end-to-end support throughout your immigration journey. Our services cover visa applications, documentation preparation, interview coaching, language test preparation, credential evaluations, and settlement guidance.
+.policy-content {
+  text-align: left;
+}
 
-### Ethical Practice
-We adhere to the highest ethical standards in the immigration consulting industry. Our advice is always honest, transparent, and in your best interest. We never make false promises or guarantees and maintain complete transparency about fees, success rates, and processing times.
+.policy-content ul, .policy-content ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
 
-### Continuous Education
-Immigration policies and procedures constantly evolve. Our team undergoes regular training and certification to stay current with the latest changes in immigration laws and requirements across all major destination countries.
+.policy-content li {
+  margin-bottom: 10px;
+  text-align: left;
+}
 
-## Our Expertise
+/* Team Member Specific Styling */
+.team-member {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 30px;
+}
 
-Our team specializes in various immigration pathways, including:
+.team-member:last-child {
+  border-bottom: none;
+}
 
-### Skilled Worker Immigration
-- Express Entry (Canada)
-- Provincial Nominee Programs (Canada)
-- Skilled Worker Visas (UK, Australia, New Zealand)
-- H-1B and Employment-Based Green Cards (USA)
-- EU Blue Card (Germany and other EU countries)
+.team-member-info {
+  flex: 1;
+}
 
-### Student Pathways
-- Student Visas
-- Scholarship Applications
-- Post-Graduation Work Permits
-- Study-to-PR Pathways
+.team-member h4 {
+  color: #0e4d92;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
 
-### Business and Investment Immigration
-- Start-up Visas
-- Entrepreneur Programs
-- Investor Visas
-- Self-Employed Options
+.team-member .position {
+  color: #1a75bb;
+  font-style: italic;
+  margin-bottom: 15px;
+  display: block;
+}
 
-### Family Sponsorship
-- Spouse/Partner Sponsorship
-- Parent and Grandparent Sponsorship
-- Child Sponsorship
-- Extended Family Immigration
+/* Social Media Links */
+.social-links {
+  display: flex;
+  margin: 30px 0;
+}
 
-### Specialized Visas
-- Digital Nomad Visas
-- Working Holiday Visas
-- Temporary Work Permits
-- Permanent Residency Applications
+.social-links a {
+  margin-right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0e4d92;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
 
-## Our Success Story
+.social-links a:hover {
+  background-color: #1a75bb;
+}
 
-Since our founding, we've successfully assisted over 5,000 Indian clients in achieving their immigration goals. Our clients now thrive as professionals, entrepreneurs, students, and family members in countries including Canada, the United States, Australia, the United Kingdom, Germany, New Zealand, Singapore, and throughout the European Union.
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0e4d92;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  display: none;
+  z-index: 100;
+}
 
-Our success is measured not just in visa approvals but in the thriving new lives our clients build abroad. We take pride in maintaining relationships with our clients long after they've settled in their new countries, celebrating their achievements and helping them bring family members to join them.
+.back-to-top:hover {
+  opacity: 1;
+}
 
-## Our Community Initiatives
+/* Responsive Design */
+@media (max-width: 768px) {
+  .policy-header h1 {
+    font-size: 2rem;
+  }
+  
+  .policy-section h2, .policy-content h2 {
+    font-size: 1.6rem;
+  }
+  
+  .policy-section h3, .policy-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .team-member {
+    flex-direction: column;
+  }
+}
 
-We believe in giving back to the community and helping aspiring immigrants regardless of their financial circumstances. Our initiatives include:
+@media (max-width: 480px) {
+  .policy-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .policy-section h2, .policy-content h2 {
+    font-size: 1.4rem;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+}
 
-### Free Immigration Workshops
-We conduct monthly workshops in major Indian cities, providing free information about immigration opportunities, requirements, and processes.
+/* Print Styles */
+@media print {
+  .policy-container {
+    padding: 0;
+    font-size: 12pt;
+  }
+  
+  .back-to-top,
+  .social-links {
+    display: none !important;
+  }
+  
+  .policy-section h2, .policy-content h2 {
+    page-break-after: avoid;
+  }
+  
+  .policy-section, .policy-content {
+    page-break-inside: avoid;
+  }
+  
+  a {
+    text-decoration: underline;
+    color: #000;
+  }
+}
+</style>
+</head>
+<body>
+    <!-- Include your website header here -->
+    
+    <div class="policy-container">
+        <div class="policy-header">
+            <h1>About Fly Abroad India</h1>
+        </div>
+        
+        <div class="policy-content">
+            <h2>Our Mission</h2>
+            <p>At Fly Abroad India, our mission is to empower Indian citizens with comprehensive immigration guidance and support services, making international relocation accessible, transparent, and stress-free. We believe everyone deserves the opportunity to explore global possibilities, and we're committed to transforming dreams of living abroad into reality.</p>
+            
+            <h2>Who We Are</h2>
+            <p>Founded in 2020, Fly Abroad India has rapidly established itself as a trusted immigration consultancy specializing in helping Indian citizens navigate the complex journey of relocating abroad. Our team comprises experienced immigration consultants, former visa officers, education counselors, and settlement specialists who understand the unique challenges Indians face when pursuing international opportunities.</p>
+            <p>With headquarters in Mumbai and regional offices in Delhi, Bangalore, Chennai, and Hyderabad, we provide personalized guidance to clients throughout India. Our extensive network of international partners in key destination countries ensures we offer accurate, up-to-date information and localized support at every stage of your journey.</p>
+            
+            <h2>Our Approach</h2>
+            
+            <h3>Client-Centered Excellence</h3>
+            <p>We place our clients at the heart of everything we do. Our consultants take the time to understand your unique circumstances, goals, and preferences before recommending immigration pathways tailored to your specific profile.</p>
+            
+            <h3>Comprehensive Support</h3>
+            <p>From initial assessment to post-landing assistance, we provide end-to-end support throughout your immigration journey. Our services cover visa applications, documentation preparation, interview coaching, language test preparation, credential evaluations, and settlement guidance.</p>
+            
+            <h3>Ethical Practice</h3>
+            <p>We adhere to the highest ethical standards in the immigration consulting industry. Our advice is always honest, transparent, and in your best interest. We never make false promises or guarantees and maintain complete transparency about fees, success rates, and processing times.</p>
+            
+            <h3>Continuous Education</h3>
+            <p>Immigration policies and procedures constantly evolve. Our team undergoes regular training and certification to stay current with the latest changes in immigration laws and requirements across all major destination countries.</p>
+            
+            <h2>Our Expertise</h2>
+            <p>Our team specializes in various immigration pathways, including:</p>
+            
+            <h3>Skilled Worker Immigration</h3>
+            <ul>
+                <li>Express Entry (Canada)</li>
+                <li>Provincial Nominee Programs (Canada)</li>
+                <li>Skilled Worker Visas (UK, Australia, New Zealand)</li>
+                <li>H-1B and Employment-Based Green Cards (USA)</li>
+                <li>EU Blue Card (Germany and other EU countries)</li>
+            </ul>
+            
+            <h3>Student Pathways</h3>
+            <ul>
+                <li>Student Visas</li>
+                <li>Scholarship Applications</li>
+                <li>Post-Graduation Work Permits</li>
+                <li>Study-to-PR Pathways</li>
+            </ul>
+            
+            <h3>Business and Investment Immigration</h3>
+            <ul>
+                <li>Start-up Visas</li>
+                <li>Entrepreneur Programs</li>
+                <li>Investor Visas</li>
+                <li>Self-Employed Options</li>
+            </ul>
+            
+            <h3>Family Sponsorship</h3>
+            <ul>
+                <li>Spouse/Partner Sponsorship</li>
+                <li>Parent and Grandparent Sponsorship</li>
+                <li>Child Sponsorship</li>
+                <li>Extended Family Immigration</li>
+            </ul>
+            
+            <h3>Specialized Visas</h3>
+            <ul>
+                <li>Digital Nomad Visas</li>
+                <li>Working Holiday Visas</li>
+                <li>Temporary Work Permits</li>
+                <li>Permanent Residency Applications</li>
+            </ul>
+            
+            <h2>Our Success Story</h2>
+            <p>Since our founding, we've successfully assisted over 5,000 Indian clients in achieving their immigration goals. Our clients now thrive as professionals, entrepreneurs, students, and family members in countries including Canada, the United States, Australia, the United Kingdom, Germany, New Zealand, Singapore, and throughout the European Union.</p>
+            <p>Our success is measured not just in visa approvals but in the thriving new lives our clients build abroad. We take pride in maintaining relationships with our clients long after they've settled in their new countries, celebrating their achievements and helping them bring family members to join them.</p>
+            
+            <h2>Our Community Initiatives</h2>
+            <p>We believe in giving back to the community and helping aspiring immigrants regardless of their financial circumstances. Our initiatives include:</p>
+            
+            <h3>Free Immigration Workshops</h3>
+            <p>We conduct monthly workshops in major Indian cities, providing free information about immigration opportunities, requirements, and processes.</p>
+            
+            <h3>Scholarship Program</h3>
+            <p>Every year, we award scholarships to promising students from underprivileged backgrounds who wish to study abroad, covering application fees and initial settlement costs.</p>
+            
+            <h3>Community Forums</h3>
+            <p>We maintain active online forums where prospective immigrants can connect, share experiences, and support each other through the immigration journey.</p>
+            
+            <h3>Pro Bono Services</h3>
+            <p>We offer pro bono consultation services to a select number of deserving candidates facing financial hardships each month.</p>
+            
+            <h2>Our Credentials</h2>
+            <p>Fly Abroad India is a registered immigration consultancy with all necessary certifications and memberships:</p>
+            <ul>
+                <li>Registered with the Registrar of Companies, Ministry of Corporate Affairs, Government of India</li>
+                <li>Member of the Immigration Consultants of India Association (ICIA)</li>
+                <li>Accredited by the International Association of Immigration Consultants (IAIC)</li>
+                <li>Licensed education agent for universities in multiple countries</li>
+                <li>Certified by the British Council as an education UK agent</li>
+                <li>Recognized by Immigration, Refugees and Citizenship Canada (IRCC) as a consulting firm</li>
+            </ul>
+            
+            <h2>Our Leadership Team</h2>
+            
+            <div class="team-member">
+                <div class="team-member-info">
+                    <h4>Rajiv Sharma</h4>
+                    <span class="position">Founder & CEO</span>
+                    <p>With over 15 years of experience in immigration consulting, Rajiv previously served as a senior visa officer at the Canadian Consulate in India. His insider knowledge of visa processing systems and assessment criteria provides our clients with unparalleled advantages in their applications.</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-member-info">
+                    <h4>Dr. Priya Mehta</h4>
+                    <span class="position">Director of Educational Services</span>
+                    <p>A former university professor with a Ph.D. in International Education, Dr. Mehta specializes in helping students secure admissions and scholarships at prestigious international universities.</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-member-info">
+                    <h4>Vikram Patel</h4>
+                    <span class="position">Head of Business Immigration</span>
+                    <p>With an MBA from INSEAD and experience as an entrepreneur in multiple countries, Vikram guides business owners and investors through specialized immigration programs worldwide.</p>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-member-info">
+                    <h4>Anita Reddy</h4>
+                    <span class="position">Director of Client Success</span>
+                    <p>A certified immigration consultant with expertise in family sponsorship and humanitarian immigration, Anita ensures every client receives personalized attention and support throughout their journey.</p>
+                </div>
+            </div>
+            
+            <h2>Connect With Us</h2>
+            <p>We invite you to take the first step toward your international future by connecting with our team. Schedule a free consultation to discuss your immigration goals and explore pathways tailored to your unique profile.</p>
+            
+            <p><strong>Headquarters:</strong><br>
+            Fly Abroad India<br>
+            [Insert Address]<br>
+            Mumbai, Maharashtra<br>
+            India</p>
+            
+            <p><strong>Contact Information:</strong><br>
+            Phone: [Insert Phone Number]<br>
+            Email: info@flyabroadindia.com<br>
+            Website: www.flyabroadindia.com</p>
+            
+            <p><strong>Office Hours:</strong><br>
+            Monday to Friday: 9:00 AM to 6:00 PM IST<br>
+            Saturday: 10:00 AM to 2:00 PM IST<br>
+            Sunday: Closed</p>
+            
+            <p>Follow us on social media for the latest immigration updates, success stories, and event announcements:</p>
+            
+            <div class="social-links">
+                <a href="https://www.facebook.com/FlyAbroadIndia" aria-label="Facebook">f</a>
+                <a href="https://www.instagram.com/FlyAbroadIndia" aria-label="Instagram">i</a>
+                <a href="https://www.linkedin.com/company/fly-abroad-india" aria-label="LinkedIn">in</a>
+                <a href="https://www.youtube.com/c/FlyAbroadIndiaChannel" aria-label="YouTube">yt</a>
+                <a href="https://twitter.com/FlyAbroadIndia" aria-label="Twitter">t</a>
+            </div>
+            
+            <p><em>Your dreams of living abroad are within reach. Let us guide you there.</em></p>
+        </div>
+    </div>
+    
+    <a href="#" class="back-to-top" aria-label="Back to top">↑</a>
 
-### Scholarship Program
-Every year, we award scholarships to promising students from underprivileged backgrounds who wish to study abroad, covering application fees and initial settlement costs.
-
-### Community Forums
-We maintain active online forums where prospective immigrants can connect, share experiences, and support each other through the immigration journey.
-
-### Pro Bono Services
-We offer pro bono consultation services to a select number of deserving candidates facing financial hardships each month.
-
-## Our Credentials
-
-Fly Abroad India is a registered immigration consultancy with all necessary certifications and memberships:
-
-- Registered with the Registrar of Companies, Ministry of Corporate Affairs, Government of India
-- Member of the Immigration Consultants of India Association (ICIA)
-- Accredited by the International Association of Immigration Consultants (IAIC)
-- Licensed education agent for universities in multiple countries
-- Certified by the British Council as an education UK agent
-- Recognized by Immigration, Refugees and Citizenship Canada (IRCC) as a consulting firm
-
-## Our Leadership Team
-
-### Rajiv Sharma, Founder & CEO
-With over 15 years of experience in immigration consulting, Rajiv previously served as a senior visa officer at the Canadian Consulate in India. His insider knowledge of visa processing systems and assessment criteria provides our clients with unparalleled advantages in their applications.
-
-### Dr. Priya Mehta, Director of Educational Services
-A former university professor with a Ph.D. in International Education, Dr. Mehta specializes in helping students secure admissions and scholarships at prestigious international universities.
-
-### Vikram Patel, Head of Business Immigration
-With an MBA from INSEAD and experience as an entrepreneur in multiple countries, Vikram guides business owners and investors through specialized immigration programs worldwide.
-
-### Anita Reddy, Director of Client Success
-A certified immigration consultant with expertise in family sponsorship and humanitarian immigration, Anita ensures every client receives personalized attention and support throughout their journey.
-
-## Connect With Us
-
-We invite you to take the first step toward your international future by connecting with our team. Schedule a free consultation to discuss your immigration goals and explore pathways tailored to your unique profile.
-
-**Headquarters:**  
-Fly Abroad India  
-[Insert Address]  
-Mumbai, Maharashtra  
-India
-
-**Contact Information:**  
-Phone: [Insert Phone Number]  
-Email: info@flyabroadindia.com  
-Website: www.flyabroadindia.com
-
-**Office Hours:**  
-Monday to Friday: 9:00 AM to 6:00 PM IST  
-Saturday: 10:00 AM to 2:00 PM IST  
-Sunday: Closed
-
-Follow us on social media for the latest immigration updates, success stories, and event announcements:
-- Facebook: @FlyAbroadIndia
-- Instagram: @FlyAbroadIndia
-- LinkedIn: Fly Abroad India
-- YouTube: Fly Abroad India Channel
-- Twitter: @FlyAbroadIndia
-
-*Your dreams of living abroad are within reach. Let us guide you there.*
+    <!-- Include your website footer here -->
+    
+    <script>
+        // Back to top button functionality
+        let backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+        
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
