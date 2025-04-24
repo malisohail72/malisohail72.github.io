@@ -2,7 +2,362 @@
 <head>
 <style>
 
+/* Common CSS for Policy Pages (Privacy Policy, Terms of Use, About Us) */
 
+/* Main Container */
+.policy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Page Header */
+.policy-header {
+  margin-bottom: 40px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 20px;
+}
+
+.policy-header h1 {
+  color: #0e4d92;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.policy-header .last-updated {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Section Styling */
+.policy-section {
+  margin-bottom: 40px;
+}
+
+.policy-section h2 {
+  color: #0e4d92;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+  font-weight: 600;
+}
+
+.policy-section h3 {
+  color: #1a75bb;
+  font-size: 1.4rem;
+  margin: 25px 0 15px;
+  font-weight: 600;
+}
+
+.policy-section h4 {
+  color: #333;
+  font-size: 1.2rem;
+  margin: 20px 0 10px;
+  font-weight: 600;
+}
+
+.policy-section p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* Lists */
+.policy-section ul, 
+.policy-section ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+
+.policy-section li {
+  margin-bottom: 10px;
+}
+
+/* Tables (for structured information) */
+.policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.policy-table th, 
+.policy-table td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.policy-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.policy-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Contact Information Section */
+.contact-info {
+  background-color: #f5f7fa;
+  padding: 25px;
+  border-radius: 5px;
+  margin: 30px 0;
+  border-left: 4px solid #0e4d92;
+}
+
+.contact-info h3 {
+  color: #0e4d92;
+  margin-top: 0;
+}
+
+/* About Us Page Specific Styling */
+.team-member {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 30px;
+}
+
+.team-member:last-child {
+  border-bottom: none;
+}
+
+.team-member-info {
+  flex: 1;
+}
+
+.team-member h4 {
+  color: #0e4d92;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+
+.team-member .position {
+  color: #1a75bb;
+  font-style: italic;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Mission & Values Section */
+.mission-values {
+  background-color: #f0f7ff;
+  padding: 25px;
+  border-radius: 5px;
+  margin: 30px 0;
+}
+
+.mission-values h3 {
+  color: #0e4d92;
+  margin-top: 0;
+}
+
+/* Statistics */
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.stat-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  margin: 10px;
+  background-color: #f5f7fa;
+  border-radius: 5px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0e4d92;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Credentials & Certifications */
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.credential-item {
+  padding: 15px;
+  margin: 10px;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  text-align: center;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.credential-item img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Important Text Highlighting */
+.highlight {
+  background-color: #fff2cc;
+  padding: 2px 5px;
+}
+
+.important-note {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+/* Links */
+.policy-section a {
+  color: #1a75bb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.policy-section a:hover {
+  color: #0e4d92;
+  text-decoration: underline;
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0e4d92;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  display: none;
+  z-index: 100;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+}
+
+/* Social Media Links (for About Us) */
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.social-links a {
+  margin: 0 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0e4d92;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.social-links a:hover {
+  background-color: #1a75bb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .policy-header h1 {
+    font-size: 2rem;
+  }
+  
+  .policy-section h2 {
+    font-size: 1.6rem;
+  }
+  
+  .policy-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .team-member {
+    flex-direction: column;
+  }
+  
+  .credential-item {
+    width: calc(50% - 20px);
+  }
+  
+  .stat-item {
+    min-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .policy-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .policy-section h2 {
+    font-size: 1.4rem;
+  }
+  
+  .credential-item {
+    width: 100%;
+  }
+  
+  .stat-item {
+    min-width: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .policy-container {
+    padding: 0;
+    font-size: 12pt;
+  }
+  
+  .back-to-top,
+  .social-links {
+    display: none !important;
+  }
+  
+  .policy-section h2 {
+    page-break-after: avoid;
+  }
+  
+  .policy-section {
+    page-break-inside: avoid;
+  }
+  
+  a {
+    text-decoration: underline;
+    color: #000;
+  }
+}
     
 </style> 
 </head>
@@ -152,6 +507,28 @@ Address: [Insert Physical Address]
 
 If you are a resident of the European Union, you have the right to lodge a complaint with your local data protection authority if you believe our processing of your personal information does not comply with the GDPR.
 
+
+    
+    <script>
+        // Back to top button functionality
+        let backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+        
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 
 </body>
 </html>
