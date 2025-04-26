@@ -660,10 +660,13 @@
                     <canvas id="halalIndexChart"></canvas>
                     <small>Note: Sample data for illustration only.</small>
                 </div>
+                
+                
+                
                 <div class="chart-container">
-                    <h3>Sample Halal Portfolio Allocation</h3>
+                    <h3>Ideal Halal Portfolio Allocation</h3>
                     <canvas id="portfolioAllocationChart"></canvas>
-                    <small>Note: Sample allocation for illustration only.</small>
+                    <small>Note: Ideal allocation for investor.</small>
                 </div>
             </div>
         </section>
@@ -722,7 +725,7 @@
     <footer>
          <div class="container">
             <p>&copy; <span id="current-year"></span> Halal Investment Guide. All Rights Reserved.</p>
-            <p class="disclaimer"><strong>Disclaimer:</strong> Information is for educational purposes only, not financial advice. Halal investing involves risks. Conduct your own research and consult qualified financial and Shariah advisors before investing. We are not affiliated with specific platforms unless stated.</p>
+            <p class="disclaimer"><strong>Disclaimer:</strong> Information is for educational purposes only, not financial advice. Halal investing also involves risks. Conduct your own research and consult Shariah advisors before investing. We are not affiliated with specific platforms unless stated.</p>
         </div>
     </footer>
 
@@ -827,17 +830,8 @@
       const ctxPortfolio = document.getElementById('portfolioAllocationChart')?.getContext('2d');
       createChart(
         ctxPortfolio, 'doughnut',
-        ['Halal Stocks', 'Sukuk', 'Halal REIT', 'Gold', 'Cash/Islamic Savings'],
-        [{ label: 'Allocation %', data: [40, 25, 15, 10, 10], backgroundColor: ['rgba(0, 100, 0, 0.8)', 'rgba(60, 179, 113, 0.8)', 'rgba(144, 238, 144, 0.8)', 'rgba(255, 215, 0, 0.8)', 'rgba(169, 169, 169, 0.8)'], hoverOffset: 8 }],
-        { responsive: true, plugins: { legend: { position: 'bottom', labels: { padding: 15 } } } }
-      );
-
-
-const ctxPortfolio2 = document.getElementById('portfolioAllocationChart')?.getContext('2d');
-      createChart(
-        ctxPortfolio, 'doughnut',
-        ['Halal Stocks', 'Sukuk', 'Halal REIT', 'Gold', 'Cash/Islamic Savings'],
-        [{ label: 'Allocation %', data: [20, 25, 25, 15, 15], backgroundColor: ['rgba(0, 100, 0, 0.8)', 'rgba(60, 179, 113, 0.8)', 'rgba(144, 238, 144, 0.8)', 'rgba(255, 215, 0, 0.8)', 'rgba(169, 169, 169, 0.8)'], hoverOffset: 8 }],
+        ['Halal Stocks', 'Sukuk', 'Halal REIT', 'Gold', 'Islamic Savings Account'],
+        [{ label: 'Allocation %', data: [20, 10, 15, 35, 20], backgroundColor: ['rgba(0, 100, 0, 0.8)', 'rgba(60, 179, 113, 0.8)', 'rgba(144, 238, 144, 0.8)', 'rgba(255, 215, 0, 0.8)', 'rgba(169, 169, 169, 0.8)'], hoverOffset: 8 }],
         { responsive: true, plugins: { legend: { position: 'bottom', labels: { padding: 15 } } } }
       );
     
