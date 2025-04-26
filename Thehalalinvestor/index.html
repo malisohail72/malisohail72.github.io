@@ -293,6 +293,158 @@
         section { padding: 40px 15px; }
         .calculator, .chart-container { padding: 20px; }
       }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      /* Calculator specific styles */
+    .section-intro {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+    }
+    
+    .calculator {
+        background: var(--light-text);
+        padding: 25px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .calculator label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+    
+    .calculator input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 5px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+    
+    .calculator input[type="number"]:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(0, 100, 0, 0.2);
+        outline: none;
+    }
+    
+    .calculator small {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+    
+    .calc-button {
+        display: inline-block;
+        padding: 12px 28px;
+        background: var(--primary-color);
+        color: var(--light-text);
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        margin-top: 10px;
+    }
+    
+    .calc-button:hover {
+        background-color: var(--primary-darker);
+        transform: translateY(-2px);
+    }
+    
+    .result-container {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: var(--secondary-color);
+        border-left: 5px solid var(--primary-color);
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        display: none;
+    }
+    
+    .result-container h4 {
+        margin-top: 0;
+        color: var(--primary-color);
+    }
+    
+    .result-summary {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .result-detail {
+        margin-bottom: 5px;
+    }
+    
+    /* Investment options styling */
+    .investment-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .investment-option {
+        background-color: var(--secondary-color);
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+    
+    .investment-option .rate {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    
+    .investment-option.selected {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        border-color: var(--primary-color);
+    }
+    
+    .investment-option.selected .rate {
+        color: var(--light-text);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .investment-options {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .investment-options {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    
+    
     </style>
 
 </head>
@@ -407,6 +559,93 @@
                     <p>Estimate future investment value based on contributions and expected Halal returns.</p>
                     <p><i>[Functionality to be added: requires inputs like initial amount, regular contribution, expected profit rate, duration.]</i></p>
                  </div>
+                
+                
+                
+                
+                <!-- ====== Calculators Section ====== -->
+<section id="calculators">
+    <div class="container">
+        <h2><center>🧮 Halal Investment Calculators</center></h2>
+        <p class="section-intro">Plan your financial future with these Shariah-compliant calculators designed for Pakistani investors.</p>
+        
+        <!-- Simple Savings Calculator -->
+        <div class="calculator">
+            <h3>Simple Savings Calculator</h3>
+            <p>Calculate the growth of your savings over time without any riba (interest).</p>
+            <form id="savings-form">
+                <div class="form-group">
+                    <label for="initial-savings">Initial Investment (PKR)</label>
+                    <input type="number" id="initial-savings" name="initial-savings" min="0" step="1000" placeholder="e.g., 100000" required>
+                    <small>Your starting investment amount in Pakistani Rupees.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="monthly-savings">Monthly Contribution (PKR)</label>
+                    <input type="number" id="monthly-savings" name="monthly-savings" min="0" step="1000" placeholder="e.g., 10000" required>
+                    <small>How much you plan to add each month.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="savings-duration">Number of Months</label>
+                    <input type="number" id="savings-duration" name="savings-duration" min="1" max="600" placeholder="e.g., 36" required>
+                    <small>How long you plan to save (1-600 months).</small>
+                </div>
+                
+                <button type="submit" class="calc-button">Calculate Savings</button>
+            </form>
+            <div id="savings-result" class="result-container"></div>
+        </div>
+        
+        <!-- Investment Calculator -->
+        <div class="calculator">
+            <h3>Halal Investment Growth Calculator</h3>
+            <p>Compare potential returns from different Shariah-compliant investment avenues in Pakistan.</p>
+            <form id="investment-form">
+                <div class="form-group">
+                    <label for="initial-investment">Initial Investment (PKR)</label>
+                    <input type="number" id="initial-investment" name="initial-investment" min="0" step="1000" placeholder="e.g., 100000" required>
+                    <small>Your starting investment amount in Pakistani Rupees.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="monthly-investment">Monthly Contribution (PKR)</label>
+                    <input type="number" id="monthly-investment" name="monthly-investment" min="0" step="1000" placeholder="e.g., 10000" required>
+                    <small>How much you plan to add each month.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investment-duration">Number of Months</label>
+                    <input type="number" id="investment-duration" name="investment-duration" min="1" max="600" placeholder="e.g., 36" required>
+                    <small>Investment duration (1-600 months).</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Investment Type</label>
+                    <div class="investment-options">
+                        <button type="button" class="investment-option" data-rate="5">Islamic Bank Savings<br><span class="rate">5% p.a.</span></button>
+                        <button type="button" class="investment-option" data-rate="7">Government Sukuk<br><span class="rate">7% p.a.</span></button>
+                        <button type="button" class="investment-option" data-rate="10">PSX Shariah Index<br><span class="rate">10% p.a.</span></button>
+                        <button type="button" class="investment-option" data-rate="8">Corporate Sukuk<br><span class="rate">8% p.a.</span></button>
+                        <button type="button" class="investment-option" data-rate="12">Halal REITs<br><span class="rate">12% p.a.</span></button>
+                    </div>
+                    <input type="hidden" id="selected-rate" name="selected-rate" value="5">
+                    <small>Historical average rates shown. Actual returns may vary.</small>
+                </div>
+                
+                <button type="submit" class="calc-button">Calculate Growth</button>
+            </form>
+            <div id="investment-result" class="result-container"></div>
+            <div id="investment-chart-container" class="chart-container" style="height: 300px; display: none;">
+                <canvas id="investmentChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+                
+                
+                
+                
             </div>
         </section>
         
@@ -585,5 +824,247 @@
 
     }); // End DOMContentLoaded
     </script>
+
+<!-- Additional CSS for calculators -->
+
+<!-- JavaScript for calculator functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ---- Simple Savings Calculator ----
+    const savingsForm = document.getElementById('savings-form');
+    const savingsResult = document.getElementById('savings-result');
+    
+    if (savingsForm && savingsResult) {
+        savingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const initialAmount = parseFloat(document.getElementById('initial-savings').value) || 0;
+            const monthlyAmount = parseFloat(document.getElementById('monthly-savings').value) || 0;
+            const months = parseInt(document.getElementById('savings-duration').value) || 0;
+            
+            if (months <= 0) {
+                savingsResult.innerHTML = '<p class="alert">Please enter a valid number of months.</p>';
+                savingsResult.style.display = 'block';
+                return;
+            }
+            
+            // Simple calculation: initial + (monthly * months)
+            const totalContributions = initialAmount + (monthlyAmount * months);
+            const yearsDecimal = months / 12;
+            const years = Math.floor(yearsDecimal);
+            const remainingMonths = Math.round((yearsDecimal - years) * 12);
+            
+            let timeDescription = '';
+            if (years > 0 && remainingMonths > 0) {
+                timeDescription = `${years} year${years !== 1 ? 's' : ''} and ${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+            } else if (years > 0) {
+                timeDescription = `${years} year${years !== 1 ? 's' : ''}`;
+            } else {
+                timeDescription = `${months} month${months !== 1 ? 's' : ''}`;
+            }
+            
+            savingsResult.innerHTML = `
+                <h4>Your Savings Summary</h4>
+                <p class="result-summary">After ${timeDescription}, you will have saved:</p>
+                <p class="result-detail"><strong>Total Savings:</strong> PKR ${totalContributions.toLocaleString()}</p>
+                <p class="result-detail"><strong>Initial Investment:</strong> PKR ${initialAmount.toLocaleString()}</p>
+                <p class="result-detail"><strong>Total Contributions:</strong> PKR ${(monthlyAmount * months).toLocaleString()}</p>
+                <p class="result-note">Note: This simple calculation doesn't include any profit or returns.</p>
+            `;
+            
+            savingsResult.style.display = 'block';
+        });
+    }
+    
+    // ---- Investment Calculator ----
+    const investmentForm = document.getElementById('investment-form');
+    const investmentResult = document.getElementById('investment-result');
+    const investmentChartContainer = document.getElementById('investment-chart-container');
+    let investmentChart = null;
+    
+    // Handle investment option selection
+    const investmentOptions = document.querySelectorAll('.investment-option');
+    const selectedRateInput = document.getElementById('selected-rate');
+    
+    if (investmentOptions && selectedRateInput) {
+        investmentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                investmentOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Update hidden input with selected rate
+                selectedRateInput.value = option.getAttribute('data-rate');
+            });
+        });
+        
+        // Set default selection
+        investmentOptions[0].classList.add('selected');
+    }
+    
+    if (investmentForm && investmentResult) {
+        investmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const initialAmount = parseFloat(document.getElementById('initial-investment').value) || 0;
+            const monthlyAmount = parseFloat(document.getElementById('monthly-investment').value) || 0;
+            const months = parseInt(document.getElementById('investment-duration').value) || 0;
+            const annualRate = parseFloat(document.getElementById('selected-rate').value) || 5;
+            const monthlyRate = annualRate / 12 / 100;
+            
+            if (months <= 0) {
+                investmentResult.innerHTML = '<p class="alert">Please enter a valid number of months.</p>';
+                investmentResult.style.display = 'block';
+                return;
+            }
+            
+            // Calculate investment growth with compound interest
+            let balance = initialAmount;
+            let totalContributions = initialAmount;
+            let monthlyData = [];
+            
+            for (let i = 1; i <= months; i++) {
+                // Add monthly contribution
+                balance += monthlyAmount;
+                totalContributions += monthlyAmount;
+                
+                // Apply monthly profit
+                balance *= (1 + monthlyRate);
+                
+                // Record data for chart (only store every 3rd month for longer durations)
+                if (i % 3 === 0 || i === 1 || i === months) {
+                    monthlyData.push({
+                        month: i,
+                        balance: balance
+                    });
+                }
+            }
+            
+            const totalProfit = balance - totalContributions;
+            const profitPercentage = (totalProfit / totalContributions) * 100;
+            
+            const yearsDecimal = months / 12;
+            const years = Math.floor(yearsDecimal);
+            const remainingMonths = Math.round((yearsDecimal - years) * 12);
+            
+            let timeDescription = '';
+            if (years > 0 && remainingMonths > 0) {
+                timeDescription = `${years} year${years !== 1 ? 's' : ''} and ${remainingMonths} month${remainingMonths !== 1 ? 's' : ''}`;
+            } else if (years > 0) {
+                timeDescription = `${years} year${years !== 1 ? 's' : ''}`;
+            } else {
+                timeDescription = `${months} month${months !== 1 ? 's' : ''}`;
+            }
+            
+            // Find selected investment option text
+            let selectedOption = 'Selected Investment';
+            document.querySelectorAll('.investment-option').forEach(option => {
+                if (option.classList.contains('selected')) {
+                    selectedOption = option.innerText.split('\n')[0];
+                }
+            });
+            
+            investmentResult.innerHTML = `
+                <h4>${selectedOption} Growth Summary</h4>
+                <p class="result-summary">After ${timeDescription} at ${annualRate}% annual profit rate:</p>
+                <p class="result-detail"><strong>Final Balance:</strong> PKR ${Math.round(balance).toLocaleString()}</p>
+                <p class="result-detail"><strong>Total Contributions:</strong> PKR ${Math.round(totalContributions).toLocaleString()}</p>
+                <p class="result-detail"><strong>Total Profit:</strong> PKR ${Math.round(totalProfit).toLocaleString()} (${profitPercentage.toFixed(2)}%)</p>
+                <p class="result-note">Note: Historical returns are not indicative of future performance. These calculations are for illustrative purposes only.</p>
+            `;
+            
+            investmentResult.style.display = 'block';
+            
+            // Create chart
+            if (window.Chart) {
+                createInvestmentChart(monthlyData, selectedOption);
+                investmentChartContainer.style.display = 'block';
+            }
+        });
+    }
+    
+    // Create investment chart
+    function createInvestmentChart(data, title) {
+        const ctx = document.getElementById('investmentChart')?.getContext('2d');
+        
+        if (!ctx) return;
+        
+        // Destroy previous chart if exists
+        if (investmentChart) {
+            investmentChart.destroy();
+        }
+        
+        // Format labels for X axis (convert months to years if appropriate)
+        const labels = data.map(item => {
+            if (item.month < 12) {
+                return `Month ${item.month}`;
+            } else {
+                const years = Math.floor(item.month / 12);
+                const months = item.month % 12;
+                if (months === 0) {
+                    return `Year ${years}`;
+                } else {
+                    return `Y${years}M${months}`;
+                }
+            }
+        });
+        
+        investmentChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Balance (PKR)',
+                    data: data.map(item => item.balance),
+                    borderColor: 'rgb(0, 100, 0)',
+                    backgroundColor: 'rgba(0, 100, 0, 0.1)',
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `${title} Growth Projection`,
+                        font: {
+                            size: 16
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                return `Balance: PKR ${Math.round(value).toLocaleString()}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                if (value >= 1000000) {
+                                    return 'PKR ' + (value / 1000000).toFixed(1) + 'M';
+                                } else if (value >= 1000) {
+                                    return 'PKR ' + (value / 1000).toFixed(1) + 'K';
+                                }
+                                return 'PKR ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+    
+    
+    
 </body>
 </html>
