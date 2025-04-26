@@ -115,11 +115,7 @@
         transform-origin: center; /* Rotate around center */
       }
 
-      /* Hamburger Icon Animation (to 'X') */
-      #nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-      #nav-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(-20px);} /* Fade and slide out */
-      #nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
+      
 
       /* --- Hero Section --- */
       #hero {
@@ -181,39 +177,6 @@
         box-shadow: 0 6px 15px var(--shadow-color); /* Enhanced hover shadow */
       }
       .avenue-card h3 { margin-top: 0; } /* Remove potential top margin */
-
-
-      /* --- Calculators & Forms --- */
-      #zakat-form label { display: block; margin-bottom: 6px; font-weight: 600; }
-      #zakat-form input[type="number"] {
-        width: 100%;
-        padding: 10px 12px;
-        margin-bottom: 10px;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-      }
-       #zakat-form input[type="number"]:focus {
-         border-color: var(--primary-color);
-         box-shadow: 0 0 0 2px rgba(0, 100, 0, 0.2); /* Subtle focus glow */
-         outline: none; /* Remove default */
-       }
-      #zakat-form small { display: block; margin: -5px 0 15px 0; font-size: 0.85rem; color: #6c757d; }
-      #zakat-result {
-        margin-top: 20px;
-        font-weight: 600; /* Bolder result */
-        font-size: 1.1rem;
-        padding: 15px;
-        background-color: var(--secondary-color);
-        border-left: 5px solid var(--primary-color);
-        border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        line-height: 1.5;
-      }
-
-      /* --- Charts --- */
-      .chart-container { position: relative; }
-      .chart-container small { display: block; text-align: center; margin-top: 15px; font-size: 0.85rem; color: #6c757d; }
 
       /* --- Footer --- */
       footer {
@@ -294,142 +257,6 @@
         .calculator, .chart-container { padding: 20px; }
       }
     
-    
-    
-    
-    
-    
-    
-    
-    
-      /* Calculator specific styles */
-    .section-intro {
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 1.1rem;
-    }
-    
-    .calculator {
-        background: var(--light-text);
-        padding: 25px;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-        margin-bottom: 30px;
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-    }
-    
-    .calculator label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 600;
-    }
-    
-    .calculator input[type="number"] {
-        width: 100%;
-        padding: 10px 12px;
-        margin-bottom: 5px;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    }
-    
-    .calculator input[type="number"]:focus {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 2px rgba(0, 100, 0, 0.2);
-        outline: none;
-    }
-    
-    .calculator small {
-        display: block;
-        margin-bottom: 5px;
-        font-size: 0.85rem;
-        color: #6c757d;
-    }
-    
-    .calc-button {
-        display: inline-block;
-        padding: 12px 28px;
-        background: var(--primary-color);
-        color: var(--light-text);
-        border-radius: var(--border-radius);
-        font-weight: 600;
-        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
-        cursor: pointer;
-        border: none;
-        text-decoration: none;
-        margin-top: 10px;
-    }
-    
-    .calc-button:hover {
-        background-color: var(--primary-darker);
-        transform: translateY(-2px);
-    }
-    
-    .result-container {
-        margin-top: 20px;
-        padding: 15px;
-        background-color: var(--secondary-color);
-        border-left: 5px solid var(--primary-color);
-        border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        display: none;
-    }
-    
-    .result-container h4 {
-        margin-top: 0;
-        color: var(--primary-color);
-    }
-    
-    .result-summary {
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-    
-    .result-detail {
-        margin-bottom: 5px;
-    }
-    
-    /* Investment options styling */
-    .investment-options {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .investment-option {
-        background-color: var(--secondary-color);
-        border: 2px solid var(--border-color);
-        border-radius: var(--border-radius);
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        transition: all var(--transition-speed) ease;
-        font-weight: 500;
-        color: var(--text-color);
-    }
-    
-    .investment-option .rate {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--primary-color);
-    }
-    
-    .investment-option.selected {
-        background-color: var(--primary-color);
-        color: var(--light-text);
-        border-color: var(--primary-color);
-    }
-    
-    .investment-option.selected .rate {
-        color: var(--light-text);
-    }
-    
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .investment-options {
@@ -441,89 +268,6 @@
         .investment-options {
             grid-template-columns: 1fr;
         }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-
-
-    /* KMI30 Chart Specific Styles */
-    .chart-container {
-        background: var(--light-text);
-        padding: 25px;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-        margin-bottom: 30px;
-    }
-    
-    .chart-container h3 {
-        margin-top: 0;
-        margin-bottom: 20px;
-        text-align: center;
-        color: var(--primary-color);
-    }
-    
-    .time-period-selector {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    
-    .time-button {
-        background-color: var(--secondary-color);
-        border: 1px solid var(--border-color);
-        color: var(--text-color);
-        border-radius: var(--border-radius);
-        padding: 8px 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all var(--transition-speed) ease;
-    }
-    
-    .time-button:hover {
-        background-color: rgba(0, 100, 0, 0.1);
-    }
-    
-    .time-button.selected {
-        background-color: var(--primary-color);
-        color: var(--light-text);
-        border-color: var(--primary-darker);
-    }
-    
-    .responsive-chart-wrapper {
-        position: relative;
-        height: 0;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        margin-bottom: 15px;
-    }
-    
-    .responsive-chart-wrapper canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    .chart-container small {
-        display: block;
-        text-align: center;
-        color: #6c757d;
-        font-size: 0.85rem;
     }
     
     /* Responsive adjustments */
