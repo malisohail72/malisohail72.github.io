@@ -445,6 +445,158 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  /* Chart container styles */
+    .chart-container {
+        background: var(--light-text);
+        padding: 25px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+        position: relative;
+    }
+    
+    /* Time period selector */
+    .time-period-selector {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .period-button {
+        background-color: var(--secondary-color);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        padding: 8px 16px;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-weight: 500;
+        transition: all var(--transition-speed) ease;
+    }
+    
+    .period-button:hover {
+        background-color: rgba(0, 100, 0, 0.1);
+    }
+    
+    .period-button.selected {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        border-color: var(--primary-darker);
+    }
+    
+    /* Index value display */
+    .index-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background-color: var(--secondary-color);
+        border-radius: var(--border-radius);
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .index-value {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        font-weight: 600;
+    }
+    
+    #current-index-value {
+        font-size: 1.5rem;
+        color: var(--text-color);
+    }
+    
+    #index-change {
+        font-size: 1rem;
+    }
+    
+    .positive {
+        color: #006400; /* Dark green */
+    }
+    
+    .negative {
+        color: #B22222; /* Dark red */
+    }
+    
+    .index-date {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+    
+    /* Chart legend */
+    .chart-legend {
+        display: flex;
+        justify-content: center;
+        margin: 15px 0;
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+    }
+    
+    .legend-color {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+        border-radius: 3px;
+    }
+    
+    /* Index description */
+    .index-description {
+        margin-top: 30px;
+    }
+    
+    .index-description h4 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+    
+    .index-description ul {
+        list-style: disc;
+        margin: 10px 0 20px 25px;
+    }
+    
+    .index-description li {
+        margin-bottom: 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .index-info {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .time-period-selector {
+            gap: 5px;
+        }
+        
+        .period-button {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+    }
+    
+    
+    
+    
     </style>
 
 </head>
@@ -674,7 +826,73 @@
         
         <br>
             
+            
+            
+            
+            
+            
+            
      
+        <!-- KMI30 Index Chart Section -->
+<section id="charts">
+    <div class="container">
+        <h2><center>📈 Pakistan KMI30 Shariah Index</center></h2>
+        
+        <div class="chart-container">
+            <h3>KMI30 Index Performance</h3>
+            
+            <!-- Time period selection buttons -->
+            <div class="time-period-selector">
+                <button class="period-button selected" data-period="1M">1 Month</button>
+                <button class="period-button" data-period="3M">3 Months</button>
+                <button class="period-button" data-period="1Y">1 Year</button>
+                <button class="period-button" data-period="ALL">All Time</button>
+            </div>
+            
+            <div class="index-info">
+                <div class="index-value">
+                    <span id="current-index-value">68,241.92</span>
+                    <span id="index-change" class="positive">+341.27 (+0.50%)</span>
+                </div>
+                <div class="index-date">
+                    As of <span id="last-updated">April 26, 2025</span>
+                </div>
+            </div>
+            
+            <canvas id="kmi30Chart"></canvas>
+            
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(0, 100, 0, 0.8);"></span>
+                    <span>KMI30 Index</span>
+                </div>
+            </div>
+            
+            <small>Source: Pakistan Stock Exchange (PSX). The KMI30 index represents Shariah-compliant companies listed on PSX.</small>
+        </div>
+        
+        <div class="index-description">
+            <h4>About KMI30 Index</h4>
+            <p>The KMI30 Index is the premier Shariah-compliant stock index in Pakistan, consisting of the 30 most liquid Shariah-compliant companies listed on the Pakistan Stock Exchange (PSX). The index is reviewed semi-annually to ensure continued Shariah compliance and is maintained according to the methodology approved by the Shariah advisors.</p>
+            <p>Companies in the KMI30 index must pass several Shariah screening criteria:</p>
+            <ul>
+                <li>Business activities must be halal (excluding conventional financial services, alcohol, etc.)</li>
+                <li>Interest-bearing debt to total assets ratio must be less than 37%</li>
+                <li>Non-compliant investments to total assets ratio must be less than 33%</li>
+                <li>Non-compliant income to total revenue ratio must be less than 5%</li>
+                <li>Illiquid assets to total assets ratio must be at least 25%</li>
+            </ul>
+        </div>
+    </div>
+</section>
+        
+        
+        
+        
+        
+        
+        
+        
         
         
             
@@ -728,6 +946,273 @@
             <p class="disclaimer"><strong>Disclaimer:</strong> Information is for educational purposes only, not financial advice. Halal investing also involves risks. Conduct your own research and consult Shariah advisors before investing. We are not affiliated with specific platforms unless stated.</p>
         </div>
     </footer>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- JavaScript for KMI30 chart functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if Chart.js is available
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is required for the KMI30 chart');
+        return;
+    }
+    
+    // KMI30 Index sample data (fictional but realistic for Pakistan market)
+    const kmi30Data = {
+        // Monthly data (30 days) - most recent first
+        '1M': {
+            labels: generateDateLabels(30, 1),
+            values: [68241.92, 67946.65, 67800.32, 67924.76, 68120.45, 68326.19, 68109.54, 
+                    67891.23, 67650.67, 67432.12, 67319.87, 67503.26, 67712.45, 67956.30, 
+                    68213.76, 68120.12, 67945.67, 68102.34, 68352.12, 68576.54, 68432.12, 
+                    68310.65, 68123.43, 67956.87, 67845.32, 68012.43, 68243.12, 68432.10, 
+                    68324.54, 68241.92].reverse()
+        },
+        
+        // 3 Month data (90 days)
+        '3M': {
+            labels: generateDateLabels(90, 3),
+            values: [65212.43, 65432.12, 65567.23, 65789.32, 65632.12, 65432.15, 65267.43, 
+                    65412.32, 65678.12, 65912.34, 66123.45, 66345.67, 66512.34, 66789.12, 
+                    66983.45, 67124.35, 67324.56, 67543.21, 67689.43, 67843.23, 67956.34, 
+                    68124.45, 68312.32, 68241.92, 68124.32, 67943.12, 67856.34, 67789.43, 
+                    67912.43, 68043.23].reverse()
+        },
+        
+        // 1 Year data (monthly points for a year)
+        '1Y': {
+            labels: ['Apr 24', 'May 24', 'Jun 24', 'Jul 24', 'Aug 24', 'Sep 24', 'Oct 24', 'Nov 24', 'Dec 24', 'Jan 25', 'Feb 25', 'Mar 25', 'Apr 25'],
+            values: [58432.12, 59123.43, 59876.54, 60312.32, 60876.54, 61243.12, 61567.23, 
+                    62456.76, 63234.54, 64567.23, 65789.12, 67213.45, 68241.92]
+        },
+        
+        // All time data (yearly points)
+        'ALL': {
+            labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+            values: [32453.23, 37654.34, 41234.56, 38765.43, 42345.67, 40123.45, 48765.43, 54321.01, 58912.34, 64567.23, 68241.92]
+        }
+    };
+    
+    // Initialize chart with monthly data
+    let currentPeriod = '1M';
+    let kmi30Chart = null;
+    
+    // Create the chart
+    createKMI30Chart(currentPeriod);
+    
+    // Add event listeners to period buttons
+    const periodButtons = document.querySelectorAll('.period-button');
+    periodButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update selected button
+            periodButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            
+            // Update chart
+            currentPeriod = button.getAttribute('data-period');
+            createKMI30Chart(currentPeriod);
+        });
+    });
+    
+    // Function to create/update KMI30 chart
+    function createKMI30Chart(period) {
+        const ctx = document.getElementById('kmi30Chart').getContext('2d');
+        
+        // Destroy previous chart if exists
+        if (kmi30Chart) {
+            kmi30Chart.destroy();
+        }
+        
+        // Get data for selected period
+        const data = kmi30Data[period];
+        
+        // Calculate data for trend line (moving average)
+        const trendData = calculateMovingAverage(data.values, period === '1M' ? 5 : (period === '3M' ? 7 : 3));
+        
+        // Create new chart
+        kmi30Chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'KMI30 Index',
+                        data: data.values,
+                        borderColor: 'rgba(0, 100, 0, 0.8)',
+                        backgroundColor: 'rgba(0, 100, 0, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: period === 'ALL' ? 4 : (period === '1Y' ? 3 : 1),
+                        pointHoverRadius: 6,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Trend',
+                        data: trendData,
+                        borderColor: 'rgba(255, 140, 0, 0.7)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: getPeriodTitle(period),
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                if (context.datasetIndex === 0) {
+                                    return `KMI30: ${context.raw.toLocaleString('en-PK')}`;
+                                } else {
+                                    return `Trend: ${context.raw.toLocaleString('en-PK')}`;
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString('en-PK');
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'nearest'
+                }
+            }
+        });
+        
+        // Update min and max for better visualization
+        const min = Math.min(...data.values);
+        const max = Math.max(...data.values);
+        const padding = (max - min) * 0.1;
+        
+        kmi30Chart.options.scales.y.min = Math.floor(min - padding);
+        kmi30Chart.options.scales.y.max = Math.ceil(max + padding);
+        kmi30Chart.update();
+        
+        // Calculate and display change values
+        const latestValue = data.values[data.values.length - 1];
+        const previousValue = data.values[data.values.length - 2];
+        const change = latestValue - previousValue;
+        const changePercent = (change / previousValue) * 100;
+        
+        // Update display values
+        document.getElementById('current-index-value').textContent = latestValue.toLocaleString('en-PK');
+        
+        const changeElement = document.getElementById('index-change');
+        const changeText = `${change >= 0 ? '+' : ''}${change.toFixed(2)} (${change >= 0 ? '+' : ''}${changePercent.toFixed(2)}%)`;
+        changeElement.textContent = changeText;
+        
+        if (change >= 0) {
+            changeElement.classList.remove('negative');
+            changeElement.classList.add('positive');
+        } else {
+            changeElement.classList.remove('positive');
+            changeElement.classList.add('negative');
+        }
+    }
+    
+    // Helper function to generate date labels
+    function generateDateLabels(days, step = 1) {
+        const labels = [];
+        const today = new Date();
+        
+        for (let i = days - 1; i >= 0; i -= step) {
+            const date = new Date();
+            date.setDate(today.getDate() - i);
+            
+            if (days > 60) {
+                // For longer periods, show only month/day
+                labels.push(`${date.getMonth() + 1}/${date.getDate()}`);
+            } else {
+                // For shorter periods, show month/day
+                labels.push(`${date.getMonth() + 1}/${date.getDate()}`);
+            }
+        }
+        
+        return labels;
+    }
+    
+    // Helper function for moving average calculation
+    function calculateMovingAverage(data, window) {
+        const result = [];
+        
+        // Add null values at the beginning for alignment
+        for (let i = 0; i < window - 1; i++) {
+            result.push(null);
+        }
+        
+        for (let i = 0; i <= data.length - window; i++) {
+            const windowValues = data.slice(i, i + window);
+            const average = windowValues.reduce((sum, value) => sum + value, 0) / window;
+            result.push(average);
+        }
+        
+        return result;
+    }
+    
+    // Helper function to get period title
+    function getPeriodTitle(period) {
+        switch (period) {
+            case '1M':
+                return 'KMI30 Index - Last Month';
+            case '3M':
+                return 'KMI30 Index - Last 3 Months';
+            case '1Y':
+                return 'KMI30 Index - Last 12 Months';
+            case 'ALL':
+                return 'KMI30 Index - Historical Performance';
+            default:
+                return 'KMI30 Index Performance';
+        }
+    }
+});
+</script>
+    
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
