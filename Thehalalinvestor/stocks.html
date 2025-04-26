@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halal Investment Avenues</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      /* --- Variables & Modern Reset --- */
+      :root {
+        --primary-color: #006400; /* Dark Green */
+        --primary-darker: #004d00;
+        --secondary-color: #f8f9fa; /* Slightly off-white */
+        --accent-color: #FFD700; /* Gold */
+        --accent-darker: #e6c300;
+        --text-color: #343a40; /* Darker Gray */
+        --light-text: #fff;
+        --border-color: #dee2e6;
+        --shadow-color: rgba(0,0,0,0.1);
+        --container-width: 960px;
+        --base-font-size: 1rem; /* 16px */
+        --border-radius: 5px;
+        --transition-speed: 0.3s;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; } /* Smooth scrolling */
+      body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.7;
+        color: var(--text-color);
+        background-color: var(--light-text);
+        font-size: var(--base-font-size);
+        -webkit-font-smoothing: antialiased; /* Nicer font rendering */
+        -moz-osx-font-smoothing: grayscale;
+      }
+      img, picture, video, canvas, svg { display: block; max-width: 100%; }
+      input, button, textarea, select { font: inherit; }
+      ul { list-style: none; }
+      a { color: var(--primary-color); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      h1, h2, h3 { margin-bottom: 1rem; color: var(--primary-color); font-weight: 600; line-height: 1.3; }
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      h3 { font-size: 1.5rem; }
+
+      /* --- Layout & Container --- */
+      .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+      main { padding-top: 20px; }
+      section { padding: 50px 20px; max-width: var(--container-width); margin: 0 auto; }
+      section:nth-child(even) { background-color: var(--secondary-color); }
+
+      /* --- Header & Navigation --- */
+      header {
+        background: var(--primary-color);
+        color: var(--light-text);
+        padding: 1rem 0;
+        position: sticky; top: 0; z-index: 100;
+        box-shadow: 0 2px 5px var(--shadow-color);
+      }
+      header nav {
+        max-width: var(--container-width); margin: auto; padding: 0 20px;
+        display: flex; justify-content: space-between; align-items: center;
+        position: relative; /* Needed for absolute positioning in mobile if used */
+      }
+      header .logo { font-size: 1.5rem; font-weight: 700; z-index: 101; /* Ensure logo stays above mobile menu if absolute */ }
+
+      /* Desktop Navigation List */
+      header nav ul#nav-menu {
+        display: flex;
+        align-items: center; /* Align items vertically in the flex container */
+      }
+      header nav ul li { margin-left: 25px; }
+      header nav ul li a {
+        color: var(--light-text);
+        padding: 6px 12px;
+        border-radius: var(--border-radius);
+        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        display: inline-block; /* Allows transform */
+        text-decoration: none;
+      }
+      header nav ul li a:hover,
+      header nav ul li a.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px); /* Subtle lift */
+        text-decoration: none;
+      }
+
+      /* Hamburger Toggle Button */
+      #nav-toggle {
+        display: none; /* Hidden by default on larger screens */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101; /* Ensure toggle is clickable above menu */
+      }
+      #nav-toggle:focus { outline: 1px dashed var(--light-text); outline-offset: 2px; } /* Basic focus style */
+      #nav-toggle span {
+        display: block; /* Ensure spans behave correctly */
+        width: 30px;
+        height: 3px;
+        background: var(--light-text);
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out; /* Smoother transition for animation */
+        position: relative; /* Needed for transform-origin */
+        transform-origin: center; /* Rotate around center */
+      }
+
+      /* Hamburger Icon Animation (to 'X') */
+      #nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      #nav-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(-20px);} /* Fade and slide out */
+      #nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+      /* --- Hero Section --- */
+      #hero {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(rgba(0, 80, 0, 0.75), rgba(0, 80, 0, 0.75)), url('https://via.placeholder.com/1200x400?text=Ethical+Investing') no-repeat center center/cover; /* Slightly darker overlay */
+        color: var(--light-text);
+        border-radius: 0 0 var(--border-radius) var(--border-radius); /* Rounded bottom corners */
+        margin-bottom: 30px; /* Space below hero */
+      }
+      #hero h1 { color: var(--light-text); margin-bottom: 0.5rem; }
+      #hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+
+      /* --- Buttons --- */
+      .cta-button, #zakat-form button {
+        display: inline-block;
+        padding: 12px 28px;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        cursor: pointer; border: none;
+        text-decoration: none;
+      }
+      .cta-button { background: var(--accent-color); color: var(--primary-darker); }
+      .cta-button:hover { background-color: var(--accent-darker); transform: translateY(-2px); text-decoration: none; }
+      #zakat-form button { background: var(--primary-color); color: var(--light-text); }
+      #zakat-form button:hover { background-color: var(--primary-darker); transform: translateY(-2px); }
+
+      /* Focus states for accessibility */
+      .cta-button:focus-visible, #zakat-form button:focus-visible, #zakat-form input:focus-visible {
+         outline: 2px solid var(--primary-darker);
+         outline-offset: 2px;
+      }
+
+
+      /* --- About & Resources Lists --- */
+      #about ul, #resources ul { list-style: disc; margin: 0 0 1rem 25px; }
+      #resources ul ul { list-style: circle; margin: 5px 0 10px 20px; }
+      #resources li { margin-bottom: 10px; }
+      #resources a { font-weight: 600; }
+
+
+      
+      /* --- Footer --- */
+      footer {
+        background: var(--text-color);
+        color: #adb5bd; /* Lighter gray for footer text */
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 40px;
+        font-size: 0.9rem;
+      }
+      footer p:first-child { color: var(--light-text); margin-bottom: 10px;}
+      footer .disclaimer {
+        font-size: 0.8rem; color: #6c757d; /* Even lighter for disclaimer */
+        margin-top: 15px;
+        max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.5;
+      }
+       footer .disclaimer strong { color: #adb5bd; }
+
+      /* --- Responsive --- */
+      @media (max-width: 768px) {
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.75rem; }
+        h3 { font-size: 1.3rem; }
+        .container, header nav { padding: 0 15px; }
+
+        /* Show Hamburger Toggle */
+        #nav-toggle { display: flex; }
+
+        /* Mobile Navigation Menu Styling */
+        header nav ul#nav-menu {
+            /* Hide by default using max-height for transition */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding var(--transition-speed) ease-out; /* Smooth transition */
+
+            /* Style as a dropdown block */
+            position: absolute; /* Take out of flow */
+            top: 100%; /* Position below header */
+            left: 0;
+            right: 0;
+            background-color: var(--primary-darker); /* Darker background for dropdown */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 0; /* No padding when closed */
+            margin: 0;
+            flex-direction: column; /* Stack links vertically */
+            align-items: stretch; /* Make items take full width */
+            border-radius: 0 0 var(--border-radius) var(--border-radius); /* Rounded bottom corners */
+        }
+        /* Style for when menu is OPEN */
+        header nav ul#nav-menu.active {
+            max-height: 500px; /* Large enough height to show all items */
+            padding: 10px 0; /* Add padding when open */
+        }
+        header nav ul li {
+            margin: 0; /* Reset desktop margin */
+            width: 100%;
+        }
+        header nav ul li a {
+            display: block; /* Make links full width */
+            text-align: left; /* Align text left */
+            padding: 12px 20px; /* Adjust padding for mobile */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+            border-radius: 0; /* Remove individual radius */
+            transition: background-color var(--transition-speed) ease; /* Only transition color */
+            transform: none; /* Remove desktop hover transform */
+        }
+        header nav ul li:last-child a { border-bottom: none; }
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle hover/active */
+            transform: none; /* Ensure no transform */
+        }
+
+        /* Rest of mobile styles */
+        #hero { padding: 60px 15px; }
+        .avenue-container { grid-template-columns: 1fr; gap: 20px; } /* Stack cards */
+        section { padding: 40px 15px; }
+        .calculator, .chart-container { padding: 20px; }
+      }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .time-period-selector {
+            justify-content: space-between;
+        }
+        
+        .time-button {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            flex: 1 0 calc(50% - 5px);
+            text-align: center;
+        }
+        
+        .responsive-chart-wrapper {
+            padding-bottom: 75%; /* Taller on mobile */
+        }
+    }
+    
+    
+    
+    </style>
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">The Halal Investor</div>
+            <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#avenues">Avenues</a></li>
+                <li><a href="#calculators">Calculators</a></li>
+                <li><a href="#charts">Charts</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+           
+             
+            
+            
+            
+            
+     
+        
+    
+    
+</body>
+</html>
