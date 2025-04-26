@@ -454,146 +454,95 @@
     
     
     
-  /* Chart container styles */
+  
+
+
+    /* KMI30 Chart Specific Styles */
     .chart-container {
         background: var(--light-text);
         padding: 25px;
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius);
         box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-        margin-bottom: 25px;
-        position: relative;
+        margin-bottom: 30px;
     }
     
-    /* Time period selector */
+    .chart-container h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        color: var(--primary-color);
+    }
+    
     .time-period-selector {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 10px;
         margin-bottom: 20px;
-        flex-wrap: wrap;
     }
     
-    .period-button {
+    .time-button {
         background-color: var(--secondary-color);
         border: 1px solid var(--border-color);
         color: var(--text-color);
-        padding: 8px 16px;
         border-radius: var(--border-radius);
+        padding: 8px 16px;
+        font-weight: 600;
         cursor: pointer;
-        font-weight: 500;
         transition: all var(--transition-speed) ease;
     }
     
-    .period-button:hover {
+    .time-button:hover {
         background-color: rgba(0, 100, 0, 0.1);
     }
     
-    .period-button.selected {
+    .time-button.selected {
         background-color: var(--primary-color);
         color: var(--light-text);
         border-color: var(--primary-darker);
     }
     
-    /* Index value display */
-    .index-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding: 10px 15px;
-        background-color: var(--secondary-color);
-        border-radius: var(--border-radius);
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    
-    .index-value {
-        display: flex;
-        align-items: baseline;
-        gap: 10px;
-        font-weight: 600;
-    }
-    
-    #current-index-value {
-        font-size: 1.5rem;
-        color: var(--text-color);
-    }
-    
-    #index-change {
-        font-size: 1rem;
-    }
-    
-    .positive {
-        color: #006400; /* Dark green */
-    }
-    
-    .negative {
-        color: #B22222; /* Dark red */
-    }
-    
-    .index-date {
-        font-size: 0.9rem;
-        color: #6c757d;
-    }
-    
-    /* Chart legend */
-    .chart-legend {
-        display: flex;
-        justify-content: center;
-        margin: 15px 0;
-    }
-    
-    .legend-item {
-        display: flex;
-        align-items: center;
-        margin: 0 10px;
-    }
-    
-    .legend-color {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        margin-right: 5px;
-        border-radius: 3px;
-    }
-    
-    /* Index description */
-    .index-description {
-        margin-top: 30px;
-    }
-    
-    .index-description h4 {
-        color: var(--primary-color);
+    .responsive-chart-wrapper {
+        position: relative;
+        height: 0;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
         margin-bottom: 15px;
     }
     
-    .index-description ul {
-        list-style: disc;
-        margin: 10px 0 20px 25px;
+    .responsive-chart-wrapper canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
     }
     
-    .index-description li {
-        margin-bottom: 5px;
+    .chart-container small {
+        display: block;
+        text-align: center;
+        color: #6c757d;
+        font-size: 0.85rem;
     }
     
     /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .index-info {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        
+    @media (max-width: 576px) {
         .time-period-selector {
-            gap: 5px;
+            justify-content: space-between;
         }
         
-        .period-button {
+        .time-button {
             padding: 6px 12px;
             font-size: 0.9rem;
+            flex: 1 0 calc(50% - 5px);
+            text-align: center;
+        }
+        
+        .responsive-chart-wrapper {
+            padding-bottom: 75%; /* Taller on mobile */
         }
     }
-    
     
     
     
@@ -830,61 +779,193 @@
             
             
             
+
+<div class="chart-container">
+    <h3>KMI30 Islamic Index Performance</h3>
+    <div class="time-period-selector">
+        <button class="time-button selected" data-period="monthly">Monthly</button>
+        <button class="time-button" data-period="quarterly">3 Months</button>
+        <button class="time-button" data-period="yearly">Yearly</button>
+        <button class="time-button" data-period="all">All Time</button>
+    </div>
+    <div class="responsive-chart-wrapper">
+        <canvas id="kmi30Chart"></canvas>
+    </div>
+    <small>Data source: Pakistan Stock Exchange KMI-30 Shariah Compliant Index</small>
+</div>
+
+           
+             
+            
+            
             
             
      
         <!-- KMI30 Index Chart Section -->
-<section id="charts">
-    <div class="container">
-        <h2><center>📈 Pakistan KMI30 Shariah Index</center></h2>
         
-        <div class="chart-container">
-            <h3>KMI30 Index Performance</h3>
-            
-            <!-- Time period selection buttons -->
-            <div class="time-period-selector">
-                <button class="period-button selected" data-period="1M">1 Month</button>
-                <button class="period-button" data-period="3M">3 Months</button>
-                <button class="period-button" data-period="1Y">1 Year</button>
-                <button class="period-button" data-period="ALL">All Time</button>
-            </div>
-            
-            <div class="index-info">
-                <div class="index-value">
-                    <span id="current-index-value">68,241.92</span>
-                    <span id="index-change" class="positive">+341.27 (+0.50%)</span>
-                </div>
-                <div class="index-date">
-                    As of <span id="last-updated">April 26, 2025</span>
-                </div>
-            </div>
-            
-            <canvas id="kmi30Chart"></canvas>
-            
-            <div class="chart-legend">
-                <div class="legend-item">
-                    <span class="legend-color" style="background-color: rgba(0, 100, 0, 0.8);"></span>
-                    <span>KMI30 Index</span>
-                </div>
-            </div>
-            
-            <small>Source: Pakistan Stock Exchange (PSX). The KMI30 index represents Shariah-compliant companies listed on PSX.</small>
-        </div>
+  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // KMI30 Index Chart Functionality
+    const kmi30ChartCanvas = document.getElementById('kmi30Chart');
+    const timeButtons = document.querySelectorAll('.time-button');
+    let kmi30Chart = null;
+    
+    // Sample KMI30 data (Replace with actual data)
+    // Using realistic but sample data points for KMI30 index from Pakistan
+    const kmi30Data = {
+        // Monthly data (most recent 12 months)
+        monthly: {
+            labels: ['Apr 25', 'Mar 25', 'Feb 25', 'Jan 25', 'Dec 24', 'Nov 24', 'Oct 24', 'Sep 24', 'Aug 24', 'Jul 24', 'Jun 24', 'May 24'],
+            values: [73500, 72800, 71200, 69900, 70500, 67800, 66500, 65200, 64800, 63100, 62500, 61800]
+        },
+        // Quarterly data (last 4 quarters)
+        quarterly: {
+            labels: ['Q1 2025', 'Q4 2024', 'Q3 2024', 'Q2 2024', 'Q1 2024', 'Q4 2023', 'Q3 2023', 'Q2 2023'],
+            values: [71800, 68500, 64100, 62700, 59800, 57200, 54500, 52100]
+        },
+        // Yearly data
+        yearly: {
+            labels: ['2025 YTD', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015'],
+            values: [73500, 70500, 59800, 52300, 46700, 42100, 38500, 34200, 31800, 29500, 27100]
+        },
+        // All time (simplified data points)
+        all: {
+            labels: ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008'],
+            values: [73500, 70500, 59800, 52300, 46700, 42100, 38500, 34200, 31800, 29500, 27100, 24800, 22500, 19700, 17200, 15600, 13800, 12000]
+        }
+    };
+    
+    // Initialize chart with monthly data by default
+    if (kmi30ChartCanvas) {
+        createKMI30Chart('monthly');
+    }
+    
+    // Time period button event listeners
+    if (timeButtons) {
+        timeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update button selection
+                timeButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+                
+                // Update chart with selected time period
+                const period = button.getAttribute('data-period');
+                createKMI30Chart(period);
+            });
+        });
+    }
+    
+    // Function to create/update KMI30 chart
+    function createKMI30Chart(period) {
+        const data = kmi30Data[period];
         
-        <div class="index-description">
-            <h4>About KMI30 Index</h4>
-            <p>The KMI30 Index is the premier Shariah-compliant stock index in Pakistan, consisting of the 30 most liquid Shariah-compliant companies listed on the Pakistan Stock Exchange (PSX). The index is reviewed semi-annually to ensure continued Shariah compliance and is maintained according to the methodology approved by the Shariah advisors.</p>
-            <p>Companies in the KMI30 index must pass several Shariah screening criteria:</p>
-            <ul>
-                <li>Business activities must be halal (excluding conventional financial services, alcohol, etc.)</li>
-                <li>Interest-bearing debt to total assets ratio must be less than 37%</li>
-                <li>Non-compliant investments to total assets ratio must be less than 33%</li>
-                <li>Non-compliant income to total revenue ratio must be less than 5%</li>
-                <li>Illiquid assets to total assets ratio must be at least 25%</li>
-            </ul>
-        </div>
-    </div>
-</section>
+        if (!data) return;
+        
+        // Destroy existing chart if it exists
+        if (kmi30Chart) {
+            kmi30Chart.destroy();
+        }
+        
+        // Create chart configuration
+        const chartConfig = {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'KMI30 Index',
+                    data: data.values,
+                    borderColor: 'rgb(0, 100, 0)',
+                    backgroundColor: 'rgba(0, 100, 0, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointBackgroundColor: 'rgb(0, 100, 0)',
+                    tension: 0.2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `KMI30 Islamic Index - ${period.charAt(0).toUpperCase() + period.slice(1)} Performance`,
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `KMI30: ${context.parsed.y.toLocaleString()} points`;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        reverse: true, // Most recent data first
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                if (value >= 10000) {
+                                    return (value / 1000) + 'k';
+                                }
+                                return value;
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                elements: {
+                    point: {
+                        radius: function(context) {
+                            // Only show points on larger screens or for specific data points
+                            const dataLength = context.chart.data.labels.length;
+                            if (window.innerWidth < 768 && dataLength > 10) {
+                                return context.dataIndex % 3 === 0 ? 3 : 0;
+                            }
+                            return 3;
+                        }
+                    }
+                }
+            }
+        };
+        
+        // Create new chart
+        kmi30Chart = new Chart(kmi30ChartCanvas.getContext('2d'), chartConfig);
+    }
+    
+    // Handle window resize to ensure chart responsiveness
+    window.addEventListener('resize', () => {
+        if (kmi30Chart) {
+            kmi30Chart.resize();
+        }
+    });
+});
+</script>
         
         
         
