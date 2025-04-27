@@ -1291,55 +1291,140 @@
         </div>
     </section>
 
-    <section id="portfolio">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Our Work</h2>
-                <p class="section-subtitle">Explore our latest projects and successful case studies</p>
-            </div>
-            <div class="portfolio-tabs fade-in">
-                <button class="portfolio-tab active" data-filter="all">All</button>
-                <button class="portfolio-tab" data-filter="web">Web</button>
-                <button class="portfolio-tab" data-filter="mobile">Mobile</button>
-                <button class="portfolio-tab" data-filter="enterprise">Enterprise</button>
-            </div>
-            <div class="grid grid-3">
-                <div class="card case-study-card fade-in">
-                    <img src="/api/placeholder/800/600" alt="Enterprise Management System" class="card-image">
-                    <div class="card-content">
-                        <span class="case-study-tag">Enterprise</span>
-                        <h3 class="card-title">Enterprise Management System</h3>
-                        <p class="card-text">Comprehensive business solution platform automating core processes for increased efficiency.</p>
-                        <div class="card-footer">
-                            <a href="portfolio.html#ems" class="card-link">View Case Study</a>
-                        </div>
+
+
+
+
+
+<!-- Portfolio Section HTML with data attributes for filtering -->
+<section id="portfolio">
+    <div class="container">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Our Work</h2>
+            <p class="section-subtitle">Explore our latest projects and successful case studies</p>
+        </div>
+        <div class="portfolio-tabs fade-in">
+            <button class="portfolio-tab active" data-filter="all">All</button>
+            <button class="portfolio-tab" data-filter="web">Web</button>
+            <button class="portfolio-tab" data-filter="mobile">Mobile</button>
+            <button class="portfolio-tab" data-filter="enterprise">Enterprise</button>
+        </div>
+        <div class="grid grid-3">
+            <!-- Added data-category attribute to each card -->
+            <div class="card case-study-card fade-in" data-category="enterprise">
+                <img src="/api/placeholder/800/600" alt="Enterprise Management System" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Enterprise</span>
+                    <h3 class="card-title">Enterprise Management System</h3>
+                    <p class="card-text">Comprehensive business solution platform automating core processes for increased efficiency.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#ems" class="card-link">View Case Study</a>
                     </div>
                 </div>
-                <div class="card case-study-card fade-in delay-1">
-                    <img src="/api/placeholder/800/600" alt="Health & Fitness App" class="card-image">
-                    <div class="card-content">
-                        <span class="case-study-tag">Mobile</span>
-                        <h3 class="card-title">Health & Fitness App</h3>
-                        <p class="card-text">AI-powered mobile application for personalized fitness tracking and health monitoring.</p>
-                        <div class="card-footer">
-                            <a href="portfolio.html#fitness-app" class="card-link">View Case Study</a>
-                        </div>
+            </div>
+            <div class="card case-study-card fade-in delay-1" data-category="mobile">
+                <img src="/api/placeholder/800/600" alt="Health & Fitness App" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Mobile</span>
+                    <h3 class="card-title">Health & Fitness App</h3>
+                    <p class="card-text">AI-powered mobile application for personalized fitness tracking and health monitoring.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#fitness-app" class="card-link">View Case Study</a>
                     </div>
                 </div>
-                <div class="card case-study-card fade-in delay-2">
-                    <img src="/api/placeholder/800/600" alt="E-commerce Platform" class="card-image">
-                    <div class="card-content">
-                        <span class="case-study-tag">Web</span>
-                        <h3 class="card-title">E-commerce Platform</h3>
-                        <p class="card-text">Scalable online marketplace with integrated payment systems and inventory management.</p>
-                        <div class="card-footer">
-                            <a href="portfolio.html#ecommerce" class="card-link">View Case Study</a>
-                        </div>
+            </div>
+            <div class="card case-study-card fade-in delay-2" data-category="web">
+                <img src="/api/placeholder/800/600" alt="E-commerce Platform" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Web</span>
+                    <h3 class="card-title">E-commerce Platform</h3>
+                    <p class="card-text">Scalable online marketplace with integrated payment systems and inventory management.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#ecommerce" class="card-link">View Case Study</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Added more portfolio items for better demonstration -->
+            <div class="card case-study-card fade-in" data-category="web">
+                <img src="/api/placeholder/800/600" alt="Corporate Website Redesign" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Web</span>
+                    <h3 class="card-title">Corporate Website Redesign</h3>
+                    <p class="card-text">Modern, responsive website overhaul with improved user experience and SEO optimization.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#corporate-web" class="card-link">View Case Study</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card case-study-card fade-in delay-1" data-category="mobile">
+                <img src="/api/placeholder/800/600" alt="Delivery Tracking App" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Mobile</span>
+                    <h3 class="card-title">Delivery Tracking App</h3>
+                    <p class="card-text">Real-time package tracking application with GPS integration and delivery notifications.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#delivery-app" class="card-link">View Case Study</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card case-study-card fade-in delay-2" data-category="enterprise">
+                <img src="/api/placeholder/800/600" alt="Financial Analytics Platform" class="card-image">
+                <div class="card-content">
+                    <span class="case-study-tag">Enterprise</span>
+                    <h3 class="card-title">Financial Analytics Platform</h3>
+                    <p class="card-text">Advanced data visualization and financial reporting tool for enterprise decision-making.</p>
+                    <div class="card-footer">
+                        <a href="portfolio.html#financial-platform" class="card-link">View Case Study</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Updated JavaScript for portfolio filtering -->
+<script>
+// Portfolio filter functionality
+const portfolioTabs = document.querySelectorAll('.portfolio-tab');
+const portfolioItems = document.querySelectorAll('.case-study-card');
+
+// Initialize all items visible
+portfolioItems.forEach(item => {
+    item.style.display = 'block';
+});
+
+portfolioTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Update active tab
+        portfolioTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Get the filter value
+        const filter = tab.getAttribute('data-filter');
+        
+        // Filter items
+        portfolioItems.forEach(item => {
+            // For animation purposes, use opacity and transition
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                item.style.opacity = '1';
+                item.style.display = 'block';
+            } else {
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300); // Match this with CSS transition duration
+            }
+        });
+    });
+});
+
+// Add these CSS styles to your existing stylesheet
+// .case-study-card {
+//     transition: opacity 0.3s ease;
+// }
+</script>
+
+
 
     <section id="team" class="bg-light">
         <div class="container">
