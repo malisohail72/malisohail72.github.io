@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,10 +106,11 @@
             background: #f1f5f9;
         }
 
-        /* Breadcrumb */
+    /* Breadcrumb - now positioned in the header */
         .breadcrumb {
-            background: var(--light-gray);
-            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
         }
 
         .breadcrumb-container {
@@ -119,6 +121,7 @@
         .breadcrumb-item {
             display: inline-flex;
             align-items: center;
+            font-size: 0.85rem;
         }
 
         .breadcrumb-item a {
@@ -136,6 +139,7 @@
         .breadcrumb-item.active {
             color: var(--text);
         }
+        
 
         /* Hero Section */
         .hero {
