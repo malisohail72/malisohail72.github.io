@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechVision Solutions | Software Development</title>
+    <meta name="description" content="TechVision Solutions - Leading software development company offering custom solutions, mobile apps, web development, and IT consulting services.">
+    <meta name="keywords" content="software development, mobile apps, web development, IT consulting, tech solutions">
+    <title>TechVision Solutions | Innovative Software Development Services</title>
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2563eb;
@@ -11,78 +16,72 @@
             --accent: #0ea5e9;
             --text: #1e293b;
             --bg: #f8fafc;
-        }
-
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s;
-        }
-
-        .loader-bar {
-            width: 200px;
-            height: 4px;
-            background: #e2e8f0;
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loader-bar::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 50%;
-            background: var(--primary);
-            animation: load 1.5s ease-in-out infinite;
-        }
-
-        @keyframes load {
-            0% { left: -50%; }
-            100% { left: 150%; }
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
             line-height: 1.6;
             color: var(--text);
             background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
         .container {
+            width: 92%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        nav {
-            background: #fff;
-            padding: 1rem 0;
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: center;
             gap: 2rem;
-            flex-wrap: wrap;
         }
 
         nav a {
@@ -99,14 +98,44 @@
             background: #f1f5f9;
         }
 
+        /* Hero Section */
         .hero {
             text-align: center;
             padding: 6rem 0;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            color: var(--white);
         }
 
-        .section {
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--white);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
             padding: 4rem 0;
         }
 
@@ -115,73 +144,156 @@
             margin-bottom: 3rem;
             font-size: 2.5rem;
             color: var(--text);
+            position: relative;
         }
 
-        .portfolio-grid {
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Grid Layouts */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .portfolio-item {
-            background: white;
+        /* Card Styles */
+        .card {
+            background: var(--white);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .portfolio-item:hover {
+        .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
-        .portfolio-image {
+        .card-image {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
         }
 
-        .portfolio-content {
+        .card-content {
             padding: 1.5rem;
         }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            background: #fff;
+        .card-title {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        /* Services Section */
+        .service-card {
+            text-align: center;
             padding: 2rem;
-            border-radius: 10px;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Technologies Section */
+        .tech-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
         }
 
         .testimonial-card {
-            background: var(--bg);
+            background: var(--white);
             padding: 2rem;
             border-radius: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--light-gray);
         }
 
-        .contact-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
         }
 
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 1rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* Contact Form */
         .contact-form input,
         .contact-form textarea {
             width: 100%;
             padding: 0.8rem;
             margin-bottom: 1rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--light-gray);
             border-radius: 6px;
         }
 
         .btn {
             background: var(--primary);
-            color: white;
+            color: var(--white);
             padding: 0.8rem 2rem;
             border: none;
             border-radius: 6px;
@@ -193,164 +305,410 @@
             background: var(--secondary);
         }
 
+        /* Footer */
         footer {
             background: var(--text);
-            color: white;
+            color: var(--white);
             padding: 3rem 0;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
         }
 
+        .footer-heading {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: var(--white);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+                gap: 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 99;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                width: 100%;
+                padding: 1rem 2rem;
+                border-radius: 0;
+            }
+
             .hero {
                 padding: 4rem 0;
             }
-            
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
-            
-            nav ul {
-                gap: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .process-step {
+                flex: 0 0 100%;
             }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="loader">
-        <div class="loader-bar"></div>
-    </div>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <header class="hero" id="home">
-        <div class="container">
-            <h1>TechVision Solutions</h1>
-            <p class="tagline">Innovative Software Solutions for Tomorrow</p>
+    <header id="top">
+        <div class="container nav-container">
+            <a href="#" class="logo">TechVision</a>
+            <button class="nav-toggle" aria-label="Toggle Navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#technologies">Tech Stack</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <section class="section" id="services">
+    <section class="hero" id="home">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <h3>Custom Software Development</h3>
-                        <p>Tailored solutions for unique business needs</p>
+            <h1>Innovative Software Solutions</h1>
+            <p>We transform your business ideas into powerful, scalable, and intuitive digital products.</p>
+            <a href="#contact" class="cta-btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Services</h2>
+            <div class="grid">
+                <div class="card service-card fade-in">
+                    <i class="fas fa-laptop-code service-icon"></i>
+                    <h3 class="card-title">Custom Software Development</h3>
+                    <p>Tailored solutions designed to address your unique business challenges and opportunities.</p>
+                </div>
+                <div class="card service-card fade-in">
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h3 class="card-title">Mobile App Development</h3>
+                    <p>Native and cross-platform applications for iOS and Android with exceptional user experience.</p>
+                </div>
+                <div class="card service-card fade-in">
+                    <i class="fas fa-globe service-icon"></i>
+                    <h3 class="card-title">Web Development</h3>
+                    <p>Responsive, fast and SEO-friendly websites and web applications using modern technologies.</p>
+                </div>
+                <div class="card service-card fade-in">
+                    <i class="fas fa-cloud service-icon"></i>
+                    <h3 class="card-title">Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and migration services for optimal performance and security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Process</h2>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We analyze your requirements and define project scope and objectives.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>Creating detailed specifications and project roadmap with milestones.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Development</h3>
+                    <p>Agile development with regular updates and continuous integration.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Testing</h3>
+                    <p>Comprehensive quality assurance and user acceptance testing.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">5</div>
+                    <h3>Deployment</h3>
+                    <p>Smooth launch with continuous support and maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technologies">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Tech Stack</h2>
+            <p class="text-center fade-in">We use cutting-edge technologies to build robust and scalable solutions</p>
+            <div class="tech-container fade-in">
+                <div class="tech-item">
+                    <i class="fab fa-react tech-icon"></i>
+                    <span>React</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-node-js tech-icon"></i>
+                    <span>Node.js</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-python tech-icon"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-aws tech-icon"></i>
+                    <span>AWS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-android tech-icon"></i>
+                    <span>Android</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-apple tech-icon"></i>
+                    <span>iOS</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database tech-icon"></i>
+                    <span>SQL/NoSQL</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-angular tech-icon"></i>
+                    <span>Angular</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Work</h2>
+            <div class="grid">
+                <div class="card fade-in">
+                    <img src="/api/placeholder/800/600" alt="Enterprise Management System" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Enterprise Management System</h3>
+                        <p>Comprehensive business solution platform automating core processes for increased efficiency.</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <h3>Mobile App Development</h3>
-                        <p>iOS & Android native applications</p>
+                <div class="card fade-in">
+                    <img src="/api/placeholder/800/600" alt="Health & Fitness App" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Health & Fitness App</h3>
+                        <p>AI-powered mobile application for personalized fitness tracking and health monitoring.</p>
+                    </div>
+                </div>
+                <div class="card fade-in">
+                    <img src="/api/placeholder/800/600" alt="E-commerce Platform" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">E-commerce Platform</h3>
+                        <p>Scalable online marketplace with integrated payment systems and inventory management.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="portfolio">
+    <section id="testimonials" class="testimonials">
         <div class="container">
-            <h2 class="section-title">Our Work</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/random/800x600?software" alt="Software" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <h3>Enterprise Management System</h3>
-                        <p>Comprehensive business solution platform</p>
-                    </div>
+            <h2 class="section-title fade-in">Client Testimonials</h2>
+            <div class="grid">
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"TechVision delivered beyond our expectations. Their technical expertise and proactive approach transformed our operations completely."</p>
+                    <p class="testimonial-author">Sarah Johnson, CTO at HealthTech Inc.</p>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://source.unsplash.com/random/800x600?app" alt="Mobile App" class="portfolio-image">
-                    <div class="portfolio-content">
-                        <h3>Health & Fitness App</h3>
-                        <p>AI-powered mobile application</p>
-                    </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"Outstanding service and expertise. The team was responsive, professional, and delivered our project on time and within budget."</p>
+                    <p class="testimonial-author">John Smith, CEO at GlobalRetail</p>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"The mobile app developed by TechVision has received excellent feedback from our users. Their attention to detail and focus on user experience is exceptional."</p>
+                    <p class="testimonial-author">Michael Brown, Product Manager at FitLife</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="testimonials">
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title">Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"Outstanding service and technical expertise."</p>
-                    <h4>John Smith, CEO</h4>
+            <h2 class="section-title fade-in">Contact Us</h2>
+            <div class="grid">
+                <div class="card fade-in">
+                    <div class="card-content">
+                        <h3 class="card-title">Get in Touch</h3>
+                        <p><i class="fas fa-envelope"></i> contact@techvision.com</p>
+                        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                        <address>
+                            <i class="fas fa-map-marker-alt"></i> 123 Tech Park Road<br>
+                            Silicon Valley, CA 94025
+                        </address>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook social-icon"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter social-icon"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin social-icon"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram social-icon"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Transformed our business operations completely."</p>
-                    <h4>Sarah Johnson, CTO</h4>
+                <div class="card fade-in">
+                    <div class="card-content">
+                        <form class="contact-form">
+                            <input type="text" placeholder="Name" required aria-label="Name">
+                            <input type="email" placeholder="Email" required aria-label="Email">
+                            <input type="tel" placeholder="Phone (optional)" aria-label="Phone">
+                            <textarea rows="5" placeholder="Message" required aria-label="Message"></textarea>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="contact-section">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    <p>Email: contact@techvision.com</p>
-                    <p>Phone: (555) 123-4567</p>
-                    <address>
-                        123 Tech Park Road<br>
-                        Silicon Valley, CA 94025
-                    </address>
-                </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea rows="5" placeholder="Message" required></textarea>
-                    <button class="btn">Send Message</button>
-                </form>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div>
-                    <h4>TechVision Solutions</h4>
-                    <p>© 2023 All rights reserved</p>
+                    <h4 class="footer-heading">TechVision Solutions</h4>
+                    <p>Delivering innovative software solutions that drive business growth and digital transformation.</p>
                 </div>
                 <div>
-                    <h4>Contact</h4>
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
                     <p>123 Tech Park Road</p>
                     <p>Silicon Valley, CA 94025</p>
+                    <p>contact@techvision.com</p>
                 </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> TechVision Solutions. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <a href="#top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelector('.loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.querySelector('.loader').remove();
-                }, 500);
-            }, 1500);
+        // Menu toggle for mobile
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('nav ul');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
         });
 
+        // Close menu when clicking on links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -360,7 +718,47 @@
             });
         });
 
-        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} TechVision Solutions. All rights reserved.`;
+        // Back to top button visibility
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Current year for copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Form submission handler
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send the form data to your backend
+            alert('Thanks for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
     </script>
 </body>
 </html>
