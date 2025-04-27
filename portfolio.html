@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -826,5 +827,134 @@
     <a href="#top" class="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </a>
-
     
+    
+    
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Mobile Navigation Toggle ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('nav ul');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                // Toggle Aria Expanded attribute for accessibility
+                const isExpanded = navMenu.classList.contains('active');
+                navToggle.setAttribute('aria-expanded', isExpanded);
+                // Change icon based on state
+                navToggle.querySelector('i').className = isExpanded ? 'fas fa-times' : 'fas fa-bars';
+            });
+
+            // Close menu if clicking outside on mobile
+            document.addEventListener('click', (event) => {
+                if (navMenu.classList.contains('active') &&
+                    !navMenu.contains(event.target) &&
+                    !navToggle.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.querySelector('i').className = 'fas fa-bars';
+                }
+            });
+        }
+
+        // --- Portfolio Filtering ---
+        const filterTabs = document.querySelectorAll('.portfolio-tab');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        const portfolioGrid = document.querySelector('.portfolio-grid'); // Get the grid container
+
+        if (filterTabs.length > 0 && portfolioItems.length > 0 && portfolioGrid) {
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab state
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const filterValue = tab.getAttribute('data-filter');
+
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        const shouldShow = filterValue === 'all' || filterValue === itemCategory;
+
+                        if (shouldShow) {
+                            item.classList.remove('hidden');
+                             // Force reflow to restart animation if needed, although fade-in is scroll triggered
+                             // item.style.display = ''; // Reset display property
+                        } else {
+                            item.classList.add('hidden');
+                           // item.style.display = 'none'; // Hide non-matching items immediately
+                        }
+                    });
+
+                     // Optional: Re-trigger fade-in for newly shown items if not relying solely on scroll
+                     // We might need a more complex approach if animations need to restart explicitly on filter
+                });
+            });
+        }
+
+
+        // --- Back to Top Button ---
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        if (backToTopButton) {
+            const toggleVisibility = () => {
+                if (window.scrollY > 300) { // Show after scrolling 300px
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            };
+
+            window.addEventListener('scroll', toggleVisibility);
+            toggleVisibility(); // Check visibility on initial load
+
+            // Smooth scroll to top on click
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // --- Fade-in Animations on Scroll ---
+        const fadeInElements = document.querySelectorAll('.fade-in');
+
+        if (fadeInElements.length > 0) {
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // trigger when 10% of the element is visible
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Optional: stop observing once visible
+                    }
+                });
+            };
+
+            const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+            fadeInElements.forEach(el => {
+                intersectionObserver.observe(el);
+            });
+        }
+
+        // --- Copyright Year ---
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
+    });
+</script>
+    
+    </body>
+    </html>
