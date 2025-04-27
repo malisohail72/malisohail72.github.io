@@ -1655,100 +1655,102 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
+
+
+
     <script>
-        // Menu toggle for mobile
-        const navToggle = document.querySelector('.nav-toggle');
-        const navMenu = document.querySelector('nav ul');
-        
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+// Menu toggle for mobile
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('nav ul');
 
-        // Close menu when clicking on links
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+// Close menu when clicking on links
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+    });
+});
 
-        // Back to top button visibility
-        const backToTop = document.querySelector('.back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Back to top button visibility
+const backToTop = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+
+// Fade-in animation on scroll
+const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+fadeElements.forEach(element => {
+    observer.observe(element);
+});
+
+// Current year for copyright
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
+// FAQ accordion functionality
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+        // Close all other items
+        faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
             }
         });
+        // Toggle current item
+        item.classList.toggle('active');
+    });
+});
 
-        // Fade-in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+// Portfolio filter
+const portfolioTabs = document.querySelectorAll('.portfolio-tab');
+const portfolioItems = document.querySelectorAll('.case-study-card');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // Current year for copyright
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // FAQ accordion functionality
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                // Toggle current item
-                item.classList.toggle('active');
-            });
-        });
-
-        // Portfolio filter
-        const portfolioTabs = document.querySelectorAll('.portfolio-tab');
-        const portfolioItems = document.querySelectorAll('.case-study-card');
+portfolioTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Update active tab
+        portfolioTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
         
-        portfolioTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Update active tab
-                portfolioTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Filter items
-                const filter = tab.getAttribute('data-filter');
-                
-                // This is where you would implement the actual filtering
-                // For this example, we're just showing all items
-                // In a real implementation, you would hide/show items based on their categories
-            });
-        });
-
+        // Filter items
+        const filter = tab.getAttribute('data-filter');
+        
+        // This is where you would implement the actual filtering
+        // For this example, we're just showing all items
+        // In a real implementation, you would hide/show items based on their categories
+    });
+});
 </script>
 
 </body>
