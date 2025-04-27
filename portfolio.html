@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechVision Solutions Portfolio - View our latest projects and software development work across various industries.">
+    <meta name="keywords" content="portfolio, projects, software development, case studies, web development">
+    <title>TechVision Solutions | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #003366;
+            --accent: #00a0e4;
+            --text: #1a1a2e;
+            --bg: #f8fafc;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --dark-bg: #f0f4f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            background: #f1f5f9;
+        }
+
+        .breadcrumb {
+            background: var(--dark-bg);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item:not(:last-child)::after {
+            content: '/';
+            margin: 0 0.5rem;
+            color: #6c757d;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--dark-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text);
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            font-size: 1.3rem;
+        }
+
+        .card-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background: rgba(0, 86, 179, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tab {
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 1px solid var(--light-gray);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-tab.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .portfolio-tab:hover:not(.active) {
+            background: var(--light-gray);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        .project-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: var(--text);
+            color: var(--white);
+            padding: 4rem 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-heading {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        footer a {
+            color: #b3b3b3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #b3b3b3;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {transition-delay: 0.1s;}
+        .delay-2 {transition-delay: 0.2s;}
+        .delay-3 {transition-delay: 0.3s;}
+
+        @media (max-width: 992px) {
+            .section-title {font-size: 2.2rem;}
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {display: block;}
+            nav ul {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: var(--white);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+                gap: 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 99;
+            }
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            nav li {width: 100%;}
+            nav a {
+                display: block;
+                width: 100%;
+                padding: 1rem 2rem;
+                border-radius: 0;
+            }
+            .page-title {font-size: 2.5rem;}
+        }
+
+        @media (max-width: 576px) {
+            .page-title {font-size: 2rem;}
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="top">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-code"></i>TechVision
+            </a>
+            <button class="nav-toggle" aria-label="Toggle Navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container breadcrumb-container">
+            <div class="breadcrumb-item"><a href="index.html">Home</a></div>
+            <div class="breadcrumb-item active">Portfolio</div>
+        </div>
+    </div>
+
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1 class="page-title fade-in">Our Portfolio</h1>
+            <p class="page-description fade-in delay-1">Showcasing our innovative projects and solutions across various industries</p>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Recent Projects</h2>
+                <p class="section-subtitle">Explore our latest work and success stories</p>
+            </div>
+            
+            <div class="portfolio-tabs fade-in">
+                <button class="portfolio-tab active" data-filter="all">All Projects</button>
+                <button class="portfolio-tab" data-filter="web">Web Development</button>
+                <button class="portfolio-tab" data-filter="mobile">Mobile Apps</button>
+                <button class="portfolio-tab" data-filter="software">Custom Software</button>
+                <button class="portfolio-tab" data-filter="cloud">Cloud Solutions</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="card portfolio-item fade-in" data-category="web">
+                    <div class="project-tag">Web Development</div>
+                    <img src="/api/placeholder/800/600" alt="E-commerce Platform" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Modern E-commerce Platform</h3>
+                        <p class="card-text">A fully-featured e-commerce solution with inventory management, payment processing, and customer analytics.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card portfolio-item fade-in delay-1" data-category="mobile">
+                    <div class="project-tag">Mobile App</div>
+                    <img src="/api/placeholder/800/600" alt="Fitness App" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">FitLife Fitness App</h3>
+                        <p class="card-text">A mobile application for fitness tracking, workout planning, and nutrition monitoring with social features.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card portfolio-item fade-in delay-2" data-category="software">
+                    <div class="project-tag">Custom Software</div>
+                    <img src="/api/placeholder/800/600" alt="Healthcare Management System" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Healthcare Management System</h3>
+                        <p class="card-text">An integrated solution for healthcare providers to manage patient records, appointments, and billing.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card portfolio-item fade-in delay-3" data-category="cloud">
+                    <div class="project-tag">Cloud Solutions</div>
+                    <img src="/api/placeholder/800/600" alt="Cloud Migration" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Enterprise Cloud Migration</h3>
+                        <p class="card-text">Migrated a large-scale enterprise infrastructure to a secure, scalable cloud environment.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card portfolio-item fade-in" data-category="web">
+                    <div class="project-tag">Web Development</div>
+                    <img src="/api/placeholder/800/600" alt="Real Estate Platform" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Real Estate Portal</h3>
+                        <p class="card-text">A comprehensive real estate platform with property listings, virtual tours, and agent management.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card portfolio-item fade-in delay-1" data-category="mobile">
+                    <div class="project-tag">Mobile App</div>
+                    <img src="/api/placeholder/800/600" alt="Food Delivery App" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Food Delivery Application</h3>
+                        <p class="card-text">A native mobile app for food ordering and delivery with real-time tracking and payment integration.</p>
+                        <div class="card-footer">
+                            <a href="project-detail.html" class="card-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="case-studies" class="bg-light">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Featured Case Studies</h2>
+                <p class="section-subtitle">In-depth analysis of our most impactful projects</p>
+            </div>
+            
+            <div class="grid">
+                <div class="card fade-in">
+                    <img src="/api/placeholder/800/600" alt="FinTech Case Study" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">FinTech Platform Transformation</h3>
+                        <p class="card-text">How we helped a financial services company modernize their legacy systems and improve customer experience.</p>
+                        <ul style="margin-bottom: 1.5rem;">
+                            <li><strong>Challenge:</strong> Outdated infrastructure</li>
+                            <li><strong>Solution:</strong> Microservices architecture</li>
+                            <li><strong>Result:</strong> 40% increase in performance</li>
+                        </ul>
+                        <div class="card-footer">
+                            <a href="case-study.html" class="card-link">Read Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-1">
+                    <img src="/api/placeholder/800/600" alt="E-learning Platform" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">E-learning Platform Development</h3>
+                        <p class="card-text">Designing and developing a scalable e-learning platform for a global educational institution.</p>
+                        <ul style="margin-bottom: 1.5rem;">
+                            <li><strong>Challenge:</strong> Global user base with varying needs</li>
+                            <li><strong>Solution:</strong> Responsive design with localization</li>
+                            <li><strong>Result:</strong> 2.5M+ active users within 6 months</li>
+                        </ul>
+                        <div class="card-footer">
+                            <a href="case-study.html" class="card-link">Read Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-2">
+                    <img src="/api/placeholder/800/600" alt="IoT Solution" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">IoT-based Smart Manufacturing</h3>
+                        <p class="card-text">Implementing an IoT solution for a manufacturing company to optimize production processes.</p>
+                        <ul style="margin-bottom: 1.5rem;">
+                            <li><strong>Challenge:</strong> Inefficient processes with high waste</li>
+                            <li><strong>Solution:</strong> Real-time monitoring and analytics</li>
+                            <li><strong>Result:</strong> 30% reduction in operational costs</li>
+                        </ul>
+                        <div class="card-footer">
+                            <a href="case-study.html" class="card-link">Read Case Study</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technologies">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Technologies We Use</h2>
+                <p class="section-subtitle">Our tech stack enables us to build scalable and efficient solutions</p>
+            </div>
+            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                <div class="card fade-in" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <p>React, Angular, Vue.js, Next.js, HTML5, CSS3, JavaScript</p>
+                </div>
+                
+                <div class="card fade-in delay-1" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <p>Node.js, Python, Java, .NET, PHP, Ruby on Rails</p>
+                </div>
+                
+                <div class="card fade-in delay-2" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Databases</h3>
+                    <p>MySQL, PostgreSQL, MongoDB, Firebase, Redis, Oracle</p>
+                </div>
+                
+                <div class="card fade-in delay-3" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Services</h3>
+                    <p>AWS, Azure, Google Cloud, Kubernetes, Docker</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title fade-in">Ready to Start Your Project?</h2>
+            <p class="cta-text fade-in delay-1">Let's discuss how we can help bring your ideas to life with our custom software solutions.</p>
+            <a href="contact.html" class="cta-btn fade-in delay-2">Get in Touch</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 class="footer-heading">TechVision Solutions</h4>
+                    <p>Delivering innovative software solutions that drive business growth and digital transformation.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Services</h4>
+                    <ul>
+                        <li><a href="services.html#custom-software">Custom Software</a></li>
+                        <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
+                        <li><a href="services.html#web-development">Web Development</a></li>
+                        <li><a href="services.html#cloud-solutions">Cloud Solutions</a></li>
+                        <li><a href="services.html#consulting">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Park Road, Silicon Valley, CA 94025</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> contact@techvision.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> TechVision Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    
