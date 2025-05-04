@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Immigration Guide for Indians</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+        }
+        /* Style for loading indicator */
+        #loadingIndicator {
+            display: none; /* Hidden by default */
+        }
+        /* Style for result sections */
+        .result-section {
+            background-color: white;
+            border: 1px solid #e2e8f0; /* Light gray border */
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+        }
+        .result-section h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #2d3748; /* Gray-800 */
+            border-bottom: 2px solid #cbd5e0; /* Gray-400 */
+            padding-bottom: 0.5rem; /* pb-2 */
+        }
+        /* Style for input labels */
+        label {
+            font-weight: 500; /* font-medium */
+            color: #4a5568; /* Gray-700 */
+        }
+        /* Style for buttons */
+        button {
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .grid-cols-3 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 shadow-md">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold">Global Immigration Guide for Indians</h1>
+            <p class="mt-2 text-lg opacity-90">Explore visa options, requirements, and life abroad.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+
+        <section id="userInputSection" class="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8 border border-gray-200">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-700 border-b pb-3">Tell Us About Yourself</h2>
+            <form id="userInfoForm" class="space-y-6">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="destinationCountry" class="block text-sm font-medium text-gray-700 mb-1">Desired Destination Country:</label>
+                        <select id="destinationCountry" name="destinationCountry" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Select Country</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                            <option value="germany">Germany</option>
+                            <option value="usa">USA</option>
+                            <option value="uk">UK</option>
+                            </select>
+                    </div>
+                    <div>
+                        <label for="visaType" class="block text-sm font-medium text-gray-700 mb-1">Desired Visa Type:</label>
+                        <select id="visaType" name="visaType" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Select Visa Type</option>
+                            <option value="work">Work Visa</option>
+                            <option value="study">Study Visa</option>
+                            <option value="entrepreneur">Entrepreneur Visa</option>
+                            <option value="family">Family Reunification</option>
+                            <option value="retirement">Retirement Visa</option>
+                            <option value="digital_nomad">Digital Nomad Visa</option>
+                            <option value="points">Points-Based Skilled Migration</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="educationLevel" class="block text-sm font-medium text-gray-700 mb-1">Highest Education Level:</label>
+                        <select id="educationLevel" name="educationLevel" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Select Level</option>
+                            <option value="high_school">High School</option>
+                            <option value="diploma">Diploma (1-2 years)</option>
+                            <option value="bachelors">Bachelor's Degree (3-4 years)</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="workExperience" class="block text-sm font-medium text-gray-700 mb-1">Years of Work Experience:</label>
+                        <input type="number" id="workExperience" name="workExperience" min="0" placeholder="e.g., 5" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="fieldOfWork" class="block text-sm font-medium text-gray-700 mb-1">Field of Work/Study:</label>
+                        <input type="text" id="fieldOfWork" name="fieldOfWork" placeholder="e.g., Software Engineering, Nursing" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="languageProficiency" class="block text-sm font-medium text-gray-700 mb-1">Primary Language Proficiency (e.g., English):</label>
+                        <select id="languageProficiency" name="languageProficiency" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Select Level</option>
+                            <option value="none">None</option>
+                            <option value="basic">Basic (A1/A2)</option>
+                            <option value="intermediate">Intermediate (B1/B2)</option>
+                            <option value="advanced">Advanced (C1)</option>
+                            <option value="native">Native/Fluent (C2)</option>
+                        </select>
+                         <small class="text-xs text-gray-500">Specify test if applicable (IELTS, TOEFL, etc.)</small>
+                    </div>
+                     <div>
+                        <label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age:</label>
+                        <input type="number" id="age" name="age" min="18" placeholder="e.g., 30" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="familyStatus" class="block text-sm font-medium text-gray-700 mb-1">Family Status:</label>
+                        <select id="familyStatus" name="familyStatus" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="single">Single</option>
+                            <option value="married_no_children">Married/Partner, no children</option>
+                            <option value="married_with_children">Married/Partner, with children</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="financialResources" class="block text-sm font-medium text-gray-700 mb-1">Estimated Savings (INR Lakhs):</label>
+                        <input type="number" id="financialResources" name="financialResources" min="0" placeholder="e.g., 15" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                         <small class="text-xs text-gray-500">Proof of funds requirement varies.</small>
+                    </div>
+                    <div>
+                        <label for="immigrationTimeline" class="block text-sm font-medium text-gray-700 mb-1">Desired Immigration Timeline:</label>
+                        <select id="immigrationTimeline" name="immigrationTimeline" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="asap">ASAP (within 6 months)</option>
+                            <option value="6_12_months">6-12 months</option>
+                            <option value="1_2_years">1-2 years</option>
+                            <option value="2_plus_years">More than 2 years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="specialSkills" class="block text-sm font-medium text-gray-700 mb-1">Special Skills or Certifications:</label>
+                    <textarea id="specialSkills" name="specialSkills" rows="3" placeholder="e.g., PMP Certified, Specific trade skills, Published research" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-4 pt-4">
+                    <button type="button" id="clearButton" class="px-6 py-2 bg-gray-500 text-white font-medium rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Clear Form
+                    </button>
+                    <button type="submit" id="submitButton" class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Find Immigration Options
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <div id="loadingIndicator" class="text-center py-10">
+            <svg class="animate-spin h-8 w-8 text-indigo-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="mt-2 text-lg font-medium text-gray-600">Analyzing options...</p>
+        </div>
+
+        <section id="resultsSection" class="mt-10 space-y-6" style="display: none;">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-3">Immigration Insights for <span id="resultCountryName" class="text-indigo-600">Selected Country</span></h2>
+
+            <div id="visaInfo" class="result-section">
+                <h3>Visa Information</h3>
+                <div id="visaDetails"></div>
+            </div>
+
+             <div id="pointsCalculatorSection" class="result-section" style="display: none;">
+                <h3>Points System Estimator (<span id="pointsSystemCountry"></span>)</h3>
+                <div id="pointsDetails"></div>
+                <div id="pointsResult" class="mt-4 font-semibold text-lg"></div>
+            </div>
+
+            <div id="economicFactors" class="result-section">
+                <h3>Economic Factors</h3>
+                <div id="economicDetails"></div>
+            </div>
+
+            <div id="qualityOfLife" class="result-section">
+                <h3>Quality of Life</h3>
+                <div id="qualityDetails"></div>
+            </div>
+
+            <div id="practicalConsiderations" class="result-section">
+                <h3>Practical Considerations</h3>
+                <div id="practicalDetails"></div>
+            </div>
+
+            <div id="messageBox" class="result-section bg-yellow-100 border-yellow-300 text-yellow-800" style="display: none;">
+                <p id="messageText"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="currentYear"></span> Global Immigration Guide. All rights reserved.</p>
+            <p class="text-sm mt-1 opacity-70">Disclaimer: Information provided is for general guidance only and may not be fully up-to-date. Consult official sources and immigration professionals.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STRUCTURES (Sample Data) ---
+        // In a real application, this data would likely come from a database/API.
+        // This is a simplified structure for demonstration.
+        const immigrationData = {
+            "canada": {
+                name: "Canada",
+                visaTypes: {
+                    work: { name: "Temporary Foreign Worker Program (TFWP) / International Mobility Program (IMP)", details: "Requires job offer in most cases. LMIA may be needed.", processingTime: "Varies (weeks to months)", successRate: "Moderate to High (depends on job/profile)", cost: "CAD $155+ (Work Permit)", language: "English/French (IELTS/CELPIP/TEF)", eduRecognition: "ECA required for Express Entry", workRecognition: "NOC system used", prPath: "Possible via Express Entry, PNP", docs: "Job offer, LMIA (if req), Passport, Funds proof, Medical exam" },
+                    study: { name: "Study Permit", details: "Requires acceptance letter from DLI.", processingTime: "Varies (weeks)", successRate: "High (with valid admission)", cost: "CAD $150 (Permit) + Biometrics", language: "English/French (IELTS/TOEFL often req)", eduRecognition: "N/A for permit, ECA for PR later", workRecognition: "Part-time work allowed during studies", prPath: "PGWP -> Express Entry/PNP", docs: "Acceptance Letter, Funds proof, Passport, Ties to home country" },
+                    points: { name: "Express Entry (FSW, FST, CEC)", details: "Points-based system (CRS). No job offer needed for FSW.", processingTime: "6 months (target after ITA)", successRate: "Depends on CRS score", cost: "CAD $850 (Application) + $515 (Right of PR Fee) + ECA/Language tests", language: "English/French (Mandatory, high score needed)", eduRecognition: "ECA Mandatory", workRecognition: "NOC system, points for skilled work", prPath: "Direct PR", docs: "ECA, Language tests, Work letters, Funds proof, Police certificates, Medical exam" },
+                    // Add other visa types (Entrepreneur, Family, etc.)
+                },
+                economic: {
+                    avgSalary: "CAD $55,000 - $75,000 (varies greatly by profession/province)",
+                    costOfLiving: "High (Toronto/Vancouver) to Moderate (other cities). Housing is major expense.",
+                    unemployment: "~5-6% (pre-COVID avg, varies)",
+                    jobMarket: "High demand in Tech, Healthcare, Skilled Trades. Varies by province.",
+                    tax: "Progressive federal/provincial income tax. GST/HST applies.",
+                    remittance: "Generally easy, standard banking procedures.",
+                    indianCertRecognition: "Varies, professional bodies may require exams/certification (e.g., engineering, medicine)."
+                },
+                qualityOfLife: {
+                    healthcare: "Publicly funded (Medicare), high quality but wait times can exist.",
+                    education: "High quality public/private schools.",
+                    culture: "Multicultural, large Indian diaspora.",
+                    weather: "Varies greatly. Cold winters in most areas, milder on West Coast.",
+                    safety: "Generally very safe.",
+                    worship: "Temples, Gurdwaras, Mosques, Churches widely available."
+                },
+                practical: {
+                    timeDiff: "IST -9.5 to -12.5 hours",
+                    flights: "Direct flights from major Indian cities (Delhi, Mumbai).",
+                    embassy: "High Commission in Delhi, Consulates in Mumbai, Chandigarh, Bengaluru.",
+                    dualCitizenship: "Allowed.",
+                    indianAssets: "Generally maintainable, subject to FEMA regulations.",
+                    financialProof: "Required (e.g., Express Entry: ~CAD $13,000 for single applicant).",
+                    covidChanges: "Check official IRCC website for latest travel/policy updates."
+                },
+                pointsSystem: { // Example: Simplified CRS Calculator Logic
+                    calculator: function(inputs) {
+                        let points = 0;
+                        // Age points (simplified)
+                        if (inputs.age >= 20 && inputs.age <= 29) points += 100;
+                        else if (inputs.age >= 30 && inputs.age <= 35) points += 80;
+                        else if (inputs.age >= 18 && inputs.age <= 19) points += 70;
+                        else if (inputs.age >= 36 && inputs.age <= 40) points += 60;
+                        else points += 0; // Simplified
+
+                        // Education points (simplified)
+                        if (inputs.educationLevel === 'phd') points += 150;
+                        else if (inputs.educationLevel === 'masters') points += 135;
+                        else if (inputs.educationLevel === 'bachelors') points += 120;
+                        else if (inputs.educationLevel === 'diploma') points += 90;
+                        else points += 30; // High school
+
+                        // Language points (simplified - assuming English CLB levels)
+                        if (inputs.languageProficiency === 'advanced') points += 120; // Approx CLB 9+
+                        else if (inputs.languageProficiency === 'intermediate') points += 80; // Approx CLB 7-8
+                        else if (inputs.languageProficiency === 'basic') points += 20; // Approx CLB 5-6
+                        else points += 0;
+
+                        // Work Experience points (simplified - assuming skilled work outside Canada)
+                        if (inputs.workExperience >= 6) points += 50;
+                        else if (inputs.workExperience >= 4) points += 40;
+                        else if (inputs.workExperience >= 2) points += 30;
+                        else if (inputs.workExperience >= 1) points += 15;
+                        else points += 0;
+
+                        // Adaptability (simplified - e.g., spouse factors not included here)
+                        // Add points for spouse skills, Canadian experience, relatives etc. in a real calc.
+
+                        return points;
+                    },
+                    threshold: "~470-500+ (Varies significantly per draw)" // Example threshold
+                }
+            },
+            "australia": {
+                name: "Australia",
+                 visaTypes: {
+                    work: { name: "Temporary Skill Shortage (TSS) visa (subclass 482)", details: "Requires employer sponsorship and nomination in an eligible occupation.", processingTime: "Months", successRate: "Moderate to High (if criteria met)", cost: "AUD $1,330 - $2,770+", language: "English (IELTS/PTE req)", eduRecognition: "Skills assessment often required", workRecognition: "Relevant work experience needed", prPath: "Possible via subclass 186/187 or Skilled Migration", docs: "Sponsorship, Nomination, Skills assessment, English test, Health/Character checks" },
+                    study: { name: "Student visa (subclass 500)", details: "Requires Confirmation of Enrolment (CoE).", processingTime: "Weeks to Months", successRate: "High (with valid CoE/GTE)", cost: "AUD $650+", language: "English (IELTS/PTE often req)", eduRecognition: "N/A for permit", workRecognition: "Limited work allowed", prPath: "Post-study work -> Skilled Migration", docs: "CoE, GTE statement, Funds proof, OSHC (Health Insurance), English test" },
+                    points: { name: "Skilled Independent visa (subclass 189) / Skilled Nominated visa (subclass 190)", details: "Points-tested. Requires EOI and invitation.", processingTime: "Months (after invitation)", successRate: "Depends on points score/occupation ceilings", cost: "AUD $4,240+ (Application) + Assessments/Tests", language: "English (Mandatory, points awarded)", eduRecognition: "Skills Assessment Mandatory", workRecognition: "Points for skilled work experience", prPath: "Direct PR", docs: "Skills assessment, English test, Work letters, Funds proof, Health/Character checks" },
+                     // Add other visa types
+                },
+                 economic: {
+                    avgSalary: "AUD $70,000 - $90,000 (varies)",
+                    costOfLiving: "High (Sydney/Melbourne) to Moderate.",
+                    unemployment: "~4-5% (pre-COVID avg)",
+                    jobMarket: "Demand in Healthcare, IT, Construction, Engineering.",
+                    tax: "Progressive income tax. GST applies.",
+                    remittance: "Generally easy.",
+                    indianCertRecognition: "Skills assessment bodies evaluate qualifications (e.g., Engineers Australia, ACS)."
+                },
+                 qualityOfLife: {
+                    healthcare: "Public (Medicare) and private system. High quality.",
+                    education: "High quality schools/universities.",
+                    culture: "Multicultural, significant Indian community.",
+                    weather: "Varies. Generally warmer than Canada. Pleasant climate in many cities.",
+                    safety: "Generally very safe.",
+                    worship: "Widely available."
+                },
+                 practical: {
+                    timeDiff: "IST +4.5 to +5.5 hours",
+                    flights: "Direct flights available.",
+                    embassy: "High Commission in Delhi, Consulates in Mumbai, Chennai, Kolkata.",
+                    dualCitizenship: "Allowed by Australia, but India generally does not allow it (OCI available).",
+                    indianAssets: "Maintainable, subject to regulations.",
+                    financialProof: "Required for some visas (e.g., student visa).",
+                    covidChanges: "Check official Home Affairs website."
+                },
+                 pointsSystem: { // Example: Simplified Australian Points Logic
+                    calculator: function(inputs) {
+                        let points = 0;
+                        // Age points
+                        if (inputs.age >= 25 && inputs.age <= 32) points += 30;
+                        else if (inputs.age >= 18 && inputs.age <= 24) points += 25;
+                        else if (inputs.age >= 33 && inputs.age <= 39) points += 25;
+                        else if (inputs.age >= 40 && inputs.age <= 44) points += 15;
+                        else points += 0;
+
+                        // English points (simplified)
+                        if (inputs.languageProficiency === 'advanced') points += 20; // Superior
+                        else if (inputs.languageProficiency === 'intermediate') points += 10; // Proficient
+                        else points += 0; // Competent or less
+
+                         // Work Experience points (simplified - overseas skilled)
+                        if (inputs.workExperience >= 8) points += 15;
+                        else if (inputs.workExperience >= 5) points += 10;
+                        else if (inputs.workExperience >= 3) points += 5;
+                        else points += 0;
+
+                        // Education points (simplified)
+                        if (inputs.educationLevel === 'phd') points += 20;
+                        else if (inputs.educationLevel === 'bachelors' || inputs.educationLevel === 'masters') points += 15;
+                        else if (inputs.educationLevel === 'diploma') points += 10; // Assuming relevant diploma/trade cert
+                        else points += 0;
+
+                        // Other factors (Specialist education, Aus study/work, partner skills etc. add more points)
+
+                        return points;
+                    },
+                    threshold: "65 (Minimum eligibility), Invitation score often higher (e.g., 80+)"
+                }
+            },
+             "germany": { // Example Data for Germany
+                name: "Germany",
+                visaTypes: {
+                    work: { name: "EU Blue Card / Skilled Worker Visa", details: "Requires recognized degree and job offer meeting salary threshold (Blue Card) or recognized vocational training/degree + job offer (Skilled Worker).", processingTime: "Weeks to Months", successRate: "High (if criteria met)", cost: "~€75-100 (Visa) + Residence Permit Fee", language: "German often required (B1/B2 level), English possible for some jobs (esp. IT).", eduRecognition: "Anabin database check / ZAB recognition required.", workRecognition: "Relevant experience valued.", prPath: "Possible after 21/33 months (Blue Card with German skills) or 4 years (Skilled Worker).", docs: "Job contract, Degree recognition, Proof of health insurance, Accommodation proof." },
+                    study: { name: "Student Visa", details: "Requires admission to a German university/institution.", processingTime: "Weeks to Months", successRate: "High (with admission/funds)", cost: "~€75 (Visa) + Blocked Account", language: "German (for most courses) or English (for international programs). Proof required.", eduRecognition: "University checks qualifications.", workRecognition: "Limited work allowed.", prPath: "Post-study work permit -> PR possible.", docs: "Admission letter, Blocked account (~€11,208/year), Health insurance, Language certificate." },
+                    // Add Job Seeker, Entrepreneur, Family visas etc.
+                },
+                economic: {
+                    avgSalary: "€45,000 - €65,000 (varies)",
+                    costOfLiving: "Moderate (compared to UK/Canada), cheaper outside major cities like Munich/Frankfurt.",
+                    unemployment: "~3-4% (pre-COVID avg, low)",
+                    jobMarket: "Strong demand for Engineers (Mechanical, Electrical, IT), Healthcare professionals, Scientists.",
+                    tax: "Progressive income tax, solidarity surcharge, church tax (optional). VAT applies.",
+                    remittance: "Standard SEPA transfers.",
+                    indianCertRecognition: "Recognition process via Anabin/ZAB is crucial."
+                },
+                qualityOfLife: {
+                    healthcare: "High-quality statutory health insurance system.",
+                    education: "High-quality, often tuition-free public universities (for Bachelor's/Master's).",
+                    culture: "Organized, value punctuality. Growing Indian community.",
+                    weather: "Temperate. Cold winters, warm summers. Generally overcast.",
+                    safety: "Generally very safe.",
+                    worship: "Available, though perhaps less widespread than Canada/Aus for some religions."
+                },
+                practical: {
+                    timeDiff: "IST -3.5 hours (Summer) / -4.5 hours (Winter)",
+                    flights: "Direct flights available.",
+                    embassy: "Embassy in Delhi, Consulates in Mumbai, Chennai, Kolkata, Bengaluru.",
+                    dualCitizenship: "Generally not allowed (exceptions exist), India doesn't allow.",
+                    indianAssets: "Maintainable.",
+                    financialProof: "Required (Blocked account for students, sufficient salary for workers).",
+                    covidChanges: "Check German Missions in India website."
+                },
+                 pointsSystem: null // Germany primarily uses qualification/job offer model, not points-based like CAN/AUS.
+            },
+            // Add data for USA, UK, etc. following a similar structure
+        };
+
+
+        // --- DOM Elements ---
+        const form = document.getElementById('userInfoForm');
+        const destinationCountrySelect = document.getElementById('destinationCountry');
+        const visaTypeSelect = document.getElementById('visaType');
+        const educationLevelSelect = document.getElementById('educationLevel');
+        const workExperienceInput = document.getElementById('workExperience');
+        const fieldOfWorkInput = document.getElementById('fieldOfWork');
+        const languageProficiencySelect = document.getElementById('languageProficiency');
+        const ageInput = document.getElementById('age');
+        const familyStatusSelect = document.getElementById('familyStatus');
+        const financialResourcesInput = document.getElementById('financialResources');
+        const immigrationTimelineSelect = document.getElementById('immigrationTimeline');
+        const specialSkillsTextarea = document.getElementById('specialSkills');
+
+        const submitButton = document.getElementById('submitButton');
+        const clearButton = document.getElementById('clearButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const resultsSection = document.getElementById('resultsSection');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+
+        // Result display areas
+        const resultCountryNameSpan = document.getElementById('resultCountryName');
+        const visaInfoDiv = document.getElementById('visaInfo');
+        const visaDetailsDiv = document.getElementById('visaDetails');
+        const economicFactorsDiv = document.getElementById('economicFactors');
+        const economicDetailsDiv = document.getElementById('economicDetails');
+        const qualityOfLifeDiv = document.getElementById('qualityOfLife');
+        const qualityDetailsDiv = document.getElementById('qualityDetails');
+        const practicalConsiderationsDiv = document.getElementById('practicalConsiderations');
+        const practicalDetailsDiv = document.getElementById('practicalDetails');
+        const pointsCalculatorSectionDiv = document.getElementById('pointsCalculatorSection');
+        const pointsSystemCountrySpan = document.getElementById('pointsSystemCountry');
+        const pointsDetailsDiv = document.getElementById('pointsDetails');
+        const pointsResultDiv = document.getElementById('pointsResult');
+
+
+        // --- Event Listeners ---
+        form.addEventListener('submit', handleSubmit);
+        clearButton.addEventListener('click', clearForm);
+        document.getElementById('currentYear').textContent = new Date().getFullYear(); // Set current year in footer
+
+        // --- Functions ---
+
+        /**
+         * Handles the form submission event.
+         * @param {Event} event - The form submission event.
+         */
+        async function handleSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+            clearResults(); // Clear previous results
+            hideElement(messageBox); // Hide any previous messages
+            showElement(loadingIndicator); // Show loading spinner
+            hideElement(resultsSection); // Hide results while loading
+
+            // Simulate asynchronous operation (like fetching data)
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+
+            try {
+                const formData = getFormData();
+
+                if (!formData.destinationCountry) {
+                    throw new Error("Please select a destination country.");
+                }
+
+                const countryData = immigrationData[formData.destinationCountry];
+
+                if (!countryData) {
+                    throw new Error(`Sorry, detailed data for ${formData.destinationCountry} is not available in this demo.`);
+                }
+
+                displayResults(countryData, formData);
+                showElement(resultsSection); // Show results section
+
+            } catch (error) {
+                displayMessage(`Error: ${error.message}`, 'error');
+            } finally {
+                hideElement(loadingIndicator); // Hide loading spinner
+            }
+        }
+
+        /**
+         * Retrieves and organizes data from the form inputs.
+         * @returns {object} - An object containing the user's input values.
+         */
+        function getFormData() {
+            return {
+                destinationCountry: destinationCountrySelect.value,
+                visaType: visaTypeSelect.value,
+                educationLevel: educationLevelSelect.value,
+                workExperience: parseInt(workExperienceInput.value) || 0,
+                fieldOfWork: fieldOfWorkInput.value.trim(),
+                languageProficiency: languageProficiencySelect.value,
+                age: parseInt(ageInput.value) || 0,
+                familyStatus: familyStatusSelect.value,
+                financialResources: parseFloat(financialResourcesInput.value) || 0,
+                immigrationTimeline: immigrationTimelineSelect.value,
+                specialSkills: specialSkillsTextarea.value.trim(),
+            };
+        }
+
+        /**
+         * Displays the relevant immigration information based on selected country and user input.
+         * @param {object} countryData - The data object for the selected country.
+         * @param {object} userData - The user's input data from the form.
+         */
+        function displayResults(countryData, userData) {
+            resultCountryNameSpan.textContent = countryData.name;
+
+            // --- 1. Visa Information ---
+            displayVisaInformation(countryData, userData);
+
+            // --- 2. Points System (if applicable) ---
+            displayPointsSystem(countryData, userData);
+
+            // --- 3. Economic Factors ---
+            displayEconomicFactors(countryData);
+
+            // --- 4. Quality of Life ---
+            displayQualityOfLife(countryData);
+
+            // --- 5. Practical Considerations ---
+            displayPracticalConsiderations(countryData);
+        }
+
+        /**
+         * Displays detailed visa information.
+         * @param {object} countryData - Country-specific data.
+         * @param {object} userData - User's input data.
+         */
+        function displayVisaInformation(countryData, userData) {
+            let html = '<ul class="space-y-4">';
+            let relevantVisaFound = false;
+
+            // Prioritize selected visa type, otherwise show general ones
+            const targetVisaKey = userData.visaType;
+            const pointsVisaKey = 'points'; // Key for points-based system if selected separately
+
+            // Check if the selected visa type exists for the country
+            if (targetVisaKey && countryData.visaTypes[targetVisaKey]) {
+                 html += formatVisaItem(countryData.visaTypes[targetVisaKey]);
+                 relevantVisaFound = true;
+            }
+            // If user selected 'points' specifically, and it exists
+            else if (targetVisaKey === pointsVisaKey && countryData.visaTypes[pointsVisaKey]) {
+                 html += formatVisaItem(countryData.visaTypes[pointsVisaKey]);
+                 relevantVisaFound = true;
+            }
+            // If no specific visa selected or found, show key visa types
+            else {
+                 html += '<p class="text-sm text-gray-600 mb-3">Showing general visa options. Select a specific visa type for more tailored info.</p>';
+                 const commonVisas = ['work', 'study', 'points']; // Common types to display
+                 commonVisas.forEach(key => {
+                     if (countryData.visaTypes[key]) {
+                        html += formatVisaItem(countryData.visaTypes[key]);
+                        relevantVisaFound = true;
+                     }
+                 });
+            }
+
+            if (!relevantVisaFound) {
+                 html += '<li>No specific visa information found matching your selection for this country in our demo data. General country info is displayed below.</li>';
+            }
+
+            html += '</ul>';
+            visaDetailsDiv.innerHTML = html;
+            showElement(visaInfoDiv);
+        }
+
+         /**
+         * Formats a single visa type into an HTML list item.
+         * @param {object} visa - The visa data object.
+         * @returns {string} - HTML string for the list item.
+         */
+        function formatVisaItem(visa) {
+            return `
+                <li class="p-4 border rounded-md bg-gray-50">
+                    <strong class="text-indigo-700">${visa.name || 'N/A'}</strong>
+                    <p class="text-sm mt-1">${visa.details || 'No details available.'}</p>
+                    <div class="text-xs mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-gray-600">
+                        <span><strong>Processing:</strong> ${visa.processingTime || 'N/A'}</span>
+                        <span><strong>Cost:</strong> ${visa.cost || 'N/A'}</span>
+                        <span><strong>Language:</strong> ${visa.language || 'N/A'}</span>
+                        <span><strong>PR Path:</strong> ${visa.prPath || 'N/A'}</span>
+                        <span><strong>Edu Recognition:</strong> ${visa.eduRecognition || 'N/A'}</span>
+                        <span><strong>Work Recognition:</strong> ${visa.workRecognition || 'N/A'}</span>
+                    </div>
+                    <p class="text-xs mt-2 text-gray-600"><strong>Docs Overview:</strong> ${visa.docs || 'Varies'}</p>
+                </li>`;
+        }
+
+        /**
+         * Displays points system information and calculator results if applicable.
+         * @param {object} countryData - Country-specific data.
+         * @param {object} userData - User's input data.
+         */
+        function displayPointsSystem(countryData, userData) {
+             if (countryData.pointsSystem && countryData.pointsSystem.calculator) {
+                pointsSystemCountrySpan.textContent = countryData.name;
+                const estimatedPoints = countryData.pointsSystem.calculator(userData);
+                let detailsHtml = `<p class="text-sm mb-2">This is a simplified estimation based on your inputs. Official calculators are more detailed.</p>`;
+                if (countryData.visaTypes.points) {
+                     detailsHtml += `<p class="text-sm mb-3"><strong>Relevant Visa:</strong> ${countryData.visaTypes.points.name || 'Points-Based Stream'}</p>`;
+                }
+                 detailsHtml += `<p class="text-sm"><strong>Typical Invitation Threshold:</strong> ${countryData.pointsSystem.threshold || 'Varies per draw'}</p>`;
+
+                pointsDetailsDiv.innerHTML = detailsHtml;
+                pointsResultDiv.innerHTML = `Your Estimated Points Score: <span class="text-2xl text-indigo-600">${estimatedPoints}</span>`;
+                showElement(pointsCalculatorSectionDiv);
+            } else {
+                hideElement(pointsCalculatorSectionDiv); // Hide if no points system data
+            }
+        }
+
+
+        /**
+         * Displays economic factor details.
+         * @param {object} countryData - Country-specific data.
+         */
+        function displayEconomicFactors(countryData) {
+            const data = countryData.economic;
+            if (!data) { hideElement(economicFactorsDiv); return; }
+            economicDetailsDiv.innerHTML = `
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Avg. Salary:</strong> ${data.avgSalary || 'N/A'} (Highly variable)</li>
+                    <li><strong>Cost of Living:</strong> ${data.costOfLiving || 'N/A'}</li>
+                    <li><strong>Unemployment Rate:</strong> ${data.unemployment || 'N/A'}</li>
+                    <li><strong>Job Market Notes:</strong> ${data.jobMarket || 'N/A'}</li>
+                    <li><strong>Tax Structure:</strong> ${data.tax || 'N/A'}</li>
+                    <li><strong>Remittance Policy:</strong> ${data.remittance || 'N/A'}</li>
+                    <li><strong>Indian Cert. Recognition:</strong> ${data.indianCertRecognition || 'N/A'}</li>
+                </ul>`;
+            showElement(economicFactorsDiv);
+        }
+
+        /**
+         * Displays quality of life metrics.
+         * @param {object} countryData - Country-specific data.
+         */
+        function displayQualityOfLife(countryData) {
+             const data = countryData.qualityOfLife;
+             if (!data) { hideElement(qualityOfLifeDiv); return; }
+             qualityDetailsDiv.innerHTML = `
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Healthcare System:</strong> ${data.healthcare || 'N/A'}</li>
+                    <li><strong>Education Quality:</strong> ${data.education || 'N/A'}</li>
+                    <li><strong>Cultural Notes:</strong> ${data.culture || 'N/A'}</li>
+                    <li><strong>Climate:</strong> ${data.weather || 'N/A'}</li>
+                    <li><strong>Safety:</strong> ${data.safety || 'N/A'}</li>
+                    <li><strong>Places of Worship (Indian Religions):</strong> ${data.worship || 'N/A'}</li>
+                </ul>`;
+            showElement(qualityOfLifeDiv);
+        }
+
+        /**
+         * Displays practical consideration details.
+         * @param {object} countryData - Country-specific data.
+         */
+        function displayPracticalConsiderations(countryData) {
+             const data = countryData.practical;
+             if (!data) { hideElement(practicalConsiderationsDiv); return; }
+             practicalDetailsDiv.innerHTML = `
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Time Difference from India:</strong> ${data.timeDiff || 'N/A'}</li>
+                    <li><strong>Direct Flights:</strong> ${data.flights || 'N/A'}</li>
+                    <li><strong>Indian Embassy/Consulate:</strong> ${data.embassy || 'N/A'}</li>
+                    <li><strong>Dual Citizenship:</strong> ${data.dualCitizenship || 'N/A'}</li>
+                    <li><strong>Maintaining Indian Assets:</strong> ${data.indianAssets || 'N/A'}</li>
+                    <li><strong>Financial Proof Req.:</strong> ${data.financialProof || 'N/A'}</li>
+                    <li><strong>Post-COVID Policy Notes:</strong> ${data.covidChanges || 'Check official sources'}</li>
+                </ul>`;
+             showElement(practicalConsiderationsDiv);
+        }
+
+
+        /**
+         * Clears the form inputs and resets the results area.
+         */
+        function clearForm() {
+            form.reset();
+            clearResults();
+            hideElement(messageBox);
+            hideElement(resultsSection);
+            hideElement(loadingIndicator);
+             hideElement(pointsCalculatorSectionDiv); // Ensure calculator is hidden
+        }
+
+        /**
+         * Clears the content of all result display divs.
+         */
+        function clearResults() {
+            resultCountryNameSpan.textContent = 'Selected Country';
+            visaDetailsDiv.innerHTML = '';
+            economicDetailsDiv.innerHTML = '';
+            qualityDetailsDiv.innerHTML = '';
+            practicalDetailsDiv.innerHTML = '';
+            pointsDetailsDiv.innerHTML = '';
+            pointsResultDiv.innerHTML = '';
+        }
+
+        /**
+         * Displays a message (error or info) in the message box.
+         * @param {string} text - The message text.
+         * @param {string} type - 'error' or 'info'.
+         */
+        function displayMessage(text, type = 'info') {
+            messageText.textContent = text;
+            messageBox.className = 'result-section'; // Reset classes
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'border-red-300', 'text-red-800');
+            } else {
+                messageBox.classList.add('bg-yellow-100', 'border-yellow-300', 'text-yellow-800');
+            }
+            showElement(messageBox);
+        }
+
+        /** Helper function to show an element */
+        function showElement(element) {
+            if(element) element.style.display = 'block';
+        }
+
+        /** Helper function to hide an element */
+        function hideElement(element) {
+             if(element) element.style.display = 'none';
+        }
+
+    </script>
+
+</body>
+</html>
