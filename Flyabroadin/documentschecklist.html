@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Travel Document Checklist for Indian Citizens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles if needed */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for checklist categories */
+        .category-title {
+            @apply text-lg font-semibold mt-6 mb-2 text-indigo-700;
+        }
+        /* Style for checklist items */
+        .checklist-item {
+            @apply flex items-start space-x-3 mb-2;
+        }
+        .checklist-item input[type="checkbox"] {
+            @apply mt-1 h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500;
+        }
+        .checklist-item label {
+            @apply text-gray-700;
+        }
+        .checklist-item .details {
+            @apply text-sm text-gray-500 ml-7 block; /* Indent details */
+        }
+        /* Style for the disclaimer */
+        .disclaimer {
+            @apply mt-8 p-4 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg text-sm;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-lg shadow-lg">
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">International Travel Document Checklist (for Indian Citizens)</h1>
+
+        <p class="text-gray-600 mb-6 text-center">Select your travel details below to generate a personalized document checklist. This is a guide; always verify requirements with the official embassy or consulate of your destination country.</p>
+
+        <form id="checklistForm" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+                <label for="destination" class="block text-sm font-medium text-gray-700 mb-1">Destination Country</label>
+                <select id="destination" name="destination" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">Select Country</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Germany">Germany (Schengen)</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="UAE">UAE</option>
+                    <option value="Other">Other (General)</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="purpose" class="block text-sm font-medium text-gray-700 mb-1">Purpose of Travel</label>
+                <select id="purpose" name="purpose" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">Select Purpose</option>
+                    <option value="tourism">Tourism / Short Visit</option>
+                    <option value="business">Business Travel</option>
+                    <option value="study">Study Abroad</option>
+                    <option value="work">Work Visa / Employment</option>
+                    <option value="family">Family Reunification / Visit</option>
+                    <option value="immigration">Permanent Residency / Immigration</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="duration" class="block text-sm font-medium text-gray-700 mb-1">Duration of Stay</label>
+                <select id="duration" name="duration" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">Select Duration</option>
+                    <option value="short_term">Short-term (e.g., < 90 days / < 6 months)</option>
+                    <option value="long_term">Long-term (e.g., > 6 months / 1 year+)</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age Group</label>
+                <select id="age" name="age" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="adult">Adult (18-64)</option>
+                    <option value="minor">Minor (< 18)</option>
+                    <option value="senior">Senior (65+)</option>
+                </select>
+            </div>
+
+             <div>
+                <label for="occupation" class="block text-sm font-medium text-gray-700 mb-1">Occupation (Primary)</label>
+                <select id="occupation" name="occupation" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="employed">Employed</option>
+                    <option value="self_employed">Self-employed / Business Owner</option>
+                    <option value="student">Student</option>
+                    <option value="retired">Retired</option>
+                    <option value="unemployed">Unemployed / Homemaker</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="family_status" class="block text-sm font-medium text-gray-700 mb-1">Traveling With</label>
+                <select id="family_status" name="family_status" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="alone">Alone</option>
+                    <option value="spouse">With Spouse</option>
+                    <option value="family_dependents">With Spouse and/or Dependents (Children)</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="md:col-span-2 flex justify-center space-x-4 mt-4">
+                <button type="button" id="generateBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                    Generate Checklist
+                </button>
+                 <button type="button" id="resetBtn" class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-md shadow hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition duration-150 ease-in-out">
+                    Reset
+                </button>
+            </div>
+        </form>
+
+        <div id="checklistOutput" class="mt-10">
+            </div>
+
+         <div class="disclaimer">
+            <strong>Disclaimer:</strong> This checklist is intended as a general guide based on common requirements. Travel regulations change frequently. Always consult the official website of the embassy or consulate of your destination country and any transit countries for the most accurate, up-to-date, and complete information specific to your situation. We are not responsible for any errors or omissions.
+        </div>
+    </div>
+
+    <script>
+        // --- Data Structure for Document Requirements ---
+        // Note: This is illustrative and not exhaustive. Real-world requirements are complex and vary greatly.
+        const documentRequirements = {
+            // General requirements applicable to most Indian citizens traveling internationally
+            general: [
+                { id: 'passport', name: 'Passport', details: 'Original, valid for at least 6 months beyond intended stay. At least 2-3 blank pages. Include copies of bio pages and previous visas.', category: 'identity', required: true },
+                { id: 'photo', name: 'Passport-size Photographs', details: 'Recent (within 6 months), specific size/background (check embassy specs). Usually 2-4 needed.', category: 'identity', required: true },
+                { id: 'travel_insurance', name: 'Travel Medical Insurance', details: 'Minimum coverage varies (e.g., €30,000 for Schengen). Check policy details.', category: 'travel', required: true },
+                { id: 'flight_bookings', name: 'Flight Itinerary/Booking Confirmation', details: 'Round-trip or onward journey proof. Confirmed booking often preferred over reservation.', category: 'travel', required: true },
+                { id: 'aadhaar', name: 'Aadhaar Card Copy', details: 'Useful as ID proof within India, sometimes requested during visa process.', category: 'identity', optional: true },
+                { id: 'pan', name: 'PAN Card Copy', details: 'May be needed for financial verification or ITR.', category: 'identity', optional: true },
+                { id: 'voter_id', name: 'Voter ID Card Copy', details: 'Optional additional ID proof.', category: 'identity', optional: true },
+                { id: 'cover_letter', name: 'Cover Letter', details: 'Explaining purpose of visit, itinerary, and list of submitted documents. Signed.', category: 'visa', required: true },
+                { id: 'old_passports', name: 'Old Passports', details: 'If any, to show travel history.', category: 'identity', optional: true },
+            ],
+            // Country-specific base requirements
+            countries: {
+                USA: [
+                    { id: 'usa_visa_form', name: 'Visa Application Form (DS-160) Confirmation Page', details: 'Completed online, bring printed confirmation page.', category: 'visa', required: true },
+                    { id: 'usa_visa_fee', name: 'Visa Fee Payment Receipt', details: 'Proof of payment (MRV fee).', category: 'visa', required: true },
+                    { id: 'usa_interview_appointment', name: 'Interview Appointment Letter', details: 'Printed confirmation of your appointment.', category: 'visa', required: true },
+                ],
+                UK: [
+                    { id: 'uk_visa_form', name: 'Visa Application Form (Printed)', details: 'Completed online via gov.uk, printed and signed.', category: 'visa', required: true },
+                    { id: 'uk_visa_fee', name: 'Visa Fee & IHS Surcharge Receipt', details: 'Proof of payment for visa fee and Immigration Health Surcharge (if applicable).', category: 'visa', required: true },
+                    { id: 'uk_biometrics', name: 'Biometrics Appointment Confirmation', details: 'Confirmation of appointment at VFS/TLS centre.', category: 'visa', required: true },
+                    { id: 'tb_test', name: 'Tuberculosis (TB) Test Certificate', details: 'Required if staying > 6 months, from an approved clinic.', category: 'health' }, // Requirement depends on duration
+                ],
+                Germany: [ // Schengen Area common requirements
+                    { id: 'schengen_visa_form', name: 'Schengen Visa Application Form', details: 'Completed accurately, printed, and signed.', category: 'visa', required: true },
+                    { id: 'schengen_visa_fee', name: 'Visa Fee Payment Receipt', details: 'Proof of payment.', category: 'visa', required: true },
+                    { id: 'proof_of_funds_schengen', name: 'Proof of Sufficient Funds', details: 'Bank statements showing specific amount per day (check embassy).', category: 'financial', required: true },
+                    { id: 'accommodation_schengen', name: 'Proof of Accommodation', details: 'Hotel bookings, rental contract, or formal invitation letter.', category: 'accommodation', required: true },
+                ],
+                Canada: [
+                    { id: 'can_visa_form', name: 'Visa Application Forms (e.g., IMM 5257)', details: 'Specific forms depend on visa type. Completed accurately.', category: 'visa', required: true },
+                    { id: 'can_family_info', name: 'Family Information Form (IMM 5645/5707)', details: 'Required for most applications.', category: 'visa', required: true },
+                    { id: 'can_visa_fee', name: 'Visa Fee & Biometrics Fee Receipt', details: 'Proof of payment.', category: 'visa', required: true },
+                    { id: 'can_biometrics', name: 'Biometrics Instruction Letter (BIL)', details: 'If required, after application submission.', category: 'visa' },
+                ],
+                 Australia: [
+                    { id: 'aus_visa_form', name: 'Visa Application (Online ImmiAccount)', details: 'Application submitted via ImmiAccount portal.', category: 'visa', required: true },
+                    { id: 'aus_visa_fee', name: 'Visa Application Charge (VAC) Receipt', details: 'Proof of payment.', category: 'visa', required: true },
+                    { id: 'aus_health_exam', name: 'Health Examination', details: 'May be required depending on visa type and duration (HAP ID needed).', category: 'health' },
+                 ],
+                 Singapore: [
+                    { id: 'sg_visa_form', name: 'Visa Application Form 14A', details: 'Completed and signed.', category: 'visa', required: true },
+                    { id: 'sg_invitation', name: 'Letter of Introduction (LOI) / V39A', details: 'May be required from a local contact/sponsor.', category: 'visa' },
+                 ],
+                 UAE: [
+                    { id: 'uae_sponsor_docs', name: 'Sponsor Documents (if applicable)', details: 'If sponsored by UAE resident/company (passport, visa copy, Emirates ID).', category: 'visa' },
+                    // UAE visas often processed by airlines or hotels
+                 ],
+                Other: [] // Generic, relies more on purpose/duration
+            },
+            // Purpose-specific requirements
+            purposes: {
+                tourism: [
+                    { id: 'hotel_reservations', name: 'Hotel Reservations / Proof of Accommodation', details: 'Covering the entire duration of stay.', category: 'accommodation', required: true },
+                    { id: 'detailed_itinerary', name: 'Day-wise Travel Itinerary', details: 'Sometimes requested, outlining planned activities.', category: 'travel', optional: true },
+                    { id: 'leave_letter', name: 'Leave Approval Letter from Employer', details: 'If employed, confirming approved leave dates.', category: 'employment', optional: true },
+                ],
+                business: [
+                    { id: 'invitation_letter_business', name: 'Invitation Letter from Host Company', details: 'Original/scan. Stating purpose, duration, contact details, financial responsibility (if any).', category: 'employment', required: true },
+                    { id: 'cover_letter_employer', name: 'Cover Letter from Indian Employer', details: 'On company letterhead, confirming employment, position, salary, purpose and duration of travel, and who bears expenses.', category: 'employment', required: true },
+                    { id: 'company_registration', name: 'Indian Company Registration Proof', details: 'E.g., Certificate of Incorporation, GST certificate (if self-employed/owner).', category: 'employment', optional: true },
+                    { id: 'correspondence', name: 'Business Correspondence', details: 'Emails or documents supporting the business purpose (optional).', category: 'employment', optional: true },
+                ],
+                study: [
+                    { id: 'admission_letter', name: 'Letter of Acceptance / Admission / CAS (UK)', details: 'Official unconditional offer from the educational institution.', category: 'education', required: true },
+                    { id: 'fee_receipts', name: 'Tuition Fee Payment Receipts', details: 'Proof of payment made towards tuition.', category: 'education', required: true }, // Often required
+                    { id: 'degree_certificates', name: 'Academic Transcripts & Degree Certificates', details: 'Originals and copies. Check Apostille/Attestation requirements.', category: 'education', required: true },
+                    { id: 'english_test', name: 'English Proficiency Test Score (IELTS/TOEFL/PTE)', details: 'Original score report meeting institution/visa requirements.', category: 'education', required: true }, // Usually required
+                    { id: 'proof_of_funds_study', name: 'Proof of Funds for Tuition & Living Expenses', details: 'Bank statements (specific duration/amount), education loan sanction letter, scholarship letter.', category: 'financial', required: true },
+                    { id: 'sponsorship_letter_study', name: 'Sponsorship Letter & Sponsor Docs', details: 'If sponsored: Notarized affidavit, sponsor\'s ID, financial docs (ITR, bank statements).', category: 'financial', optional: true }, // Required if sponsored
+                    { id: 'research_proposal', name: 'Research Proposal / Statement of Purpose (SOP)', details: 'For research programs (Masters/PhD).', category: 'education', optional: true }, // Required for research
+                ],
+                work: [
+                    { id: 'job_offer', name: 'Signed Employment Contract / Job Offer Letter', details: 'Detailed contract outlining role, salary, duration, terms.', category: 'employment', required: true },
+                    { id: 'work_permit_approval', name: 'Work Permit Approval / LMIA (Canada) / CoS (UK)', details: 'Approval document from destination country\'s labour/immigration authority (if applicable).', category: 'employment', required: true }, // Often required
+                    { id: 'work_experience', name: 'Work Experience Letters', details: 'From previous/current employers detailing roles and duration.', category: 'employment', required: true }, // Usually required
+                    { id: 'professional_license', name: 'Professional Licenses / Registrations / Certifications', details: 'Required for regulated professions.', category: 'employment', optional: true }, // Required if applicable
+                    { id: 'resume_cv', name: 'Detailed Resume / CV', details: 'Updated curriculum vitae.', category: 'employment', required: true },
+                    { id: 'payslips', name: 'Recent Payslips', details: 'Usually last 3-6 months from current/previous employer.', category: 'employment', optional: true },
+                    { id: 'police_clearance', name: 'Police Clearance Certificate (PCC)', details: 'From Passport Seva Kendra or local police. May need one from previous countries of residence too.', category: 'identity' }, // Often required for work/immigration
+                    { id: 'degree_certificates_work', name: 'Educational Qualification Documents', details: 'Degrees relevant to the job. Check Apostille/Attestation.', category: 'education' }, // Often required
+                ],
+                family: [
+                    { id: 'invitation_letter_family', name: 'Invitation Letter from Family Member', details: 'Stating relationship, purpose/duration of stay, accommodation details.', category: 'visa', required: true },
+                    { id: 'sponsor_status_proof', name: 'Sponsor\'s Status Proof', details: 'Copy of sponsor\'s passport, visa/residence permit, proof of address in destination country.', category: 'visa', required: true },
+                    { id: 'relationship_proof', name: 'Proof of Relationship', details: 'Marriage certificate (Apostilled/Attested if needed), Birth certificates (Apostilled/Attested if needed), family photos.', category: 'identity', required: true },
+                    { id: 'sponsor_financials', name: 'Sponsor\'s Financial Documents', details: 'If sponsoring: Bank statements, employment letter, tax documents.', category: 'financial', optional: true }, // Required if sponsoring
+                ],
+                immigration: [
+                    // Immigration requirements are highly specific and complex, often requiring many documents from other categories plus:
+                    { id: 'points_assessment', name: 'Points Assessment Proof (if applicable)', details: 'For points-based systems (e.g., Australia, Canada).', category: 'visa' },
+                    { id: 'language_test_immigration', name: 'Language Proficiency Test (Higher Score)', details: 'Often higher score needed than for study/work.', category: 'education' },
+                    { id: 'settlement_funds', name: 'Proof of Settlement Funds', details: 'Specific amount required by the country.', category: 'financial', required: true },
+                    { id: 'medical_exam_immigration', name: 'Comprehensive Medical Examination', details: 'Required for principal applicant and dependents.', category: 'health', required: true },
+                    { id: 'pcc_immigration', name: 'Police Clearance Certificates', details: 'From India and any country lived in for >6-12 months.', category: 'identity', required: true },
+                    { id: 'birth_certificate_immigration', name: 'Birth Certificate (Applicant & Dependents)', details: 'Often requires Apostille/Attestation.', category: 'identity', required: true },
+                    { id: 'marriage_certificate_immigration', name: 'Marriage Certificate (if applicable)', details: 'Often requires Apostille/Attestation.', category: 'identity', required: true }, // Required if married
+                ],
+                other: [] // Generic
+            },
+            // Duration-specific requirements
+            durations: {
+                long_term: [
+                    { id: 'itr_long', name: 'Income Tax Returns (ITR)', details: 'Usually last 2-3 years acknowledgment pages.', category: 'financial' }, // More likely needed for long term
+                    { id: 'bank_statements_long', name: 'Bank Statements', details: 'Original/e-statements (stamped). Last 6 months showing sufficient funds & regular income.', category: 'financial', required: true },
+                    { id: 'medical_exam_long', name: 'Medical Examination Report', details: 'May be required for stays over 6 months/1 year (check country rules).', category: 'health', optional: true },
+                    { id: 'pcc_long', name: 'Police Clearance Certificate (PCC)', details: 'More likely required for long-term stays (work, study, immigration).', category: 'identity', optional: true },
+                ],
+                short_term: [
+                    { id: 'itr_short', name: 'Income Tax Returns (ITR)', details: 'Last 1-2 years, sometimes requested.', category: 'financial', optional: true },
+                    { id: 'bank_statements_short', name: 'Bank Statements', details: 'Original/e-statements (stamped). Last 3-6 months showing sufficient funds.', category: 'financial', required: true },
+                ]
+            },
+            // Demographic-specific requirements
+            demographics: {
+                minor: [
+                    { id: 'birth_certificate_minor', name: 'Birth Certificate', details: 'Original or certified copy. May need Apostille/Attestation.', category: 'identity', required: true },
+                    { id: 'consent_letter_parents', name: 'Notarized Consent Letter from Parent(s)', details: 'Required if traveling alone, with one parent, or guardian. Include parent(s) ID proof.', category: 'identity', required: true }, // Check specifics
+                    { id: 'parent_id', name: 'Parent(s) Passport/ID Copies', details: 'Copies of passports of accompanying/non-accompanying parent(s).', category: 'identity', required: true },
+                    { id: 'school_letter_minor', name: 'Letter from School', details: 'Confirming enrollment and leave (if traveling during school term).', category: 'education', optional: true },
+                ],
+                senior: [
+                    { id: 'pension_proof', name: 'Proof of Pension / Retirement Income', details: 'May be needed for certain visa types or proof of funds.', category: 'financial', optional: true },
+                    // May have specific requirements for retirement visas
+                ],
+                family_dependents: [ // When traveling *with* dependents
+                    { id: 'marriage_certificate_family', name: 'Marriage Certificate', details: 'Original + Copy. Check Apostille/Attestation requirements.', category: 'identity', required: true }, // Required if traveling with spouse
+                    { id: 'birth_certificate_dependent', name: 'Birth Certificate of Dependents', details: 'Original + Copy. Check Apostille/Attestation requirements.', category: 'identity', required: true }, // Required if traveling with children
+                ]
+            },
+            // General notes/categories applicable across combinations
+            common_notes: [
+                { id: 'authentication', name: 'Document Authentication (Apostille/Attestation)', details: 'Check specific requirements for documents like Birth/Marriage Certificates, Degrees. Apostille for Hague member countries, Embassy Attestation for others. Process via MEA India.', category: 'authentication', required: true }, // Highlight importance
+                { id: 'translation', name: 'Certified Document Translation', details: 'Required if original documents are not in English or the destination country\'s official language. Use certified translators.', category: 'authentication', optional: true }, // Required if applicable
+                { id: 'copies', name: 'Number of Copies', details: 'Prepare at least 1-2 sets of photocopies for all documents submitted. Keep digital scans accessible (cloud/email).', category: 'format', required: true },
+                { id: 'digital_physical', name: 'Digital vs Physical Submission', details: 'Verify if documents need online upload during application or physical submission at VAC/Embassy/Consulate.', category: 'format', required: true },
+                { id: 'validity_dates', name: 'Check Document Validity', details: 'Ensure all documents (passport, test scores, certificates) are valid throughout the application process and travel period.', category: 'general_check', required: true },
+                { id: 'post_arrival', name: 'Post-Arrival Formalities', details: 'Research requirements like local registration (e.g., FRRO upon return if applicable, foreign country registration), opening bank accounts, applying for local ID/driver\'s license upon arrival.', category: 'post_arrival', required: true }, // Important reminder
+                { id: 'renewal_extension', name: 'Renewal/Extension Process', details: 'If planning a long stay, understand the visa/permit renewal or extension process, timelines, and requirements well in advance.', category: 'renewal', optional: true }, // Relevant for long stays
+            ]
+        };
+
+        // --- JavaScript Logic ---
+        const form = document.getElementById('checklistForm');
+        const generateBtn = document.getElementById('generateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const outputDiv = document.getElementById('checklistOutput');
+
+        // Function to generate checklist HTML
+        function generateChecklist() {
+            const destination = document.getElementById('destination').value;
+            const purpose = document.getElementById('purpose').value;
+            const duration = document.getElementById('duration').value;
+            const age = document.getElementById('age').value;
+            // const occupation = document.getElementById('occupation').value; // Currently not used in logic, but available
+            const familyStatus = document.getElementById('family_status').value;
+
+            // Basic validation
+            if (!destination || !purpose || !duration) {
+                outputDiv.innerHTML = '<p class="text-red-600 font-semibold">Please select Destination, Purpose, and Duration.</p>';
+                return;
+            }
+
+            let combinedList = [];
+            let uniqueIds = new Set();
+
+            // Helper function to add items if not already present
+            const addItem = (item) => {
+                if (!uniqueIds.has(item.id)) {
+                    combinedList.push(item);
+                    uniqueIds.add(item.id);
+                } else {
+                    // Optional: Could merge details or prioritize required=true if duplicate IDs exist
+                    // For simplicity, we just avoid duplicates based on ID.
+                }
+            };
+
+            // 1. Add General items
+            documentRequirements.general.forEach(addItem);
+
+            // 2. Add Country-specific items
+            if (documentRequirements.countries[destination]) {
+                documentRequirements.countries[destination].forEach(addItem);
+            } else if (destination === 'Other') {
+                 // Add items potentially relevant if country not listed (e.g., generic visa form reminder)
+                 addItem({ id: 'generic_visa_form', name: 'Destination Country Visa Application Form', details: 'Check specific embassy website for the correct form.', category: 'visa', required: true });
+            }
+
+            // 3. Add Purpose-specific items
+            if (documentRequirements.purposes[purpose]) {
+                documentRequirements.purposes[purpose].forEach(addItem);
+            }
+
+            // 4. Add Duration-specific items
+            if (documentRequirements.durations[duration]) {
+                documentRequirements.durations[duration].forEach(addItem);
+            }
+
+            // 5. Add Demographic-specific items
+            if (documentRequirements.demographics[age]) {
+                documentRequirements.demographics[age].forEach(addItem);
+            }
+            // Add items based on family status (traveling with spouse/dependents)
+            if (familyStatus === 'spouse' || familyStatus === 'family_dependents') {
+                 if(documentRequirements.demographics['family_dependents']) { // Use the 'family_dependents' key for relevant docs
+                      documentRequirements.demographics['family_dependents'].forEach(addItem);
+                 }
+            }
+            // Special handling for UK TB Test based on duration
+             if (destination === 'UK' && duration === 'long_term') {
+                 const tbTestItem = combinedList.find(item => item.id === 'tb_test');
+                 if (tbTestItem) tbTestItem.required = true; // Mark as required for long term UK stay
+             } else if (destination === 'UK') {
+                 const tbTestItem = combinedList.find(item => item.id === 'tb_test');
+                 if (tbTestItem) tbTestItem.required = false; // Mark as not required for short term
+             }
+
+
+            // 6. Add Common Notes / Reminders
+            documentRequirements.common_notes.forEach(addItem);
+
+            // Filter out items marked explicitly as not required (e.g., TB test for short UK stay)
+            combinedList = combinedList.filter(item => item.required !== false);
+
+            // Group items by category
+            const groupedItems = combinedList.reduce((acc, item) => {
+                const category = item.category || 'other';
+                if (!acc[category]) {
+                    acc[category] = [];
+                }
+                acc[category].push(item);
+                return acc;
+            }, {});
+
+            // Define category order and titles
+            const categoryOrder = ['identity', 'visa', 'financial', 'health', 'education', 'employment', 'accommodation', 'travel', 'authentication', 'format', 'post_arrival', 'renewal', 'general_check', 'other'];
+            const categoryTitles = {
+                identity: 'Identity Documents',
+                visa: 'Visa Application Documents',
+                financial: 'Financial Documents',
+                health: 'Health & Medical Documents',
+                education: 'Educational Documents',
+                employment: 'Employment Documents',
+                accommodation: 'Accommodation Proof',
+                travel: 'Travel Itinerary & Insurance',
+                authentication: 'Document Authentication & Translation',
+                format: 'Document Format & Copies',
+                post_arrival: 'Post-Arrival Considerations',
+                renewal: 'Renewal/Extension Considerations',
+                general_check: 'General Checks & Reminders',
+                other: 'Other Documents'
+            };
+
+            // Generate HTML output
+            let html = '<h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">Your Personalized Document Checklist:</h2>';
+
+            categoryOrder.forEach(categoryKey => {
+                if (groupedItems[categoryKey] && groupedItems[categoryKey].length > 0) {
+                    html += `<h3 class="category-title">${categoryTitles[categoryKey] || categoryKey.replace('_', ' ').toUpperCase()}</h3>`;
+                    groupedItems[categoryKey].sort((a, b) => { // Sort required items first within category
+                        const requiredA = a.required === true ? 0 : (a.optional === true ? 2 : 1);
+                        const requiredB = b.required === true ? 0 : (b.optional === true ? 2 : 1);
+                        if (requiredA !== requiredB) return requiredA - requiredB;
+                        return a.name.localeCompare(b.name); // Then sort alphabetically
+                    }).forEach(item => {
+                        const isRequired = item.required === true;
+                        const isOptional = item.optional === true;
+                        let tag = '';
+                        if (isRequired) tag = '<span class="text-xs font-semibold text-red-600 ml-2">(Required)</span>';
+                        else if (isOptional) tag = '<span class="text-xs font-semibold text-blue-600 ml-2">(Optional/If Applicable)</span>';
+                        else tag = '<span class="text-xs font-semibold text-gray-500 ml-2">(Check Requirement)</span>'; // Default if not specified
+
+                        html += `
+                            <div class="checklist-item">
+                                <input type="checkbox" id="chk-${item.id}" name="chk-${item.id}" value="${item.id}">
+                                <div>
+                                    <label for="chk-${item.id}" class="font-medium">${item.name}</label> ${tag}
+                                    ${item.details ? `<span class="details">${item.details}</span>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            if (combinedList.length === 0) {
+                 html += '<p class="text-gray-600">Could not generate specific checklist items based on selection. Please review general requirements and consult official sources.</p>';
+            }
+
+
+            outputDiv.innerHTML = html;
+        }
+
+        // Function to reset form and output
+        function resetForm() {
+            form.reset();
+            outputDiv.innerHTML = ''; // Clear the checklist
+        }
+
+        // Event Listeners
+        generateBtn.addEventListener('click', generateChecklist);
+        resetBtn.addEventListener('click', resetForm);
+
+    </script>
+
+</body>
+</html>
