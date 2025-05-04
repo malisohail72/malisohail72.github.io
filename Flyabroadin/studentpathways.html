@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Student Pathways Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Style for disabled button */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        /* Simple transition for result cards */
+        .result-card {
+            transition: all 0.3s ease-in-out;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr; /* Stack form elements on smaller screens */
+            }
+            .result-grid {
+                 grid-template-columns: 1fr; /* Stack result cards */
+            }
+        }
+         /* Simple loader style */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-700 mb-2">Indian Student Pathways Calculator</h1>
+            <p class="text-md md:text-lg text-gray-600">Explore international education opportunities tailored for you.</p>
+            <p class="text-sm text-red-500 mt-2">Note: Data shown is illustrative. Always verify with official sources.</p>
+        </header>
+
+        <section id="input-form" class="bg-white p-6 md:p-8 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-700 border-b pb-2">Your Profile & Preferences</h2>
+            <form id="pathway-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 form-grid">
+                    <div>
+                        <label for="current-qualification" class="block text-sm font-medium text-gray-700 mb-1">Current Qualification</label>
+                        <select id="current-qualification" name="current-qualification" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="12th">Completed 12th / High School</option>
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="academic-score" class="block text-sm font-medium text-gray-700 mb-1">Academic Score (%)</label>
+                        <input type="number" id="academic-score" name="academic-score" min="0" max="100" step="0.1" placeholder="e.g., 85" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                     <div>
+                        <label for="english-test" class="block text-sm font-medium text-gray-700 mb-1">English Test Taken</label>
+                        <select id="english-test" name="english-test" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="none">None</option>
+                            <option value="ielts">IELTS</option>
+                            <option value="toefl">TOEFL</option>
+                            <option value="pte">PTE</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label for="english-score" class="block text-sm font-medium text-gray-700 mb-1">English Test Score</label>
+                        <input type="number" id="english-score" name="english-score" min="0" step="0.1" placeholder="e.g., 7.0 (IELTS) or 95 (TOEFL)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+
+                    <div>
+                        <label for="desired-country" class="block text-sm font-medium text-gray-700 mb-1">Desired Country</label>
+                        <select id="desired-country" name="desired-country" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <option value="">Select Country</option>
+                            <option value="USA">USA</option>
+                            <option value="Canada">Canada</option>
+                            <option value="UK">UK</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Germany">Germany</option>
+                             <option value="Any">Any (Show All)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="desired-program" class="block text-sm font-medium text-gray-700 mb-1">Desired Program Level</label>
+                        <select id="desired-program" name="desired-program" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                             <option value="">Select Program Level</option>
+                             <option value="Bachelors">Bachelor's Degree</option>
+                             <option value="Masters">Master's Degree</option>
+                             <option value="PhD">PhD</option>
+                             <option value="Diploma">Diploma/Certificate</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label for="field-of-study" class="block text-sm font-medium text-gray-700 mb-1">Field of Study</label>
+                        <select id="field-of-study" name="field-of-study" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                             <option value="">Select Field</option>
+                             <option value="Engineering">Engineering</option>
+                             <option value="Computer Science">Computer Science / IT</option>
+                             <option value="Business">Business / Management</option>
+                             <option value="Healthcare">Healthcare / Medicine</option>
+                             <option value="Arts Humanities">Arts & Humanities</option>
+                             <option value="Sciences">Sciences</option>
+                             <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">Annual Budget (INR Lakhs)</label>
+                        <input type="number" id="budget" name="budget" min="0" placeholder="e.g., 25" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button type="submit" id="calculate-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out">
+                        Calculate Pathways
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="results-section" class="mt-10 hidden">
+            <h2 class="text-2xl font-semibold mb-6 text-gray-700 border-b pb-2">Potential Pathways & Information</h2>
+             <div id="loader" class="loader hidden"></div>
+            <div id="results-output" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 result-grid">
+                </div>
+             <div id="no-results" class="text-center text-gray-500 py-10 hidden">
+                <p>No matching pathways found based on your criteria. Try adjusting your selections.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- Mock Data ---
+        // In a real application, this data would come from a database/API.
+        // This is a simplified structure for demonstration.
+        const pathwayData = {
+            "USA": {
+                currency: "USD",
+                exchangeRate: 83.0, // Example INR to USD
+                financials: {
+                    tuition: { "Bachelors": [25000, 55000], "Masters": [30000, 60000], "PhD": [28000, 55000], "Diploma": [15000, 30000] },
+                    scholarships: ["Merit-based (competitive)", "Need-based (limited for intl)", "University-specific grants"],
+                    livingExpenses: [15000, 25000], // Per year
+                    healthInsurance: [1500, 3000], // Per year
+                    setupCosts: { visa: 185, sevis: 350, travel: 1200, deposit: 1000 },
+                },
+                academics: {
+                    requirements: { "Bachelors": "High School Diploma, SAT/ACT (often optional), TOEFL/IELTS", "Masters": "Bachelor's degree, GRE/GMAT (program specific), TOEFL/IELTS", "PhD": "Master's degree (usually), Strong Research Profile", "Diploma": "High School or Bachelor's, TOEFL/IELTS" },
+                    language: { IELTS: 6.5, TOEFL: 80, PTE: 58 }, // Minimum general guideline
+                    bridgePrograms: "Available, especially for English proficiency",
+                    duration: { "Bachelors": "4 years", "Masters": "1.5-2 years", "PhD": "4-6 years", "Diploma": "1-2 years" }
+                },
+                visa: {
+                    type: "F-1",
+                    postStudyWork: "OPT (1 year standard, +24 months STEM extension)",
+                    prPathways: "Challenging (H1-B lottery, EB green cards)",
+                    dependents: "F-2 (cannot work)",
+                    processingTime: "Weeks to months"
+                },
+                destination: {
+                    safetyIndex: "Medium",
+                    culturalAdaptation: "Diverse, integration varies",
+                    indianCommunity: "Large in major cities/university towns",
+                    jobMarket: { "Engineering": "Strong", "Computer Science": "Very Strong", "Business": "Strong", "Healthcare": "Good (licensing needed)", "Arts Humanities": "Competitive", "Sciences": "Good (Research/Industry)" }
+                },
+                career: {
+                    avgSalary: { "Masters": [75000, 130000], "Bachelors": [60000, 90000] }, // Field dependent
+                    employmentRate: "Good, but competitive",
+                },
+                support: {
+                    accommodation: ["On-campus", "Off-campus apartments (shared/individual)"],
+                    partTimeWork: "On-campus (max 20 hrs/week during term), CPT/OPT"
+                }
+            },
+            "Canada": {
+                currency: "CAD",
+                exchangeRate: 61.0, // Example INR to CAD
+                financials: {
+                    tuition: { "Bachelors": [20000, 45000], "Masters": [18000, 35000], "PhD": [15000, 25000], "Diploma": [15000, 22000] },
+                    scholarships: ["Merit-based", "Government scholarships (limited)", "University-specific"],
+                    livingExpenses: [12000, 18000], // Per year (excluding Quebec)
+                    healthInsurance: "Provincial plans (eligibility varies) / Private (~$600-900/yr)",
+                    setupCosts: { visa: 150, biometrics: 85, travel: 1100, deposit: 800 },
+                },
+                 academics: {
+                    requirements: { "Bachelors": "High School Diploma (specific provincial requirements), IELTS/TOEFL", "Masters": "Bachelor's degree (4 years preferred), IELTS/TOEFL", "PhD": "Master's degree, Research Proposal", "Diploma": "High School or Bachelor's, IELTS/TOEFL" },
+                    language: { IELTS: 6.5, TOEFL: 85, PTE: 60 },
+                    bridgePrograms: "Common for language and academic gaps",
+                    duration: { "Bachelors": "3-4 years", "Masters": "1-2 years", "PhD": "4-5 years", "Diploma": "1-2 years" }
+                },
+                 visa: {
+                    type: "Study Permit",
+                    postStudyWork: "PGWP (Post-Graduation Work Permit) up to 3 years",
+                    prPathways: "Favorable (Express Entry, PNP)",
+                    dependents: "Spouse Open Work Permit, Child Study Permit",
+                    processingTime: "Weeks to months (SDS available for India)"
+                },
+                destination: {
+                    safetyIndex: "High",
+                    culturalAdaptation: "Multicultural, generally welcoming",
+                    indianCommunity: "Very large and widespread",
+                    jobMarket: { "Engineering": "Good", "Computer Science": "Strong", "Business": "Good", "Healthcare": "Good (licensing needed)", "Arts Humanities": "Moderate", "Sciences": "Good" }
+                },
+                career: {
+                    avgSalary: { "Masters": [65000, 100000], "Bachelors": [55000, 80000] },
+                    employmentRate: "Generally good",
+                },
+                 support: {
+                    accommodation: ["On-campus", "Off-campus rentals", "Homestays"],
+                    partTimeWork: "On/Off-campus (max 20 hrs/week during term, full-time during breaks)"
+                }
+            },
+             "UK": {
+                currency: "GBP",
+                exchangeRate: 105.0, // Example INR to GBP
+                financials: {
+                    tuition: { "Bachelors": [15000, 30000], "Masters": [18000, 35000], "PhD": [17000, 30000], "Diploma": [12000, 20000] },
+                    scholarships: ["Merit-based (Chevening, Commonwealth)", "University-specific"],
+                    livingExpenses: [11000, 15000], // Per year (higher in London)
+                    healthInsurance: "NHS Surcharge (~£776/year)",
+                    setupCosts: { visa: 490, travel: 900, deposit: 700 },
+                },
+                 academics: {
+                    requirements: { "Bachelors": "High School (A-levels equivalent), IELTS UKVI", "Masters": "Bachelor's degree, IELTS UKVI", "PhD": "Master's degree, Research Proposal", "Diploma": "Varies, IELTS UKVI" },
+                    language: { IELTS: 6.0, TOEFL: "Not widely accepted for visa", PTE: 59 }, // IELTS UKVI preferred
+                    bridgePrograms: "Pre-sessional English, Foundation years",
+                    duration: { "Bachelors": "3 years (4 in Scotland)", "Masters": "1 year", "PhD": "3-4 years", "Diploma": "6 months - 1 year" }
+                },
+                 visa: {
+                    type: "Student Route",
+                    postStudyWork: "Graduate Route (2 years, 3 for PhD)",
+                    prPathways: "Possible via Skilled Worker visa after Graduate Route",
+                    dependents: "Allowed for Masters (research) / PhD",
+                    processingTime: "Usually within 3-5 weeks"
+                },
+                 destination: {
+                    safetyIndex: "Medium-High",
+                    culturalAdaptation: "Multicultural, long history with India",
+                    indianCommunity: "Large and well-established",
+                    jobMarket: { "Engineering": "Good", "Computer Science": "Strong", "Business": "Very Strong (Finance)", "Healthcare": "Good (NHS)", "Arts Humanities": "Competitive", "Sciences": "Good (Research/Pharma)" }
+                },
+                 career: {
+                    avgSalary: { "Masters": [35000, 60000], "Bachelors": [30000, 50000] },
+                    employmentRate: "Good, especially in London",
+                },
+                 support: {
+                    accommodation: ["University Halls", "Private Rentals"],
+                    partTimeWork: "Max 20 hrs/week during term, full-time during breaks"
+                }
+            },
+             "Australia": {
+                currency: "AUD",
+                exchangeRate: 55.0, // Example INR to AUD
+                financials: {
+                    tuition: { "Bachelors": [25000, 45000], "Masters": [30000, 50000], "PhD": [30000, 50000], "Diploma": [15000, 30000] },
+                    scholarships: ["Merit-based", "Government (Australia Awards)", "University-specific"],
+                    livingExpenses: [21000, 28000], // Per year (mandated minimum proof)
+                    healthInsurance: "OSHC (Overseas Student Health Cover) required (~$500+/year)",
+                    setupCosts: { visa: 710, travel: 1000, deposit: 900 },
+                },
+                 academics: {
+                    requirements: { "Bachelors": "High School (ATAR equivalent), IELTS/PTE/TOEFL", "Masters": "Bachelor's degree, IELTS/PTE/TOEFL", "PhD": "Master's degree (research), Proposal", "Diploma": "Varies, IELTS/PTE/TOEFL" },
+                    language: { IELTS: 6.5, TOEFL: 79, PTE: 58 },
+                    bridgePrograms: "Foundation studies, English language courses",
+                    duration: { "Bachelors": "3-4 years", "Masters": "1.5-2 years", "PhD": "3-4 years", "Diploma": "1-2 years" }
+                },
+                 visa: {
+                    type: "Subclass 500",
+                    postStudyWork: "Temporary Graduate visa (Subclass 485) - 2-6 years depending on qualification/location",
+                    prPathways: "Possible via skilled migration points system",
+                    dependents: "Allowed",
+                    processingTime: "Weeks to months"
+                },
+                 destination: {
+                    safetyIndex: "High",
+                    culturalAdaptation: "Multicultural, outdoor lifestyle",
+                    indianCommunity: "Large, particularly in major cities",
+                    jobMarket: { "Engineering": "Good", "Computer Science": "Strong", "Business": "Good", "Healthcare": "Strong (licensing needed)", "Arts Humanities": "Moderate", "Sciences": "Good" }
+                },
+                 career: {
+                    avgSalary: { "Masters": [70000, 110000], "Bachelors": [60000, 90000] },
+                    employmentRate: "Good",
+                },
+                 support: {
+                    accommodation: ["On-campus", "Off-campus", "Homestays"],
+                    partTimeWork: "48 hours per fortnight during term, unlimited during breaks"
+                }
+            },
+            "Germany": {
+                currency: "EUR",
+                exchangeRate: 90.0, // Example INR to EUR
+                financials: {
+                    // Public universities often have NO tuition fees for Bachelors/Masters (small semester contribution)
+                    tuition: { "Bachelors": [0, 1500], "Masters": [0, 1500], "PhD": [0, 500], "Diploma": [0, 1000] }, // Per semester contribution; Baden-Württemberg charges non-EU tuition (~€1500/semester)
+                    scholarships: ["DAAD scholarships", "University-specific (limited)"],
+                    livingExpenses: [10000, 12000], // Per year (Blocked account requirement ~€11,208/year)
+                    healthInsurance: "Required (~€110-120/month)",
+                    setupCosts: { visa: 75, travel: 800, deposit: 500 },
+                },
+                 academics: {
+                    requirements: { "Bachelors": "High School (may need Studienkolleg - foundation year), German proficiency (often required) or IELTS/TOEFL for English programs", "Masters": "Bachelor's degree (often specific field), IELTS/TOEFL for English programs, German may be needed", "PhD": "Master's degree, Research Proposal", "Diploma": "Varies" },
+                    language: { IELTS: 6.5, TOEFL: 85 }, // For English programs; German levels (B1-C1) often needed
+                    bridgePrograms: "Studienkolleg (foundation year), Language courses",
+                    duration: { "Bachelors": "3-3.5 years", "Masters": "2 years", "PhD": "3-4 years", "Diploma": "Varies" }
+                },
+                 visa: {
+                    type: "National Visa (Type D)",
+                    postStudyWork: "Job Seeker Visa (18 months)",
+                    prPathways: "Possible after 2+ years of skilled work",
+                    dependents: "Allowed (proof of funds needed)",
+                    processingTime: "Months"
+                },
+                 destination: {
+                    safetyIndex: "High",
+                    culturalAdaptation: "Learning German highly recommended",
+                    indianCommunity: "Growing, especially in tech hubs",
+                    jobMarket: { "Engineering": "Very Strong", "Computer Science": "Very Strong", "Business": "Good (German helps)", "Healthcare": "Good (German essential)", "Arts Humanities": "Challenging", "Sciences": "Strong (Research)" }
+                },
+                 career: {
+                    avgSalary: { "Masters": [45000, 70000], "Bachelors": [40000, 60000] },
+                    employmentRate: "Good, especially for STEM",
+                },
+                 support: {
+                    accommodation: ["Student dorms (limited)", "Shared flats (WG)"],
+                    partTimeWork: "120 full days or 240 half days per year"
+                }
+            }
+            // Add more countries as needed...
+        };
+
+        // --- DOM Elements ---
+        const form = document.getElementById('pathway-form');
+        const resultsSection = document.getElementById('results-section');
+        const resultsOutput = document.getElementById('results-output');
+        const noResultsDiv = document.getElementById('no-results');
+        const calculateBtn = document.getElementById('calculate-btn');
+        const loader = document.getElementById('loader');
+        const countrySelect = document.getElementById('desired-country');
+        const programSelect = document.getElementById('desired-program');
+        const fieldSelect = document.getElementById('field-of-study');
+        const budgetInput = document.getElementById('budget');
+        const academicScoreInput = document.getElementById('academic-score');
+        const englishTestSelect = document.getElementById('english-test');
+        const englishScoreInput = document.getElementById('english-score');
+
+
+        // --- Event Listeners ---
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            calculatePathways();
+        });
+
+        // --- Functions ---
+
+        // Main function to calculate and display pathways
+        function calculatePathways() {
+            // Show loader and hide previous results
+            loader.classList.remove('hidden');
+            resultsSection.classList.remove('hidden');
+            resultsOutput.innerHTML = ''; // Clear previous results
+            noResultsDiv.classList.add('hidden');
+            calculateBtn.disabled = true; // Disable button during calculation
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const formData = new FormData(form);
+                const preferences = {
+                    country: formData.get('desired-country'),
+                    programLevel: formData.get('desired-program'),
+                    field: formData.get('field-of-study'),
+                    budget: parseFloat(formData.get('budget')) * 100000, // Convert lakhs to INR
+                    academicScore: parseFloat(formData.get('academic-score')),
+                    englishTest: formData.get('english-test'),
+                    englishScore: parseFloat(formData.get('english-score')) || 0
+                };
+
+                const potentialPathways = filterPathways(preferences);
+
+                loader.classList.add('hidden'); // Hide loader
+                calculateBtn.disabled = false; // Re-enable button
+
+                if (potentialPathways.length > 0) {
+                    displayResults(potentialPathways, preferences);
+                } else {
+                    noResultsDiv.classList.remove('hidden');
+                }
+            }, 1000); // Simulate 1 second delay
+        }
+
+        // Filter pathways based on user preferences and mock data
+        function filterPathways(preferences) {
+            const results = [];
+            const targetCountries = preferences.country === 'Any' ? Object.keys(pathwayData) : [preferences.country];
+
+            targetCountries.forEach(country => {
+                const data = pathwayData[country];
+                if (!data) return; // Skip if country data doesn't exist
+
+                // Basic Eligibility Checks (can be made more sophisticated)
+                // 1. Program Level Availability Check
+                if (!data.financials.tuition[preferences.programLevel]) {
+                   console.log(`Skipping ${country}: Program level ${preferences.programLevel} not listed.`);
+                   return;
+                }
+
+                // 2. Financial Check (Very simplified)
+                const estimatedAnnualCost = calculateEstimatedCost(data, preferences.programLevel);
+                const budgetInCountryCurrency = preferences.budget / data.exchangeRate;
+
+                if (budgetInCountryCurrency < estimatedAnnualCost * 0.8) { // Allow some flexibility (e.g., scholarships)
+                     console.log(`Skipping ${country}: Budget ${budgetInCountryCurrency.toFixed(0)} ${data.currency} seems lower than estimated cost ${estimatedAnnualCost.toFixed(0)} ${data.currency}.`);
+                    return; // Skip if budget is significantly lower than estimated costs
+                }
+
+                // 3. Language Score Check (Simplified)
+                let languageRequirementMet = true; // Assume met if no test selected or no score provided
+                 if (preferences.englishTest !== 'none' && preferences.englishScore > 0) {
+                    const requiredScores = data.academics.language;
+                    switch(preferences.englishTest) {
+                        case 'ielts': languageRequirementMet = preferences.englishScore >= (requiredScores.IELTS || 0); break;
+                        case 'toefl': languageRequirementMet = preferences.englishScore >= (requiredScores.TOEFL || 0); break;
+                        case 'pte': languageRequirementMet = preferences.englishScore >= (requiredScores.PTE || 0); break;
+                    }
+                 }
+                 if (!languageRequirementMet) {
+                     console.log(`Skipping ${country}: Language score requirement not met.`);
+                     return; // Skip if language requirement not met
+                 }
+
+
+                // If checks pass, add to results
+                results.push({ country, data });
+            });
+
+            return results;
+        }
+
+        // Calculate a rough estimated annual cost
+        function calculateEstimatedCost(countryData, programLevel) {
+            const tuitionRange = countryData.financials.tuition[programLevel] || [0, 0];
+            const avgTuition = (tuitionRange[0] + tuitionRange[1]) / 2;
+            const livingExpensesRange = countryData.financials.livingExpenses || [0, 0];
+            const avgLivingExpenses = (livingExpensesRange[0] + livingExpensesRange[1]) / 2;
+            let avgInsurance = 0;
+             // Handle different insurance representations
+            if (typeof countryData.financials.healthInsurance === 'object' && Array.isArray(countryData.financials.healthInsurance)) {
+                 avgInsurance = (countryData.financials.healthInsurance[0] + countryData.financials.healthInsurance[1]) / 2;
+            } else if (typeof countryData.financials.healthInsurance === 'string') {
+                 // Try to parse simple cost like "$600-900/yr" or "£776/year" or "~€110-120/month"
+                const costMatch = countryData.financials.healthInsurance.match(/[\d\.]+/g);
+                if (costMatch) {
+                    const costs = costMatch.map(Number);
+                    avgInsurance = costs.reduce((a, b) => a + b, 0) / costs.length;
+                     if (countryData.financials.healthInsurance.includes('/month')) {
+                         avgInsurance *= 12; // Annualize monthly cost
+                     }
+                } else {
+                    avgInsurance = 700; // Default fallback if parsing fails
+                }
+            } else {
+                 avgInsurance = 700; // Default fallback
+            }
+
+
+            // Add NHS surcharge for UK specifically if not already parsed
+            if (countryData.currency === 'GBP' && countryData.financials.healthInsurance.includes('NHS Surcharge')) {
+                 const nhsMatch = countryData.financials.healthInsurance.match(/£(\d+)/);
+                 if (nhsMatch) avgInsurance = parseFloat(nhsMatch[1]);
+            }
+
+
+            return avgTuition + avgLivingExpenses + avgInsurance;
+        }
+
+        // Display the filtered results on the page
+        function displayResults(pathways, preferences) {
+            resultsOutput.innerHTML = ''; // Clear previous results
+            pathways.forEach(path => {
+                const card = createResultCard(path.country, path.data, preferences);
+                resultsOutput.appendChild(card);
+            });
+        }
+
+        // Create an HTML card element for a single result
+        function createResultCard(country, data, preferences) {
+            const card = document.createElement('div');
+            card.className = 'result-card bg-white p-5 rounded-lg shadow-md border border-gray-200 hover:shadow-lg';
+
+            const estimatedCost = calculateEstimatedCost(data, preferences.programLevel);
+            const budgetInCountryCurrency = preferences.budget / data.exchangeRate;
+            const costDifference = budgetInCountryCurrency - estimatedCost;
+
+            // Determine job market outlook for the selected field
+            const jobMarketOutlook = data.destination.jobMarket[preferences.field] || data.destination.jobMarket['Other'] || 'Varies';
+
+             // Determine average salary, fallback if specific level/field not found
+            let avgSalaryRange = "N/A";
+            if (data.career.avgSalary && data.career.avgSalary[preferences.programLevel]) {
+                const salary = data.career.avgSalary[preferences.programLevel];
+                avgSalaryRange = `${formatCurrency(salary[0], data.currency)} - ${formatCurrency(salary[1], data.currency)}`;
+            } else if (data.career.avgSalary && data.career.avgSalary["Masters"]) { // Fallback to Masters salary
+                 const salary = data.career.avgSalary["Masters"];
+                 avgSalaryRange = `${formatCurrency(salary[0], data.currency)} - ${formatCurrency(salary[1], data.currency)} (Masters avg.)`;
+            }
+
+
+            card.innerHTML = `
+                <h3 class="text-xl font-semibold text-indigo-700 mb-3">${country}</h3>
+                <div class="space-y-2 text-sm text-gray-700">
+                    <p><strong>Program Level:</strong> ${preferences.programLevel}</p>
+                    <p><strong>Field:</strong> ${preferences.field}</p>
+                    <p><strong>Est. Annual Cost:</strong> ${formatCurrency(estimatedCost, data.currency)}</p>
+                    <p><strong>Your Budget (Approx):</strong> ${formatCurrency(budgetInCountryCurrency, data.currency)}</p>
+                    <p><strong>Budget vs. Est. Cost:</strong> <span class="${costDifference >= 0 ? 'text-green-600' : 'text-red-600'}">${formatCurrency(costDifference, data.currency)} ${costDifference >= 0 ? '(Surplus)' : '(Shortfall)'}</span></p>
+                    <hr class="my-2">
+                    <p><strong>Avg. Tuition (${preferences.programLevel}):</strong> ${formatCurrencyRange(data.financials.tuition[preferences.programLevel], data.currency)}</p>
+                    <p><strong>Avg. Living Expenses:</strong> ${formatCurrencyRange(data.financials.livingExpenses, data.currency)} / year</p>
+                    <p><strong>Scholarships:</strong> ${data.financials.scholarships.join(', ')}</p>
+                    <hr class="my-2">
+                     <p><strong>Language Requirement (General):</strong> IELTS ${data.academics.language.IELTS || 'N/A'} / TOEFL ${data.academics.language.TOEFL || 'N/A'} / PTE ${data.academics.language.PTE || 'N/A'}</p>
+                    <p><strong>Program Duration:</strong> ${data.academics.duration[preferences.programLevel] || 'Varies'}</p>
+                    <hr class="my-2">
+                    <p><strong>Visa Type:</strong> ${data.visa.type}</p>
+                    <p><strong>Post-Study Work:</strong> ${data.visa.postStudyWork}</p>
+                    <p><strong>PR Pathway:</strong> ${data.visa.prPathways}</p>
+                     <hr class="my-2">
+                    <p><strong>Job Market (${preferences.field}):</strong> <span class="font-medium">${jobMarketOutlook}</span></p>
+                    <p><strong>Avg. Starting Salary (Approx):</strong> ${avgSalaryRange}</p>
+                    <p><strong>Part-time Work Rules:</strong> ${data.support.partTimeWork}</p>
+                     <hr class="my-2">
+                    <p><strong>Indian Community:</strong> ${data.destination.indianCommunity}</p>
+                    <p><strong>Safety Index:</strong> ${data.destination.safetyIndex}</p>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">Exchange Rate Used: 1 ${data.currency} = ${data.exchangeRate} INR</p>
+            `;
+            return card;
+        }
+
+        // Helper function to format currency
+        function formatCurrency(amount, currencyCode) {
+            if (isNaN(amount)) return "N/A";
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode, maximumFractionDigits: 0 }).format(amount);
+        }
+
+         // Helper function to format currency range
+        function formatCurrencyRange(range, currencyCode) {
+            if (!range || range.length < 2 || isNaN(range[0]) || isNaN(range[1])) return "N/A";
+            return `${formatCurrency(range[0], currencyCode)} - ${formatCurrency(range[1], currencyCode)}`;
+        }
+
+    </script>
+
+</body>
+</html>
