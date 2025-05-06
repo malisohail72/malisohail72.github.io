@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Career Pathway Calculator - Global Opportunities</title>
+    <style>
+        :root {
+            --primary: #00635a;
+            --primary-light: #008075;
+            --secondary: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .calculator-section {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,99,90,0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .results-section {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .pathway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .pathway-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: var(--transition);
+        }
+        
+        .pathway-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .pathway-header {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pathway-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .match-percentage {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #0277bd;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .pathway-content {
+            flex-grow: 1;
+        }
+        
+        .pathway-tag {
+            display: inline-block;
+            background-color: #f1f1f1;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: var(--text-light);
+        }
+        
+        .detail-value {
+            flex-grow: 1;
+        }
+        
+        .info-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .advice-list {
+            padding-left: 1.5rem;
+        }
+        
+        .advice-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .country-flag {
+            width: 24px;
+            height: auto;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        .tab-container {
+            margin-bottom: 1rem;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tab-button {
+            background-color: var(--secondary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .summary-box {
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-container {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin: 0.5rem 0 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        
+        .expandable-section {
+            margin-top: 1rem;
+        }
+        
+        .expandable-header {
+            cursor: pointer;
+            padding: 0.75rem;
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .expandable-content {
+            display: none;
+            padding: 1rem;
+            border: 1px solid #f1f1f1;
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Global Career Pathway Calculator</h1>
+            <p class="tagline">Tailored guidance for Indian professionals seeking opportunities worldwide</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="calculator-section">
+            <h2>Enter Your Details</h2>
+            <p>Fill in the information below to get personalized career pathways tailored to your background and preferences.</p>
+            
+            <form id="pathway-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="education-level">Highest Education Level</label>
+                        <select id="education-level" required>
+                            <option value="">Select your education level</option>
+                            <option value="high-school">High School (12th)</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">Ph.D or Doctorate</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="field-of-study">Field of Study</label>
+                        <select id="field-of-study" required>
+                            <option value="">Select your field</option>
+                            <option value="computer-science">Computer Science & IT</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="business">Business & Management</option>
+                            <option value="medicine">Medicine & Healthcare</option>
+                            <option value="science">Science & Research</option>
+                            <option value="arts">Arts & Humanities</option>
+                            <option value="education">Education</option>
+                            <option value="law">Law</option>
+                            <option value="finance">Finance & Accounting</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialization">Specialization/Stream</label>
+                    <select id="specialization" required>
+                        <option value="">Select your specialization</option>
+                        <!-- Options will be dynamically populated based on field of study -->
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="percentage">Academic Performance (%)</label>
+                        <input type="number" id="percentage" placeholder="Your percentage/CGPA (converted to %)" min="0" max="100" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Work Experience (Years)</label>
+                        <input type="number" id="experience" placeholder="Years of relevant experience" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="skills">Key Skills (comma separated)</label>
+                        <input type="text" id="skills" placeholder="E.g., Python, Machine Learning, Data Analysis">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="preferred-domain">Preferred Career Domain</label>
+                        <select id="preferred-domain" required>
+                            <option value="">Select preferred domain</option>
+                            <!-- Options will be dynamically populated based on field of study -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="certifications">Certifications (if any)</label>
+                        <input type="text" id="certifications" placeholder="E.g., AWS Certified, PMP, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="language-proficiency">English Proficiency</label>
+                        <select id="language-proficiency" required>
+                            <option value="">Select your level</option>
+                            <option value="basic">Basic</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="native">Native/Bilingual</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preferred-locations">Preferred Locations</label>
+                        <select id="preferred-locations" multiple>
+                            <option value="usa">United States</option>
+                            <option value="canada">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="australia">Australia</option>
+                            <option value="germany">Germany</option>
+                            <option value="singapore">Singapore</option>
+                            <option value="uae">UAE</option>
+                            <option value="japan">Japan</option>
+                            <option value="nordic">Nordic Countries</option>
+                            <option value="india">India</option>
+                            <option value="anywhere">Open to Anywhere</option>
+                        </select>
+                        <small>Hold Ctrl/Cmd to select multiple</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relocation-timeframe">Planned Relocation Timeframe</label>
+                        <select id="relocation-timeframe" required>
+                            <option value="">Select timeframe</option>
+                            <option value="immediate">Immediate (0-3 months)</option>
+                            <option value="short">Short-term (3-6 months)</option>
+                            <option value="medium">Medium-term (6-12 months)</option>
+                            <option value="long">Long-term (1-2 years)</option>
+                            <option value="planning">Just Planning</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Career Priorities (Select top 3)</label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="salary"> 
+                            <span style="margin-left: 5px;">High Salary</span>
+                        </label>
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="work-life"> 
+                            <span style="margin-left: 5px;">Work-Life Balance</span>
+                        </label>
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="growth"> 
+                            <span style="margin-left: 5px;">Career Growth</span>
+                        </label>
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="stability"> 
+                            <span style="margin-left: 5px;">Job Stability</span>
+                        </label>
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="learning"> 
+                            <span style="margin-left: 5px;">Continuous Learning</span>
+                        </label>
+                        <label style="display: inline-flex; align-items: center;">
+                            <input type="checkbox" name="priority" value="impact"> 
+                            <span style="margin-left: 5px;">Social Impact</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Calculate My Career Pathways</button>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading-section">
+            <div class="spinner"></div>
+            <p>Analyzing your profile and calculating optimal career pathways...</p>
+        </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="summary-box">
+                <h2>Your Career Profile Summary</h2>
+                <div id="profile-summary"></div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="profile-strength"></div>
+                </div>
+                <p id="profile-strength-text"></p>
+            </div>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="recommended-pathways">Recommended Pathways</button>
+                    <button class="tab-button" data-tab="location-opportunities">Location-Based Opportunities</button>
+                    <button class="tab-button" data-tab="skill-development">Skill Development Plan</button>
+                    <button class="tab-button" data-tab="visa-immigration">Visa & Immigration</button>
+                    <button class="tab-button" data-tab="networking">Networking Strategies</button>
+                </div>
+                
+                <div class="tab-content active" id="recommended-pathways">
+                    <h3>Your Top Career Pathways</h3>
+                    <p>Based on your profile, these career paths align best with your qualifications and preferences:</p>
+                    
+                    <div class="pathway-grid" id="pathways-container">
+                        <!-- Pathways will be dynamically generated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="location-opportunities">
+                    <h3>Location-Based Opportunities</h3>
+                    <p>Explore opportunities in different countries based on your preferred locations:</p>
+                    
+                    <div id="locations-container">
+                        <!-- Location cards will be dynamically generated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="skill-development">
+                    <h3>Skill Development Plan</h3>
+                    <p>To maximize your global opportunities, focus on developing these skills:</p>
+                    
+                    <div id="skills-container">
+                        <!-- Skill development content will be dynamically generated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="visa-immigration">
+                    <h3>Visa & Immigration Guidance</h3>
+                    <p>Important visa and immigration information for your preferred destinations:</p>
+                    
+                    <div id="visa-container">
+                        <!-- Visa information will be dynamically generated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="networking">
+                    <h3>Professional Networking Strategies</h3>
+                    <p>Build your professional network to enhance your global career opportunities:</p>
+                    
+                    <div id="networking-container">
+                        <!-- Networking strategies will be dynamically generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Specialization options based on field of study
+        const specializationOptions = {
+            'computer-science': [
+                'Software Engineering', 'Data Science', 'Artificial Intelligence',
+                'Cybersecurity', 'Cloud Computing', 'Web Development',
+                'Mobile App Development', 'Database Administration', 'DevOps',
+                'Network Engineering', 'UI/UX Design'
+            ],
+            'engineering': [
+                'Mechanical Engineering', 'Electrical Engineering', 'Civil Engineering',
+                'Chemical Engineering', 'Aerospace Engineering', 'Petroleum Engineering',
+                'Biomedical Engineering', 'Industrial Engineering', 'Materials Science',
+                'Robotics & Automation'
+            ],
+            'business': [
+                'Marketing', 'Finance', 'Human Resources', 'Operations Management',
+                'International Business', 'Supply Chain Management', 'Entrepreneurship',
+                'Project Management', 'Business Analytics', 'E-commerce'
+            ],
+            'medicine': [
+                'Medicine (MBBS/MD)', 'Dentistry', 'Pharmacy', 'Nursing',
+                'Physiotherapy', 'Public Health', 'Healthcare Management',
+                'Biotechnology', 'Medical Research', 'Allied Health Sciences'
+            ],
+            'science': [
+                'Physics', 'Chemistry', 'Biology', 'Mathematics', 'Environmental Science',
+                'Geology', 'Astronomy', 'Microbiology', 'Biochemistry', 'Statistics'
+            ],
+            'arts': [
+                'Literature', 'Fine Arts', 'Performing Arts', 'Philosophy', 'History',
+                'Linguistics', 'Journalism', 'Media Studies', 'Design', 'Music'
+            ],
+            'education': [
+                'Early Childhood Education', 'Elementary Education', 'Secondary Education',
+                'Special Education', 'Educational Leadership', 'Curriculum Development',
+                'Educational Psychology', 'TESOL/TEFL', 'Educational Technology', 'Higher Education'
+            ],
+            'law': [
+                'Corporate Law', 'Criminal Law', 'Civil Law', 'International Law',
+                'Intellectual Property Law', 'Tax Law', 'Constitutional Law',
+                'Environmental Law', 'Human Rights Law', 'Family Law'
+            ],
+            'finance': [
+                'Accounting', 'Investment Banking', 'Financial Analysis', 'Taxation',
+                'Risk Management', 'Wealth Management', 'Corporate Finance',
+                'Insurance', 'Fintech', 'Auditing'
+            ]
+        };
+
+        // Career domain options based on field of study
+        const domainOptions = {
+            'computer-science': [
+                'Software Development', 'Data & Analytics', 'Information Security',
+                'IT Infrastructure', 'Product Management', 'Technical Consulting',
+                'AI Research', 'Technology Entrepreneurship'
+            ],
+            'engineering': [
+                'Design & Development', 'Manufacturing', 'R&D', 'Quality Assurance',
+                'Project Management', 'Technical Sales', 'Consulting', 'Field Engineering'
+            ],
+            'business': [
+                'Corporate Strategy', 'Sales & Marketing', 'Financial Services',
+                'HR & Talent Management', 'Operations', 'Consulting', 'Entrepreneurship'
+            ],
+            'medicine': [
+                'Clinical Practice', 'Research', 'Public Health', 'Healthcare Administration',
+                'Medical Education', 'Pharmaceutical Industry', 'Health Technology'
+            ],
+            'science': [
+                'Research & Development', 'Academia', 'Industry Applications',
+                'Environmental Consulting', 'Data
