@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+#<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -734,5 +734,372 @@
                                 </div>
                                 <div class="info-row">
                                     <div class="info-label">Salary Range:</div>
-                                    
+                                    <div class="info-value">${country.salary}</div>
+                                </div>
+                                
+                                <div class="info-row">
+                                    <div class="info-label">Competition:</div>
+                                    <div class="info-value">${country.competition}</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Fit Score:</div>
+                                    <div class="info-value">
+                                        ${'★'.repeat(fitScore)}${'☆'.repeat(5-fitScore)}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button onclick="showCountryDetails('${country.name}', '${field}', '${domain}')" class="btn-details" style="background-color: var(--accent); padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">
+                                    View Details
+                                </button>
+                            </div>
+                        `;
+                        
+                        opportunitiesGrid.appendChild(card);
+                    });
+                }
+            });
+            
+            // If no regions were selected or found
+            if (opportunitiesGrid.children.length === 0) {
+                opportunitiesGrid.innerHTML = '<div class="alert">No specific regions selected. Please select preferred regions to see detailed opportunities.</div>';
+            }
+        }
+        
+        // Generate education pathways
+        function generateEducationPathways(field, domain, currentEducation) {
+            const educationGrid = document.getElementById('educationGrid');
+            educationGrid.innerHTML = '';
+            
+            const fieldInfo = careerData.fieldInfo[field];
+            
+            // Generate recommended education paths
+            fieldInfo.education.forEach(edu => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Determine if this education is a logical next step
+                let recommendation = "";
+                if (currentEducation === 'highschool' && edu.includes("Bachelor")) {
+                    recommendation = "Strongly recommended next step";
+                } else if (currentEducation === 'bachelor' && edu.includes("Master")) {
+                    recommendation = "Recommended for career advancement";
+                } else if (currentEducation === 'master' && edu.includes("PhD")) {
+                    recommendation = "Consider for research careers";
+                } else if (edu.includes("certif")) {
+                    recommendation = "Valuable addition to any education level";
+                } else {
+                    recommendation = "Optional pathway for specialization";
+                }
+                
+                card.innerHTML = `
+                    <div class="card-header">${edu}</div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <div class="info-label">Recommendation:</div>
+                            <div class="info-value">${recommendation}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Timeline:</div>
+                            <div class="info-value">${getEducationTimeline(edu)}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Investment:</div>
+                            <div class="info-value">${getEducationCost(edu)}</div>
+                        </div>
+                    </div>
+                `;
+                
+                educationGrid.appendChild(card);
+            });
+            
+            // Add domain-specific certifications if available
+            if (careerData.domainSpecifics[domain] && careerData.domainSpecifics[domain].certifications) {
+                const certifications = careerData.domainSpecifics[domain].certifications;
+                
+                certifications.forEach(cert => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    card.innerHTML = `
+                        <div class="card-header">${cert}</div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <div class="info-label">Type:</div>
+                                <div class="info-value">Professional Certification</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Recommendation:</div>
+                                <div class="info-value">Highly valuable for ${domain} specialists</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">Recognition:</div>
+                                <div class="info-value">Globally recognized</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    educationGrid.appendChild(card);
+                });
+            }
+        }
+        
+        // Helper function to get education timeline
+        function getEducationTimeline(education) {
+            if (education.includes("Bachelor")) return "3-4 years";
+            if (education.includes("Master")) return "1-2 years";
+            if (education.includes("PhD")) return "3-5 years";
+            if (education.includes("certif")) return "3-6 months";
+            if (education.includes("Post-graduate")) return "6-12 months";
+            return "Variable";
+        }
+        
+        // Helper function to get education cost
+        function getEducationCost(education) {
+            if (education.includes("Bachelor")) return "$$$";
+            if (education.includes("Master")) return "$$$";
+            if (education.includes("PhD")) return "$$-$$$$ (often funded)";
+            if (education.includes("certif")) return "$-$$";
+            if (education.includes("Post-graduate")) return "$$-$$$";
+            return "Variable";
+        }
+        
+        // Generate skills section
+        function generateSkillsSection(field, domain) {
+            const skillsSection = document.getElementById('skillsSection');
+            
+            let content = '<div class="accordion-item">';
+            content += `<div class="accordion-header" onclick="toggleAccordion(this)">Core Field Skills <span>+</span></div>`;
+            content += '<div class="accordion-content">';
+            content += '<ul>';
+            
+            // Add field-specific skills
+            careerData.fieldInfo[field].skills.forEach(skill => {
+                content += `<li>${skill}</li>`;
+            });
+            
+            content += '</ul></div></div>';
+            
+            // Add domain-specific skills if available
+            if (careerData.domainSpecifics[domain] && careerData.domainSpecifics[domain].skills) {
+                content += '<div class="accordion-item">';
+                content += `<div class="accordion-header" onclick="toggleAccordion(this)">Specialized ${domain} Skills <span>+</span></div>`;
+                content += '<div class="accordion-content">';
+                content += '<ul>';
+                
+                careerData.domainSpecifics[domain].skills.forEach(skill => {
+                    content += `<li>${skill}</li>`;
+                });
+                
+                content += '</ul></div></div>';
+            }
+            
+            // Add transferable skills section
+            content += '<div class="accordion-item">';
+            content += `<div class="accordion-header" onclick="toggleAccordion(this)">Transferable Global Skills <span>+</span></div>`;
+            content += '<div class="accordion-content">';
+            content += '<ul>';
+            
+            const transferableSkills = [
+                "Cross-cultural communication",
+                "Adaptability and resilience",
+                "Global business etiquette",
+                "Remote collaboration",
+                "Time management across time zones",
+                "Language proficiency (English plus local language if applicable)",
+                "Negotiation and conflict resolution",
+                "Presentation skills",
+                "Documentation and reporting"
+            ];
+            
+            transferableSkills.forEach(skill => {
+                content += `<li>${skill}</li>`;
+            });
+            
+            content += '</ul></div></div>';
+            
+            // Add skill development resources
+            content += '<div class="accordion-item">';
+            content += `<div class="accordion-header" onclick="toggleAccordion(this)">Skill Development Resources <span>+</span></div>`;
+            content += '<div class="accordion-content">';
+            
+            content += `
+                <table>
+                    <tr>
+                        <th>Resource Type</th>
+                        <th>Examples</th>
+                        <th>Investment</th>
+                    </tr>
+                    <tr>
+                        <td>Online Courses</td>
+                        <td>Coursera, edX, Udemy, LinkedIn Learning</td>
+                        <td>$-$$</td>
+                    </tr>
+                    <tr>
+                        <td>Professional Certifications</td>
+                        <td>Industry-specific certifications</td>
+                        <td>$$-$$$</td>
+                    </tr>
+                    <tr>
+                        <td>Workshops & Bootcamps</td>
+                        <td>Intensive short-term training programs</td>
+                        <td>$$-$$$</td>
+                    </tr>
+                    <tr>
+                        <td>Industry Conferences</td>
+                        <td>Networking and learning events</td>
+                        <td>$$-$$$</td>
+                    </tr>
+                    <tr>
+                        <td>Open Source Contributions</td>
+                        <td>GitHub projects, community initiatives</td>
+                        <td>Free (time investment)</td>
+                    </tr>
+                </table>
+            `;
+            
+            content += '</div></div>';
+            
+            skillsSection.innerHTML = content;
+        }
+        
+        // Generate immigration insights
+        function generateImmigrationInsights(regions) {
+            const immigrationSection = document.getElementById('immigrationSection');
+            
+            let content = '';
+            
+            regions.forEach(region => {
+                if (careerData.countries[region]) {
+                    const regionData = careerData.countries[region];
+                    
+                    content += '<div class="accordion-item">';
+                    content += `<div class="accordion-header" onclick="toggleAccordion(this)">${regionData.name} <span>+</span></div>`;
+                    content += '<div class="accordion-content">';
+                    
+                    content += '<table>';
+                    content += `
+                        <tr>
+                            <th>Country</th>
+                            <th>Visa Types</th>
+                            <th>Key Requirements</th>
+                            <th>Processing Time</th>
+                        </tr>
+                    `;
+                    
+                    regionData.countries.forEach(country => {
+                        content += `
+                            <tr>
+                                <td>${country.name}</td>
+                                <td>${country.visa}</td>
+                                <td>${getVisaRequirements(country.name)}</td>
+                                <td>${getProcessingTime(country.name)}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    content += '</table>';
+                    
+                    // Add general immigration tips
+                    content += '<div class="info-row" style="margin-top: 15px;">';
+                    content += '<div class="info-label">Key Tips:</div>';
+                    content += `<div class="info-value">${getImmigrationTips(regionData.name)}</div>`;
+                    content += '</div>';
+                    
+                    content += '</div></div>';
+                }
+            });
+            
+            // If no regions were selected
+            if (content === '') {
+                content = '<div class="alert">Please select preferred regions to view immigration insights.</div>';
+            }
+            
+            immigrationSection.innerHTML = content;
+        }
+        
+        // Helper function to toggle accordion
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const plusMinus = element.querySelector('span');
+            
+            // Toggle visibility
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                plusMinus.textContent = '+';
+            } else {
+                content.style.display = 'block';
+                plusMinus.textContent = '-';
+            }
+        }
+        
+        // Helper function to get visa requirements
+        function getVisaRequirements(country) {
+            const requirements = {
+                "United States": "Job offer, relevant degree, employer sponsorship",
+                "Canada": "Points-based system, language proficiency, education assessment",
+                "United Kingdom": "Job offer, skill level, English proficiency",
+                "Germany": "Job offer, recognized qualification, German/English skills",
+                "Australia": "Points-based system, skills assessment, English test",
+                "Singapore": "Job offer, salary threshold, qualifications",
+                "Japan": "Job offer, relevant qualifications, work experience",
+                "UAE": "Employer sponsorship, educational credentials, security clearance",
+                "Netherlands": "Job offer, salary threshold, employer sponsorship",
+                "Sweden": "Job offer, work permit application, union approval",
+                "France": "Job offer, qualifications, French language (varies)",
+                "New Zealand": "Points-based system, job offer, health requirements",
+                "South Korea": "Job offer, relevant education, employer sponsorship",
+                "Israel": "Job offer, expertise validation, employer sponsorship",
+                "South Africa": "Critical skills proof, qualification verification, registration with professional body"
+            };
+            
+            return requirements[country] || "Varies by visa type";
+        }
+        
+        // Helper function to get visa processing time
+        function getProcessingTime(country) {
+            const processingTimes = {
+                "United States": "3-6+ months",
+                "Canada": "6-12+ months",
+                "United Kingdom": "3-8 weeks",
+                "Germany": "1-3 months",
+                "Australia": "4-10+ months",
+                "Singapore": "3-5 weeks",
+                "Japan": "1-3 months",
+                "UAE": "2-4 weeks",
+                "Netherlands": "2-5 weeks",
+                "Sweden": "2-4 months",
+                "France": "2-3 months",
+                "New Zealand": "6-9 months",
+                "South Korea": "4-8 weeks",
+                "Israel": "4-12 weeks",
+                "South Africa": "4-8 weeks"
+            };
+            
+            return processingTimes[country] || "Varies";
+        }
+        
+        // Helper function to get immigration tips
+        function getImmigrationTips(region) {
+            const tips = {
+                "North America": "Start application processes early, ensure all documentation is properly authenticated, consider hiring an immigration attorney for complex cases.",
+                "Europe": "Learn basics of local language, research healthcare and social security requirements, check for EU Blue Card eligibility if applicable.",
+                "Australia & New Zealand": "Focus on points-based system requirements, obtain skills assessment from relevant authority, apply for state nomination if eligible.",
+                "Asia": "Research local business culture, check for regional specific visa options, prepare for potentially strict documentation requirements.",
+                "Other Regions": "Research country-specific requirements thoroughly, connect with expat communities, consider political stability and security factors."
+            };
+            
+            return tips[region] || "Research specific requirements for your target country.";
+        }
+        
+        // Function to show detailed country information (modal or expanded view)
+        function showCountryDetails(country, field, domain) {
+            alert(`Detailed information for ${country} opportunities in ${domain} would appear in a modal window. This would include salary ranges, job market trends, cultural insights, and networking resources.`);
+            
+            // In a complete implementation, this would open a modal with detailed information
+            // about opportunities in the selected country for the specific field and domain
+        }
+    </script>
+</body>
+</html>
                                     
