@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Cost Calculator for Indian Students</title>
+    <style>
+        :root {
+            --primary-color: #006664;
+            --secondary-color: #008080;
+            --accent-color: #00a79d;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        
+        .logo span {
+            color: var(--white);
+            font-size: 32px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .tagline {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .calculator-section {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        #results {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .results-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .results-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #eee;
+        }
+        
+        .cost-category {
+            margin-bottom: 25px;
+        }
+        
+        .cost-category h3 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+        
+        .cost-item:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        
+        .total-section {
+            font-weight: bold;
+            font-size: 18px;
+            border-top: 2px solid var(--accent-color);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        
+        .conversion-rate {
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        .info-box {
+            background-color: #e8f4f4;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            background-color: #e0e0e0;
+            margin-right: 5px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            background-color: var(--white);
+            font-weight: 600;
+            border-top: 3px solid var(--accent-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span>₹</span>
+            </div>
+            <h1>Student Cost Calculator</h1>
+            <p class="tagline">Comprehensive cost estimation for Indian students planning to study abroad</p>
+        </header>
+        
+        <div class="calculator-section">
+            <form id="calculatorForm">
+                <div class="form-group">
+                    <label for="region">Select Region:</label>
+                    <select id="region" onchange="updateCountryOptions()">
+                        <option value="">-- Select Region --</option>
+                        <option value="europe">Europe</option>
+                        <option value="northAmerica">North America</option>
+                        <option value="southAmerica">South America</option>
+                        <option value="oceania">Australia & New Zealand</option>
+                        <option value="asia">Southeast Asia</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Select Country:</label>
+                    <select id="country" onchange="updateCityOptions()">
+                        <option value="">-- First Select a Region --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">Select City:</label>
+                    <select id="city">
+                        <option value="">-- First Select a Country --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="program">Program Level:</label>
+                    <select id="program">
+                        <option value="bachelors">Bachelor's Degree</option>
+                        <option value="masters">Master's Degree</option>
+                        <option value="phd">Ph.D.</option>
+                        <option value="diploma">Diploma/Certificate</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="field">Field of Study:</label>
+                    <select id="field">
+                        <option value="engineering">Engineering & Technology</option>
+                        <option value="business">Business & Management</option>
+                        <option value="medicine">Medicine & Healthcare</option>
+                        <option value="arts">Arts & Humanities</option>
+                        <option value="science">Natural Sciences</option>
+                        <option value="social">Social Sciences</option>
+                        <option value="law">Law</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Program Duration (years):</label>
+                    <input type="number" id="duration" min="0.5" max="6" step="0.5" value="2">
+                </div>
+                
+                <div class="form-group">
+                    <label for="accommodation">Accommodation Preference:</label>
+                    <select id="accommodation">
+                        <option value="university">University Dormitory</option>
+                        <option value="shared">Shared Apartment</option>
+                        <option value="private">Private Apartment</option>
+                        <option value="homestay">Homestay</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lifestyle">Lifestyle Preference:</label>
+                    <select id="lifestyle">
+                        <option value="budget">Budget Conscious</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn" onclick="calculateCosts()">Calculate Costs</button>
+            </form>
+        </div>
+        
+        <div id="results">
+            <div class="results-header">
+                Detailed Cost Estimation
+            </div>
+            <div class="results-content">
+                <div class="tabs">
+                    <div class="tab active" onclick="changeTab('summary')">Summary</div>
+                    <div class="tab" onclick="changeTab('tuition')">Tuition</div>
+                    <div class="tab" onclick="changeTab('living')">Living Costs</div>
+                    <div class="tab" onclick="changeTab('pre-departure')">Pre-Departure</div>
+                    <div class="tab" onclick="changeTab('misc')">Miscellaneous</div>
+                </div>
+                
+                <div id="summary" class="tab-content active">
+                    <div class="cost-category">
+                        <h3>Cost Overview</h3>
+                        <div id="summaryContent"></div>
+                    </div>
+                </div>
+                
+                <div id="tuition" class="tab-content">
+                    <div class="cost-category">
+                        <h3>Tuition & Academic Fees</h3>
+                        <div id="tuitionContent"></div>
+                    </div>
+                </div>
+                
+                <div id="living" class="tab-content">
+                    <div class="cost-category">
+                        <h3>Living Expenses</h3>
+                        <div id="livingContent"></div>
+                    </div>
+                </div>
+                
+                <div id="pre-departure" class="tab-content">
+                    <div class="cost-category">
+                        <h3>Pre-Departure Expenses</h3>
+                        <div id="preDepartureContent"></div>
+                    </div>
+                </div>
+                
+                <div id="misc" class="tab-content">
+                    <div class="cost-category">
+                        <h3>Miscellaneous Expenses</h3>
+                        <div id="miscContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Database of countries, cities, and their associated costs
+        const costDatabase = {
+            europe: {
+                uk: {
+                    name: "United Kingdom",
+                    cities: {
+                        london: {
+                            name: "London",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 22000,
+                                    business: 20000,
+                                    medicine: 35000,
+                                    arts: 17000,
+                                    science: 21000,
+                                    social: 18000,
+                                    law: 20000,
+                                    other: 19000
+                                },
+                                masters: {
+                                    engineering: 25000,
+                                    business: 28000,
+                                    medicine: 40000,
+                                    arts: 19000,
+                                    science: 24000,
+                                    social: 21000,
+                                    law: 25000,
+                                    other: 22000
+                                },
+                                phd: {
+                                    engineering: 22000,
+                                    business: 22000,
+                                    medicine: 30000,
+                                    arts: 18000,
+                                    science: 21000,
+                                    social: 19000,
+                                    law: 21000,
+                                    other: 20000
+                                },
+                                diploma: {
+                                    engineering: 15000,
+                                    business: 14000,
+                                    medicine: 18000,
+                                    arts: 12000,
+                                    science: 14000,
+                                    social: 13000,
+                                    law: 14000,
+                                    other: 13000
+                                }
+                            },
+                            accommodation: {
+                                university: 800,
+                                shared: 750,
+                                private: 1500,
+                                homestay: 950
+                            },
+                            livingCosts: {
+                                budget: 800,
+                                moderate: 1200,
+                                premium: 2000
+                            },
+                            currency: "GBP"
+                        },
+                        manchester: {
+                            name: "Manchester",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 19000,
+                                    business: 18000,
+                                    medicine: 30000,
+                                    arts: 15000,
+                                    science: 18000,
+                                    social: 16000,
+                                    law: 17000,
+                                    other: 16000
+                                },
+                                masters: {
+                                    engineering: 21000,
+                                    business: 23000,
+                                    medicine: 35000,
+                                    arts: 17000,
+                                    science: 20000,
+                                    social: 18000,
+                                    law: 21000,
+                                    other: 19000
+                                },
+                                phd: {
+                                    engineering: 19000,
+                                    business: 19000,
+                                    medicine: 25000,
+                                    arts: 16000,
+                                    science: 18000,
+                                    social: 17000,
+                                    law: 19000,
+                                    other: 18000
+                                },
+                                diploma: {
+                                    engineering: 13000,
+                                    business: 12000,
+                                    medicine: 15000,
+                                    arts: 10000,
+                                    science: 12000,
+                                    social: 11000,
+                                    law: 12000,
+                                    other: 11000
+                                }
+                            },
+                            accommodation: {
+                                university: 600,
+                                shared: 550,
+                                private: 900,
+                                homestay: 700
+                            },
+                            livingCosts: {
+                                budget: 600,
+                                moderate: 900,
+                                premium: 1500
+                            },
+                            currency: "GBP"
+                        }
+                    }
+                },
+                germany: {
+                    name: "Germany",
+                    cities: {
+                        berlin: {
+                            name: "Berlin",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 500,
+                                    business: 500,
+                                    medicine: 1500,
+                                    arts: 500,
+                                    science: 500,
+                                    social: 500,
+                                    law: 500,
+                                    other: 500
+                                },
+                                masters: {
+                                    engineering: 1500,
+                                    business: 2500,
+                                    medicine: 3000,
+                                    arts: 1000,
+                                    science: 1500,
+                                    social: 1000,
+                                    law: 1500,
+                                    other: 1500
+                                },
+                                phd: {
+                                    engineering: 500,
+                                    business: 500,
+                                    medicine: 1000,
+                                    arts: 500,
+                                    science: 500,
+                                    social: 500,
+                                    law: 500,
+                                    other: 500
+                                },
+                                diploma: {
+                                    engineering: 1000,
+                                    business: 1000,
+                                    medicine: 1500,
+                                    arts: 800,
+                                    science: 1000,
+                                    social: 800,
+                                    law: 1000,
+                                    other: 1000
+                                }
+                            },
+                            accommodation: {
+                                university: 350,
+                                shared: 450,
+                                private: 800,
+                                homestay: 500
+                            },
+                            livingCosts: {
+                                budget: 600,
+                                moderate: 900,
+                                premium: 1400
+                            },
+                            currency: "EUR"
+                        },
+                        munich: {
+                            name: "Munich",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 500,
+                                    business: 500,
+                                    medicine: 1500,
+                                    arts: 500,
+                                    science: 500,
+                                    social: 500,
+                                    law: 500,
+                                    other: 500
+                                },
+                                masters: {
+                                    engineering: 1500,
+                                    business: 3000,
+                                    medicine: 3500,
+                                    arts: 1200,
+                                    science: 1500,
+                                    social: 1200,
+                                    law: 2000,
+                                    other: 1500
+                                },
+                                phd: {
+                                    engineering: 500,
+                                    business: 500,
+                                    medicine: 1000,
+                                    arts: 500,
+                                    science: 500,
+                                    social: 500,
+                                    law: 500,
+                                    other: 500
+                                },
+                                diploma: {
+                                    engineering: 1000,
+                                    business: 1200,
+                                    medicine: 1800,
+                                    arts: 800,
+                                    science: 1000,
+                                    social: 800,
+                                    law: 1200,
+                                    other: 1000
+                                }
+                            },
+                            accommodation: {
+                                university: 400,
+                                shared: 550,
+                                private: 950,
+                                homestay: 600
+                            },
+                            livingCosts: {
+                                budget: 700,
+                                moderate: 1000,
+                                premium: 1600
+                            },
+                            currency: "EUR"
+                        }
+                    }
+                },
+                france: {
+                    name: "France",
+                    cities: {
+                        paris: {
+                            name: "Paris",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 3000,
+                                    business: 10000,
+                                    medicine: 5000,
+                                    arts: 2500,
+                                    science: 3000,
+                                    social: 2500,
+                                    law: 3000,
+                                    other: 3000
+                                },
+                                masters: {
+                                    engineering: 4000,
+                                    business: 15000,
+                                    medicine: 6000,
+                                    arts: 3000,
+                                    science: 4000,
+                                    social: 3500,
+                                    law: 4000,
+                                    other: 4000
+                                },
+                                phd: {
+                                    engineering: 400,
+                                    business: 5000,
+                                    medicine: 800,
+                                    arts: 400,
+                                    science: 400,
+                                    social: 400,
+                                    law: 400,
+                                    other: 400
+                                },
+                                diploma: {
+                                    engineering: 2000,
+                                    business: 8000,
+                                    medicine: 3000,
+                                    arts: 1800,
+                                    science: 2000,
+                                    social: 1800,
+                                    law: 2000,
+                                    other: 2000
+                                }
+                            },
+                            accommodation: {
+                                university: 500,
+                                shared: 700,
+                                private: 1200,
+                                homestay: 800
+                            },
+                            livingCosts: {
+                                budget: 750,
+                                moderate: 1100,
+                                premium: 1800
+                            },
+                            currency: "EUR"
+                        },
+                        lyon: {
+                            name: "Lyon",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 2500,
+                                    business: 8000,
+                                    medicine: 4500,
+                                    arts: 2000,
+                                    science: 2500,
+                                    social: 2000,
+                                    law: 2500,
+                                    other: 2500
+                                },
+                                masters: {
+                                    engineering: 3500,
+                                    business: 12000,
+                                    medicine: 5500,
+                                    arts: 2500,
+                                    science: 3500,
+                                    social: 3000,
+                                    law: 3500,
+                                    other: 3500
+                                },
+                                phd: {
+                                    engineering: 400,
+                                    business: 4000,
+                                    medicine: 800,
+                                    arts: 400,
+                                    science: 400,
+                                    social: 400,
+                                    law: 400,
+                                    other: 400
+                                },
+                                diploma: {
+                                    engineering: 1800,
+                                    business: 6000,
+                                    medicine: 2500,
+                                    arts: 1500,
+                                    science: 1800,
+                                    social: 1500,
+                                    law: 1800,
+                                    other: 1800
+                                }
+                            },
+                            accommodation: {
+                                university: 400,
+                                shared: 550,
+                                private: 900,
+                                homestay: 650
+                            },
+                            livingCosts: {
+                                budget: 650,
+                                moderate: 900,
+                                premium: 1500
+                            },
+                            currency: "EUR"
+                        }
+                    }
+                }
+            },
+            northAmerica: {
+                usa: {
+                    name: "United States",
+                    cities: {
+                        newyork: {
+                            name: "New York",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 45000,
+                                    business: 50000,
+                                    medicine: 60000,
+                                    arts: 40000,
+                                    science: 45000,
+                                    social: 42000,
+                                    law: 50000,
+                                    other: 45000
+                                },
+                                masters: {
+                                    engineering: 50000,
+                                    business: 70000,
+                                    medicine: 65000,
+                                    arts: 45000,
+                                    science: 50000,
+                                    social: 47000,
+                                    law: 60000,
+                                    other: 50000
+                                },
+                                phd: {
+                                    engineering: 40000,
+                                    business: 45000,
+                                    medicine: 50000,
+                                    arts: 35000,
+                                    science: 40000,
+                                    social: 38000,
+                                    law: 45000,
+                                    other: 40000
+                                },
+                                diploma: {
+                                    engineering: 25000,
+                                    business: 30000,
+                                    medicine: 35000,
+                                    arts: 22000,
+                                    science: 25000,
+                                    social: 23000,
+                                    law: 28000,
+                                    other: 25000
+                                }
+                            },
+                            accommodation: {
+                                university: 1500,
+                                shared: 1200,
+                                private: 2500,
+                                homestay: 1400
+                            },
+                            livingCosts: {
+                                budget: 1200,
+                                moderate: 1800,
+                                premium: 3000
+                            },
+                            currency: "USD"
+                        },
+                        boston: {
+                            name: "Boston",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 48000,
+                                    business: 52000,
+                                    medicine: 62000,
+                                    arts: 42000,
+                                    science: 48000,
+                                    social: 44000,
+                                    law: 52000,
+                                    other: 48000
+                                },
+                                masters: {
+                                    engineering: 52000,
+                                    business: 72000,
+                                    medicine: 68000,
+                                    arts: 46000,
+                                    science: 52000,
+                                    social: 48000,
+                                    law: 62000,
+                                    other: 52000
+                                },
+                                phd: {
+                                    engineering: 42000,
+                                    business: 46000,
+                                    medicine: 52000,
+                                    arts: 36000,
+                                    science: 42000,
+                                    social: 40000,
+                                    law: 46000,
+                                    other: 42000
+                                },
+                                diploma: {
+                                    engineering: 28000,
+                                    business: 32000,
+                                    medicine: 38000,
+                                    arts: 24000,
+                                    science: 28000,
+                                    social: 26000,
+                                    law: 30000,
+                                    other: 28000
+                                }
+                            },
+                            accommodation: {
+                                university: 1400,
+                                shared: 1100,
+                                private: 2200,
+                                homestay: 1300
+                            },
+                            livingCosts: {
+                                budget: 1100,
+                                moderate: 1600,
+                                premium: 2700
+                            },
+                            currency: "USD"
+                        }
+                    }
+                },
+                canada: {
+                    name: "Canada",
+                    cities: {
+                        toronto: {
+                            name: "Toronto",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 35000,
+                                    business: 38000,
+                                    medicine: 45000,
+                                    arts: 30000,
+                                    science: 35000,
+                                    social: 32000,
+                                    law: 38000,
+                                    other: 34000
+                                },
+                                masters: {
+                                    engineering: 38000,
+                                    business: 45000,
+                                    medicine: 48000,
+                                    arts: 32000,
+                                    science: 38000,
+                                    social: 35000,
+                                    law: 42000,
+                                    other: 38000
+                                },
+                                phd: {
+                                    engineering: 25000,
+                                    business: 28000,
+                                    medicine: 30000,
+                                    arts: 22000,
+                                    science: 25000,
+                                    social: 24000,
+                                    law: 28000,
+                                    other: 25000
+                                },
+                                diploma: {
+                                    engineering: 20000,
+                                    business: 22000,
+                                    medicine: 25000,
+                                    arts: 18000,
+                                    science: 20000,
+                                    social: 19000,
+                                    law: 22000,
+                                    other: 20000
+                                }
+                            },
+                            accommodation: {
+                                university: 1000,
+                                shared: 900,
+                                private: 1800,
+                                homestay: 1100
+                            },
+                            livingCosts: {
+                                budget: 900,
+                                moderate: 1300,
+                                premium: 2200
+                            },
+                            currency: "CAD"
+                        },
+                        vancouver: {
+                            name: "Vancouver",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 34000,
+                                    business: 37000,
+                                    medicine: 44000,
+                                    arts: 29000,
+                                    science: 34000,
+                                    social: 31000,
+                                    law: 37000,
+                                    other: 33000
+                                },
+                                masters: {
+                                    engineering: 37000,
+                                    business: 44000,
+                                    medicine: 47000,
+                                    arts: 31000,
+                                    science: 37000,
+                                    social: 34000,
+                                    law: 41000,
+                                    other: 37000
+                                },
+                                phd: {
+                                    engineering: 24000,
+                                    business: 27000,
+                                    medicine: 29000,
+                                    arts: 21000,
+                                    science: 24000,
+                                    social: 23000,
+                                    law: 27000,
+                                    other: 24000
+                                },
+                                diploma: {
+                                    engineering: 19000,
+                                    business: 21000,
+                                    medicine: 24000,
+                                    arts: 17000,
+                                    science: 19000,
+                                    social: 18000,
+                                    law: 21000,
+                                    other: 19000
+                                }
+                            },
+                            accommodation: {
+                                university: 1100,
+                                shared: 950,
+                                private: 1900,
+                                homestay: 1200
+                            },
+                            livingCosts: {
+                                budget: 950,
+                                moderate: 1400,
+                                premium: 2300
+                            },
+                            currency: "CAD"
+                        }
+                    }
+                }
+            },
+            southAmerica: {
+                brazil: {
+                    name: "Brazil",
+                    cities: {
+                        saopaulo: {
+                            name: "São Paulo",
+                            tuition: {
+                                bachelors: {
+                                    engineering: 5000,
+                                    business: 6000,
+                                    medicine: 12000,
+                                    arts: 4000,
+                                    science: 5000,
+                                    social: 4500,
+                                    law: 6000,
+                                    other: 5000
+                                },
+                                masters: {
+                                    engineering:
