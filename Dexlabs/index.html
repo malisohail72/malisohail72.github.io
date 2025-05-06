@@ -6,25 +6,33 @@
     <meta name="description" content="[Your Agency Name] - Expert web development, digital marketing, SEO, and custom software solutions to elevate your business.">
     <meta name="keywords" content="web development, digital marketing, SEO services, software development, app development, UI/UX design, [Your City/Region]">
     <title>[Your Agency Name] - Innovative Digital Solutions</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <style>
-        /* Reset and Base Styles */
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* --- GLOBAL STYLES & CSS VARIABLES --- */
         :root {
-            --primary-color: #0A2540; /* Deep Blue - Professional */
-            --secondary-color: #007BFF; /* Bright Blue - Action/Highlight */
-            --accent-color: #4CAF50; /* Green - Success/Growth */
-            --text-color: #333;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #6c757d;
-            --font-primary: 'Roboto', sans-serif; /* Clean, modern sans-serif */
-            --font-secondary: 'Montserrat', sans-serif; /* For headings, slightly more character */
-            --container-width: 1140px;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --transition-speed: 0.3s ease;
+            --primary-color: #1A2E47; /* Dark Desaturated Blue */
+            --secondary-color: #00C9A7; /* Bright Teal/Mint - For CTAs and accents */
+            --accent-color: #FFC107; /* Amber/Gold - For subtle highlights */
+            --bg-white: #FFFFFF;
+            --bg-light-gray: #F8F9FA; /* Off-white for section backgrounds */
+            --bg-medium-gray: #E9ECEF; /* Slightly darker gray */
+            --text-dark: #212529; /* Near black for primary text */
+            --text-light: #495057; /* Dark gray for secondary text */
+            --text-muted: #6C757D; /* Muted gray for less emphasis */
+            --border-color: #DEE2E6; /* Light gray for borders */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --font-primary: 'Poppins', sans-serif; /* Modern, geometric sans-serif */
+            --font-secondary: 'Inter', sans-serif; /* Clean, highly legible sans-serif */
+            --container-width: 1200px;
+            --transition-speed: 0.3s ease-in-out;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
         * {
             margin: 0;
@@ -34,81 +42,78 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px; /* Base font size */
+            font-size: 16px;
         }
 
         body {
-            font-family: var(--font-primary);
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #fff;
+            font-family: var(--font-secondary);
+            line-height: 1.7;
+            color: var(--text-light);
+            background-color: var(--bg-white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Utility Classes */
+        /* --- UTILITY CLASSES --- */
         .container {
             width: 90%;
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-bg {
-            background-color: var(--light-gray);
+            background-color: var(--bg-light-gray);
         }
 
-        .text-center {
+        .text-center { text-align: center; }
+
+        .section-heading {
+            font-family: var(--font-primary);
+            font-size: 2.5rem; /* 40px */
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .section-subheading {
+            font-size: 1.125rem; /* 18px */
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+
+        .highlight { color: var(--secondary-color); }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-family: var(--font-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: var(--border-radius-md);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            border: 2px solid transparent;
             text-align: center;
         }
 
-        .primary-heading {
-            font-family: var(--font-secondary);
-            font-size: 2.8rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .secondary-heading {
-            font-family: var(--font-secondary);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .tertiary-heading {
-            font-family: var(--font-secondary);
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-            color: var(--dark-gray);
-            font-size: 1.05rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
+        .btn-primary {
             background-color: var(--secondary-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            font-weight: 500;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            border: 2px solid transparent;
+            color: var(--bg-white);
+            box-shadow: 0 4px 10px rgba(0, 201, 167, 0.3);
         }
-
-        .btn:hover {
-            background-color: #0056b3; /* Darker shade of secondary */
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            background-color: #00ab8c; /* Darker shade of secondary */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 201, 167, 0.4);
         }
 
         .btn-outline {
@@ -116,89 +121,90 @@
             color: var(--secondary-color);
             border: 2px solid var(--secondary-color);
         }
-
         .btn-outline:hover {
             background-color: var(--secondary-color);
-            color: #fff;
+            color: var(--bg-white);
+            transform: translateY(-3px);
+        }
+        .btn-outline-dark {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        .btn-outline-dark:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Header & Navigation */
+        /* --- HEADER & NAVIGATION --- */
         .main-header {
-            background-color: #fff;
-            padding: 15px 0;
+            background-color: var(--bg-white);
+            padding: 20px 0;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            transition: background-color var(--transition-speed);
+            box-shadow: var(--shadow-sm);
+            transition: background-color var(--transition-speed), padding var(--transition-speed);
         }
-
         .main-header.scrolled {
+            padding: 15px 0;
             background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-md);
         }
-
         .main-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
-            font-family: var(--font-secondary);
-            font-size: 1.8rem;
+            font-family: var(--font-primary);
+            font-size: 1.75rem; /* 28px */
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
         }
-        .logo span { color: var(--secondary-color); } /* Optional accent */
+        .logo .highlight { font-weight: 700; }
 
         .main-nav ul {
             list-style: none;
             display: flex;
+            align-items: center;
         }
-
-        .main-nav ul li {
-            margin-left: 25px;
-        }
-
+        .main-nav ul li { margin-left: 30px; }
         .main-nav ul li a {
             text-decoration: none;
-            color: var(--primary-color);
+            color: var(--text-light);
             font-weight: 500;
-            padding: 8px 0;
+            font-size: 0.95rem;
+            padding: 8px 4px;
             position: relative;
             transition: color var(--transition-speed);
         }
-
         .main-nav ul li a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: var(--secondary-color);
             transition: width var(--transition-speed);
         }
-
-        .main-nav ul li a:hover, .main-nav ul li a.active {
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
             color: var(--secondary-color);
         }
-        .main-nav ul li a:hover::after, .main-nav ul li a.active::after {
+        .main-nav ul li a.active::after,
+        .main-nav ul li a:hover::after {
             width: 100%;
         }
+        .main-nav .btn { padding: 10px 24px; margin-left: 20px; }
 
         .mobile-nav-toggle {
-            display: none; /* Shown via JS for mobile */
+            display: none;
             font-size: 1.8rem;
             color: var(--primary-color);
             background: none;
@@ -206,139 +212,149 @@
             cursor: pointer;
         }
 
-
-        /* Hero Section */
+        /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), url('https://via.placeholder.com/1920x1080.png?text=Premium+Background+Image') no-repeat center center/cover; /* Replace with your image */
-            color: #fff;
-            padding: 180px 0 120px; /* Adjust padding to account for fixed header */
-            text-align: center;
+            background: linear-gradient(rgba(26, 46, 71, 0.8), rgba(26, 46, 71, 0.8)), url('https://via.placeholder.com/1920x1080/1A2E47/FFFFFF?text=Modern+Agency+Background') no-repeat center center/cover;
+            color: var(--bg-white);
+            padding: 200px 0 150px; /* More padding */
             display: flex;
             align-items: center;
-            min-height: 100vh; /* Full viewport height */
+            min-height: 90vh; /* Slightly less than full to invite scroll */
         }
-
+        .hero-content { max-width: 800px; }
         .hero-content h1 {
-            font-family: var(--font-secondary);
-            font-size: 3.5rem;
+            font-family: var(--font-primary);
+            font-size: 3.8rem; /* 60px */
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.2;
         }
-        .hero-content h1 span {
-             background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-        }
-
         .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            color: rgba(255,255,255,0.9);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.25rem; /* 20px */
+            margin-bottom: 40px;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
         }
+        .hero .btn { margin-right: 15px; }
+        .hero .btn-outline { border-color: var(--secondary-color); color: var(--secondary-color); }
+        .hero .btn-outline:hover { background-color: var(--secondary-color); color: var(--bg-white); }
 
-        /* Services Section */
+
+        /* --- SERVICES SECTION --- */
         .services .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
-
         .service-item {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            background-color: var(--bg-white);
+            padding: 35px 30px;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            text-align: left;
+            border: 1px solid var(--border-color);
         }
-
         .service-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
-
         .service-item .icon {
-            font-size: 2.5rem; /* Placeholder for icon font or SVG */
+            font-size: 2.8rem;
             color: var(--secondary-color);
-            margin-bottom: 20px;
-            /* Example: using a character as a placeholder */
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            background-color: var(--light-gray);
+            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: #E6F9F5; /* Light teal background for icon */
             border-radius: 50%;
         }
-
         .service-item h4 {
-            font-family: var(--font-secondary);
-            font-size: 1.4rem;
+            font-family: var(--font-primary);
+            font-size: 1.4rem; /* 22px */
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: 600;
         }
-
         .service-item p {
-            font-size: 0.95rem;
-            color: var(--dark-gray);
-            margin-bottom: 0;
+            font-size: 0.95rem; /* 15px */
+            color: var(--text-muted);
+            margin-bottom: 20px;
         }
-
-        /* About Us Section */
-        .about-us .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-us img.about-image {
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .about-us ul {
+        .service-item ul {
             list-style: none;
             padding-left: 0;
+            font-size: 0.9rem;
         }
-        .about-us ul li {
-            padding-left: 25px;
+        .service-item ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
             position: relative;
-            margin-bottom: 10px;
-            color: var(--text-color);
+            color: var(--text-light);
         }
-        .about-us ul li::before {
-            content: '✓'; /* Checkmark icon */
-            color: var(--accent-color);
+        .service-item ul li::before {
+            content: '✓';
+            color: var(--secondary-color);
             position: absolute;
             left: 0;
             font-weight: bold;
         }
 
-        /* Our Process Section */
+
+        /* --- ABOUT US SECTION --- */
+        .about-us .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-us img.about-image {
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-lg);
+            max-width: 100%;
+        }
+        .about-us .about-text h3 {
+            font-family: var(--font-primary);
+            font-size: 1.8rem; /* 28px */
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .about-us .about-text p { margin-bottom: 20px; }
+        .about-us .about-text ul { list-style: none; padding-left: 0; margin-top: 20px; }
+        .about-us .about-text ul li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+        .about-us .about-text ul li::before {
+            content: '✨'; /* Sparkle icon or use SVG/FontAwesome */
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            top: 2px;
+        }
+
+        /* --- OUR PROCESS SECTION --- */
         .process .timeline {
             position: relative;
             max-width: 900px;
-            margin: 40px auto 0;
+            margin: 50px auto 0;
         }
-        .process .timeline::after { /* The central line */
+        .process .timeline::after {
             content: '';
             position: absolute;
-            width: 4px;
+            width: 3px;
             background-color: var(--secondary-color);
-            opacity: 0.3;
+            opacity: 0.2;
             top: 0;
             bottom: 0;
             left: 50%;
-            margin-left: -2px;
+            margin-left: -1.5px;
         }
         .process .timeline-item {
             padding: 10px 40px;
@@ -346,236 +362,264 @@
             background-color: inherit;
             width: 50%;
         }
-        .process .timeline-item::after { /* The circles on the timeline */
+        .process .timeline-item::after { /* The circles */
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: #fff;
+            width: 22px;
+            height: 22px;
+            right: -11px;
+            background-color: var(--bg-white);
             border: 4px solid var(--secondary-color);
             top: 20px;
             border-radius: 50%;
             z-index: 1;
+            transition: transform 0.3s ease;
+        }
+         .process .timeline-item:hover::after {
+            transform: scale(1.2);
         }
         .process .timeline-item.left { left: 0; }
         .process .timeline-item.right { left: 50%; }
-        .process .timeline-item.left::before { /* Connector arrows */
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 25px;
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid var(--medium-gray);
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent var(--medium-gray);
+        .process .timeline-item.left::before { /* Connector arrows - subtle */
+            display:none; /* Can be distracting, removed for cleaner look */
         }
-        .process .timeline-item.right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 25px;
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid var(--medium-gray);
-            border-width: 10px 10px 10px 0;
-            border-color: transparent var(--medium-gray) transparent transparent;
-        }
-        .process .timeline-item.right::after { left: -10px; }
+        .process .timeline-item.right::before { display:none; }
+        .process .timeline-item.right::after { left: -11px; }
         .process .timeline-content {
-            padding: 20px;
-            background-color: #fff;
+            padding: 25px;
+            background-color: var(--bg-white);
             position: relative;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--secondary-color);
+            transition: box-shadow var(--transition-speed);
         }
-         .process .timeline-content h5 {
-            font-family: var(--font-secondary);
-            font-size: 1.2rem;
+        .process .timeline-item:hover .timeline-content {
+            box-shadow: var(--shadow-lg);
+        }
+        .process .timeline-content h5 {
+            font-family: var(--font-primary);
+            font-size: 1.25rem; /* 20px */
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
         .process .timeline-content p {
-            font-size: 0.9rem;
+            font-size: 0.9rem; /* 14.4px */
             margin-bottom: 0;
+            color: var(--text-muted);
         }
 
-        /* Portfolio/Case Studies Section */
+        /* --- PORTFOLIO/CASE STUDIES SECTION --- */
         .portfolio .filter-buttons {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
         }
         .portfolio .filter-buttons button {
-            background: none;
-            border: 1px solid var(--medium-gray);
-            padding: 8px 18px;
-            margin: 0 5px;
-            border-radius: var(--border-radius);
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 10px 22px;
+            margin: 0 8px 10px; /* Allow wrapping */
+            border-radius: var(--border-radius-sm);
             cursor: pointer;
-            color: var(--dark-gray);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            color: var(--text-light);
+            font-weight: 500;
+            transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
         }
-        .portfolio .filter-buttons button.active, .portfolio .filter-buttons button:hover {
+        .portfolio .filter-buttons button.active,
+        .portfolio .filter-buttons button:hover {
             background-color: var(--secondary-color);
-            color: #fff;
+            color: var(--bg-white);
             border-color: var(--secondary-color);
         }
-        .portfolio .grid {
+        .portfolio .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         .portfolio-item {
-            background: #fff;
-            border-radius: var(--border-radius);
+            background: var(--bg-white);
+            border-radius: var(--border-radius-md);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--shadow-md);
             position: relative;
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         .portfolio-item img {
             width: 100%;
-            height: 250px; /* Fixed height for consistency */
+            height: 260px;
             object-fit: cover;
-            transition: transform var(--transition-speed);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .portfolio-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         .portfolio-item .overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(10, 37, 64, 0.9), transparent);
-            padding: 30px 20px 20px;
-            opacity: 1; /* Always show for basic info */
+            background: linear-gradient(to top, rgba(26, 46, 71, 0.95), transparent 80%);
+            padding: 40px 25px 25px;
+            opacity: 1;
             transition: opacity var(--transition-speed);
         }
-         .portfolio-item .overlay h5 {
-            font-family: var(--font-secondary);
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-         }
-         .portfolio-item .overlay span {
-            color: var(--medium-gray);
+        .portfolio-item .overlay h5 {
+            font-family: var(--font-primary);
+            color: var(--bg-white);
+            font-size: 1.4rem; /* 22px */
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .portfolio-item .overlay span {
+            color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
-         }
-         .portfolio-item .details-link {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .portfolio-item .details-link {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            color: #fff;
-            background-color: rgba(0, 123, 255, 0.8);
-            width: 35px;
-            height: 35px;
+            top: 20px;
+            right: 20px;
+            color: var(--bg-white);
+            background-color: var(--secondary-color);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0;
-            transform: scale(0.8);
+            transform: scale(0.7) rotate(-45deg);
             transition: opacity var(--transition-speed), transform var(--transition-speed);
-         }
-         .portfolio-item:hover .details-link {
+        }
+        .portfolio-item:hover .details-link {
             opacity: 1;
-            transform: scale(1);
-         }
+            transform: scale(1) rotate(0deg);
+        }
 
-
-        /* Testimonials Section */
+        /* --- TESTIMONIALS SECTION --- */
         .testimonials {
-            background: var(--primary-color); /* Dark background for contrast */
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--bg-white);
         }
-        .testimonials .primary-heading, .testimonials .secondary-heading { color: #fff; }
-        .testimonials p { color: rgba(255,255,255,0.8); }
+        .testimonials .section-heading,
+        .testimonials .section-subheading { color: var(--bg-white); }
+        .testimonials .section-subheading { color: rgba(255,255,255,0.7); }
 
-        .testimonial-slider { /* Basic structure, needs JS for actual sliding */
-            display: flex; /* For side-by-side items if not using JS slider */
-            overflow-x: auto; /* Allows horizontal scroll if items exceed width */
+        .testimonial-slider { /* Needs JS for actual sliding, this is basic flex layout */
+            display: flex;
             gap: 30px;
-            padding-bottom: 20px; /* For scrollbar */
+            overflow-x: auto; /* For horizontal scroll on smaller viewports if items exceed width */
+            padding-bottom: 20px; /* Space for scrollbar if it appears */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
+        .testimonial-slider::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+
         .testimonial-item {
             background-color: rgba(255,255,255, 0.05);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            min-width: 320px; /* So items don't get too squished */
-            flex: 0 0 auto; /* Prevents shrinking, allows scrolling */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 35px;
+            border-radius: var(--border-radius-md);
+            min-width: 350px;
+            flex: 0 0 auto; /* Prevents shrinking/growing */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--secondary-color);
         }
         .testimonial-item blockquote {
             font-style: italic;
-            margin-bottom: 15px;
-            border-left: 3px solid var(--secondary-color);
-            padding-left: 15px;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: rgba(255,255,255,0.9);
+            position: relative;
+            padding-left: 35px;
         }
-        .testimonial-author {
-            display: flex;
-            align-items: center;
+        .testimonial-item blockquote::before {
+            content: '“';
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0px;
+            top: -5px;
         }
+        .testimonial-author { display: flex; align-items: center; }
         .testimonial-author img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             margin-right: 15px;
             object-fit: cover;
+            border: 2px solid var(--secondary-color);
         }
         .testimonial-author h6 {
-            font-family: var(--font-secondary);
-            margin: 0;
+            font-family: var(--font-primary);
+            margin: 0 0 3px 0;
             font-size: 1.1rem;
             font-weight: 600;
+            color: var(--bg-white);
         }
         .testimonial-author span {
             font-size: 0.9rem;
-            color: var(--medium-gray);
+            color: var(--text-muted);
+            color: rgba(255,255,255,0.6);
         }
 
-        /* Blog/Insights Section */
+        /* --- BLOG/INSIGHTS SECTION --- */
         .blog .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
         .blog-post-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            background: var(--bg-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
         }
         .blog-post-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
+        .blog-post-item .post-image-link { display: block; overflow: hidden;}
         .blog-post-item img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+        .blog-post-item:hover img { transform: scale(1.08); }
         .blog-post-content {
-            padding: 20px;
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         .blog-post-content .meta {
-            font-size: 0.85rem;
-            color: var(--dark-gray);
-            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .blog-post-content .meta span { margin-right: 15px; }
+        .blog-post-content .meta .category { color: var(--secondary-color); font-weight: 600;}
         .blog-post-content h4 {
-            font-family: var(--font-secondary);
-            font-size: 1.3rem;
+            font-family: var(--font-primary);
+            font-size: 1.3rem; /* 20.8px */
             margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
         }
         .blog-post-content h4 a {
             text-decoration: none;
@@ -583,71 +627,111 @@
             transition: color var(--transition-speed);
         }
         .blog-post-content h4 a:hover { color: var(--secondary-color); }
+        .blog-post-content .excerpt {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
         .blog-post-content .read-more {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: auto; /* Pushes to bottom */
             color: var(--secondary-color);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
         .blog-post-content .read-more:hover { text-decoration: underline; }
 
-        /* Call to Action (CTA) Section */
+        /* --- CALL TO ACTION (CTA) SECTION --- */
         .cta {
-            background: var(--secondary-color);
-            color: #fff;
-            padding: 60px 0;
+            background: var(--secondary-color); /* Use vibrant accent */
+            color: var(--bg-white);
+            padding: 80px 0;
             text-align: center;
         }
-        .cta .primary-heading { color: #fff; margin-bottom: 15px; font-size: 2.5rem; }
-        .cta p { color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 30px auto; }
+        .cta .section-heading {
+            color: var(--bg-white);
+            margin-bottom: 15px;
+            font-size: 2.8rem; /* 44.8px */
+        }
+        .cta p {
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 35px auto;
+            font-size: 1.125rem; /* 18px */
+        }
         .cta .btn {
-            background-color: #fff;
-            color: var(--secondary-color);
-            padding: 14px 32px;
+            background-color: var(--bg-white);
+            color: var(--secondary-color); /* Text color matches the accent for strong contrast */
+            padding: 16px 40px;
             font-size: 1.1rem;
+            box-shadow: var(--shadow-md);
         }
         .cta .btn:hover {
-            background-color: var(--light-gray);
+            background-color: var(--bg-light-gray);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
-        /* Contact Section */
+        /* --- CONTACT SECTION --- */
         .contact .content-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1.5fr; /* Info | Form */
+            grid-template-columns: 1fr 1.8fr; /* Info smaller, Form larger */
             gap: 50px;
-            margin-top: 40px;
+            margin-top: 50px;
             align-items: flex-start;
+        }
+        .contact-info h3, .contact-form h3 {
+            font-family: var(--font-primary);
+            font-size: 1.6rem; /* 25.6px */
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 600;
         }
         .contact-info-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Align icon with first line of text */
             margin-bottom: 25px;
         }
         .contact-info-item .icon {
-            font-size: 1.8rem;
+            font-size: 1.5rem; /* 24px */
             color: var(--secondary-color);
             margin-right: 20px;
-            width: 40px;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
             text-align: center;
+            background-color: #E6F9F5; /* Light teal */
+            border-radius: 50%;
+            flex-shrink: 0;
         }
-        .contact-info-item h5 {
-            font-family: var(--font-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-            color: var(--primary-color);
+        .contact-info-item div h5 {
+            font-family: var(--font-primary);
+            font-size: 1.1rem; /* 17.6px */
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            font-weight: 600;
         }
-        .contact-info-item p { margin-bottom: 0; font-size: 1rem; color: var(--dark-gray); }
-        .contact-info-item p a { color: var(--dark-gray); text-decoration: none; }
-        .contact-info-item p a:hover { color: var(--secondary-color); }
+        .contact-info-item div p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .contact-info-item div p a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        .contact-info-item div p a:hover { color: var(--secondary-color); }
 
-        .contact-form .form-group {
-            margin-bottom: 20px;
-        }
+        .contact-form .form-group { margin-bottom: 25px; }
         .contact-form label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            font-size: 0.9rem;
             color: var(--primary-color);
         }
         .contact-form input[type="text"],
@@ -655,12 +739,13 @@
         .contact-form input[type="tel"],
         .contact-form textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--medium-gray);
-            border-radius: var(--border-radius);
-            font-family: var(--font-primary);
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-secondary);
             font-size: 1rem;
-            transition: border-color var(--transition-speed);
+            color: var(--text-dark);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
         }
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
@@ -668,127 +753,163 @@
         .contact-form textarea:focus {
             border-color: var(--secondary-color);
             outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            box-shadow: 0 0 0 0.2rem rgba(0, 201, 167, 0.25);
         }
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .contact-form button[type="submit"] {
-            padding: 14px 35px;
-            font-size: 1.05rem;
-        }
+        .contact-form textarea { resize: vertical; min-height: 140px; }
+        .contact-form button[type="submit"] { width: 100%; padding: 16px; font-size: 1.05rem; }
 
-        /* Footer */
+        /* --- FOOTER --- */
         .main-footer {
             background-color: var(--primary-color);
-            color: rgba(255,255,255,0.8);
-            padding: 60px 0 20px;
+            color: rgba(255,255,255,0.7);
+            padding: 80px 0 30px;
         }
         .main-footer .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
         .footer-col h5 {
-            font-family: var(--font-secondary);
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-family: var(--font-primary);
+            color: var(--bg-white);
+            font-size: 1.2rem; /* 19.2px */
+            margin-bottom: 25px;
             font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
         }
-        .footer-col p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+        .footer-col h5::after { /* Underline accent */
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        .footer-col p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.8;}
         .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li { margin-bottom: 12px; }
         .footer-col ul li a {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.6);
             text-decoration: none;
             transition: color var(--transition-speed), padding-left var(--transition-speed);
             font-size: 0.95rem;
         }
         .footer-col ul li a:hover {
-            color: #fff;
+            color: var(--secondary-color);
             padding-left: 5px;
         }
         .social-links a {
-            display: inline-block;
-            width: 36px;
-            height: 36px;
-            line-height: 36px;
-            text-align: center;
+            display: inline-flex; /* Use flex for centering icon */
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background-color: rgba(255,255,255,0.1);
-            color: #fff;
-            margin-right: 8px;
+            color: var(--bg-white);
+            margin-right: 10px;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
+            text-decoration: none; /* Ensure no underline for icon placeholders */
         }
         .social-links a:hover {
             background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
         }
         .footer-bottom a { color: var(--secondary-color); text-decoration: none; }
         .footer-bottom a:hover { text-decoration: underline; }
 
-        /* Responsive Design */
+        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
-            .primary-heading { font-size: 2.4rem; }
-            .secondary-heading { font-size: 1.8rem; }
-            .hero-content h1 { font-size: 2.8rem; }
+            .section-heading { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 3rem; }
             .hero-content p { font-size: 1.1rem; }
 
             .about-us .content-wrapper { grid-template-columns: 1fr; text-align: center; }
-            .about-us img.about-image { margin-bottom: 30px; max-width: 80%; margin-left:auto; margin-right:auto;}
+            .about-us img.about-image { margin: 0 auto 40px auto; max-width: 80%;}
 
             .contact .content-wrapper { grid-template-columns: 1fr; }
-            .contact-info { margin-bottom: 40px; text-align: center; }
+            .contact-info { margin-bottom: 50px; text-align: center; }
             .contact-info-item { justify-content: center; }
+            .contact-info-item .icon { margin-right: 15px; } /* Adjust for centered items */
 
-            .process .timeline::after { left: 20px; }
-            .process .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; }
+            .process .timeline::after { left: 30px; }
+            .process .timeline-item { width: 100%; padding-left: 70px; padding-right: 15px; }
             .process .timeline-item.right, .process .timeline-item.left { left: 0%; }
-            .process .timeline-item.left::after, .process .timeline-item.right::after { left: 10px; }
-            .process .timeline-item.left::before, .process .timeline-item.right::before {
-                left: 30px;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent var(--medium-gray) transparent transparent;
-            }
+            .process .timeline-item.left::after, .process .timeline-item.right::after { left: 19px; } /* 30 - (22/2) */
+            .process .timeline-content { border-left-width: 3px; }
         }
 
         @media (max-width: 768px) {
-            .main-header .container { flex-direction: column; align-items: flex-start;}
-            .main-nav { width: 100%; margin-top: 10px; }
+            .main-header .container { /* Keep logo and toggle on one line if possible */
+                flex-wrap: wrap; /* Allow wrap if needed */
+            }
+             .main-nav {
+                order: 3; /* Make nav appear below logo/toggle */
+                width: 100%;
+                margin-top: 15px;
+            }
             .main-nav ul {
-                display: none; /* Initially hidden, shown by JS */
+                display: none;
                 flex-direction: column;
                 width: 100%;
-                background-color: #fff;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                background-color: var(--bg-white);
+                box-shadow: var(--shadow-md);
+                border-radius: var(--border-radius-md);
+                padding: 10px 0;
             }
-            .main-nav ul.active { display: flex; } /* JS will toggle this class */
-            .main-nav ul li { margin: 10px 0; text-align: center; }
-            .main-nav ul li a { display: block; padding: 10px; }
-            .main-nav ul li a::after { display: none; } /* No underline for mobile nav items */
-            .mobile-nav-toggle { display: block; position: absolute; top: 20px; right: 20px;}
+            .main-nav ul.active { display: flex; }
+            .main-nav ul li { margin: 0; width: 100%;}
+            .main-nav ul li a {
+                display: block;
+                padding: 12px 20px;
+                text-align: left;
+                border-bottom: 1px solid var(--bg-medium-gray);
+            }
+            .main-nav ul li:last-child a { border-bottom: none; }
+            .main-nav ul li a::after { display: none; }
+            .main-nav .btn { margin: 10px 20px; display:block; text-align: center;}
 
-            .hero { padding-top: 120px; padding-bottom: 80px; min-height: auto;}
-            .hero-content h1 { font-size: 2.2rem; }
+            .mobile-nav-toggle {
+                display: block;
+                /* position: absolute; top: 22px; right: 20px; */ /* Adjust if logo is too wide */
+            }
+
+            .hero { padding: 150px 0 100px; text-align: center;}
+            .hero-content h1 { font-size: 2.5rem; }
             .hero-content p { font-size: 1rem; }
-            .btn { padding: 10px 22px; }
+            .hero .btn { margin-bottom: 10px; width: 80%; max-width: 280px; }
 
-            .section { padding: 60px 0; }
-            .primary-heading { font-size: 2rem; }
-            .secondary-heading { font-size: 1.6rem; }
 
-            .services .grid, .portfolio .grid, .blog .grid { grid-template-columns: 1fr; }
-            .main-footer .grid { grid-template-columns: 1fr; text-align:center; }
-            .footer-col ul { padding-left: 0; }
+            .section { padding: 70px 0; }
+            .section-heading { font-size: 1.8rem; }
+            .section-subheading { font-size: 1rem; margin-bottom: 40px;}
+
+            .services .grid, .portfolio .portfolio-grid, .blog .grid { grid-template-columns: 1fr; }
+            .service-item, .portfolio-item, .blog-post-item { margin-bottom: 25px;}
+
+            .main-footer .grid { grid-template-columns: 1fr; text-align:left; } /* Align left for better readability on mobile */
+            .footer-col h5::after { left:0; /* Ensure underline stays with text */ }
+            .social-links { text-align: left; /* Align left on mobile */ }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero .btn { width: 100%; }
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form input[type="tel"],
+            .contact-form textarea,
+            .contact-form button[type="submit"] { font-size: 0.95rem; padding: 12px 15px; }
         }
 
     </style>
@@ -797,19 +918,19 @@
 
     <header class="main-header" id="mainHeader">
         <div class="container">
-            <a href="#hero" class="logo">[YourAgency]<span>.</span></a>
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <a href="#hero" class="logo">[YourAgency]<span class="highlight">.</span></a>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
                 &#9776; </button>
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#process">Our Process</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#portfolio">Work</a></li>
+                    <li><a href="#testimonials">Clients</a></li>
                     <li><a href="#blog">Insights</a></li>
-                    <li><a href="#contact" class="btn btn-outline">Contact Us</a></li>
+                    <li><a href="#contact" class="btn btn-primary">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -819,182 +940,162 @@
         <section id="hero" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Innovate. Create. <span>Elevate.</span><br>Your Vision, Our Expertise.</h1>
-                    <p>We are a passionate team of developers, marketers, and strategists dedicated to crafting cutting-edge digital solutions that drive growth and deliver exceptional results.</p>
-                    <a href="#contact" class="btn">Get a Free Quote</a>
-                    <a href="#portfolio" class="btn btn-outline" style="margin-left: 15px;">View Our Work</a>
+                    <h1>Innovate. Create. <span class="highlight">Elevate.</span><br>Digital Solutions That Drive Results.</h1>
+                    <p>We are a forward-thinking software agency specializing in web development, digital marketing, SEO, and custom software. Let's build your future, together.</p>
+                    <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                    <a href="#portfolio" class="btn btn-outline">View Our Work</a>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="section">
+        <section id="services" class="section section-bg">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">Our Core Services</h2>
-                    <p>Delivering comprehensive digital solutions tailored to your unique business needs.</p>
+                    <h2 class="section-heading">Our Core <span class="highlight">Services</span></h2>
+                    <p class="section-subheading">We deliver comprehensive digital solutions tailored to your unique business needs, focusing on innovation and quality.</p>
                 </div>
                 <div class="grid">
                     <article class="service-item">
-                        <div class="icon">&#128187;</div> <h4>Web Development</h4>
-                        <p>Crafting responsive, high-performance websites and web applications with modern technologies. From e-commerce to custom platforms.</p>
+                        <div class="icon">&#128187;</div>
+                        <h4>Web Development</h4>
+                        <p>Crafting responsive, high-performance websites and web applications with modern technologies for optimal user experience.</p>
                         <ul>
-                            <li>Custom Website Design</li>
+                            <li>Custom Website Design & UX</li>
                             <li>E-commerce Solutions</li>
                             <li>CMS Development (WordPress, etc.)</li>
-                            <li>Web Application Development</li>
+                            <li>Progressive Web Apps (PWAs)</li>
                         </ul>
                     </article>
                     <article class="service-item">
-                        <div class="icon">&#128200;</div> <h4>Digital Marketing</h4>
-                        <p>Strategic online marketing campaigns to boost your brand visibility, engagement, and conversions across all digital channels.</p>
+                        <div class="icon">&#128200;</div>
+                        <h4>Digital Marketing</h4>
+                        <p>Strategic online marketing campaigns to boost brand visibility, engagement, and conversions across key digital channels.</p>
                         <ul>
-                            <li>Social Media Marketing (SMM)</li>
-                            <li>Pay-Per-Click (PPC) Advertising</li>
-                            <li>Content Marketing</li>
-                            <li>Email Marketing</li>
+                            <li>Social Media Strategy (SMM)</li>
+                            <li>Pay-Per-Click (PPC) Campaigns</li>
+                            <li>Content Creation & Marketing</li>
+                            <li>Email Automation</li>
                         </ul>
                     </article>
                     <article class="service-item">
-                        <div class="icon">&#128269;</div> <h4>SEO (Search Engine Optimization)</h4>
-                        <p>Optimizing your online presence to rank higher in search engine results, driving organic traffic and qualified leads to your business.</p>
+                        <div class="icon">&#128269;</div>
+                        <h4>SEO Optimization</h4>
+                        <p>Optimizing your online presence to rank higher in search results, driving targeted organic traffic and qualified leads.</p>
                         <ul>
-                            <li>On-Page & Off-Page SEO</li>
                             <li>Technical SEO Audits</li>
-                            <li>Keyword Research & Strategy</li>
-                            <li>Local SEO</li>
+                            <li>Keyword Research & Analysis</li>
+                            <li>On-Page & Off-Page Strategy</li>
+                            <li>Local SEO & Google My Business</li>
                         </ul>
                     </article>
                     <article class="service-item">
                         <div class="icon">&#xE86F;</div> <h4>Software Development</h4>
-                        <p>Building robust, scalable, and custom software solutions, including mobile apps and enterprise applications to streamline operations.</p>
+                        <p>Building robust, scalable, and custom software, including mobile apps and enterprise solutions to enhance efficiency.</p>
                         <ul>
-                            <li>Custom Software Solutions</li>
+                            <li>Custom Application Development</li>
                             <li>Mobile App Development (iOS & Android)</li>
-                            <li>Enterprise Software</li>
-                            <li>API Development & Integration</li>
-                        </ul>
-                    </article>
-                     <article class="service-item">
-                        <div class="icon">&#127912;</div> <h4>UI/UX Design</h4>
-                        <p>Creating intuitive and engaging user interfaces and experiences that delight users and achieve business objectives.</p>
-                         <ul>
-                            <li>User Research & Analysis</li>
-                            <li>Wireframing & Prototyping</li>
-                            <li>Visual Design</li>
-                            <li>Usability Testing</li>
-                        </ul>
-                    </article>
-                     <article class="service-item">
-                        <div class="icon">&#9729;</div> <h4>Cloud & DevOps</h4>
-                        <p>Leveraging cloud platforms and DevOps practices for scalable infrastructure, continuous integration, and efficient deployment.</p>
-                         <ul>
-                            <li>Cloud Migration & Management (AWS, Azure, GCP)</li>
-                            <li>CI/CD Pipeline Implementation</li>
-                            <li>Infrastructure as Code (IaC)</li>
-                            <li>Performance Monitoring</li>
+                            <li>API Design & Integration</li>
+                            <li>SaaS Product Development</li>
                         </ul>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="section section-bg">
+        <section id="about" class="section">
             <div class="container">
-                <div class="text-center">
-                     <h2 class="primary-heading">About [Your Agency Name]</h2>
-                </div>
                 <div class="content-wrapper">
                     <div class="about-text">
-                        <h3 class="secondary-heading">Driving Digital Transformation</h3>
+                        <h2 class="section-heading" style="text-align:left; margin-bottom: 15px;">About <span class="highlight">[Your Agency Name]</span></h2>
+                        <h3 class="secondary-heading" style="font-size: 1.5rem; color: var(--text-light); margin-bottom:25px; font-weight:500;">Pioneering Digital Excellence</h3>
                         <p>Founded with a passion for technology and innovation, [Your Agency Name] is a full-service digital agency committed to helping businesses thrive in the digital landscape. We believe in creating solutions that are not only technically sound but also strategically aligned with your goals.</p>
-                        <p>Our team comprises experienced professionals specializing in various fields, working collaboratively to deliver excellence. We value transparency, communication, and a client-centric approach.</p>
+                        <p>Our team comprises experienced professionals specializing in various fields, working collaboratively to deliver excellence. We value transparency, communication, and a client-centric approach to every project.</p>
                         <ul>
-                            <li>Client-Focused Approach</li>
-                            <li>Innovative Solutions</li>
-                            <li>Experienced & Dedicated Team</li>
-                            <li>Results-Driven Strategies</li>
-                            <li>Commitment to Quality</li>
+                            <li>Client-Focused Approach & Collaboration</li>
+                            <li>Data-Driven & Innovative Solutions</li>
+                            <li>Experienced & Passionate Team</li>
+                            <li>Commitment to Quality & Results</li>
                         </ul>
-                        <a href="#contact" class="btn" style="margin-top:20px;">Learn More About Us</a>
+                        <a href="#contact" class="btn btn-primary" style="margin-top:30px;">Meet The Team</a>
                     </div>
                     <div class="about-image-container">
-                        <img src="https://via.placeholder.com/600x450.png?text=Our+Team+or+Office" alt="About [Your Agency Name]" class="about-image">
+                        <img src="https://via.placeholder.com/550x480/00C9A7/FFFFFF?text=Our+Modern+Office+Space" alt="About [Your Agency Name] - Our Team or Office" class="about-image">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="process" class="section process">
+        <section id="process" class="section process section-bg">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">Our Proven Process</h2>
-                    <p>A systematic approach to ensure project success and client satisfaction from start to finish.</p>
+                    <h2 class="section-heading">Our Proven <span class="highlight">Process</span></h2>
+                    <p class="section-subheading">A transparent and agile approach to ensure project success and client satisfaction, every step of the way.</p>
                 </div>
                 <div class="timeline">
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <h5>1. Discovery & Strategy</h5>
-                            <p>Understanding your business, goals, and target audience to define a clear project roadmap and strategy.</p>
+                            <p>We dive deep to understand your business, objectives, and audience, forming a comprehensive project roadmap.</p>
                         </div>
                     </div>
                     <div class="timeline-item right">
                         <div class="timeline-content">
-                            <h5>2. Design & Prototyping</h5>
-                            <p>Creating intuitive UI/UX designs and interactive prototypes for review and feedback before development.</p>
+                            <h5>2. UI/UX Design</h5>
+                            <p>Crafting intuitive and engaging user interfaces and experiences, validated through prototypes and user feedback.</p>
                         </div>
                     </div>
                     <div class="timeline-item left">
                         <div class="timeline-content">
-                            <h5>3. Development & Coding</h5>
-                            <p>Building your solution using agile methodologies, clean code, and the latest technologies for optimal performance.</p>
+                            <h5>3. Development</h5>
+                            <p>Our expert developers bring designs to life with clean, efficient code and the latest technologies, ensuring scalability.</p>
                         </div>
                     </div>
                     <div class="timeline-item right">
                         <div class="timeline-content">
-                            <h5>4. Testing & Quality Assurance</h5>
-                            <p>Rigorous testing across devices and scenarios to ensure a bug-free, high-quality, and reliable product.</p>
+                            <h5>4. Testing & QA</h5>
+                            <p>Rigorous testing across all devices and scenarios to guarantee a flawless, high-quality, and reliable digital product.</p>
                         </div>
                     </div>
                     <div class="timeline-item left">
                         <div class="timeline-content">
                             <h5>5. Deployment & Launch</h5>
-                            <p>Seamless deployment to your chosen environment, followed by a carefully planned launch strategy.</p>
+                            <p>Seamless deployment to your chosen environment, executed with a carefully planned and communicated launch strategy.</p>
                         </div>
                     </div>
                     <div class="timeline-item right">
                         <div class="timeline-content">
                             <h5>6. Support & Growth</h5>
-                            <p>Providing ongoing maintenance, support, and iterative improvements to help your solution evolve and grow.</p>
+                            <p>We provide ongoing maintenance, support, and data-driven insights for iterative improvements and sustained growth.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="portfolio" class="section section-bg">
+        <section id="portfolio" class="section">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">Our Recent Work</h2>
-                    <p>Explore some of the projects we're proud to have delivered for our clients.</p>
+                    <h2 class="section-heading">Our <span class="highlight">Impactful</span> Work</h2>
+                    <p class="section-subheading">Explore some of the innovative projects and successful solutions we've delivered for our valued clients.</p>
                 </div>
                 <div class="filter-buttons">
-                    <button class="active" data-filter="all">All</button>
+                    <button class="active" data-filter="all">All Projects</button>
                     <button data-filter="web">Web Development</button>
                     <button data-filter="marketing">Digital Marketing</button>
                     <button data-filter="software">Software Dev</button>
-                    <button data-filter="seo">SEO</button>
+                    <button data-filter="seo">SEO Cases</button>
                 </div>
-                <div class="grid portfolio-grid">
+                <div class="portfolio-grid">
                     <article class="portfolio-item" data-category="web">
-                        <img src="https://via.placeholder.com/400x300.png?text=Project+Alpha" alt="Project Alpha">
+                        <img src="https://via.placeholder.com/450x350/1A2E47/FFFFFF?text=Web+Project+Showcase" alt="E-commerce Platform Enhancement">
                         <div class="overlay">
                             <h5>E-commerce Platform</h5>
-                            <span>Web Development</span>
+                            <span>Web Development / UI/UX</span>
                         </div>
                         <a href="#" class="details-link" title="View Details">+</a>
                     </article>
                     <article class="portfolio-item" data-category="software">
-                        <img src="https://via.placeholder.com/400x300.png?text=Project+Beta" alt="Project Beta">
+                        <img src="https://via.placeholder.com/450x350/00C9A7/1A2E47?text=Software+Solution+Mockup" alt="Custom CRM Solution">
                          <div class="overlay">
                             <h5>Custom CRM Solution</h5>
                             <span>Software Development</span>
@@ -1002,10 +1103,10 @@
                         <a href="#" class="details-link" title="View Details">+</a>
                     </article>
                     <article class="portfolio-item" data-category="marketing">
-                        <img src="https://via.placeholder.com/400x300.png?text=Campaign+Gamma" alt="Campaign Gamma">
+                        <img src="https://via.placeholder.com/450x350/FFC107/1A2E47?text=Marketing+Campaign+Results" alt="Brand Growth Campaign">
                         <div class="overlay">
-                            <h5>Brand Growth Campaign</h5>
-                            <span>Digital Marketing</span>
+                            <h5>Tech Startup SEO Surge</h5>
+                            <span>SEO / Content Marketing</span>
                         </div>
                         <a href="#" class="details-link" title="View Details">+</a>
                     </article>
@@ -1016,246 +1117,259 @@
         <section id="testimonials" class="section testimonials">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">What Our Clients Say</h2>
-                    <p>We pride ourselves on building strong relationships and delivering impactful results.</p>
+                    <h2 class="section-heading">Client <span class="highlight">Success Stories</span></h2>
+                    <p class="section-subheading">We're proud of the relationships we build and the tangible results we help our clients achieve.</p>
                 </div>
-                <div class="testimonial-slider"> <article class="testimonial-item">
+                <div class="testimonial-slider">
+                    <article class="testimonial-item">
                         <blockquote>
-                            <p>"[Your Agency Name] transformed our online presence! Their team was professional, creative, and delivered beyond our expectations. Highly recommended."</p>
+                            <p>"[Your Agency Name] completely revitalized our online presence! Their team is incredibly talented, professional, and delivered results that exceeded all our expectations. A true partner."</p>
                         </blockquote>
                         <div class="testimonial-author">
-                            <img src="https://via.placeholder.com/80x80.png?text=Client+A" alt="Client A">
+                            <img src="https://via.placeholder.com/100x100/FFFFFF/1A2E47?text=JD" alt="Client John D.">
                             <div>
-                                <h6>John Doe</h6>
-                                <span>CEO, Company X</span>
+                                <h6>Johnathan Doe</h6>
+                                <span>CEO, Innovatech Ltd.</span>
                             </div>
                         </div>
                     </article>
                     <article class="testimonial-item">
                         <blockquote>
-                            <p>"The software solution they developed streamlined our operations significantly. Their attention to detail and technical expertise are top-notch."</p>
+                            <p>"The custom software they developed has been a game-changer for our operations. Their technical expertise and commitment to our project's success were evident from day one."</p>
                         </blockquote>
                         <div class="testimonial-author">
-                            <img src="https://via.placeholder.com/80x80.png?text=Client+B" alt="Client B">
+                            <img src="https://via.placeholder.com/100x100/FFFFFF/1A2E47?text=JS" alt="Client Jane S.">
                             <div>
                                 <h6>Jane Smith</h6>
-                                <span>COO, Company Y</span>
+                                <span>COO, Quantum Solutions</span>
                             </div>
                         </div>
                     </article>
-                    </div>
+                     <article class="testimonial-item">
+                        <blockquote>
+                            <p>"Our search rankings and organic traffic have seen a massive improvement since partnering with them for SEO. Highly knowledgeable and transparent in their approach."</p>
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/100x100/FFFFFF/1A2E47?text=AL" alt="Client Alex L.">
+                            <div>
+                                <h6>Alex Lee</h6>
+                                <span>Marketing Director, NextGen Corp</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <section id="blog" class="section">
+        <section id="blog" class="section section-bg">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">Our Insights & News</h2>
-                    <p>Stay updated with the latest trends, tips, and news from the digital world.</p>
+                    <h2 class="section-heading">Our <span class="highlight">Insights</span> & News</h2>
+                    <p class="section-subheading">Stay informed with the latest trends, expert tips, and company news from the ever-evolving digital landscape.</p>
                 </div>
                 <div class="grid">
                     <article class="blog-post-item">
-                        <a href="blog-single.html"> <img src="https://via.placeholder.com/400x250.png?text=Blog+Image+1" alt="Blog Post Title 1">
+                        <a href="blog-single.html" class="post-image-link">
+                           <img src="https://via.placeholder.com/400x250/1A2E47/FFFFFF?text=Future+of+Web+Dev" alt="The Future of Web Development">
                         </a>
                         <div class="blog-post-content">
                             <div class="meta">
-                                <span><time datetime="2025-05-01">May 1, 2025</time></span> / <span>Web Development</span>
+                                <time datetime="2025-05-01">May 1, 2025</time> / <span class="category">Web Development</span>
                             </div>
-                            <h4><a href="blog-single.html">The Future of Web Development: Trends to Watch</a></h4>
-                            <p class="excerpt">Discover the upcoming trends in web development that are set to reshape the digital landscape...</p>
-                            <a href="blog-single.html" class="read-more">Read More &rarr;</a>
+                            <h4><a href="blog-single.html">The Future of Web Development: AI, VR, and Beyond</a></h4>
+                            <p class="excerpt">Explore the cutting-edge trends set to reshape web development, from AI-driven tools to immersive VR experiences...</p>
+                            <a href="blog-single.html" class="read-more">Read Full Article &rarr;</a>
                         </div>
                     </article>
                     <article class="blog-post-item">
-                         <a href="blog-single.html">
-                            <img src="https://via.placeholder.com/400x250.png?text=Blog+Image+2" alt="Blog Post Title 2">
+                         <a href="blog-single.html" class="post-image-link">
+                            <img src="https://via.placeholder.com/400x250/00C9A7/1A2E47?text=SEO+Guide+2025" alt="SEO Success Guide">
                          </a>
                         <div class="blog-post-content">
                             <div class="meta">
-                                <span><time datetime="2025-04-22">April 22, 2025</time></span> / <span>SEO</span>
+                                <time datetime="2025-04-22">April 22, 2025</time> / <span class="category">SEO</span>
                             </div>
-                            <h4><a href="blog-single.html">Unlocking SEO Success: A Beginner's Guide</a></h4>
-                            <p class="excerpt">Learn the fundamentals of Search Engine Optimization and how to improve your website's visibility...</p>
-                            <a href="blog-single.html" class="read-more">Read More &rarr;</a>
+                            <h4><a href="blog-single.html">Unlocking SEO Success in 2025: A Comprehensive Guide</a></h4>
+                            <p class="excerpt">Navigate the latest SEO algorithms and strategies to significantly boost your website's visibility and organic reach...</p>
+                            <a href="blog-single.html" class="read-more">Read Full Article &rarr;</a>
                         </div>
                     </article>
                     <article class="blog-post-item">
-                         <a href="blog-single.html">
-                            <img src="https://via.placeholder.com/400x250.png?text=Blog+Image+3" alt="Blog Post Title 3">
+                         <a href="blog-single.html" class="post-image-link">
+                            <img src="https://via.placeholder.com/400x250/FFC107/1A2E47?text=Marketing+AI+Tools" alt="AI in Digital Marketing">
                          </a>
                         <div class="blog-post-content">
                             <div class="meta">
-                                <span><time datetime="2025-04-15">April 15, 2025</time></span> / <span>Digital Marketing</span>
+                                <time datetime="2025-04-15">April 15, 2025</time> / <span class="category">Digital Marketing</span>
                             </div>
-                            <h4><a href="blog-single.html">Effective Digital Marketing Strategies for Small Businesses</a></h4>
-                            <p class="excerpt">Explore actionable digital marketing tactics that can help small businesses grow their reach...</p>
-                            <a href="blog-single.html" class="read-more">Read More &rarr;</a>
+                            <h4><a href="blog-single.html">How AI is Revolutionizing Digital Marketing Strategies</a></h4>
+                            <p class="excerpt">Discover the transformative impact of AI tools on content creation, ad targeting, and customer personalization in marketing...</p>
+                            <a href="blog-single.html" class="read-more">Read Full Article &rarr;</a>
                         </div>
                     </article>
                 </div>
-                <div class="text-center" style="margin-top: 40px;">
-                    <a href="blog.html" class="btn">View All Posts</a> </div>
+                <div class="text-center" style="margin-top: 50px;">
+                    <a href="blog.html" class="btn btn-outline-dark">View All Insights</a>
+                </div>
             </div>
         </section>
 
         <section id="cta" class="cta">
             <div class="container">
-                <h2 class="primary-heading">Ready to Start Your Next Project?</h2>
-                <p>Let's discuss how our expertise can help you achieve your business objectives. Contact us today for a free consultation and quote.</p>
-                <a href="#contact" class="btn">Let's Talk</a>
+                <h2 class="section-heading">Ready to <span class="highlight" style="color:var(--primary-color); background:var(--bg-white); padding: 0 10px; border-radius: var(--border-radius-sm);">Transform</span> Your Business?</h2>
+                <p>Let's discuss your project. We're excited to learn about your vision and explore how our expertise can help you achieve outstanding results.</p>
+                <a href="#contact" class="btn">Schedule a Free Consultation</a>
             </div>
         </section>
 
         <section id="contact" class="section">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="primary-heading">Get In Touch</h2>
-                    <p>We're here to answer your questions and help you get started. Reach out to us via the form below or through our contact details.</p>
+                    <h2 class="section-heading">Get In <span class="highlight">Touch</span></h2>
+                    <p class="section-subheading">We're here to answer your questions and help bring your digital projects to life. Reach out today!</p>
                 </div>
                 <div class="content-wrapper">
                     <div class="contact-info">
-                        <h3 class="secondary-heading" style="margin-bottom:30px;">Contact Information</h3>
+                        <h3>Contact Information</h3>
                         <div class="contact-info-item">
-                            <span class="icon">&#128205;</span> <div>
+                            <span class="icon">&#128205;</span>
+                            <div>
                                 <h5>Our Office</h5>
-                                <p>123 Digital Avenue, Tech City, TC 54321</p>
+                                <p>123 Digital Avenue, Tech City, TC 54321, Country</p>
                             </div>
                         </div>
                         <div class="contact-info-item">
-                             <span class="icon">&#9993;</span> <div>
+                             <span class="icon">&#9993;</span>
+                            <div>
                                 <h5>Email Us</h5>
                                 <p><a href="mailto:info@youragency.com">info@youragency.com</a></p>
                             </div>
                         </div>
                         <div class="contact-info-item">
-                            <span class="icon">&#128222;</span> <div>
+                            <span class="icon">&#128222;</span>
+                            <div>
                                 <h5>Call Us</h5>
                                 <p><a href="tel:+12345678900">+1 (234) 567-8900</a></p>
                             </div>
                         </div>
                          <div class="contact-info-item">
-                            <span class="icon">&#128337;</span> <div>
-                                <h5>Working Hours</h5>
-                                <p>Mon - Fri: 9 AM - 6 PM</p>
-                                <p>Sat - Sun: Closed</p>
+                            <span class="icon">&#128337;</span>
+                            <div>
+                                <h5>Business Hours</h5>
+                                <p>Monday - Friday: 9 AM - 6 PM</p>
+                                <p>Saturday - Sunday: Closed</p>
                             </div>
                         </div>
                     </div>
-                    <form action="#" method="POST" class="contact-form">
-                        <h3 class="secondary-heading" style="margin-bottom:30px;">Send Us a Message</h3>
+                    <form id="contactForm" class="contact-form">
+                        <h3>Send Us a Message</h3>
                         <div class="form-group">
-                            <label for="name">Full Name</label>
+                            <label for="name">Full Name*</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
+                            <label for="email">Email Address*</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number (Optional)</label>
+                            <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="phone">
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
+                            <label for="subject">Subject*</label>
                             <input type="text" id="subject" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Your Message</label>
+                            <label for="message">Your Message*</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="btn btn-primary">Send Message Now</button>
                     </form>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="main-footer">
         <div class="container">
             <div class="grid">
                 <div class="footer-col">
-                    <h5>[Your Agency Name]</h5>
-                    <p>Your partner in digital innovation. We craft bespoke solutions to elevate your brand and achieve your business goals.</p>
-                     <div class="social-links" style="margin-top:15px;">
-                        <a href="#" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f">F</i></a> <a href="#" title="Twitter" aria-label="Twitter"><i class="fab fa-twitter">T</i></a>
-                        <a href="#" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in">L</i></a>
-                        <a href="#" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram">I</i></a>
+                    <h5>[YourAgencyName]<span style="color:var(--secondary-color);">.</span></h5>
+                    <p>Your trusted partner in digital innovation and transformation. We craft bespoke web and software solutions to elevate your brand and achieve your business goals.</p>
+                     <div class="social-links" style="margin-top:20px;">
+                        <a href="#" title="Facebook" aria-label="Facebook">F</a>
+                        <a href="#" title="Twitter" aria-label="Twitter">T</a>
+                        <a href="#" title="LinkedIn" aria-label="LinkedIn">L</a>
+                        <a href="#" title="Instagram" aria-label="Instagram">I</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h5>Quick Links</h5>
                     <ul>
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#portfolio">Case Studies</a></li>
+                        <li><a href="#blog">Blog/Insights</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-of-service.html">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Our Services</h5>
+                    <h5>Core Services</h5>
                     <ul>
                         <li><a href="#services">Web Development</a></li>
-                        <li><a href="#services">Digital Marketing</a></li>
-                        <li><a href="#services">SEO Optimization</a></li>
-                        <li><a href="#services">Software Development</a></li>
+                        <li><a href="#services">Digital Marketing & SEO</a></li>
+                        <li><a href="#services">Custom Software</a></li>
                         <li><a href="#services">UI/UX Design</a></li>
+                        <li><a href="#services">Mobile App Development</a></li>
                         <li><a href="#services">Cloud Solutions</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5>Contact Us</h5>
-                    <p>
+                    <h5>Get In Touch</h5>
+                     <address style="font-style:normal; color:rgba(255,255,255,0.6); font-size: 0.95rem;">
                         123 Digital Avenue, <br>
-                        Tech City, TC 54321<br><br>
-                        <strong>Phone:</strong> <a href="tel:+12345678900" style="color:rgba(255,255,255,0.7);">+1 (234) 567-8900</a><br>
-                        <strong>Email:</strong> <a href="mailto:info@youragency.com" style="color:rgba(255,255,255,0.7);">info@youragency.com</a>
-                    </p>
+                        Tech City, TC 54321, Country<br><br>
+                        <strong>P:</strong> <a href="tel:+12345678900">+1 (234) 567-8900</a><br>
+                        <strong>E:</strong> <a href="mailto:info@youragency.com">info@youragency.com</a>
+                    </address>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> [Your Agency Name]. All Rights Reserved. Designed by [Your Agency Name or You].</p>
+                <p>&copy; <span id="currentYear"></span> [Your Agency Name]. All Rights Reserved. Designed with <span style="color:var(--secondary-color); font-size: 1.2em;">&hearts;</span> by [Your Name/Agency].</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple script for current year and basic nav interactions
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Smooth scrolling for anchor links
+        // --- SMOOTH SCROLL & ACTIVE NAV LINK ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // Account for fixed header height
                     const headerOffset = document.getElementById('mainHeader').offsetHeight || 70;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
 
-                    // Close mobile nav if open
-                    const nav = document.getElementById('mainNav');
-                    const toggleButton = document.getElementById('mobileNavToggle');
-                    if (nav.classList.contains('active')) {
-                        nav.classList.remove('active');
-                        toggleButton.setAttribute('aria-expanded', 'false');
-                        toggleButton.innerHTML = '&#9776;'; // Hamburger
+                    // Close mobile nav if open and it's a nav link
+                    if (this.closest('.main-nav')) {
+                        const nav = document.getElementById('mainNav');
+                        const toggleButton = document.getElementById('mobileNavToggle');
+                        if (nav.classList.contains('active')) {
+                            nav.classList.remove('active');
+                            toggleButton.setAttribute('aria-expanded', 'false');
+                            toggleButton.innerHTML = '&#9776;';
+                        }
                     }
                 }
             });
         });
 
-        // Mobile navigation toggle
+        // --- MOBILE NAVIGATION TOGGLE ---
         const mobileNavToggle = document.getElementById('mobileNavToggle');
         const mainNav = document.getElementById('mainNav');
         if (mobileNavToggle && mainNav) {
@@ -1263,15 +1377,15 @@
                 mainNav.classList.toggle('active');
                 const isActive = mainNav.classList.contains('active');
                 this.setAttribute('aria-expanded', isActive);
-                this.innerHTML = isActive ? '&times;' : '&#9776;'; // Close icon or Hamburger
+                this.innerHTML = isActive ? '&times;' : '&#9776;';
             });
         }
 
-        // Header scroll effect
+        // --- HEADER SCROLL EFFECT ---
         const header = document.getElementById('mainHeader');
         if(header) {
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
+                if (window.scrollY > 80) { /* A bit more scroll before effect */
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
@@ -1279,16 +1393,15 @@
             });
         }
 
-        // Active navigation link highlighting on scroll (basic version)
+        // --- ACTIVE NAVIGATION LINK HIGHLIGHTING ON SCROLL ---
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.main-nav ul li a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const headerHeight = document.getElementById('mainHeader').offsetHeight;
+        const updateActiveNavLink = () => {
+            let current = 'hero'; // Default to hero
+            const headerHeight = document.getElementById('mainHeader').offsetHeight + 20; // Extra offset
 
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - headerHeight - 50; // Adjusted offset
+                const sectionTop = section.offsetTop - headerHeight;
                 if (pageYOffset >= sectionTop) {
                     current = section.getAttribute('id');
                 }
@@ -1300,34 +1413,66 @@
                     link.classList.add('active');
                 }
             });
-             // Ensure home is active if at the very top
-            if (pageYOffset < sections[0].offsetTop - headerHeight - 50) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                const homeLink = document.querySelector('.main-nav ul li a[href="#hero"]');
-                if (homeLink) homeLink.classList.add('active');
-            }
-        });
+        };
+        window.addEventListener('scroll', updateActiveNavLink);
+        window.addEventListener('load', updateActiveNavLink); // Also on load
 
-        // Portfolio Filter (Simple example - requires actual content and potentially more robust JS)
+        // --- PORTFOLIO FILTER ---
         const filterButtons = document.querySelectorAll('.portfolio .filter-buttons button');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
+        if (filterButtons.length > 0 && portfolioItems.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
 
-                const filter = this.getAttribute('data-filter');
-
-                portfolioItems.forEach(item => {
-                    item.style.display = 'none'; // Hide all items initially
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'block'; // Show matched items
-                    }
+                    portfolioItems.forEach(item => {
+                        item.style.display = 'none'; // Hide all
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block'; // Show matched
+                        }
+                    });
                 });
             });
-        });
+        }
 
+        // --- CONTACT FORM SUBMISSION (Placeholder) ---
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent actual form submission for this demo
+                // Basic validation check (browser built-in 'required' also helps)
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                if (name && email && subject && message) {
+                    alert('Thank you for your message, ' + name + '! (This is a demo. Form data not actually sent.)');
+                    this.reset(); // Clear the form
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+                // In a real application, you would send this data to a server
+                // using fetch() or XMLHttpRequest.
+            });
+        }
+
+        // --- CURRENT YEAR FOR FOOTER ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Note on Breadcrumbs: For a single-page site, active navigation highlighting serves a similar purpose.
+        // If you were building internal pages (e.g., blog-single.html), you would add breadcrumbs there, like:
+        // <nav aria-label="breadcrumb">
+        //   <ol class="breadcrumb">
+        //     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        //     <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+        //     <li class="breadcrumb-item active" aria-current="page">Blog Post Title</li>
+        //   </ol>
+        // </nav>
+        // This would require its own CSS styling.
     </script>
-    </body>
+</body>
 </html>
