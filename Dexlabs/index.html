@@ -141,7 +141,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: lightblue;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 100;
             transition: all 0.3s ease;
@@ -151,7 +151,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 0;
+            padding: 1.5rem 0;
         }
         
         .logo {
@@ -954,28 +954,13 @@
         
         
         
-         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f4f7f6; /* Lighter, soft background */
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+         
+  
+            
+        
 
         .service-card {
-            background-color: #ffffff;
-            border-radius: 12px; /* Softer rounded corners */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+              }
 
         .service-card:hover {
             transform: translateY(-5px); /* Subtle lift on hover */
@@ -1081,6 +1066,9 @@
             }
         }
         
+        
+        
+        
     </style>
 </head>
 <body>
@@ -1135,8 +1123,24 @@
 
     
 
-    <div class="container">
-        <div class="service-card">
+    <div class="container"
+      style="
+      max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+      "
+      >
+        <div class="service-card"
+          style="
+          background-color: #ffffff;
+            border-radius: 12px; /* Softer rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+      "
+          
+          >
             <div class="service-card-header">
                 <div class="service-icon-container">
                     <i class="fas fa-laptop-code"></i> </div>
@@ -1159,7 +1163,17 @@
             <a href="#" class="cta-button">Learn More</a>
         </div>
 
-        <div class="service-card">
+        <div class="service-card"
+          style="
+          background-color: #ffffff;
+            border-radius: 12px; /* Softer rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+          "
+          >
             <div class="service-card-header">
                 <div class="service-icon-container" style="background-color: #28a745;"> <i class="fas fa-chart-line"></i> </div>
                 <h2>SEO</h2>
