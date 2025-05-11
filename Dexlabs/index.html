@@ -951,6 +951,136 @@
             }
         }
         
+        
+        
+        
+         body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f7f6; /* Lighter, soft background */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 12px; /* Softer rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px); /* Subtle lift on hover */
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon-container {
+            background-color: #007bff; /* Example primary color - choose your brand's */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px; /* Icon size */
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .service-card h2 {
+            font-family: 'Montserrat', sans-serif; /* More distinct heading font */
+            font-size: 24px;
+            color: #2c3e50; /* Darker, richer heading color */
+            margin: 0;
+        }
+
+        .service-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .premium-offerings h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff; /* Accent border */
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .premium-offerings ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .premium-offerings ul li {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .premium-offerings ul li i { /* Styling for checkmark icon */
+            color: #28a745; /* Green for success/checkmark */
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6347; /* Vibrant accent color (Tomato) */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px; /* Pill-shaped button */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #e55337; /* Darker shade on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Basic responsive adjustments */
+        @media (max-width: 600px) {
+            .service-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .service-icon-container {
+                margin-bottom: 15px;
+            }
+            .service-card h2 {
+                font-size: 20px;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -990,7 +1120,70 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+       
+
+    
+
+    <div class="container">
+        <div class="service-card">
+            <div class="service-card-header">
+                <div class="service-icon-container">
+                    <i class="fas fa-laptop-code"></i> </div>
+                <h2>Web Development</h2>
+            </div>
+            <p>We create business-friendly, responsive websites that are optimized for your company growth & digital reach.</p>
+
+            <div class="premium-offerings">
+                <h3>Our Premium Offerings:</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Custom Development Solutions.</li>
+                    <li><i class="fas fa-check-circle"></i> Full-Stack Solutions.</li>
+                    <li><i class="fas fa-check-circle"></i> CMS Solutions.</li>
+                    <li><i class="fas fa-check-circle"></i> Progressive Web Apps.</li>
+                    <li><i class="fas fa-check-circle"></i> Wordpress Websites.</li>
+                    <li><i class="fas fa-check-circle"></i> Maintenance & Bug Fixes.</li>
+                    <li><i class="fas fa-check-circle"></i> Life-Time Support.</li>
+                </ul>
+            </div>
+            <a href="#" class="cta-button">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-card-header">
+                <div class="service-icon-container" style="background-color: #28a745;"> <i class="fas fa-chart-line"></i> </div>
+                <h2>SEO</h2>
+            </div>
+            <p>Boost your online visibility and rank higher in search engine results with our expert SEO strategies.</p>
+             <div class="premium-offerings">
+                <h3>Key SEO Services:</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Keyword Research & Analysis</li>
+                    <li><i class="fas fa-check-circle"></i> On-Page Optimization</li>
+                    <li><i class="fas fa-check-circle"></i> Link Building</li>
+                    <li><i class="fas fa-check-circle"></i> Technical SEO Audits</li>
+                </ul>
+            </div>
+            <a href="#" class="cta-button" style="background-color: #17a2b8;">Explore SEO Services</a> </div>
+
+    </div>
+
+
+
+
+
+<!--
+     Services Section 
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
@@ -1133,7 +1326,14 @@
             
             
         </div>
-    </section>
+    </section> -->
+    
+    
+    
+    
+    
+    
+    
 
     <!-- About Section -->
     <section id="about" class="about">
