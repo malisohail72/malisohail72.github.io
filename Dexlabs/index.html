@@ -953,122 +953,6 @@
         
         
         
-        
-         
-  
-            
-        
-
-        .service-card {
-              }
-
-        .service-card:hover {
-            transform: translateY(-5px); /* Subtle lift on hover */
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .service-icon-container {
-            background-color: #007bff; /* Example primary color - choose your brand's */
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 24px; /* Icon size */
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-        }
-
-        .service-card h2 {
-            font-family: 'Montserrat', sans-serif; /* More distinct heading font */
-            font-size: 24px;
-            color: #2c3e50; /* Darker, richer heading color */
-            margin: 0;
-        }
-
-        .service-card p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .premium-offerings h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 18px;
-            color: #34495e;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #007bff; /* Accent border */
-            padding-bottom: 5px;
-            display: inline-block;
-        }
-
-        .premium-offerings ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .premium-offerings ul li {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .premium-offerings ul li i { /* Styling for checkmark icon */
-            color: #28a745; /* Green for success/checkmark */
-            margin-right: 10px;
-            font-size: 18px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #ff6347; /* Vibrant accent color (Tomato) */
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px; /* Pill-shaped button */
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .cta-button:hover {
-            background-color: #e55337; /* Darker shade on hover */
-            transform: translateY(-2px);
-        }
-
-        /* Basic responsive adjustments */
-        @media (max-width: 600px) {
-            .service-card-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .service-icon-container {
-                margin-bottom: 15px;
-            }
-            .service-card h2 {
-                font-size: 20px;
-            }
-        }
-        
-        
-        
-        
     </style>
 </head>
 <body>
@@ -1151,7 +1035,8 @@
             <div class="premium-offerings">
                 <h3>Our Premium Offerings:</h3>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Custom Development Solutions.</li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> Custom Development Solutions.</li>
                     <li><i class="fas fa-check-circle"></i> Full-Stack Solutions.</li>
                     <li><i class="fas fa-check-circle"></i> CMS Solutions.</li>
                     <li><i class="fas fa-check-circle"></i> Progressive Web Apps.</li>
@@ -1232,13 +1117,23 @@
                         <h5>Our Premium Offerings:</h5>
                         
                         <ul>
-                         <i class="fa-solid fa-check"></i>  Custom Development Solutions. <br>
-                            <i class="fa-solid fa-check"></i> Full-Stack Solutions. <br>
-                            <i class="fa-solid fa-check"></i>  CMS Solutions. <br>
-                           <i class="fa-solid fa-check"></i>   Progressive Web Apps <br>               
-                    <i class="fa-solid fa-check"></i> Wordpress Websites. <br>
-                           <i class="fa-solid fa-check"></i> Maintenance & Bug Fixes.  <br> 
-                                     <i class="fa-solid fa-check"></i> Life-Time Support. <br>
+                                 <i class="fas fa-check-circle"></i>
+                          Custom Development Solutions. <br>
+                            
+                                   <i class="fas fa-check-circle"></i>
+                            Full-Stack Solutions. <br>
+                              
+                                   <i class="fas fa-check-circle"></i>
+                            CMS Solutions. <br>
+                              
+                                 <i class="fas fa-check-circle"></i>   Progressive Web Apps <br>               
+                            <i class="fas fa-check-circle"></i>
+                    Wordpress Websites. <br>
+                      
+                                   <i class="fas fa-check-circle"></i>
+                          Maintenance & Bug Fixes.  <br> 
+                                   <i class="fas fa-check-circle"></i>
+                                      Life-Time Support. <br>
                        
                         </ul>
                         
@@ -1248,14 +1143,7 @@
                 
                 <div class="service-card"
                   style=" 
-                    color:white;
-                    background-color: black;
-            border-radius: 12px; /* Softer rounded corners */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-            padding: 3px;
-            margin-bottom: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        ">
+                     ">
 
                     <div class="service-content">
                         <div class="service-icon">
