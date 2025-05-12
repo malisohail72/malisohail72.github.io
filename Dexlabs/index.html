@@ -1177,6 +1177,39 @@
     
 
     <!-- About Section -->
+    
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-wrapper">
+      <div class="about-content">
+        <h2> <center> DEXLABS - Delivering Value. </center> </h2>
+        <p>
+          DEXLABS, the only software company that helps businesses achieve their goals with cutting-edge solutions. With over a decade of experience, we deliver tailored solutions that drive growth and success, building long-term partnerships with our clients.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-alt"></i> </div>
+            <div class="stat-value counter" data-target="5">0+</div> <div class="stat-label">Years of Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-tasks"></i> </div>
+            <div class="stat-value counter" data-target="850">0+</div> <div class="stat-label">Completed Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-smile-beam"></i> </div>
+            <div class="stat-value counter" data-target="845">0+</div> <div class="stat-label">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
     <section id="about" class="about">
         <div class="container">
             <div class="about-wrapper">
@@ -1207,6 +1240,78 @@ DEXLABS, the only software company that helps businesses achieve their goals wit
             </div>
         </div>
     </section>
+    
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.counter');
+    const animationDuration = 2000; // Duration in milliseconds (e.g., 2 seconds)
+    const frameDuration = 1000 / 60; // 60 frames per second
+
+    const animateCounter = (element, targetValue) => {
+        let currentValue = 0;
+        const totalFrames = Math.round(animationDuration / frameDuration);
+        const increment = targetValue / totalFrames;
+        let frame = 0;
+
+        const updateCounter = () => {
+            frame++;
+            currentValue += increment;
+
+            if (frame >= totalFrames || currentValue >= targetValue) {
+                element.textContent = Math.ceil(targetValue) + '+'; // Ensure final value is correct and add '+'
+                return;
+            }
+
+            element.textContent = Math.ceil(currentValue) + '+';
+            requestAnimationFrame(updateCounter);
+        };
+        requestAnimationFrame(updateCounter);
+    };
+
+    // Intersection Observer to trigger animation when section is visible
+    const aboutSection = document.getElementById('about'); // Or '.stats-grid'
+    let animationHasRun = false; // Flag to ensure animation runs only once
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animationHasRun) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target'); // Get target value from data-target
+                    counter.textContent = '0+'; // Reset text content before starting
+                    animateCounter(counter, target);
+                });
+                animationHasRun = true; // Set flag to true
+                observer.unobserve(aboutSection); // Stop observing after animation
+            }
+        });
+    }, {
+        threshold: 0.2 // Trigger when 20% of the element is visible
+    });
+
+    if (aboutSection) {
+        observer.observe(aboutSection);
+    } else {
+        // Fallback if section not found, or animate immediately for testing
+        // counters.forEach(counter => {
+        //     const target = +counter.getAttribute('data-target');
+        //     animateCounter(counter, target);
+        // });
+        console.warn('About section for counter animation not found.');
+    }
+});
+    
+    
+    
+    
+    
+    
+    </script>
+    
+    
+    
+    
+    
 
     <!-- Process Section -->
     <section id="process" class="process">
@@ -1250,6 +1355,15 @@ DEXLABS, the only software company that helps businesses achieve their goals wit
             </div>
         </div>
     </section>
+    
+    
+  
+    
+    
+    
+    
+    
+    
 
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
