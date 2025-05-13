@@ -963,6 +963,58 @@
         
         
         
+        
+        
+        .rocket {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: #ff9900;
+  border-radius: 50%;
+  animation: fly 2s ease-out infinite;
+}
+
+.rocket::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 10px;
+  height: 30px;
+  background-color: #ff9900;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-200px);
+  }
+}
+
+.success-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #2ecc71;
+  opacity: 0;
+  animation: show-message 2s ease-out 1s forwards;
+}
+
+@keyframes show-message {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+        
     </style>
 </head>
 <body>
@@ -1017,6 +1069,19 @@
                 </div>
             </div>
         </div>
+
+
+
+<div class="rocket"></div>
+<div class="success-message">Success!</div>
+
+        
+        
+        
+        
+        
+        
+        
     </section>
 
 
