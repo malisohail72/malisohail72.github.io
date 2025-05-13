@@ -1,1 +1,648 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempMail - Disposable Email Generator</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2980b9;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --light-text: #7f8c8d;
+            --border: #e0e0e0;
+            --success: #2ecc71;
+            --error: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 300px 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .generator {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .email-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--background);
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+
+        .email-address {
+            flex-grow: 1;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary);
+        }
+
+        .copy-btn, .refresh-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .inbox {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .inbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inbox-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background-color: var(--success);
+        }
+
+        .mail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .mail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .mail-item:hover {
+            background-color: var(--background);
+        }
+
+        .mail-sender {
+            font-weight: bold;
+        }
+
+        .mail-subject {
+            color: var(--light-text);
+        }
+
+        .mail-time {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .mail-content {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background-color: var(--background);
+            min-height: 200px;
+        }
+
+        .empty-inbox {
+            text-align: center;
+            padding: 2rem;
+            color: var(--light-text);
+        }
+
+        .ads-container {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            margin: 1rem 0;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--border);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem;
+            border-radius: 4px;
+            background-color: var(--success);
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 100;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .loading-dots div {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        
+        .loading-dots div:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        
+        .loading-dots div:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TempMail</div>
+        <div class="tagline">Disposable Email Service - Quick, Free, No Sign-up Required</div>
+    </header>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="card generator">
+                <h2>Your Temporary Email</h2>
+                <div class="email-display">
+                    <span class="email-address" id="email-address">Loading...</span>
+                    <button class="copy-btn" id="copy-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button class="refresh-btn" id="refresh-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+                    </svg>
+                    Generate New Email
+                </button>
+                <p>This email will expire in 10 minutes. All received emails are displayed below.</p>
+            </div>
+            
+            <div class="ads-container">
+                <span>Google AdSense Space</span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="card inbox">
+                <div class="inbox-header">
+                    <h2>Inbox</h2>
+                    <div class="inbox-status">
+                        <div class="status-dot"></div>
+                        <span id="inbox-status">Connected</span>
+                    </div>
+                </div>
+
+                <div id="mail-container">
+                    <div class="empty-inbox" id="empty-inbox">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-6l-2 3h-4l-2-3H2"></path>
+                            <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+                        </svg>
+                        <h3>Your inbox is empty</h3>
+                        <p>Received emails will appear here automatically</p>
+                    </div>
+                    
+                    <div class="mail-list" id="mail-list" style="display: none;"></div>
+                    
+                    <div class="mail-content" id="mail-content" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="ads-container">
+                <span>Google AdSense Space</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h3>Anonymous & Secure</h3>
+            <p>No personal information required. Stay anonymous online.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <h3>Instant Access</h3>
+            <p>No registration needed. Get a temporary email address instantly.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+                </svg>
+            </div>
+            <h3>Spam Prevention</h3>
+            <p>Avoid spam in your personal inbox. Perfect for sign-ups and trials.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 TempMail - Disposable Email Service</p>
+        <p>Disclaimer: This service is for legitimate purposes only. Don't use for illegal activities.</p>
+    </footer>
+    
+    <div class="notification" id="notification">Email copied to clipboard!</div>
+    
+    <script>
+        // DOM Elements
+        const emailAddressElement = document.getElementById('email-address');
+        const copyButton = document.getElementById('copy-btn');
+        const refreshButton = document.getElementById('refresh-btn');
+        const notificationElement = document.getElementById('notification');
+        const inboxStatusElement = document.getElementById('inbox-status');
+        const emptyInboxElement = document.getElementById('empty-inbox');
+        const mailListElement = document.getElementById('mail-list');
+        const mailContentElement = document.getElementById('mail-content');
+        
+        // Mock data for demo purposes
+        const domains = ['tempmail.org', 'disposable.me', 'quickmail.temp', 'throwaway.email', 'fakemail.net'];
+        let currentEmail = '';
+        let emails = [];
+        let checkEmailInterval;
+        let expireTimeout;
+        
+        // Generate a random username
+        function generateUsername() {
+            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let username = '';
+            const length = 8 + Math.floor(Math.random() * 8); // Username between 8-16 chars
+            
+            for (let i = 0; i < length; i++) {
+                username += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            
+            return username;
+        }
+        
+        // Generate a new email address
+        function generateEmail() {
+            const username = generateUsername();
+            const domain = domains[Math.floor(Math.random() * domains.length)];
+            return `${username}@${domain}`;
+        }
+        
+        // Initialize a new email
+        function initEmail() {
+            emailAddressElement.textContent = 'Loading...';
+            
+            // Clear previous data
+            emails = [];
+            updateInbox();
+            
+            // Clear previous timers
+            if (checkEmailInterval) clearInterval(checkEmailInterval);
+            if (expireTimeout) clearTimeout(expireTimeout);
+            
+            // Simulate loading
+            setTimeout(() => {
+                currentEmail = generateEmail();
+                emailAddressElement.textContent = currentEmail;
+                
+                // Set up email checking (simulated)
+                checkEmailInterval = setInterval(checkForNewEmails, 5000);
+                
+                // Set email expiration (10 minutes)
+                expireTimeout = setTimeout(() => {
+                    inboxStatusElement.textContent = 'Expired';
+                    document.querySelector('.status-dot').style.backgroundColor = 'var(--error)';
+                    clearInterval(checkEmailInterval);
+                    
+                    // Show notification
+                    showNotification('Email has expired. Generate a new one!', 'var(--error)');
+                }, 10 * 60 * 1000); // 10 minutes
+                
+                // Reset status
+                inboxStatusElement.textContent = 'Connected';
+                document.querySelector('.status-dot').style.backgroundColor = 'var(--success)';
+                
+                // Add demo email after a delay (for demonstration)
+                if (Math.random() > 0.5) {
+                    setTimeout(addDemoEmail, 15000);
+                }
+            }, 1500);
+        }
+        
+        // Copy email to clipboard
+        function copyEmailToClipboard() {
+            navigator.clipboard.writeText(currentEmail).then(() => {
+                showNotification('Email copied to clipboard!');
+            }).catch(err => {
+                showNotification('Failed to copy email!', 'var(--error)');
+            });
+        }
+        
+        // Show notification
+        function showNotification(message, color = 'var(--success)') {
+            notificationElement.textContent = message;
+            notificationElement.style.backgroundColor = color;
+            notificationElement.classList.add('show');
+            
+            setTimeout(() => {
+                notificationElement.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Simulate checking for new emails
+        function checkForNewEmails() {
+            // Random chance to receive a new email (for demo)
+            if (Math.random() < 0.1) {
+                addDemoEmail();
+            }
+        }
+        
+        // Add a demo email for demonstration
+        function addDemoEmail() {
+            const senders = [
+                'newsletter@example.com',
+                'support@service.com',
+                'noreply@social.net',
+                'team@webapp.io',
+                'info@company.org'
+            ];
+            
+            const subjects = [
+                'Welcome to our service!',
+                'Your account verification',
+                'Special offer just for you',
+                'Your subscription is active',
+                'Important security update',
+                'Confirm your email address'
+            ];
+            
+            const sender = senders[Math.floor(Math.random() * senders.length)];
+            const subject = subjects[Math.floor(Math.random() * subjects.length)];
+            const time = new Date();
+            
+            const emailContent = `
+                <div style="padding: 20px; font-family: Arial, sans-serif;">
+                    <h2>Hello ${currentEmail.split('@')[0]},</h2>
+                    <p>Thank you for using our service! This is a demonstration email to show how the inbox functionality works.</p>
+                    <p>With TempMail, you can:</p>
+                    <ul>
+                        <li>Receive emails anonymously</li>
+                        <li>Protect your primary inbox from spam</li>
+                        <li>Sign up for services without using your personal email</li>
+                    </ul>
+                    <p>If you have any questions, feel free to visit our help center.</p>
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <p style="color: #777;">Best regards,<br>The Demo Team</p>
+                    </div>
+                </div>
+            `;
+            
+            const newEmail = {
+                id: Date.now(),
+                sender,
+                subject,
+                time,
+                content: emailContent,
+                read: false
+            };
+            
+            emails.unshift(newEmail);
+            updateInbox();
+            
+            // Show notification
+            showNotification('New email received!');
+        }
+        
+        // Update the inbox display
+        function updateInbox() {
+            if (emails.length === 0) {
+                emptyInboxElement.style.display = 'block';
+                mailListElement.style.display = 'none';
+                mailContentElement.style.display = 'none';
+                return;
+            }
+            
+            emptyInboxElement.style.display = 'none';
+            mailListElement.style.display = 'flex';
+            
+            // Clear the mail list
+            mailListElement.innerHTML = '';
+            
+            // Add emails to the list
+            emails.forEach(email => {
+                const mailItem = document.createElement('div');
+                mailItem.className = 'mail-item';
+                if (!email.read) {
+                    mailItem.style.fontWeight = 'bold';
+                    mailItem.style.borderLeft = '3px solid var(--primary)';
+                }
+                
+                mailItem.innerHTML = `
+                    <div>
+                        <div class="mail-sender">${email.sender}</div>
+                        <div class="mail-subject">${email.subject}</div>
+                    </div>
+                    <div class="mail-time">${formatTime(email.time)}</div>
+                `;
+                
+                mailItem.addEventListener('click', () => {
+                    openEmail(email);
+                });
+                
+                mailListElement.appendChild(mailItem);
+            });
+        }
+        
+        // Open an email to view content
+        function openEmail(email) {
+            email.read = true;
+            
+            mailContentElement.style.display = 'block';
+            mailContentElement.innerHTML = `
+                <div>
+                    <h3>${email.subject}</h3>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <div>From: <strong>${email.sender}</strong></div>
+                        <div>${formatTime(email.time, true)}</div>
+                    </div>
+                    <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+                        ${email.content}
+                    </div>
+                </div>
+            `;
+            
+            // Update inbox to reflect read status
+            updateInbox();
+        }
+        
+        // Format the time
+        function formatTime(date, full = false) {
+            if (full) {
+                return date.toLocaleString();
+            }
+            
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000 / 60); // difference in minutes
+            
+            if (diff < 1) return 'Just now';
+            if (diff < 60) return `${diff}m ago`;
+            
+            const hours = Math.floor(diff / 60);
+            if (hours < 24) return `${hours}h ago`;
+            
+            return date.toLocaleDateString();
+        }
+        
+        // Event listeners
+        copyButton.addEventListener('click', copyEmailToClipboard);
+        refreshButton.addEventListener('click', initEmail);
+        
+        // Initialize on page load
+        window.addEventListener('load', initEmail);
+    </script>
+</body>
+</html>
