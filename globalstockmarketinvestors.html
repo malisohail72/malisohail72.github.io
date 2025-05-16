@@ -430,7 +430,61 @@ footer {
     </footer>
 
     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.sidebar .nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const currentYearSpan = document.getElementById('currentYear');
 
+    // Set current year in footer
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Function to switch active section
+    function showSection(targetId) {
+        contentSections.forEach(section => {
+            if (section.id === targetId) {
+                section.classList.add('active-section');
+            } else {
+                section.classList.remove('active-section');
+            }
+        });
+    }
+
+    // Event listeners for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('data-target');
+
+            // Update active link style
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            this.classList.add('active');
+
+            // Show the target section
+            showSection(targetId);
+
+            // If on mobile, close sidebar after clicking a link
+            if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+
+    // Sidebar toggle for mobile
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+        });
+    }
+
+    // Initially show the 'home' section or the first one if 'home' doesn't exist
+    const initialTarget = document.querySelector('.sidebar .nav-link.active')?.getAttribute('data-target') || 'home';
+    showSection(initialTarget);
+
+});
     </script>
 </body>
 </html>
