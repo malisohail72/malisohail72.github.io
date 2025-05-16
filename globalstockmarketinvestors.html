@@ -7,7 +7,254 @@
     <link rel="stylesheet" href="style.css">
 
 <style>
+/* Basic Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.sidebar-toggle {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none; /* Hidden by default, shown on smaller screens */
+}
+
+.container {
+    display: flex;
+    flex: 1; /* Allows container to fill remaining vertical space */
+    margin-top: 0; /* Header is sticky */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 1.5rem 1rem;
+    transition: transform 0.3s ease-in-out;
+    height: calc(100vh - 60px); /* Adjust based on header height */
+    overflow-y: auto;
+    position: sticky;
+    top: 60px; /* Height of the header */
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Content Area Styles */
+.content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #fff;
+    overflow-y: auto; /* Allows content to scroll independently if it overflows */
+    height: calc(100vh - 60px); /* Adjust if footer is also sticky */
+}
+
+.content-section {
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.content-section.active-section {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+}
+
+.content h3 {
+    color: #34495e;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.content h4 {
+    color: #3498db;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.investor-subsection,
+.guidance-subsection,
+.performance-subsection {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+table th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+table tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+/* Bullet Point List Styles */
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* AdSense Placeholder Styles */
+.adsense-placeholder {
+    background-color: #e0e0e0;
+    border: 1px dashed #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 20px auto; /* Centered with some margin */
+}
+
+.adsense-banner {
+    min-height: 90px; /* Common banner height */
+    width: 100%;
+    max-width: 728px; /* Common banner width */
+}
+
+.adsense-in-article {
+    min-height: 250px; /* Common in-article ad height */
+    width: 100%;
+    max-width: 300px; /* Common in-article ad width */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 0.8rem 1rem;
+    }
+    header h1 {
+        font-size: 1.4rem;
+    }
+    .sidebar-toggle {
+        display: block; /* Show toggle button */
+    }
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto; /* Auto height when stacked */
+        position: static; /* No longer sticky in the same way */
+        transform: translateX(-100%); /* Hide sidebar off-screen */
+        position: fixed; /* Make it fixed for overlay effect */
+        top: 55px; /* Adjust based on header height */
+        left: 0;
+        bottom: 0;
+        z-index: 999;
+        background-color: rgba(52, 73, 94, 0.95); /* Slightly transparent */
+    }
+    .sidebar.open {
+        transform: translateX(0); /* Slide in sidebar */
+    }
+    .content {
+        width: 100%;
+        height: auto;
+        padding: 1.5rem;
+    }
+    .adsense-banner {
+        max-width: 100%;
+    }
+}
 </style>
 
 </head>
