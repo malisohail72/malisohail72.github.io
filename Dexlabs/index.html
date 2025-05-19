@@ -975,6 +975,271 @@
 
 
 
+
+
+
+
+
+/* Section Styles */
+        section {
+            padding: 60px 0;
+            background-color: white;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            display: block;
+            height: 4px;
+            width: 70px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Registration Section */
+        .registration-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .registration-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 280px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .registration-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .registration-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .registration-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Products Section */
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 340px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-content h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .product-content p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Comparison Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .feature-name {
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .check {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .cross {
+            color: #dc3545;
+        }
+        
+        .partial {
+            color: #ffc107;
+        }
+        
+        /* Offices Section */
+        .offices-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .office-card {
+            width: 280px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .office-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .office-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .office-content {
+            padding: 20px;
+        }
+        
+        .office-content h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .office-content p {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .office-content .contact {
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .registration-card, .product-card, .office-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .table-container {
+                margin: 0;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+ 
+
     </style>
 </head>
 <body>
@@ -1374,6 +1639,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <section id="technologies" class="bg-light">
+      <center>
+        <h2>
         <div class="container">
             <div class="section-header fade-in">
                 <h2 class="section-title">Our Tech Stack</h2>
@@ -1430,8 +1697,226 @@
                 </div>
             </div>
         </div>
+        </h2>
     </section>
     
+    
+    
+    
+
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- Registration with Multiple Authorities Section -->
+    <section id="registration">
+        <div class="container">
+            <div class="section-title">
+                <h2>Registration & Certifications</h2>
+            </div>
+            <div class="registration-container">
+                <div class="registration-card">
+                    <div class="registration-icon">🏛️</div>
+                    <h3>ISO 27001</h3>
+                    <p>Certified for Information Security Management Systems ensuring highest standards of data protection.</p>
+                </div>
+                <div class="registration-card">
+                    <div class="registration-icon">⚖️</div>
+                    <h3>GDPR Compliant</h3>
+                    <p>Fully compliant with General Data Protection Regulation for EU data privacy and security.</p>
+                </div>
+                <div class="registration-card">
+                    <div class="registration-icon">🔒</div>
+                    <h3>CMMI Level 5</h3>
+                    <p>Highest maturity level for development processes and quality management.</p>
+                </div>
+                <div class="registration-card">
+                    <div class="registration-icon">💼</div>
+                    <h3>Government Approved</h3>
+                    <p>Registered contractor for government IT projects with security clearance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <!-- Comparison Table Section -->
+    <section id="comparison">
+        <div class="container">
+            <div class="section-title">
+                <h2>Service Comparison</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>DEXLABS</th>
+                            <th>Competitor A</th>
+                            <th>Competitor B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">24/7 Support</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="partial">Limited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI-Powered Analytics</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="partial">Basic</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Multi-Cloud Integration</td>
+                            <td class="check">✓</td>
+                            <td class="partial">Limited</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Quantum Encryption</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Global CDN Network</td>
+                            <td class="check">✓</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Custom API Development</td>
+                            <td class="check">✓</td>
+                            <td class="partial">Limited</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Enterprise SLA</td>
+                            <td class="check">99.99%</td>
+                            <td class="partial">99.5%</td>
+                            <td class="partial">99.0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- Flagship Products Section -->
+    <section id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Flagship Products</h2>
+            </div>
+            <div class="products-container">
+                <div class="product-card">
+                    <div class="product-img">
+                        <i>🛡️</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>DexShield</h3>
+                        <p>Enterprise-grade cybersecurity solution with AI-powered threat detection and real-time monitoring for businesses of all sizes.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <i>📊</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>DexAnalytics</h3>
+                        <p>Advanced data analytics platform that transforms complex data into actionable business intelligence with customizable dashboards.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <i>☁️</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>DexCloud</h3>
+                        <p>Secure, scalable cloud infrastructure solutions with 99.99% uptime guarantee and global edge computing capabilities.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  
+    
+
+    <script>
+        // Simple animation for section visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Set initial styles
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Check on load and scroll
+            checkVisibility();
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+
+    
+        
+        
+        
     
     
     
@@ -1981,6 +2466,69 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+    <!-- Our Offices Section -->
+    <section id="offices">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Global Offices</h2>
+            </div>
+            <div class="offices-container">
+                <div class="office-card">
+                    <div class="office-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="office-content">
+                        <h3>New York</h3>
+                        <p>350 Fifth Avenue</p>
+                        <p>New York, NY 10118</p>
+                        <p>United States</p>
+                        <p class="contact">+1 (212) 555-1234</p>
+                    </div>
+                </div>
+                <div class="office-card">
+                    <div class="office-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="office-content">
+                        <h3>London</h3>
+                        <p>30 St Mary Axe</p>
+                        <p>London EC3A 8BF</p>
+                        <p>United Kingdom</p>
+                        <p class="contact">+44 20 7123 4567</p>
+                    </div>
+                </div>
+                <div class="office-card">
+                    <div class="office-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="office-content">
+                        <h3>Singapore</h3>
+                        <p>1 Raffles Place</p>
+                        <p>Singapore 048616</p>
+                        <p>Singapore</p>
+                        <p class="contact">+65 6123 4567</p>
+                    </div>
+                </div>
+                <div class="office-card">
+                    <div class="office-img" style="background-image: url('/api/placeholder/400/320');"></div>
+                    <div class="office-content">
+                        <h3>Sydney</h3>
+                        <p>1 Macquarie Place</p>
+                        <p>Sydney NSW 2000</p>
+                        <p>Australia</p>
+                        <p class="contact">+61 2 9876 5432</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
 
     <!-- CTA Section -->
     <section class="cta">
