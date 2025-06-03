@@ -1,715 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>China Sourcing</title>
-<style>
-        /* Basic Reset & Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
-}
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    overflow: hidden; /* Clear floats */
-}
-
-a {
-    text-decoration: none;
-    color: #337ab7;
-}
-
-ul {
-    list-style: none;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-h1, h2, h3 {
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-section {
-    padding: 4rem 0;
-}
-
-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-}
-
-.btn-secondary:hover {
-    background-color: #545b62;
-}
-
-.btn-signup {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    margin-left: 1rem;
-}
-
-.btn-signup:hover {
-    background-color: #1e7e34;
-}
-
-
-/* Navbar */
-.navbar {
-    background-color: #fff;
-    color: #333;
-    padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.navbar .nav-links {
-    display: flex;
-    align-items: center;
-}
-
-.navbar .nav-links li {
-    margin-left: 1.5rem;
-}
-
-.navbar .nav-links a {
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.navbar .nav-links a:hover {
-    color: #007bff;
-}
-
-/* Mobile Menu Toggle */
-.menu-toggle {
-    display: none; /* Hidden by default */
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.menu-toggle .bar {
-    height: 3px;
-    width: 25px;
-    background-color: #333;
-    margin: 4px 0;
-    transition: 0.3s;
-}
-
-
-/* Hero Section */
-.hero {
-    background: #e9ecef; /* Light grey background */
-    padding: 8rem 0 4rem 0; /* Extra padding top due to fixed navbar */
-    text-align: left;
-    margin-top: 60px; /* Adjust based on navbar height */
-}
-
-.hero .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.hero-content {
-    flex: 1;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #555;
-}
-
-.hero-image {
-    flex: 1;
-    text-align: center; /* Or right */
-}
-
-.hero-image img {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Services Section */
-.services {
-    background-color: #fff;
-}
-
-.service-cards {
-    display: flex;
-    justify-content: space-around;
-    gap: 1.5rem;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-.service-card {
-    background-color: #f9f9f9;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
-    flex-basis: calc(33.333% - 1rem); /* Adjust for gap */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.service-card .icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #007bff; /* Placeholder for icon color */
-}
-
-.service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-/* About Us Section */
-.about {
-    background-color: #e9ecef;
-}
-
-.about .container {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-
-.about-image {
-    flex: 1;
-}
-
-.about-image img {
-    border-radius: 8px;
-}
-
-.about-content {
-    flex: 1.5; /* Give more space to content */
-}
-
-.about-content h2 {
-    text-align: left;
-    margin-bottom: 1.5rem;
-}
-
-.about-content p {
-    margin-bottom: 1rem;
-}
-
-/* Portfolio Section */
-.portfolio {
-    background-color: #fff;
-}
-
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.portfolio-item img {
-    width: 100%;
-    height: 250px; /* Fixed height for consistency */
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.portfolio-item img:hover {
-    transform: scale(1.05);
-}
-
-/* Contact Us Section */
-.contact {
-    background-color: #f9f9f9;
-}
-
-.contact-form {
-    max-width: 700px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #555;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-
-.form-group textarea {
-    resize: vertical; /* Allow vertical resize, disable horizontal */
-}
-
-.contact-form button[type="submit"] {
-    width: 100%;
-    padding: 1rem;
-}
-
-/* Footer */
-.footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
-}
-
-.footer .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.footer p {
-    margin-bottom: 0.5rem;
-}
-
-.social-links a {
-    color: #fff;
-    margin: 0 0.5rem;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: #007bff;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .hero .container,
-    .about .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-content, .about-content {
-        margin-bottom: 2rem;
-    }
-
-    .hero-image, .about-image {
-        margin-bottom: 2rem; /* Add margin if they stack */
-    }
-     .about-content h2 {
-        text-align: center;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .navbar .container {
-        flex-wrap: wrap; /* Allow items to wrap */
-        position: relative; /* For positioning the mobile menu */
-    }
-
-    .navbar .nav-links {
-        display: none; /* Hide nav links by default */
-        flex-direction: column;
-        width: 100%;
-        background-color: #fff;
-        position: absolute;
-        top: 100%; /* Position below the navbar */
-        left: 0;
-        padding: 1rem 0;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .navbar .nav-links.active {
-        display: flex; /* Show when active */
-    }
-
-    .navbar .nav-links li {
-        margin: 0.5rem 0;
-        text-align: center;
-    }
-
-    .navbar .btn-signup {
-        margin-top: 1rem; /* Add space if it wraps */
-        width: 100%; /* Make it full width in mobile menu */
-    }
-
-    .menu-toggle {
-        display: flex; /* Show hamburger icon */
-        order: 1; /* Move it to the right if logo is first */
-    }
-    .navbar .btn-signup { /* Hide signup button from main nav on small screens if it's too cluttered */
-        display: none;
-    }
-     /* You might want to add the signup button inside the mobile dropdown instead */
-    .nav-links.active .btn-signup-mobile { /* Example class for mobile signup */
-        display: block;
-        margin: 1rem auto;
-    }
-
-
-    .service-cards {
-        flex-direction: column;
-    }
-
-    .service-card {
-        flex-basis: 100%; /* Full width for stacked cards */
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-    .hero-content p {
-        font-size: 1rem;
-    }
-
-    section h2 {
-        font-size: 2rem;
-    }
-    .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 576px) {
-    .container {
-        width: 95%;
-    }
-
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr; /* Single column */
-    }
-    .portfolio-item img {
-        height: 200px;
-    }
-}
-</style>
-
+    <title>Conceptual Website Layout</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4; /* Light gray for the main content area */
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 280px;
+            background-color: #2c3e50; /* Dark blue - similar to image */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            height: 100%;
+            overflow-y: auto; /* Allows scrolling if content exceeds height */
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 1px solid #34495e; /* Slightly lighter border */
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li a, .sidebar-nav li .nav-item-container {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-nav li a:hover, .sidebar-nav li .nav-item-container:hover {
+            background-color: #34495e; /* Slightly lighter blue on hover */
+        }
+
+        .sidebar-nav li .nav-item-container .icon,
+        .sidebar-nav li a .icon {
+            margin-right: 15px;
+            width: 20px; /* Fixed width for icons */
+            text-align: center;
+        }
+
+        .sidebar-nav li .nav-item-container .arrow {
+            margin-left: auto; /* Pushes arrow to the right */
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-nav li.active .nav-item-container .arrow {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-nav .submenu {
+            list-style: none;
+            padding-left: 35px; /* Indent submenu items */
+            background-color: #233140; /* Slightly darker for submenu */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .sidebar-nav li.active .submenu {
+            /* max-height will be set by JS */
+        }
+
+        .sidebar-nav .submenu li a {
+            padding: 10px 20px;
+            font-size: 0.9em;
+        }
+
+        /* Main Content Area Styling */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #ffffff; /* White background for content */
+            overflow-y: auto;
+        }
+
+        .main-content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .main-content-header .left-controls,
+        .main-content-header .right-controls {
+            display: flex;
+            align-items: center;
+        }
+         /* Placeholder for icons - you'd use actual icons (e.g., Font Awesome, SVGs) */
+        .icon-placeholder::before {
+            content: "●"; /* Simple dot as placeholder */
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+        }
+        .arrow-placeholder::before {
+            content: ">";
+        }
+        .active .arrow-placeholder::before {
+            content: "∨";
+        }
+
+    </style>
 </head>
 <body>
-    
 
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">LOGO</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            ChinaSourcingHub
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Provinces & Cities</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Subitem 1</a></li>
+                        <li><a href="#"><span class="icon"></span>Subitem 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Processes & Taxes</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Tax Info</a></li>
+                        <li><a href="#"><span class="icon"></span>Process Flow</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="icon icon-placeholder"></span><span>FAQ</span></a></li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Sourcing Guides</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Guide A</a></li>
+                        <li><a href="#"><span class="icon"></span>Guide B</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Supplier Directory</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Verified Suppliers</a></li>
+                        <li><a href="#"><span class="icon"></span>New Suppliers</a></li>
+                    </ul>
+                </li>
+                <li>
+                     <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Product Categories</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Electronics</a></li>
+                        <li><a href="#"><span class="icon"></span>Textiles</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Quality Control</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Inspection</a></li>
+                        <li><a href="#"><span class="icon"></span>Standards</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>Logistics & Shipping</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Air Freight</a></li>
+                        <li><a href="#"><span class="icon"></span>Sea Freight</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="nav-item-container">
+                        <span class="icon icon-placeholder"></span> <span>News & Blog</span>
+                        <span class="arrow arrow-placeholder"></span>
+                    </div>
+                     <ul class="submenu">
+                        <li><a href="#"><span class="icon"></span>Latest News</a></li>
+                        <li><a href="#"><span class="icon"></span>Blog Posts</a></li>
+                    </ul>
+                </li>
             </ul>
-            <a href="#" class="btn btn-signup">Sign Up</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
-    <header class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Main Headline Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
+    <div class="main-content">
+        <div class="main-content-header">
+            <div class="left-controls">
+                 <span style="font-size: 1.5em; cursor: pointer;">&lt;</span>
             </div>
-            <div class="hero-image">
-                <img src="https://via.placeholder.com/500x400?text=Hero+Image" alt="Hero Image">
-            </div>
+            <div class="right-controls">
+                </div>
         </div>
-    </header>
-
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="service-cards">
-                <div class="service-card">
-                    <div class="icon">[Icon1]</div>
-                    <h3>Service 1</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">[Icon2]</div>
-                    <h3>Service 2</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">[Icon3]</div>
-                    <h3>Service 3</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
+        <h1>Welcome to the Main Content Area</h1>
+        <p>This is where the main content of the page selected from the sidebar would be displayed.</p>
+        <p>The provided image shows "Guide to sourcing products from China. Explore the complexities of manufacturing, quality..." in this section.</p>
         </div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-image">
-                <img src="https://via.placeholder.com/400x350?text=About+Us+Image" alt="About Us">
-            </div>
-            <div class="about-content">
-                <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a href="#" class="btn btn-secondary">Read More</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <h2>Our Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x250?text=Portfolio+1" alt="Portfolio Item 1">
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x250?text=Portfolio+2" alt="Portfolio Item 2">
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x250?text=Portfolio+3" alt="Portfolio Item 3">
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x250?text=Portfolio+4" alt="Portfolio Item 4">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-        </div>
-    </section>
-    
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 A product of QECEL.com, All rights reserved.</p>
-            <div class="social-links">
-                <a href="#">[FB]</a>
-                <a href="#">[TW]</a>
-                <a href="#">[IG]</a>
-                <a href="#">[LI]</a>
-            </div>
-        </div>
-    </footer>
-    
-
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+        document.addEventListener('DOMContentLoaded', function () {
+            const navItems = document.querySelectorAll('.sidebar-nav > ul > li');
 
-    if (mobileMenu && navLinks) {
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            // Optional: Animate hamburger icon
-            mobileMenu.classList.toggle('is-active');
-        });
-    }
+            navItems.forEach(item => {
+                const itemContainer = item.querySelector('.nav-item-container');
+                const submenu = item.querySelector('.submenu');
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+                if (itemContainer && submenu) { // Only add listeners to items with submenus
+                    itemContainer.addEventListener('click', () => {
+                        // Close other open submenus
+                        navItems.forEach(otherItem => {
+                            if (otherItem !== item && otherItem.classList.contains('active')) {
+                                otherItem.classList.remove('active');
+                                const otherSubmenu = otherItem.querySelector('.submenu');
+                                if (otherSubmenu) {
+                                    otherSubmenu.style.maxHeight = '0';
+                                }
+                            }
+                        });
 
-            if (targetElement) {
-                // Get the navbar height to offset scroll position
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                // Close mobile menu if open after clicking a link
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    if (mobileMenu) {
-                        mobileMenu.classList.remove('is-active');
-                    }
+                        // Toggle current submenu
+                        item.classList.toggle('active');
+                        if (item.classList.contains('active')) {
+                            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+                        } else {
+                            submenu.style.maxHeight = '0';
+                        }
+                    });
                 }
-            }
+            });
         });
-    });
-
-    // Optional: Add active class to nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', navHighlighter);
-
-    function navHighlighter() {
-        let scrollY = window.pageYOffset;
-        const navbarHeight = document.querySelector('.navbar').offsetHeight;
-
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            // Adjust sectionTop to account for the fixed navbar
-            const sectionTop = current.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 70; // 70 is an additional offset
-            let sectionId = current.getAttribute('id');
-
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-                document.querySelector('.nav-links a[href*=' + sectionId + ']').classList.add('active-link');
-            } else {
-                 const navLink = document.querySelector('.nav-links a[href*=' + sectionId + ']');
-                 if (navLink) {
-                    navLink.classList.remove('active-link');
-                 }
-            }
-        });
-    }
-    // Add this to your CSS for the active link style
-    /*
-    .nav-links a.active-link {
-        color: #007bff; // Or your primary color
-        font-weight: bold;
-    }
-    */
-
-
-    // Basic Contact Form Submission (Prevents default and logs to console)
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent actual submission for this demo
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            if (name && email && message) {
-                console.log('Form Submitted:');
-                console.log('Name:', name);
-                console.log('Email:', email);
-                console.log('Message:', message);
-                alert('Message sent (logged to console)!');
-                contactForm.reset(); // Clear the form
-            } else {
-                alert('Please fill in all fields.');
-            }
-        });
-    }
-
-});
     </script>
 
 </body>
