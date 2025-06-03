@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conceptual Website Layout</title>
+    <title>China Sourcing Guide</title>
     <style>
         /* Basic Reset */
         * {
@@ -14,262 +14,434 @@
         }
 
         body {
-            display: flex;
-            height: 100vh;
-            background-color: #f4f4f4; /* Light gray for the main content area */
-        }
-
-        /* Sidebar Styling */
-        .sidebar {
-            width: 280px;
-            background-color: #2c3e50; /* Dark blue - similar to image */
-            color: white;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
-            height: 100%;
-            overflow-y: auto; /* Allows scrolling if content exceeds height */
+            min-height: 100vh;
         }
 
-        .sidebar-header {
-            padding: 0 20px 20px 20px;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: left;
-            border-bottom: 1px solid #34495e; /* Slightly lighter border */
-            margin-bottom: 10px;
-        }
-
-        .sidebar-nav ul {
-            list-style: none;
-        }
-
-        .sidebar-nav li a, .sidebar-nav li .nav-item-container {
+        /* --- Navbar --- */
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 2rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
-            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .navbar-logo a {
+            color: #fff;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar-toggle {
+            display: none; /* Hidden on larger screens */
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
             cursor: pointer;
         }
 
-        .sidebar-nav li a:hover, .sidebar-nav li .nav-item-container:hover {
-            background-color: #34495e; /* Slightly lighter blue on hover */
-        }
-
-        .sidebar-nav li .nav-item-container .icon,
-        .sidebar-nav li a .icon {
-            margin-right: 15px;
-            width: 20px; /* Fixed width for icons */
-            text-align: center;
-        }
-
-        .sidebar-nav li .nav-item-container .arrow {
-            margin-left: auto; /* Pushes arrow to the right */
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-nav li.active .nav-item-container .arrow {
-            transform: rotate(90deg);
-        }
-
-        .sidebar-nav .submenu {
+        .navbar-links {
             list-style: none;
-            padding-left: 35px; /* Indent submenu items */
-            background-color: #233140; /* Slightly darker for submenu */
+            display: flex;
+        }
+
+        .navbar-links li {
+            margin-left: 20px;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: #f0a500; /* Accent color */
+        }
+
+        /* --- Side Menu --- */
+        .sidemenu {
+            height: 100%;
+            width: 0; /* Initially hidden */
+            position: fixed;
+            z-index: 1001; /* Above navbar content, below navbar toggle if needed */
+            top: 0;
+            left: 0;
+            background-color: #222;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px; /* Place content below the topnav */
+            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+        }
+
+        .sidemenu-header {
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+        }
+
+        .sidemenu-header h3 {
+            color: #f0a500;
+            font-size: 1.2rem;
+        }
+
+        .sidemenu .closebtn {
+            font-size: 2rem;
+            color: #818181;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sidemenu .closebtn:hover {
+            color: #f1f1f1;
+        }
+
+        .sidemenu-content {
+            padding: 20px;
+        }
+
+        .sidemenu ul {
+            list-style: none;
+        }
+
+        .sidemenu ul li a,
+        .sidemenu ul li .submenu-toggle {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            cursor: pointer;
+            border-bottom: 1px solid #333;
+        }
+        .sidemenu ul li .submenu-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidemenu ul li a:hover,
+        .sidemenu ul li .submenu-toggle:hover {
+            color: #f1f1f1;
+            background-color: #333;
+        }
+
+        .sidemenu .submenu {
+            list-style: none;
+            padding-left: 20px; /* Indent submenus */
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
 
-        .sidebar-nav li.active .submenu {
-            /* max-height will be set by JS */
+        .sidemenu .submenu.open {
+            max-height: 500px; /* Adjust as needed */
         }
 
-        .sidebar-nav .submenu li a {
-            padding: 10px 20px;
-            font-size: 0.9em;
+        .sidemenu .submenu li a {
+            font-size: 1rem;
+            color: #ccc;
+            padding: 8px 15px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        .sidemenu .submenu li a:hover {
+            color: #fff;
+            background-color: #444;
         }
 
-        /* Main Content Area Styling */
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: #ffffff; /* White background for content */
-            overflow-y: auto;
-        }
-
-        .main-content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-
-        .main-content-header .left-controls,
-        .main-content-header .right-controls {
-            display: flex;
-            align-items: center;
-        }
-         /* Placeholder for icons - you'd use actual icons (e.g., Font Awesome, SVGs) */
-        .icon-placeholder::before {
-            content: "●"; /* Simple dot as placeholder */
+        .arrow {
+            border: solid #818181;
+            border-width: 0 2px 2px 0;
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            text-align: center;
+            padding: 3px;
+            margin-left: 10px;
+            transition: transform 0.3s ease-out;
         }
-        .arrow-placeholder::before {
-            content: ">";
+        .arrow.down {
+            transform: rotate(45deg);
         }
-        .active .arrow-placeholder::before {
-            content: "∨";
+        .arrow.up {
+            transform: rotate(-135deg);
         }
 
+
+        /* --- Main Content --- */
+        .main-content {
+            padding-top: 80px; /* Height of navbar + some margin */
+            padding-bottom: 80px; /* Height of footer + some margin */
+            flex-grow: 1;
+            margin-left: 0; /* Adjusted by JS when sidemenu is open */
+            transition: margin-left .5s;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .main-content h1 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .main-content p {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar-toggle {
+                display: block; /* Show hamburger icon */
+            }
+
+            .navbar-links {
+                display: none; /* Hide normal nav links */
+                /* Alternatively, you could make them display block and style them differently */
+            }
+
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        /* For very small screens, adjust padding */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .navbar-logo a {
+                font-size: 1.2rem;
+            }
+            .main-content {
+                padding-top: 70px;
+            }
+            .footer {
+                padding: 1rem 0.5rem;
+            }
+            .sidemenu-header h3 {
+                font-size: 1rem;
+            }
+            .sidemenu .closebtn {
+                font-size: 1.8rem;
+            }
+            .sidemenu ul li a, .sidemenu ul li .submenu-toggle {
+                font-size: 1rem;
+            }
+            .sidemenu .submenu li a {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            ChinaSourcingHub
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="#">ChinaSourcingCo</a>
         </div>
-        <nav class="sidebar-nav">
+        <button class="navbar-toggle" id="navbarToggle">
+            ☰
+        </button>
+        <ul class="navbar-links" id="navbarLinks">
+            <li><a href="#" onclick="displayContent('Home', 'Welcome to our China Sourcing Guide!')">Home</a></li>
+            <li><a href="#" onclick="displayContent('About Us', 'Learn more about our expertise in sourcing from China.')">About</a></li>
+            <li><a href="#" onclick="displayContent('Services', 'Explore the range of sourcing services we offer.')">Services</a></li>
+            <li><a href="#" onclick="displayContent('Contact', 'Get in touch with us for your sourcing needs.')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="mySidemenu" class="sidemenu">
+        <div class="sidemenu-header">
+            <h3>Menu</h3>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        </div>
+        <div class="sidemenu-content">
             <ul>
+                <li><a href="#" onclick="displayContent('Dashboard', 'Welcome to your Sourcing Dashboard.'); closeNav();">Dashboard</a></li>
                 <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Provinces & Cities</span>
-                        <span class="arrow arrow-placeholder"></span>
+                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
+                        <span>Product Sourcing</span>
+                        <span class="arrow down"></span>
                     </div>
                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Subitem 1</a></li>
-                        <li><a href="#"><span class="icon"></span>Subitem 2</a></li>
+                        <li><a href="#" onclick="displayContent('Supplier Identification', 'Content for Supplier Identification. We help you find reliable suppliers in China.'); closeNav();">Supplier Identification</a></li>
+                        <li><a href="#" onclick="displayContent('Price Negotiation', 'Content for Price Negotiation. Our experts negotiate the best prices for you.'); closeNav();">Price Negotiation</a></li>
+                        <li><a href="#" onclick="displayContent('Sample Arrangement', 'Content for Sample Arrangement. We facilitate sample procurement and review.'); closeNav();">Sample Arrangement</a></li>
                     </ul>
                 </li>
                 <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Processes & Taxes</span>
-                        <span class="arrow arrow-placeholder"></span>
+                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
+                        <span>Quality Control</span>
+                        <span class="arrow down"></span>
                     </div>
                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Tax Info</a></li>
-                        <li><a href="#"><span class="icon"></span>Process Flow</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><span class="icon icon-placeholder"></span><span>FAQ</span></a></li>
-                <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Sourcing Guides</span>
-                        <span class="arrow arrow-placeholder"></span>
-                    </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Guide A</a></li>
-                        <li><a href="#"><span class="icon"></span>Guide B</a></li>
+                        <li><a href="#" onclick="displayContent('Pre-Production Inspection', 'Content for Pre-Production Inspection. Ensuring quality before mass production starts.'); closeNav();">Pre-Production Inspection</a></li>
+                        <li><a href="#" onclick="displayContent('During Production Inspection', 'Content for During Production Inspection. Monitoring quality throughout the manufacturing process.'); closeNav();">During Production Inspection</a></li>
+                        <li><a href="#" onclick="displayContent('Pre-Shipment Inspection', 'Content for Pre-Shipment Inspection. Final quality check before goods are dispatched.'); closeNav();">Pre-Shipment Inspection</a></li>
                     </ul>
                 </li>
                 <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Supplier Directory</span>
-                        <span class="arrow arrow-placeholder"></span>
+                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
+                        <span>Logistics</span>
+                        <span class="arrow down"></span>
                     </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Verified Suppliers</a></li>
-                        <li><a href="#"><span class="icon"></span>New Suppliers</a></li>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="displayContent('Shipping Solutions', 'Content for Shipping Solutions. We offer various shipping options to meet your needs.'); closeNav();">Shipping Solutions</a></li>
+                        <li><a href="#" onclick="displayContent('Customs Clearance', 'Content for Customs Clearance. Assisting with the necessary documentation and procedures.'); closeNav();">Customs Clearance</a></li>
+                        <li><a href="#" onclick="displayContent('Warehousing', 'Content for Warehousing. Secure storage solutions for your products.'); closeNav();">Warehousing</a></li>
                     </ul>
                 </li>
-                <li>
-                     <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Product Categories</span>
-                        <span class="arrow arrow-placeholder"></span>
-                    </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Electronics</a></li>
-                        <li><a href="#"><span class="icon"></span>Textiles</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Quality Control</span>
-                        <span class="arrow arrow-placeholder"></span>
-                    </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Inspection</a></li>
-                        <li><a href="#"><span class="icon"></span>Standards</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>Logistics & Shipping</span>
-                        <span class="arrow arrow-placeholder"></span>
-                    </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Air Freight</a></li>
-                        <li><a href="#"><span class="icon"></span>Sea Freight</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="nav-item-container">
-                        <span class="icon icon-placeholder"></span> <span>News & Blog</span>
-                        <span class="arrow arrow-placeholder"></span>
-                    </div>
-                     <ul class="submenu">
-                        <li><a href="#"><span class="icon"></span>Latest News</a></li>
-                        <li><a href="#"><span class="icon"></span>Blog Posts</a></li>
-                    </ul>
-                </li>
+                <li><a href="#" onclick="displayContent('FAQ', 'Frequently Asked Questions about sourcing from China.'); closeNav();">FAQ</a></li>
+                <li><a href="#" onclick="displayContent('Blog', 'Read our latest articles and insights on China sourcing.'); closeNav();">Blog</a></li>
+                 <li><a href="#" onclick="displayContent('Case Studies', 'Explore our successful sourcing projects and client stories.'); closeNav();">Case Studies</a></li>
             </ul>
-        </nav>
+        </div>
     </div>
 
-    <div class="main-content">
-        <div class="main-content-header">
-            <div class="left-controls">
-                 <span style="font-size: 1.5em; cursor: pointer;">&lt;</span>
-            </div>
-            <div class="right-controls">
-                </div>
-        </div>
-        <h1>Welcome to the Main Content Area</h1>
-        <p>This is where the main content of the page selected from the sidebar would be displayed.</p>
-        <p>The provided image shows "Guide to sourcing products from China. Explore the complexities of manufacturing, quality..." in this section.</p>
-        </div>
+    <div class="main-content" id="mainContent">
+        <h1>Welcome to China Sourcing Guide</h1>
+        <p>Your one-stop solution for efficiently and effectively sourcing products from China. Navigate through our menu to explore services and information.</p>
+        <p>Use the menu icon (☰) on smaller screens or the top navigation bar to access different sections. The side menu provides detailed options for your sourcing journey.</p>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <span id="currentYear"></span> China Sourcing Guide. All Rights Reserved.</p>
+        <p>Your Trusted Partner in China Sourcing</p>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const navItems = document.querySelectorAll('.sidebar-nav > ul > li');
+        // --- Navbar Toggle for Mobile ---
+        const navbarToggle = document.getElementById('navbarToggle');
+        const sidemenu = document.getElementById('mySidemenu');
+        const mainContent = document.getElementById('mainContent');
 
-            navItems.forEach(item => {
-                const itemContainer = item.querySelector('.nav-item-container');
-                const submenu = item.querySelector('.submenu');
-
-                if (itemContainer && submenu) { // Only add listeners to items with submenus
-                    itemContainer.addEventListener('click', () => {
-                        // Close other open submenus
-                        navItems.forEach(otherItem => {
-                            if (otherItem !== item && otherItem.classList.contains('active')) {
-                                otherItem.classList.remove('active');
-                                const otherSubmenu = otherItem.querySelector('.submenu');
-                                if (otherSubmenu) {
-                                    otherSubmenu.style.maxHeight = '0';
-                                }
-                            }
-                        });
-
-                        // Toggle current submenu
-                        item.classList.toggle('active');
-                        if (item.classList.contains('active')) {
-                            submenu.style.maxHeight = submenu.scrollHeight + 'px';
-                        } else {
-                            submenu.style.maxHeight = '0';
-                        }
-                    });
-                }
-            });
+        navbarToggle.addEventListener('click', () => {
+            openNav();
         });
+
+        // --- Side Menu Functionality ---
+        function openNav() {
+            sidemenu.style.width = "280px"; // Width of the sidemenu
+            // Optional: Push content to the right
+            // mainContent.style.marginLeft = "280px";
+        }
+
+        function closeNav() {
+            sidemenu.style.width = "0";
+            // Optional: Bring content back
+            // mainContent.style.marginLeft = "0";
+        }
+
+        // --- Submenu Toggle ---
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+            if (submenu.classList.contains('open')) {
+                submenu.classList.remove('open');
+                arrow.classList.remove('up');
+                arrow.classList.add('down');
+            } else {
+                // Close other open submenus (optional)
+                document.querySelectorAll('.sidemenu .submenu.open').forEach(openSubmenu => {
+                    if (openSubmenu !== submenu) {
+                        openSubmenu.classList.remove('open');
+                        const otherArrow = openSubmenu.previousElementSibling.querySelector('.arrow');
+                        if (otherArrow) {
+                             otherArrow.classList.remove('up');
+                             otherArrow.classList.add('down');
+                        }
+                    }
+                });
+                submenu.classList.add('open');
+                arrow.classList.remove('down');
+                arrow.classList.add('up');
+            }
+        }
+
+        // --- Display Content ---
+        function displayContent(title, content) {
+            const mainContentArea = document.getElementById('mainContent');
+            mainContentArea.innerHTML = `<h1>${title}</h1><p>${content}</p>`;
+            // Add more complex HTML structure here if needed based on the title
+
+            if (title === 'Supplier Identification') {
+                mainContentArea.innerHTML += `
+                    <h2>Our Process:</h2>
+                    <ul>
+                        <li>Understanding your product requirements.</li>
+                        <li>Market research and supplier shortlisting.</li>
+                        <li>Factory audits and verification.</li>
+                        <li>Presenting you with a list of qualified suppliers.</li>
+                    </ul>
+                    <p>We ensure transparency and reliability in every step.</p>
+                `;
+            } else if (title === 'Pre-Shipment Inspection') {
+                 mainContentArea.innerHTML += `
+                    <h2>Key Checks:</h2>
+                    <ol>
+                        <li>Quantity Verification</li>
+                        <li>Workmanship Quality</li>
+                        <li>Product Specifications (color, size, material)</li>
+                        <li>Functionality Testing</li>
+                        <li>Packaging & Labeling</li>
+                    </ol>
+                    <p>A detailed report with images will be provided.</p>
+                `;
+            }
+            // Add more 'else if' blocks for other specific content sections
+
+            if (window.innerWidth <= 768) { // Close sidemenu on mobile after clicking a link
+                closeNav();
+            }
+        }
+
+        // --- Footer Current Year ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Close sidemenu if clicking outside of it (optional) ---
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidemenu = sidemenu.contains(event.target);
+            const isClickOnToggle = navbarToggle.contains(event.target);
+
+            if (!isClickInsideSidemenu && !isClickOnToggle && sidemenu.style.width === "280px") {
+                // Only close if sidemenu is open and click is not on toggle
+                // This prevents immediate closing if toggle button itself is outside (which it isn't in this layout)
+                // but good for robustness if layout changes.
+                // Check if the click was on a link that should keep the menu open (not implemented here, but a consideration)
+                // For this simple setup, any click outside closes it.
+                 // closeNav(); // Can be too aggressive, consider user experience.
+            }
+        });
+
     </script>
 
 </body>
