@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Only China Sourcing Guide You Need.</title>
+    <title>China Sourcing Platform</title>
     <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: sans-serif;
-        }
-
+        /* Basic Reset & Body Styling */
         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
             color: #333;
@@ -22,807 +17,471 @@
             min-height: 100vh;
         }
 
-        /* --- Navbar --- */
-        .navbar {
+        /* Header Styling */
+        header {
             background-color: #333;
             color: #fff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
+            padding: 1rem 0;
+            text-align: center;
             width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .navbar-logo a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .navbar-toggle {
-            display: none; /* Hidden on larger screens */
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .navbar-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .navbar-links li {
-            margin-left: 20px;
-        }
-
-        .navbar-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-links a:hover {
-            color: #f0a500; /* Accent color */
-        }
-
-        /* --- Side Menu --- */
-        .sidemenu {
-            height: 100%;
-            width: 0; /* Initially hidden */
             position: fixed;
-            z-index: 1001; /* Above navbar content, below navbar toggle if needed */
             top: 0;
             left: 0;
-            background-color: #222;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px; /* Place content below the topnav */
-            box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
 
-        .sidemenu-header {
-            padding: 10px 15px;
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        /* Main Container for Sidebar and Content */
+        .main-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #444;
+            margin-top: 60px; /* Height of the fixed header */
+            flex-grow: 1;
         }
 
-        .sidemenu-header h3 {
-            color: #f0a500;
-            font-size: 1.2rem;
-        }
-
-        .sidemenu .closebtn {
-            font-size: 2rem;
-            color: #818181;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .sidemenu .closebtn:hover {
-            color: #f1f1f1;
-        }
-
-        .sidemenu-content {
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #444;
+            color: #fff;
             padding: 20px;
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto; /* For scrollable sidebar if content exceeds height */
+            height: calc(100vh - 60px); /* Full viewport height minus header */
+            position: fixed;
+            left: 0;
+            top: 60px; /* Below header */
         }
 
-        .sidemenu ul {
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar nav ul {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .sidemenu ul li a,
-        .sidemenu ul li .submenu-toggle {
-            padding: 10px 15px;
+        .sidebar nav ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar nav ul li a,
+        .sidebar nav ul li .submenu-toggle {
+            color: #fff;
             text-decoration: none;
-            font-size: 1.1rem;
-            color: #818181;
             display: block;
-            transition: 0.3s;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
             cursor: pointer;
-            border-bottom: 1px solid #333;
-        }
-        .sidemenu ul li .submenu-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .sidemenu ul li a:hover,
-        .sidemenu ul li .submenu-toggle:hover {
-            color: #f1f1f1;
-            background-color: #333;
+        .sidebar nav ul li a:hover,
+        .sidebar nav ul li .submenu-toggle:hover,
+        .sidebar nav ul li a.active {
+            background-color: #555;
         }
 
-        .sidemenu .submenu {
+        /* Submenu Styling */
+        .sidebar nav ul ul {
             list-style: none;
-            padding-left: 20px; /* Indent submenus */
+            padding-left: 20px; /* Indent submenu */
+            margin-top: 5px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
 
-        .sidemenu .submenu.open {
-            max-height: 500px; /* Adjust as needed */
+        .sidebar nav ul ul.open {
+            max-height: 500px; /* Adjust as needed for submenu content */
         }
 
-        .sidemenu .submenu li a {
-            font-size: 1rem;
-            color: #ccc;
+        .sidebar nav ul ul li a {
             padding: 8px 15px;
-            border-bottom: 1px solid #2a2a2a;
-        }
-        .sidemenu .submenu li a:hover {
-            color: #fff;
-            background-color: #444;
+            font-size: 0.9em;
         }
 
-        .arrow {
-            border: solid #818181;
-            border-width: 0 2px 2px 0;
-            display: inline-block;
-            padding: 3px;
-            margin-left: 10px;
-            transition: transform 0.3s ease-out;
+        .sidebar nav ul li .submenu-toggle::after {
+            content: ' ▼'; /* Down arrow for closed submenu */
+            font-size: 0.8em;
+            float: right;
         }
-        .arrow.down {
-            transform: rotate(45deg);
-        }
-        .arrow.up {
-            transform: rotate(-135deg);
+
+        .sidebar nav ul li .submenu-toggle.open::after {
+            content: ' ▲'; /* Up arrow for open submenu */
         }
 
 
-        /* --- Main Content --- */
-        .main-content {
-            padding-top: 80px; /* Height of navbar + some margin */
-            padding-bottom: 80px; /* Height of footer + some margin */
+        /* Content Area Styling */
+        .content-area {
             flex-grow: 1;
-            margin-left: 0; /* Adjusted by JS when sidemenu is open */
-            transition: margin-left .5s;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding: 20px;
+            margin-left: 250px; /* Same as sidebar width */
+            transition: margin-left 0.3s ease-in-out;
+            background-color: #fff;
         }
 
-        .main-content h1 {
-            margin-bottom: 1rem;
+        .content-area.sidebar-collapsed {
+            margin-left: 0;
+        }
+
+        .content-section {
+            display: none; /* Hide all content sections by default */
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .content-section.active {
+            display: block; /* Show active content section */
+        }
+
+        .content-section h2 {
+            margin-top: 0;
             color: #333;
         }
-        .main-content p {
-            margin-bottom: 0.8rem;
-            line-height: 1.8;
+
+        .content-section p {
+            margin-bottom: 10px;
         }
 
-        /* --- Footer --- */
-        .footer {
+        /* Sidebar Toggle Button (for smaller screens) */
+        .sidebar-toggle {
+            display: none; /* Hidden by default on larger screens */
             background-color: #333;
             color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 15px;
+            z-index: 1001;
+            border-radius: 4px;
+        }
+
+        /* Footer Styling */
+        footer {
             text-align: center;
-            padding: 1.5rem 1rem;
+            padding: 1rem 0;
+            background-color: #333;
+            color: #fff;
             width: 100%;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
         }
 
-        .footer p {
-            margin: 0;
-        }
-
-        /* --- Responsive Design --- */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .navbar-toggle {
-                display: block; /* Show hamburger icon */
+            .sidebar {
+                transform: translateX(-100%); /* Hide sidebar by default */
+                z-index: 999;
             }
 
-            .navbar-links {
-                display: none; /* Hide normal nav links */
-                /* Alternatively, you could make them display block and style them differently */
+            .sidebar.open {
+                transform: translateX(0);
             }
 
-            .main-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
+            .content-area {
+                margin-left: 0; /* Content takes full width when sidebar is hidden */
             }
-        }
 
-        /* For very small screens, adjust padding */
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 1rem;
+            .sidebar-toggle {
+                display: block; /* Show toggle button */
             }
-            .navbar-logo a {
-                font-size: 1.2rem;
-            }
-            .main-content {
-                padding-top: 70px;
-            }
-            .footer {
-                padding: 1rem 0.5rem;
-            }
-            .sidemenu-header h3 {
-                font-size: 1rem;
-            }
-            .sidemenu .closebtn {
-                font-size: 1.8rem;
-            }
-            .sidemenu ul li a, .sidemenu ul li .submenu-toggle {
-                font-size: 1rem;
-            }
-            .sidemenu .submenu li a {
-                font-size: 0.9rem;
+
+            header h1 {
+                font-size: 1.5rem;
+                margin-left: 60px; /* Space for toggle button */
             }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <a href="#">Global China Sourcing Guide </a>
-        </div>
-        <button class="navbar-toggle" id="navbarToggle">
-            ☰
-        </button>
-        
-        
-        <ul class="navbar-links" id="navbarLinks">
-            <li><a href="#" onclick="displayContent('Home', 'Welcome to our China Sourcing Guide!')">Home</a></li>
-            <li><a href="#" onclick="displayContent('About Us', 'Learn more about our expertise in sourcing from China.')">About</a></li>
-            <li><a href="#" onclick="displayContent('Services', 'Explore the range of sourcing services we offer.')">Services</a></li>
-            <li><a href="#" onclick="displayContent('Contact', 'Get in touch with us for your sourcing needs.')">Contact</a></li>
-        </ul>
-        
-        
-    </nav>
+    <header>
+        <h1>China Sourcing Platform</h1>
+    </header>
 
-    <div id="mySidemenu" class="sidemenu">
-        <div class="sidemenu-header">
-            <h3>Menu</h3>
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        </div>
-        
-        <div class="sidemenu-content">
-            <ul>
-                <li><a href="#" onclick="displayContent('Dashboard', 'Welcome to your Sourcing Dashboard.'); closeNav();">Dashboard</a></li>
-                <li>
-                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
-                        <span>Product Sourcing</span>
-                        <span class="arrow down"></span>
-                    </div>
-                    <ul class="submenu">
-                        
-                        <li><a href="#" onclick="displayContent('Regions', 
-                            ' 
-                               # China Regional Sourcing Guide - Products by Province/Region
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
 
-## PROVINCES (23)
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-content="home">Home</a></li>
+                    <li>
+                        <span class="submenu-toggle">Products</span>
+                        <ul class="submenu">
+                            <li><a href="#" class="nav-link" data-content="electronics">Electronics</a></li>
+                            <li><a href="#" class="nav-link" data-content="apparel">Apparel</a></li>
+                            <li><a href="#" class="nav-link" data-content="home-goods">Home Goods</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="submenu-toggle">Services</span>
+                        <ul class="submenu">
+                            <li><a href="#" class="nav-link" data-content="sourcing">Sourcing & Procurement</a></li>
+                            <li><a href="#" class="nav-link" data-content="quality-control">Quality Control</a></li>
+                            <li><a href="#" class="nav-link" data-content="logistics">Logistics & Shipping</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav-link" data-content="suppliers">Find Suppliers</a></li>
+                    <li><a href="#" class="nav-link" data-content="guides">Sourcing Guides</a></li>
+                    <li><a href="#" class="nav-link" data-content="contact">Contact Us</a></li>
+                    <li><a href="#" class="nav-link" data-content="about">About Us</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-### 1. Anhui Province
-**Key Industries & Products:**
-- **Automotive Parts & Components** - Major automotive manufacturing hub
-- **Home Appliances** - Refrigerators, washing machines, air conditioners
-- **Steel & Iron Products** - Steel plates, construction steel
-- **Textiles & Clothing** - Cotton textiles, garments
-- **Agricultural Products** - Tea (Huangshan Maofeng), rice, soybeans
-- **Chemicals** - Fertilizers, petrochemicals
-- **Machinery** - Construction machinery, agricultural equipment
+        <main class="content-area" id="contentArea">
+            <div id="content-sections">
+                <div id="home" class="content-section active">
+                    <h2>Welcome to the China Sourcing Platform!</h2>
+                    <p>Your one-stop solution for finding reliable suppliers and high-quality products from China. Navigate through our services and product categories to get started.</p>
+                    <p>We offer comprehensive services including product sourcing, supplier verification, quality control, and logistics management to streamline your international trade operations.</p>
+                    <p>Explore our vast network of manufacturers and wholesalers across various industries. Whether you're a startup or an established business, we're here to help you succeed.</p>
+                    <p><strong>Tip:</strong> Click on the menu items in the sidebar to explore different sections of our platform. On smaller screens, use the '☰' icon to toggle the sidebar.</p>
+                </div>
 
-### 2. Fujian Province
-**Key Industries & Products:**
-- **Footwear** - Athletic shoes, casual shoes (major Nike, Adidas supplier)
-- **Stone Products** - Granite, marble, stone crafts
-- **Tea** - Oolong tea, white tea, jasmine tea
-- **Seafood Products** - Processed fish, shellfish, seaweed
-- **Electronics** - LED lights, electronic components
-- **Textiles** - Synthetic fabrics, sportswear
-- **Bamboo Products** - Bamboo furniture, crafts, flooring
-
-### 3. Gansu Province
-**Key Industries & Products:**
-- **Non-ferrous Metals** - Aluminum, copper, zinc, lead
-- **Petrochemicals** - Refined petroleum products
-- **Agricultural Products** - Herbs (traditional Chinese medicine), wool
-- **Minerals** - Rare earth elements, nickel
-- **Machinery** - Heavy machinery, mining equipment
-- **Textiles** - Wool products, carpets
-
-### 4. Guangdong Province
-**Key Industries & Products:**
-- **Electronics & IT** - Smartphones, computers, semiconductors, PCBs
-- **Toys & Games** - Plastic toys, electronic toys, stuffed animals
-- **Furniture** - Office furniture, home furniture, rattan furniture
-- **Textiles & Apparel** - Fashion clothing, leather goods, fabrics
-- **Household Appliances** - Small appliances, kitchen equipment
-- **Automotive Parts** - Car accessories, auto electronics
-- **Jewelry & Accessories** - Fashion jewelry, watches, handbags
-- **Plastics & Rubber** - Plastic products, rubber goods
-
-### 5. Guizhou Province
-**Key Industries & Products:**
-- **Alcohol** - Baijiu (Chinese liquor), especially Moutai
-- **Tobacco Products** - Cigarettes, tobacco processing
-- **Pharmaceuticals** - Traditional Chinese medicine, herbal products
-- **Coal & Energy** - Coal products, electricity
-- **Non-ferrous Metals** - Aluminum, phosphorus
-- **Agricultural Products** - Tea, chili peppers, herbs
-
-### 6. Hainan Province
-**Key Industries & Products:**
-- **Tropical Fruits** - Coconuts, mangoes, pineapples, dragon fruit
-- **Seafood** - Fresh and processed seafood
-- **Rubber Products** - Natural rubber, rubber goods
-- **Pharmaceuticals** - Traditional Chinese medicine, health supplements
-- **Coconut Products** - Coconut oil, coconut fiber, coconut crafts
-- **Tourism Products** - Handicrafts, souvenirs
-
-### 7. Hebei Province
-**Key Industries & Products:**
-- **Steel & Iron** - Steel products, iron ore, metal structures
-- **Cement** - Construction cement, building materials
-- **Glass** - Float glass, glass products
-- **Chemicals** - Industrial chemicals, fertilizers
-- **Textiles** - Cotton textiles, cashmere products
-- **Pharmaceuticals** - Generic drugs, APIs
-- **Agricultural Products** - Wheat, corn, pears
-
-### 8. Heilongjiang Province
-**Key Industries & Products:**
-- **Agricultural Products** - Soybeans, corn, rice, wheat
-- **Dairy Products** - Milk powder, dairy products
-- **Timber & Wood Products** - Lumber, wood furniture, paper
-- **Petroleum Products** - Crude oil, refined petroleum
-- **Machinery** - Agricultural machinery, heavy equipment
-- **Fur Products** - Fur clothing, leather goods
-
-### 9. Henan Province
-**Key Industries & Products:**
-- **Agricultural Products** - Wheat, corn, sesame, peanuts
-- **Food Processing** - Instant noodles, snack foods, flour
-- **Aluminum Products** - Aluminum ingots, aluminum products
-- **Machinery** - Agricultural machinery, construction equipment
-- **Textiles** - Cotton textiles, clothing
-- **Automotive** - Commercial vehicles, auto parts
-
-### 10. Hubei Province
-**Key Industries & Products:**
-- **Automotive** - Passenger cars, commercial vehicles, auto parts
-- **Steel & Iron** - Steel products, iron ore
-- **Chemicals** - Petrochemicals, pharmaceuticals, fertilizers
-- **Machinery** - Heavy machinery, precision instruments
-- **Textiles** - Cotton textiles, silk products
-- **Food Products** - Processed foods, beverages
-- **Optical Products** - Fiber optics, optical instruments
-
-### 11. Hunan Province
-**Key Industries & Products:**
-- **Non-ferrous Metals** - Zinc, lead, tungsten, antimony
-- **Machinery** - Construction machinery, agricultural equipment
-- **Steel Products** - Steel rails, steel structures
-- **Fireworks & Pyrotechnics** - Fireworks, firecrackers
-- **Textiles** - Cotton textiles, hemp products
-- **Ceramics** - Porcelain, ceramic tiles
-- **Food Products** - Rice, tea, spices
-
-### 12. Jiangsu Province
-**Key Industries & Products:**
-- **Electronics** - Semiconductors, electronic components, solar panels
-- **Textiles** - Silk products, synthetic fabrics, clothing
-- **Chemicals** - Fine chemicals, pharmaceuticals, pesticides
-- **Machinery** - Precision machinery, equipment manufacturing
-- **Steel Products** - Special steel, steel processing
-- **Automotive** - Auto parts, automotive electronics
-- **Solar Equipment** - Solar panels, solar components
-
-### 13. Jiangxi Province
-**Key Industries & Products:**
-- **Ceramics** - Porcelain (Jingdezhen), ceramic products, tiles
-- **Non-ferrous Metals** - Copper, tungsten, rare earth elements
-- **Textiles** - Cotton textiles, ramie products
-- **Pharmaceuticals** - Traditional Chinese medicine, generic drugs
-- **Food Products** - Rice, tea, oranges
-- **Optical Products** - Lenses, optical instruments
-
-### 14. Jilin Province
-**Key Industries & Products:**
-- **Automotive** - Passenger cars, auto parts (FAW Group)
-- **Petrochemicals** - Synthetic rubber, plastics, chemicals
-- **Pharmaceuticals** - Traditional Chinese medicine, vaccines
-- **Agricultural Products** - Corn, soybeans, ginseng
-- **Machinery** - Heavy machinery, railway equipment
-- **Timber Products** - Lumber, wood processing
-
-### 15. Liaoning Province
-**Key Industries & Products:**
-- **Heavy Machinery** - Ship engines, turbines, heavy equipment
-- **Steel & Iron** - Steel products, iron ore, metal processing
-- **Petrochemicals** - Refined petroleum, chemicals
-- **Shipbuilding** - Ships, marine equipment
-- **Automotive** - Auto parts, commercial vehicles
-- **Textiles** - Synthetic fabrics, clothing
-- **Seafood** - Marine products, aquaculture
-
-### 16. Qinghai Province
-**Key Industries & Products:**
-- **Salt Products** - Table salt, industrial salt
-- **Non-ferrous Metals** - Potassium, magnesium, lithium
-- **Wool Products** - Yak wool, cashmere, carpets
-- **Pharmaceuticals** - Traditional Tibetan medicine
-- **Agricultural Products** - Barley, rapeseed
-- **Renewable Energy** - Solar panels, wind turbines
-
-### 17. Shaanxi Province
-**Key Industries & Products:**
-- **Aerospace** - Aircraft parts, aerospace components
-- **Energy** - Coal, natural gas, petroleum
-- **Electronics** - Semiconductors, electronic components
-- **Machinery** - Heavy machinery, precision equipment
-- **Textiles** - Cotton textiles, silk products
-- **Pharmaceuticals** - Generic drugs, APIs
-- **Agricultural Products** - Apples, kiwi fruit
-
-### 18. Shandong Province
-**Key Industries & Products:**
-- **Tires & Rubber** - Truck tires, passenger car tires
-- **Machinery** - Construction machinery, agricultural equipment
-- **Chemicals** - Petrochemicals, fine chemicals, pharmaceuticals
-- **Textiles** - Cotton textiles, silk, clothing
-- **Food Products** - Processed foods, beverages, seafood
-- **Paper Products** - Newsprint, packaging paper
-- **Gold & Jewelry** - Gold products, jewelry
-
-### 19. Shanxi Province
-**Key Industries & Products:**
-- **Coal Products** - Coking coal, thermal coal
-- **Steel & Iron** - Steel products, iron casting
-- **Chemicals** - Coal chemicals, coke
-- **Machinery** - Heavy machinery, mining equipment
-- **Aluminum Products** - Aluminum ingots, aluminum processing
-- **Textiles** - Cotton textiles, wool products
-
-### 20. Sichuan Province
-**Key Industries & Products:**
-- **Electronics** - Semiconductors, computer components, software
-- **Machinery** - Heavy machinery, precision equipment
-- **Pharmaceuticals** - Traditional Chinese medicine, generic drugs
-- **Food Products** - Processed foods, spices, liquor
-- **Textiles** - Silk products, cotton textiles
-- **Chemicals** - Fine chemicals, fertilizers
-- **Agricultural Products** - Rice, tea, citrus fruits
-
-### 21. Yunnan Province
-**Key Industries & Products:**
-- **Non-ferrous Metals** - Copper, zinc, lead, tin
-- **Tobacco Products** - Cigarettes, tobacco processing
-- **Flowers** - Fresh cut flowers, dried flowers
-- **Tea** - Pu-erh tea, green tea
-- **Pharmaceuticals** - Traditional Chinese medicine, herbal products
-- **Agricultural Products** - Coffee, rubber, tropical fruits
-- **Minerals** - Phosphate, coal
-
-### 22. Zhejiang Province
-**Key Industries & Products:**
-- **Textiles & Apparel** - Silk products, synthetic fabrics, clothing
-- **Small Commodities** - Daily necessities, plastic goods, small electronics
-- **Machinery** - Precision machinery, equipment manufacturing
-- **Chemicals** - Fine chemicals, dyes, pharmaceuticals
-- **Electronics** - Electronic components, LED products
-- **Automotive Parts** - Auto accessories, components
-- **Home Appliances** - Small appliances, kitchen equipment
-
-### 23. Taiwan
-**Key Industries & Products:**
-- **Semiconductors** - Microchips, electronic components
-- **Electronics** - Computers, smartphones, LCD panels
-- **Machinery** - Precision machinery, machine tools
-- **Plastics** - Plastic products, synthetic materials
-- **Textiles** - Synthetic fabrics, technical textiles
-- **Chemicals** - Petrochemicals, specialty chemicals
-- **Bicycles** - High-end bicycles, bike components
-
-## AUTONOMOUS REGIONS (5)
-
-### 1. Guangxi Autonomous Region
-**Key Industries & Products:**
-- **Sugar Products** - Cane sugar, sugar processing
-- **Non-ferrous Metals** - Aluminum, tin, manganese
-- **Automotive** - Commercial vehicles, auto parts
-- **Machinery** - Construction machinery, agricultural equipment
-- **Textiles** - Silk products, cotton textiles
-- **Pharmaceuticals** - Traditional Chinese medicine
-- **Agricultural Products** - Rice, fruits, spices
-
-### 2. Inner Mongolia Autonomous Region
-**Key Industries & Products:**
-- **Cashmere Products** - Cashmere yarn, cashmere clothing
-- **Coal Products** - Thermal coal, coking coal
-- **Steel & Iron** - Steel products, iron ore
-- **Dairy Products** - Milk powder, dairy products
-- **Chemicals** - Coal chemicals, fertilizers
-- **Rare Earth Elements** - Rare earth metals, magnets
-- **Wool Products** - Wool yarn, wool textiles
-
-### 3. Ningxia Autonomous Region
-**Key Industries & Products:**
-- **Coal Products** - Thermal coal, coal chemicals
-- **Goji Berries** - Dried goji berries, goji products
-- **Chemicals** - Coal chemicals, petrochemicals
-- **Textiles** - Cotton textiles, wool products
-- **Machinery** - Heavy machinery, equipment
-- **Agricultural Products** - Rice, wheat, livestock
-
-### 4. Tibet Autonomous Region
-**Key Industries & Products:**
-- **Minerals** - Copper, zinc, lead, gold
-- **Tibetan Medicine** - Traditional Tibetan pharmaceuticals
-- **Yak Products** - Yak wool, yak meat products
-- **Handicrafts** - Tibetan carpets, religious artifacts
-- **Agricultural Products** - Barley, yak butter
-- **Tourism Products** - Handicrafts, souvenirs
-
-### 5. Xinjiang Autonomous Region
-**Key Industries & Products:**
-- **Cotton Products** - Raw cotton, cotton textiles
-- **Petrochemicals** - Crude oil, natural gas, chemicals
-- **Agricultural Products** - Fruits (grapes, melons), nuts
-- **Textiles** - Cotton yarn, cotton fabrics
-- **Minerals** - Coal, gold, uranium
-- **Food Products** - Dried fruits, nuts, raisins
-
-## MUNICIPALITIES (4)
-
-### 1. Beijing Municipality
-**Key Industries & Products:**
-- **Technology** - Software, IT services, telecommunications
-- **Automotive** - Passenger cars, electric vehicles
-- **Pharmaceuticals** - Generic drugs, biotechnology
-- **Electronics** - Electronic equipment, components
-- **Machinery** - Precision machinery, equipment
-- **Publishing** - Books, magazines, printing
-- **Cultural Products** - Arts, crafts, cultural goods
-
-### 2. Chongqing Municipality
-**Key Industries & Products:**
-- **Automotive** - Passenger cars, motorcycles, auto parts
-- **Electronics** - Laptops, electronic components
-- **Machinery** - Heavy machinery, equipment manufacturing
-- **Chemicals** - Petrochemicals, fine chemicals
-- **Pharmaceuticals** - Generic drugs, traditional medicine
-- **Metallurgy** - Steel products, aluminum processing
-- **Textiles** - Silk products, synthetic fabrics
-
-### 3. Shanghai Municipality
-**Key Industries & Products:**
-- **Automotive** - Passenger cars, luxury vehicles
-- **Electronics** - Semiconductors, electronic equipment
-- **Chemicals** - Petrochemicals, fine chemicals, pharmaceuticals
-- **Steel Products** - Special steel, steel processing
-- **Textiles** - High-end fabrics, fashion clothing
-- **Machinery** - Precision machinery, industrial equipment
-- **Financial Services** - Fintech products, financial software
-
-### 4. Tianjin Municipality
-**Key Industries & Products:**
-- **Automotive** - Passenger cars, auto parts
-- **Petrochemicals** - Refined petroleum, chemicals
-- **Electronics** - Electronic components, telecommunications
-- **Machinery** - Heavy machinery, precision equipment
-- **Steel Products** - Steel pipes, steel structures
-- **Textiles** - Synthetic fabrics, clothing
-- **Bicycles** - Bicycles, bike components
-
-## SPECIAL ADMINISTRATIVE REGIONS (2)
-
-### 1. Hong Kong SAR
-**Key Industries & Products:**
-- **Electronics** - Electronic components, consumer electronics
-- **Textiles & Apparel** - Fashion clothing, accessories
-- **Watches & Jewelry** - Luxury watches, jewelry
-- **Toys** - High-end toys, collectibles
-- **Financial Services** - Fintech, financial products
-- **Trading Services** - Import/export, logistics
-- **Pharmaceuticals** - Generic drugs, health products
-
-### 2. Macau SAR
-**Key Industries & Products:**
-- **Textiles** - Garments, fabrics
-- **Electronics** - Electronic components, small electronics
-- **Food Products** - Processed foods, snacks
-- **Toys** - Small toys, novelty items
-- **Gaming Equipment** - Casino equipment, gaming accessories
-- **Tourism Products** - Souvenirs, handicrafts
-- **Pharmaceuticals** - Health supplements, traditional medicine
-
-## SOURCING TIPS BY REGION
-
-### High-Tech Manufacturing Hubs:
-- **Guangdong** (Shenzhen, Dongguan): Electronics, smartphones, gadgets
-- **Jiangsu** (Suzhou, Wuxi): Semiconductors, precision equipment
-- **Shanghai**: Advanced manufacturing, automotive, chemicals
-- **Zhejiang** (Hangzhou, Ningbo): E-commerce, small commodities
-
-### Traditional Manufacturing Centers:
-- **Shandong**: Heavy machinery, tires, chemicals
-- **Hebei**: Steel, glass, construction materials
-- **Liaoning**: Heavy industry, shipbuilding
-- **Shanxi**: Coal, steel, heavy machinery
-
-### Specialized Product Regions:
-- **Fujian**: Footwear, stone products, tea
-- **Xinjiang**: Cotton, textiles, agricultural products
-- **Inner Mongolia**: Cashmere, dairy, rare earth elements
-- **Yunnan**: Non-ferrous metals, flowers, tea
-
-### Emerging Manufacturing Areas:
-- **Chongqing**: Electronics, automotive
-- **Sichuan**: Electronics, pharmaceuticals
-- **Hubei**: Automotive, steel, chemicals
-- **Anhui**: Home appliances, automotive parts
-
-This guide provides a comprehensive overview of China's regional manufacturing specializations to help optimize your sourcing decisions based on product type and regional expertise.
-                         
-                            
-                            '); 
-                            
-                            closeNav();">Sourcing Provinces </a></li>
-                        
-                        
-                        
-                        <li><a href="#" onclick="displayContent('Price Negotiation', 'Content for Price Negotiation. Our experts negotiate the best prices for you.'); closeNav();">Price Negotiation</a></li>
-                        <li><a href="#" onclick="displayContent('Sample Arrangement', 'Content for Sample Arrangement. We facilitate sample procurement and review.'); closeNav();">Sample Arrangement</a></li>
+                <div id="electronics" class="content-section">
+                    <h2>Electronics</h2>
+                    <p>Discover a wide range of electronic components, consumer electronics, and innovative gadgets sourced directly from manufacturers in China.</p>
+                    <ul>
+                        <li>Consumer Electronics (Smartphones, Tablets, Wearables)</li>
+                        <li>Electronic Components (ICs, PCBs, Sensors)</li>
+                        <li>Home Appliances (Smart Home Devices, Kitchen Appliances)</li>
+                        <li>Office Electronics (Printers, Scanners, Projectors)</li>
                     </ul>
-                </li>
-                <li>
-                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
-                        <span>Quality Control</span>
-                        <span class="arrow down"></span>
-                    </div>
-                    <ul class="submenu">
-                        <li><a href="#" onclick="displayContent('Pre-Production Inspection', 'Content for Pre-Production Inspection. Ensuring quality before mass production starts.'); closeNav();">Pre-Production Inspection</a></li>
-                        <li><a href="#" onclick="displayContent('During Production Inspection', 'Content for During Production Inspection. Monitoring quality throughout the manufacturing process.'); closeNav();">During Production Inspection</a></li>
-                        <li><a href="#" onclick="displayContent('Pre-Shipment Inspection', 'Content for Pre-Shipment Inspection. Final quality check before goods are dispatched.'); closeNav();">Pre-Shipment Inspection</a></li>
+                    <p>We ensure all electronic products meet international quality and safety standards. Our team can help you with custom specifications and OEM/ODM services.</p>
+                </div>
+
+                <div id="apparel" class="content-section">
+                    <h2>Apparel & Textiles</h2>
+                    <p>Source high-quality apparel, textiles, and fashion accessories from leading Chinese factories. We cater to all segments, from fast fashion to luxury goods.</p>
+                    <ul>
+                        <li>Men's, Women's, and Children's Clothing</li>
+                        <li>Sportswear and Activewear</li>
+                        <li>Fashion Accessories (Bags, Shoes, Jewelry)</li>
+                        <li>Fabric and Raw Materials</li>
                     </ul>
-                </li>
-                <li>
-                    <div class="submenu-toggle" onclick="toggleSubmenu(this)">
-                        <span>Logistics</span>
-                        <span class="arrow down"></span>
-                    </div>
-                    <ul class="submenu">
-                        <li><a href="#" onclick="displayContent('Shipping Solutions', 'Content for Shipping Solutions. We offer various shipping options to meet your needs.'); closeNav();">Shipping Solutions</a></li>
-                        <li><a href="#" onclick="displayContent('Customs Clearance', 'Content for Customs Clearance. Assisting with the necessary documentation and procedures.'); closeNav();">Customs Clearance</a></li>
-                        <li><a href="#" onclick="displayContent('Warehousing', 'Content for Warehousing. Secure storage solutions for your products.'); closeNav();">Warehousing</a></li>
+                    <p>Our network includes suppliers specializing in various materials like cotton, silk, polyester, and sustainable fabrics. We can assist with sample development, bulk production, and private labeling.</p>
+                </div>
+
+                <div id="home-goods" class="content-section">
+                    <h2>Home Goods & Decor</h2>
+                    <p>Find a diverse selection of home goods, furniture, and decorative items to enhance any living space. We connect you with artisans and large-scale producers.</p>
+                    <ul>
+                        <li>Furniture (Indoor & Outdoor)</li>
+                        <li>Kitchenware and Tableware</li>
+                        <li>Home Decor (Lighting, Rugs, Wall Art)</li>
+                        <li>Garden Supplies</li>
                     </ul>
-                </li>
-                <li><a href="#" onclick="displayContent('FAQ', 'Frequently Asked Questions about sourcing from China.'); closeNav();">FAQ</a></li>
-                <li><a href="#" onclick="displayContent('Blog', 'Read our latest articles and insights on China sourcing.'); closeNav();">Blog</a></li>
-                 <li><a href="#" onclick="displayContent('Case Studies', 'Explore our successful sourcing projects and client stories.'); closeNav();">Case Studies</a></li>
-            </ul>
-        </div>
+                    <p>From modern minimalist designs to traditional craftsmanship, our sourcing experts can help you find the perfect products for your market.</p>
+                </div>
+
+                <div id="sourcing" class="content-section">
+                    <h2>Sourcing & Procurement</h2>
+                    <p>Our expert sourcing team helps you identify and vet reliable suppliers in China. We manage the procurement process from initial contact to final delivery.</p>
+                    <p>Services include:</p>
+                    <ul>
+                        <li>Supplier Identification and Verification</li>
+                        <li>Request for Quotation (RFQ) Management</li>
+                        <li>Price Negotiation</li>
+                        <li>Sample Arrangement and Review</li>
+                        <li>Contract Management</li>
+                    </ul>
+                    <p>We aim to minimize risks and maximize value for your business.</p>
+                </div>
+
+                <div id="quality-control" class="content-section">
+                    <h2>Quality Control & Inspection</h2>
+                    <p>Ensure your products meet your quality standards with our comprehensive inspection services at various stages of production.</p>
+                    <ul>
+                        <li>Pre-Production Inspection (PPI)</li>
+                        <li>During Production Inspection (DPI)</li>
+                        <li>Pre-Shipment Inspection (PSI)</li>
+                        <li>Container Loading Supervision (CLS)</li>
+                        <li>Factory Audits</li>
+                    </ul>
+                    <p>Our detailed reports and on-the-ground presence help you maintain consistent product quality.</p>
+                </div>
+
+                <div id="logistics" class="content-section">
+                    <h2>Logistics & Shipping</h2>
+                    <p>We offer end-to-end logistics solutions, including freight forwarding, customs clearance, and warehousing, to ensure timely and cost-effective delivery of your goods.</p>
+                    <ul>
+                        <li>Sea Freight (FCL/LCL)</li>
+                        <li>Air Freight</li>
+                        <li>Rail Freight (especially for Eurasia)</li>
+                        <li>Customs Brokerage</li>
+                        <li>Warehousing and Distribution</li>
+                        <li>Door-to-Door Delivery</li>
+                    </ul>
+                    <p>Navigate the complexities of international shipping with our experienced logistics partners.</p>
+                </div>
+
+                <div id="suppliers" class="content-section">
+                    <h2>Find Suppliers</h2>
+                    <p>Our platform provides access to a curated database of verified Chinese suppliers across numerous industries. Search, filter, and connect with manufacturers and wholesalers that match your specific requirements.</p>
+                    <p>We rigorously vet suppliers for:</p>
+                    <ul>
+                        <li>Production Capacity</li>
+                        <li>Quality Management Systems (e.g., ISO 9001)</li>
+                        <li>Export Experience</li>
+                        <li>Social Compliance</li>
+                        <li>Financial Stability</li>
+                    </ul>
+                    <p>Start building your reliable supply chain today.</p>
+                </div>
+
+                <div id="guides" class="content-section">
+                    <h2>Sourcing Guides & Resources</h2>
+                    <p>Access valuable insights, tips, and best practices for sourcing from China. Our guides cover topics like negotiation, cultural nuances, avoiding scams, and understanding trade terms.</p>
+                    <p>Popular guides include:</p>
+                    <ul>
+                        <li>The Ultimate Guide to Sourcing from Alibaba</li>
+                        <li>Negotiating with Chinese Suppliers: A Practical Handbook</li>
+                        <li>Understanding Incoterms in International Trade</li>
+                        <li>IP Protection When Manufacturing in China</li>
+                        <li>A Beginner's Guide to Attending Chinese Trade Fairs</li>
+                    </ul>
+                    <p>Empower yourself with knowledge to make informed sourcing decisions.</p>
+                </div>
+
+                <div id="contact" class="content-section">
+                    <h2>Contact Us</h2>
+                    <p>We're here to help! Reach out to our team for any inquiries or to discuss your sourcing needs.</p>
+                    <p><strong>Email:</strong> info@chinasourcingplatform.example.com</p>
+                    <p><strong>Phone:</strong> +86-XXX-XXXX-XXXX</p>
+                    <p><strong>Address:</strong> [Your Office Address in China, if applicable]</p>
+                    <p>Alternatively, fill out our online inquiry form on our website, and one of our representatives will get back to you shortly.</p>
+                </div>
+                <div id="about" class="content-section">
+                    <h2>About Us</h2>
+                    <p>China Sourcing Platform is dedicated to simplifying the process of sourcing products from China for businesses worldwide. With years of experience and a strong network of trusted suppliers, we bridge the gap between global buyers and Chinese manufacturers.</p>
+                    <p>Our mission is to provide transparent, efficient, and reliable sourcing solutions that empower businesses to grow and succeed in the global marketplace.</p>
+                    <p>We believe in building long-term partnerships based on trust, quality, and mutual benefit. Our team of multilingual professionals is committed to understanding your unique needs and delivering tailored services.</p>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <div class="main-content" id="mainContent">
-        <h1>Welcome to China Sourcing Guide</h1>
-        <p>Your one-stop solution for efficiently and effectively sourcing products from China. Navigate through our menu to explore services and information.</p>
-        <p>Use the menu icon (☰) on smaller screens or the top navigation bar to access different sections. The side menu provides detailed options for your sourcing journey.</p>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; <span id="currentYear"></span> China Sourcing Guide. All Rights Reserved.</p>
-        <p>Your Trusted Partner in China Sourcing</p>
+    <footer>
+        <p>&copy; <span id="currentYear"></span> China Sourcing Platform. All rights reserved.</p>
     </footer>
 
     <script>
-        // --- Navbar Toggle for Mobile ---
-        const navbarToggle = document.getElementById('navbarToggle');
-        const sidemenu = document.getElementById('mySidemenu');
-        const mainContent = document.getElementById('mainContent');
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const contentArea = document.getElementById('contentArea');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const submenuToggles = document.querySelectorAll('.submenu-toggle');
+            const currentYearSpan = document.getElementById('currentYear');
 
-        navbarToggle.addEventListener('click', () => {
-            openNav();
-        });
+            // Set current year in footer
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
 
-        // --- Side Menu Functionality ---
-        function openNav() {
-            sidemenu.style.width = "280px"; // Width of the sidemenu
-            // Optional: Push content to the right
-            // mainContent.style.marginLeft = "280px";
-        }
+            // Sidebar Toggle Functionality
+            if (sidebarToggle && sidebar && contentArea) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('open');
+                    // If you want the content to not be overlaid by the sidebar on small screens when it's open
+                    // you might need more complex CSS or adjust margins here.
+                    // For this example, the sidebar overlays the content or pushes it based on CSS.
+                    // The current CSS hides the sidebar off-screen and brings it in.
+                    // If you used margin-left on contentArea, you'd toggle that here too.
+                });
+            }
 
-        function closeNav() {
-            sidemenu.style.width = "0";
-            // Optional: Bring content back
-            // mainContent.style.marginLeft = "0";
-        }
+            // Function to display content
+            function showContent(contentId) {
+                // Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
 
-        // --- Submenu Toggle ---
-        function toggleSubmenu(element) {
-            const submenu = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow');
-            if (submenu.classList.contains('open')) {
-                submenu.classList.remove('open');
-                arrow.classList.remove('up');
-                arrow.classList.add('down');
-            } else {
-                // Close other open submenus (optional)
-                document.querySelectorAll('.sidemenu .submenu.open').forEach(openSubmenu => {
-                    if (openSubmenu !== submenu) {
-                        openSubmenu.classList.remove('open');
-                        const otherArrow = openSubmenu.previousElementSibling.querySelector('.arrow');
-                        if (otherArrow) {
-                             otherArrow.classList.remove('up');
-                             otherArrow.classList.add('down');
-                        }
+                // Deactivate all nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+
+                // Show the selected content section
+                const activeSection = document.getElementById(contentId);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                }
+
+                // Activate the clicked nav link
+                const activeLink = document.querySelector(`.nav-link[data-content="${contentId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+
+                // Close sidebar on content selection on smaller screens
+                if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            }
+
+            // Add event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default anchor behavior
+                    const contentId = this.getAttribute('data-content');
+                    if (contentId) {
+                        showContent(contentId);
                     }
                 });
-                submenu.classList.add('open');
-                arrow.classList.remove('down');
-                arrow.classList.add('up');
+            });
+
+            // Add event listeners to submenu toggles
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('open');
+                    const submenu = this.nextElementSibling; // Assumes ul.submenu is the next sibling
+                    if (submenu && submenu.classList.contains('submenu')) {
+                        submenu.classList.toggle('open');
+                    }
+                });
+            });
+
+            // Responsive adjustments for sidebar state based on window size
+            function checkScreenSize() {
+                const isSmallScreen = window.innerWidth <= 768;
+                if (isSmallScreen) {
+                    // On small screens, ensure sidebar is initially closed unless explicitly opened
+                    if (!sidebar.classList.contains('open')) {
+                        sidebar.classList.add('collapsed'); // Using a distinct class for initial state on small screens
+                    }
+                    contentArea.classList.add('sidebar-collapsed');
+                } else {
+                    // On larger screens, ensure sidebar is visible and content area is adjusted
+                    sidebar.classList.remove('collapsed');
+                    sidebar.classList.remove('open'); // Remove 'open' if it was set by toggle on small screen
+                    contentArea.classList.remove('sidebar-collapsed');
+                }
             }
-        }
 
-        // --- Display Content ---
-        function displayContent(title, content) {
-            const mainContentArea = document.getElementById('mainContent');
-            mainContentArea.innerHTML = `<h1>${title}</h1><p>${content}</p>`;
-            // Add more complex HTML structure here if needed based on the title
+            // Initial check
+            checkScreenSize();
+            // Add event listener for window resize
+            window.addEventListener('resize', checkScreenSize);
 
-            if (title === 'Supplier Identification') {
-                mainContentArea.innerHTML += `
-                    <h2>Our Process:</h2>
-                    <ul>
-                        <li>Understanding your product requirements.</li>
-                        <li>Market research and supplier shortlisting.</li>
-                        <li>Factory audits and verification.</li>
-                        <li>Presenting you with a list of qualified suppliers.</li>
-                    </ul>
-                    <p>We ensure transparency and reliability in every step.</p>
-                `;
-            } else if (title === 'Pre-Shipment Inspection') {
-                 mainContentArea.innerHTML += `
-                    <h2>Key Checks:</h2>
-                    <ol>
-                        <li>Quantity Verification</li>
-                        <li>Workmanship Quality</li>
-                        <li>Product Specifications (color, size, material)</li>
-                        <li>Functionality Testing</li>
-                        <li>Packaging & Labeling</li>
-                    </ol>
-                    <p>A detailed report with images will be provided.</p>
-                `;
-            }
-            // Add more 'else if' blocks for other specific content sections
-
-            if (window.innerWidth <= 768) { // Close sidemenu on mobile after clicking a link
-                closeNav();
-            }
-        }
-
-        // --- Footer Current Year ---
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // --- Close sidemenu if clicking outside of it (optional) ---
-        document.addEventListener('click', function(event) {
-            const isClickInsideSidemenu = sidemenu.contains(event.target);
-            const isClickOnToggle = navbarToggle.contains(event.target);
-
-            if (!isClickInsideSidemenu && !isClickOnToggle && sidemenu.style.width === "280px") {
-                // Only close if sidemenu is open and click is not on toggle
-                // This prevents immediate closing if toggle button itself is outside (which it isn't in this layout)
-                // but good for robustness if layout changes.
-                // Check if the click was on a link that should keep the menu open (not implemented here, but a consideration)
-                // For this simple setup, any click outside closes it.
-                 // closeNav(); // Can be too aggressive, consider user experience.
-            }
+            // Optional: Load default content (e.g., 'home') if no hash or specific logic
+            // The 'home' content is already marked as 'active' in HTML, so it shows by default.
+            // If you want to change the default, you can call showContent here:
+            // showContent('home');
         });
-
     </script>
 
 </body>
