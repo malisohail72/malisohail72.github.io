@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/dist/date-fns.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #d9534f; /* Blood red */
+            --secondary-color: #f7f7f7; /* Light grey background */
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .card .data {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .chart-container {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #c9302c; /* Darker red */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🩸 Blood Donation Dashboard</h1>
+    </header>
+
+    <div class="cards-container" id="cards-container">
+        </div>
+
+    <div class="chart-container">
+        <div class="filters" id="filters">
+            <button class="filter-btn active" data-period="daily">Daily</button>
+            <button class="filter-btn" data-period="weekly">Weekly</button>
+            <button class="filter-btn" data-period="monthly">Monthly</button>
+            <button class="filter-btn" data-period="quarterly">Quarterly</button>
+            <button class="filter-btn" data-period="biannually">Biannually</button>
+            <button class="filter-btn" data-period="yearly">Yearly</button>
+            <button class="filter-btn" data-period="all">All Time</button>
+        </div>
+        <canvas id="donationsChart"></canvas>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Hardcoded Demo Data ---
+        // In a real application, this would come from a database/API
+        const patientData = [
+            // Recent data for daily/weekly view
+            { date: '2025-08-01', bloodType: 'A+', volume: 450 },
+            { date: '2025-07-31', bloodType: 'O-', volume: 400 },
+            { date: '2025-07-30', bloodType: 'B+', volume: 420 },
+            { date: '2025-07-25', bloodType: 'AB+', volume: 350 },
+            { date: '2025-07-24', bloodType: 'A+', volume: 480 },
+            
+            // Monthly/Quarterly data
+            { date: '2025-07-15', bloodType: 'O+', volume: 450 },
+            { date: '2025-07-10', bloodType: 'B-', volume: 380 },
+            { date: '2025-06-20', bloodType: 'A-', volume: 410 },
+            { date: '2025-06-15', bloodType: 'O-', volume: 430 },
+            { date: '2025-05-30', bloodType: 'A+', volume: 470 },
+            { date: '2025-05-12', bloodType: 'B+', volume: 460 },
+            { date: '2025-04-05', bloodType: 'O+', volume: 450 },
+
+            // Biannual/Yearly data
+            { date: '2025-03-01', bloodType: 'AB-', volume: 390 },
+            { date: '2025-02-15', bloodType: 'A+', volume: 490 },
+            { date: '2025-01-20', bloodType: 'O-', volume: 440 },
+            { date: '2024-11-18', bloodType: 'B+', volume: 430 },
+            { date: '2024-09-10', bloodType: 'A+', volume: 480 },
+            { date: '2023-12-25', bloodType: 'O+', volume: 500 },
+        ];
+        
+        const ctx = document.getElementById('donationsChart').getContext('2d');
+        let donationsChart;
+
+        // --- 1. Update Data Cards ---
+        function updateCards() {
+            const cardsContainer = document.getElementById('cards-container');
+            const totalDonations = patientData.length;
+            const totalVolume = patientData.reduce((sum, p) => sum + p.volume, 0);
+            const aPositiveDonors = patientData.filter(p => p.bloodType === 'A+').length;
+            const mostRecentDonation = patientData.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+
+            const cardsHTML = `
+                <div class="card">
+                    <h3>Total Donations</h3>
+                    <p class="data">${totalDonations}</p>
+                </div>
+                <div class="card">
+                    <h3>Total Volume (ml)</h3>
+                    <p class="data">${totalVolume.toLocaleString()}</p>
+                </div>
+                <div class="card">
+                    <h3>A+ Donors</h3>
+                    <p class="data">${aPositiveDonors}</p>
+                </div>
+                <div class="card">
+                    <h3>Most Recent</h3>
+                    <p class="data" style="font-size: 1.2em;">${new Date(mostRecentDonation.date).toLocaleDateString()}</p>
+                    <p>${mostRecentDonation.bloodType}, ${mostRecentDonation.volume}ml</p>
+                </div>
+            `;
+            cardsContainer.innerHTML = cardsHTML;
+        }
+
+        // --- 2. Update Chart ---
+        function updateChart(period) {
+            const now = new Date('2025-08-02'); // Using a fixed date for consistent demo results
+            let filteredData = [];
+            
+            if (period === 'all') {
+                filteredData = patientData;
+            } else {
+                 filteredData = patientData.filter(p => {
+                    const donationDate = new Date(p.date);
+                    switch (period) {
+                        case 'daily': return dateFns.isSameDay(donationDate, dateFns.subDays(now, 1)) || dateFns.isSameDay(donationDate, now);
+                        case 'weekly': return dateFns.isWithinInterval(donationDate, { start: dateFns.subWeeks(now, 1), end: now });
+                        case 'monthly': return dateFns.isWithinInterval(donationDate, { start: dateFns.subMonths(now, 1), end: now });
+                        case 'quarterly': return dateFns.isWithinInterval(donationDate, { start: dateFns.subQuarters(now, 1), end: now });
+                        case 'biannually': return dateFns.isWithinInterval(donationDate, { start: dateFns.subMonths(now, 6), end: now });
+                        case 'yearly': return dateFns.isWithinInterval(donationDate, { start: dateFns.subYears(now, 1), end: now });
+                        default: return true;
+                    }
+                });
+            }
+
+            const groupedData = groupData(filteredData, period);
+            const labels = Object.keys(groupedData);
+            const data = Object.values(groupedData);
+
+            if (donationsChart) {
+                donationsChart.destroy();
+            }
+
+            donationsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Donations',
+                        data: data,
+                        backgroundColor: 'rgba(217, 83, 79, 0.6)',
+                        borderColor: 'rgba(217, 83, 79, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: `Donation Growth - ${period.charAt(0).toUpperCase() + period.slice(1)}`
+                        }
+                    }
+                }
+            });
+        }
+        
+        // --- 3. Helper function to group data for chart ---
+        function groupData(data, period) {
+            if (!data.length) return {};
+            
+            // Sort data by date first
+            data.sort((a,b) => new Date(a.date) - new Date(b.date));
+
+            const formatMap = {
+                daily: 'yyyy-MM-dd',
+                weekly: 'RRRR-II', // Year-Week
+                monthly: 'yyyy-MM', // Year-Month
+                quarterly: 'yyyy-qqq', // Year-Quarter
+                biannually: (date) => `${dateFns.getYear(date)}-H${Math.ceil((dateFns.getMonth(date) + 1) / 6)}`, // Year-Half
+                yearly: 'yyyy',
+                all: 'yyyy'
+            };
+            
+            const getGroupKey = (date) => {
+                const d = new Date(date);
+                if (period === 'biannually') return formatMap.biannually(d);
+                return dateFns.format(d, formatMap[period]);
+            };
+
+            return data.reduce((acc, curr) => {
+                const key = getGroupKey(curr.date);
+                acc[key] = (acc[key] || 0) + 1;
+                return acc;
+            }, {});
+        }
+
+        // --- 4. Event Listeners for Filters ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                updateChart(button.dataset.period);
+            });
+        });
+        
+        // --- Initial Load ---
+        updateCards();
+        updateChart('daily'); // Set the default view
+    });
+</script>
+
+</body>
+</html>
