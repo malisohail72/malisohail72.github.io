@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donors Pakistan</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #c8102e; /* Red color for blood donation theme */
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 5px solid #a20c24;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Main Content Container */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Search & Filter Section */
+        .search-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .filter-group select,
+        .filter-group input[type="text"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto; /* For responsiveness on small screens */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        thead th {
+            background-color: #343a40;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🩸 Find a Blood Donor in Pakistan</h1>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <div class="filter-group">
+                <label for="city-filter">City</label>
+                <select id="city-filter">
+                    <option value="">All Cities</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="blood-group-filter">Blood Group</label>
+                <select id="blood-group-filter">
+                    <option value="">All Groups</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="search-bar">Search by Name</label>
+                <input type="text" id="search-bar" placeholder="e.g., Ahmed Khan">
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="donors-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Blood Group</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ahmed Khan</td>
+                        <td>Karachi</td>
+                        <td>O+</td>
+                        <td>0300-1234567</td>
+                    </tr>
+                    <tr>
+                        <td>Fatima Ali</td>
+                        <td>Lahore</td>
+                        <td>A+</td>
+                        <td>0321-7654321</td>
+                    </tr>
+                    <tr>
+                        <td>Bilal Sheikh</td>
+                        <td>Islamabad</td>
+                        <td>B+</td>
+                        <td>0333-1122334</td>
+                    </tr>
+                     <tr>
+                        <td>Sana Mirza</td>
+                        <td>Lahore</td>
+                        <td>O-</td>
+                        <td>0312-9876543</td>
+                    </tr>
+                    <tr>
+                        <td>Usman Butt</td>
+                        <td>Rawalpindi</td>
+                        <td>AB+</td>
+                        <td>0345-5566778</td>
+                    </tr>
+                    <tr>
+                        <td>Ayesha Jamil</td>
+                        <td>Karachi</td>
+                        <td>A-</td>
+                        <td>0301-2345678</td>
+                    </tr>
+                    <tr>
+                        <td>Zainab Ansari</td>
+                        <td>Faisalabad</td>
+                        <td>B-</td>
+                        <td>0334-8765432</td>
+                    </tr>
+                    <tr>
+                        <td>Haris Iqbal</td>
+                        <td>Peshawar</td>
+                        <td>O+</td>
+                        <td>0315-1231231</td>
+                    </tr>
+                     <tr>
+                        <td>Imran Farooq</td>
+                        <td>Quetta</td>
+                        <td>A+</td>
+                        <td>0302-3456789</td>
+                    </tr>
+                    <tr>
+                        <td>Mariam Tariq</td>
+                        <td>Lahore</td>
+                        <td>B+</td>
+                        <td>0322-9876543</td>
+                    </tr>
+                    <tr>
+                        <td>Saad Akhtar</td>
+                        <td>Islamabad</td>
+                        <td>AB-</td>
+                        <td>0336-1234567</td>
+                    </tr>
+                    <tr>
+                        <td>Nida Yasir</td>
+                        <td>Karachi</td>
+                        <td>O+</td>
+                        <td>0300-7654321</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Blood Donors Pakistan. Saving Lives Together.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cityFilter = document.getElementById('city-filter');
+            const bloodGroupFilter = document.getElementById('blood-group-filter');
+            const searchBar = document.getElementById('search-bar');
+            const tableRows = document.querySelectorAll('#donors-table tbody tr');
+
+            function filterTable() {
+                const cityValue = cityFilter.value;
+                const bloodGroupValue = bloodGroupFilter.value;
+                const searchValue = searchBar.value.toLowerCase();
+
+                tableRows.forEach(row => {
+                    const rowCity = row.cells[1].textContent;
+                    const rowBloodGroup = row.cells[2].textContent;
+                    const rowName = row.cells[0].textContent.toLowerCase();
+
+                    // Visibility logic
+                    const cityMatch = (cityValue === "" || rowCity === cityValue);
+                    const bloodGroupMatch = (bloodGroupValue === "" || rowBloodGroup === bloodGroupValue);
+                    const nameMatch = (searchValue === "" || rowName.includes(searchValue));
+
+                    if (cityMatch && bloodGroupMatch && nameMatch) {
+                        row.style.display = ""; // Show the row
+                    } else {
+                        row.style.display = "none"; // Hide the row
+                    }
+                });
+            }
+
+            // Add event listeners to all filter controls
+            cityFilter.addEventListener('change', filterTable);
+            bloodGroupFilter.addEventListener('change', filterTable);
+            searchBar.addEventListener('keyup', filterTable);
+        });
+    </script>
+
+</body>
+</html>
