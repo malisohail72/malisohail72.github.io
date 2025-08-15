@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PakRaye - Your Voice on Pakistani Companies</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons for UI elements -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A light gray background */
+        }
+        
+        /* Style for the star rating system */
+        .star-rating label {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f59e0b; /* Amber color for selected/hovered stars */
+        }
+        
+        /* Animation for modals and cards */
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-green-700">PakRaye</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-gray-600 hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#companies" class="text-gray-600 hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Companies</a>
+                        <a href="#recent-feedback" class="text-gray-600 hover:bg-green-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Recent Feedback</a>
+                    </div>
+                </div>
+                <div>
+                     <button id="submitFeedbackBtn" class="bg-green-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105">
+                        Submit Feedback
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Hero Section -->
+        <section class="text-center py-12 md:py-20">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                Your Voice Matters.
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                Share your experience and help build a transparent directory of customer feedback for Pakistani companies.
+            </p>
+            <div class="mt-8 max-w-xl mx-auto">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-feather="search" class="text-gray-400"></i>
+                    </div>
+                    <input type="search" id="search-company" placeholder="Find a company (e.g., HBL, Daraz, PTCL)" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm transition">
+                </div>
+            </div>
+        </section>
+
+        <!-- Companies Grid Section -->
+        <section id="companies" class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Featured Companies</h2>
+            <div id="company-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Company cards will be dynamically inserted here -->
+            </div>
+        </section>
+        
+        <!-- Recent Feedback Section -->
+        <section id="recent-feedback" class="py-12 bg-white rounded-xl shadow-lg p-6 md:p-8 mt-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Latest Customer Feedback</h2>
+            <div id="feedback-list" class="space-y-6">
+                <!-- Feedback items will be dynamically inserted here -->
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="font-bold text-lg text-green-400">PakRaye</p>
+            <p class="mt-2 text-sm text-gray-400">&copy; 2025 PakRaye. All rights reserved. Helping customers make informed decisions.</p>
+        </div>
+    </footer>
+
+    <!-- Feedback Submission Modal -->
+    <div id="feedbackModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4 fade-in">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg p-6 md:p-8 relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <i data-feather="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-6 text-center">Share Your Experience</h3>
+            <form id="feedbackForm">
+                <div class="mb-4">
+                    <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="e.g., Jazz">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Your Rating</label>
+                    <div class="star-rating flex flex-row-reverse justify-end text-gray-400 text-4xl">
+                        <!-- Stars are generated in reverse order for CSS sibling selector to work -->
+                        <input type="radio" id="star5" name="rating" value="5" class="hidden" required/><label for="star5" title="5 stars">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4" class="hidden"/><label for="star4" title="4 stars">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3" class="hidden"/><label for="star3" title="3 stars">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2" class="hidden"/><label for="star2" title="2 stars">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1" class="hidden"/><label for="star1" title="1 star">&#9733;</label>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="feedbackMessage" class="block text-sm font-medium text-gray-700 mb-1">Your Feedback</label>
+                    <textarea id="feedbackMessage" name="feedbackMessage" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="What was your experience like?"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300">Submit My Feedback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Message Toast -->
+    <div id="successToast" class="fixed bottom-5 right-5 bg-green-500 text-white py-3 px-5 rounded-lg shadow-lg hidden flex items-center gap-3 fade-in">
+        <i data-feather="check-circle"></i>
+        <span>Feedback submitted successfully!</span>
+    </div>
+
+
+    <script>
+        // --- Mock Data ---
+        // In a real application, this data would come from a database.
+        const initialData = [
+            {
+                name: 'Daraz',
+                category: 'E-commerce',
+                logo: 'https://placehold.co/100x100/00457C/FFFFFF?text=Daraz',
+                feedback: [
+                    { rating: 4, comment: "Fast delivery, but the packaging could be better. Overall a good experience." },
+                    { rating: 2, comment: "Received the wrong item and the return process was very slow." },
+                ]
+            },
+            {
+                name: 'HBL',
+                category: 'Banking',
+                logo: 'https://placehold.co/100x100/008000/FFFFFF?text=HBL',
+                feedback: [
+                    { rating: 5, comment: "The mobile app is fantastic! So easy to use for transactions." },
+                    { rating: 3, comment: "Long queues at the branch, but the staff was helpful once I got to the counter." },
+                ]
+            },
+            {
+                name: 'PTCL',
+                category: 'Telecom',
+                logo: 'https://placehold.co/100x100/339933/FFFFFF?text=PTCL',
+                feedback: [
+                    { rating: 1, comment: "Constant disconnections. The internet speed is never what they advertise." },
+                    { rating: 4, comment: "The fiber connection has been very reliable for me. Much better than their old DSL." },
+                ]
+            },
+            {
+                name: 'Jazz',
+                category: 'Telecom',
+                logo: 'https://placehold.co/100x100/ED1C24/FFFFFF?text=Jazz',
+                feedback: [
+                    { rating: 5, comment: "Excellent 4G coverage all over the city. Never have signal issues." },
+                ]
+            },
+            {
+                name: 'K-Electric',
+                category: 'Utilities',
+                logo: 'https://placehold.co/100x100/FF6600/FFFFFF?text=KE',
+                feedback: [
+                    { rating: 2, comment: "Unscheduled load shedding is a huge problem. Very frustrating." },
+                ]
+            },
+            {
+                name: 'Foodpanda',
+                category: 'Food Delivery',
+                logo: 'https://placehold.co/100x100/D70F64/FFFFFF?text=Foodpanda',
+                feedback: [
+                    { rating: 4, comment: "Great selection of restaurants, and the delivery is usually on time." },
+                ]
+            }
+        ];
+
+        // --- Core Application Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Feather Icons
+            feather.replace();
+
+            const companyGrid = document.getElementById('company-grid');
+            const feedbackList = document.getElementById('feedback-list');
+            const searchInput = document.getElementById('search-company');
+
+            // Function to calculate average rating
+            const calculateAverageRating = (feedback) => {
+                if (feedback.length === 0) return 0;
+                const total = feedback.reduce((sum, item) => sum + item.rating, 0);
+                return (total / feedback.length).toFixed(1);
+            };
+            
+            // Function to generate star HTML
+            const generateStars = (rating) => {
+                let stars = '';
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                for (let i = 0; i < 5; i++) {
+                    if (i < fullStars) {
+                        stars += `<span class="text-yellow-500">&#9733;</span>`;
+                    } else {
+                        stars += `<span class="text-gray-300">&#9733;</span>`;
+                    }
+                }
+                return stars;
+            };
+
+            // Function to render all companies
+            const renderCompanies = (companiesToRender) => {
+                companyGrid.innerHTML = '';
+                companiesToRender.forEach(company => {
+                    const avgRating = calculateAverageRating(company.feedback);
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer fade-in';
+                    card.innerHTML = `
+                        <div class="flex flex-col items-center text-center">
+                            <img src="${company.logo}" alt="${company.name} Logo" class="w-20 h-20 rounded-full mb-4 object-cover">
+                            <h3 class="text-xl font-bold">${company.name}</h3>
+                            <p class="text-sm text-gray-500 mb-3">${company.category}</p>
+                            <div class="flex items-center">
+                                <div class="flex">${generateStars(avgRating)}</div>
+                                <span class="ml-2 text-gray-600 font-semibold">${avgRating}</span>
+                                <span class="ml-1 text-gray-400 text-sm">(${company.feedback.length})</span>
+                            </div>
+                        </div>
+                    `;
+                    companyGrid.appendChild(card);
+                });
+            };
+
+            // Function to render all feedback items
+            const renderFeedback = () => {
+                feedbackList.innerHTML = '';
+                // Get all feedback from all companies, add company info, and sort by date (simulated)
+                const allFeedback = initialData.flatMap(company => 
+                    company.feedback.map(fb => ({...fb, companyName: company.name, companyLogo: company.logo}))
+                ).reverse(); // Show newest first
+
+                allFeedback.forEach(fb => {
+                    const feedbackItem = document.createElement('div');
+                    feedbackItem.className = 'border-b border-gray-200 pb-4 fade-in';
+                    feedbackItem.innerHTML = `
+                        <div class="flex items-start">
+                            <img src="${fb.companyLogo}" alt="${fb.companyName} Logo" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-lg">${fb.companyName}</h4>
+                                    <div class="flex">${generateStars(fb.rating)}</div>
+                                </div>
+                                <p class="text-gray-600 mt-1">"${fb.comment}"</p>
+                            </div>
+                        </div>
+                    `;
+                    feedbackList.appendChild(feedbackItem);
+                });
+            };
+
+            // Initial Render
+            renderCompanies(initialData);
+            renderFeedback();
+
+            // --- Event Listeners ---
+
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredCompanies = initialData.filter(company => 
+                    company.name.toLowerCase().includes(searchTerm) ||
+                    company.category.toLowerCase().includes(searchTerm)
+                );
+                renderCompanies(filteredCompanies);
+            });
+
+            // Modal Handling
+            const modal = document.getElementById('feedbackModal');
+            const openModalBtn = document.getElementById('submitFeedbackBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            
+            const openModal = () => modal.classList.replace('hidden', 'flex');
+            const closeModal = () => modal.classList.replace('flex', 'hidden');
+
+            openModalBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            // Close modal if clicking outside the content area
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Form Submission
+            const feedbackForm = document.getElementById('feedbackForm');
+            feedbackForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const companyName = e.target.companyName.value.trim();
+                const rating = parseInt(e.target.rating.value);
+                const comment = e.target.feedbackMessage.value.trim();
+
+                if (!companyName || !rating || !comment) {
+                    // Simple validation
+                    alert('Please fill out all fields.');
+                    return;
+                }
+
+                // Find if company exists, or create a new one
+                let company = initialData.find(c => c.name.toLowerCase() === companyName.toLowerCase());
+                if (company) {
+                    company.feedback.push({ rating, comment });
+                } else {
+                    // Add a new company to our data
+                    const newCompany = {
+                        name: companyName,
+                        category: 'General', // Default category
+                        logo: `https://placehold.co/100x100/64748B/FFFFFF?text=${companyName.charAt(0)}`,
+                        feedback: [{ rating, comment }]
+                    };
+                    initialData.push(newCompany);
+                }
+
+                // Re-render everything to show the new data
+                renderCompanies(initialData);
+                renderFeedback();
+                
+                // Close modal and show success message
+                closeModal();
+                feedbackForm.reset();
+                showSuccessToast();
+            });
+            
+            // Success Toast
+            const successToast = document.getElementById('successToast');
+            const showSuccessToast = () => {
+                successToast.classList.remove('hidden');
+                setTimeout(() => {
+                    successToast.classList.add('hidden');
+                }, 3000); // Hide after 3 seconds
+            };
+        });
+    </script>
+</body>
+</html>
