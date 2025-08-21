@@ -1,1 +1,344 @@
-hi
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Qecel | Strategic IT Services for Funded Startups in the USA</title>
+    <meta name="description" content="Qecel offers scalable IT infrastructure, cybersecurity, and managed support for venture-backed startups. We help you build a secure foundation for rapid growth.">
+    <meta name="keywords" content="IT services for startups, funded startups, venture-backed tech support, scalable IT, startup cybersecurity, cloud infrastructure, managed IT services USA, vCIO services, SOC 2 compliance for startups">
+    <meta name="author" content="Qecel">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top left, rgba(29, 78, 216, 0.1), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(147, 51, 234, 0.1), transparent 40%);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#home" class="text-2xl font-bold text-blue-600">
+                    Qecel
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-slate-600 hover:text-blue-600 transition-colors">Services</a>
+                    <a href="#why-us" class="text-slate-600 hover:text-blue-600 transition-colors">Why Qecel</a>
+                    <a href="#about" class="text-slate-600 hover:text-blue-600 transition-colors">About</a>
+                    <a href="#testimonials" class="text-slate-600 hover:text-blue-600 transition-colors">Testimonials</a>
+                    <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md font-medium cta-button">Get a Quote</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-slate-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#services" class="block py-2 text-slate-600 hover:text-blue-600">Services</a>
+            <a href="#why-us" class="block py-2 text-slate-600 hover:text-blue-600">Why Qecel</a>
+            <a href="#about" class="block py-2 text-slate-600 hover:text-blue-600">About</a>
+            <a href="#testimonials" class="block py-2 text-slate-600 hover:text-blue-600">Testimonials</a>
+            <a href="#contact" class="block mt-2 bg-blue-600 text-white text-center px-4 py-2 rounded-md font-medium">Get a Quote</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="py-20 md:py-32 hero-gradient">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-4">
+                    Scalable IT for Ambitious Startups
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+                    You just secured funding. Don't let IT be your bottleneck. Qecel provides the strategic IT foundation for startups to scale securely, efficiently, and with confidence.
+                </p>
+                <a href="#contact" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg inline-block cta-button">
+                    Get a Free IT Strategy Session
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Your Outsourced Tech Operations Partner</h2>
+                    <p class="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">From Day 1 infrastructure to Series C compliance, we provide the essential IT services that let you focus on growth.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                        <div class="mb-4 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Cloud Infrastructure & DevOps</h3>
+                        <p class="text-slate-600">We design and manage scalable, secure, and cost-efficient cloud environments on AWS, GCP, and Azure. Automate your deployments and build a resilient foundation for your product.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                        <div class="mb-4 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Cybersecurity & Compliance</h3>
+                        <p class="text-slate-600">Protect your IP and customer data. We implement robust security programs, manage threats, and guide you through compliance frameworks like SOC 2, HIPAA, and GDPR.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                        <div class="mb-4 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Managed IT Support & Onboarding</h3>
+                        <p class="text-slate-600">Provide your team with world-class IT support. We manage employee hardware, software, and access, ensuring seamless onboarding and day-to-day productivity.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                         <div class="mb-4 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Virtual CIO (vCIO) & Strategy</h3>
+                        <p class="text-slate-600">Get executive-level IT leadership without the full-time cost. We help you with tech roadmapping, budget planning, and vendor selection to align your IT with your business goals.</p>
+                    </div>
+                    <!-- Service Card 5 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                        <div class="mb-4 text-blue-600">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Data & Analytics Solutions</h3>
+                        <p class="text-slate-600">Turn your data into a competitive advantage. We help set up data warehouses, analytics pipelines, and business intelligence dashboards to empower data-driven decisions.</p>
+                    </div>
+                    <!-- Service Card 6 -->
+                    <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+                        <div class="mb-4 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Vendor & Software Management</h3>
+                        <p class="text-slate-600">We manage your SaaS portfolio and vendor relationships, ensuring you have the right tools at the right price, optimizing costs and reducing software sprawl.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-20 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="lg:flex lg:items-center lg:gap-12">
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Designed for the Startup Journey</h2>
+                        <p class="text-lg text-slate-600 mt-4 mb-8">Generic IT providers don't understand the pressures of a venture-backed company. We do. Our entire model is built to support your rapid growth trajectory.</p>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">✓</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold">Built for Scale</h4>
+                                    <p class="text-slate-600">Our solutions are designed to grow with you, from your first hire to your hundredth, without costly re-architecting.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">✓</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold">Startup-Focused Expertise</h4>
+                                    <p class="text-slate-600">We speak your language. We understand burn rates, pivots, and the need for speed and agility.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">✓</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold">Security-First Mindset</h4>
+                                    <p class="text-slate-600">We bake security into everything we do, protecting you from threats and helping you build trust with enterprise customers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 mt-10 lg:mt-0">
+                        <img src="https://placehold.co/600x500/e0e7ff/3b82f6?text=Growth+Ready+IT" alt="A team collaborating in a modern startup office" class="rounded-lg shadow-xl w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">We're Former Founders and Tech Leaders</h2>
+                    <p class="text-lg text-slate-600 mt-4">
+                        Qecel was founded by a team who have lived the startup life. We've built products, raised capital, and scaled teams. We experienced firsthand how critical, yet often overlooked, a solid IT foundation is. Our mission is to provide the strategic IT partnership we wish we had, enabling the next generation of innovators to succeed without being hindered by technology challenges. We're more than a service provider; we're an extension of your team.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Trusted by the Next Wave of Innovators</h2>
+                    <p class="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">Hear from founders who are scaling faster with Qecel.</p>
+                </div>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <p class="text-slate-600 italic mb-4">"Working with Qecel was a game-changer after our seed round. They set up our entire cloud infrastructure and security posture in weeks, not months. It passed our first vendor security review with flying colors, which was huge for closing our first enterprise deal."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/50x50/e0e7ff/3b82f6?text=JS" alt="Jane Smith" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold text-slate-900">Jane Smith</p>
+                                <p class="text-slate-500">Founder & CEO, ConnectSphere</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <p class="text-slate-600 italic mb-4">"As we prepared for our Series A, we needed to get serious about compliance. Qecel guided us through the entire SOC 2 process. Their team feels like our own, always responsive and incredibly knowledgeable about the startup ecosystem. I can't recommend them enough."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/50x50/e0e7ff/3b82f6?text=MK" alt="Michael Kors" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold text-slate-900">Michael Kors</p>
+                                <p class="text-slate-500">CTO, FinScale Analytics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-blue-600 text-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Ready to Scale Your IT?</h2>
+                    <p class="text-lg text-blue-200 mt-4 max-w-2xl mx-auto">Let's talk about your goals. Fill out the form below for a free, no-obligation IT strategy session with one of our startup specialists.</p>
+                </div>
+                <div class="max-w-xl mx-auto">
+                    <form id="contact-form" class="bg-white text-slate-800 p-8 rounded-lg shadow-2xl">
+                        <div id="form-success" class="hidden bg-green-100 text-green-800 p-4 rounded-md mb-4">
+                            Thank you! Your message has been sent. We'll be in touch shortly.
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block font-medium mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="company" class="block font-medium mb-1">Company Name</label>
+                                <input type="text" id="company" name="company" required class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block font-medium mb-1">Work Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block font-medium mb-1">How can we help?</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg cta-button">
+                                Request Strategy Session
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg font-bold text-white mb-2">Qecel</p>
+            <p class="mb-4">Your Partner in Startup Growth</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#services" class="hover:text-white">Services</a>
+                <a href="#why-us" class="hover:text-white">Why Qecel</a>
+                <a href="#contact" class="hover:text-white">Contact</a>
+            </div>
+            <p>&copy; 2025 Qecel, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Fade-in sections on scroll
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            const formSuccessMessage = document.getElementById('form-success');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // In a real application, you would send the form data to a server here.
+                // For this demo, we'll just show the success message.
+                formSuccessMessage.classList.remove('hidden');
+                contactForm.reset();
+                setTimeout(() => {
+                    formSuccessMessage.classList.add('hidden');
+                }, 5000);
+            });
+        });
+    </script>
+
+</body>
+</html>
