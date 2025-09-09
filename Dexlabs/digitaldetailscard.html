@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .form-container {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .donor-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #donor-card-content, #donor-card-content * {
+                visibility: visible;
+            }
+            #donor-card-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .print-hide {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                <h1 class="text-xl font-bold text-gray-700">LifeBlood</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-600 hover:text-red-500 transition duration-300">Home</a>
+                <a href="#register" class="text-gray-600 hover:text-red-500 transition duration-300">Register</a>
+                <a href="#" class="text-gray-600 hover:text-red-500 transition duration-300">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-red-500 transition duration-300">Contact</a>
+            </div>
+            <button class="md:hidden" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#" class="block py-2 text-gray-600 hover:text-red-500">Home</a>
+            <a href="#register" class="block py-2 text-gray-600 hover:text-red-500">Register</a>
+            <a href="#" class="block py-2 text-gray-600 hover:text-red-500">About Us</a>
+            <a href="#" class="block py-2 text-gray-600 hover:text-red-500">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white">
+        <div class="container mx-auto px-6 py-24 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Be a Hero, Donate Blood</h2>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">A single donation can save up to three lives. Your precious gift is a lifeline in an emergency and for people who need long-term treatments.</p>
+            <a href="#register" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section id="register" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="p-8 md:p-12">
+                    <h3 class="text-3xl font-bold text-center text-gray-800 mb-2">Donor Registration Form</h3>
+                    <p class="text-center text-gray-500 mb-8">Please fill out the form below to become a volunteer blood donor.</p>
+                    <form id="donation-form" class="space-y-6">
+                        <!-- Personal Information -->
+                        <div>
+                            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="bloodGroup" class="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
+                                <select id="bloodGroup" name="bloodGroup" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" required>
+                                    <option value="" disabled selected>Select your blood group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                                <input type="number" id="age" name="age" min="18" max="65" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="18-65" required>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="e.g., +1 234 567 890" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="you@example.com" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Full Address</label>
+                            <textarea id="address" name="address" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="123 Main Street, Anytown, USA" required></textarea>
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 flex items-center justify-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                <span>Generate Donor Card</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 LifeBlood. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">Saving lives, one drop at a time.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Donor Card -->
+    <div id="card-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg mx-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Your Donor Card</h2>
+                
+                <!-- Donor Card Content -->
+                <div id="donor-card-content" class="donor-card p-6 rounded-xl shadow-lg border border-gray-200 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-500 rounded-full opacity-20"></div>
+                    <div class="absolute -bottom-12 -left-8 w-40 h-40 bg-red-500 rounded-full opacity-10"></div>
+                    
+                    <div class="flex items-center justify-between mb-4 z-10 relative">
+                         <div class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            <h3 class="text-xl font-bold text-gray-700">LifeBlood</h3>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm font-semibold text-gray-600">Blood Group</p>
+                            <p id="card-bloodGroup" class="text-3xl font-extrabold text-red-500">O+</p>
+                        </div>
+                    </div>
+
+                    <div class="text-left z-10 relative space-y-2 text-gray-700">
+                        <div>
+                            <p class="text-xs font-medium text-gray-500">Name</p>
+                            <p id="card-fullName" class="font-semibold text-lg"></p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500">Age</p>
+                                <p id="card-age" class="font-semibold"></p>
+                            </div>
+                             <div>
+                                <p class="text-xs font-medium text-gray-500">Phone</p>
+                                <p id="card-phone" class="font-semibold"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-medium text-gray-500">Email</p>
+                            <p id="card-email" class="font-semibold"></p>
+                        </div>
+                         <div>
+                            <p class="text-xs font-medium text-gray-500">Address</p>
+                            <p id="card-address" class="font-semibold"></p>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-gray-400 mt-6 italic">Thank you for your willingness to save a life!</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-center space-x-4 mt-6 print-hide">
+                    <button id="print-button" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Print</button>
+                    <button id="download-button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Download</button>
+                    <button id="close-modal" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('donation-form');
+            const modal = document.getElementById('card-modal');
+            const modalContent = modal.querySelector('.transform');
+            const closeModalButton = document.getElementById('close-modal');
+            const printButton = document.getElementById('print-button');
+            const downloadButton = document.getElementById('download-button');
+            const donorCardContent = document.getElementById('donor-card-content');
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Form submission logic
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                if (this.checkValidity()) {
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData.entries());
+
+                    // Populate the donor card
+                    document.getElementById('card-fullName').textContent = data.fullName;
+                    document.getElementById('card-bloodGroup').textContent = data.bloodGroup;
+                    document.getElementById('card-age').textContent = data.age;
+                    document.getElementById('card-phone').textContent = data.phone;
+                    document.getElementById('card-email').textContent = data.email;
+                    document.getElementById('card-address').textContent = data.address;
+                    
+                    // Show the modal
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modalContent.classList.remove('scale-95', 'opacity-0');
+                        modalContent.classList.add('scale-100', 'opacity-100');
+                    }, 10);
+
+                } else {
+                    this.reportValidity();
+                }
+            });
+
+            // Close modal logic
+            const closeModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            };
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // --- FIXED PRINT LOGIC ---
+            // Uses CSS media queries to print only the card without reloading the page.
+            printButton.addEventListener('click', () => {
+                window.print();
+            });
+            
+            // --- FIXED DOWNLOAD LOGIC ---
+            // Added error handling and ensured the process is robust.
+            downloadButton.addEventListener('click', () => {
+                html2canvas(donorCardContent, { 
+                    scale: 2, // Higher scale for better quality
+                    useCORS: true,
+                    logging: false // Turn off logging for production
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `LifeBlood-Donor-Card.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                }).catch(err => {
+                    console.error('oops, something went wrong!', err);
+                    // You could show an error message to the user here
+                    alert('Sorry, the card could not be downloaded at this time.');
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
