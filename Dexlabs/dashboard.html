@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blood Donor Details and Charts</title>
+<title>Blood Donor Details and Editable Table with Charts</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -22,6 +22,10 @@
   th {
     background-color: #4CAF50;
     color: white;
+  }
+  td[contenteditable="true"] {
+    background-color: #f9f9f9;
+    cursor: text;
   }
   button {
     margin-right: 10px;
@@ -45,7 +49,7 @@
 </head>
 <body>
 
-<h2>Blood Donor Details</h2>
+<h2>Blood Donor Details (Editable)</h2>
 
 <table id="donorTable">
   <thead>
@@ -58,7 +62,7 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Rows will be inserted here by JS -->
+    <!-- Rows inserted by JS -->
   </tbody>
 </table>
 
@@ -75,7 +79,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const donors = [
+  let donors = [
     {name: "Alice", age: 25, city: "New York", bloodGroup: "A+", timesDonated: 3},
     {name: "Bob", age: 34, city: "Los Angeles", bloodGroup: "B-", timesDonated: 1},
     {name: "Charlie", age: 29, city: "Chicago", bloodGroup: "O+", timesDonated: 5},
@@ -88,40 +92,70 @@
     {name: "Jane", age: 28, city: "San Jose", bloodGroup: "B-", timesDonated: 4}
   ];
 
-  // Populate the table with donor data
+  let currentChartType = 'bloodGroup'; // track which chart is showing
+
+  // Populate the table with editable cells
   function populateTable() {
     const tbody = document.querySelector("#donorTable tbody");
-    donors.forEach(donor => {
+    tbody.innerHTML = ''; // clear existing rows
+    donors.forEach((donor, index) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${donor.name}</td>
-        <td>${donor.age}</td>
-        <td>${donor.city}</td>
-        <td>${donor.bloodGroup}</td>
-        <td>${donor.timesDonated}</td>
+        <td contenteditable="true" data-field="name" data-index="${index}">${donor.name}</td>
+        <td contenteditable="true" data-field="age" data-index="${index}">${donor.age}</td>
+        <td contenteditable="true" data-field="city" data-index="${index}">${donor.city}</td>
+        <td contenteditable="true" data-field="bloodGroup" data-index="${index}">${donor.bloodGroup}</td>
+        <td contenteditable="true" data-field="timesDonated" data-index="${index}">${donor.timesDonated}</td>
       `;
       tbody.appendChild(tr);
     });
+
+    // Attach event listeners to each editable cell
+    tbody.querySelectorAll('td[contenteditable="true"]').forEach(td => {
+      td.addEventListener('input', onCellEdit);
+      td.addEventListener('blur', onCellEdit); // Also update on blur for more reliability
+    });
   }
 
-  // Chart instance
-  let myChart = null;
+  // Update donors array when table cell changes
+  function onCellEdit(event) {
+    const td = event.target;
+    const index = td.getAttribute('data-index');
+    const field = td.getAttribute('data-field');
+    let value = td.textContent.trim();
 
-  // Helper function to destroy previous chart if exists
+    // Basic validation and type conversions
+    if (field === 'age' || field === 'timesDonated') {
+      // Convert to number if possible
+      let numVal = parseInt(value, 10);
+      if (isNaN(numVal) || numVal < 0) {
+        // Invalid input, reset cell to previous value
+        td.textContent = donors[index][field];
+        return;
+      }
+      value = numVal;
+    }
+
+    donors[index][field] = value;
+
+    // Refresh the current chart to reflect updates
+    showChart(currentChartType);
+  }
+
+  let myChart = null;
   function resetChart() {
     if (myChart) {
       myChart.destroy();
     }
   }
 
-  // Chart display logic based on selection
   function showChart(type) {
+    currentChartType = type;
     resetChart();
 
     const ctx = document.getElementById('myChart').getContext('2d');
 
     if (type === 'bloodGroup') {
-      // Count blood groups
       const bloodGroupCount = {};
       donors.forEach(d => {
         bloodGroupCount[d.bloodGroup] = (bloodGroupCount[d.bloodGroup] || 0) + 1;
@@ -145,16 +179,12 @@
         options: {
           responsive: true,
           plugins: {
-            title: {
-              display: true,
-              text: 'Blood Group Distribution'
-            }
+            title: { display: true, text: 'Blood Group Distribution' }
           }
         }
       });
 
     } else if (type === 'timesDonated') {
-      // Count how many donors for each donation count
       const donationCounts = {};
       donors.forEach(d => {
         donationCounts[d.timesDonated] = (donationCounts[d.timesDonated] || 0) + 1;
@@ -174,20 +204,14 @@
         },
         options: {
           responsive: true,
-          scales: {
-            y: { beginAtZero: true, stepSize: 1 }
-          },
+          scales: { y: { beginAtZero: true, stepSize: 1 }},
           plugins: {
-            title: {
-              display: true,
-              text: 'Times Donated Distribution'
-            }
+            title: { display: true, text: 'Times Donated Distribution' }
           }
         }
       });
 
     } else if (type === 'ageDistribution') {
-      // Group ages into bins (20-24, 25-29, 30-34, etc)
       const ageBins = {
         "20-24": 0,
         "25-29": 0,
@@ -218,20 +242,14 @@
         },
         options: {
           responsive: true,
-          scales: {
-            y: { beginAtZero: true, stepSize: 1 }
-          },
+          scales: { y: { beginAtZero: true, stepSize: 1 }},
           plugins: {
-            title: {
-              display: true,
-              text: 'Age Distribution of Donors'
-            }
+            title: { display: true, text: 'Age Distribution of Donors' }
           }
         }
       });
 
     } else if (type === 'cityWise') {
-      // Count donors by city
       const cityCount = {};
       donors.forEach(d => {
         cityCount[d.city] = (cityCount[d.city] || 0) + 1;
@@ -252,25 +270,18 @@
         },
         options: {
           responsive: true,
-          scales: {
-            y: { beginAtZero: true, stepSize: 1 }
-          },
+          scales: { y: { beginAtZero: true, stepSize: 1 }},
           plugins: {
-            title: {
-              display: true,
-              text: 'Donors by City'
-            }
+            title: { display: true, text: 'Donors by City' }
           }
         }
       });
-
     }
   }
 
-  // Initial setup
+  // Initialize page
   populateTable();
-  showChart('bloodGroup'); // show blood group chart by default
-
+  showChart(currentChartType);
 </script>
 
 </body>
