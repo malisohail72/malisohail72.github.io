@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blood Donor Details and Charts</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  button {
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  #chartContainer {
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+
+<h2>Blood Donor Details</h2>
+
+<table id="donorTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>City</th>
+      <th>Blood Group</th>
+      <th>Times Donated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Rows will be inserted here by JS -->
+  </tbody>
+</table>
+
+<div>
+  <button onclick="showChart('bloodGroup')">Blood Group Distribution</button>
+  <button onclick="showChart('timesDonated')">Times Donated Distribution</button>
+  <button onclick="showChart('ageDistribution')">Age Distribution</button>
+  <button onclick="showChart('cityWise')">City-wise Donors</button>
+</div>
+
+<div id="chartContainer">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const donors = [
+    {name: "Alice", age: 25, city: "New York", bloodGroup: "A+", timesDonated: 3},
+    {name: "Bob", age: 34, city: "Los Angeles", bloodGroup: "B-", timesDonated: 1},
+    {name: "Charlie", age: 29, city: "Chicago", bloodGroup: "O+", timesDonated: 5},
+    {name: "Diana", age: 22, city: "Houston", bloodGroup: "AB+", timesDonated: 2},
+    {name: "Ethan", age: 40, city: "Phoenix", bloodGroup: "A-", timesDonated: 4},
+    {name: "Fiona", age: 31, city: "Philadelphia", bloodGroup: "B+", timesDonated: 2},
+    {name: "George", age: 27, city: "San Antonio", bloodGroup: "O-", timesDonated: 3},
+    {name: "Hannah", age: 36, city: "San Diego", bloodGroup: "AB-", timesDonated: 1},
+    {name: "Ian", age: 24, city: "Dallas", bloodGroup: "A+", timesDonated: 6},
+    {name: "Jane", age: 28, city: "San Jose", bloodGroup: "B-", timesDonated: 4}
+  ];
+
+  // Populate the table with donor data
+  function populateTable() {
+    const tbody = document.querySelector("#donorTable tbody");
+    donors.forEach(donor => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${donor.name}</td>
+        <td>${donor.age}</td>
+        <td>${donor.city}</td>
+        <td>${donor.bloodGroup}</td>
+        <td>${donor.timesDonated}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Chart instance
+  let myChart = null;
+
+  // Helper function to destroy previous chart if exists
+  function resetChart() {
+    if (myChart) {
+      myChart.destroy();
+    }
+  }
+
+  // Chart display logic based on selection
+  function showChart(type) {
+    resetChart();
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    if (type === 'bloodGroup') {
+      // Count blood groups
+      const bloodGroupCount = {};
+      donors.forEach(d => {
+        bloodGroupCount[d.bloodGroup] = (bloodGroupCount[d.bloodGroup] || 0) + 1;
+      });
+      const labels = Object.keys(bloodGroupCount);
+      const data = Object.values(bloodGroupCount);
+
+      myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Blood Group Distribution',
+            data,
+            backgroundColor: [
+              '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+              '#9966FF', '#FF9F40', '#C9CBCF', '#FF6384'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Blood Group Distribution'
+            }
+          }
+        }
+      });
+
+    } else if (type === 'timesDonated') {
+      // Count how many donors for each donation count
+      const donationCounts = {};
+      donors.forEach(d => {
+        donationCounts[d.timesDonated] = (donationCounts[d.timesDonated] || 0) + 1;
+      });
+      const labels = Object.keys(donationCounts).sort((a,b) => a-b);
+      const data = labels.map(k => donationCounts[k]);
+
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Number of Donors',
+            data,
+            backgroundColor: '#4CAF50'
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, stepSize: 1 }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Times Donated Distribution'
+            }
+          }
+        }
+      });
+
+    } else if (type === 'ageDistribution') {
+      // Group ages into bins (20-24, 25-29, 30-34, etc)
+      const ageBins = {
+        "20-24": 0,
+        "25-29": 0,
+        "30-34": 0,
+        "35-39": 0,
+        "40-44": 0
+      };
+      donors.forEach(d => {
+        if (d.age >= 20 && d.age <= 24) ageBins["20-24"]++;
+        else if (d.age >= 25 && d.age <= 29) ageBins["25-29"]++;
+        else if (d.age >= 30 && d.age <= 34) ageBins["30-34"]++;
+        else if (d.age >= 35 && d.age <= 39) ageBins["35-39"]++;
+        else if (d.age >= 40 && d.age <= 44) ageBins["40-44"]++;
+      });
+
+      const labels = Object.keys(ageBins);
+      const data = Object.values(ageBins);
+
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Number of Donors',
+            data,
+            backgroundColor: '#FF6384'
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, stepSize: 1 }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Age Distribution of Donors'
+            }
+          }
+        }
+      });
+
+    } else if (type === 'cityWise') {
+      // Count donors by city
+      const cityCount = {};
+      donors.forEach(d => {
+        cityCount[d.city] = (cityCount[d.city] || 0) + 1;
+      });
+
+      const labels = Object.keys(cityCount);
+      const data = Object.values(cityCount);
+
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Number of Donors',
+            data,
+            backgroundColor: '#36A2EB'
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, stepSize: 1 }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Donors by City'
+            }
+          }
+        }
+      });
+
+    }
+  }
+
+  // Initial setup
+  populateTable();
+  showChart('bloodGroup'); // show blood group chart by default
+
+</script>
+
+</body>
+</html>
