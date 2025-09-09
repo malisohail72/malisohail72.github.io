@@ -1,288 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blood Donor Details and Editable Table with Charts</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 30px;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  td[contenteditable="true"] {
-    background-color: #f9f9f9;
-    cursor: text;
-  }
-  button {
-    margin-right: 10px;
-    margin-bottom: 20px;
-    padding: 8px 15px;
-    cursor: pointer;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-  }
-  button:hover {
-    background-color: #45a049;
-  }
-  #chartContainer {
-    width: 80%;
-    max-width: 700px;
-    margin: auto;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blood Donation Details</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c0392b;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 260px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 16px;
+      font-weight: bold;
+      color: #c0392b;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-<h2>Blood Donor Details (Editable)</h2>
+  <h1>Blood Donation Summary</h1>
 
-<table id="donorTable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>City</th>
-      <th>Blood Group</th>
-      <th>Times Donated</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Rows inserted by JS -->
-  </tbody>
-</table>
+  <div class="card-container">
+    <div class="card">
+      <h2>Total Donations</h2>
+      <p id="total-donations">12</p>
+    </div>
 
-<div>
-  <button onclick="showChart('bloodGroup')">Blood Group Distribution</button>
-  <button onclick="showChart('timesDonated')">Times Donated Distribution</button>
-  <button onclick="showChart('ageDistribution')">Age Distribution</button>
-  <button onclick="showChart('cityWise')">City-wise Donors</button>
-</div>
+    <div class="card">
+      <h2>Donated City</h2>
+      <p id="donated-city">New York</p>
+    </div>
 
-<div id="chartContainer">
-  <canvas id="myChart"></canvas>
-</div>
+    <div class="card">
+      <h2>Last Donation Date</h2>
+      <p id="last-donation">2025-06-15</p>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  let donors = [
-    {name: "Alice", age: 25, city: "New York", bloodGroup: "A+", timesDonated: 3},
-    {name: "Bob", age: 34, city: "Los Angeles", bloodGroup: "B-", timesDonated: 1},
-    {name: "Charlie", age: 29, city: "Chicago", bloodGroup: "O+", timesDonated: 5},
-    {name: "Diana", age: 22, city: "Houston", bloodGroup: "AB+", timesDonated: 2},
-    {name: "Ethan", age: 40, city: "Phoenix", bloodGroup: "A-", timesDonated: 4},
-    {name: "Fiona", age: 31, city: "Philadelphia", bloodGroup: "B+", timesDonated: 2},
-    {name: "George", age: 27, city: "San Antonio", bloodGroup: "O-", timesDonated: 3},
-    {name: "Hannah", age: 36, city: "San Diego", bloodGroup: "AB-", timesDonated: 1},
-    {name: "Ian", age: 24, city: "Dallas", bloodGroup: "A+", timesDonated: 6},
-    {name: "Jane", age: 28, city: "San Jose", bloodGroup: "B-", timesDonated: 4}
-  ];
+    <div class="card">
+      <h2>Blood Group</h2>
+      <p id="blood-group">O+</p>
+    </div>
 
-  let currentChartType = 'bloodGroup'; // track which chart is showing
+    <div class="card">
+      <h2>Eligibility to Donate</h2>
+      <p id="eligibility">Calculating...</p>
+    </div>
+  </div>
 
-  // Populate the table with editable cells
-  function populateTable() {
-    const tbody = document.querySelector("#donorTable tbody");
-    tbody.innerHTML = ''; // clear existing rows
-    donors.forEach((donor, index) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td contenteditable="true" data-field="name" data-index="${index}">${donor.name}</td>
-        <td contenteditable="true" data-field="age" data-index="${index}">${donor.age}</td>
-        <td contenteditable="true" data-field="city" data-index="${index}">${donor.city}</td>
-        <td contenteditable="true" data-field="bloodGroup" data-index="${index}">${donor.bloodGroup}</td>
-        <td contenteditable="true" data-field="timesDonated" data-index="${index}">${donor.timesDonated}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+  <div class="footer">
+    © 2025 Blood Donation App
+  </div>
 
-    // Attach event listeners to each editable cell
-    tbody.querySelectorAll('td[contenteditable="true"]').forEach(td => {
-      td.addEventListener('input', onCellEdit);
-      td.addEventListener('blur', onCellEdit); // Also update on blur for more reliability
-    });
-  }
+  <script>
+    // Calculate eligibility based on last donation date (must wait 56 days)
+    const lastDonationDate = new Date(document.getElementById('last-donation').textContent);
+    const today = new Date();
+    const diffTime = today - lastDonationDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  // Update donors array when table cell changes
-  function onCellEdit(event) {
-    const td = event.target;
-    const index = td.getAttribute('data-index');
-    const field = td.getAttribute('data-field');
-    let value = td.textContent.trim();
-
-    // Basic validation and type conversions
-    if (field === 'age' || field === 'timesDonated') {
-      // Convert to number if possible
-      let numVal = parseInt(value, 10);
-      if (isNaN(numVal) || numVal < 0) {
-        // Invalid input, reset cell to previous value
-        td.textContent = donors[index][field];
-        return;
-      }
-      value = numVal;
+    const eligibility = document.getElementById('eligibility');
+    if (diffDays >= 56) {
+      eligibility.textContent = "Eligible";
+      eligibility.style.color = "#27ae60";
+    } else {
+      eligibility.textContent = `Not eligible for ${56 - diffDays} days`;
+      eligibility.style.color = "#e74c3c";
     }
-
-    donors[index][field] = value;
-
-    // Refresh the current chart to reflect updates
-    showChart(currentChartType);
-  }
-
-  let myChart = null;
-  function resetChart() {
-    if (myChart) {
-      myChart.destroy();
-    }
-  }
-
-  function showChart(type) {
-    currentChartType = type;
-    resetChart();
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    if (type === 'bloodGroup') {
-      const bloodGroupCount = {};
-      donors.forEach(d => {
-        bloodGroupCount[d.bloodGroup] = (bloodGroupCount[d.bloodGroup] || 0) + 1;
-      });
-      const labels = Object.keys(bloodGroupCount);
-      const data = Object.values(bloodGroupCount);
-
-      myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Blood Group Distribution',
-            data,
-            backgroundColor: [
-              '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-              '#9966FF', '#FF9F40', '#C9CBCF', '#FF6384'
-            ],
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            title: { display: true, text: 'Blood Group Distribution' }
-          }
-        }
-      });
-
-    } else if (type === 'timesDonated') {
-      const donationCounts = {};
-      donors.forEach(d => {
-        donationCounts[d.timesDonated] = (donationCounts[d.timesDonated] || 0) + 1;
-      });
-      const labels = Object.keys(donationCounts).sort((a,b) => a-b);
-      const data = labels.map(k => donationCounts[k]);
-
-      myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Number of Donors',
-            data,
-            backgroundColor: '#4CAF50'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true, stepSize: 1 }},
-          plugins: {
-            title: { display: true, text: 'Times Donated Distribution' }
-          }
-        }
-      });
-
-    } else if (type === 'ageDistribution') {
-      const ageBins = {
-        "20-24": 0,
-        "25-29": 0,
-        "30-34": 0,
-        "35-39": 0,
-        "40-44": 0
-      };
-      donors.forEach(d => {
-        if (d.age >= 20 && d.age <= 24) ageBins["20-24"]++;
-        else if (d.age >= 25 && d.age <= 29) ageBins["25-29"]++;
-        else if (d.age >= 30 && d.age <= 34) ageBins["30-34"]++;
-        else if (d.age >= 35 && d.age <= 39) ageBins["35-39"]++;
-        else if (d.age >= 40 && d.age <= 44) ageBins["40-44"]++;
-      });
-
-      const labels = Object.keys(ageBins);
-      const data = Object.values(ageBins);
-
-      myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Number of Donors',
-            data,
-            backgroundColor: '#FF6384'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true, stepSize: 1 }},
-          plugins: {
-            title: { display: true, text: 'Age Distribution of Donors' }
-          }
-        }
-      });
-
-    } else if (type === 'cityWise') {
-      const cityCount = {};
-      donors.forEach(d => {
-        cityCount[d.city] = (cityCount[d.city] || 0) + 1;
-      });
-
-      const labels = Object.keys(cityCount);
-      const data = Object.values(cityCount);
-
-      myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Number of Donors',
-            data,
-            backgroundColor: '#36A2EB'
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: { y: { beginAtZero: true, stepSize: 1 }},
-          plugins: {
-            title: { display: true, text: 'Donors by City' }
-          }
-        }
-      });
-    }
-  }
-
-  // Initialize page
-  populateTable();
-  showChart(currentChartType);
-</script>
+  </script>
 
 </body>
 </html>
