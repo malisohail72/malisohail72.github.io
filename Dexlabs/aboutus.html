@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - LifeSaver Blood Donation App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #1f2937;
+            background-color: #fafafa;
+        }
+        .tab-active {
+            border-bottom: 2px solid #EF4444;
+            color: #EF4444;
+        }
+        .boosted-card {
+            background: linear-gradient(to right, #FFFBEB, #FEF2F2);
+            border: 1px solid #F87171;
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 115, 0.1), 0 4px 6px -2px rgba(249, 115, 115, 0.05);
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        
+        /* Additional styles for the page */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #EF4444;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            padding-bottom: 5px;
+        }
+        .nav-links a:hover {
+            color: #EF4444;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        section {
+            padding: 50px 0;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #111827;
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            color: #EF4444;
+            margin-top: 0;
+        }
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #EF4444;
+            margin: 15px 0;
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .partner-logo {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .partner-logo img {
+            max-width: 100%;
+            max-height: 70px;
+        }
+        .awards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .award {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .award-icon {
+            font-size: 2.5rem;
+            color: #EF4444;
+            margin-bottom: 15px;
+        }
+        footer {
+            background: #111827;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .footer-section h3 {
+            color: #EF4444;
+            margin-bottom: 20px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">LifeSaver</div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Find Donors</a>
+                    <a href="#">Donation Centers</a>
+                    <a href="#" class="tab-active">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Saving Lives Through Technology</h1>
+            <p>LifeSaver is a trusted blood donation platform connecting donors with those in need. We're proud to be recognized by government and private organizations for our life-saving work.</p>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <h2>Our Impact in Numbers</h2>
+            <div class="cards-container">
+                <div class="card boosted-card">
+                    <h3>Lives Saved</h3>
+                    <div class="impact-number">24,583</div>
+                    <p>Number of lives saved through successful blood transfusions facilitated by our platform.</p>
+                </div>
+                <div class="card">
+                    <h3>Active Donors</h3>
+                    <div class="impact-number">56,742</div>
+                    <p>Registered blood donors ready to help when emergencies arise.</p>
+                </div>
+                <div class="card">
+                    <h3>Partnerships</h3>
+                    <div class="impact-number">127</div>
+                    <p>Hospitals and blood banks partnered with us across the country.</p>
+                </div>
+                <div class="card boosted-card">
+                    <h3>Donations</h3>
+                    <div class="impact-number">78,346</div>
+                    <p>Successful blood donations coordinated through our platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #fef2f2;">
+        <div class="container">
+            <h2>Registered With</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">Our platform is officially recognized and registered with these government and health organizations.</p>
+            
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <!-- Placeholder for government health organization logo -->
+                    <div style="font-weight: 700; color: #1e40af;">Ministry of Health</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for red cross logo -->
+                    <div style="font-weight: 700; color: #ef4444;">National Red Cross</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for FDA logo -->
+                    <div style="font-weight: 700; color: #3b82f6;">Food & Drug Administration</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for health regulatory body -->
+                    <div style="font-weight: 700; color: #059669;">National Health Regulatory Authority</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Private Organization Partnerships</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">We collaborate with leading private healthcare organizations to expand our reach and impact.</p>
+            
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <!-- Placeholder for hospital chain -->
+                    <div style="font-weight: 700; color: #0369a1;">MediCare Hospital Group</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for corporate -->
+                    <div style="font-weight: 700; color: #7e22ce;">HealthPlus Network</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for corporate -->
+                    <div style="font-weight: 700; color: #ca8a04;">Global Blood Solutions</div>
+                </div>
+                <div class="partner-logo">
+                    <!-- Placeholder for corporate -->
+                    <div style="font-weight: 700; color: #dc2626;">LifeStream Healthcare</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #fffbeb;">
+        <div class="container">
+            <h2>Awards & Recognition</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">Our work has been recognized by prestigious organizations in healthcare and technology.</p>
+            
+            <div class="awards-container">
+                <div class="award">
+                    <div class="award-icon">🏆</div>
+                    <h3>Health Innovation Award 2022</h3>
+                    <p>Global Health Organization</p>
+                </div>
+                <div class="award">
+                    <div class="award-icon">⭐</div>
+                    <h3>Best Social Impact App 2021</h3>
+                    <p>Tech for Good Foundation</p>
+                </div>
+                <div class="award">
+                    <div class="award-icon">🎖️</div>
+                    <h3>Excellence in Healthcare 2023</h3>
+                    <p>National Healthcare Association</p>
+                </div>
+                <div class="award">
+                    <div class="award-icon">🏅</div>
+                    <h3>Community Hero Award 2022</h3>
+                    <p>Red Cross Society</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>LifeSaver</h3>
+                    <p>Connecting blood donors with those in need through technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#" style="color: #fff;">Home</a></p>
+                    <p><a href="#" style="color: #fff;">Find Donors</a></p>
+                    <p><a href="#" style="color: #fff;">About Us</a></p>
+                    <p><a href="#" style="color: #fff;">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@lifesaver.app</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 123 Health Ave, Medical District</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 LifeSaver Blood Donation App. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
