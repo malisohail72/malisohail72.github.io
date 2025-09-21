@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor Badges</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #ef4444;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            color: #6b7280;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .tab-active {
+            border-bottom: 2px solid #EF4444;
+            color: #EF4444;
+        }
+        
+        .tab:hover {
+            color: #EF4444;
+        }
+        
+        .badges-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .badge-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .badge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .boosted-card {
+            background: linear-gradient(to right, #FFFBEB, #FEF2F2);
+            border: 1px solid #F87171;
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 115, 0.1), 0 4px 6px -2px rgba(249, 115, 115, 0.05);
+        }
+        
+        .badge-header {
+            padding: 20px;
+            text-align: center;
+            background: #fef2f2;
+        }
+        
+        .badge-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 30px;
+        }
+        
+        .badge-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .badge-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .donors-list {
+            padding: 15px;
+        }
+        
+        .donor {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f9fafb;
+        }
+        
+        .donor-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 600;
+            color: #ef4444;
+        }
+        
+        .donor-info {
+            flex-grow: 1;
+        }
+        
+        .donor-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .donor-stats {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        .contact-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background: #dc2626;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #fef2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #ef4444;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .modal-badge {
+            display: inline-block;
+            background: #fef2f2;
+            color: #ef4444;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-weight: 500;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .btn-close {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .btn-close:hover {
+            background: #e5e7eb;
+        }
+        
+        .btn-contact {
+            background: #ef4444;
+            color: white;
+            border: none;
+        }
+        
+        .btn-contact:hover {
+            background: #dc2626;
+        }
+        
+        @media (max-width: 768px) {
+            .badges-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blood Donor Recognition</h1>
+            <p class="description">Celebrating our most dedicated donors who have made exceptional contributions to saving lives through regular blood donations.</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab tab-active">All Badges</div>
+            <div class="tab">Life Savers</div>
+            <div class="tab">Super Donors</div>
+            <div class="tab">Emergency Volunteers</div>
+        </div>
+        
+        <div class="badges-container">
+            <!-- Life Saver Badge -->
+            <div class="badge-card boosted-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #fef2f2; color: #ef4444;">❤️</div>
+                    <div class="badge-title">Life Saver</div>
+                    <div class="badge-description">Donated every 4 months for last 33 months</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">JD</div>
+                        <div class="donor-info">
+                            <div class="donor-name">John Doe</div>
+                            <div class="donor-stats">9 donations • 36 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="john-doe">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">AS</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Alice Smith</div>
+                            <div class="donor-stats">8 donations • 32 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="alice-smith">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">RJ</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Robert Johnson</div>
+                            <div class="donor-stats">8 donations • 32 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="robert-johnson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">EW</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Emma Wilson</div>
+                            <div class="donor-stats">7 donations • 28 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="emma-wilson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">MB</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Michael Brown</div>
+                            <div class="donor-stats">7 donations • 28 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="michael-brown">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Super Donor Badge -->
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #f0f9ff; color: #0369a1;">🌟</div>
+                    <div class="badge-title">Super Donor</div>
+                    <div class="badge-description">Donated every 6 months for the last 2 years</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">SJ</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Sarah Johnson</div>
+                            <div class="donor-stats">5 donations • 30 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="sarah-johnson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">DW</div>
+                        <div class="donor-info">
+                            <div class="donor-name">David Williams</div>
+                            <div class="donor-stats">4 donations • 24 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="david-williams">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">LT</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Lisa Taylor</div>
+                            <div class="donor-stats">4 donations • 24 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="lisa-taylor">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">KA</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Kevin Anderson</div>
+                            <div class="donor-stats">4 donations • 24 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="kevin-anderson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">AM</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Amy Martinez</div>
+                            <div class="donor-stats">4 donations • 24 months</div>
+                        </div>
+                        <button class="contact-btn" data-donor="amy-martinez">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Emergency Volunteer Badge -->
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #fefce8; color: #ca8a04;">🚑</div>
+                    <div class="badge-title">Emergency Volunteer</div>
+                    <div class="badge-description">Helped during natural disasters</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">MD</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Mark Davis</div>
+                            <div class="donor-stats">3 emergencies • 12 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="mark-davis">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">JG</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Jennifer Garcia</div>
+                            <div class="donor-stats">3 emergencies • 10 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="jennifer-garcia">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">CR</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Christopher Rodriguez</div>
+                            <div class="donor-stats">2 emergencies • 8 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="christopher-rodriguez">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">RL</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Rebecca Lee</div>
+                            <div class="donor-stats">2 emergencies • 7 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="rebecca-lee">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">TW</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Thomas White</div>
+                            <div class="donor-stats">2 emergencies • 6 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="thomas-white">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Donor Badge -->
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #f0fdf4; color: #16a34a;">💉</div>
+                    <div class="badge-title">Regular Donor</div>
+                    <div class="badge-description">Once in a year for the last 3 years</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">JH</div>
+                        <div class="donor-info">
+                            <div class="donor-name">James Harris</div>
+                            <div class="donor-stats">5 donations • 5 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="james-harris">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">SC</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Susan Clark</div>
+                            <div class="donor-stats">4 donations • 4 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="susan-clark">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">PL</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Paul Lewis</div>
+                            <div class="donor-stats">4 donations • 4 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="paul-lewis">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">NR</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Nancy Robinson</div>
+                            <div class="donor-stats">3 donations • 3 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="nancy-robinson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">MW</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Matthew Walker</div>
+                            <div class="donor-stats">3 donations • 3 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="matthew-walker">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Badges -->
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #fdf4ff; color: #9333ea;">🏆</div>
+                    <div class="badge-title">Platinum Donor</div>
+                    <div class="badge-description">10+ donations total</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">RP</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Richard Perez</div>
+                            <div class="donor-stats">15 donations • 6 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="richard-perez">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">DT</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Donna Thompson</div>
+                            <div class="donor-stats">14 donations • 7 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="donna-thompson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">RM</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Robert Moore</div>
+                            <div class="donor-stats">12 donations • 5 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="robert-moore">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">JA</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Jessica Allen</div>
+                            <div class="donor-stats">11 donations • 4 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="jessica-allen">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">BY</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Brian Young</div>
+                            <div class="donor-stats">10 donations • 5 years</div>
+                        </div>
+                        <button class="contact-btn" data-donor="brian-young">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #fffbeb; color: #d97706;">🔥</div>
+                    <div class="badge-title">Rapid Responder</div>
+                    <div class="badge-description">Responded to urgent requests within 24h</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">KH</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Karen Hall</div>
+                            <div class="donor-stats">8 rapid responses</div>
+                        </div>
+                        <button class="contact-btn" data-donor="karen-hall">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">JK</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Jason King</div>
+                            <div class="donor-stats">7 rapid responses</div>
+                        </div>
+                        <button class="contact-btn" data-donor="jason-king">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">SW</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Scott Wright</div>
+                            <div class="donor-stats">6 rapid responses</div>
+                        </div>
+                        <button class="contact-btn" data-donor="scott-wright">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">LS</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Linda Scott</div>
+                            <div class="donor-stats">5 rapid responses</div>
+                        </div>
+                        <button class="contact-btn" data-donor="linda-scott">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">GT</div>
+                        <div class="donor-info">
+                            <div class="donor-name">George Torres</div>
+                            <div class="donor-stats">5 rapid responses</div>
+                        </div>
+                        <button class="contact-btn" data-donor="george-torres">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #eff6ff; color: #2563eb;">🩸</div>
+                    <div class="badge-title">Universal Donor</div>
+                    <div class="badge-description">O- blood type with 5+ donations</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">SN</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Steven Nguyen</div>
+                            <div class="donor-stats">O- • 9 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="steven-nguyen">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">MH</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Michelle Hill</div>
+                            <div class="donor-stats">O- • 8 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="michelle-hill">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">JF</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Jonathan Flores</div>
+                            <div class="donor-stats">O- • 7 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="jonathan-flores">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">AG</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Amanda Green</div>
+                            <div class="donor-stats">O- • 6 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="amanda-green">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">RA</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Ryan Adams</div>
+                            <div class="donor-stats">O- • 5 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="ryan-adams">Contact</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-card">
+                <div class="badge-header">
+                    <div class="badge-icon" style="background: #fdf2f8; color: #db2777;">⭐</div>
+                    <div class="badge-title">Community Champion</div>
+                    <div class="badge-description">Recruited 5+ new donors</div>
+                </div>
+                <div class="donors-list">
+                    <div class="donor">
+                        <div class="donor-avatar">PB</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Patricia Baker</div>
+                            <div class="donor-stats">9 recruits • 12 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="patricia-baker">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">DN</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Daniel Nelson</div>
+                            <div class="donor-stats">8 recruits • 10 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="daniel-nelson">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">CC</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Carol Carter</div>
+                            <div class="donor-stats">7 recruits • 8 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="carol-carter">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">MM</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Margaret Mitchell</div>
+                            <div class="donor-stats">6 recruits • 7 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="margaret-mitchell">Contact</button>
+                    </div>
+                    <div class="donor">
+                        <div class="donor-avatar">RM</div>
+                        <div class="donor-info">
+                            <div class="donor-name">Richard Martinez</div>
+                            <div class="donor-stats">5 recruits • 6 donations</div>
+                        </div>
+                        <button class="contact-btn" data-donor="richard-martinez">Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-avatar" id="modalAvatar">JD</div>
+                <div>
+                    <div class="modal-title" id="modalName">John Doe</div>
+                    <div class="modal-badge" id="modalBadge">Life Saver</div>
+                </div>
+            </div>
+            
+            <div class="modal-details">
+                <div class="detail-item">
+                    <div class="detail-label">Blood Type</div>
+                    <div class="detail-value" id="modalBloodType">O+</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Donations</div>
+                    <div class="detail-value" id="modalDonations">9</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">First Donation</div>
+                    <div class="detail-value" id="modalFirstDonation">Jan 2020</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Last Donation</div>
+                    <div class="detail-value" id="modalLastDonation">Oct 2022</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value" id="modalLocation">New York, NY</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Availability</div>
+                    <div class="detail-value" id="modalAvailability">Within 2 weeks</div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn btn-close" id="btnClose">Close</button>
+                <button class="modal-btn btn-contact">Contact Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample donor data
+        const donorData = {
+            'john-doe': {
+                name: 'John Doe',
+                avatar: 'JD',
+                badge: 'Life Saver',
+                bloodType: 'O+',
+                donations: 9,
+                firstDonation: 'Jan 2020',
+                lastDonation: 'Oct 2022',
+                location: 'New York, NY',
+                availability: 'Within 2 weeks'
+            },
+            'alice-smith': {
+                name: 'Alice Smith',
+                avatar: 'AS',
+                badge: 'Life Saver',
+                bloodType: 'A+',
+                donations: 8,
+                firstDonation: 'Mar 2020',
+                lastDonation: 'Sep 2022',
+                location: 'Los Angeles, CA',
+                availability: 'Within 1 week'
+            },
+            // More data would be added for all donors in a real implementation
+            'sarah-johnson': {
+                name: 'Sarah Johnson',
+                avatar: 'SJ',
+                badge: 'Super Donor',
+                bloodType: 'B+',
+                donations: 5,
+                firstDonation: 'Feb 2019',
+                lastDonation: 'Aug 2022',
+                location: 'Chicago, IL',
+                availability: 'Within 3 weeks'
+            }
+        };
+
+        // Modal functionality
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalAvatar = document.getElementById('modalAvatar');
+        const modalName = document.getElementById('modalName');
+        const modalBadge = document.getElementById('modalBadge');
+        const modalBloodType = document.getElementById('modalBloodType');
+        const modalDonations = document.getElementById('modalDonations');
+        const modalFirstDonation = document.getElementById('modalFirstDonation');
+        const modalLastDonation = document.getElementById('modalLastDonation');
+        const modalLocation = document.getElementById('modalLocation');
+        const modalAvailability = document.getElementById('modalAvailability');
+        const btnClose = document.getElementById('btnClose');
+
+        // Add event listeners to all contact buttons
+        document.querySelectorAll('.contact-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const donorId = button.getAttribute('data-donor');
+                const donor = donorData[donorId] || {
+                    name: 'Donor Name',
+                    avatar: 'DN',
+                    badge: 'Regular Donor',
+                    bloodType: 'Unknown',
+                    donations: 0,
+                    firstDonation: 'Unknown',
+                    lastDonation: 'Unknown',
+                    location: 'Unknown',
+                    availability: 'Unknown'
+                };
+                
+                // Update modal with donor data
+                modalAvatar.textContent = donor.avatar;
+                modalName.textContent = donor.name;
+                modalBadge.textContent = donor.badge;
+                modalBloodType.textContent = donor.bloodType;
+                modalDonations.textContent = donor.donations;
+                modalFirstDonation.textContent = donor.firstDonation;
+                modalLastDonation.textContent = donor.lastDonation;
+                modalLocation.textContent = donor.location;
+                modalAvailability.textContent = donor.availability;
+                
+                // Show modal
+                modalBackdrop.classList.add('active');
+            });
+        });
+
+        // Close modal
+        btnClose.addEventListener('click', () => {
+            modalBackdrop.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                modalBackdrop.classList.remove('active');
+            }
+        });
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                // In a real implementation, this would filter the badges
+            });
+        });
+    </script>
+</body>
+</html>
