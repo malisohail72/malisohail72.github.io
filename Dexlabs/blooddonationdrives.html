@@ -1,1 +1,629 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Camps in Pakistan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            color: #EF4444;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .tab-active {
+            border-bottom: 2px solid #EF4444;
+            color: #EF4444;
+        }
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        .calendar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .calendar-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .calendar-day {
+            text-align: center;
+            padding: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        .calendar-date {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .calendar-date:hover {
+            background-color: #fef2f2;
+        }
+        .date-has-event {
+            background-color: #FFFBEB;
+            border: 1px solid #F87171;
+            font-weight: 600;
+        }
+        .date-selected {
+            background-color: #EF4444;
+            color: white;
+        }
+        .events-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .events-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .events-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .event-card {
+            background: linear-gradient(to right, #FFFBEB, #FEF2F2);
+            border: 1px solid #F87171;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .boosted-card {
+            background: linear-gradient(to right, #FFFBEB, #FEF2F2);
+            border: 1px solid #F87171;
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 115, 0.1), 0 4px 6px -2px rgba(249, 115, 115, 0.05);
+        }
+        .event-card h3 {
+            margin-top: 0;
+            color: #EF4444;
+        }
+        .event-details {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .event-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .event-detail i {
+            width: 20px;
+            margin-right: 10px;
+            color: #EF4444;
+        }
+        .register-btn {
+            background-color: #EF4444;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .register-btn:hover {
+            background-color: #dc2626;
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            display: none;
+        }
+        .modal {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: #EF4444;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+        .submit-btn {
+            background-color: #EF4444;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #dc2626;
+        }
+        .cities-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .city-btn {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .city-btn-active {
+            background: #EF4444;
+            color: white;
+            border-color: #EF4444;
+        }
+        @media (max-width: 900px) {
+            .calendar-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blood Donation Camps</h1>
+            <p class="subtitle">Find blood donation camps across Pakistan and register to save lives</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab tab-active">Calendar View</div>
+            <div class="tab">List View</div>
+        </div>
+
+        <div class="cities-filter">
+            <div class="city-btn city-btn-active">All Cities</div>
+            <div class="city-btn">Karachi</div>
+            <div class="city-btn">Lahore</div>
+            <div class="city-btn">Islamabad</div>
+            <div class="city-btn">Rawalpindi</div>
+            <div class="city-btn">Faisalabad</div>
+            <div class="city-btn">Peshawar</div>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar">
+                <div class="calendar-header">
+                    <h2>November 2023</h2>
+                    <div>
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day">Sun</div>
+                    <div class="calendar-day">Mon</div>
+                    <div class="calendar-day">Tue</div>
+                    <div class="calendar-day">Wed</div>
+                    <div class="calendar-day">Thu</div>
+                    <div class="calendar-day">Fri</div>
+                    <div class="calendar-day">Sat</div>
+                    
+                    <!-- Calendar dates will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="events-container">
+                <div class="events-header">
+                    <h2>Events on <span id="selected-date">November 15, 2023</span></h2>
+                </div>
+                <div class="events-list">
+                    <!-- Event cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="registration-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Register for Blood Donation</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="blood-type">Blood Type</label>
+                    <select id="blood-type" required>
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Register Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for blood donation camps
+        const eventsData = [
+            {
+                id: 1,
+                date: '2023-11-15',
+                title: 'Red Crescent Blood Drive',
+                organization: 'Pakistan Red Crescent',
+                city: 'Karachi',
+                time: '10:00 AM - 4:00 PM',
+                address: 'Plot ST-2, Block 3, Scheme 5, Clifton',
+                description: 'Join us for a blood donation drive to help those in need. All donors will receive a certificate and refreshments.'
+            },
+            {
+                id: 2,
+                date: '2023-11-15',
+                title: 'Life Savers Camp',
+                organization: 'Blood Donors Pakistan',
+                city: 'Lahore',
+                time: '9:00 AM - 3:00 PM',
+                address: '12-Main Gulberg, near Kalma Chowk',
+                description: 'Emergency blood donation camp to address the current shortage in city hospitals.'
+            },
+            {
+                id: 3,
+                date: '2023-11-17',
+                title: 'Community Blood Donation',
+                organization: 'Health Foundation',
+                city: 'Islamabad',
+                time: '8:00 AM - 2:00 PM',
+                address: 'Sector F-8 Markaz, Community Center',
+                description: 'Monthly blood donation camp organized in collaboration with PIMS Hospital.'
+            },
+            {
+                id: 4,
+                date: '2023-11-20',
+                title: 'Students Blood Drive',
+                organization: 'Youth Blood Donors Society',
+                city: 'Rawalpindi',
+                time: '9:00 AM - 3:00 PM',
+                address: 'Pir Mehr Ali Shah Arid Agriculture University',
+                description: 'Special blood donation camp for students and faculty members.'
+            },
+            {
+                id: 5,
+                date: '2023-11-22',
+                title: 'Corporate Blood Donation',
+                organization: 'Health Foundation',
+                city: 'Karachi',
+                time: '10:00 AM - 4:00 PM',
+                address: 'Bahria Town Tower, main boulevard',
+                description: 'Corporate blood donation drive with participation from major companies.'
+            },
+            {
+                id: 6,
+                date: '2023-11-25',
+                title: 'Emergency Blood Camp',
+                organization: 'Blood Donors Pakistan',
+                city: 'Faisalabad',
+                time: '8:00 AM - 1:00 PM',
+                address: 'D Ground opposite Clock Tower',
+                description: 'Emergency blood donation camp to address the current shortage in city hospitals.'
+            },
+            {
+                id: 7,
+                date: '2023-11-28',
+                title: 'Community Service',
+                organization: 'Pakistan Red Crescent',
+                city: 'Peshawar',
+                time: '9:00 AM - 2:00 PM',
+                address: 'University Road, near Khyber Teaching Hospital',
+                description: 'Monthly community blood donation service in collaboration with local hospitals.'
+            }
+        ];
+
+        // Current date and selected date
+        let currentDate = new Date();
+        let selectedDate = new Date('2023-11-15');
+        
+        // DOM elements
+        const calendarGrid = document.querySelector('.calendar-grid');
+        const eventsList = document.querySelector('.events-list');
+        const selectedDateElement = document.getElementById('selected-date');
+        const modalBackdrop = document.getElementById('registration-modal');
+        const registrationForm = document.getElementById('registration-form');
+        const closeModalBtn = document.querySelector('.close-btn');
+        const cityButtons = document.querySelectorAll('.city-btn');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+
+        // Initialize the calendar
+        function initCalendar() {
+            // Clear the calendar grid except for the day headers
+            while (calendarGrid.children.length > 7) {
+                calendarGrid.removeChild(calendarGrid.lastChild);
+            }
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            // Get first day of month and number of days in month
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Create empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('calendar-date');
+                calendarGrid.appendChild(emptyCell);
+            }
+            
+            // Create cells for each day of the month
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateCell = document.createElement('div');
+                dateCell.classList.add('calendar-date');
+                dateCell.textContent = i;
+                
+                // Check if this date has events
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const hasEvents = eventsData.some(event => event.date === dateStr);
+                
+                if (hasEvents) {
+                    dateCell.classList.add('date-has-event');
+                }
+                
+                // Check if this is the selected date
+                if (selectedDate && selectedDate.getDate() === i && 
+                    selectedDate.getMonth() === month && 
+                    selectedDate.getFullYear() === year) {
+                    dateCell.classList.add('date-selected');
+                }
+                
+                // Add click event
+                dateCell.addEventListener('click', () => {
+                    selectDate(new Date(year, month, i));
+                });
+                
+                calendarGrid.appendChild(dateCell);
+            }
+            
+            // Update the selected date display
+            updateSelectedDateDisplay();
+        }
+
+        // Update events list based on selected date
+        function updateEventsList() {
+            eventsList.innerHTML = '';
+            
+            const dateStr = selectedDate.toISOString().split('T')[0];
+            const eventsForDate = eventsData.filter(event => event.date === dateStr);
+            
+            if (eventsForDate.length === 0) {
+                eventsList.innerHTML = '<p>No events found for this date.</p>';
+                return;
+            }
+            
+            eventsForDate.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.classList.add('event-card');
+                
+                // Make the first event card boosted
+                if (event.id === eventsForDate[0].id) {
+                    eventCard.classList.add('boosted-card');
+                }
+                
+                eventCard.innerHTML = `
+                    <h3>${event.title}</h3>
+                    <div class="event-details">
+                        <div class="event-detail">
+                            <i class="fas fa-building"></i>
+                            <span>${event.organization}</span>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${event.city} - ${event.address}</span>
+                        </div>
+                        <div class="event-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>${event.time}</span>
+                        </div>
+                    </div>
+                    <p>${event.description}</p>
+                    <button class="register-btn" data-event-id="${event.id}">Register Now</button>
+                `;
+                
+                eventsList.appendChild(eventCard);
+            });
+            
+            // Add event listeners to register buttons
+            document.querySelectorAll('.register-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const eventId = e.target.getAttribute('data-event-id');
+                    openRegistrationModal(eventId);
+                });
+            });
+        }
+
+        // Update the selected date display
+        function updateSelectedDateDisplay() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            selectedDateElement.textContent = selectedDate.toLocaleDateString('en-US', options);
+        }
+
+        // Select a date
+        function selectDate(date) {
+            selectedDate = date;
+            initCalendar();
+            updateEventsList();
+        }
+
+        // Open registration modal
+        function openRegistrationModal(eventId) {
+            modalBackdrop.style.display = 'flex';
+        }
+
+        // Close registration modal
+        function closeRegistrationModal() {
+            modalBackdrop.style.display = 'none';
+        }
+
+        // Filter events by city
+        function filterEventsByCity(city) {
+            // This would filter events in a real application
+            console.log(`Filtering by city: ${city}`);
+            // For now, we'll just update the UI to show the active city button
+            cityButtons.forEach(btn => {
+                if (btn.textContent === city || (city === 'All Cities' && btn.textContent === 'All Cities')) {
+                    btn.classList.add('city-btn-active');
+                } else {
+                    btn.classList.remove('city-btn-active');
+                }
+            });
+        }
+
+        // Event listeners
+        closeModalBtn.addEventListener('click', closeRegistrationModal);
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                closeRegistrationModal();
+            }
+        });
+
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Registration successful! Thank you for your willingness to donate blood.');
+            closeRegistrationModal();
+        });
+
+        cityButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterEventsByCity(btn.textContent);
+            });
+        });
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            initCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            initCalendar();
+        });
+
+        // Initialize the application
+        initCalendar();
+        updateEventsList();
+    </script>
+</body>
+</html>
