@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Stock Inventory Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        .tab-active {
+            border-bottom: 2px solid #EF4444;
+            color: #EF4444;
+        }
+        .boosted-card {
+            background: linear-gradient(to right, #FFFBEB, #FEF2F2);
+            border: 1px solid #F87171;
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 115, 0.1), 0 4px 6px -2px rgba(249, 115, 115, 0.05);
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #1F2937;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #374151;
+            margin-bottom: 20px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .sidebar-menu li:hover {
+            background-color: #374151;
+        }
+        .sidebar-menu li.active {
+            background-color: #EF4444;
+        }
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 6px;
+            padding: 8px 16px;
+            width: 300px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+            width: 100%;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .stat-card h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+        .stat-card p {
+            margin: 10px 0 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .blood-type-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .blood-type-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .blood-type {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .blood-units {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+        .blood-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .status-critical {
+            background-color: #FEF2F2;
+            color: #EF4444;
+        }
+        .status-adequate {
+            background-color: #F0FDF4;
+            color: #22C55E;
+        }
+        .status-low {
+            background-color: #FFFBEB;
+            color: #F59E0B;
+        }
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .chart-card h3 {
+            margin: 0 0 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .inventory-table {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .inventory-table h3 {
+            margin: 0 0 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        th {
+            font-weight: 500;
+            font-size: 14px;
+            color: #6B7280;
+        }
+        .action-btn {
+            background-color: #EF4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .action-btn:hover {
+            background-color: #DC2626;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab:hover {
+            color: #EF4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>BloodStock Pro</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">Dashboard</li>
+                <li>Inventory</li>
+                <li>Donations</li>
+                <li>Requests</li>
+                <li>Donors</li>
+                <li>Reports</li>
+                <li>Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1>Blood Stock Dashboard</h1>
+                <div class="search-bar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Search inventory...">
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAydjRhMiAyIDAgMCAxLTIgMkg2YTIgMiAwIDAgMS0yLTJWMiIvPjxwYXRoIGQ9Ik0yMiAxMHYzYTIgMiAwIDAgMS0yIDJINGEyIDIgMCAwIDEtMi0ydi0zIi8+PHJlY3QgeD0iOCIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjQiIHJ4PSIxIiByeT0iMSIvPjxwYXRoIGQ9Ik0yMiAxOHYtMWEyIDIgMCAwIDAtMi0ySDRhMiAyIDAgMCAwLTIgMnYxIi8+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iMiIgcnk9IjIiLz48L3N2Zz4=" alt="User">
+                    <span>Admin User</span>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab tab-active">Overview</div>
+                <div class="tab">Inventory Management</div>
+                <div class="tab">Expiry Tracking</div>
+                <div class="tab">Usage Analytics</div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card boosted-card">
+                    <h3>TOTAL BLOOD UNITS</h3>
+                    <p>1,248</p>
+                </div>
+                <div class="stat-card">
+                    <h3>CRITICAL STOCK LEVELS</h3>
+                    <p>3</p>
+                </div>
+                <div class="stat-card">
+                    <h3>EXPIRING IN 7 DAYS</h3>
+                    <p>42</p>
+                </div>
+                <div class="stat-card">
+                    <h3>DONATIONS THIS MONTH</h3>
+                    <p>187</p>
+                </div>
+            </div>
+
+            <!-- Blood Type Grid -->
+            <div class="blood-type-grid">
+                <div class="blood-type-card">
+                    <p class="blood-type">A+</p>
+                    <p class="blood-units">312</p>
+                    <span class="blood-status status-adequate">Adequate</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">A-</p>
+                    <p class="blood-units">98</p>
+                    <span class="blood-status status-low">Low</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">B+</p>
+                    <p class="blood-units">256</p>
+                    <span class="blood-status status-adequate">Adequate</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">B-</p>
+                    <p class="blood-units">74</p>
+                    <span class="blood-status status-critical">Critical</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">AB+</p>
+                    <p class="blood-units">142</p>
+                    <span class="blood-status status-adequate">Adequate</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">AB-</p>
+                    <p class="blood-units">45</p>
+                    <span class="blood-status status-low">Low</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">O+</p>
+                    <p class="blood-units">402</p>
+                    <span class="blood-status status-adequate">Adequate</span>
+                </div>
+                <div class="blood-type-card">
+                    <p class="blood-type">O-</p>
+                    <p class="blood-units">67</p>
+                    <span class="blood-status status-critical">Critical</span>
+                </div>
+            </div>
+
+            <!-- Charts Container -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Blood Inventory Trend (Last 30 Days)</h3>
+                    <canvas id="inventoryTrendChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Stock Distribution</h3>
+                    <canvas id="stockDistributionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="inventory-table">
+                <h3>Recent Blood Donations</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Donation ID</th>
+                            <th>Donor Name</th>
+                            <th>Blood Type</th>
+                            <th>Donation Date</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#D-7829</td>
+                            <td>John Smith</td>
+                            <td>O+</td>
+                            <td>Oct 12, 2023</td>
+                            <td>Dec 12, 2023</td>
+                            <td><span class="blood-status status-adequate">Available</span></td>
+                            <td><button class="action-btn">Process</button></td>
+                        </tr>
+                        <tr>
+                            <td>#D-7815</td>
+                            <td>Sarah Johnson</td>
+                            <td>B-</td>
+                            <td>Oct 11, 2023</td>
+                            <td>Dec 11, 2023</td>
+                            <td><span class="blood-status status-critical">Expiring Soon</span></td>
+                            <td><button class="action-btn">Process</button></td>
+                        </tr>
+                        <tr>
+                            <td>#D-7802</td>
+                            <td>Michael Brown</td>
+                            <td>A+</td>
+                            <td>Oct 10, 2023</td>
+                            <td>Dec 10, 2023</td>
+                            <td><span class="blood-status status-adequate">Available</span></td>
+                            <td><button class="action-btn">Process</button></td>
+                        </tr>
+                        <tr>
+                            <td>#D-7798</td>
+                            <td>Emily Davis</td>
+                            <td>AB-</td>
+                            <td>Oct 9, 2023</td>
+                            <td>Dec 9, 2023</td>
+                            <td><span class="blood-status status-low">Low Stock</span></td>
+                            <td><button class="action-btn">Process</button></td>
+                        </tr>
+                        <tr>
+                            <td>#D-7784</td>
+                            <td>Robert Wilson</td>
+                            <td>O-</td>
+                            <td>Oct 8, 2023</td>
+                            <td>Dec 8, 2023</td>
+                            <td><span class="blood-status status-critical">Critical</span></td>
+                            <td><button class="action-btn">Process</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize charts when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inventory Trend Chart
+            const trendCtx = document.getElementById('inventoryTrendChart').getContext('2d');
+            const inventoryTrendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sep 15', 'Sep 20', 'Sep 25', 'Sep 30', 'Oct 5', 'Oct 10', 'Oct 15'],
+                    datasets: [
+                        {
+                            label: 'A+',
+                            data: [280, 290, 305, 312, 300, 308, 312],
+                            borderColor: '#EF4444',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'B+',
+                            data: [220, 230, 240, 245, 250, 252, 256],
+                            borderColor: '#3B82F6',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'O+',
+                            data: [370, 380, 390, 395, 398, 400, 402],
+                            borderColor: '#10B981',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'AB+',
+                            data: [120, 125, 130, 132, 136, 140, 142],
+                            borderColor: '#8B5CF6',
+                            tension: 0.3,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Units'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Stock Distribution Chart
+            const distCtx = document.getElementById('stockDistributionChart').getContext('2d');
+            const stockDistributionChart = new Chart(distCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+                    datasets: [{
+                        data: [312, 98, 256, 74, 142, 45, 402, 67],
+                        backgroundColor: [
+                            '#EF4444', '#F87171', '#3B82F6', '#60A5FA', 
+                            '#8B5CF6', '#A78BFA', '#10B981', '#34D399'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
