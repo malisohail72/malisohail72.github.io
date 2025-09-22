@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Remote IT Talent - Affordable Quality Remote Workers</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: #fff;
+      color: #111;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      background: #4f46e5;
+      color: white;
+      font-weight: 600;
+      padding: 0.75em 2em;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    button:hover,
+    button:focus {
+      background: #3730a3;
+      outline: none;
+    }
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    /* Header / Hero */
+    header {
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: white;
+      padding: 5rem 1.5rem 6rem;
+      text-align: center;
+    }
+    header h1 {
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    header p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+    header button {
+      font-size: 1.125rem;
+      padding: 1rem 3rem;
+      box-shadow: 0 8px 24px rgb(79 70 229 / 0.4);
+    }
+    /* Features Section */
+    section.features {
+      padding: 5rem 1.5rem 4rem;
+      background: #f9fafb;
+    }
+    section.features h2 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #111827;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .feature-item {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.07);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .feature-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      color: #4f46e5;
+      margin-bottom: 1.25rem;
+    }
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: #111827;
+    }
+    .feature-desc {
+      color: #4b5563;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    /* Why Choose Us */
+    section.why-choose {
+      padding: 5rem 1.5rem 5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    section.why-choose h2 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem;
+      color: #111827;
+    }
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      color: #374151;
+    }
+    .why-icon {
+      color: #4f46e5;
+      font-size: 1.75rem;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .why-text {
+      font-size: 1.125rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+    /* Testimonials */
+    section.testimonials {
+      background: #4f46e5;
+      color: white;
+      padding: 5rem 1.5rem 5rem;
+      text-align: center;
+    }
+    section.testimonials h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .testimonial-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .testimonial-item {
+      background: rgba(255 255 255 / 0.15);
+      padding: 2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .testimonial-text {
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-top: auto;
+      text-align: right;
+      opacity: 0.85;
+    }
+    /* Contact */
+    section.contact {
+      padding: 5rem 1.5rem 6rem;
+      background: #f3f4f6;
+    }
+    section.contact h2 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #111827;
+    }
+    form {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    label {
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.3rem;
+      display: block;
+      font-size: 0.95rem;
+    }
+    input, textarea {
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1.5px solid #d1d5db;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+      width: 100%;
+    }
+    input:focus, textarea:focus {
+      border-color: #4f46e5;
+      outline: none;
+      box-shadow: 0 0 5px rgb(79 70 229 / 0.5);
+    }
+    textarea {
+      min-height: 120px;
+    }
+    form button {
+      align-self: center;
+      width: 100%;
+      max-width: 220px;
+      margin-top: 1rem;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      background: white;
+    }
+    /* Responsive tweaks */
+    @media (min-width: 640px) {
+      .why-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .why-item {
+        max-width: 300px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .why-icon {
+        margin-top: 0;
+      }
+      .why-text {
+        font-weight: 600;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Quality Remote IT Talent at Affordable Rates</h1>
+      <p>Hire vetted remote IT professionals who deliver excellence, without breaking the bank.</p>
+      <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </div>
+  </header>
+
+  <section class="features" aria-labelledby="features-title">
+    <div class="container">
+      <h2 id="features-title">Our Remote Hiring Advantages</h2>
+      <div class="features-grid">
+        <article class="feature-item" role="region" aria-label="Cost-effective remote workers">
+          <div class="feature-icon" aria-hidden="true">💰</div>
+          <h3 class="feature-title">Cost-Effective Talent</h3>
+          <p class="feature-desc">Save up to 60% on hiring costs without compromising quality or reliability.</p>
+        </article>
+        <article class="feature-item" role="region" aria-label="Vetted IT professionals">
+          <div class="feature-icon" aria-hidden="true">🛡️</div>
+          <h3 class="feature-title">Vetted IT Professionals</h3>
+          <p class="feature-desc">Only the top 5% of remote workers pass our rigorous screening process.</p>
+        </article>
+        <article class="feature-item" role="region" aria-label="Flexible hiring models">
+          <div class="feature-icon" aria-hidden="true">🔄</div>
+          <h3 class="feature-title">Flexible Hiring</h3>
+          <p class="feature-desc">From full-time to project-based contracts, scale your team as you grow.</p>
+        </article>
+        <article class="feature-item" role="region" aria-label="Dedicated support">
+          <div class="feature-icon" aria-hidden="true">🤝</div>
+          <h3 class="feature-title">Dedicated Support</h3>
+          <p class="feature-desc">Our team assists you throughout the hiring and onboarding process.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-choose" aria-labelledby="why-title">
+    <h2 id="why-title">Why Choose Us?</h2>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-icon" aria-hidden="true">⚡</div>
+        <p class="why-text">Rapid candidate matching with a turnaround in 48 hours.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon" aria-hidden="true">🌍</div>
+        <p class="why-text">Access to a global pool of highly skilled IT professionals.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon" aria-hidden="true">📈</div>
+        <p class="why-text">Focus on growth while we handle recruitment complexities.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon" aria-hidden="true">🔒</div>
+        <p class="why-text">Confidentiality and data security guaranteed for all projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title">What Our Clients Say</h2>
+    <div class="testimonial-list">
+      <blockquote class="testimonial-item">
+        <p class="testimonial-text">"The remote developers we hired through this agency have transformed our product timeline. High quality and affordable!"</p>
+        <footer class="testimonial-author">— Sarah L., CTO at TechNova</footer>
+      </blockquote>
+      <blockquote class="testimonial-item">
+        <p class="testimonial-text">"Great service, seamless communication, and the talent was exceptional. Highly recommend for startups."</p>
+        <footer class="testimonial-author">— Mark D., Founder of DevSolutions</footer>
+      </blockquote>
+      <blockquote class="testimonial-item">
+        <p class="testimonial-text">"We scaled our IT team quickly with no hassle. The support team was always available and proactive."</p>
+        <footer class="testimonial-author">— Priya M., Product Manager at CloudWave</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contact-title" id="contact">
+    <h2 id="contact-title">Contact Us to Hire Remote IT Talent</h2>
+    <form id="contact-form" aria-label="Contact form to hire remote IT talent">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name" />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+
+      <label for="company">Company Name</label>
+      <input type="text" id="company" name="company" placeholder="Your company" autocomplete="organization" />
+
+      <label for="message">Project Details / Requirements</label>
+      <textarea id="message" name="message" placeholder="Tell us about your project or talent needs" required></textarea>
+
+      <button type="submit">Send Inquiry</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Remote IT Talent Agency. All rights reserved.
+  </footer>
+
+  <script>
+    // Simple form submission simulation
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      // Simulate network delay
+      setTimeout(() => {
+        alert('Thank you for reaching out! We will get back to you shortly.');
+        e.target.reset();
+        btn.disabled = false;
+        btn.textContent = 'Send Inquiry';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
