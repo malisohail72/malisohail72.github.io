@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group Compatibility</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            color: #c00;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .compatibility-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .blood-group {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .blood-group:hover {
+            transform: translateY(-5px);
+        }
+        
+        .group-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .group-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #c00;
+            margin-right: 10px;
+        }
+        
+        .group-type {
+            font-size: 0.9rem;
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .receives-from, .donates-to {
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        
+        .compatibility-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .compatible-group {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .can-donate {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .can-receive {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        .key-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .key-info h3 {
+            margin-bottom: 15px;
+            color: #c00;
+        }
+        
+        .key-info ul {
+            padding-left: 20px;
+        }
+        
+        .key-info li {
+            margin-bottom: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .compatibility-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Blood Group Compatibility</h1>
+            <p class="subtitle">Find out which blood types can donate to and receive from each other</p>
+        </header>
+        
+        <div class="intro">
+            <p>Understanding blood group compatibility is crucial for safe blood transfusions. This chart shows which blood types can donate to and receive from other types.</p>
+        </div>
+        
+        <div class="compatibility-section" id="compatibilityGrid">
+            <!-- Blood groups will be populated by JavaScript -->
+        </div>
+        
+        <div class="key-info">
+            <h3>Key Information</h3>
+            <ul>
+                <li><strong>Universal Donor:</strong> O- is the universal donor as it can be given to any blood type.</li>
+                <li><strong>Universal Recipient:</strong> AB+ is the universal recipient as it can receive from any blood type.</li>
+                <li><strong>Rh Factor:</strong> The "+" or "-" in blood types refers to the Rh factor. Rh- can only receive Rh- blood, but Rh+ can receive both.</li>
+                <li><strong>Always verify compatibility</strong> with medical professionals before any transfusion.</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Note: This information is for educational purposes. Always consult healthcare professionals for medical advice.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Blood group compatibility data
+        const bloodGroups = [
+            {
+                type: "A+",
+                receivesFrom: ["A+", "A-", "O+", "O-"],
+                donatesTo: ["A+", "AB+"],
+                description: "Can receive from A and O blood groups (both Rh+ and Rh-)"
+            },
+            {
+                type: "A-",
+                receivesFrom: ["A-", "O-"],
+                donatesTo: ["A+", "A-", "AB+", "AB-"],
+                description: "Can receive from A- and O- blood groups"
+            },
+            {
+                type: "B+",
+                receivesFrom: ["B+", "B-", "O+", "O-"],
+                donatesTo: ["B+", "AB+"],
+                description: "Can receive from B and O blood groups (both Rh+ and Rh-)"
+            },
+            {
+                type: "B-",
+                receivesFrom: ["B-", "O-"],
+                donatesTo: ["B+", "B-", "AB+", "AB-"],
+                description: "Can receive from B- and O- blood groups"
+            },
+            {
+                type: "AB+",
+                receivesFrom: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+                donatesTo: ["AB+"],
+                description: "Universal recipient - can receive from all blood types"
+            },
+            {
+                type: "AB-",
+                receivesFrom: ["A-", "B-", "AB-", "O-"],
+                donatesTo: ["AB+", "AB-"],
+                description: "Can receive from AB-, A-, B-, and O- blood groups"
+            },
+            {
+                type: "O+",
+                receivesFrom: ["O+", "O-"],
+                donatesTo: ["A+", "B+", "AB+", "O+"],
+                description: "Can receive from O+ and O- blood groups"
+            },
+            {
+                type: "O-",
+                receivesFrom: ["O-"],
+                donatesTo: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+                description: "Universal donor - can donate to all blood types"
+            }
+        ];
+
+        // Function to create blood group cards
+        function createBloodGroupCards() {
+            const grid = document.getElementById('compatibilityGrid');
+            
+            bloodGroups.forEach(group => {
+                const card = document.createElement('div');
+                card.className = 'blood-group';
+                
+                // Determine if it's universal donor or recipient for special styling
+                const isUniversalDonor = group.type === "O-";
+                const isUniversalRecipient = group.type === "AB+";
+                
+                card.innerHTML = `
+                    <div class="group-header">
+                        <div class="group-title">${group.type}</div>
+                        <div class="group-type">${isUniversalDonor ? 'Universal Donor' : (isUniversalRecipient ? 'Universal Recipient' : '')}</div>
+                    </div>
+                    <div class="receives-from">
+                        <div class="section-title">Receives From:</div>
+                        <div class="compatibility-list">
+                            ${group.receivesFrom.map(bloodType => 
+                                `<span class="compatible-group can-receive">${bloodType}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    <div class="donates-to">
+                        <div class="section-title">Donates To:</div>
+                        <div class="compatibility-list">
+                            ${group.donatesTo.map(bloodType => 
+                                `<span class="compatible-group can-donate">${bloodType}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">${group.description}</p>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize the page when it loads
+        document.addEventListener('DOMContentLoaded', createBloodGroupCards);
+    </script>
+</body>
+</html>
