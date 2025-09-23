@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoteRecruit Pro | Hire Top Remote Talent</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #1d1d1f;
+            --secondary-color: #0066cc;
+            --accent-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --text-light: #86868b;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: #004499;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Vetting Criteria */
+        .criteria {
+            background-color: var(--accent-color);
+        }
+
+        .criteria-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .criteria-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background-color: var(--accent-color);
+            padding: 0 15px;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Talent Pool */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .talent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .talent-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .talent-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .talent-img {
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--text-light);
+        }
+
+        .talent-info {
+            padding: 20px;
+        }
+
+        .talent-name {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .talent-role {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .talent-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .skill-tag {
+            background-color: var(--accent-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #004499 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta .btn {
+            background-color: var(--white);
+            color: var(--secondary-color);
+        }
+
+        .cta .btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .criteria-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .criteria-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--box-shadow);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .talent-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Remote<span>Recruit</span> Pro</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#vetting">Vetting</a></li>
+                    <li><a href="#talent">Talent Pool</a></li>
+                    <li><a href="#contact" class="btn btn-outline">Contact Us</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Hire Top Remote Talent from South Asia</h1>
+            <p>Connect with pre-vetted professionals from Pakistan, India, and the Philippines. Save up to 60% on hiring costs while accessing world-class talent.</p>
+            <div class="hero-btns">
+                <a href="#talent" class="btn">Browse Talent</a>
+                <a href="#contact" class="btn btn-outline">Post a Job</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Hire Remote with Us?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Cost Efficiency</h3>
+                    <p>Save up to 60% on hiring costs compared to local talent while maintaining quality.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time Zone Advantage</h3>
+                    <p>Leverage time zone differences for round-the-clock productivity and faster project delivery.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Top Talent</h3>
+                    <p>Access a pool of highly skilled professionals with strong technical and English communication skills.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Risk-Free Hiring</h3>
+                    <p>Our rigorous vetting process ensures you only interview candidates who match your requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vetting Criteria Section -->
+    <section class="section criteria" id="vetting">
+        <div class="container">
+            <h2 class="section-title">Our Rigorous Vetting Process</h2>
+            <div class="criteria-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Skill Assessment</h3>
+                    <p>Technical tests and portfolio review to verify expertise.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Communication Check</h3>
+                    <p>English proficiency and communication skills evaluation.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Cultural Fit</h3>
+                    <p>Assessment of work ethics, reliability, and team compatibility.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Final Approval</h3>
+                    <p>Only top 5% of applicants make it to our talent pool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talent Pool Section -->
+    <section class="section" id="talent">
+        <div class="container">
+            <h2 class="section-title">Our Top Talent Pool</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web-dev">Web Development</button>
+                <button class="filter-btn" data-filter="devops">DevOps</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Development</button>
+                <button class="filter-btn" data-filter="design">UI/UX Design</button>
+            </div>
+            <div class="talent-grid">
+                <!-- Web Development Profiles -->
+                <div class="talent-card" data-category="web-dev">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Ayesha Khan</h3>
+                        <p class="talent-role">Senior Full Stack Developer</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                        <p>5+ years experience building scalable web applications. Based in Pakistan.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+                <div class="talent-card" data-category="web-dev">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Raj Patel</h3>
+                        <p class="talent-role">Frontend Developer</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">SASS</span>
+                        </div>
+                        <p>Specialized in creating responsive and accessible user interfaces. Based in India.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+                <div class="talent-card" data-category="web-dev">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Maria Santos</h3>
+                        <p class="talent-role">Backend Developer</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                        </div>
+                        <p>Expert in building robust APIs and database architecture. Based in Philippines.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+
+                <!-- DevOps Profiles -->
+                <div class="talent-card" data-category="devops">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Ahmed Raza</h3>
+                        <p class="talent-role">DevOps Engineer</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                        </div>
+                        <p>Specialized in cloud infrastructure and CI/CD pipelines. Based in Pakistan.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+                <div class="talent-card" data-category="devops">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Priya Sharma</h3>
+                        <p class="talent-role">Cloud Architect</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Ansible</span>
+                        </div>
+                        <p>Expert in designing scalable cloud solutions. Based in India.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+                <div class="talent-card" data-category="devops">
+                    <div class="talent-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="talent-info">
+                        <h3 class="talent-name">Carlos Reyes</h3>
+                        <p class="talent-role">Site Reliability Engineer</p>
+                        <div class="talent-skills">
+                            <span class="skill-tag">GCP</span>
+                            <span class="skill-tag">Prometheus</span>
+                            <span class="skill-tag">Grafana</span>
+                        </div>
+                        <p>Focused on system reliability and performance optimization. Based in Philippines.</p>
+                        <a href="#" class="btn">View Profile</a>
+                    </div>
+                </div>
+
+                <!-- Additional profiles would continue here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Hire Top Remote Talent?</h2>
+            <p>Join hundreds of companies that have scaled their teams with our pre-vetted professionals from South Asia.</p>
+            <a href="#contact" class="btn">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>RemoteRecruit Pro</h3>
+                    <p>Connecting global companies with top remote talent from Pakistan, India, and the Philippines.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#vetting">Vetting Process</a></li>
+                        <li><a href="#talent">Talent Pool</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Remote Hiring</a></li>
+                        <li><a href="#">Payroll Management</a></li>
+                        <li><a href="#">Compliance Support</a></li>
+                        <li><a href="#">Talent Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> hello@remoterecruit.pro</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Global Remote Team</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 RemoteRecruit Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Filter Talent by Category
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const talentCards = document.querySelectorAll('.talent-card');
+                
+                talentCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'var(--box-shadow)';
+            }
+        });
+    </script>
+</body>
+</html>
