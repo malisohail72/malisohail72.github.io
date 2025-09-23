@@ -3,133 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RemoteRecruit Pro | Hire Top Remote Talent</title>
+    <title>RemoteHire Pro | Top Remote Talent from South Asia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for consistent theming */
         :root {
-            --primary-color: #1d1d1f;
-            --secondary-color: #0066cc;
-            --accent-color: #f5f5f7;
-            --text-color: #1d1d1f;
-            --text-light: #86868b;
-            --white: #ffffff;
-            --border-radius: 12px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --transition: all 0.3s ease;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--white);
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3, h4, h5 {
             font-weight: 600;
             line-height: 1.2;
             margin-bottom: 1rem;
         }
 
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
         p {
-            margin-bottom: 1rem;
-            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 1.1rem;
         }
 
         a {
             text-decoration: none;
-            color: var(--secondary-color);
+            color: inherit;
             transition: var(--transition);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--secondary-color);
-            color: var(--white);
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
             border: none;
             border-radius: var(--border-radius);
-            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         .btn:hover {
-            background-color: #004499;
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .btn-outline {
+        .btn-secondary {
             background-color: transparent;
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
+            border: 1px solid var(--primary);
+            color: var(--primary);
         }
 
-        .btn-outline:hover {
-            background-color: var(--secondary-color);
-            color: var(--white);
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
         }
 
         /* Header & Navigation */
         header {
-            background-color: var(--white);
-            box-shadow: var(--box-shadow);
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: var(--shadow);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--dark);
+            display: flex;
+            align-items: center;
         }
 
         .logo span {
-            color: var(--secondary-color);
+            color: var(--primary);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
         }
 
         .nav-links {
@@ -142,12 +160,23 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
             font-weight: 500;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary-color);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .mobile-menu {
@@ -158,77 +187,104 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 150px 0 100px;
-            text-align: center;
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(37, 99, 235, 0.03)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
             margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .hero-btns {
             display: flex;
-            justify-content: center;
             gap: 15px;
-            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         /* Benefits Section */
+        .benefits {
+            background-color: white;
+        }
+
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin-top: 50px;
         }
 
         .benefit-card {
-            background-color: var(--white);
+            background: white;
             padding: 30px;
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
+            box-shadow: var(--shadow);
             transition: var(--transition);
+            text-align: center;
         }
 
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
         }
 
         /* Vetting Criteria */
-        .criteria {
-            background-color: var(--accent-color);
+        .vetting {
+            background-color: #f8fafc;
         }
 
-        .criteria-steps {
+        .vetting-steps {
             display: flex;
             justify-content: space-between;
-            margin-top: 50px;
             position: relative;
+            margin-top: 50px;
         }
 
-        .criteria-steps::before {
+        .vetting-steps::before {
             content: '';
             position: absolute;
             top: 40px;
             left: 0;
             right: 0;
             height: 2px;
-            background-color: var(--secondary-color);
+            background-color: var(--gray-light);
             z-index: 1;
         }
 
@@ -236,8 +292,9 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            background-color: var(--accent-color);
+            background-color: #f8fafc;
             padding: 0 15px;
+            flex: 1;
         }
 
         .step-number {
@@ -246,26 +303,31 @@
             justify-content: center;
             width: 80px;
             height: 80px;
-            background-color: var(--secondary-color);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
         }
 
         /* Talent Pool */
+        .talent-pool {
+            background-color: white;
+        }
+
         .filters {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 40px;
         }
 
         .filter-btn {
             padding: 10px 20px;
-            background-color: var(--accent-color);
+            background-color: var(--gray-light);
             border: none;
             border-radius: 30px;
             cursor: pointer;
@@ -274,8 +336,8 @@
         }
 
         .filter-btn.active {
-            background-color: var(--secondary-color);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
 
         .talent-grid {
@@ -285,29 +347,30 @@
         }
 
         .talent-card {
-            background-color: var(--white);
+            background-color: white;
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
         .talent-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .talent-img {
             height: 200px;
-            background-color: #e0e0e0;
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            color: var(--text-light);
+            color: var(--primary);
         }
 
         .talent-info {
-            padding: 20px;
+            padding: 25px;
         }
 
         .talent-name {
@@ -316,71 +379,73 @@
         }
 
         .talent-role {
-            color: var(--secondary-color);
+            color: var(--primary);
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .talent-skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .skill-tag {
-            background-color: var(--accent-color);
-            padding: 3px 10px;
+            background-color: var(--gray-light);
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #004499 100%);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             text-align: center;
             padding: 100px 0;
         }
 
         .cta h2 {
-            font-size: 2.5rem;
+            color: white;
             margin-bottom: 1.5rem;
         }
 
         .cta p {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
             margin: 0 auto 2rem;
         }
 
         .cta .btn {
-            background-color: var(--white);
-            color: var(--secondary-color);
+            background-color: white;
+            color: var(--primary);
         }
 
         .cta .btn:hover {
-            background-color: var(--accent-color);
+            background-color: var(--light);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 60px 0 30px;
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .footer-column h3 {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
             position: relative;
+            color: white;
         }
 
         .footer-column h3::after {
@@ -390,7 +455,7 @@
             bottom: -8px;
             width: 30px;
             height: 2px;
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .footer-links {
@@ -398,7 +463,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
@@ -406,7 +471,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--white);
+            color: white;
         }
 
         .social-links {
@@ -423,12 +488,11 @@
             height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            color: var(--white);
             transition: var(--transition);
         }
 
         .social-links a:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary);
             transform: translateY(-3px);
         }
 
@@ -440,22 +504,45 @@
             font-size: 0.9rem;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .hero h1 {
+            h1 {
                 font-size: 2.8rem;
             }
             
-            .criteria-steps {
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .vetting-steps {
                 flex-direction: column;
                 gap: 40px;
             }
             
-            .criteria-steps::before {
+            .vetting-steps::before {
                 display: none;
             }
         }
@@ -467,10 +554,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--white);
+                background-color: white;
                 flex-direction: column;
                 padding: 20px;
-                box-shadow: var(--box-shadow);
+                box-shadow: var(--shadow);
             }
             
             .nav-links.active {
@@ -485,12 +572,9 @@
                 display: block;
             }
             
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
+            .hero {
+                padding: 150px 0 80px;
+                text-align: center;
             }
             
             .hero-btns {
@@ -506,11 +590,15 @@
         }
 
         @media (max-width: 576px) {
-            .section {
-                padding: 60px 0;
+            section {
+                padding: 80px 0;
             }
             
-            .section-title {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
                 font-size: 1.8rem;
             }
             
@@ -526,16 +614,16 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
+    <header id="header">
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">Remote<span>Recruit</span> Pro</a>
+                <a href="#" class="logo"><i class="fas fa-globe-americas"></i>Remote<span>Hire</span> Pro</a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#benefits">Benefits</a></li>
                     <li><a href="#vetting">Vetting</a></li>
                     <li><a href="#talent">Talent Pool</a></li>
-                    <li><a href="#contact" class="btn btn-outline">Contact Us</a></li>
+                    <li><a href="#contact" class="btn btn-secondary">Contact Us</a></li>
                 </ul>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -547,42 +635,44 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>Hire Top Remote Talent from South Asia</h1>
-            <p>Connect with pre-vetted professionals from Pakistan, India, and the Philippines. Save up to 60% on hiring costs while accessing world-class talent.</p>
-            <div class="hero-btns">
-                <a href="#talent" class="btn">Browse Talent</a>
-                <a href="#contact" class="btn btn-outline">Post a Job</a>
+            <div class="hero-content">
+                <h1>Hire Top Remote Talent from South Asia</h1>
+                <p>Access pre-vetted professionals from Pakistan, India, and the Philippines. Save up to 60% on hiring costs while getting world-class talent.</p>
+                <div class="hero-btns">
+                    <a href="#talent" class="btn">Browse Talent</a>
+                    <a href="#contact" class="btn btn-secondary">Post a Job</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Benefits Section -->
-    <section class="section" id="benefits">
+    <section class="benefits" id="benefits">
         <div class="container">
-            <h2 class="section-title">Why Hire Remote with Us?</h2>
+            <h2>Why Hire Remote with Us?</h2>
             <div class="benefits-grid">
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <h3>Cost Efficiency</h3>
-                    <p>Save up to 60% on hiring costs compared to local talent while maintaining quality.</p>
+                    <p>Save up to 60% on hiring costs compared to local talent while maintaining exceptional quality.</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">
                         <i class="fas fa-clock"></i>
                     </div>
                     <h3>Time Zone Advantage</h3>
                     <p>Leverage time zone differences for round-the-clock productivity and faster project delivery.</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Top Talent</h3>
                     <p>Access a pool of highly skilled professionals with strong technical and English communication skills.</p>
                 </div>
-                <div class="benefit-card">
+                <div class="benefit-card fade-in">
                     <div class="benefit-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -594,38 +684,38 @@
     </section>
 
     <!-- Vetting Criteria Section -->
-    <section class="section criteria" id="vetting">
+    <section class="vetting" id="vetting">
         <div class="container">
-            <h2 class="section-title">Our Rigorous Vetting Process</h2>
-            <div class="criteria-steps">
-                <div class="step">
+            <h2>Our Rigorous Vetting Process</h2>
+            <div class="vetting-steps">
+                <div class="step fade-in">
                     <div class="step-number">1</div>
                     <h3>Skill Assessment</h3>
-                    <p>Technical tests and portfolio review to verify expertise.</p>
+                    <p>Technical tests and portfolio review to verify expertise and problem-solving abilities.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">2</div>
                     <h3>Communication Check</h3>
-                    <p>English proficiency and communication skills evaluation.</p>
+                    <p>English proficiency and communication skills evaluation through structured interviews.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">3</div>
                     <h3>Cultural Fit</h3>
-                    <p>Assessment of work ethics, reliability, and team compatibility.</p>
+                    <p>Assessment of work ethics, reliability, and team compatibility for seamless integration.</p>
                 </div>
-                <div class="step">
+                <div class="step fade-in">
                     <div class="step-number">4</div>
                     <h3>Final Approval</h3>
-                    <p>Only top 5% of applicants make it to our talent pool.</p>
+                    <p>Only the top 5% of applicants make it to our exclusive talent pool.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Talent Pool Section -->
-    <section class="section" id="talent">
+    <section class="talent-pool" id="talent">
         <div class="container">
-            <h2 class="section-title">Our Top Talent Pool</h2>
+            <h2>Our Top Talent Pool</h2>
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="web-dev">Web Development</button>
@@ -635,9 +725,9 @@
             </div>
             <div class="talent-grid">
                 <!-- Web Development Profiles -->
-                <div class="talent-card" data-category="web-dev">
+                <div class="talent-card fade-in" data-category="web-dev">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-code"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Ayesha Khan</h3>
@@ -651,9 +741,9 @@
                         <a href="#" class="btn">View Profile</a>
                     </div>
                 </div>
-                <div class="talent-card" data-category="web-dev">
+                <div class="talent-card fade-in" data-category="web-dev">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-laptop-code"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Raj Patel</h3>
@@ -667,9 +757,9 @@
                         <a href="#" class="btn">View Profile</a>
                     </div>
                 </div>
-                <div class="talent-card" data-category="web-dev">
+                <div class="talent-card fade-in" data-category="web-dev">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-server"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Maria Santos</h3>
@@ -685,9 +775,9 @@
                 </div>
 
                 <!-- DevOps Profiles -->
-                <div class="talent-card" data-category="devops">
+                <div class="talent-card fade-in" data-category="devops">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-cloud"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Ahmed Raza</h3>
@@ -701,9 +791,9 @@
                         <a href="#" class="btn">View Profile</a>
                     </div>
                 </div>
-                <div class="talent-card" data-category="devops">
+                <div class="talent-card fade-in" data-category="devops">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-network-wired"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Priya Sharma</h3>
@@ -717,9 +807,9 @@
                         <a href="#" class="btn">View Profile</a>
                     </div>
                 </div>
-                <div class="talent-card" data-category="devops">
+                <div class="talent-card fade-in" data-category="devops">
                     <div class="talent-img">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-cogs"></i>
                     </div>
                     <div class="talent-info">
                         <h3 class="talent-name">Carlos Reyes</h3>
@@ -753,7 +843,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>RemoteRecruit Pro</h3>
+                    <h3>RemoteHire Pro</h3>
                     <p>Connecting global companies with top remote talent from Pakistan, India, and the Philippines.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
@@ -782,14 +872,14 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> hello@remoterecruit.pro</li>
+                        <li><i class="fas fa-envelope"></i> hello@remotehire.pro</li>
                         <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
                         <li><i class="fas fa-map-marker-alt"></i> Global Remote Team</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 RemoteRecruit Pro. All rights reserved.</p>
+                <p>&copy; 2023 RemoteHire Pro. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -798,6 +888,16 @@
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
 
         // Filter Talent by Category
@@ -845,15 +945,22 @@
             });
         });
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = 'var(--box-shadow)';
-            }
-        });
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
     </script>
 </body>
 </html>
