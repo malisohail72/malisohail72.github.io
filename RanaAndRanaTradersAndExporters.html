@@ -1135,142 +1135,200 @@ here...
 -->
 
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Rana & Rana Exporters - Reliable sourcing and export solutions from Pakistan to the world.">
-  <title>Rana & Rana Exporters | Pakistan's Reliable Export Partner</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PakExport — Global Sourcing & Export from Pakistan</title>
+  <meta name="description" content="PakExport — Professional exporters from Pakistan. Textiles, surgical instruments, sports goods, leather & more. Reliable shipping, compliance and global logistics." />
+  <meta name="author" content="PakExport" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Tailwind CDN for quick production-ready layout -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { color: #222; background: #fff; line-height: 1.6; }
-    header { background: #004aad; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-    header h1 { font-size: 1.5rem; }
-    nav ul { list-style: none; display: flex; gap: 1.5rem; }
-    nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
-    nav a:hover { color: #ffce00; }
-
-    .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581092787766-3d4b3e06a22e?auto=format&fit=crop&w=1350&q=80') center/cover; color: white; text-align: center; padding: 8rem 2rem; }
-    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
-
-    section { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
-    h2.section-title { text-align: center; margin-bottom: 2rem; color: #004aad; }
-
-    .about, .services, .partners, .forex, .contact { margin-top: 3rem; }
-    .about p { text-align: center; max-width: 800px; margin: auto; font-size: 1.1rem; }
-
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .service-box { background: #f9f9f9; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; }
-    .service-box:hover { transform: translateY(-5px); }
-    .service-box h3 { color: #004aad; margin-bottom: 1rem; }
-
-    .forex-placeholder { background: #eef4ff; padding: 3rem; text-align: center; border-radius: 10px; }
-    .forex-placeholder p { color: #004aad; font-weight: 500; }
-
-    .partners-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-    .partners-logos img { height: 50px; filter: grayscale(100%); opacity: 0.8; transition: 0.3s; }
-    .partners-logos img:hover { filter: grayscale(0); opacity: 1; }
-
-    .contact form { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: auto; }
-    input, textarea { padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; }
-    button { padding: 0.8rem; background: #004aad; color: white; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
-    button:hover { background: #003580; }
-
-    footer { background: #002d73; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
-    footer p { font-size: 0.9rem; }
-
-    @media (max-width: 768px) {
-      .hero h2 { font-size: 2rem; }
-      nav ul { flex-direction: column; gap: 1rem; }
-    }
+    /* small custom styles */
+    .hero-bg { background-image: linear-gradient(90deg, rgba(2,6,23,0.6), rgba(14,165,233,0.15)), url('https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1400&q=60'); background-size: cover; background-position: center; }
   </style>
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PakExport",
+    "url": "https://yourdomain.com",
+    "logo": "https://yourdomain.com/logo.png",
+    "sameAs": [],
+    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+92-21-0000000", "contactType": "customer service", "areaServed": "PK,INTL" }]
+  }
+  </script>
 </head>
-
-<body>
-
-  <header>
-    <h1>Rana & Rana Exporters</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#forex">Forex</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<body class="antialiased text-slate-800">
+  <!-- NAV -->
+  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <img src="https://via.placeholder.com/48x48.png?text=PE" alt="PakExport logo" class="w-12 h-12 rounded-md shadow" />
+        <div>
+          <h1 class="font-semibold">PakExport</h1>
+          <p class="text-xs text-slate-500">Trusted exporters from Pakistan</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#services" class="hover:underline">Services</a>
+        <a href="#products" class="hover:underline">Products</a>
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+        <a href="#" class="inline-block px-4 py-2 bg-sky-600 text-white rounded-md">Get Quote</a>
+      </nav>
+      <button id="navToggle" class="md:hidden p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- mobile nav -->
+    <div id="mobileNav" class="md:hidden hidden px-6 pb-6">
+      <a href="#services" class="block py-2">Services</a>
+      <a href="#products" class="block py-2">Products</a>
+      <a href="#about" class="block py-2">About</a>
+      <a href="#contact" class="block py-2">Contact</a>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Connecting Pakistan to Global Markets</h2>
-    <p>Your trusted partner in sourcing and exporting premium products from Pakistan — ethically, efficiently, and globally.</p>
-  </section>
-
-  <section id="about" class="about">
-    <h2 class="section-title">About Us</h2>
-    <p>Rana & Rana Exporters is a Pakistan-based export firm specializing in global product sourcing, logistics management, and trade facilitation. 
-       We bridge the gap between Pakistani manufacturers and international buyers with transparency, reliability, and compliance.</p>
-  </section>
-
-  <section id="services" class="services">
-    <h2 class="section-title">Our Services</h2>
-    <div class="services-grid">
-      <div class="service-box">
-        <h3>Product Sourcing</h3>
-        <p>We locate and vet high-quality suppliers across Pakistan for your specific requirements.</p>
-      </div>
-      <div class="service-box">
-        <h3>Export Logistics</h3>
-        <p>Handling documentation, freight forwarding, and shipping via FOB (Free on Board) or CNF (Cost and Freight) terms.</p>
-      </div>
-      <div class="service-box">
-        <h3>Quality Inspection</h3>
-        <p>Third-party checks and QC reports to ensure international export standards.</p>
-      </div>
-      <div class="service-box">
-        <h3>Customs & Clearance</h3>
-        <p>We simplify all customs and port clearance procedures to ensure smooth delivery.</p>
-      </div>
-      <div class="service-box">
-        <h3>Trade Consulting</h3>
-        <p>Market research, buyer matching, and export documentation guidance for new traders.</p>
+  <!-- HERO -->
+  <section class="hero-bg min-h-[60vh] flex items-center">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="max-w-2xl text-white">
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight">Reliable Export Sourcing — Pakistan to the World</h2>
+        <p class="mt-4 text-lg opacity-90">Textiles, surgical instruments, sports goods, leather and custom manufacturing — quality control, export compliance and fast shipping.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#contact" class="px-6 py-3 bg-white text-sky-700 font-semibold rounded shadow">Request a Quote</a>
+          <a href="#products" class="px-6 py-3 border border-white rounded text-white">View Products</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="forex" class="forex">
-    <h2 class="section-title">Forex Calculator (Placeholder)</h2>
-    <div class="forex-placeholder">
-      <p>Live Forex Calculator will be integrated here soon. (USD → PKR, EUR → PKR, etc.)</p>
+  <!-- SERVICES -->
+  <section id="services" class="max-w-7xl mx-auto px-6 py-16">
+    <h3 class="text-2xl font-semibold">What we offer</h3>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="p-6 border rounded-lg">
+        <h4 class="font-semibold">Sourcing & Manufacturing</h4>
+        <p class="mt-2 text-sm text-slate-600">Local factory sourcing, OEM/ODM, product sampling and quality assurance visits.</p>
+      </article>
+      <article class="p-6 border rounded-lg">
+        <h4 class="font-semibold">Quality Control & Testing</h4>
+        <p class="mt-2 text-sm text-slate-600">In-line inspections, pre-shipment checks and third-party lab testing coordination.</p>
+      </article>
+      <article class="p-6 border rounded-lg">
+        <h4 class="font-semibold">Logistics & Compliance</h4>
+        <p class="mt-2 text-sm text-slate-600">EXW, FOB, CIF — export docs, customs clearance, and global freight partners.</p>
+      </article>
     </div>
   </section>
 
-  <section id="partners" class="partners">
-    <h2 class="section-title">Our Partners</h2>
-    <div class="partners-logos">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/PIA_Logo.svg" alt="PIA">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Maersk_Group_Logo.svg" alt="Maersk">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/HBL_logo.svg" alt="HBL">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/DHL_Logo.svg" alt="DHL">
+  <!-- PRODUCTS -->
+  <section id="products" class="bg-slate-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-2xl font-semibold">Popular product categories</h3>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- example product card -->
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img src="https://images.unsplash.com/photo-1520975681763-9c6adf7c3e19?auto=format&fit=crop&w=800&q=60" alt="Surgical instruments" class="h-40 w-full object-cover rounded" />
+          <h5 class="mt-3 font-semibold">Surgical Instruments</h5>
+          <p class="text-sm text-slate-500">CE/ISO certified lines, customization available.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=60" alt="Textiles" class="h-40 w-full object-cover rounded" />
+          <h5 class="mt-3 font-semibold">Textiles & Home Textiles</h5>
+          <p class="text-sm text-slate-500">Knitted & woven fabrics, bulk orders, private label.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img src="https://images.unsplash.com/photo-1514995669114-2b1b73f32f34?auto=format&fit=crop&w=800&q=60" alt="Leather goods" class="h-40 w-full object-cover rounded" />
+          <h5 class="mt-3 font-semibold">Leather & Accessories</h5>
+          <p class="text-sm text-slate-500">Handcrafted leather, OEM runs for retail brands.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=60" alt="Sports goods" class="h-40 w-full object-cover rounded" />
+          <h5 class="mt-3 font-semibold">Sports Goods</h5>
+          <p class="text-sm text-slate-500">Sialkot-made equipment with export-grade packing.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <h2 class="section-title">Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+  <!-- ABOUT -->
+  <section id="about" class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <div class="md:col-span-2">
+        <h3 class="text-2xl font-semibold">About PakExport</h3>
+        <p class="mt-4 text-slate-600">Established team with deep networks across Pakistani manufacturing hubs. We manage sourcing, QA, export documentation and logistics so international buyers receive consistent quality on schedule.</p>
+        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+          <li>• Local supplier audits & sustainability checks</li>
+          <li>• Export-ready packaging & labeling</li>
+          <li>• Long-term supplier relationships and volume discounts</li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <h4 class="font-semibold">Quick facts</h4>
+        <dl class="mt-3 text-sm text-slate-600">
+          <dt class="font-medium">Years in export:</dt><dd> 12+</dd>
+          <dt class="font-medium">Main hubs:</dt><dd> Sialkot, Lahore, Karachi</dd>
+          <dt class="font-medium">Certifications:</dt><dd> ISO / CE (on request)</dd>
+        </dl>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>© 2025 Rana & Rana Exporters | All Rights Reserved | Based in Lahore, Pakistan</p>
+  <!-- CONTACT -->
+  <section id="contact" class="bg-white py-16">
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-2xl font-semibold">Get in touch</h3>
+        <p class="mt-3 text-slate-600">Send product specs, target quantity and delivery port. We'll reply within one business day.</p>
+        <div class="mt-6 space-y-3 text-sm text-slate-700">
+          <p><strong>Email:</strong> export@pakexport.com</p>
+          <p><strong>Phone:</strong> +92-21-0000000</p>
+          <p><strong>Address:</strong> Warehouse Rd, Sialkot, Pakistan</p>
+        </div>
+      </div>
+      <form class="space-y-4" action="mailto:export@pakexport.com" method="post" enctype="text/plain">
+        <input name="name" placeholder="Full name" required class="w-full p-3 border rounded" />
+        <input name="company" placeholder="Company" class="w-full p-3 border rounded" />
+        <input name="email" type="email" placeholder="Email" required class="w-full p-3 border rounded" />
+        <textarea name="message" placeholder="Product details, qty, target price, incoterm, port" rows="5" class="w-full p-3 border rounded"></textarea>
+        <div class="flex gap-3">
+          <button type="submit" class="px-4 py-2 bg-sky-600 text-white rounded">Send Message</button>
+          <button type="reset" class="px-4 py-2 border rounded">Reset</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-800 text-slate-200 py-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between gap-6">
+      <div>
+        <h4 class="font-semibold">PakExport</h4>
+        <p class="text-sm text-slate-300">Exporting quality from Pakistan since 2013.</p>
+      </div>
+      <div class="text-sm text-slate-300">© <span id="year"></span> PakExport — All rights reserved.</div>
+    </div>
   </footer>
 
+  <script>
+    // small interactivity
+    document.getElementById('navToggle').addEventListener('click', function(){
+      const mn = document.getElementById('mobileNav');
+      mn.classList.toggle('hidden');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
