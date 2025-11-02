@@ -1,4 +1,4 @@
-
+<!--
 
 <!DOCTYPE html>
 <html lang="en">
@@ -1128,6 +1128,149 @@ here...
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
     </script>
+
+</body>
+</html>
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rana & Rana Exporters - Reliable sourcing and export solutions from Pakistan to the world.">
+  <title>Rana & Rana Exporters | Pakistan's Reliable Export Partner</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { color: #222; background: #fff; line-height: 1.6; }
+    header { background: #004aad; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    header h1 { font-size: 1.5rem; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+    nav a:hover { color: #ffce00; }
+
+    .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581092787766-3d4b3e06a22e?auto=format&fit=crop&w=1350&q=80') center/cover; color: white; text-align: center; padding: 8rem 2rem; }
+    .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+    section { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
+    h2.section-title { text-align: center; margin-bottom: 2rem; color: #004aad; }
+
+    .about, .services, .partners, .forex, .contact { margin-top: 3rem; }
+    .about p { text-align: center; max-width: 800px; margin: auto; font-size: 1.1rem; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .service-box { background: #f9f9f9; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; }
+    .service-box:hover { transform: translateY(-5px); }
+    .service-box h3 { color: #004aad; margin-bottom: 1rem; }
+
+    .forex-placeholder { background: #eef4ff; padding: 3rem; text-align: center; border-radius: 10px; }
+    .forex-placeholder p { color: #004aad; font-weight: 500; }
+
+    .partners-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+    .partners-logos img { height: 50px; filter: grayscale(100%); opacity: 0.8; transition: 0.3s; }
+    .partners-logos img:hover { filter: grayscale(0); opacity: 1; }
+
+    .contact form { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: auto; }
+    input, textarea { padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; }
+    button { padding: 0.8rem; background: #004aad; color: white; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #003580; }
+
+    footer { background: #002d73; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+    footer p { font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2rem; }
+      nav ul { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Rana & Rana Exporters</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#forex">Forex</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Connecting Pakistan to Global Markets</h2>
+    <p>Your trusted partner in sourcing and exporting premium products from Pakistan — ethically, efficiently, and globally.</p>
+  </section>
+
+  <section id="about" class="about">
+    <h2 class="section-title">About Us</h2>
+    <p>Rana & Rana Exporters is a Pakistan-based export firm specializing in global product sourcing, logistics management, and trade facilitation. 
+       We bridge the gap between Pakistani manufacturers and international buyers with transparency, reliability, and compliance.</p>
+  </section>
+
+  <section id="services" class="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-box">
+        <h3>Product Sourcing</h3>
+        <p>We locate and vet high-quality suppliers across Pakistan for your specific requirements.</p>
+      </div>
+      <div class="service-box">
+        <h3>Export Logistics</h3>
+        <p>Handling documentation, freight forwarding, and shipping via FOB (Free on Board) or CNF (Cost and Freight) terms.</p>
+      </div>
+      <div class="service-box">
+        <h3>Quality Inspection</h3>
+        <p>Third-party checks and QC reports to ensure international export standards.</p>
+      </div>
+      <div class="service-box">
+        <h3>Customs & Clearance</h3>
+        <p>We simplify all customs and port clearance procedures to ensure smooth delivery.</p>
+      </div>
+      <div class="service-box">
+        <h3>Trade Consulting</h3>
+        <p>Market research, buyer matching, and export documentation guidance for new traders.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="forex" class="forex">
+    <h2 class="section-title">Forex Calculator (Placeholder)</h2>
+    <div class="forex-placeholder">
+      <p>Live Forex Calculator will be integrated here soon. (USD → PKR, EUR → PKR, etc.)</p>
+    </div>
+  </section>
+
+  <section id="partners" class="partners">
+    <h2 class="section-title">Our Partners</h2>
+    <div class="partners-logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/PIA_Logo.svg" alt="PIA">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Maersk_Group_Logo.svg" alt="Maersk">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/HBL_logo.svg" alt="HBL">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/DHL_Logo.svg" alt="DHL">
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Rana & Rana Exporters | All Rights Reserved | Based in Lahore, Pakistan</p>
+  </footer>
 
 </body>
 </html>
