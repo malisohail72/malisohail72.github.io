@@ -3,29 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RanaExports - Shipping Quality At Scale.</title>
-
-<style>
-
-
-</style>
-
-
+<title>Export Company</title>
 </head>
-
-
 <body style="margin:0;font-family:Arial, sans-serif;background-color:#e3f2fd;">
 
-
-<!-- Sticky Navbar -->
-<div style="position:sticky;top:0;background-color:#1565c0;color:white;display:flex;justify-content:space-around;padding:15px 0;z-index:1000;">
-  <a href="#home" style="color:white;text-decoration:none;">Home</a>
-  <a href="#products" style="color:white;text-decoration:none;">Our Products</a>
-  <a href="#costing" style="color:white;text-decoration:none;">Product Costing</a>
-  <a href="#quality" style="color:white;text-decoration:none;">Quality Assurance</a>
-  <a href="#loyalty" style="color:white;text-decoration:none;">Loyalty Program</a>
-  <a href="#registration" style="color:white;text-decoration:none;">Registrations</a>
-  <a href="#awards" style="color:white;text-decoration:none;">Awards</a>
+<!-- Sticky Navbar with Breadcrumb -->
+<div style="position:sticky;top:0;background-color:#1565c0;color:white;padding:10px 20px;z-index:1000;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+    <div>
+      <a href="#home" style="color:white;text-decoration:none;font-weight:bold;">ExportCo</a>
+    </div>
+    <div id="breadcrumb" style="font-size:14px;">
+      Home
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+    <a href="#home" style="color:white;text-decoration:none;margin:0 10px;">Home</a>
+    <a href="#products" style="color:white;text-decoration:none;margin:0 10px;">Our Products</a>
+    <a href="#costing" style="color:white;text-decoration:none;margin:0 10px;">Product Costing</a>
+    <a href="#quality" style="color:white;text-decoration:none;margin:0 10px;">Quality Assurance</a>
+    <a href="#loyalty" style="color:white;text-decoration:none;margin:0 10px;">Loyalty Program</a>
+    <a href="#registration" style="color:white;text-decoration:none;margin:0 10px;">Registrations</a>
+    <a href="#awards" style="color:white;text-decoration:none;margin:0 10px;">Awards</a>
+  </div>
 </div>
 
 <!-- Sections -->
@@ -79,12 +79,16 @@
   <p>&copy; 2025 Export Company | All Rights Reserved</p>
 </div>
 
-<!-- Smooth Scroll JS -->
+<!-- Breadcrumb + Smooth Scroll JS -->
 <script>
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',function(e){
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',function(e){
     e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    let target = document.querySelector(this.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({behavior:'smooth'});
+      document.getElementById('breadcrumb').textContent = 'Home > ' + target.querySelector('h2,h1').textContent;
+    }
   });
 });
 </script>
