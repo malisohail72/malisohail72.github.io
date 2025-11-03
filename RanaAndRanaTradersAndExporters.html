@@ -16,12 +16,39 @@
 <style>
 
 /* Sections of the page */
-.section-one {
-  background-color: #f2f2f2;
+
+
+.thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $secondary-color;
+  opacity: 0;
+  transition: all 0.2s ease-in;
 }
 
-.section-two {
-  background-color: #007bff;
+.thumbnail:hover .thumbnail-overlay {
+  opacity: 1;
+  transition: all 0.2s ease-in;
+}
+// Projects Pages
+
+.full-screen {
+  background: #eee;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  // Avoids leaving portfolio screen stuck up
+  overflow-y: scroll;
+}
+
+.close-window {
+  cursor: pointer;
 }
 
 
@@ -40,79 +67,105 @@
 
 
 
-  <!-- Navbar:dark -->
 
-<nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><strong> RanaExports </strong> - Shipping Quality At Scale. </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Most Visited Pages</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Shipment Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Forex & Taxes Calculator</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Bonus For Buyers
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">Purchase Discounts</a></li>
-              <li><a class="dropdown-item" href="#">Loyality Program</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Low MOQ Option</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
+      <hr>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <a class="btn-inverse btn-block btn-lg" target="newwindow" href="https://github.com/vuejs/vue-test-utils">View</a>
+        </div> <!-- .col-md-6 -->
+        <div class="col-md-3">
+          <a class="btn-danger btn-lg close-window btn-block">Close</a>
+        </div> <!-- .col-md-6 -->        
+      </div> <!-- .row -->      
+    </div> <!-- .col-md-6 -->
+  </div> <!-- .container -->
+</div> <!-- .full-screen -->
+<div id="book" class="full-screen">
+  <div class="container">
+    <div class="col-md-6 text-center center">
+      <div class="row">
+      </div> <!-- .row -->          
+      <p class="lead">Testing Vue.js Applications</p>
+      <p>
+       Learn how to test Vue.js applications with my book.</p>
+      <hr>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <a class="btn-inverse btn-block btn-lg" target="_blank" href="https://www.manning.com/books/testing-vue-js-applications">View</a>
+        </div> <!-- .col-md-6 -->
+        <div class="col-md-3">
+          <a class="btn-danger btn-lg close-window btn-block">Close</a>
+        </div> <!-- .col-md-6 -->        
+      </div> <!-- .row -->
+    </div> <!-- .col-md-6 -->
+  </div> <!-- .container -->
+</div> <!-- .full-screen -->
+<div id="blog" class="full-screen">
+  <div class="container">
+    <div class="col-md-6 text-center center">
+      <div class="row">
+      </div> <!-- .row -->
+      <p class="lead">
+        My personal blog
+      </p>
+      <hr>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <a class="btn-inverse btn-block btn-lg" target="_blank" href="https://eddyerburgh.me/">View</a>
+        </div> <!-- .col-md-6 -->
+        <div class="col-md-3">
+          <a class="btn-danger btn-lg close-window btn-block">Close</a>
+        </div> <!-- .col-md-6 -->        
+      </div> <!-- .row -->
+    </div> <!-- .col-md-6 -->
+  </div> <!-- .container -->
+</div> <!-- .full-screen -->
+</main>
 
 
 
-<br>
-  <br>
+
+
+
+<script>
+
+// Smooth Scrolling for internal links
+$('a[href^="#"]').on("click",function (e) {
+	    e.preventDefault();
   
 
+	    var target = this.hash;
+	    var $target = $(target);
 
-<!-- Sections -->
+	    $("html, body").stop().animate({
+	        "scrollTop": $target.offset().top
+	    }, 900, 'swing', function () {
+	        window.location.hash = target;
+	    });
+	});
 
+// Change background of nav bar on scroll
+$(window).scroll(function() {    
+  var scroll = $(window).scrollTop();
+  if (scroll > window.innerHeight - 55) {
+      $(".navbar").removeClass("transparent");
+    } else {
+      $(".navbar").addClass("transparent");
+    }
+});
 
-<div class="section-one p-5">
-  <!-- Section content -->
- <center> <h1> Welcome </h1> </center>
-  
-  
-</div>
+// Activate scrollspy to highlight nav item when scrolled over
+$("body").scrollspy({target: ".navbar"}) 
 
-<div class="section-two p-5">
-  <!-- Section content -->
-  helllo
-  hhj
-  hhjj
-  
-</div>
+// Bind events to open and close portfolio popups
+$(".thumbnail-overlay").on("click", openProject.bind( this ))
+$(".close-window").on("click", closeWindow.bind(this))
 
+function openProject( event ) {
+  if ( $(event.target).next(".thumbnail-overlay") ) {
+    var id =  "#" + $(event.target).parent().attr("page");
 
-
-  
-  
+</script>
   
   
   
