@@ -1,463 +1,474 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pakistan Export Co. — Global Sourcing from Pakistan</title>
-  <style>
-    /* --- Reset & base --- */
-    :root{
-      --blue:#0b6ef6;
-      --dark:#0d1724;
-      --muted:#6b7280;
-      --card:#ffffff;
-      --glass: rgba(255,255,255,0.06);
-      --max-width:1200px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0f1724;background:linear-gradient(180deg,#e8f0ff 0%, #f8fbff 100%);}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--max-width);margin:0 auto;padding:24px}
-    /* --- Navbar --- */
-    .navbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(12,20,36,0.06)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;color:var(--dark)}
-    .brand .logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--blue),#3fb3ff);display:grid;place-items:center;color:white;font-weight:800}
-    .nav-links{display:flex;gap:16px;align-items:center}
-    .nav-links a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--muted)}
-    .btn-primary{background:var(--blue);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;display:inline-block}
-    /* --- Hero --- */
-    .hero{display:flex;gap:24px;align-items:center;padding:48px 0}
-    .hero-left{flex:1}
-    .hero-title{font-size:32px;line-height:1.05;color:var(--dark);margin-bottom:12px}
-    .hero-sub{color:var(--muted);margin-bottom:18px}
-    .kpis{display:flex;gap:12px;flex-wrap:wrap}
-    .kpi{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(12,20,36,0.04);min-width:130px}
-    .hero-right{flex:1}
-    .hero-card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 30px rgba(12,20,36,0.06)}
-    /* --- Sections --- */
-    section{padding:44px 0}
-    h2{font-size:20px;margin-bottom:12px;color:var(--dark)}
-    p.lead{color:var(--muted);margin-bottom:18px}
-    .grid{display:grid;gap:18px}
-    .cols-3{grid-template-columns:repeat(3,1fr)}
-    .cols-2{grid-template-columns:repeat(2,1fr)}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(12,20,36,0.04)}
-    .product-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-    .small-btn{background:transparent;border:1px solid rgba(12,20,36,0.06);padding:8px 10px;border-radius:8px;cursor:pointer}
-    .gallery{display:flex;gap:8px;flex-wrap:wrap}
-    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-    .gallery .col{flex:1;min-width:180px}
-    /* Pricing table */
-    table{width:100%;border-collapse:collapse;margin-top:12px}
-    table th, table td{padding:10px;border-bottom:1px solid #eef2ff;text-align:left}
-    table th{font-weight:700;background:#f7fbff}
-    /* Testimonials */
-    .test-grid{display:flex;gap:12px;flex-wrap:wrap}
-    .testimonial{flex:1;min-width:240px;background:linear-gradient(180deg,#ffffff,#fbfdff);padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(12,20,36,0.04)}
-    /* Team */
-    .team{display:flex;gap:14px;flex-wrap:wrap}
-    .member{background:var(--card);padding:14px;border-radius:12px;text-align:center;flex:1;min-width:180px}
-    .avatar{width:96px;height:96px;border-radius:12px;background:linear-gradient(135deg,#cfe7ff,#d1fcff);display:inline-block;margin-bottom:12px}
-    /* Contact / footer */
-    .contact-grid{display:grid;grid-template-columns:1fr 340px;gap:18px}
-    footer{padding:28px 0;color:var(--muted)}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);font-weight:700}
-    /* Responsive */
-    @media (max-width:900px){
-      .cols-3{grid-template-columns:repeat(1,1fr)}
-      .cols-2{grid-template-columns:repeat(1,1fr)}
-      .hero{flex-direction:column}
-      .contact-grid{grid-template-columns:1fr}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rana & Rana Traders - Premier exporters of Spices, Textiles, and Agricultural products from Pakistan. Global sourcing, transparent costing, and ISO certified quality.">
+    <meta name="keywords" content="Export Pakistan, Spices Export, Textile Sourcing, Rana Traders, Rice Export, FOB CIF Calculator">
+    <meta name="author" content="Rana & Rana Traders">
+    <title>Rana & Rana Traders | Global Export & Sourcing Partner</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #0f172a; /* Deep Navy */
+            --secondary: #b45309; /* Bronze/Gold */
+            --accent: #0ea5e9; /* Sky Blue */
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --text-gray: #64748b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; color: var(--primary); line-height: 1.6; background-color: var(--light); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--primary); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        
+        /* --- UTILITY CLASSES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 12px 30px; border-radius: 5px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-primary { background: var(--secondary); color: white; }
+        .btn-primary:hover { background: #92400e; transform: translateY(-2px); }
+        .btn-outline { border: 2px solid var(--light); color: var(--light); }
+        .btn-outline:hover { background: var(--light); color: var(--primary); }
+        .section-padding { padding: 80px 0; }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 2rem; }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; color: white; font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .logo span { color: var(--secondary); }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #e2e8f0; font-size: 0.95rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--secondary); }
+        .mobile-toggle { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-top: -60px; /* Offset header */
+        }
+        .hero-content { max-width: 800px; }
+        .hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: white; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
+        .stat-item h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 0; }
+        .stat-item p { font-size: 0.9rem; opacity: 0.8; }
+
+        /* --- TRUST BAR --- */
+        .trust-bar { background: white; padding: 30px 0; box-shadow: var(--shadow); position: relative; z-index: 10; margin-top: -50px; border-radius: 8px; }
+        .trust-grid { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; text-align: center; }
+        .trust-item i { font-size: 2rem; color: var(--secondary); margin-bottom: 10px; }
+        .trust-item h4 { font-size: 1rem; font-family: 'Poppins', sans-serif; }
+
+        /* --- PRODUCTS GRID --- */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .card-img { height: 200px; background: #cbd5e1; position: relative; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-card:hover .card-img img { transform: scale(1.1); }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .card-body p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 15px; }
+        .tag { display: inline-block; padding: 4px 10px; background: #e0f2fe; color: var(--accent); font-size: 0.8rem; border-radius: 20px; font-weight: 600; }
+
+        /* --- CALCULATOR SECTION --- */
+        .calculator-section { background: var(--dark); color: white; }
+        .calculator-section h2 { color: white; }
+        .calc-wrapper {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .calc-form { flex: 1; min-width: 300px; }
+        .calc-result { flex: 1; min-width: 300px; background: var(--secondary); padding: 30px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #475569; background: #334155; color: white; font-family: 'Poppins', sans-serif; }
+        .form-control:focus { outline: none; border-color: var(--secondary); }
+
+        .price-row { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .price-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .price-val { font-size: 1.5rem; font-weight: 700; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: white; padding: 50px; border-radius: 10px; box-shadow: var(--shadow); }
+        .contact-info i { width: 40px; height: 40px; background: var(--light); color: var(--secondary); text-align: center; line-height: 40px; border-radius: 50%; margin-right: 15px; }
+        .info-item { display: flex; align-items: center; margin-bottom: 25px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: #94a3b8; padding: 60px 0 20px; border-top: 3px solid var(--secondary); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-family: 'Playfair Display'; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a:hover { color: white; }
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #334155; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .contact-wrapper { grid-template-columns: 1fr; padding: 30px; }
+            .calc-wrapper { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo">PX</div>
-        <div>
-          <div style="font-size:14px">Pakistan Export Co.</div>
-          <div style="font-size:12px;color:var(--muted)">Global sourcing & export services</div>
-        </div>
-      </div>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#products">Products</a>
-        <a href="#costing">Product Costing</a>
-        <a href="#qa">Quality</a>
-        <a href="#registrations">Registrations</a>
-        <a href="#team">Team</a>
-        <a href="#contact" class="btn-primary">Contact Us</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="container">
-      <!-- Hero -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-left">
-          <h1 id="hero-title" class="hero-title">Reliable sourcing from Pakistan — spices, textiles, sugar & more</h1>
-          <p class="hero-sub">We help businesses around the world import high-quality products from Pakistan with full compliance, competitive pricing, and logistical support.</p>
-          <div class="kpis" role="list">
-            <div class="kpi"><strong>1000+</strong><div style="font-size:12px;color:var(--muted)">Shipments completed</div></div>
-            <div class="kpi"><strong>50+</strong><div style="font-size:12px;color:var(--muted)">Global clients</div></div>
-            <div class="kpi"><strong>20+</strong><div style="font-size:12px;color:var(--muted)">Export product categories</div></div>
-          </div>
-          <div style="margin-top:18px">
-            <a href="#contact" class="btn-primary">Request Quote</a>
-            <a href="#products" style="margin-left:12px;padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(12,20,36,0.06);font-weight:700">View Products</a>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="hero-card">
-            <h3 style="margin-bottom:8px">Quick Quote</h3>
-            <form id="quickQuote" onsubmit="return handleQuickQuote(event)">
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <input required placeholder="Your name" name="name" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input required placeholder="Company / Organization" name="company" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input required placeholder="Product of interest (e.g. Jaggery)" name="product" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input required placeholder="Order size (kg/units)" name="qty" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <button class="btn-primary" type="submit">Get preliminary quote</button>
-              </div>
-            </form>
-            <div id="quoteMsg" style="margin-top:10px;color:var(--muted);font-size:13px"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Products -->
-      <section id="products">
-        <h2>Our Products</h2>
-        <p class="lead">Core export categories. Click a category to preview sample product images.</p>
-
-        <div class="card">
-          <div class="product-buttons" role="tablist" aria-label="Product categories">
-            <button class="small-btn" onclick="showGallery('spices')">Spices</button>
-            <button class="small-btn" onclick="showGallery('textiles')">Textiles</button>
-            <button class="small-btn" onclick="showGallery('jaggery')">Jaggery</button>
-            <button class="small-btn" onclick="showGallery('rice')">Rice</button>
-            <button class="small-btn" onclick="showGallery('fruits')">Dried Fruits</button>
-          </div>
-
-          <div id="productGallery" class="gallery">
-            <!-- populated via JS -->
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">Images are placeholders. Replace with your product photography for best conversions.</p>
-        </div>
-      </section>
-
-      <!-- Product Costing -->
-      <section id="costing">
-        <h2>Our Product Costing</h2>
-        <p class="lead">Transparent costing model — FOB (Free On Board) and CIF (Cost, Insurance & Freight) estimates included.</p>
-
-        <div class="grid cols-2" style="margin-top:12px">
-          <div class="card">
-            <h3 style="font-size:16px">Cost components</h3>
-            <ul style="margin-top:8px;color:var(--muted);line-height:1.6">
-              <li>Product sourcing & raw-material cost</li>
-              <li>Processing, grading & packing</li>
-              <li>Inland transport to port</li>
-              <li>Customs clearance & export documentation</li>
-              <li>Port handling & loading</li>
-              <li>Ocean freight & insurance (for CIF)</li>
-              <li>Bank charges & LC / payment fees</li>
-              <li>Quality inspection & third-party testing</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3 style="font-size:16px">Sample costing calculator</h3>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <input id="unitPrice" type="number" placeholder="Unit price (USD per unit/kg)" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-              <input id="qtyCalc" type="number" placeholder="Quantity" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-              <select id="incoterm" style="padding:10px;border-radius:8px;border:1px solid #eef2ff">
-                <option value="FOB">FOB (Port of Karachi)</option>
-                <option value="CIF">CIF (to destination port)</option>
-              </select>
-              <button class="small-btn" onclick="calcCost()">Calculate Estimate</button>
-              <div id="costResult" style="margin-top:8px;color:var(--muted)"></div>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Rana & Rana <span>Traders</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#products">Products</a>
+                <a href="#services">Services</a>
+                <a href="#costing">Cost Calculator</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; margin-top: -5px;">Get Quote</a>
+            </nav>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
             </div>
-          </div>
         </div>
+    </header>
 
-        <div class="card" style="margin-top:18px">
-          <h3 style="font-size:16px">Rates comparison (sample)</h3>
-          <table aria-label="Rates comparison">
-            <thead><tr><th>Product</th><th>Typical FOB (USD/kg)</th><th>Typical CIF (USD/kg)</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Jaggery (bulk)</td><td>0.35 - 0.60</td><td>0.50 - 0.80</td><td>Depends on grade & packing</td></tr>
-              <tr><td>Basmati Rice</td><td>0.80 - 1.50</td><td>1.00 - 1.80</td><td>Origin & milling date matter</td></tr>
-              <tr><td>Chilies (red)</td><td>1.20 - 2.50</td><td>1.60 - 3.00</td><td>Drying & color grade</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Bridging Pakistan's Finest to the Global Market</h1>
+                <p>We specialize in the export of premium spices, textiles, and agricultural produce. ISO certified quality, transparent FOB/CIF costing, and end-to-end logistics solutions.</p>
+                <a href="#costing" class="btn btn-primary">Estimate Costs</a>
+                <a href="#products" class="btn btn-outline">Explore Catalog</a>
 
-      <!-- Quality Assurance -->
-      <section id="qa">
-        <h2>Quality Assurance</h2>
-        <p class="lead">We follow strict QA: ISO-style inspection checklists, third-party lab testing, HACCP for food products, and traceability from farm to port.</p>
-        <div class="grid cols-3" style="margin-top:12px">
-          <div class="card">
-            <h4 style="margin-bottom:8px">Pre-shipment inspection</h4>
-            <p style="color:var(--muted)">Random sampling, moisture & purity tests, packaging integrity checks.</p>
-          </div>
-          <div class="card">
-            <h4 style="margin-bottom:8px">Third-party labs</h4>
-            <p style="color:var(--muted)">Certifications and test reports from accredited labs on request.</p>
-          </div>
-          <div class="card">
-            <h4 style="margin-bottom:8px">Traceability</h4>
-            <p style="color:var(--muted)">Batch tracking, harvest dates, and chain-of-custody records for high-value consignments.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Loyalty Program -->
-      <section id="loyalty">
-        <h2>Our Loyalty Program</h2>
-        <p class="lead">Volume-driven benefits: tiered discounts, priority production slots, extended payment terms, and dedicated account managers.</p>
-        <div class="card" style="margin-top:12px">
-          <ul style="color:var(--muted);line-height:1.6">
-            <li><strong>Bronze:</strong> 0–10 MT / year — standard rates & quarterly support</li>
-            <li><strong>Silver:</strong> 10–50 MT / year — 3% discount & faster lead times</li>
-            <li><strong>Gold:</strong> 50+ MT / year — custom pricing, priority dispatch, and annual reviews</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Registrations and Compliance -->
-      <section id="registrations">
-        <h2>Registrations & Trade Compliance</h2>
-        <p class="lead">We maintain registrations with SECP, FBR (where relevant), TDAP & exporters' associations. We prepare export docs: Commercial Invoice, Packing List, Certificate of Origin, Phytosanitary Certificate, Bill of Lading/AWB, and Inspection reports.</p>
-        <div class="card" style="margin-top:12px">
-          <h4>Helpful documents we provide</h4>
-          <ul style="color:var(--muted);line-height:1.6">
-            <li>Commercial Invoice & Packing List</li>
-            <li>Certificate of Origin (Chamber of Commerce)</li>
-            <li>Phytosanitary / Health Certificate (for food/agri)</li>
-            <li>Third-party inspection & lab reports</li>
-            <li>Export contracts & insurance documentation</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Testimonials -->
-      <section id="testimonials">
-        <h2>Client Testimonials</h2>
-        <p class="lead">What our clients say</p>
-        <div class="test-grid">
-          <div class="testimonial">
-            <strong>Global Foods Ltd.</strong>
-            <p style="color:var(--muted);margin-top:8px">"Consistent quality and clear communication — shipments arrived on time and paperwork was flawless."</p>
-          </div>
-          <div class="testimonial">
-            <strong>Spice Traders LLC</strong>
-            <p style="color:var(--muted);margin-top:8px">"Competitive pricing and great traceability on spice batches."</p>
-          </div>
-          <div class="testimonial">
-            <strong>Retail Co. UK</strong>
-            <p style="color:var(--muted);margin-top:8px">"Flexible payment options and helpful team — made onboarding easy."</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Team -->
-      <section id="team">
-        <h2>Meet Our Team</h2>
-        <p class="lead">Experienced in sourcing, QC, logistics and export documentation.</p>
-        <div class="team" style="margin-top:12px">
-          <div class="member">
-            <div class="avatar"></div>
-            <div style="font-weight:700">Director: Placeholder</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">20+ years — Sourcing & export operations</div>
-          </div>
-          <div class="member">
-            <div class="avatar"></div>
-            <div style="font-weight:700">Head of QA</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">Quality & certifications</div>
-          </div>
-          <div class="member">
-            <div class="avatar"></div>
-            <div style="font-weight:700">Logistics Manager</div>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">Shipping & customs</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact">
-        <h2>Contact & Sales</h2>
-        <p class="lead">Ready to start? Request a detailed quote or schedule a call.</p>
-
-        <div class="contact-grid" style="margin-top:12px">
-          <div class="card">
-            <form id="contactForm" onsubmit="return handleContact(event)">
-              <div style="display:flex;flex-direction:column;gap:10px">
-                <input required name="fullname" placeholder="Full name" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input required name="company" placeholder="Company" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input required name="email" type="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <input name="phone" placeholder="Phone (optional)" style="padding:10px;border-radius:8px;border:1px solid #eef2ff" />
-                <textarea name="message" placeholder="Tell us about your requirements" rows="5" style="padding:10px;border-radius:8px;border:1px solid #eef2ff"></textarea>
-                <div style="display:flex;gap:8px;align-items:center">
-                  <button type="submit" class="btn-primary">Send Message</button>
-                  <div id="contactMsg" style="color:var(--muted);font-size:13px"></div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Containers Shipped</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>25+</h3>
+                        <p>Countries Served</p>
+                    </div>
                 </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="card">
-            <div style="font-weight:700;margin-bottom:8px">Office</div>
-            <div style="color:var(--muted);line-height:1.6">
-              <div>Karachi, Sindh, Pakistan</div>
-              <div>Email: sales@pakistanexportco.example</div>
-              <div>Phone: +92-300-0000000</div>
-              <div style="margin-top:12px"><span class="badge">SECP Registered</span> <span class="badge">TDAP & Chamber</span></div>
             </div>
-            <div style="margin-top:12px">
-              <strong>Payment methods we accept</strong>
-              <ul style="color:var(--muted);line-height:1.6;margin-top:6px">
-                <li>Bank transfer (SWIFT / MT103)</li>
-                <li>LC (Letter of Credit) — confirmed / irrevocable</li>
-                <li>TT (Telegraphic Transfer)</li>
-                <li>Escrow / Trade Finance on request</li>
-              </ul>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="trust-bar">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>ISO 9001 Certified</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>FDA Registered</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-globe"></i>
+                    <h4>Member of TDAP</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Organic Options</h4>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </div>
 
-      <!-- Rates & quick notes -->
-      <section aria-hidden="true" style="padding-bottom:28px">
-        <div style="display:flex;gap:12px;justify-content:space-between;align-items:center">
-          <div style="color:var(--muted)">We follow international trade compliance and can provide export documentation on request.</div>
-          <div style="font-size:13px;color:var(--muted)">Last updated: Nov 19, 2025</div>
+    <section id="products" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Our Export Categories</h2>
+                <p>High-grade commodities sourced directly from manufacturers and farms.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Spices">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Top Seller</span>
+                        <h3>Premium Spices</h3>
+                        <p>Red Chili, Turmeric, Cumin. Processed in HACCP certified facilities.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1534951474654-886e56391794?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Rice">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Super Kernel</span>
+                        <h3>Basmati Rice</h3>
+                        <p>Aged Super Kernel and 1121 Kainat Basmati rice. 0% broken options available.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1520188741366-65f02f9c9436?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Textiles">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Custom GSM</span>
+                        <h3>Home Textiles</h3>
+                        <p>Cotton bed sheets, towels, and fabrics. Custom weaving and stitching available.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
-    </div>
-  </main>
+    </section>
 
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        <div style="font-weight:700">Pakistan Export Co.</div>
-        <div style="font-size:13px;color:var(--muted)">Trusted sourcing partner from Pakistan</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:13px;color:var(--muted)">© <span id="year"></span> Pakistan Export Co.</div>
-        <div style="font-size:12px;color:var(--muted)">Privacy · Terms · Trade Compliance</div>
-      </div>
-    </div>
-  </footer>
+    <section id="costing" class="section-padding calculator-section">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Export Cost Estimator</h2>
+                <p style="opacity: 0.8">Get an instant indicative price based on current market rates.</p>
+            </div>
+            <div class="calc-wrapper">
+                <div class="calc-form">
+                    <form id="costForm">
+                        <div class="form-group">
+                            <label>Product Category</label>
+                            <select class="form-control" id="productSelect">
+                                <option value="0.85">Basmati Rice ($0.85/kg)</option>
+                                <option value="2.50">Red Chili Whole ($2.50/kg)</option>
+                                <option value="0.55">Raw Jaggery ($0.55/kg)</option>
+                                <option value="4.20">Cotton Bed Sheets ($4.20/pc)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity (Kg or Pieces)</label>
+                            <input type="number" class="form-control" id="quantityInput" placeholder="e.g. 1000" value="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination Region (Est. Freight)</label>
+                            <select class="form-control" id="regionSelect">
+                                <option value="0.10">Middle East (+$0.10/unit)</option>
+                                <option value="0.25">Europe (+$0.25/unit)</option>
+                                <option value="0.35">North America (+$0.35/unit)</option>
+                                <option value="0.15">Asia Pacific (+$0.15/unit)</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="calculateCost()" style="width: 100%;">Calculate Estimate</button>
+                    </form>
+                </div>
+                <div class="calc-result">
+                    <div class="price-row">
+                        <span>Total Quantity</span>
+                        <span class="price-val" id="resQty">1000 Units</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Est. FOB Value</span>
+                        <span class="price-val" id="resFob">$850.00</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Est. CIF Value</span>
+                        <span class="price-val" id="resCif">$950.00</span>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">*Indicative prices only. Market volatility applies. Contact for official invoice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Year update
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Start Your Order</h2>
+                <p>Send us your requirements. We usually reply within 4 hours.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-details">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h5>Head Office</h5>
+                            <p>Plot 45, Port Qasim Industrial Area, Karachi, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h5>Phone / WhatsApp</h5>
+                            <p>+92 300 1234567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>Email</h5>
+                            <p>exports@ranatraders.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-file-contract"></i>
+                        <div>
+                            <h5>Documents</h5>
+                            <p>NTN, GST, Chamber Membership, PEC License</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-box">
+                    <form onsubmit="event.preventDefault(); alert('Thank you! Your quote request has been sent to our sales team.');">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Business Email" style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" placeholder="Product details, quantity, and destination..." style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Product galleries (placeholders using picsum.photos)
-    const galleries = {
-      spices: [
-        'https://picsum.photos/seed/spice1/800/600',
-        'https://picsum.photos/seed/spice2/800/600',
-        'https://picsum.photos/seed/spice3/800/600'
-      ],
-      textiles: [
-        'https://picsum.photos/seed/textile1/800/600',
-        'https://picsum.photos/seed/textile2/800/600',
-        'https://picsum.photos/seed/textile3/800/600'
-      ],
-      jaggery: [
-        'https://picsum.photos/seed/jaggery1/800/600',
-        'https://picsum.photos/seed/jaggery2/800/600',
-        'https://picsum.photos/seed/jaggery3/800/600'
-      ],
-      rice: [
-        'https://picsum.photos/seed/rice1/800/600',
-        'https://picsum.photos/seed/rice2/800/600',
-        'https://picsum.photos/seed/rice3/800/600'
-      ],
-      fruits: [
-        'https://picsum.photos/seed/fruit1/800/600',
-        'https://picsum.photos/seed/fruit2/800/600',
-        'https://picsum.photos/seed/fruit3/800/600'
-      ]
-    };
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Rana & Rana Traders</h4>
+                    <p>Your trusted partner for sourcing high-quality Pakistani products. Ensuring quality, compliance, and timely delivery since 2010.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#products">Product Catalog</a></li>
+                        <li><a href="#costing">FOB Calculator</a></li>
+                        <li><a href="#about">Company Profile</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Export Markets</h4>
+                    <ul>
+                        <li><a href="#">United Arab Emirates</a></li>
+                        <li><a href="#">United Kingdom</a></li>
+                        <li><a href="#">United States</a></li>
+                        <li><a href="#">Malaysia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Rana & Rana Traders. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    function showGallery(key){
-      const container = document.getElementById('productGallery');
-      container.innerHTML = '';
-      (galleries[key]||[]).forEach(src=>{
-        const col = document.createElement('div');
-        col.className = 'col';
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = key + ' product';
-        col.appendChild(img);
-        container.appendChild(col);
-      });
-      // smooth scroll
-      container.scrollIntoView({behavior:'smooth', block:'center'});
-    }
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
 
-    // Quick quote (demo: just show calculated estimate)
-    function handleQuickQuote(e){
-      e.preventDefault();
-      const f = e.target;
-      const name = f.name.value || 'Customer';
-      const product = f.product.value || 'product';
-      const qty = Number(f.qty.value) || 0;
-      const msg = document.getElementById('quoteMsg');
-      // simple placeholder logic for demo
-      const estPerUnit = 0.8; // sample USD
-      const estTotal = (estPerUnit * qty).toFixed(2);
-      msg.textContent = `Thanks ${name}. Preliminary estimate for ${qty} units of ${product}: approx USD ${estTotal} (rough). We will follow up via email for formal quote.`;
-      f.reset();
-      return false;
-    }
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-    // Contact form (demo; replace with real endpoint)
-    function handleContact(e){
-      e.preventDefault();
-      const data = new FormData(e.target);
-      const msgEl = document.getElementById('contactMsg');
-      // Demo behavior: show summary
-      msgEl.textContent = 'Thanks — message received. We will respond within 24 hours.';
-      e.target.reset();
-      return false;
-    }
+        // Sticky Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(15, 23, 42, 1)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
 
-    // Cost calculator
-    function calcCost(){
-      const unit = Number(document.getElementById('unitPrice').value) || 0;
-      const qty = Number(document.getElementById('qtyCalc').value) || 0;
-      const incoterm = document.getElementById('incoterm').value;
-      // simple cost model
-      const productCost = unit * qty;
-      const inland = productCost * 0.05; // 5%
-      const packing = productCost * 0.03; // 3%
-      const docs = 35; // flat
-      let freight = 0;
-      if(incoterm === 'CIF') freight = productCost * 0.08; // 8%
-      const total = (productCost + inland + packing + docs + freight).toFixed(2);
-      const result = `Estimated total (${incoterm}): USD ${total}. (Detailed: product ${productCost.toFixed(2)}, inland ${inland.toFixed(2)}, packing ${packing.toFixed(2)}, docs ${docs}, freight ${freight.toFixed(2)})`;
-      document.getElementById('costResult').textContent = result;
-    }
+        // Cost Calculator Logic
+        function calculateCost() {
+            const pricePerUnit = parseFloat(document.getElementById('productSelect').value);
+            const quantity = parseFloat(document.getElementById('quantityInput').value);
+            const freightCost = parseFloat(document.getElementById('regionSelect').value);
+            
+            if (isNaN(quantity) || quantity <= 0) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
 
-    // Accessibility: keyboard focus on nav links
-    document.querySelectorAll('.nav-links a').forEach(a=>{
-      a.addEventListener('click', ()=>{ document.activeElement.blur && document.activeElement.blur(); });
-    });
+            // FOB Calculation = (Unit Price * Quantity) + (Handling Flat Fee $50)
+            const fobTotal = (pricePerUnit * quantity) + 50; 
+            
+            // CIF Calculation = FOB + (Freight * Quantity) + (Insurance 1% of FOB)
+            const freightTotal = freightCost * quantity;
+            const insurance = fobTotal * 0.01;
+            const cifTotal = fobTotal + freightTotal + insurance;
 
-    // Initialize default gallery
-    showGallery('spices');
-  </script>
+            // Update UI with Animation
+            animateValue("resFob", fobTotal);
+            animateValue("resCif", cifTotal);
+            document.getElementById('resQty').innerText = quantity + " Units";
+        }
+
+        function animateValue(id, end) {
+            const obj = document.getElementById(id);
+            const start = 0;
+            const duration = 1000;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = "$" + value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Initial Calculation
+        calculateCost();
+    </script>
 </body>
 </html>
