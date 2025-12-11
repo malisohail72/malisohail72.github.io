@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rana & Rana Traders - Premier exporters of Spices, Textiles, and Agricultural products from Pakistan. Global sourcing, transparent costing, and ISO certified quality.">
+    <meta name="keywords" content="Export Pakistan, Spices Export, Textile Sourcing, Rana Traders, Rice Export, FOB CIF Calculator">
+    <meta name="author" content="Rana & Rana Traders">
+    <title>Rana Global Export & Sourcing Partner</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #0f172a; /* Deep Navy */
+            --secondary: #b45309; /* Bronze/Gold */
+            --accent: #0ea5e9; /* Sky Blue */
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --text-gray: #64748b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; color: var(--primary); line-height: 1.6; background-color: var(--light); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--primary); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        
+        /* --- UTILITY CLASSES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 12px 30px; border-radius: 5px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-primary { background: var(--secondary); color: white; }
+        .btn-primary:hover { background: #92400e; transform: translateY(-2px); }
+        .btn-outline { border: 2px solid var(--light); color: var(--light); }
+        .btn-outline:hover { background: var(--light); color: var(--primary); }
+        .section-padding { padding: 80px 0; }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 2rem; }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; color: white; font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .logo span { color: var(--secondary); }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #e2e8f0; font-size: 0.95rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--secondary); }
+        .mobile-toggle { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-top: -60px; /* Offset header */
+        }
+        .hero-content { max-width: 800px; }
+        .hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: white; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; }
+        .stat-item h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 0; }
+        .stat-item p { font-size: 0.9rem; opacity: 0.8; }
+
+        /* --- TRUST BAR --- */
+        .trust-bar { background: white; padding: 30px 0; box-shadow: var(--shadow); position: relative; z-index: 10; margin-top: -50px; border-radius: 8px; }
+        .trust-grid { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; text-align: center; }
+        .trust-item i { font-size: 2rem; color: var(--secondary); margin-bottom: 10px; }
+        .trust-item h4 { font-size: 1rem; font-family: 'Poppins', sans-serif; }
+
+        /* --- PRODUCTS GRID --- */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .card-img { height: 200px; background: #cbd5e1; position: relative; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-card:hover .card-img img { transform: scale(1.1); }
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .card-body p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 15px; }
+        .tag { display: inline-block; padding: 4px 10px; background: #e0f2fe; color: var(--accent); font-size: 0.8rem; border-radius: 20px; font-weight: 600; }
+
+        /* --- CALCULATOR SECTION --- */
+        .calculator-section { background: var(--dark); color: white; }
+        .calculator-section h2 { color: white; }
+        .calc-wrapper {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .calc-form { flex: 1; min-width: 300px; }
+        .calc-result { flex: 1; min-width: 300px; background: var(--secondary); padding: 30px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #475569; background: #334155; color: white; font-family: 'Poppins', sans-serif; }
+        .form-control:focus { outline: none; border-color: var(--secondary); }
+
+        .price-row { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .price-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .price-val { font-size: 1.5rem; font-weight: 700; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: white; padding: 50px; border-radius: 10px; box-shadow: var(--shadow); }
+        .contact-info i { width: 40px; height: 40px; background: var(--light); color: var(--secondary); text-align: center; line-height: 40px; border-radius: 50%; margin-right: 15px; }
+        .info-item { display: flex; align-items: center; margin-bottom: 25px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: #94a3b8; padding: 60px 0 20px; border-top: 3px solid var(--secondary); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-family: 'Playfair Display'; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a:hover { color: white; }
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #334155; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; text-align: center; }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .contact-wrapper { grid-template-columns: 1fr; padding: 30px; }
+            .calc-wrapper { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Rana & Rana <span>Traders</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#products">Products</a>
+                <a href="#services">Services</a>
+                <a href="#costing">Cost Calculator</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; margin-top: -5px;">Get Quote</a>
+            </nav>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Bridging Pakistan's Finest to the Global Market</h1>
+                <p>We specialize in the export of premium spices, textiles, and agricultural produce. ISO certified quality, transparent FOB/CIF costing, and end-to-end logistics solutions.</p>
+                <a href="#costing" class="btn btn-primary">Estimate Costs</a>
+                <a href="#products" class="btn btn-outline">Explore Catalog</a>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>10+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Containers Shipped</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>25+</h3>
+                        <p>Countries Served</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="trust-bar">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-certificate"></i>
+                    <h4>ISO 9001 Certified</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>FDA Registered</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-globe"></i>
+                    <h4>Member of TDAP</h4>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Organic Options</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="products" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Our Export Categories</h2>
+                <p>High-grade commodities sourced directly from manufacturers and farms.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Spices">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Top Seller</span>
+                        <h3>Premium Spices</h3>
+                        <p>Red Chili, Turmeric, Cumin. Processed in HACCP certified facilities.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1534951474654-886e56391794?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Rice">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Super Kernel</span>
+                        <h3>Basmati Rice</h3>
+                        <p>Aged Super Kernel and 1121 Kainat Basmati rice. 0% broken options available.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1520188741366-65f02f9c9436?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Textiles">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag">Custom GSM</span>
+                        <h3>Home Textiles</h3>
+                        <p>Cotton bed sheets, towels, and fabrics. Custom weaving and stitching available.</p>
+                        <a href="#contact" class="btn-text">Request Sample <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="costing" class="section-padding calculator-section">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Export Cost Estimator</h2>
+                <p style="opacity: 0.8">Get an instant indicative price based on current market rates.</p>
+            </div>
+            <div class="calc-wrapper">
+                <div class="calc-form">
+                    <form id="costForm">
+                        <div class="form-group">
+                            <label>Product Category</label>
+                            <select class="form-control" id="productSelect">
+                                <option value="0.85">Basmati Rice ($0.85/kg)</option>
+                                <option value="2.50">Red Chili Whole ($2.50/kg)</option>
+                                <option value="0.55">Raw Jaggery ($0.55/kg)</option>
+                                <option value="4.20">Cotton Bed Sheets ($4.20/pc)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity (Kg or Pieces)</label>
+                            <input type="number" class="form-control" id="quantityInput" placeholder="e.g. 1000" value="1000">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination Region (Est. Freight)</label>
+                            <select class="form-control" id="regionSelect">
+                                <option value="0.10">Middle East (+$0.10/unit)</option>
+                                <option value="0.25">Europe (+$0.25/unit)</option>
+                                <option value="0.35">North America (+$0.35/unit)</option>
+                                <option value="0.15">Asia Pacific (+$0.15/unit)</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="calculateCost()" style="width: 100%;">Calculate Estimate</button>
+                    </form>
+                </div>
+                <div class="calc-result">
+                    <div class="price-row">
+                        <span>Total Quantity</span>
+                        <span class="price-val" id="resQty">1000 Units</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Est. FOB Value</span>
+                        <span class="price-val" id="resFob">$850.00</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Est. CIF Value</span>
+                        <span class="price-val" id="resCif">$950.00</span>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">*Indicative prices only. Market volatility applies. Contact for official invoice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Start Your Order</h2>
+                <p>Send us your requirements. We usually reply within 4 hours.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-details">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h5>Head Office</h5>
+                            <p>Plot 45, Port Qasim Industrial Area, Karachi, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h5>Phone / WhatsApp</h5>
+                            <p>+92 300 1234567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>Email</h5>
+                            <p>exports@ranatraders.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-file-contract"></i>
+                        <div>
+                            <h5>Documents</h5>
+                            <p>NTN, GST, Chamber Membership, PEC License</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-box">
+                    <form onsubmit="event.preventDefault(); alert('Thank you! Your quote request has been sent to our sales team.');">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Business Email" style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" placeholder="Product details, quantity, and destination..." style="background: #f1f5f9; color: #333; border: 1px solid #cbd5e1;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Rana & Rana Traders</h4>
+                    <p>Your trusted partner for sourcing high-quality Pakistani products. Ensuring quality, compliance, and timely delivery since 2010.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#products">Product Catalog</a></li>
+                        <li><a href="#costing">FOB Calculator</a></li>
+                        <li><a href="#about">Company Profile</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Export Markets</h4>
+                    <ul>
+                        <li><a href="#">United Arab Emirates</a></li>
+                        <li><a href="#">United Kingdom</a></li>
+                        <li><a href="#">United States</a></li>
+                        <li><a href="#">Malaysia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Rana & Rana Traders. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sticky Header Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(15, 23, 42, 1)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+
+        // Cost Calculator Logic
+        function calculateCost() {
+            const pricePerUnit = parseFloat(document.getElementById('productSelect').value);
+            const quantity = parseFloat(document.getElementById('quantityInput').value);
+            const freightCost = parseFloat(document.getElementById('regionSelect').value);
+            
+            if (isNaN(quantity) || quantity <= 0) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
+
+            // FOB Calculation = (Unit Price * Quantity) + (Handling Flat Fee $50)
+            const fobTotal = (pricePerUnit * quantity) + 50; 
+            
+            // CIF Calculation = FOB + (Freight * Quantity) + (Insurance 1% of FOB)
+            const freightTotal = freightCost * quantity;
+            const insurance = fobTotal * 0.01;
+            const cifTotal = fobTotal + freightTotal + insurance;
+
+            // Update UI with Animation
+            animateValue("resFob", fobTotal);
+            animateValue("resCif", cifTotal);
+            document.getElementById('resQty').innerText = quantity + " Units";
+        }
+
+        function animateValue(id, end) {
+            const obj = document.getElementById(id);
+            const start = 0;
+            const duration = 1000;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = "$" + value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Initial Calculation
+        calculateCost();
+    </script>
+</body>
+</html>
