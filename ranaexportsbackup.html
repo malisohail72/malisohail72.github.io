@@ -15,6 +15,94 @@
     
     
     
+    /* --- YOUTUBE VIDEO CARDS SECTION --- */
+.video-section {
+    background: var(--primary); /* Use primary color for high contrast */
+    color: white;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.video-card {
+    background: #1c2438; /* Slightly lighter navy for depth */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-placeholder {
+    height: 180px;
+    background: linear-gradient(135deg, var(--secondary), #a16207);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.video-placeholder i {
+    font-size: 3rem;
+    color: white;
+    padding: 20px;
+    border: 3px solid white;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.video-card:hover .video-placeholder i {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.video-content {
+    padding: 20px;
+}
+
+.video-title {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.video-desc {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-bottom: 0;
+}
+
+.video-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+
+
+
+    
+    
+    
+    
+    
     /* --- ENHANCEMENT: EXPORT STATISTICS TABLE --- */
 .export-stats-table {
     margin-top: 60px;
@@ -1043,6 +1131,94 @@
             </div>
         </div>
     </section>
+    
+    
+    
+    
+    
+    
+    <section class="section-padding video-section">
+    <div class="container">
+        <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+            <h4 style="color: var(--secondary);">MEDIA & TRANSPARENCY</h4>
+            <h2 style="color: white; margin-bottom: 15px;">Video Insights</h2>
+            <p style="color: #cbd5e1;">Get a virtual tour of our facilities, quality control processes, and commodity reports.</p>
+        </div>
+
+        <div class="video-grid">
+
+            <div class="video-card">
+                <div class="video-placeholder" onclick="alert('Video link will be added here!')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <span class="video-tag">Process</span>
+                    <h3 class="video-title">Our Milling Facility Tour</h3>
+                    <p class="video-desc">A detailed look at the end-to-end processing of Basmati and IRRI rice.</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder" onclick="alert('Video link will be added here!')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <span class="video-tag">Quality Check</span>
+                    <h3 class="video-title">3-Stage Quality Assurance</h3>
+                    <p class="video-desc">Walkthrough of our sorting, grading, and final packaging inspection protocols.</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder" onclick="alert('Video link will be added here!')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <span class="video-tag">Market Report</span>
+                    <h3 class="video-title">Q4 Commodity Price Forecast</h3>
+                    <p class="video-desc">Analysis of global rice and spice market trends and forward contract pricing.</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder" onclick="alert('Video link will be added here!')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <span class="video-tag">Logistics</span>
+                    <h3 class="video-title">Container Loading & Sealing</h3>
+                    <p class="video-desc">Documenting the standardized procedure for secure FCL shipment loading at the port.</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-placeholder" onclick="alert('Video link will be added here!')">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <span class="video-tag">Client Story</span>
+                    <h3 class="video-title">Partner Testimonial (Europe)</h3>
+                    <p class="video-desc">A video review from one of our strategic European procurement partners.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <section id="logistics" class="section-padding logistics-section">
         <div class="container">
