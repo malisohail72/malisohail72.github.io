@@ -11,6 +11,135 @@
 
     <style>
     
+    
+    
+    
+    
+    /* --- PAYMENT TERMS SECTION --- */
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.pay-card {
+    background: white;
+    padding: 40px 30px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    position: relative;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Hover Effect: Lift and Gold Border */
+.pay-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary);
+}
+
+/* Header Styling */
+.pay-icon-box {
+    width: 60px;
+    height: 60px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.pay-card:hover .pay-icon-box {
+    background: var(--primary);
+    color: var(--secondary);
+}
+
+.pay-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.pay-card h4 {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.pay-desc {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Pushes bottom content down */
+    line-height: 1.6;
+}
+
+/* The List of Terms */
+.pay-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.pay-features li {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pay-features li i {
+    color: #059669; /* Green checkmark */
+    font-size: 0.8rem;
+}
+
+/* Special "Recommended" Badge for the Standard Card */
+.badge-popular {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: var(--secondary);
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Dark Mode Card (For Corporate/LC) */
+.pay-card.dark-theme {
+    background: var(--primary);
+    border: 1px solid #1e293b;
+}
+.pay-card.dark-theme h3 { color: white; }
+.pay-card.dark-theme .pay-desc { color: #94a3b8; }
+.pay-card.dark-theme .pay-features { border-top-color: #334155; }
+.pay-card.dark-theme .pay-features li { color: #cbd5e1; }
+.pay-card.dark-theme .pay-icon-box { background: rgba(255,255,255,0.1); color: white; }
+.pay-card.dark-theme:hover { border-color: var(--secondary); }
+    
+    
+    
+    
+    
+    
+    
     /* Document Cards */
     
     /* --- DOWNLOADS / PDF CARDS SECTION --- */
@@ -572,6 +701,80 @@
 
     </div>
 </section>
+
+
+
+
+
+
+<section class="section-padding" style="background: #f8fafc;">
+    <div class="container">
+        <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+            <h4 class="text-gold">FINANCIAL FRAMEWORK</h4>
+            <h2>Flexible Payment Solutions</h2>
+            <p style="color: #64748b;">We offer secured transaction methods tailored to your volume, region, and relationship history.</p>
+        </div>
+
+        <div class="payment-grid">
+
+            <div class="pay-card">
+                <div class="badge-popular">MOST USED</div>
+                <div class="pay-icon-box"><i class="fas fa-hand-holding-dollar"></i></div>
+                <h3>Standard Commercial</h3>
+                <h4>Telegraphic Transfer (T/T)</h4>
+                <p class="pay-desc">The industry standard balancing risk for both parties. Ideal for new partners and standard FCL orders.</p>
+                <ul class="pay-features">
+                    <li><i class="fas fa-check"></i> <strong>30% Advance</strong> to start production</li>
+                    <li><i class="fas fa-check"></i> <strong>70% Balance</strong> on Scanned B/L</li>
+                    <li><i class="fas fa-check"></i> Fast release of original docs</li>
+                    <li><i class="fas fa-check"></i> Low bank charges</li>
+                </ul>
+            </div>
+
+            <div class="pay-card dark-theme">
+                <div class="pay-icon-box"><i class="fas fa-university"></i></div>
+                <h3>High Volume Trade</h3>
+                <h4>Letter of Credit (L/C)</h4>
+                <p class="pay-desc">Bank-guaranteed security for large contracts exceeding $50k USD. Maximum safety for the buyer.</p>
+                <ul class="pay-features">
+                    <li><i class="fas fa-check"></i> <strong>100% Irrevocable</strong> L/C at Sight</li>
+                    <li><i class="fas fa-check"></i> Must be from Top 50 World Banks</li>
+                    <li><i class="fas fa-check"></i> Zero risk for buyer's capital</li>
+                    <li><i class="fas fa-check"></i> Best for Government Tenders</li>
+                </ul>
+            </div>
+
+            <div class="pay-card">
+                <div class="pay-icon-box"><i class="fas fa-file-signature"></i></div>
+                <h3>Strategic Partner</h3>
+                <h4>Cash Against Documents (CAD)</h4>
+                <p class="pay-desc">Reserved for long-term clients with a verified history of 3+ successful transactions.</p>
+                <ul class="pay-features">
+                    <li><i class="fas fa-check"></i> <strong>0% Advance</strong> required</li>
+                    <li><i class="fas fa-check"></i> Payment via Bank Collection (DP)</li>
+                    <li><i class="fas fa-check"></i> Flexible cash flow for buyer</li>
+                    <li><i class="fas fa-check"></i> Requires Credit Insurance approval</li>
+                </ul>
+            </div>
+
+            <div class="pay-card">
+                <div class="pay-icon-box"><i class="fas fa-plane-departure"></i></div>
+                <h3>Express & Samples</h3>
+                <h4>100% Advance Payment</h4>
+                <p class="pay-desc">Designed for sample approval, air-freight consignments, or small LCL orders under $5k.</p>
+                <ul class="pay-features">
+                    <li><i class="fas fa-check"></i> <strong>Instant Production</strong> Start</li>
+                    <li><i class="fas fa-check"></i> No documentation delays</li>
+                    <li><i class="fas fa-check"></i> Cheapest option (Zero Bank Fees)</li>
+                    <li><i class="fas fa-check"></i> Priority Dispatch status</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
 
 
 
