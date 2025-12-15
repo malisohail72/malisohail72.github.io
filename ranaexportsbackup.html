@@ -10,6 +10,142 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+    
+    /* Document Cards */
+    
+    /* --- DOWNLOADS / PDF CARDS SECTION --- */
+.downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Common Card Properties */
+.doc-card {
+    padding: 35px 25px;
+    border-radius: 8px;
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.doc-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.doc-card p {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.doc-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* STYLE 1: The "Classic Corporate" (Clean White) */
+.doc-style-1 {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--secondary);
+    box-shadow: var(--shadow-sm);
+}
+.doc-style-1:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+.doc-style-1 .btn-doc {
+    background: var(--surface);
+    color: var(--primary);
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    width: 100%;
+    text-align: center;
+    transition: var(--transition);
+}
+.doc-style-1 .btn-doc:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* STYLE 2: The "Premium Flagship" (Dark Navy) */
+.doc-style-2 {
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+.doc-style-2 h3 { color: white; }
+.doc-style-2 p { color: #94a3b8; }
+.doc-style-2:hover {
+    transform: translateY(-5px);
+}
+.doc-style-2 .btn-doc {
+    background: var(--secondary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    border: none;
+    transition: var(--transition);
+}
+.doc-style-2 .btn-doc:hover {
+    background: #a16207;
+}
+
+/* STYLE 3: The "Technical Spec" (Minimalist Dashed) */
+.doc-style-3 {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+}
+.doc-style-3:hover {
+    border-color: var(--secondary);
+    background: white;
+}
+.doc-style-3 .btn-doc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+.doc-style-3 .btn-doc:hover {
+    color: var(--secondary);
+}
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         /* --- 1. CORE VARIABLES & RESET (UNCHANGED) --- */
         :root {
             --primary: #0b1120; /* Midnight Navy */
@@ -177,6 +313,9 @@
         </div>
     </section>
 
+
+
+
     <section id="company" class="section-padding">
         <div class="container">
 
@@ -226,6 +365,19 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <section id="matrix" class="section-padding" style="background: #f1f5f9;">
         <div class="container">
@@ -477,6 +629,78 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+<section class="section-padding" style="background: white;">
+    <div class="container">
+        <div class="text-center" style="max-width: 700px; margin: 0 auto;">
+            <h4 class="text-gold">DOCUMENTATION</h4>
+            <h2>Corporate Resources</h2>
+            <p style="color: #64748b;">Download our official profiles, product specifications, and compliance certificates.</p>
+        </div>
+
+        <div class="downloads-grid">
+            
+            <div class="doc-card doc-style-1">
+                <div>
+                    <div class="doc-meta">
+                        <i class="fas fa-file-pdf text-gold"></i>
+                        <span>PDF • 4.5 MB</span>
+                    </div>
+                    <h3>Product Catalog 2025</h3>
+                    <p style="color: #64748b;">Complete guide to our Rice, Spices, and Textile collections including packaging specifications.</p>
+                </div>
+                <a href="#" class="btn-doc" onclick="alert('PDF will be attached later.')">
+                    <i class="fas fa-download" style="margin-right:8px;"></i> Download Catalog
+                </a>
+            </div>
+
+            <div class="doc-card doc-style-2">
+                <div>
+                    <div class="doc-meta" style="color: var(--secondary);">
+                        <i class="fas fa-star"></i>
+                        <span>FEATURED • 2.1 MB</span>
+                    </div>
+                    <h3>Corporate Profile</h3>
+                    <p>An executive overview of Rana & Rana Traders, our global supply chain, and financial standing.</p>
+                </div>
+                <a href="#" class="btn-doc" onclick="alert('PDF will be attached later.')">
+                    <i class="fas fa-download" style="margin-right:8px;"></i> Get Company Profile
+                </a>
+            </div>
+
+            <div class="doc-card doc-style-3">
+                <div>
+                    <div class="doc-meta">
+                        <i class="fas fa-certificate text-gold"></i>
+                        <span>COMPLIANCE • 1.2 MB</span>
+                    </div>
+                    <h3>ISO & HACCP Certs</h3>
+                    <p style="color: #64748b;">Official quality assurance documentation required for customs and import clearance.</p>
+                </div>
+                <a href="#" class="btn-doc" onclick="alert('PDF will be attached later.')">
+                    View Document <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
 
     <footer id="contact">
         <div class="container">
