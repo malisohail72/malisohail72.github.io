@@ -15,6 +15,63 @@
     
     
     
+    /* --- ENHANCEMENT: EXPORT STATISTICS TABLE --- */
+.export-stats-table {
+    margin-top: 60px;
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.export-stats-table th,
+.export-stats-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.export-stats-table thead th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.export-stats-table tbody tr:nth-child(even) {
+    background: #fcfcfd;
+}
+
+.export-stats-table tbody tr:hover {
+    background: #f1f5f9;
+}
+
+.performance-bar {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--secondary);
+    transition: width 1s ease-out;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /* --- PAYMENT TERMS SECTION --- */
 .payment-grid {
     display: grid;
@@ -949,6 +1006,64 @@
             </div>
         </div>
     </section>
+    
+    
+    
+    
+            <h3 style="margin-top: 60px; margin-bottom: 20px;">Key Trade Statistics (Last 12 Months)</h3>
+            <div style="overflow-x: auto;">
+                <table class="export-stats-table">
+                    <thead>
+                        <tr>
+                            <th>Region / Destination</th>
+                            <th>Primary Commodity</th>
+                            <th>Total TEUs</th>
+                            <th>Compliance Score</th>
+                            <th>Avg Transit (Days)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Middle East & GCC</td>
+                            <td>Basmati Rice (Aged)</td>
+                            <td>340</td>
+                            <td><span class="performance-bar"><span class="bar-fill" style="width: 98%;"></span></span></td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>European Union (EU)</td>
+                            <td>Textiles & Linens</td>
+                            <td>110</td>
+                            <td><span class="performance-bar"><span class="bar-fill" style="width: 95%;"></span></span></td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <td>North America (USA/CA)</td>
+                            <td>Premium Spices</td>
+                            <td>85</td>
+                            <td><span class="performance-bar"><span class="bar-fill" style="width: 90%;"></span></span></td>
+                            <td>35</td>
+                        </tr>
+                        <tr>
+                            <td>Asia Pacific (SE Asia)</td>
+                            <td>IRRI-6 Rice</td>
+                            <td>180</td>
+                            <td><span class="performance-bar"><span class="bar-fill" style="width: 99%;"></span></span></td>
+                            <td>18</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        
+    
+    
+    
+    
+    
+    
+    
+    
     
     <section class="section-padding" style="padding-top: 0; background: var(--surface);">
         <div class="container">
