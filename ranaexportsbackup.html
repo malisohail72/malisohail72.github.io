@@ -142,6 +142,102 @@
     
     
     
+    /* --- INFINITE CERTIFICATES SLIDER --- */
+.cert-section {
+    background: var(--surface);
+    overflow: hidden; /* Hides the scrolling content */
+    position: relative;
+}
+
+/* The fading gradients on left/right for smooth entry/exit */
+.cert-section::before,
+.cert-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Allows clicking through */
+}
+.cert-section::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+.cert-section::after { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+
+/* The Moving Track */
+.cert-track {
+    display: flex;
+    gap: 30px;
+    width: max-content; /* Adjusts to content size */
+    animation: scroll-left 40s linear infinite;
+    padding: 20px 0;
+}
+
+/* Pause animation on hover for readability */
+.cert-track:hover {
+    animation-play-state: paused;
+}
+
+/* Individual Card Styling */
+.cert-card {
+    width: 300px; /* Fixed width for consistency */
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    flex-shrink: 0; /* Prevents squishing */
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.cert-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.cert-img {
+    height: 100px;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: grayscale(100%); /* B&W by default for uniform look */
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.cert-card:hover .cert-img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.cert-title {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+}
+
+.cert-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Keyframe for moving Left */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Moves half the total width (the original set) */
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .cert-track { animation-duration: 25s; } /* Faster on mobile */
+    .cert-section::before, .cert-section::after { width: 50px; }
+}
+    
+    
     
     
     
@@ -368,7 +464,114 @@
 
 
 
+<section class="section-padding cert-section">
+    <div class="container text-center" style="margin-bottom: 50px;">
+        <h4 class="text-gold">ACCREDITATIONS</h4>
+        <h2>Certifications & Awards</h2>
+        <p style="color: #64748b;">Recognized globally for quality assurance and ethical trade practices.</p>
+    </div>
 
+    <div class="cert-track">
+        
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3208/3208728.png" alt="ISO Logo" class="cert-img">
+            <h3 class="cert-title">ISO 9001:2015</h3>
+            <p class="cert-desc">Certified Quality Management System ensuring consistent production standards.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4300/4300058.png" alt="HACCP Logo" class="cert-img">
+            <h3 class="cert-title">HACCP Compliance</h3>
+            <p class="cert-desc">Hazard Analysis Critical Control Point certified for food safety protocols.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3197/3197607.png" alt="Halal Logo" class="cert-img">
+            <h3 class="cert-title">Global Halal</h3>
+            <p class="cert-desc">Fully compliant with Islamic dietary laws for Middle East export markets.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198356.png" alt="FDA Logo" class="cert-img">
+            <h3 class="cert-title">FDA Registered</h3>
+            <p class="cert-desc">Approved facility for food exports to the United States and North America.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2965/2965313.png" alt="Chamber Logo" class="cert-img">
+            <h3 class="cert-title">LCCI Member</h3>
+            <p class="cert-desc">Premium member of the Lahore Chamber of Commerce & Industry.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2720/2720616.png" alt="Export Award" class="cert-img">
+            <h3 class="cert-title">Top Exporter 2024</h3>
+            <p class="cert-desc">Awarded by TDAP for highest volume of Basmati Rice exports.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png" alt="Organic Logo" class="cert-img">
+            <h3 class="cert-title">Organic Certified</h3>
+            <p class="cert-desc">Verified organic farming practices for specialized spice consignments.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/992/992701.png" alt="SGS Logo" class="cert-img">
+            <h3 class="cert-title">SGS Inspected</h3>
+            <p class="cert-desc">All shipments undergo rigorous pre-shipment inspection by SGS.</p>
+        </div>
+
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3208/3208728.png" alt="ISO Logo" class="cert-img">
+            <h3 class="cert-title">ISO 9001:2015</h3>
+            <p class="cert-desc">Certified Quality Management System ensuring consistent production standards.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4300/4300058.png" alt="HACCP Logo" class="cert-img">
+            <h3 class="cert-title">HACCP Compliance</h3>
+            <p class="cert-desc">Hazard Analysis Critical Control Point certified for food safety protocols.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3197/3197607.png" alt="Halal Logo" class="cert-img">
+            <h3 class="cert-title">Global Halal</h3>
+            <p class="cert-desc">Fully compliant with Islamic dietary laws for Middle East export markets.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198356.png" alt="FDA Logo" class="cert-img">
+            <h3 class="cert-title">FDA Registered</h3>
+            <p class="cert-desc">Approved facility for food exports to the United States and North America.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2965/2965313.png" alt="Chamber Logo" class="cert-img">
+            <h3 class="cert-title">LCCI Member</h3>
+            <p class="cert-desc">Premium member of the Lahore Chamber of Commerce & Industry.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2720/2720616.png" alt="Export Award" class="cert-img">
+            <h3 class="cert-title">Top Exporter 2024</h3>
+            <p class="cert-desc">Awarded by TDAP for highest volume of Basmati Rice exports.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/4333/4333609.png" alt="Organic Logo" class="cert-img">
+            <h3 class="cert-title">Organic Certified</h3>
+            <p class="cert-desc">Verified organic farming practices for specialized spice consignments.</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/992/992701.png" alt="SGS Logo" class="cert-img">
+            <h3 class="cert-title">SGS Inspected</h3>
+            <p class="cert-desc">All shipments undergo rigorous pre-shipment inspection by SGS.</p>
+        </div>
+
+    </div>
+</section>
 
 
 
