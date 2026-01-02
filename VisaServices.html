@@ -1,1 +1,428 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Guide - PathFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CSS VARIABLES & RESET (Google Style) --- */
+        :root {
+            --primary-color: #1a73e8; /* Google Blue */
+            --bg-color: #ffffff;
+            --surface-color: #f8f9fa;
+            --text-main: #202124;
+            --text-secondary: #5f6368;
+            --border-color: #dadce0;
+            --card-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --card-radius: 8px;
+            --nav-height: 64px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 2. STICKY NAVBAR & BREADCRUMBS --- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            height: var(--nav-height);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo span { color: var(--text-main); font-weight: bold; }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: none; /* Hidden on very small mobile */
+        }
+        
+        .breadcrumb span { margin: 0 5px; }
+
+        @media (min-width: 768px) {
+            .breadcrumb { display: block; }
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .dropdown-trigger:hover { background: var(--surface-color); }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: var(--card-shadow);
+            border-radius: var(--card-radius);
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .dropdown-content a {
+            color: var(--text-main);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover { background-color: var(--surface-color); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* --- 3. MAIN CONTENT & GRID --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .section-header {
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .section-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .section-link:hover { text-decoration: underline; }
+
+        /* --- 4. SCROLLABLE CARD CONTAINER (The Feature Template) --- */
+        .card-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            padding-bottom: 16px; /* Space for shadow */
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .card-scroller::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari/Opera */
+        }
+
+        /* The Card */
+        .feature-card {
+            min-width: 240px;
+            max-width: 240px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--card-shadow);
+            transform: translateY(-2px);
+        }
+
+        .card-img-placeholder {
+            height: 120px;
+            background-color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .card-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        .card-action {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* --- 5. SEPARATORS & FOOTER --- */
+        .separator {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 32px 0;
+        }
+
+        footer {
+            background-color: var(--surface-color);
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul { list-style: none; }
+        
+        .footer-col a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .footer-col a:hover { color: var(--primary-color); }
+
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <span class="material-icons-outlined">public</span>
+                <span>VisaPath</span>
+            </div>
+            <div class="breadcrumb">
+                Home <span>/</span> Services <span>/</span> Visa Guide
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-trigger">
+                <span class="material-icons-outlined">apps</span>
+            </div>
+            <div class="dropdown-content">
+                <a href="#"><span class="material-icons-outlined" style="vertical-align: middle; font-size: 16px; margin-right: 8px;">account_circle</span>My Profile</a>
+                <a href="#">Settings</a>
+                <a href="#">Help & Support</a>
+                <hr style="margin: 4px 0; border:0; border-top:1px solid #eee;">
+                <a href="#">Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-container">
+        <p style="text-align:center; color: var(--text-secondary);">Loading visa services...</p>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Embassy Directory</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 32px; font-size: 12px; color: var(--text-secondary);">
+            &copy; 2023 VisaPath Services. Google-inspired Design Placeholder.
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * DATA LAYER
+         * All features are independent objects. 
+         * To add a new section, simply add a new object to this array.
+         */
+        const visaData = [
+            {
+                id: 'student-visas',
+                categoryTitle: 'Student & Study Visas',
+                categoryLink: 'View all study options',
+                items: [
+                    { title: 'Schengen Study', icon: 'school', desc: 'Long-term D-Type visas for Germany, France, Italy.', bg: '#e8f0fe' },
+                    { title: 'Japan Student', icon: 'local_florist', desc: 'COE application guidance and language schools.', bg: '#fce8e6' },
+                    { title: 'China X1/X2', icon: 'temple_buddhist', desc: 'University admissions and JW202 form support.', bg: '#fef7e0' },
+                    { title: 'UK Tier 4', icon: 'apartment', desc: 'Points-based system guidance for British universities.', bg: '#e6f4ea' },
+                    { title: 'Canada Study', icon: 'park', desc: 'Study permits and SDS program requirements.', bg: '#f1f3f4' },
+                ]
+            },
+            {
+                id: 'work-visas',
+                categoryTitle: 'Work & Employment',
+                categoryLink: 'View all work permits',
+                items: [
+                    { title: 'USA H-1B', icon: 'work', desc: 'Specialty occupations and lottery system guidance.', bg: '#e8f0fe' },
+                    { title: 'Germany Job Seeker', icon: 'engineering', desc: '6-month visa to look for employment in Germany.', bg: '#fef7e0' },
+                    { title: 'UAE Freelance', icon: 'badge', desc: 'Remote work and freelance permits for Dubai.', bg: '#fce8e6' },
+                    { title: 'Australia 482', icon: 'construction', desc: 'Temporary skill shortage visa assistance.', bg: '#e6f4ea' }
+                ]
+            },
+            {
+                id: 'business-tourist',
+                categoryTitle: 'Business & Tourism',
+                categoryLink: 'View travel options',
+                items: [
+                    { title: 'B1/B2 USA', icon: 'business_center', desc: 'Business conferences and tourism combinations.', bg: '#f1f3f4' },
+                    { title: 'Schengen Tourist', icon: 'flight', desc: '90-day short stay calculator and itinerary.', bg: '#e8f0fe' },
+                    { title: 'Turkey E-Visa', icon: 'laptop_mac', desc: 'Instant electronic visa processing guide.', bg: '#fce8e6' },
+                    { title: 'Thailand Elite', icon: 'star', desc: 'Long-term residency for high-net-worth individuals.', bg: '#fff0b3' }
+                ]
+            }
+        ];
+
+        /**
+         * TEMPLATE ENGINE
+         * Renders the data into the DOM
+         */
+        function renderApp() {
+            const container = document.getElementById('app-container');
+            container.innerHTML = ''; // Clear loading state
+
+            visaData.forEach((section, index) => {
+                // 1. Create Section Wrapper
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'feature-section';
+
+                // 2. Create Header
+                const headerHtml = `
+                    <div class="section-header">
+                        <h2 class="section-title">${section.categoryTitle}</h2>
+                        <a href="#" class="section-link">${section.categoryLink}</a>
+                    </div>
+                `;
+
+                // 3. Create Cards Scroll Container
+                const scrollerEl = document.createElement('div');
+                scrollerEl.className = 'card-scroller';
+
+                // 4. Generate Cards
+                section.items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'feature-card';
+                    card.innerHTML = `
+                        <div class="card-img-placeholder" style="background-color: ${item.bg}">
+                            <span class="material-icons-outlined" style="font-size: 48px; opacity: 0.5;">${item.icon}</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${item.title}</h3>
+                            <p class="card-desc">${item.desc}</p>
+                            <span class="card-action">Learn More</span>
+                        </div>
+                    `;
+                    scrollerEl.appendChild(card);
+                });
+
+                // Assemble the section
+                sectionEl.innerHTML = headerHtml;
+                sectionEl.appendChild(scrollerEl);
+                container.appendChild(sectionEl);
+
+                // Add Separator (except for the last item)
+                if (index < visaData.length - 1) {
+                    const separator = document.createElement('hr');
+                    separator.className = 'separator';
+                    container.appendChild(separator);
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', renderApp);
+
+    </script>
+</body>
+</html>
