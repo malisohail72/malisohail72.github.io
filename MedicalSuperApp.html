@@ -3,404 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCore | Medical Super App</title>
-    
+    <title>MediCore | Super App</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================
-           1. GLOBAL VARIABLES & RESET
-           (Central control for fonts and colors)
+           1. EYE-FRIENDLY THEME & VARIABLES
            ========================================= */
         :root {
-            /* Palette: Eye-friendly Medical Colors */
-            --primary-color: #1a73e8;       /* Google Blue */
-            --secondary-color: #e8f0fe;     /* Very Light Blue */
-            --accent-blood: #d93025;        /* Alert Red */
-            --accent-pharmacy: #188038;     /* Safe Green */
-            --accent-hospital: #f9ab00;     /* Warning/Biz Orange */
+            /* Theme Colors - Distinct per stakeholder */
+            --theme-user: #0F9D58;      /* Google Green (Wellness) */
+            --theme-hospital: #4285F4;  /* Google Blue (Trust) */
+            --theme-pharma: #FBBC05;    /* Google Yellow/Orange (Retail/Ads) */
+            --theme-alert: #EA4335;     /* Google Red (Urgent) */
+
+            /* UI Base */
+            --bg-body: #f5f6f7;         /* Very light grey, easier on eyes than pure white */
+            --surface: #ffffff;
+            --text-primary: #3c4043;    /* Softer black */
+            --text-secondary: #5f6368;  /* Softer grey */
             
-            --text-dark: #202124;
-            --text-grey: #5f6368;
-            --bg-color: #f8f9fa;
-            --white: #ffffff;
-            
-            /* Spacing & Layout */
-            --shadow-card: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-hover: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-            --radius: 8px;
-            --nav-height: 64px;
+            /* Shapes & Depth */
+            --radius-btn: 50px;         /* Pill shape buttons (friendlier) */
+            --radius-card: 16px;        /* Soft rounded corners */
+            --shadow-soft: 0 4px 6px rgba(60,64,67,0.05);
+            --shadow-hover: 0 10px 25px rgba(60,64,67,0.12);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.6;
-            padding-top: var(--nav-height); /* Prevent content hiding behind sticky nav */
+            padding-top: 70px; /* Space for fixed nav */
         }
 
         /* =========================================
-           2. NAVIGATION (Sticky & Responsive)
+           2. STICKY NAVBAR (Glassmorphism Lite)
            ========================================= */
         .navbar {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            height: var(--nav-height);
-            background: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 24px;
+            padding: 0 5%;
             z-index: 1000;
         }
 
-        .brand-logo {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--text-dark);
+        .brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
-        
-        .brand-logo span { color: var(--primary-color); }
 
-        .nav-links {
+        .nav-menu {
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
-        .nav-item {
+        .nav-link {
             text-decoration: none;
-            color: var(--text-grey);
+            color: var(--text-secondary);
             font-weight: 500;
             transition: color 0.3s;
+            font-size: 0.95rem;
         }
-
-        .nav-item:hover { color: var(--primary-color); }
-
-        /* Dropdown Style */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        
+        .nav-link:hover { color: var(--theme-hospital); }
+        .nav-cta {
+            background: var(--theme-hospital);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: var(--radius-btn);
+            box-shadow: 0 2px 5px rgba(66, 133, 244, 0.3);
         }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--white);
-            min-width: 160px;
-            box-shadow: var(--shadow-card);
-            border-radius: var(--radius);
-            padding: 10px 0;
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: var(--text-dark);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover { background-color: var(--secondary-color); }
-        .dropdown:hover .dropdown-content { display: block; }
 
         /* =========================================
-           3. LAYOUT UTILITIES
+           3. MODULAR LAYOUT (The "Template")
            ========================================= */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        .section-header {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
+        .section-title {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .section-header h2 {
-            font-weight: 400;
-            color: var(--text-dark);
-        }
-
-        /* Grid for cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 24px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
-        /* =========================================
-           4. MODULAR FEATURE CARDS
-           (Independent styles for each feature)
-           ========================================= */
-        
-        /* Base Card Style */
-        .feature-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-card);
-            padding: 24px;
-            transition: transform 0.2s, box-shadow 0.2s;
+        /* Base Card Template */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            height: 100%;
         }
 
-        .feature-card:hover {
-            transform: translateY(-2px);
+        .card:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
-        /* --- FEATURE A: Blood Donation (Public) --- */
-        .feat-blood-alert {
-            border-top: 4px solid var(--accent-blood);
-        }
-        .feat-blood-alert h3 { color: var(--accent-blood); margin-bottom: 10px; }
-        .btn-blood {
-            background-color: var(--accent-blood);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-
-        /* --- FEATURE B: Hospital Partnerships (B2B) --- */
-        .feat-hospital-biz {
-            border-top: 4px solid var(--primary-color);
-        }
-        .feat-hospital-biz h3 { color: var(--primary-color); margin-bottom: 10px; }
-        .stat-display {
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--text-dark);
-            margin: 10px 0;
-        }
-        .btn-hospital {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-
-        /* --- FEATURE C: Pharmacy Ads (Commercial) --- */
-        .feat-pharmacy-ad {
-            border-top: 4px solid var(--accent-pharmacy);
-            background: #f1f8e9; /* Slight green tint for distinction */
-        }
-        .feat-pharmacy-ad h3 { color: var(--accent-pharmacy); margin-bottom: 10px; }
-        .ad-badge {
-            background: var(--text-grey);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            align-self: flex-start;
-            margin-bottom: 8px;
-        }
+        .card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 500; }
+        .card p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
 
         /* =========================================
-           5. FOOTER
+           4. STAKEHOLDER BUTTONS & STYLES
            ========================================= */
-        .main-footer {
-            background-color: var(--white);
-            border-top: 1px solid #ddd;
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--text-grey);
+        
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-btn);
+            font-weight: 600;
             font-size: 0.9rem;
+            cursor: pointer;
+            width: fit-content;
+            transition: filter 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
         
-        .footer-links {
+        .btn:hover { filter: brightness(95%); }
+
+        /* USER Styles (Green/Teal theme) */
+        .user-section .section-badge { background: #e6f4ea; color: var(--theme-user); }
+        .btn-donate { background: #fce8e6; color: var(--theme-alert); } /* Soft Red */
+        .btn-directory { background: #e8f0fe; color: var(--theme-hospital); } /* Soft Blue */
+        .btn-bmi { background: #e6f4ea; color: var(--theme-user); } /* Soft Green */
+
+        /* HOSPITAL Styles (Blue/Professional theme) */
+        .hospital-section .section-badge { background: #e8f0fe; color: var(--theme-hospital); }
+        .btn-register { 
+            background: var(--theme-hospital); 
+            color: white; 
+            width: 100%; /* Full width for emphasis */
+        }
+        .benefit-list {
+            list-style: none;
             margin-bottom: 20px;
         }
-        .footer-links a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: var(--text-grey);
+        .benefit-list li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .navbar { padding: 0 16px; }
-            .nav-links { display: none; } /* Simplified for mobile example */
-            .brand-logo { font-size: 1.2rem; }
+        /* PHARMACY Styles (Ad-centric) */
+        .pharma-section .section-badge { background: #fef7e0; color: #f9ab00; }
+        .ad-card { border: 2px dashed #ffe082; background: #fffdf5; }
+        .btn-shop { background: var(--theme-pharma); color: #202124; }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Mobile Tweaks */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; } /* Simplified for template */
+            .card-grid { grid-template-columns: 1fr; }
+            .section-title { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="brand-logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            MediCore
+        <div class="brand">
+            <span style="color: var(--theme-hospital); font-size: 1.8rem;">+</span> MediCore
         </div>
-        <div class="nav-links">
-            <a href="#" class="nav-item">Dashboard</a>
-            <a href="#" class="nav-item">Services</a>
-            
-            <div class="dropdown">
-                <a href="#" class="nav-item">Partners ▼</a>
-                <div class="dropdown-content">
-                    <a href="#hospitals">For Hospitals</a>
-                    <a href="#pharmacies">For Pharmacies</a>
-                    <a href="#labs">For Labs</a>
-                </div>
-            </div>
-            
-            <a href="#" class="nav-item">Profile</a>
+        <div class="nav-menu">
+            <a href="#users" class="nav-link">For You</a>
+            <a href="#hospitals" class="nav-link">Institutions</a>
+            <a href="#pharmacy" class="nav-link">Pharmacy</a>
+            <a href="#" class="nav-link nav-cta">Login</a>
         </div>
     </nav>
 
     <main class="container">
 
-        <section id="public-section">
-            <div class="section-header">
-                <h2>Public Services</h2>
-                <small style="color: var(--text-grey)">Personalized health alerts and donation camps</small>
+        <section id="users" class="user-section">
+            <div class="section-title">
+                <h2>Patient Care & Tools</h2>
+                <span class="section-badge">Personal</span>
             </div>
 
             <div class="card-grid">
-                <article class="feature-card feat-blood-alert">
+                <article class="card">
                     <div>
-                        <h3>Urgent Blood Request</h3>
-                        <p>A+ blood needed at City Hospital within 2 hours. 3 patients currently on waitlist.</p>
-                        <p style="margin-top:10px; font-size: 0.9rem; color: #555;">📍 2.5km away</p>
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🩸</div>
+                        <h3>Blood Donation</h3>
+                        <p>Find nearby donation camps or request blood urgently. Join 10k+ donors saving lives.</p>
                     </div>
-                    <button class="btn-blood" onclick="alert('Redirecting to Donor Registration...')">Donate Now</button>
+                    <a href="#" class="btn btn-donate">Find Donors &rarr;</a>
                 </article>
 
-                <article class="feature-card">
+                <article class="card">
                     <div>
-                        <h3 style="color: var(--text-dark)">Daily Health Tip</h3>
-                        <p>Flu season is peaking. Remember to stay hydrated and get your Vitamin C intake today.</p>
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🏥</div>
+                        <h3>Hospital Directory</h3>
+                        <p>Locate specialists, check OPD timings, and book appointments at verified clinics.</p>
                     </div>
-                    <div style="margin-top: 15px; color: var(--primary-color); cursor: pointer;">Read More &rarr;</div>
+                    <a href="#" class="btn btn-directory">Search Hospitals</a>
+                </article>
+
+                <article class="card">
+                    <div>
+                        <div style="font-size: 2rem; margin-bottom: 10px;">⚖️</div>
+                        <h3>BMI Calculator</h3>
+                        <p>Track your fitness goals. Calculate your Body Mass Index instantly.</p>
+                    </div>
+                    <button class="btn btn-bmi" onclick="alert('BMI Modal would open here')">Calculate Now</button>
                 </article>
             </div>
         </section>
 
-        <section id="hospitals">
-            <div class="section-header">
-                <h2>Hospital Partners</h2>
-                <small style="color: var(--text-grey)">Commissions, Analytics, and Partnership Tools</small>
+        <section id="hospitals" class="hospital-section">
+            <div class="section-title">
+                <h2>Partner Network</h2>
+                <span class="section-badge">Institutional</span>
             </div>
 
             <div class="card-grid">
-                <article class="feature-card feat-hospital-biz">
+                <article class="card" style="border-left: 4px solid var(--theme-hospital);">
                     <div>
-                        <h3>Monthly Commissions</h3>
-                        <p>Your partnership revenue for October.</p>
-                        <div class="stat-display">$12,450.00</div>
-                        <p style="font-size: 0.85rem; color: green;">▲ 8.4% from last month</p>
+                        <h3>Register Your Hospital</h3>
+                        <p>Join the MediCore network to streamline patient intake and increase visibility.</p>
+                        <ul class="benefit-list">
+                            <li>✓ Access to 5M+ Patient Base</li>
+                            <li>✓ Real-time Bed Management System</li>
+                            <li>✓ Automated Appointment Scheduling</li>
+                        </ul>
                     </div>
-                    <button class="btn-hospital" onclick="alert('Downloading Financial Report...')">View Report</button>
+                    <button class="btn btn-register">Become a Partner</button>
                 </article>
 
-                <article class="feature-card feat-hospital-biz">
+                <article class="card">
                     <div>
-                        <h3>Bed Inventory</h3>
-                        <p>Manage real-time ICU and Ward availability visible to users.</p>
+                        <h3>Partner Dashboard</h3>
+                        <p>Already a member? Log in to manage staff, view analytics, and handle claims.</p>
                     </div>
-                    <button class="btn-hospital">Update Inventory</button>
+                    <a href="#" style="color: var(--theme-hospital); text-decoration: none; font-weight: 600;">Login to Portal &rarr;</a>
                 </article>
             </div>
         </section>
 
-        <section id="pharmacies">
-            <div class="section-header">
-                <h2>Pharmacy Network</h2>
-                <small style="color: var(--text-grey)">Sponsored placements and inventory management</small>
+        <section id="pharmacy" class="pharma-section">
+            <div class="section-title">
+                <h2>Pharmacy & Deals</h2>
+                <span class="section-badge">Sponsored</span>
             </div>
 
             <div class="card-grid">
-                <article class="feature-card feat-pharmacy-ad">
-                    <span class="ad-badge">Sponsored Ad</span>
+                <article class="card ad-card">
                     <div>
-                        <h3>Discount on Supplements</h3>
-                        <p>Get 20% off on all whey protein and multivitamins at <strong>MediPlus Pharmacy</strong>.</p>
+                        <span style="background: #fef7e0; color: #f9ab00; padding: 2px 6px; font-size: 0.7rem; border-radius: 4px; text-transform: uppercase;">Ad</span>
+                        <h3 style="margin-top: 8px; color: #b26a00;">Vitamin C Mega Sale</h3>
+                        <p>Get flat <strong>20% OFF</strong> on all immunity boosters this winter. Powered by <em>GreenLeaf Pharma</em>.</p>
                     </div>
-                    <button style="margin-top:15px; border:1px solid var(--accent-pharmacy); background:none; color:var(--accent-pharmacy); padding:8px; border-radius:4px; cursor:pointer;">Boost This Ad</button>
+                    <button class="btn btn-shop">Shop Deal</button>
                 </article>
 
-                <article class="feature-card" style="border-top: 4px solid var(--text-grey);">
+                <article class="card">
                     <div>
-                        <h3>Low Stock Alert</h3>
-                        <p>Insulin glargine stock is running low across 3 branches.</p>
+                        <h3>Find Medicines</h3>
+                        <p>Upload your prescription or search for generic alternatives available near you.</p>
                     </div>
-                    <button class="btn-hospital" style="color: var(--text-dark);">Restock</button>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" placeholder="Search medicine..." style="padding: 10px; border: 1px solid #ddd; border-radius: 50px; flex: 1; outline: none;">
+                        <button style="background: var(--text-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">🔍</button>
+                    </div>
                 </article>
             </div>
         </section>
 
     </main>
 
-    <footer class="main-footer">
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Partner with Us</a>
-            <a href="#">Help Center</a>
-        </div>
-        <p>&copy; 2024 MediCore App. All rights reserved.</p>
+    <footer>
+        <p>&copy; 2026 MediCore Inc. | Designed for Wellness</p>
     </footer>
 
     <script>
-        // =========================================
-        // JAVASCRIPT: Logic Isolation
-        // =========================================
-
-        /* NOTE: In a real environment, each feature below would 
-           live in its own .js file or module to ensure independence.
-        */
-
-        // Feature: Navbar Dropdown Logic (Generic)
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log("MediCore App Loaded");
+        // Separate Logic Blocks for modularity
+        
+        // 1. User Interaction Logic
+        document.querySelector('.btn-bmi').addEventListener('click', () => {
+            console.log('Open BMI Calculator Modal');
         });
 
-        // Feature: Blood Donation Alert Logic
-        const bloodModule = {
-            init: function() {
-                // Fetch live data logic would go here
-                console.log("Blood module active");
-            }
-        };
+        // 2. Hospital Registration Logic
+        document.querySelector('.btn-register').addEventListener('click', () => {
+            console.log('Redirect to B2B Registration Form');
+        });
 
-        // Feature: Hospital Dashboard Logic
-        const hospitalModule = {
-            refreshStats: function() {
-                // API calls for financial data
-                console.log("Refreshing hospital stats...");
-            }
-        };
-
-        // Initialize features independently
-        bloodModule.init();
-        hospitalModule.refreshStats();
-
+        // 3. Ad Tracking Logic
+        document.querySelector('.btn-shop').addEventListener('click', () => {
+            console.log('Track Ad Click ID: 4452');
+        });
     </script>
 </body>
 </html>
