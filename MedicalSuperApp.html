@@ -3,399 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCore | Super App</title>
+    <title>MediCore | Professional Medical Ecosystem</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================
-           1. EYE-FRIENDLY THEME & VARIABLES
+           1. CORE THEME & VARIABLES
            ========================================= */
         :root {
-            /* Theme Colors */
-            --theme-user: #0F9D58;      /* Google Green (Wellness) */
-            --theme-hospital: #4285F4;  /* Google Blue (Trust) */
-            --theme-pharma: #FBBC05;    /* Google Yellow (Retail) */
-            --theme-alert: #EA4335;     /* Google Red (Urgent) */
-            
-            /* Accents for new features */
-            --theme-purple: #A142F4;    /* Mental Health */
-            --theme-pink: #E91E63;      /* Women's Health */
-
-            /* UI Base */
-            --bg-body: #f5f6f7;
+            --theme-user: #0F9D58;
+            --theme-hospital: #1a73e8;
+            --theme-pharma: #FBBC05;
+            --theme-alert: #d93025;
+            --bg-body: #f8f9fa;
             --surface: #ffffff;
-            --text-primary: #3c4043;
-            --text-secondary: #5f6368;
-            
-            /* Shapes & Depth */
-            --radius-btn: 50px;
-            --radius-card: 16px;
-            --shadow-soft: 0 4px 6px rgba(60,64,67,0.05);
-            --shadow-hover: 0 10px 25px rgba(60,64,67,0.12);
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --border-color: #e0e0e0;
+            --radius-pill: 50px;
+            --radius-card: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding-top: 70px;
-        }
+        body { font-family: 'Roboto', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; padding-top: 110px; }
 
         /* =========================================
-           2. STICKY NAVBAR
+           2. NAVIGATION & BREADCRUMBS
            ========================================= */
-        .navbar {
+        .header-fixed {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 2000;
+            background: var(--surface);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            height: 64px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
-            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .brand {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
+        .brand { font-size: 1.5rem; font-weight: 700; color: var(--theme-hospital); text-decoration: none; }
+
+        .breadcrumb-bar {
+            height: 40px;
+            background: #f1f3f4;
             display: flex;
             align-items: center;
-            gap: 8px;
+            padding: 0 5%;
+            font-size: 0.85rem;
+            color: var(--text-sub);
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        .nav-link:hover { color: var(--theme-hospital); }
-        .nav-cta {
-            background: var(--theme-hospital);
-            color: white !important;
-            padding: 8px 20px;
-            border-radius: var(--radius-btn);
-            box-shadow: 0 2px 5px rgba(66, 133, 244, 0.3);
-        }
+        .breadcrumb-bar a { text-decoration: none; color: var(--theme-hospital); margin: 0 8px; }
+        .breadcrumb-bar span { margin: 0 5px; }
 
         /* =========================================
-           3. LAYOUT UTILITIES
+           3. PROFESSIONAL INTRO & ABOUT
            ========================================= */
-        .container {
-            max-width: 100%; /* Changed to full width for scrolling */
-            padding: 40px 0; /* Remove side padding to let scroll hit edges */
+        .intro-hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
         }
 
-        .section-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
+        .intro-hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .intro-hero p { max-width: 700px; margin: 0 auto; font-size: 1.1rem; opacity: 0.9; }
+
+        .about-section {
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            text-align: center;
             padding: 0 20px;
         }
 
-        .section-title {
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .section-badge {
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        /* =========================================
+           4. GLOBAL SECTION STYLES
+           ========================================= */
+        .container { width: 100%; max-width: 1400px; margin: 0 auto; }
+        .section-header-centered { text-align: center; margin-bottom: 40px; }
+        .section-header-centered h2 { font-size: 2rem; font-weight: 400; color: var(--text-main); }
+        .section-header-centered .underline { width: 60px; height: 4px; background: var(--theme-hospital); margin: 10px auto; border-radius: 2px; }
+
+        .divider { border: 0; border-top: 1px solid var(--border-color); margin: 80px 5%; }
 
         /* =========================================
-           4. SCROLLABLE CARD LOGIC (NEW)
-           Makes cards scroll horizontally on all screens
+           5. SCROLLABLE & GRID COMPONENTS
            ========================================= */
-        .scrolling-wrapper {
+        .scroll-container {
             display: flex;
             overflow-x: auto;
-            gap: 24px;
-            padding: 10px 20px 40px 20px; /* Bottom padding for shadow visibility */
+            gap: 20px;
+            padding: 20px 5% 40px 5%;
             scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
-            
-            /* Hide Scrollbar for clean UI */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE 10+ */
+            scrollbar-width: none;
         }
-        
-        .scrolling-wrapper::-webkit-scrollbar { 
-            display: none; /* WebKit */
-        }
+        .scroll-container::-webkit-scrollbar { display: none; }
 
         .card {
-            flex: 0 0 auto; /* Don't shrink cards */
-            width: 300px;   /* Fixed width for uniformity */
+            flex: 0 0 300px;
             background: var(--surface);
             border-radius: var(--radius-card);
-            padding: 28px;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            border: 1px solid rgba(0,0,0,0.02);
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            scroll-snap-align: center; /* Center card when scrolling stops */
+            scroll-snap-align: start;
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 500; }
-        .card p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
-
-        /* Icon Helper */
+        .card:hover { box-shadow: var(--shadow-sm); transform: translateY(-3px); }
         .card-icon { font-size: 2rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 500; }
+        .card p { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 20px; }
+
+        /* Pharmacy Grid */
+        .pharma-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+        }
 
         /* =========================================
-           5. BUTTONS & STAKEHOLDER STYLES
+           6. BUTTONS
            ========================================= */
         .btn {
             border: none;
-            padding: 10px 20px;
-            border-radius: var(--radius-btn);
-            font-weight: 600;
-            font-size: 0.9rem;
+            padding: 10px 24px;
+            border-radius: var(--radius-pill);
+            font-weight: 500;
             cursor: pointer;
-            width: fit-content;
-            transition: filter 0.2s;
             text-decoration: none;
             display: inline-block;
+            font-size: 0.9rem;
+            transition: background 0.2s;
             text-align: center;
         }
-        .btn:hover { filter: brightness(95%); }
+        .btn-user { background: var(--theme-user); color: white; }
+        .btn-hospital { background: var(--theme-hospital); color: white; }
+        .btn-pharma { background: var(--theme-pharma); color: var(--text-main); }
+        .btn-outline { border: 1px solid var(--border-color); color: var(--text-sub); }
 
-        /* User Theme */
-        .user-section .section-badge { background: #e6f4ea; color: var(--theme-user); }
-        .btn-user { background: #e6f4ea; color: var(--theme-user); }
-        .btn-alert { background: #fce8e6; color: var(--theme-alert); }
-        .btn-purple { background: #f3e5f5; color: var(--theme-purple); }
-        .btn-pink { background: #fce4ec; color: var(--theme-pink); }
-
-        /* Hospital Theme */
-        .hospital-section .section-badge { background: #e8f0fe; color: var(--theme-hospital); }
-        .btn-hospital { background: var(--theme-hospital); color: white; width: 100%; }
-
-        /* Pharmacy Theme (Uses Grid, not scroll, as requested in previous prompt, but adapting) */
-        .pharma-section .section-badge { background: #fef7e0; color: var(--theme-pharma); }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            padding: 0 20px;
-        }
-        .ad-card { border: 2px dashed #ffe082; background: #fffdf5; }
-        .btn-shop { background: var(--theme-pharma); color: #202124; }
-
-        /* Footer */
+        /* =========================================
+           7. FOOTER STAKEHOLDER LINKS
+           ========================================= */
         footer {
-            background: white;
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid #eee;
-            color: var(--text-secondary);
-            margin-top: 40px;
+            background: #202124;
+            color: #bdc1c6;
+            padding: 60px 5% 30px 5%;
+            margin-top: 80px;
         }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-weight: 500; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #bdc1c6; text-decoration: none; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: white; }
+        
+        .footer-bottom { border-top: 1px solid #3c4043; padding-top: 20px; text-align: center; font-size: 0.8rem; }
 
         @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .card { width: 85vw; } /* Cards take up most of the screen on mobile */
+            .card { flex: 0 0 260px; }
+            .intro-hero h1 { font-size: 1.8rem; }
+            .navbar { padding: 0 15px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="brand">
-            <span style="color: var(--theme-hospital); font-size: 1.8rem;">+</span> MediCore
+    <header class="header-fixed">
+        <nav class="navbar">
+            <a href="#" class="brand">MediCore</a>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" class="btn btn-outline">Sign In</a>
+                <a href="#" class="btn btn-hospital">Sign Up</a>
+            </div>
+        </nav>
+        <div class="breadcrumb-bar">
+            <a href="#">Home</a> <span>/</span> <a href="#users">Users</a> <span>/</span> <a href="#hospitals">Hospitals</a> <span>/</span> <a href="#pharmacy">Pharmacy</a>
         </div>
-        <div class="nav-menu">
-            <a href="#users" class="nav-link">For You</a>
-            <a href="#hospitals" class="nav-link">Institutions</a>
-            <a href="#pharmacy" class="nav-link">Pharmacy</a>
-            <a href="#" class="nav-link nav-cta">Login</a>
+    </header>
+
+    <section class="intro-hero">
+        <h1>Advanced Healthcare Integrated</h1>
+        <p>MediCore is a unified ecosystem connecting patients, healthcare providers, and pharmaceutical services through data-driven technology.</p>
+    </section>
+
+    <section class="about-section">
+        <div class="section-header-centered">
+            <h2>About Our Mission</h2>
+            <div class="underline"></div>
         </div>
-    </nav>
+        <p>We bridge the gap between medical institutions and common people. By centralizing essential tools—from emergency blood alerts to hospital inventory management—we ensure that healthcare is accessible, transparent, and immediate for every stakeholder.</p>
+    </section>
 
     <main class="container">
 
-        <section id="users" class="user-section">
-            <div class="section-wrap">
-                <div class="section-title">
-                    <h2>Personal Health Tools</h2>
-                    <span class="section-badge">Scroll to explore &rarr;</span>
-                </div>
+        <hr class="divider">
+
+        <section id="users">
+            <div class="section-header-centered">
+                <h2>Patient & Personal Tools</h2>
+                <div class="underline" style="background: var(--theme-user);"></div>
             </div>
 
-            <div class="scrolling-wrapper">
-                
-                <article class="card" style="border-top: 4px solid var(--theme-alert);">
-                    <div>
-                        <div class="card-icon">🩸</div>
-                        <h3>Blood Requests</h3>
-                        <p>View urgent requests for blood in your area. Your donation can save 3 lives today.</p>
-                    </div>
-                    <a href="#" class="btn btn-alert">View Requests</a>
-                </article>
-
+            <div class="scroll-container">
                 <article class="card">
-                    <div>
-                        <div class="card-icon">📂</div>
-                        <h3>Medical History</h3>
-                        <p>Securely upload and store your prescriptions, lab reports, and X-rays in the cloud.</p>
-                    </div>
-                    <a href="#" class="btn btn-user">Upload Files</a>
+                    <div class="card-icon">🩸</div>
+                    <h3>Blood Requests</h3>
+                    <p>Donate or request life-saving blood units in real-time within your local radius.</p>
+                    <a href="#" class="btn btn-user">Request Blood</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">⌚</div>
-                        <h3>Basic Health Tracker</h3>
-                        <p>Log your daily Steps, Water Intake, and Sleep cycles to maintain a healthy lifestyle.</p>
-                    </div>
+                    <div class="card-icon">📂</div>
+                    <h3>Medical History</h3>
+                    <p>Digitize your records. Securely store and share lab results with your doctor.</p>
+                    <a href="#" class="btn btn-user">Secure Vault</a>
+                </article>
+                <article class="card">
+                    <div class="card-icon">📏</div>
+                    <h3>BMI & Trackers</h3>
+                    <p>Track your vitals including BMI, hydration, and daily activity metrics.</p>
                     <a href="#" class="btn btn-user">Open Tracker</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">🩹</div>
-                        <h3>First Aid Guider</h3>
-                        <p>Step-by-step emergency guides for burns, cuts, CPR, and choking. Works offline.</p>
-                    </div>
-                    <a href="#" class="btn btn-alert">Emergency Guide</a>
+                    <div class="card-icon">🩹</div>
+                    <h3>First Aid Guider</h3>
+                    <p>Immediate instructions for emergency situations and basic injury care.</p>
+                    <a href="#" class="btn btn-user">Emergency Help</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">🌡️</div>
-                        <h3>Symptom Checker</h3>
-                        <p>Select your symptoms and get a preliminary AI-based health assessment.</p>
-                    </div>
-                    <a href="#" class="btn btn-user">Check Symptoms</a>
+                    <div class="card-icon">🌡️</div>
+                    <h3>Symptom Checker</h3>
+                    <p>AI-powered preliminary analysis of your current health symptoms.</p>
+                    <a href="#" class="btn btn-user">Check Now</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">💊</div>
-                        <h3>Medicine Checker</h3>
-                        <p>Check drug interactions, side effects, and dosage instructions for your meds.</p>
-                    </div>
-                    <a href="#" class="btn btn-user">Scan Medicine</a>
+                    <div class="card-icon">💊</div>
+                    <h3>Medicine Use</h3>
+                    <p>Check dosages, side effects, and drug-to-drug interaction warnings.</p>
+                    <a href="#" class="btn btn-user">Scan Pack</a>
                 </article>
-
-                <article class="card" style="border-top: 4px solid var(--theme-purple);">
-                    <div>
-                        <div class="card-icon">🧠</div>
-                        <h3>Mental Health</h3>
-                        <p>Take a quick anxiety/depression assessment or access meditation audio tracks.</p>
-                    </div>
-                    <a href="#" class="btn btn-purple">Start Assessment</a>
+                <article class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Mental Wellness</h3>
+                    <p>Assess your stress levels and access guided therapeutic resources.</p>
+                    <a href="#" class="btn btn-user">Start Test</a>
                 </article>
-
-                <article class="card" style="border-top: 4px solid var(--theme-pink);">
-                    <div>
-                        <div class="card-icon">🌸</div>
-                        <h3>Women's Health</h3>
-                        <p>Period tracker, pregnancy week-by-week guide, and PCOS health tips.</p>
-                    </div>
-                    <a href="#" class="btn btn-pink">Open Tracker</a>
+                <article class="card">
+                    <div class="card-icon">🌸</div>
+                    <h3>Women's Health</h3>
+                    <p>Dedicated tracking for menstrual cycles, pregnancy, and wellness.</p>
+                    <a href="#" class="btn btn-user">Access Suite</a>
                 </article>
-
             </div>
         </section>
 
-        <br><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><br>
+        <hr class="divider">
 
-        <section id="hospitals" class="hospital-section">
-            <div class="section-wrap">
-                <div class="section-title">
-                    <h2>For Hospitals & Clinics</h2>
-                    <span class="section-badge">Institutional Partner</span>
-                </div>
+        <section id="hospitals">
+            <div class="section-header-centered">
+                <h2>Institutional Partnership</h2>
+                <div class="underline" style="background: var(--theme-hospital);"></div>
             </div>
 
-            <div class="scrolling-wrapper">
-                
+            <div class="scroll-container">
                 <article class="card">
-                    <div>
-                        <div class="card-icon">🏥</div>
-                        <h3>Register Clinic</h3>
-                        <p>Onboard your facility to receive digital appointments and manage patient flow.</p>
-                    </div>
-                    <button class="btn btn-hospital">Register Now</button>
+                    <div class="card-icon">🏢</div>
+                    <h3>Register Clinic</h3>
+                    <p>List your facility on our global map to receive digital bookings.</p>
+                    <a href="#" class="btn btn-hospital">Onboard Facility</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">🚑</div>
-                        <h3>Request Blood Drive</h3>
-                        <p>Organize a blood donation camp at your facility. We notify all nearby donors.</p>
-                    </div>
-                    <button class="btn btn-hospital">Create Event</button>
+                    <div class="card-icon">📢</div>
+                    <h3>Donation Drive</h3>
+                    <p>Request and organize a blood donation drive at your hospital premises.</p>
+                    <a href="#" class="btn btn-hospital">Host Event</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <div class="card-icon">📊</div>
-                        <h3>Request Patient Data</h3>
-                        <p>Securely request medical history from patients with their explicit OTP consent.</p>
-                    </div>
-                    <button class="btn btn-hospital">Request Access</button>
+                    <div class="card-icon">🔒</div>
+                    <h3>Request Data</h3>
+                    <p>Securely request verified patient medical history via OTP authorization.</p>
+                    <a href="#" class="btn btn-hospital">Access Records</a>
                 </article>
-
             </div>
         </section>
 
-        <br><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><br>
+        <hr class="divider">
 
-        <section id="pharmacy" class="pharma-section">
-            <div class="section-wrap">
-                <div class="section-title">
-                    <h2>Pharmacy Deals</h2>
-                    <span class="section-badge">Sponsored</span>
-                </div>
+        <section id="pharmacy">
+            <div class="section-header-centered">
+                <h2>Pharmacy Network</h2>
+                <div class="underline" style="background: var(--theme-pharma);"></div>
             </div>
 
-            <div class="card-grid">
-                <article class="card ad-card">
+            <div class="pharma-grid">
+                <article class="card" style="border: 2px dashed var(--theme-pharma);">
                     <div>
-                        <span style="background: #fef7e0; color: #f9ab00; padding: 2px 6px; font-size: 0.7rem; border-radius: 4px; text-transform: uppercase;">Ad</span>
-                        <h3 style="margin-top: 8px; color: #b26a00;">Winter Wellness Sale</h3>
-                        <p>Flat 20% OFF on immunity boosters and vitamins.</p>
+                        <span style="font-size: 0.7rem; background: var(--theme-pharma); padding: 2px 8px; border-radius: 4px;">SPONSORED</span>
+                        <h3 style="margin-top: 15px;">Pharma Ad Placement</h3>
+                        <p>Promote your medical supplies or pharmacy store to 1M+ active users.</p>
                     </div>
-                    <button class="btn btn-shop">Shop Now</button>
+                    <a href="#" class="btn btn-pharma">Post Advertisement</a>
                 </article>
-
                 <article class="card">
-                    <div>
-                        <h3>Search Medicines</h3>
-                        <p>Find generic alternatives and check stock in nearby pharmacies.</p>
-                    </div>
-                    <button class="btn" style="background: #eee; color: #333;">Search Inventory</button>
+                    <div class="card-icon">📦</div>
+                    <h3>Inventory Sync</h3>
+                    <p>Sync your local pharmacy stock to help users find medicines near them.</p>
+                    <a href="#" class="btn btn-outline">Manage Stock</a>
                 </article>
             </div>
         </section>
@@ -403,21 +332,51 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 MediCore Inc. | Designed for Wellness</p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>MediCore</h4>
+                <p style="font-size: 0.9rem;">The future of digital healthcare integration.</p>
+            </div>
+            <div class="footer-col">
+                <h4>For Users</h4>
+                <ul>
+                    <li><a href="#">Donate Blood</a></li>
+                    <li><a href="#">Calculate BMI</a></li>
+                    <li><a href="#">Health Records</a></li>
+                    <li><a href="#">Symptom Checker</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>For Hospitals</h4>
+                <ul>
+                    <li><a href="#">Partner Registration</a></li>
+                    <li><a href="#">Data Access API</a></li>
+                    <li><a href="#">Emergency Alerts</a></li>
+                    <li><a href="#">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>For Pharmacy</h4>
+                <ul>
+                    <li><a href="#">Ad Placements</a></li>
+                    <li><a href="#">Stock Management</a></li>
+                    <li><a href="#">Delivery API</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 MediCore International. All rights reserved. | Privacy Policy | Terms of Service
+        </div>
     </footer>
 
     <script>
-        // Simple Interaction Logging
-        const allButtons = document.querySelectorAll('.btn');
-        allButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // Prevent actual navigation for demo
-                e.preventDefault(); 
-                const featureName = e.target.parentElement.querySelector('h3') 
-                                    ? e.target.parentElement.querySelector('h3').innerText 
-                                    : "Unknown Feature";
-                
-                alert(`You clicked on: ${featureName}\nFeature Logic would load here.`);
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
