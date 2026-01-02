@@ -11,21 +11,25 @@
            1. EYE-FRIENDLY THEME & VARIABLES
            ========================================= */
         :root {
-            /* Theme Colors - Distinct per stakeholder */
+            /* Theme Colors */
             --theme-user: #0F9D58;      /* Google Green (Wellness) */
             --theme-hospital: #4285F4;  /* Google Blue (Trust) */
-            --theme-pharma: #FBBC05;    /* Google Yellow/Orange (Retail/Ads) */
+            --theme-pharma: #FBBC05;    /* Google Yellow (Retail) */
             --theme-alert: #EA4335;     /* Google Red (Urgent) */
+            
+            /* Accents for new features */
+            --theme-purple: #A142F4;    /* Mental Health */
+            --theme-pink: #E91E63;      /* Women's Health */
 
             /* UI Base */
-            --bg-body: #f5f6f7;         /* Very light grey, easier on eyes than pure white */
+            --bg-body: #f5f6f7;
             --surface: #ffffff;
-            --text-primary: #3c4043;    /* Softer black */
-            --text-secondary: #5f6368;  /* Softer grey */
+            --text-primary: #3c4043;
+            --text-secondary: #5f6368;
             
             /* Shapes & Depth */
-            --radius-btn: 50px;         /* Pill shape buttons (friendlier) */
-            --radius-card: 16px;        /* Soft rounded corners */
+            --radius-btn: 50px;
+            --radius-card: 16px;
             --shadow-soft: 0 4px 6px rgba(60,64,67,0.05);
             --shadow-hover: 0 10px 25px rgba(60,64,67,0.12);
         }
@@ -37,11 +41,11 @@
             background-color: var(--bg-body);
             color: var(--text-primary);
             line-height: 1.6;
-            padding-top: 70px; /* Space for fixed nav */
+            padding-top: 70px;
         }
 
         /* =========================================
-           2. STICKY NAVBAR (Glassmorphism Lite)
+           2. STICKY NAVBAR
            ========================================= */
         .navbar {
             position: fixed;
@@ -91,12 +95,17 @@
         }
 
         /* =========================================
-           3. MODULAR LAYOUT (The "Template")
+           3. LAYOUT UTILITIES
            ========================================= */
         .container {
-            max-width: 1100px;
+            max-width: 100%; /* Changed to full width for scrolling */
+            padding: 40px 0; /* Remove side padding to let scroll hit edges */
+        }
+
+        .section-wrap {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
         }
 
         .section-title {
@@ -115,15 +124,30 @@
             letter-spacing: 0.5px;
         }
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* =========================================
+           4. SCROLLABLE CARD LOGIC (NEW)
+           Makes cards scroll horizontally on all screens
+           ========================================= */
+        .scrolling-wrapper {
+            display: flex;
+            overflow-x: auto;
             gap: 24px;
-            margin-bottom: 80px;
+            padding: 10px 20px 40px 20px; /* Bottom padding for shadow visibility */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            
+            /* Hide Scrollbar for clean UI */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE 10+ */
+        }
+        
+        .scrolling-wrapper::-webkit-scrollbar { 
+            display: none; /* WebKit */
         }
 
-        /* Base Card Template */
         .card {
+            flex: 0 0 auto; /* Don't shrink cards */
+            width: 300px;   /* Fixed width for uniformity */
             background: var(--surface);
             border-radius: var(--radius-card);
             padding: 28px;
@@ -133,7 +157,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            scroll-snap-align: center; /* Center card when scrolling stops */
         }
 
         .card:hover {
@@ -144,13 +168,15 @@
         .card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 500; }
         .card p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
 
+        /* Icon Helper */
+        .card-icon { font-size: 2rem; margin-bottom: 15px; }
+
         /* =========================================
-           4. STAKEHOLDER BUTTONS & STYLES
+           5. BUTTONS & STAKEHOLDER STYLES
            ========================================= */
-        
         .btn {
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: var(--radius-btn);
             font-weight: 600;
             font-size: 0.9rem;
@@ -161,37 +187,27 @@
             display: inline-block;
             text-align: center;
         }
-        
         .btn:hover { filter: brightness(95%); }
 
-        /* USER Styles (Green/Teal theme) */
+        /* User Theme */
         .user-section .section-badge { background: #e6f4ea; color: var(--theme-user); }
-        .btn-donate { background: #fce8e6; color: var(--theme-alert); } /* Soft Red */
-        .btn-directory { background: #e8f0fe; color: var(--theme-hospital); } /* Soft Blue */
-        .btn-bmi { background: #e6f4ea; color: var(--theme-user); } /* Soft Green */
+        .btn-user { background: #e6f4ea; color: var(--theme-user); }
+        .btn-alert { background: #fce8e6; color: var(--theme-alert); }
+        .btn-purple { background: #f3e5f5; color: var(--theme-purple); }
+        .btn-pink { background: #fce4ec; color: var(--theme-pink); }
 
-        /* HOSPITAL Styles (Blue/Professional theme) */
+        /* Hospital Theme */
         .hospital-section .section-badge { background: #e8f0fe; color: var(--theme-hospital); }
-        .btn-register { 
-            background: var(--theme-hospital); 
-            color: white; 
-            width: 100%; /* Full width for emphasis */
-        }
-        .benefit-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-        .benefit-list li {
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .btn-hospital { background: var(--theme-hospital); color: white; width: 100%; }
 
-        /* PHARMACY Styles (Ad-centric) */
-        .pharma-section .section-badge { background: #fef7e0; color: #f9ab00; }
+        /* Pharmacy Theme (Uses Grid, not scroll, as requested in previous prompt, but adapting) */
+        .pharma-section .section-badge { background: #fef7e0; color: var(--theme-pharma); }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 0 20px;
+        }
         .ad-card { border: 2px dashed #ffe082; background: #fffdf5; }
         .btn-shop { background: var(--theme-pharma); color: #202124; }
 
@@ -202,13 +218,12 @@
             text-align: center;
             border-top: 1px solid #eee;
             color: var(--text-secondary);
+            margin-top: 40px;
         }
 
-        /* Responsive Mobile Tweaks */
         @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Simplified for template */
-            .card-grid { grid-template-columns: 1fr; }
-            .section-title { flex-direction: column; align-items: flex-start; }
+            .nav-menu { display: none; }
+            .card { width: 85vw; } /* Cards take up most of the screen on mobile */
         }
     </style>
 </head>
@@ -229,96 +244,158 @@
     <main class="container">
 
         <section id="users" class="user-section">
-            <div class="section-title">
-                <h2>Patient Care & Tools</h2>
-                <span class="section-badge">Personal</span>
+            <div class="section-wrap">
+                <div class="section-title">
+                    <h2>Personal Health Tools</h2>
+                    <span class="section-badge">Scroll to explore &rarr;</span>
+                </div>
             </div>
 
-            <div class="card-grid">
-                <article class="card">
+            <div class="scrolling-wrapper">
+                
+                <article class="card" style="border-top: 4px solid var(--theme-alert);">
                     <div>
-                        <div style="font-size: 2rem; margin-bottom: 10px;">🩸</div>
-                        <h3>Blood Donation</h3>
-                        <p>Find nearby donation camps or request blood urgently. Join 10k+ donors saving lives.</p>
+                        <div class="card-icon">🩸</div>
+                        <h3>Blood Requests</h3>
+                        <p>View urgent requests for blood in your area. Your donation can save 3 lives today.</p>
                     </div>
-                    <a href="#" class="btn btn-donate">Find Donors &rarr;</a>
+                    <a href="#" class="btn btn-alert">View Requests</a>
                 </article>
 
                 <article class="card">
                     <div>
-                        <div style="font-size: 2rem; margin-bottom: 10px;">🏥</div>
-                        <h3>Hospital Directory</h3>
-                        <p>Locate specialists, check OPD timings, and book appointments at verified clinics.</p>
+                        <div class="card-icon">📂</div>
+                        <h3>Medical History</h3>
+                        <p>Securely upload and store your prescriptions, lab reports, and X-rays in the cloud.</p>
                     </div>
-                    <a href="#" class="btn btn-directory">Search Hospitals</a>
+                    <a href="#" class="btn btn-user">Upload Files</a>
                 </article>
 
                 <article class="card">
                     <div>
-                        <div style="font-size: 2rem; margin-bottom: 10px;">⚖️</div>
-                        <h3>BMI Calculator</h3>
-                        <p>Track your fitness goals. Calculate your Body Mass Index instantly.</p>
+                        <div class="card-icon">⌚</div>
+                        <h3>Basic Health Tracker</h3>
+                        <p>Log your daily Steps, Water Intake, and Sleep cycles to maintain a healthy lifestyle.</p>
                     </div>
-                    <button class="btn btn-bmi" onclick="alert('BMI Modal would open here')">Calculate Now</button>
+                    <a href="#" class="btn btn-user">Open Tracker</a>
                 </article>
+
+                <article class="card">
+                    <div>
+                        <div class="card-icon">🩹</div>
+                        <h3>First Aid Guider</h3>
+                        <p>Step-by-step emergency guides for burns, cuts, CPR, and choking. Works offline.</p>
+                    </div>
+                    <a href="#" class="btn btn-alert">Emergency Guide</a>
+                </article>
+
+                <article class="card">
+                    <div>
+                        <div class="card-icon">🌡️</div>
+                        <h3>Symptom Checker</h3>
+                        <p>Select your symptoms and get a preliminary AI-based health assessment.</p>
+                    </div>
+                    <a href="#" class="btn btn-user">Check Symptoms</a>
+                </article>
+
+                <article class="card">
+                    <div>
+                        <div class="card-icon">💊</div>
+                        <h3>Medicine Checker</h3>
+                        <p>Check drug interactions, side effects, and dosage instructions for your meds.</p>
+                    </div>
+                    <a href="#" class="btn btn-user">Scan Medicine</a>
+                </article>
+
+                <article class="card" style="border-top: 4px solid var(--theme-purple);">
+                    <div>
+                        <div class="card-icon">🧠</div>
+                        <h3>Mental Health</h3>
+                        <p>Take a quick anxiety/depression assessment or access meditation audio tracks.</p>
+                    </div>
+                    <a href="#" class="btn btn-purple">Start Assessment</a>
+                </article>
+
+                <article class="card" style="border-top: 4px solid var(--theme-pink);">
+                    <div>
+                        <div class="card-icon">🌸</div>
+                        <h3>Women's Health</h3>
+                        <p>Period tracker, pregnancy week-by-week guide, and PCOS health tips.</p>
+                    </div>
+                    <a href="#" class="btn btn-pink">Open Tracker</a>
+                </article>
+
             </div>
         </section>
+
+        <br><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><br>
 
         <section id="hospitals" class="hospital-section">
-            <div class="section-title">
-                <h2>Partner Network</h2>
-                <span class="section-badge">Institutional</span>
+            <div class="section-wrap">
+                <div class="section-title">
+                    <h2>For Hospitals & Clinics</h2>
+                    <span class="section-badge">Institutional Partner</span>
+                </div>
             </div>
 
-            <div class="card-grid">
-                <article class="card" style="border-left: 4px solid var(--theme-hospital);">
+            <div class="scrolling-wrapper">
+                
+                <article class="card">
                     <div>
-                        <h3>Register Your Hospital</h3>
-                        <p>Join the MediCore network to streamline patient intake and increase visibility.</p>
-                        <ul class="benefit-list">
-                            <li>✓ Access to 5M+ Patient Base</li>
-                            <li>✓ Real-time Bed Management System</li>
-                            <li>✓ Automated Appointment Scheduling</li>
-                        </ul>
+                        <div class="card-icon">🏥</div>
+                        <h3>Register Clinic</h3>
+                        <p>Onboard your facility to receive digital appointments and manage patient flow.</p>
                     </div>
-                    <button class="btn btn-register">Become a Partner</button>
+                    <button class="btn btn-hospital">Register Now</button>
                 </article>
 
                 <article class="card">
                     <div>
-                        <h3>Partner Dashboard</h3>
-                        <p>Already a member? Log in to manage staff, view analytics, and handle claims.</p>
+                        <div class="card-icon">🚑</div>
+                        <h3>Request Blood Drive</h3>
+                        <p>Organize a blood donation camp at your facility. We notify all nearby donors.</p>
                     </div>
-                    <a href="#" style="color: var(--theme-hospital); text-decoration: none; font-weight: 600;">Login to Portal &rarr;</a>
+                    <button class="btn btn-hospital">Create Event</button>
                 </article>
+
+                <article class="card">
+                    <div>
+                        <div class="card-icon">📊</div>
+                        <h3>Request Patient Data</h3>
+                        <p>Securely request medical history from patients with their explicit OTP consent.</p>
+                    </div>
+                    <button class="btn btn-hospital">Request Access</button>
+                </article>
+
             </div>
         </section>
 
+        <br><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><br>
+
         <section id="pharmacy" class="pharma-section">
-            <div class="section-title">
-                <h2>Pharmacy & Deals</h2>
-                <span class="section-badge">Sponsored</span>
+            <div class="section-wrap">
+                <div class="section-title">
+                    <h2>Pharmacy Deals</h2>
+                    <span class="section-badge">Sponsored</span>
+                </div>
             </div>
 
             <div class="card-grid">
                 <article class="card ad-card">
                     <div>
                         <span style="background: #fef7e0; color: #f9ab00; padding: 2px 6px; font-size: 0.7rem; border-radius: 4px; text-transform: uppercase;">Ad</span>
-                        <h3 style="margin-top: 8px; color: #b26a00;">Vitamin C Mega Sale</h3>
-                        <p>Get flat <strong>20% OFF</strong> on all immunity boosters this winter. Powered by <em>GreenLeaf Pharma</em>.</p>
+                        <h3 style="margin-top: 8px; color: #b26a00;">Winter Wellness Sale</h3>
+                        <p>Flat 20% OFF on immunity boosters and vitamins.</p>
                     </div>
-                    <button class="btn btn-shop">Shop Deal</button>
+                    <button class="btn btn-shop">Shop Now</button>
                 </article>
 
                 <article class="card">
                     <div>
-                        <h3>Find Medicines</h3>
-                        <p>Upload your prescription or search for generic alternatives available near you.</p>
+                        <h3>Search Medicines</h3>
+                        <p>Find generic alternatives and check stock in nearby pharmacies.</p>
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" placeholder="Search medicine..." style="padding: 10px; border: 1px solid #ddd; border-radius: 50px; flex: 1; outline: none;">
-                        <button style="background: var(--text-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">🔍</button>
-                    </div>
+                    <button class="btn" style="background: #eee; color: #333;">Search Inventory</button>
                 </article>
             </div>
         </section>
@@ -330,21 +407,18 @@
     </footer>
 
     <script>
-        // Separate Logic Blocks for modularity
-        
-        // 1. User Interaction Logic
-        document.querySelector('.btn-bmi').addEventListener('click', () => {
-            console.log('Open BMI Calculator Modal');
-        });
-
-        // 2. Hospital Registration Logic
-        document.querySelector('.btn-register').addEventListener('click', () => {
-            console.log('Redirect to B2B Registration Form');
-        });
-
-        // 3. Ad Tracking Logic
-        document.querySelector('.btn-shop').addEventListener('click', () => {
-            console.log('Track Ad Click ID: 4452');
+        // Simple Interaction Logging
+        const allButtons = document.querySelectorAll('.btn');
+        allButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Prevent actual navigation for demo
+                e.preventDefault(); 
+                const featureName = e.target.parentElement.querySelector('h3') 
+                                    ? e.target.parentElement.querySelector('h3').innerText 
+                                    : "Unknown Feature";
+                
+                alert(`You clicked on: ${featureName}\nFeature Logic would load here.`);
+            });
         });
     </script>
 </body>
