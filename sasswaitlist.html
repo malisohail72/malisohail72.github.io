@@ -3,316 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join the waitlist for the ultimate digital solution. Secure your spot today.">
-    <title>SaaS Product Waitlist</title>
-    
+    <meta name="description" content="The ultimate SaaS solution for modern teams. Join the waitlist today.">
+    <title>SaaS Product - Early Access</title>
+
     <style>
-        /* --- CSS VARIABLES & THEME --- */
+        /* ========================================
+        1. CSS VARIABLES & THEME CONFIGURATION
+        ========================================
+        */
         :root {
-            /* Professional Color Palette (Deep Blue/Slate & Vibrant Accent) */
-            --primary-color: #2563EB;       /* Vibrant Blue */
-            --primary-hover: #1D4ED8;       /* Darker Blue */
-            --secondary-color: #0F172A;     /* Dark Slate (Text/Headings) */
-            --text-color: #475569;          /* Muted Slate (Body text) */
-            --bg-color: #F8FAFC;            /* Very Light Blue/Gray Background */
-            --white: #FFFFFF;
-            --border-color: #E2E8F0;
-            --success-color: #10B981;
+            /* Palette: Slate & Royal Blue (Trustworthy & Modern) */
+            --primary: #2563EB;        /* Action Color */
+            --primary-dark: #1D4ED8;   /* Hover State */
+            --secondary: #0F172A;      /* Headings */
+            --text: #475569;           /* Body Text */
+            --bg-body: #F8FAFC;        /* Light Gray Background */
+            --bg-card: #FFFFFF;        /* White Card Background */
+            --border: #E2E8F0;         /* Subtle Borders */
+            --accent: #F59E0B;         /* Gold/Amber for highlights */
             
-            /* Spacing & Layout */
+            /* Dimensions */
             --max-width: 1200px;
-            --container-padding: 20px;
-            --radius: 8px;
-            --transition: all 0.3s ease;
+            --nav-height: 70px;
+            --radius: 12px;            /* Modern rounded corners */
+            
+            /* Animation */
+            --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* --- GLOBAL RESET & TYPOGRAPHY --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        /* ========================================
+        2. RESET & GLOBAL STYLES
+        ========================================
+        */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            color: var(--text);
+            background-color: var(--bg-body);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            color: var(--secondary-color);
-            line-height: 1.2;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        h1 { font-size: 2.5rem; } /* Mobile first size */
-        h2 { font-size: 2rem; }
+        h1, h2, h3, h4 { color: var(--secondary); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 1rem; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 4vw, 2.5rem); }
         h3 { font-size: 1.25rem; }
         
-        p { margin-bottom: 1.5rem; }
-        
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        p { margin-bottom: 1.5rem; font-size: 1.125rem; color: var(--text); }
+        a { text-decoration: none; transition: all 0.2s var(--ease); }
+        ul { list-style: none; }
 
-        /* --- UTILITY CLASSES --- */
+        /* Utility: Container */
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 var(--container-padding);
+            padding: 0 24px;
         }
 
+        /* Utility: Buttons */
         .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 12px 24px;
-            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
             font-weight: 600;
-            border: none;
+            border-radius: var(--radius);
             cursor: pointer;
-            text-align: center;
+            border: none;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
         }
 
-        .btn:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-1px);
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
         }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
 
         .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--secondary);
         }
+        .btn-outline:hover { border-color: var(--secondary); background: var(--secondary); color: white; }
 
-        .btn-outline:hover {
-            background-color: var(--secondary-color);
-            color: var(--white);
+        /* Utility: Section Spacing */
+        section { padding: 80px 0; }
+
+        /* Scroll Reveal Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease);
         }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- NAVIGATION --- */
+        /* ========================================
+        3. COMPONENT STYLES
+        ========================================
+        */
+
+        /* Navbar */
         header {
-            background: var(--white);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--secondary); }
+        .logo span { color: var(--primary); }
+        
+        .nav-links { display: none; gap: 32px; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a { color: var(--text); }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .mobile-menu-btn { display: block; font-size: 1.5rem; cursor: pointer; color: var(--secondary); }
+
+        /* Hero */
+        .hero {
+            padding-top: 160px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, #EFF6FF 0%, #F8FAFC 100%);
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #DBEAFE;
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero-form {
+            max-width: 480px;
+            margin: 32px auto 0;
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+        .hero-form input {
+            padding: 14px 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            font-size: 1rem;
+            width: 100%;
+            transition: border 0.2s;
+        }
+        .hero-form input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px #DBEAFE; }
+
+        /* Features Grid */
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 32px; }
+        .card {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.3s var(--ease);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
+        .icon-box {
+            width: 48px; height: 48px;
+            background: #EFF6FF;
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
         }
 
-        nav {
+        /* Comparison Table */
+        .comparison-wrapper { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); min-width: 600px; }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: #F1F5F9; color: var(--secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .col-highlight { background: #EFF6FF; color: var(--primary); font-weight: 700; border-bottom-color: #BFDBFE; }
+        .check { color: #10B981; } .cross { color: #EF4444; opacity: 0.5; }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 40px; }
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+            position: relative;
+            text-align: left;
+        }
+        .pricing-card.popular { border: 2px solid var(--primary); box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1); }
+        .popular-badge {
+            position: absolute; top: -12px; right: 24px;
+            background: var(--primary); color: white;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+        }
+        .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text); font-weight: 400; }
+        .features-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-top: 40px; }
+        .team-member { text-align: center; }
+        .avatar {
+            width: 120px; height: 120px;
+            background: #CBD5E1;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            object-fit: cover;
+        }
+        .role { color: var(--primary); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+
+        /* FAQ (Accordion) */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: none; /* Hidden on mobile */
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background: var(--white);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            color: var(--text-color);
-        }
-
-        .hero-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .hero-form input {
-            padding: 14px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .hero-form input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* --- BENEFITS GRID --- */
-        .features {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            background: #EFF6FF;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        /* --- COMPARISON TABLE --- */
-        .comparison {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .comparison-table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background: #F1F5F9;
-            color: var(--secondary-color);
-        }
-
-        .highlight-col {
-            background: #EFF6FF;
-            font-weight: 600;
-            color: var(--primary-color);
-            text-align: center;
-        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--primary); }
+        details[open] summary::after { content: '-'; }
+        .faq-answer { padding: 0 20px 20px; color: var(--text); font-size: 0.95rem; border-top: 1px solid transparent; }
         
-        .check { color: var(--success-color); }
-        .cross { color: #EF4444; }
-
-        /* --- ABOUT / MISSION --- */
-        .about {
-            padding: 80px 0;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: var(--secondary-color);
-            color: #94A3B8;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        footer a { color: var(--white); }
-        footer p { margin-bottom: 0.5rem; font-size: 0.9rem; }
-
-        /* --- RESPONSIVE MEDIA QUERIES --- */
-        @media (min-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            
-            .nav-links {
-                display: flex;
-                gap: 2rem;
-            }
-
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .hero-form {
-                flex-direction: row;
-            }
-            
-            .hero-form input {
-                flex: 1;
-            }
-        }
+        /* Contact / Footer */
+        .contact-section { background: var(--secondary); color: white; text-align: center; }
+        .contact-section h2 { color: white; }
+        .contact-section p { color: #94A3B8; }
         
-        /* --- NOTIFICATION TOAST --- */
+        /* Toast Notification */
         #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: var(--secondary-color);
-            color: #fff;
-            text-align: center;
-            border-radius: var(--radius);
-            padding: 16px;
-            position: fixed;
-            z-index: 1001;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 17px;
+            visibility: hidden; min-width: 300px;
+            background-color: #10B981; color: #fff;
+            text-align: center; border-radius: var(--radius);
+            padding: 16px; position: fixed; z-index: 2000;
+            left: 50%; bottom: 30px; transform: translateX(-50%);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 3s; }
+
+        /* ========================================
+        4. MEDIA QUERIES (Responsive)
+        ========================================
+        */
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            .mobile-menu-btn { display: none; }
+            .hero-form { flex-direction: row; }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @keyframes fadein {
-            from {bottom: 0; opacity: 0;}
-            to {bottom: 30px; opacity: 1;}
-        }
-
-        @keyframes fadeout {
-            from {bottom: 30px; opacity: 1;}
-            to {bottom: 0; opacity: 0;}
-        }
+        /* Animations */
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body>
@@ -320,98 +285,118 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">ProductX.</div>
+                <a href="#" class="logo">Nexus<span>AI</span>.</a>
                 <div class="nav-links">
                     <a href="#features">Features</a>
-                    <a href="#comparison">Why Us</a>
-                    <a href="#about">About</a>
+                    <a href="#comparison">Compare</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#team">Team</a>
+                    <a href="#faq">FAQ</a>
                 </div>
-                <a href="#waitlist" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">Get Early Access</a>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Contact</a>
+                    <div class="mobile-menu-btn">☰</div>
+                </div>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="waitlist">
+    <section class="hero">
         <div class="container">
-            <h1>Stop Wasting Time.<br>Start Building Faster.</h1>
-            <p>The all-in-one workspace designed for modern creators. Organize, collaborate, and ship 10x faster. Join the waitlist for exclusive early access.</p>
-            
-            <form class="hero-form" id="emailForm" onsubmit="handleFormSubmit(event)">
-                <input type="email" id="email" placeholder="Enter your email address" required aria-label="Email Address">
-                <button type="submit" class="btn">Join Waitlist</button>
+            <span class="badge reveal">🚀 Public Beta v2.0 is Live</span>
+            <h1 class="reveal">Build Faster. Scale Smarter.<br>Retire Early.</h1>
+            <p class="reveal" style="max-width: 600px; margin: 20px auto;">
+                NexusAI replaces your entire fragmented tech stack. One platform to manage projects, billing, and automation. Join 10,000+ founders.
+            </p>
+
+            <form class="hero-form reveal" onsubmit="handleFormSubmit(event)">
+                <input type="email" id="email" placeholder="work@email.com" required>
+                <button type="submit" class="btn btn-primary">Join Waitlist</button>
             </form>
-            <p style="font-size: 0.85rem; margin-top: 10px; color: #94A3B8;">No spam. Unsubscribe anytime. 2,000+ already joined.</p>
+            <p class="reveal" style="font-size: 0.85rem; margin-top: 16px; color: #94A3B8;">Free for the first 500 users.</p>
         </div>
     </section>
 
-    <section class="features" id="features">
+    <section style="padding: 40px 0; border-bottom: 1px solid var(--border);">
+        <div class="container" style="text-align: center; opacity: 0.6;">
+            <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Trusted by teams at</p>
+            <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; font-weight: 700; color: var(--text);">
+                <span>ACME Corp</span>
+                <span>Stark Ind</span>
+                <span>Wayne Ent</span>
+                <span>Cyberdyne</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
         <div class="container">
-            <div class="section-header">
-                <h2>Why ProductX?</h2>
-                <p>Everything you need to scale, without the clutter.</p>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="reveal">Everything you need</h2>
+                <p class="reveal">Powerful features wrapped in a simple interface.</p>
             </div>
             
             <div class="grid-3">
-                <div class="feature-card">
+                <div class="card reveal">
                     <div class="icon-box">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Optimized for speed. Zero lag, instant loading, and real-time syncing across all your devices.</p>
+                    <h3>Instant Deploy</h3>
+                    <p>Push code to production in seconds. Our global edge network ensures 99.99% uptime.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box">🛡️</div>
-                    <h3>Bank-Grade Security</h3>
-                    <p>Your data is encrypted and safe. We prioritize privacy and compliance so you can focus on work.</p>
+                <div class="card reveal">
+                    <div class="icon-box">📊</div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Watch your user base grow live. Detailed cohorts, retention graphs, and revenue metrics.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="icon-box">🤝</div>
-                    <h3>Seamless Collaboration</h3>
-                    <p>Work together in real-time. Comments, tasks, and file sharing made incredibly simple.</p>
+                <div class="card reveal">
+                    <div class="icon-box">🔒</div>
+                    <h3>Enterprise Security</h3>
+                    <p>SOC2 Type II ready. We handle the compliance so you can focus on building the product.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="comparison" id="comparison">
+    <section id="comparison" style="background: #F8FAFC;">
         <div class="container">
-            <div class="section-header">
-                <h2>Us vs. Them</h2>
-                <p>See why creators are switching to ProductX.</p>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 class="reveal">Stop overpaying for tools</h2>
+                <p class="reveal">See how we stack up against the legacy giants.</p>
             </div>
             
-            <div class="comparison-table-wrapper">
+            <div class="comparison-wrapper reveal">
                 <table>
                     <thead>
                         <tr>
                             <th>Feature</th>
-                            <th>Competitor A</th>
-                            <th>Competitor B</th>
-                            <th class="highlight-col">ProductX</th>
+                            <th>Legacy Tool A</th>
+                            <th>Legacy Tool B</th>
+                            <th class="col-highlight">NexusAI</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Real-time Sync</td>
-                            <td><span class="cross">✘</span> Limited</td>
-                            <td><span class="check">✔</span> Yes</td>
-                            <td class="highlight-col"><span class="check">✔</span> Instant</td>
-                        </tr>
-                        <tr>
-                            <td>Offline Mode</td>
-                            <td><span class="cross">✘</span> No</td>
-                            <td><span class="cross">✘</span> No</td>
-                            <td class="highlight-col"><span class="check">✔</span> Full Support</td>
-                        </tr>
-                        <tr>
-                            <td>Pricing</td>
-                            <td>$29/mo</td>
-                            <td>$49/mo</td>
-                            <td class="highlight-col">Free Beta</td>
+                            <td>Setup Time</td>
+                            <td>2 Weeks</td>
+                            <td>5 Days</td>
+                            <td class="col-highlight">2 Minutes</td>
                         </tr>
                         <tr>
                             <td>API Access</td>
-                            <td><span class="check">✔</span> Paid Add-on</td>
-                            <td><span class="cross">✘</span> No</td>
-                            <td class="highlight-col"><span class="check">✔</span> Unlimited</td>
+                            <td><span class="cross">✖</span> Paid Add-on</td>
+                            <td><span class="check">✔</span> Limited</td>
+                            <td class="col-highlight"><span class="check">✔</span> Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>24/7 Support</td>
+                            <td><span class="cross">✖</span> No</td>
+                            <td><span class="cross">✖</span> Email Only</td>
+                            <td class="col-highlight"><span class="check">✔</span> Live Chat</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Cost</td>
+                            <td>$99/user</td>
+                            <td>$49/user</td>
+                            <td class="col-highlight">$12/user</td>
                         </tr>
                     </tbody>
                 </table>
@@ -419,46 +404,203 @@
         </div>
     </section>
 
-    <section class="about" id="about">
+    <section id="pricing">
         <div class="container">
-            <h2>Built by Makers, for Makers.</h2>
-            <p>We were tired of clunky software that slowed us down. So we built the tool we always wanted. Our mission is to help you reclaim your time and focus on what matters: creating.</p>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 class="reveal">Simple, Transparent Pricing</h2>
+                <p class="reveal">No credit card required for the waitlist.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Starter</h3>
+                    <div class="price">$0<span>/mo</span></div>
+                    <p>Perfect for hobby projects.</p>
+                    <ul class="features-list">
+                        <li><span class="check">✔</span> 1 Project</li>
+                        <li><span class="check">✔</span> Community Support</li>
+                        <li><span class="check">✔</span> 5GB Storage</li>
+                    </ul>
+                    <a href="#hero" class="btn btn-outline" style="width: 100%; margin-top: 20px;">Join Waitlist</a>
+                </div>
+
+                <div class="pricing-card popular reveal">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$29<span>/mo</span></div>
+                    <p>For growing startups.</p>
+                    <ul class="features-list">
+                        <li><span class="check">✔</span> Unlimited Projects</li>
+                        <li><span class="check">✔</span> Priority Support</li>
+                        <li><span class="check">✔</span> Analytics Dashboard</li>
+                        <li><span class="check">✔</span> Custom Domain</li>
+                    </ul>
+                    <a href="#hero" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Join Waitlist</a>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <h3>Enterprise</h3>
+                    <div class="price">$99<span>/mo</span></div>
+                    <p>For large scale teams.</p>
+                    <ul class="features-list">
+                        <li><span class="check">✔</span> Everything in Pro</li>
+                        <li><span class="check">✔</span> Dedicated Account Manager</li>
+                        <li><span class="check">✔</span> SSO & Audit Logs</li>
+                        <li><span class="check">✔</span> 99.99% SLA</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width: 100%; margin-top: 20px;">Contact Sales</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
+    <section id="team" style="background: white;">
         <div class="container">
-            <p>&copy; 2026 YourProduct Inc. All rights reserved.</p>
-            <p>
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
-                <a href="mailto:hello@example.com">Contact Us</a>
-            </p>
+            <div style="text-align: center;">
+                <h2 class="reveal">Meet the Builders</h2>
+                <p class="reveal">We are a team of ex-FAANG engineers building the future of work.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member reveal">
+                    <div class="avatar" style="background: #cbd5e1 url('https://ui-avatars.com/api/?name=Alex+R&background=random') no-repeat center/cover;"></div>
+                    <h3>Alex Rivera</h3>
+                    <div class="role">Co-Founder & CTO</div>
+                    <p style="font-size: 0.9rem;">Ex-Google Cloud architect. Obsessed with distributed systems.</p>
+                </div>
+                <div class="team-member reveal">
+                    <div class="avatar" style="background: #cbd5e1 url('https://ui-avatars.com/api/?name=Sarah+J&background=random') no-repeat center/cover;"></div>
+                    <h3>Sarah Jenkins</h3>
+                    <div class="role">Product Lead</div>
+                    <p style="font-size: 0.9rem;">Previously led design at Stripe. Passionate about UI/UX.</p>
+                </div>
+                <div class="team-member reveal">
+                    <div class="avatar" style="background: #cbd5e1 url('https://ui-avatars.com/api/?name=Mike+T&background=random') no-repeat center/cover;"></div>
+                    <h3>Mike Tahan</h3>
+                    <div class="role">Head of Growth</div>
+                    <p style="font-size: 0.9rem;">Scaled 3 SaaS products from 0 to $10M ARR.</p>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <div id="toast">You've been added to the waitlist! 🚀</div>
+    <section id="faq">
+        <div class="container" style="max-width: 800px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 class="reveal">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="reveal">
+                <details class="faq-item">
+                    <summary>When will the product launch?</summary>
+                    <div class="faq-answer">
+                        We are currently in private beta. We expect to open public access in Q4 2024. Join the waitlist to get notified first.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a free trial available?</summary>
+                    <div class="faq-answer">
+                        Yes! All new accounts get a 14-day free trial of the Pro plan. No credit card required.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I export my data?</summary>
+                    <div class="faq-answer">
+                        Absolutely. You own your data. You can export everything to CSV or JSON format at any time with one click.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you offer discounts for non-profits?</summary>
+                    <div class="faq-answer">
+                        Yes, we offer a 50% lifetime discount for registered non-profits and educational institutions. Contact us for details.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="reveal">Still have questions?</h2>
+            <p class="reveal">We’d love to hear from you.</p>
+            <div style="margin: 30px 0;">
+                <a href="mailto:support@nexusai.com" class="btn btn-primary" style="background: white; color: var(--primary);">Email Support</a>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 60px 0 30px;">
+            
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; gap: 20px; font-size: 0.9rem; color: #94A3B8;">
+                <div>
+                    &copy; 2024 NexusAI Inc. All rights reserved.
+                </div>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#" style="color: #94A3B8;">Twitter</a>
+                    <a href="#" style="color: #94A3B8;">LinkedIn</a>
+                    <a href="#" style="color: #94A3B8;">Privacy</a>
+                    <a href="#" style="color: #94A3B8;">Terms</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast">You're on the list! Watch your inbox. 🚀</div>
 
     <script>
-        function handleFormSubmit(e) {
-            e.preventDefault(); // Prevent actual page reload
-            
-            const emailInput = document.getElementById('email');
-            const email = emailInput.value;
+        // 1. SCROLL REVEAL ANIMATION
+        // This adds the "active" class to elements as they scroll into view
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-            if(email) {
-                // Here is where you would send data to your backend
-                console.log("Capturing email:", email);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 2. EMAIL FORM HANDLING
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email');
+            
+            if(emailInput.value) {
+                // TODO: Connect this to Formspree, Google Sheets, or your API
+                console.log("Captured:", emailInput.value);
                 
-                // Show success message
+                // Show Success Toast
                 const toast = document.getElementById("toast");
                 toast.className = "show";
-                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
                 
-                // Clear input
                 emailInput.value = "";
             }
         }
+        
+        // 3. SIMPLE MOBILE MENU TOGGLE
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 10px 10px rgba(0,0,0,0.1)';
+            }
+        });
     </script>
 </body>
 </html>
