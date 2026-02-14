@@ -1,1 +1,464 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the waitlist for the ultimate digital solution. Secure your spot today.">
+    <title>SaaS Product Waitlist</title>
+    
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            /* Professional Color Palette (Deep Blue/Slate & Vibrant Accent) */
+            --primary-color: #2563EB;       /* Vibrant Blue */
+            --primary-hover: #1D4ED8;       /* Darker Blue */
+            --secondary-color: #0F172A;     /* Dark Slate (Text/Headings) */
+            --text-color: #475569;          /* Muted Slate (Body text) */
+            --bg-color: #F8FAFC;            /* Very Light Blue/Gray Background */
+            --white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --success-color: #10B981;
+            
+            /* Spacing & Layout */
+            --max-width: 1200px;
+            --container-padding: 20px;
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* --- GLOBAL RESET & TYPOGRAPHY --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; } /* Mobile first size */
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.25rem; }
+        
+        p { margin-bottom: 1.5rem; }
+        
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: none; /* Hidden on mobile */
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--text-color);
+        }
+
+        .hero-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .hero-form input {
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .hero-form input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* --- BENEFITS GRID --- */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: #EFF6FF;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* --- COMPARISON TABLE --- */
+        .comparison {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #F1F5F9;
+            color: var(--secondary-color);
+        }
+
+        .highlight-col {
+            background: #EFF6FF;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .check { color: var(--success-color); }
+        .cross { color: #EF4444; }
+
+        /* --- ABOUT / MISSION --- */
+        .about {
+            padding: 80px 0;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary-color);
+            color: #94A3B8;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer a { color: var(--white); }
+        footer p { margin-bottom: 0.5rem; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (min-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-form {
+                flex-direction: row;
+            }
+            
+            .hero-form input {
+                flex: 1;
+            }
+        }
+        
+        /* --- NOTIFICATION TOAST --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+            border-radius: var(--radius);
+            padding: 16px;
+            position: fixed;
+            z-index: 1001;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 17px;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ProductX.</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#comparison">Why Us</a>
+                    <a href="#about">About</a>
+                </div>
+                <a href="#waitlist" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">Get Early Access</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="waitlist">
+        <div class="container">
+            <h1>Stop Wasting Time.<br>Start Building Faster.</h1>
+            <p>The all-in-one workspace designed for modern creators. Organize, collaborate, and ship 10x faster. Join the waitlist for exclusive early access.</p>
+            
+            <form class="hero-form" id="emailForm" onsubmit="handleFormSubmit(event)">
+                <input type="email" id="email" placeholder="Enter your email address" required aria-label="Email Address">
+                <button type="submit" class="btn">Join Waitlist</button>
+            </form>
+            <p style="font-size: 0.85rem; margin-top: 10px; color: #94A3B8;">No spam. Unsubscribe anytime. 2,000+ already joined.</p>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why ProductX?</h2>
+                <p>Everything you need to scale, without the clutter.</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="icon-box">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed. Zero lag, instant loading, and real-time syncing across all your devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">🛡️</div>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Your data is encrypted and safe. We prioritize privacy and compliance so you can focus on work.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">🤝</div>
+                    <h3>Seamless Collaboration</h3>
+                    <p>Work together in real-time. Comments, tasks, and file sharing made incredibly simple.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison" id="comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2>Us vs. Them</h2>
+                <p>See why creators are switching to ProductX.</p>
+            </div>
+            
+            <div class="comparison-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Competitor A</th>
+                            <th>Competitor B</th>
+                            <th class="highlight-col">ProductX</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Real-time Sync</td>
+                            <td><span class="cross">✘</span> Limited</td>
+                            <td><span class="check">✔</span> Yes</td>
+                            <td class="highlight-col"><span class="check">✔</span> Instant</td>
+                        </tr>
+                        <tr>
+                            <td>Offline Mode</td>
+                            <td><span class="cross">✘</span> No</td>
+                            <td><span class="cross">✘</span> No</td>
+                            <td class="highlight-col"><span class="check">✔</span> Full Support</td>
+                        </tr>
+                        <tr>
+                            <td>Pricing</td>
+                            <td>$29/mo</td>
+                            <td>$49/mo</td>
+                            <td class="highlight-col">Free Beta</td>
+                        </tr>
+                        <tr>
+                            <td>API Access</td>
+                            <td><span class="check">✔</span> Paid Add-on</td>
+                            <td><span class="cross">✘</span> No</td>
+                            <td class="highlight-col"><span class="check">✔</span> Unlimited</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Built by Makers, for Makers.</h2>
+            <p>We were tired of clunky software that slowed us down. So we built the tool we always wanted. Our mission is to help you reclaim your time and focus on what matters: creating.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 YourProduct Inc. All rights reserved.</p>
+            <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="mailto:hello@example.com">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <div id="toast">You've been added to the waitlist! 🚀</div>
+
+    <script>
+        function handleFormSubmit(e) {
+            e.preventDefault(); // Prevent actual page reload
+            
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+
+            if(email) {
+                // Here is where you would send data to your backend
+                console.log("Capturing email:", email);
+                
+                // Show success message
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+                
+                // Clear input
+                emailInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
